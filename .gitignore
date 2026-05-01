@@ -1,3 +1,8 @@
 node_modules/
-docs/.vitepress/dist
-docs/.vitepress/cache
+build/
+.docusaurus/
+.cache-loader/
+.DS_Store
+.env.local
+.env*.local
+npm-debug.log*
