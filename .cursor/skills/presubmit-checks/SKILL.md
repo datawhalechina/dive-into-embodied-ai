@@ -1,6 +1,6 @@
 ---
 name: presubmit-checks
-description: Run before committing docs or asset changes in dw-dive-into-embodied-ai. Two commands catch the recurring regressions (PNG/JPG leak, MDX errors, broken links, sidebar id mismatch, mermaid SSR crash). Use when finishing any change under docs/, src/, sidebars*.ts, _category_.json, or after syncing from upstream dive-into-embodied-ai.
+description: Run before committing docs or asset changes in dive-into-embodied-ai. Two commands catch the recurring regressions (PNG/JPG leak, MDX errors, broken links, sidebar id mismatch, mermaid SSR crash). Use when finishing any change under docs/, src/, sidebars*.ts, _category_.json, or after syncing from upstream dive-into-embodied-ai.
 ---
 
 # Presubmit Checks
@@ -32,8 +32,8 @@ After running the two commands, also confirm:
 
 - Source frontmatter `id:` and `slug:` are stripped.
 - Path prefixes rewritten: `/docs/projects/` → `/docs/practices/...`, `/docs/tutorial/` → `/docs/foundations/...`.
-- GitHub URL rewritten: `github.com/robots-hub/...` → `github.com/datawhalechina/dw-...`.
+- GitHub URL rewritten: `github.com/robots-hub/...` → `github.com/datawhalechina/dive-into-embodied-ai/...`.
 - VLA chapters: source prefix N → target prefix N+1; cross-refs `第 N 讲` shifted by +1 inside the body.
 - Skip non-reader assets like `.paper-work/`, LaTeX sources, `source.bundle`.
 
-Detailed sync recipe lives in `docs/plans/dw-d2eai-migration-plan-v3-mapping.md` §7.6.
+Detailed sync recipe lives in `docs/plans/d2eai-migration-plan-v3-mapping.md` §7.6.

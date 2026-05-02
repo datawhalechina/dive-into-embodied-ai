@@ -9,11 +9,11 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   url: 'https://datawhalechina.github.io',
-  baseUrl: '/dw-dive-into-embodied-ai/',
+  baseUrl: '/dive-into-embodied-ai/',
   trailingSlash: false,
 
   organizationName: 'datawhalechina',
-  projectName: 'dw-dive-into-embodied-ai',
+  projectName: 'dive-into-embodied-ai',
 
   onBrokenLinks: 'throw',
 
@@ -88,7 +88,7 @@ const config: Config = {
           label: '求职篇',
         },
         {
-          href: 'https://github.com/datawhalechina/dw-dive-into-embodied-ai',
+          href: 'https://github.com/datawhalechina/dive-into-embodied-ai',
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
@@ -112,7 +112,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub Discussions',
-              href: 'https://github.com/datawhalechina/dw-dive-into-embodied-ai/discussions',
+              href: 'https://github.com/datawhalechina/dive-into-embodied-ai/discussions',
             },
             {
               label: 'Datawhale',
@@ -125,7 +125,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/datawhalechina/dw-dive-into-embodied-ai',
+              href: 'https://github.com/datawhalechina/dive-into-embodied-ai',
             },
           ],
         },

@@ -7,7 +7,7 @@ description: Keep Docusaurus documentation image assets consistent by converting
 
 ## When To Use
 
-Use this skill in `dw-dive-into-embodied-ai` when:
+Use this skill in `dive-into-embodied-ai` when:
 
 - Migrating docs or figures from another repo.
 - Adding or replacing static documentation images.

@@ -18,13 +18,13 @@ function HomepageHeader() {
         <div style={{ marginTop: '1.5rem' }}>
           <a
             className="button button--primary button--lg"
-            href="/dw-dive-into-embodied-ai/docs/overview/intro"
+            href="/dive-into-embodied-ai/docs/overview/intro"
           >
             开始学习
           </a>
           <a
             className="button button--secondary button--lg"
-            href="https://github.com/datawhalechina/dw-dive-into-embodied-ai"
+            href="https://github.com/datawhalechina/dive-into-embodied-ai"
             style={{ marginLeft: '1rem' }}
           >
             GitHub
