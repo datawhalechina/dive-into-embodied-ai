@@ -1,39 +1,78 @@
 #!/bin/sh
 
 MAX_SIZE=512000
+LFS_POINTER_PREFIX="version https://git-lfs.github.com/spec/v1"
+
+# Keep static raster assets consistent across the docs site.
+if [ -f "scripts/convert-images-to-webp.py" ]; then
+  python3 scripts/convert-images-to-webp.py --check || exit 1
+fi
 
 # Files to skip (large but must stay diffable)
 SKIP_FILES="package-lock.json yarn.lock pnpm-lock.yaml"
 
-OVERSIZED=$(git diff --cached --name-only --diff-filter=ACM | while read f; do
-  if [ -f "$f" ]; then
-    skip=0
-    for s in $SKIP_FILES; do
-      if [ "$f" = "$s" ]; then
-        skip=1
-        break
-      fi
-    done
-    if [ "$skip" = "1" ]; then
-      continue
+OVERSIZED=""
+BAD_LFS=""
+
+STAGED=$(git diff --cached --name-only --diff-filter=ACM)
+
+IFS='
+'
+for f in $STAGED; do
+  [ -f "$f" ] || continue
+
+  skip=0
+  for s in $SKIP_FILES; do
+    if [ "$f" = "$s" ]; then
+      skip=1
+      break
     fi
-    size=$(wc -c < "$f" | tr -d ' ')
-    if git check-attr filter -- "$f" | grep -q "lfs"; then
-      continue
-    fi
-    if [ "$size" -gt "$MAX_SIZE" ]; then
-      echo "  $f ($(( size / 1024 ))KB)"
-    fi
+  done
+  [ "$skip" = "1" ] && continue
+
+  if git check-attr filter -- "$f" | grep -q "lfs"; then
+    # File is declared as LFS in .gitattributes — make sure the *staged*
+    # blob is actually an LFS pointer and not a real binary blob. This
+    # protects against contributors who don't have git-lfs installed or
+    # haven't run `git lfs install` in this clone.
+    head_line=$(git show ":$f" 2>/dev/null | head -n 1)
+    case "$head_line" in
+      "$LFS_POINTER_PREFIX"*)
+        ;;
+      *)
+        size=$(git cat-file -s ":$f" 2>/dev/null || echo 0)
+        BAD_LFS="$BAD_LFS  $f ($(( size / 1024 ))KB, staged as raw blob)
+"
+        ;;
+    esac
+    continue
   fi
-done)
+
+  size=$(wc -c < "$f" | tr -d ' ')
+  if [ "$size" -gt "$MAX_SIZE" ]; then
+    OVERSIZED="$OVERSIZED  $f ($(( size / 1024 ))KB)
+"
+  fi
+done
+unset IFS
+
+if [ -n "$BAD_LFS" ]; then
+  printf 'ERROR: The following files are declared LFS in .gitattributes but staged as raw blobs:\n'
+  printf '%s' "$BAD_LFS"
+  printf '\nFix:\n'
+  printf '  1. Install Git LFS:        brew install git-lfs   (or apt/yum/etc.)\n'
+  printf '  2. Activate it in repo:    git lfs install --local\n'
+  printf '  3. Re-stage the file(s):   git add --renormalize <file>\n'
+  printf '  4. Commit again.\n'
+  exit 1
+fi
 
 if [ -n "$OVERSIZED" ]; then
-  echo "ERROR: The following files exceed 500KB and are not tracked by Git LFS:"
-  echo "$OVERSIZED"
-  echo ""
-  echo "Options:"
-  echo "  1. Compress the file(s)"
-  echo "  2. Add the file type to .gitattributes for LFS tracking"
-  echo "  3. Use 'git commit --no-verify' to bypass (not recommended)"
+  printf 'ERROR: The following files exceed 500KB and are not tracked by Git LFS:\n'
+  printf '%s' "$OVERSIZED"
+  printf '\nOptions:\n'
+  printf '  1. Compress the file(s)\n'
+  printf '  2. Add the file type to .gitattributes for LFS tracking\n'
+  printf "  3. Use 'git commit --no-verify' to bypass (not recommended)\n"
   exit 1
 fi

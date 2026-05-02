@@ -1,0 +1,46 @@
+<svg width="960" height="660" viewBox="0 0 960 660" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="660" rx="28" fill="#F8FAFC"/>
+  <rect x="36" y="36" width="888" height="588" rx="24" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="64" y="82" fill="#0F172A" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">哪些算法工程师更适合转具身算法</text>
+  <text x="64" y="116" fill="#475569" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">判断关键不是“会不会训模型”，而是你的经验是否接近多模态、时序决策、数据闭环和系统落地。</text>
+
+  <rect x="64" y="166" width="248" height="400" rx="22" fill="#ECFDF5" stroke="#86EFAC" stroke-width="2"/>
+  <text x="92" y="210" fill="#166534" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">很适合现在切</text>
+  <text x="92" y="252" fill="#14532D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 做过多模态 / VLM</text>
+  <text x="110" y="280" fill="#14532D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">/ 指令跟随</text>
+  <text x="92" y="316" fill="#14532D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 做过 Diffusion</text>
+  <text x="110" y="344" fill="#14532D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">/ 时序建模</text>
+  <text x="92" y="380" fill="#14532D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 做过 RL / IL / 策略学习</text>
+  <text x="92" y="416" fill="#14532D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 擅长数据 pipeline</text>
+  <text x="110" y="444" fill="#14532D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">和实验闭环</text>
+  <text x="92" y="486" fill="#166534" font-size="15" font-family="PingFang SC, Microsoft YaHei, sans-serif">这类经验本身就能直接映射到</text>
+  <text x="92" y="510" fill="#166534" font-size="14" font-family="PingFang SC, Microsoft YaHei, sans-serif">VLA、动作生成、</text>
+  <text x="92" y="532" fill="#166534" font-size="14" font-family="PingFang SC, Microsoft YaHei, sans-serif">评估和部署工作。</text>
+
+  <rect x="356" y="166" width="248" height="400" rx="22" fill="#FFFBEB" stroke="#FCD34D" stroke-width="2"/>
+  <text x="384" y="210" fill="#B45309" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">可以转，但要补课</text>
+  <text x="384" y="252" fill="#92400E" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 主要做静态 CV 任务</text>
+  <text x="384" y="288" fill="#92400E" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 做 NLP / LLM 应用</text>
+  <text x="402" y="316" fill="#92400E" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">但不碰时序</text>
+  <text x="384" y="352" fill="#92400E" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 做推荐、搜索、</text>
+  <text x="402" y="380" fill="#92400E" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">广告等系统</text>
+  <text x="384" y="416" fill="#92400E" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 工程能力强，</text>
+  <text x="402" y="444" fill="#92400E" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">但缺机器人语境</text>
+  <text x="384" y="486" fill="#B45309" font-size="15" font-family="PingFang SC, Microsoft YaHei, sans-serif">这类人不是不能转，</text>
+  <text x="384" y="510" fill="#B45309" font-size="14" font-family="PingFang SC, Microsoft YaHei, sans-serif">而是要先补动作、仿真、</text>
+  <text x="384" y="532" fill="#B45309" font-size="14" font-family="PingFang SC, Microsoft YaHei, sans-serif">评估和系统认知。</text>
+
+  <rect x="648" y="166" width="248" height="400" rx="22" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="2"/>
+  <text x="676" y="210" fill="#991B1B" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">别只因热度冲进来</text>
+  <text x="676" y="252" fill="#7F1D1D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 只想训模型，</text>
+  <text x="694" y="280" fill="#7F1D1D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">不想碰系统</text>
+  <text x="676" y="316" fill="#7F1D1D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 排斥 ROS / 仿真</text>
+  <text x="694" y="344" fill="#7F1D1D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">/ 真机问题</text>
+  <text x="676" y="380" fill="#7F1D1D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 希望几周内速成</text>
+  <text x="694" y="408" fill="#7F1D1D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">换赛道</text>
+  <text x="676" y="444" fill="#7F1D1D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 对动作和时序任务</text>
+  <text x="694" y="472" fill="#7F1D1D" font-size="17" font-family="PingFang SC, Microsoft YaHei, sans-serif">没兴趣</text>
+  <text x="676" y="500" fill="#991B1B" font-size="14" font-family="PingFang SC, Microsoft YaHei, sans-serif">具身不是“会动的多模态模型”，</text>
+  <text x="676" y="522" fill="#991B1B" font-size="14" font-family="PingFang SC, Microsoft YaHei, sans-serif">它最终要落到</text>
+  <text x="676" y="544" fill="#991B1B" font-size="14" font-family="PingFang SC, Microsoft YaHei, sans-serif">真实世界执行。</text>
+</svg>

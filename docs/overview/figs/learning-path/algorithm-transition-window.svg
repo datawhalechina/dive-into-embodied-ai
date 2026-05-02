@@ -1,0 +1,21 @@
+<svg width="960" height="420" viewBox="0 0 960 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="420" rx="28" fill="#F8FAFC"/>
+  <rect x="36" y="36" width="888" height="348" rx="24" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="64" y="82" fill="#0F172A" font-size="26" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">为什么说“现在”比以前更容易转具身</text>
+  <text x="64" y="118" fill="#475569" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">不是门槛消失了，而是行业底座成熟了，算法工程师终于能从自己熟悉的工作流切入。</text>
+
+  <rect x="64" y="152" width="380" height="184" rx="20" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="2"/>
+  <text x="92" y="192" fill="#991B1B" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">几年前</text>
+  <text x="92" y="230" fill="#7F1D1D" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 工具链零散，项目难跑</text>
+  <text x="92" y="264" fill="#7F1D1D" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 数据不标准，训练难复现</text>
+  <text x="92" y="298" fill="#7F1D1D" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 招聘更偏 ROS / 控制 / 真机经验</text>
+
+  <rect x="516" y="152" width="380" height="184" rx="20" fill="#ECFDF5" stroke="#86EFAC" stroke-width="2"/>
+  <text x="544" y="192" fill="#166534" font-size="24" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">现在</text>
+  <text x="544" y="230" fill="#14532D" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif">• LeRobot / OpenVLA / Libero 可直接上手</text>
+  <text x="544" y="264" fill="#14532D" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 数据、训练、评估流程越来越标准化</text>
+  <text x="544" y="298" fill="#14532D" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif">• 企业更需要“AI + 机器人”的复合能力</text>
+
+  <path d="M452 244H508" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M496 230L510 244L496 258" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

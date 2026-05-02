@@ -1,0 +1,459 @@
+---
+sidebar_position: 4
+title: "4. Gymnasium 快速上手"
+---
+
+import CartPolePyodide from '@site/src/components/docs/tutorial/simulation/gymnasium/CartPolePyodide';
+
+# 4. Gymnasium 快速上手
+
+Gymnasium 不是一个“把机器人放进 3D 世界里跑起来”的仿真器，它更像是强化学习环境的标准接口层。
+
+它解决的问题不是“物理怎么模拟”，而是“智能体如何以统一方式和环境交互”。很多你熟悉的环境，无论底层是 `Classic Control`、`Box2D`、`MuJoCo` 还是你自己写的任务，到了 Gymnasium 这里都会收敛成同一套 API：
+
+- `gym.make()`
+- `env.reset()`
+- `env.step(action)`
+- `env.render()`
+- `env.close()`
+
+如果你是第一次接触 Gymnasium，这一节的目标很明确：
+
+1. 分清 Gymnasium 和 Isaac Sim / MuJoCo 这类仿真器的关系。
+2. 把最常用的安装方式装起来。
+3. 跑通一个最小环境，例如 `CartPole-v1`。
+4. 读懂 `reset()`、`step()`、`action_space` 和 `observation_space`。
+5. 知道怎么把内置环境过渡到自定义环境。
+
+## 4.1 Gymnasium 是什么
+
+你可以把 Gymnasium 理解成强化学习世界里的“环境协议”。
+
+它的核心价值主要有四个：
+
+- 给不同环境提供统一的交互接口，降低切换成本。
+- 内置一批常见参考环境，适合教学、实验和算法验证。
+- 提供 `Wrapper`、`Vector Env` 等机制，方便做环境改造和并行采样。
+- 让训练代码和具体环境实现解耦，更容易接入上层算法框架。
+
+这里最容易混淆的一点是：
+
+- `Isaac Sim`、`MuJoCo` 更偏“世界和物理怎么模拟”
+- `Gymnasium` 更偏“智能体如何看到状态、执行动作、收到奖励”
+
+两者并不冲突。真实工作流里很常见的一种组合就是：
+
+`物理引擎 / 仿真器 -> 封装成 Gymnasium Env -> 训练代码`
+
+## 4.2 安装前先做两个判断
+
+正式开始前，建议先判断两件事。
+
+### 1. 你是想先学环境 API，还是先学高保真仿真
+
+- 想先理解强化学习环境循环、状态、动作、奖励：先学 Gymnasium。
+- 想先搭 3D 场景、传感器、机器人资产：先学 Isaac Sim、Gazebo、MuJoCo 等仿真器。
+- 想做机器人学习：通常两者都要学，只是顺序可以不同。
+
+### 2. 你是先用内置环境，还是马上写自己的环境
+
+- 第一次上手：先用 `CartPole-v1`、`Pendulum-v1` 这类内置环境。
+- 已经有明确任务定义：再进入自定义环境。
+
+原因很简单：如果你连 `reset/step` 循环还没建立直觉，一上来就写自己的环境，很容易把“环境逻辑问题”和“算法问题”混在一起。
+
+## 4.3 截至 2026-04-14，版本怎么装
+
+> 截至 `2026-04-14`，PyPI 上 Gymnasium 的最新稳定版是 `1.2.3`，发布时间是 `2025-12-18`；PyPI 页面同时标明它要求 `Python >= 3.10`。
+
+对大多数第一次上手的人，我建议这样选：
+
+- 只想先理解 API：`pip install gymnasium`
+- 想跑 `CartPole`、`Pendulum`、`MountainCar`：`pip install "gymnasium[classic-control]"`
+- 想跑 `Box2D` 环境：`pip install "gymnasium[box2d]"`
+- 想跑 `MuJoCo` 环境：`pip install "gymnasium[mujoco]"`
+
+如果你只是想把最小例子跑通，先装 `classic-control` 就够了。
+
+### Windows
+
+```bat
+py -3.11 -m venv env_gymnasium
+env_gymnasium\Scripts\activate
+python -m pip install --upgrade pip
+pip install "gymnasium[classic-control]"
+```
+
+### macOS / Linux
+
+```bash
+python3.11 -m venv env_gymnasium
+source env_gymnasium/bin/activate
+python -m pip install --upgrade pip
+pip install "gymnasium[classic-control]"
+```
+
+几个实用提醒：
+
+- 如果你只安装了 `gymnasium`，某些需要额外依赖的环境会创建失败，这通常不是 Gymnasium 本体坏了，而是缺少对应 extra。
+- 文档和旧博客里经常混用 `gym` 和 `gymnasium`。新项目优先直接使用 `gymnasium`。
+- 新手第一步不必追求“装全家桶”，先把 `classic-control` 跑通最重要。
+
+## 4.4 Gymnasium 的核心心智模型
+
+Gymnasium 上手最快的方法，不是先记一堆环境名，而是先记住这 6 个核心概念。
+
+### 1. `Env`
+
+环境对象本身。它定义了：
+
+- 当前状态如何组织
+- 动作如何输入
+- 奖励如何返回
+- 什么时候一局结束
+
+### 2. `reset()`
+
+开始新 episode。它返回：
+
+```python
+observation, info = env.reset()
+```
+
+也就是说，Gymnasium 不是只返回观测，还会返回一个 `info` 字典。
+
+### 3. `step(action)`
+
+推进环境一步。它返回：
+
+```python
+observation, reward, terminated, truncated, info = env.step(action)
+```
+
+这里最重要的是别再把它想成旧版 Gym 里的 `done`。
+
+- `terminated`：任务本身结束了，例如杆子倒了、目标达成了
+- `truncated`：被时间上限或外部限制截断了
+
+对入门循环来说，通常会写成：
+
+```python
+episode_over = terminated or truncated
+```
+
+### 4. `action_space`
+
+动作空间定义了智能体“允许做什么”。
+
+常见类型有：
+
+- `Discrete(n)`：离散动作，例如左/右
+- `Box(...)`：连续动作，例如关节力矩、速度命令
+
+### 5. `observation_space`
+
+观测空间定义了环境“会返回什么”。
+
+它可能是：
+
+- 一维向量
+- 图像张量
+- 字典结构
+
+### 6. `Wrapper`
+
+Wrapper 可以在不改原环境源码的情况下修改交互形式，比如：
+
+- 改观测格式
+- 裁剪动作
+- 改奖励
+- 增加时间信息
+
+Gymnasium 官方文档也明确提到，大多数通过 `gym.make()` 创建的环境，默认已经包上了 `TimeLimit`、`OrderEnforcing` 和 `PassiveEnvChecker`。
+
+## 4.5 第一个环境：让 CartPole 随机跑起来
+
+这是最值得先做的实验，因为它能帮你把 Gymnasium 的主循环一次性看明白。
+
+下面是一个最小可运行脚本。它会创建 `CartPole-v1` 环境，然后每一步都随机采样动作：
+
+```python
+import gymnasium as gym
+
+env = gym.make("CartPole-v1", render_mode="human")
+
+observation, info = env.reset(seed=42)
+total_reward = 0.0
+episode_over = False
+
+while not episode_over:
+    action = env.action_space.sample()
+    observation, reward, terminated, truncated, info = env.step(action)
+    total_reward += reward
+    episode_over = terminated or truncated
+
+print(f"Episode finished! Total reward: {total_reward}")
+env.close()
+```
+
+<CartPolePyodide />
+
+运行方式：
+
+```bash
+python hello_cartpole.py
+```
+
+你应该会看到一个小车左右乱动，杆子很快倒下去。这是正常现象，因为现在的智能体还没有学习，只是在随机试动作。
+
+这段代码里最值得注意的是三件事：
+
+- `render_mode="human"` 需要在 `gym.make()` 时传入，而不是等运行后再补。
+- 第一步一定是 `reset()`，不能直接 `step()`。
+- 随机动作只能证明环境在正常工作，不代表你已经“训练了一个 agent”。
+
+## 4.6 看懂动作空间和观测空间
+
+很多时候，环境能不能接进你的算法，关键就看你有没有把 `action_space` 和 `observation_space` 看明白。
+
+```python
+import gymnasium as gym
+
+env = gym.make("CartPole-v1")
+
+print("action_space:", env.action_space)
+print("observation_space:", env.observation_space)
+
+observation, info = env.reset(seed=42)
+print("initial observation:", observation)
+print("sample action:", env.action_space.sample())
+
+env.close()
+```
+
+对 `CartPole-v1` 来说：
+
+- 动作空间是 `Discrete(2)`，通常对应“向左推”和“向右推”
+- 观测空间是一个 `Box`，里面包含小车位置、速度、杆角度、角速度
+
+这一步真正要建立的认知是：
+
+`算法输出的动作` 必须匹配 `action_space`  
+`环境返回的观测` 必须匹配 `observation_space`
+
+如果这两个接口对不上，训练代码往往还没开始学就已经报错了。
+
+## 4.7 读懂 `terminated` 和 `truncated`
+
+这是新手最常混淆、但又非常关键的一点。
+
+很多旧教程还会写：
+
+```python
+observation, reward, done, info = env.step(action)
+```
+
+但在 Gymnasium 里，应该明确区分成：
+
+```python
+observation, reward, terminated, truncated, info = env.step(action)
+```
+
+你可以这样理解：
+
+- `terminated`：环境从任务逻辑上结束
+- `truncated`：环境被时间限制或其他外部条件截断
+
+为什么这件事重要？
+
+因为在训练代码里，这两种结束信号有时应该被不同地处理。最典型的例子就是：时间上限到了，不代表任务一定“失败”；它只是这一局被强制停下来了。
+
+对初学者来说，先记住这条实用规则就够：
+
+- 写交互循环时，用 `terminated or truncated`
+- 写算法细节时，再去区分这两类结束信号
+
+## 4.8 第二个实验：并行跑多个环境
+
+当你开始训练强化学习算法时，单环境往往不够快。Gymnasium 提供了 `Vector Env` 机制，把多个环境按批次一起跑。
+
+一个最小例子如下：
+
+```python
+import gymnasium as gym
+
+envs = gym.make_vec("CartPole-v1", num_envs=4, vectorization_mode="sync")
+
+observations, infos = envs.reset(seed=42)
+
+for _ in range(100):
+    actions = envs.action_space.sample()
+    observations, rewards, terminations, truncations, infos = envs.step(actions)
+
+envs.close()
+```
+
+这里最重要的直觉有三个：
+
+- 现在返回的 `observations`、`rewards`、`terminations`、`truncations` 都是“批量”的。
+- `envs.action_space` 也变成了面向批量环境的动作空间。
+- 如果你只想看单个子环境的接口，应该关注 `envs.single_action_space` 和 `envs.single_observation_space`。
+
+Gymnasium 官方文档还特别提醒，向量化环境通常会在 episode 结束后自动重置子环境，所以你后面接训练代码时，需要清楚自己使用的是哪种 autoreset 语义。
+
+## 4.9 从内置环境到你自己的任务
+
+当你已经能顺畅使用 `CartPole` 这类内置环境后，下一步就应该尝试把“任务描述”写成自己的环境。
+
+最小骨架通常长这样：
+
+```python
+import numpy as np
+import gymnasium as gym
+from gymnasium import spaces
+
+
+class LineReachEnv(gym.Env):
+    metadata = {"render_modes": [], "render_fps": 4}
+
+    def __init__(self, goal=5):
+        self.goal = goal
+        self.action_space = spaces.Discrete(2)
+        self.observation_space = spaces.Box(
+            low=0,
+            high=goal,
+            shape=(1,),
+            dtype=np.int32,
+        )
+        self.state = 0
+
+    def reset(self, seed=None, options=None):
+        super().reset(seed=seed)
+        self.state = 0
+        observation = np.array([self.state], dtype=np.int32)
+        info = {}
+        return observation, info
+
+    def step(self, action):
+        if action == 1:
+            self.state += 1
+        else:
+            self.state -= 1
+
+        self.state = int(np.clip(self.state, 0, self.goal))
+        terminated = self.state == self.goal
+        truncated = False
+        reward = 1.0 if terminated else -0.01
+        observation = np.array([self.state], dtype=np.int32)
+        info = {}
+        return observation, reward, terminated, truncated, info
+```
+
+然后你可以把它注册成一个标准环境：
+
+```python
+import gymnasium as gym
+
+gym.register(
+    id="tutorial/LineReach-v0",
+    entry_point=LineReachEnv,
+    max_episode_steps=20,
+)
+
+env = gym.make("tutorial/LineReach-v0")
+```
+
+你需要理解自定义环境最核心的四件事：
+
+- `action_space` 定义合法动作
+- `observation_space` 定义合法观测
+- `reset()` 负责开始一局
+- `step()` 负责推进一步并返回奖励与结束信号
+
+如果你怀疑自己的环境定义有问题，可以先做一件非常值回票价的事：
+
+```python
+from gymnasium.utils.env_checker import check_env
+
+check_env(LineReachEnv())
+```
+
+这能帮你提前抓住很多接口层面的低级错误。
+
+## 4.10 Gymnasium 还能帮你做什么
+
+当你迈过最小环境这一步之后，Gymnasium 的价值会越来越明显，常见进阶方向主要有四类。
+
+### 1. 快速验证 RL 算法
+
+- 换环境方便
+- 接口统一
+- 适合做最小实验和回归测试
+
+### 2. 包装已有仿真任务
+
+很多机器人任务会把底层仿真器封装成 Gymnasium 接口，让上层训练代码不用关心具体物理引擎。
+
+### 3. 并行采样
+
+当训练吞吐变成瓶颈时，`Vector Env` 会是非常常见的一步优化。
+
+### 4. 构建自己的 Benchmark
+
+如果你在做特定机器人任务、控制问题或具身任务，Gymnasium 提供了一套非常清晰的环境组织方式，方便你把任务标准化下来。
+
+## 4.11 新手最常踩的坑
+
+### 坑 1：把 Gymnasium 当成算法库
+
+Gymnasium 主要解决的是环境接口问题，不负责直接给你 PPO、DQN、SAC 这些训练实现。
+
+### 坑 2：还在用旧版 `done`
+
+如果你照抄旧 Gym 教程里的四元组返回值，很容易在新版代码里踩坑。
+
+### 坑 3：忘了先 `reset()`
+
+Gymnasium 官方文档专门把这件事列为新手常见错误。环境必须先 reset，再 step。
+
+### 坑 4：以为 `env.action_space.sample()` 就是在训练
+
+这只是随机采样动作，用来验证环境是否工作正常，不是学习过程本身。
+
+### 坑 5：没装对应 extra，就直接跑环境
+
+比如你只安装了基础包，却直接去跑 `Box2D` 或 `MuJoCo` 环境，失败通常是依赖没装齐，不一定是代码逻辑有问题。
+
+### 坑 6：没区分 `terminated` 和 `truncated`
+
+入门时可以先用 `or` 合并，但到了算法实现阶段，最好明确知道哪一种结束信号是任务终止，哪一种只是时间截断。
+
+## 4.12 一条实用的学习路径
+
+如果你准备认真学 Gymnasium，我建议按这个顺序走：
+
+1. 先跑通 `CartPole-v1`，把 `reset/step/render/close` 主循环看明白。
+2. 再看 `action_space` 和 `observation_space`，建立接口直觉。
+3. 试一个连续动作环境，例如 `Pendulum-v1`。
+4. 学会至少一种 Wrapper。
+5. 学会 `make_vec()`，理解并行环境的返回值。
+6. 最后再开始写自己的环境。
+
+当你能把“随机跑一个内置环境”和“注册一个自定义环境”都各做一遍时，就已经真正跨过 Gymnasium 的入门门槛了。
+
+## 4.13 本节小结
+
+这一节最重要的结论有四个：
+
+- Gymnasium 更像环境交互标准，而不是具体物理仿真器。
+- 截至 `2026-04-14`，Gymnasium 当前稳定版是 `1.2.3`，并要求 `Python >= 3.10`。
+- 真正有效的上手顺序是 `内置环境 -> API 循环 -> space -> 向量化 -> 自定义环境`。
+- 很多机器人和强化学习项目，最终都会落到 `底层仿真器 + Gymnasium 接口 + 训练代码` 这条工作流上。
+
+## 参考资料
+
+- [Gymnasium 官方：Basic Usage](https://gymnasium.farama.org/main/introduction/basic_usage/)
+- [Gymnasium 官方：Create a Custom Environment](https://gymnasium.farama.org/main/introduction/create_custom_env/)
+- [Gymnasium 官方：Vectorize](https://gymnasium.farama.org/main/api/vector/)
+- [Gymnasium 官方：Gymnasium Basics](https://gymnasium.farama.org/main/tutorials/gymnasium_basics/)
+- [PyPI：gymnasium](https://pypi.org/project/gymnasium/)

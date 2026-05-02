@@ -6,6 +6,8 @@ const sidebars: SidebarsConfig = {
     'overview/embodied-ai-roadmap',
     'overview/learning-path',
     'overview/company-landscape',
+    'overview/robotics-and-ros2-roadmap',
+    'overview/algorithm-engineer-transition',
   ],
 
   foundationsSidebar: [
