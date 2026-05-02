@@ -11,9 +11,9 @@ function HomepageHeader() {
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <p style={{ fontSize: '1rem', color: 'var(--ifm-color-emphasis-600)' }}>
-          面向求职与转行的具身智能开源实践教程
+          给想入门、转行或找相关工作的同学准备
           <br />
-          基础知识打底 · 项目实践贯穿 · 求职能力收口
+          先补基础，再做项目，最后整理到简历和面试
         </p>
         <div style={{ marginTop: '1.5rem' }}>
           <a

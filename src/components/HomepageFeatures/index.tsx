@@ -12,25 +12,25 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: '总览',
-    description: '技术路线全景图、学习路径推荐、公司图谱',
+    description: '项目介绍、学习路径和公司图谱',
     link: '/docs/overview/intro',
     emoji: '\uD83D\uDDFA\uFE0F',
   },
   {
     title: '基础篇',
-    description: '机器人学、ROS2、仿真、强化学习、VLM/VLA — 7 大模块建立认知',
+    description: '机器人学、ROS2、仿真、强化学习、VLM/VLA 等基础模块',
     link: '/docs/foundations/intro',
     emoji: '\uD83D\uDCDA',
   },
   {
     title: '实践篇',
-    description: '机械臂、四足、人形、移动操作 — 4 大方向动手实战',
+    description: '机械臂、四足、人形、移动操作四类项目',
     link: '/docs/practices/intro',
     emoji: '\uD83D\uDD27',
   },
   {
     title: '求职篇',
-    description: '岗位拆解、面经、简历、公司技术栈 — 把项目经验转化为竞争力',
+    description: '岗位拆解、面经、简历和公司技术栈',
     link: '/docs/career/intro',
     emoji: '\uD83C\uDFAF',
   },

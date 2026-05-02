@@ -1,0 +1,37 @@
+<svg width="960" height="560" viewBox="0 0 960 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="560" rx="28" fill="#F8FAFC"/>
+  <rect x="36" y="36" width="888" height="488" rx="24" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="64" y="82" fill="#0F172A" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">算法工程师转具身的现实路径</text>
+  <text x="64" y="116" fill="#475569" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">比起一上来冲真机控制，更稳的方式是先建立语境，再通过开源项目和仿真项目积累成果。</text>
+
+  <path d="M132 190V226" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M118 212L132 226L146 212" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M132 294V330" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M118 316L132 330L146 316" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M132 398V434" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M118 420L132 434L146 420" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="92" y="138" width="760" height="76" rx="20" fill="#F8FBFF" stroke="#BFDBFE" stroke-width="2"/>
+  <circle cx="132" cy="176" r="24" fill="#DBEAFE"/>
+  <text x="120" y="184" fill="#1D4ED8" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">01</text>
+  <text x="180" y="170" fill="#1D4ED8" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">补最小机器人认知</text>
+  <text x="180" y="198" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">先补 ROS2、运动学和仿真概念，先建立工作语境，不要求一上来就学很深。</text>
+
+  <rect x="92" y="242" width="760" height="76" rx="20" fill="#FBFAFF" stroke="#C7D2FE" stroke-width="2"/>
+  <circle cx="132" cy="280" r="24" fill="#E0E7FF"/>
+  <text x="120" y="288" fill="#4338CA" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">02</text>
+  <text x="180" y="274" fill="#4338CA" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">从开源项目切入</text>
+  <text x="180" y="302" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">从 ACT、OpenVLA、LeRobot、Libero 这类项目进入，更容易回到熟悉的训练与实验节奏。</text>
+
+  <rect x="92" y="346" width="760" height="76" rx="20" fill="#F6FFFB" stroke="#A7F3D0" stroke-width="2"/>
+  <circle cx="132" cy="384" r="24" fill="#D1FAE5"/>
+  <text x="120" y="392" fill="#047857" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">03</text>
+  <text x="180" y="378" fill="#047857" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">优先做仿真与数据侧</text>
+  <text x="180" y="406" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">先做能展示、能写进简历的仿真训练、数据处理和评估项目，尽快形成第一批成果。</text>
+
+  <rect x="92" y="450" width="760" height="76" rx="20" fill="#FFFDF6" stroke="#FCD34D" stroke-width="2"/>
+  <circle cx="132" cy="488" r="24" fill="#FEF3C7"/>
+  <text x="120" y="496" fill="#B45309" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">04</text>
+  <text x="180" y="482" fill="#B45309" font-size="22" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">再往模型与部署深入</text>
+  <text x="180" y="510" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">等你对系统链路有感觉之后，再去做 VLA、动作生成和推理优化，推进会顺很多。</text>
+</svg>

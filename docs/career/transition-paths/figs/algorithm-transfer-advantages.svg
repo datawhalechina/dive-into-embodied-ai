@@ -1,0 +1,39 @@
+<svg width="960" height="620" viewBox="0 0 960 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="620" rx="28" fill="#F8FAFC"/>
+  <rect x="36" y="36" width="888" height="548" rx="24" fill="white" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="64" y="82" fill="#0F172A" font-size="28" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">你的原有算法经验，在具身里通常怎么落地</text>
+  <text x="64" y="116" fill="#475569" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">真正有价值的不是“会不会写模型”，而是你能不能把已有经验迁移到任务、数据、动作和系统闭环里。</text>
+
+  <rect x="64" y="164" width="222" height="82" rx="18" fill="#EFF6FF" stroke="#93C5FD" stroke-width="2"/>
+  <text x="90" y="213" fill="#1D4ED8" font-size="20" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">多模态训练经验</text>
+  <path d="M304 205H382" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M368 191L382 205L368 219" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="404" y="164" width="492" height="82" rx="18" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="430" y="207" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">更容易接住 VLA 训练、</text>
+  <text x="430" y="235" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">指令到动作和多模态状态建模</text>
+
+  <rect x="64" y="260" width="222" height="82" rx="18" fill="#EEF2FF" stroke="#A5B4FC" stroke-width="2"/>
+  <text x="90" y="309" fill="#4338CA" font-size="20" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">生成模型 / 时序建模</text>
+  <path d="M304 301H382" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M368 287L382 301L368 315" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="404" y="260" width="492" height="82" rx="18" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="430" y="303" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">更容易理解动作序列生成、</text>
+  <text x="430" y="331" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">policy modeling 与误差累积</text>
+
+  <rect x="64" y="356" width="222" height="82" rx="18" fill="#ECFDF5" stroke="#86EFAC" stroke-width="2"/>
+  <text x="90" y="405" fill="#047857" font-size="20" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">RL / IL / 策略学习</text>
+  <path d="M304 397H382" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M368 383L382 397L368 411" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="404" y="356" width="492" height="82" rx="18" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="430" y="399" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">更容易进入策略训练、rollout 评估、</text>
+  <text x="430" y="427" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">泛化分析与 sim2real 问题排查</text>
+
+  <rect x="64" y="452" width="222" height="82" rx="18" fill="#FFFBEB" stroke="#FCD34D" stroke-width="2"/>
+  <text x="84" y="492" fill="#B45309" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">数据 / 平台 /</text>
+  <text x="84" y="518" fill="#B45309" font-size="18" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-weight="700">部署经验</text>
+  <path d="M304 493H382" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M368 479L382 493L368 507" stroke="#94A3B8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="404" y="452" width="492" height="82" rx="18" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="430" y="495" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">更容易承担数据闭环、训练评估体系、</text>
+  <text x="430" y="523" fill="#334155" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">推理优化与上机部署</text>
+</svg>
