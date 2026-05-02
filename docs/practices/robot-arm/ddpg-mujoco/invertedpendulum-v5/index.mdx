@@ -1,0 +1,260 @@
+---
+sidebar_position: 3
+title: DDPG InvertedPendulum-v5
+---
+
+import Figure from '@site/src/components/Figure';
+import SourceCodeCard from '@site/src/components/SourceCodeCard';
+export const trainSource = "import argparse\nimport random\nimport sys\nfrom collections import deque\nfrom dataclasses import dataclass\nfrom pathlib import Path\n\nimport gymnasium as gym\nimport imageio.v2 as imageio\nimport numpy as np\nimport torch\nimport torch.nn as nn\nimport torch.nn.functional as F\nfrom tqdm import trange\n\n\ndef set_seed(seed: int) -> None:\n    random.seed(seed)\n    np.random.seed(seed)\n    torch.manual_seed(seed)\n    if torch.cuda.is_available():\n        torch.cuda.manual_seed_all(seed)\n\n\nclass ReplayBuffer:\n    def __init__(self, obs_dim: int, action_dim: int, capacity: int) -> None:\n        self.capacity = capacity\n        self.obs = np.zeros((capacity, obs_dim), dtype=np.float32)\n        self.actions = np.zeros((capacity, action_dim), dtype=np.float32)\n        self.rewards = np.zeros((capacity, 1), dtype=np.float32)\n        self.next_obs = np.zeros((capacity, obs_dim), dtype=np.float32)\n        self.dones = np.zeros((capacity, 1), dtype=np.float32)\n        self.ptr = 0\n        self.size = 0\n\n    def add(\n        self,\n        obs: np.ndarray,\n        action: np.ndarray,\n        reward: float,\n        next_obs: np.ndarray,\n        done: float,\n    ) -> None:\n        self.obs[self.ptr] = obs\n        self.actions[self.ptr] = action\n        self.rewards[self.ptr] = reward\n        self.next_obs[self.ptr] = next_obs\n        self.dones[self.ptr] = done\n        self.ptr = (self.ptr + 1) % self.capacity\n        self.size = min(self.size + 1, self.capacity)\n\n    def sample(self, batch_size: int, device: torch.device) -> tuple[torch.Tensor, ...]:\n        idx = np.random.randint(0, self.size, size=batch_size)\n        return (\n            torch.as_tensor(self.obs[idx], device=device),\n            torch.as_tensor(self.actions[idx], device=device),\n            torch.as_tensor(self.rewards[idx], device=device),\n            torch.as_tensor(self.next_obs[idx], device=device),\n            torch.as_tensor(self.dones[idx], device=device),\n        )\n\n    def __len__(self) -> int:\n        return self.size\n\n\nclass MLP(nn.Module):\n    def __init__(self, in_dim: int, hidden_dim: int, out_dim: int) -> None:\n        super().__init__()\n        self.net = nn.Sequential(\n            nn.Linear(in_dim, hidden_dim),\n            nn.ReLU(),\n            nn.Linear(hidden_dim, hidden_dim),\n            nn.ReLU(),\n            nn.Linear(hidden_dim, out_dim),\n        )\n\n    def forward(self, x: torch.Tensor) -> torch.Tensor:\n        return self.net(x)\n\n\nclass Actor(nn.Module):\n    def __init__(\n        self,\n        obs_dim: int,\n        action_dim: int,\n        hidden_dim: int,\n        action_low: np.ndarray,\n        action_high: np.ndarray,\n    ) -> None:\n        super().__init__()\n        self.backbone = MLP(obs_dim, hidden_dim, action_dim)\n        action_scale = (action_high - action_low) / 2.0\n        action_bias = (action_high + action_low) / 2.0\n        self.register_buffer(\"action_scale\", torch.as_tensor(action_scale, dtype=torch.float32))\n        self.register_buffer(\"action_bias\", torch.as_tensor(action_bias, dtype=torch.float32))\n\n    def forward(self, obs: torch.Tensor) -> torch.Tensor:\n        raw_action = torch.tanh(self.backbone(obs))\n        return raw_action * self.action_scale + self.action_bias\n\n\nclass Critic(nn.Module):\n    def __init__(self, obs_dim: int, action_dim: int, hidden_dim: int) -> None:\n        super().__init__()\n        self.q = MLP(obs_dim + action_dim, hidden_dim, 1)\n\n    def forward(self, obs: torch.Tensor, action: torch.Tensor) -> torch.Tensor:\n        return self.q(torch.cat([obs, action], dim=-1))\n\n\n@dataclass\nclass DDPGConfig:\n    env_id: str\n    total_steps: int\n    start_steps: int\n    batch_size: int\n    buffer_size: int\n    gamma: float\n    tau: float\n    actor_lr: float\n    critic_lr: float\n    hidden_dim: int\n    exploration_noise: float\n    seed: int\n    eval_interval: int\n    eval_episodes: int\n    load_path: Path | None\n    skip_train: bool\n    record_path: Path | None\n    record_episodes: int\n    record_fps: int\n    record_frame_skip: int\n    save_path: Path\n    device: str\n\n\nclass DDPGAgent:\n    def __init__(\n        self,\n        obs_dim: int,\n        action_dim: int,\n        action_low: np.ndarray,\n        action_high: np.ndarray,\n        config: DDPGConfig,\n    ) -> None:\n        if config.device == \"auto\":\n            device_name = \"cuda\" if torch.cuda.is_available() else \"cpu\"\n        else:\n            device_name = config.device\n        self.device = torch.device(device_name)\n\n        self.actor = Actor(obs_dim, action_dim, config.hidden_dim, action_low, action_high).to(self.device)\n        self.actor_target = Actor(obs_dim, action_dim, config.hidden_dim, action_low, action_high).to(self.device)\n        self.critic = Critic(obs_dim, action_dim, config.hidden_dim).to(self.device)\n        self.critic_target = Critic(obs_dim, action_dim, config.hidden_dim).to(self.device)\n\n        self.actor_target.load_state_dict(self.actor.state_dict())\n        self.critic_target.load_state_dict(self.critic.state_dict())\n\n        self.actor_optim = torch.optim.Adam(self.actor.parameters(), lr=config.actor_lr)\n        self.critic_optim = torch.optim.Adam(self.critic.parameters(), lr=config.critic_lr)\n\n        self.gamma = config.gamma\n        self.tau = config.tau\n        self.action_low = action_low\n        self.action_high = action_high\n        self.action_scale_np = (action_high - action_low) / 2.0\n\n    @torch.no_grad()\n    def act(self, obs: np.ndarray, noise_scale: float = 0.0) -> np.ndarray:\n        obs_tensor = torch.as_tensor(obs, dtype=torch.float32, device=self.device).unsqueeze(0)\n        action = self.actor(obs_tensor).cpu().numpy()[0]\n        if noise_scale > 0.0:\n            noise = np.random.normal(0.0, self.action_scale_np * noise_scale, size=action.shape)\n            action = action + noise\n        return np.clip(action, self.action_low, self.action_high)\n\n    def update(self, replay_buffer: ReplayBuffer, batch_size: int) -> tuple[float, float]:\n        obs, actions, rewards, next_obs, dones = replay_buffer.sample(batch_size, self.device)\n\n        with torch.no_grad():\n            next_actions = self.actor_target(next_obs)\n            target_q = self.critic_target(next_obs, next_actions)\n            backup = rewards + self.gamma * (1.0 - dones) * target_q\n\n        current_q = self.critic(obs, actions)\n        critic_loss = F.mse_loss(current_q, backup)\n        self.critic_optim.zero_grad()\n        critic_loss.backward()\n        self.critic_optim.step()\n\n        actor_loss = -self.critic(obs, self.actor(obs)).mean()\n        self.actor_optim.zero_grad()\n        actor_loss.backward()\n        self.actor_optim.step()\n\n        self.soft_update(self.actor, self.actor_target)\n        self.soft_update(self.critic, self.critic_target)\n        return float(actor_loss.item()), float(critic_loss.item())\n\n    def soft_update(self, source: nn.Module, target: nn.Module) -> None:\n        for target_param, source_param in zip(target.parameters(), source.parameters()):\n            target_param.data.mul_(1.0 - self.tau).add_(source_param.data, alpha=self.tau)\n\n    def save_actor(self, save_path: Path) -> None:\n        save_path.parent.mkdir(parents=True, exist_ok=True)\n        torch.save(self.actor.state_dict(), save_path)\n\n    def load_actor(self, load_path: Path) -> None:\n        state_dict = torch.load(load_path, map_location=self.device)\n        self.actor.load_state_dict(state_dict)\n        self.actor_target.load_state_dict(self.actor.state_dict())\n\n\ndef get_env_specs(env: gym.Env) -> tuple[int, int, np.ndarray, np.ndarray]:\n    obs_dim = int(np.prod(env.observation_space.shape))\n    action_dim = int(np.prod(env.action_space.shape))\n    action_low = env.action_space.low.astype(np.float32)\n    action_high = env.action_space.high.astype(np.float32)\n    return obs_dim, action_dim, action_low, action_high\n\n\ndef evaluate_policy(\n    env_id: str,\n    agent: DDPGAgent,\n    episodes: int,\n    seed: int,\n) -> float:\n    eval_env = gym.make(env_id)\n    returns: list[float] = []\n    for episode_idx in range(episodes):\n        obs, _ = eval_env.reset(seed=seed + 10_000 + episode_idx)\n        done = False\n        episode_return = 0.0\n        while not done:\n            action = agent.act(obs, noise_scale=0.0)\n            obs, reward, terminated, truncated, _ = eval_env.step(action)\n            done = terminated or truncated\n            episode_return += reward\n        returns.append(episode_return)\n    eval_env.close()\n    return float(np.mean(returns))\n\n\ndef record_policy(\n    env_id: str,\n    agent: DDPGAgent,\n    episodes: int,\n    seed: int,\n    record_path: Path,\n    fps: int,\n    frame_skip: int,\n) -> None:\n    if record_path.suffix.lower() not in {\".gif\", \".mp4\"}:\n        raise ValueError(\"record_path must end with .gif or .mp4\")\n\n    record_path.parent.mkdir(parents=True, exist_ok=True)\n    record_env = gym.make(env_id, render_mode=\"rgb_array\")\n    frames: list[np.ndarray] = []\n\n    for episode_idx in range(episodes):\n        obs, _ = record_env.reset(seed=seed + 30_000 + episode_idx)\n        done = False\n        step_idx = 0\n\n        initial_frame = record_env.render()\n        if initial_frame is not None:\n            frames.append(initial_frame)\n\n        while not done:\n            action = agent.act(obs, noise_scale=0.0)\n            obs, _, terminated, truncated, _ = record_env.step(action)\n            done = terminated or truncated\n            step_idx += 1\n            if step_idx % frame_skip == 0:\n                frame = record_env.render()\n                if frame is not None:\n                    frames.append(frame)\n\n        final_frame = record_env.render()\n        if final_frame is not None:\n            frames.append(final_frame)\n\n    record_env.close()\n\n    if record_path.suffix.lower() == \".gif\":\n        imageio.mimsave(record_path, frames, fps=fps, loop=0)\n    else:\n        with imageio.get_writer(\n            record_path,\n            fps=fps,\n            codec=\"libx264\",\n            format=\"FFMPEG\",\n            macro_block_size=None,\n        ) as writer:\n            for frame in frames:\n                writer.append_data(frame)\n\n    print(f\"saved_recording={record_path}\")\n\n\ndef train(config: DDPGConfig, agent: DDPGAgent | None = None) -> DDPGAgent:\n    set_seed(config.seed)\n    env = gym.make(config.env_id)\n    env.action_space.seed(config.seed)\n\n    obs_dim, action_dim, action_low, action_high = get_env_specs(env)\n\n    if agent is None:\n        agent = DDPGAgent(obs_dim, action_dim, action_low, action_high, config)\n    replay_buffer = ReplayBuffer(obs_dim, action_dim, config.buffer_size)\n\n    obs, _ = env.reset(seed=config.seed)\n    episode_return = 0.0\n    episode_length = 0\n    recent_returns: deque[float] = deque(maxlen=10)\n\n    print(f\"device={agent.device} env={config.env_id}\", flush=True)\n    use_tqdm = sys.stderr.isatty()\n    progress = trange(1, config.total_steps + 1, desc=\"training\", leave=True, disable=not use_tqdm)\n    for step in progress:\n        if step <= config.start_steps:\n            action = env.action_space.sample()\n        else:\n            action = agent.act(obs, noise_scale=config.exploration_noise)\n\n        next_obs, reward, terminated, truncated, _ = env.step(action)\n        done = terminated or truncated\n\n        # Time-limit truncation should still bootstrap the target.\n        replay_done = float(terminated)\n        replay_buffer.add(obs, action, reward, next_obs, replay_done)\n\n        obs = next_obs\n        episode_return += reward\n        episode_length += 1\n\n        actor_loss = None\n        critic_loss = None\n        if step > config.start_steps and len(replay_buffer) >= config.batch_size:\n            actor_loss, critic_loss = agent.update(replay_buffer, config.batch_size)\n\n        if done:\n            recent_returns.append(episode_return)\n            if use_tqdm:\n                progress.set_postfix(\n                    episode_return=f\"{episode_return:.1f}\",\n                    episode_length=episode_length,\n                    avg10=f\"{np.mean(recent_returns):.1f}\",\n                    actor_loss=f\"{actor_loss:.3f}\" if actor_loss is not None else \"na\",\n                    critic_loss=f\"{critic_loss:.3f}\" if critic_loss is not None else \"na\",\n                )\n            obs, _ = env.reset()\n            episode_return = 0.0\n            episode_length = 0\n\n        if step % config.eval_interval == 0:\n            avg_eval_return = evaluate_policy(config.env_id, agent, config.eval_episodes, config.seed)\n            print(f\"[eval] step={step} avg_return={avg_eval_return:.2f}\")\n\n    env.close()\n    agent.save_actor(config.save_path)\n    final_eval_return = evaluate_policy(config.env_id, agent, config.eval_episodes, config.seed)\n    print(f\"saved_actor={config.save_path}\")\n    print(f\"final_eval_return={final_eval_return:.2f}\")\n    return agent\n\n\ndef build_agent(config: DDPGConfig) -> DDPGAgent:\n    env = gym.make(config.env_id)\n    obs_dim, action_dim, action_low, action_high = get_env_specs(env)\n    env.close()\n    return DDPGAgent(obs_dim, action_dim, action_low, action_high, config)\n\n\ndef parse_args() -> DDPGConfig:\n    parser = argparse.ArgumentParser(description=\"Train a pure PyTorch DDPG agent on InvertedPendulum-v5.\")\n    parser.add_argument(\"--env-id\", type=str, default=\"InvertedPendulum-v5\")\n    parser.add_argument(\"--total-steps\", type=int, default=20_000)\n    parser.add_argument(\"--start-steps\", type=int, default=1_000)\n    parser.add_argument(\"--batch-size\", type=int, default=256)\n    parser.add_argument(\"--buffer-size\", type=int, default=200_000)\n    parser.add_argument(\"--gamma\", type=float, default=0.99)\n    parser.add_argument(\"--tau\", type=float, default=0.005)\n    parser.add_argument(\"--actor-lr\", type=float, default=1e-3)\n    parser.add_argument(\"--critic-lr\", type=float, default=1e-3)\n    parser.add_argument(\"--hidden-dim\", type=int, default=256)\n    parser.add_argument(\"--exploration-noise\", type=float, default=0.1)\n    parser.add_argument(\"--seed\", type=int, default=42)\n    parser.add_argument(\"--eval-interval\", type=int, default=2_000)\n    parser.add_argument(\"--eval-episodes\", type=int, default=5)\n    parser.add_argument(\"--load-path\", type=Path, default=None)\n    parser.add_argument(\"--skip-train\", action=\"store_true\")\n    parser.add_argument(\"--record-path\", type=Path, default=None)\n    parser.add_argument(\"--record-episodes\", type=int, default=1)\n    parser.add_argument(\"--record-fps\", type=int, default=20)\n    parser.add_argument(\"--record-frame-skip\", type=int, default=8)\n    parser.add_argument(\"--save-path\", type=Path, default=Path(\"artifacts/ddpg_invertedpendulum_v5_actor.pt\"))\n    parser.add_argument(\"--device\", type=str, default=\"auto\", choices=[\"auto\", \"cpu\", \"cuda\"])\n    args = parser.parse_args()\n    return DDPGConfig(\n        env_id=args.env_id,\n        total_steps=args.total_steps,\n        start_steps=args.start_steps,\n        batch_size=args.batch_size,\n        buffer_size=args.buffer_size,\n        gamma=args.gamma,\n        tau=args.tau,\n        actor_lr=args.actor_lr,\n        critic_lr=args.critic_lr,\n        hidden_dim=args.hidden_dim,\n        exploration_noise=args.exploration_noise,\n        seed=args.seed,\n        eval_interval=args.eval_interval,\n        eval_episodes=args.eval_episodes,\n        load_path=args.load_path,\n        skip_train=args.skip_train,\n        record_path=args.record_path,\n        record_episodes=args.record_episodes,\n        record_fps=args.record_fps,\n        record_frame_skip=args.record_frame_skip,\n        save_path=args.save_path,\n        device=args.device,\n    )\n\n\nif __name__ == \"__main__\":\n    config = parse_args()\n\n    agent: DDPGAgent | None = None\n    if config.skip_train or config.load_path is not None:\n        agent = build_agent(config)\n\n    if config.load_path is not None:\n        agent.load_actor(config.load_path)\n        print(f\"loaded_actor={config.load_path}\")\n\n    if not config.skip_train:\n        agent = train(config, agent=agent)\n    elif agent is None:\n        raise ValueError(\"skip_train requires --load-path so there is a model to use\")\n\n    if config.record_path is not None:\n        record_policy(\n            config.env_id,\n            agent,\n            episodes=config.record_episodes,\n            seed=config.seed,\n            record_path=config.record_path,\n            fps=config.record_fps,\n            frame_skip=config.record_frame_skip,\n        )\n";
+
+# DDPG InvertedPendulum-v5 Demo
+
+使用纯 PyTorch 实现 DDPG，在 MuJoCo 的 `InvertedPendulum-v5` 环境中训练一个连续控制智能体。
+
+## 项目简介
+
+DDPG（Deep Deterministic Policy Gradient）是一种经典的 Actor-Critic 深度强化学习算法，专为**连续动作空间**设计。这个项目默认展示的是 `InvertedPendulum-v5`，适合作为学习 MuJoCo 连续控制强化学习的起点。
+
+虽然脚本仍然支持通过 `--env-id` 切换到其他 MuJoCo 环境，但这篇项目页的默认案例就是 `InvertedPendulum-v5`。相比已经单独拆分出来并做过针对性调参的 `ddpg-reacher-v5`、`ddpg-pusher-v5`，这里更像是一个从简单任务切入的 DDPG baseline 示例。
+
+## 算法原理
+
+DDPG 结合了 DPG（确定性策略梯度）和 DQN 的核心思想：
+
+```
+┌─────────────────────────────────────────────┐
+│                DDPG 架构                      │
+│                                               │
+│   Actor（策略网络）──→ 输出确定性动作 a = μ(s)  │
+│   Critic（价值网络）──→ 评估 Q(s, a)           │
+│   Target 网络 ──→ 稳定训练目标                  │
+│   Replay Buffer ──→ 打破样本相关性              │
+└─────────────────────────────────────────────┘
+```
+
+### 核心更新公式
+
+**Critic 更新**（最小化 TD 误差）：
+
+$$
+\begin{equation}
+L = \frac{1}{N}\sum_i \left( Q(s_i, a_i) - \left( r_i + \gamma (1 - d_i) Q'(s_{i+1}, \mu'(s_{i+1})) \right) \right)^2
+\end{equation}
+$$
+
+**Actor 更新**（最大化 Q 值）：
+
+$$
+\begin{equation}
+\nabla_\theta J \approx \frac{1}{N}\sum_i \nabla_a Q(s, a)\big|_{a=\mu(s_i)} \nabla_\theta \mu(s_i)
+\end{equation}
+$$
+
+**Target 网络软更新**：
+
+$$
+\begin{equation}
+\theta' \leftarrow \tau \theta + (1 - \tau) \theta'
+\end{equation}
+$$
+
+## 代码结构
+
+```text
+ddpg-invertedpendulum-v5/
+├── figs/
+│   └── invertedpendulum-success.gif
+├── index.mdx
+└── train_ddpg_invertedpendulum_v5.py
+```
+
+本项目刻意将所有代码放在单个文件中，方便阅读和理解。训练脚本当前约 `333` 行，主要模块包括：
+
+| 模块 | 说明 |
+|------|------|
+| `ReplayBuffer` | 高效的 NumPy 环形经验回放缓冲区 |
+| `MLP` | 通用多层感知机基础网络 |
+| `Actor` | 策略网络，输出经 `tanh` 缩放到动作范围的确定性动作 |
+| `Critic` | Q 值网络，输入 `(state, action)` 拼接向量 |
+| `DDPGConfig` | 使用 `dataclass` 管理所有超参数 |
+| `DDPGAgent` | 封装训练逻辑：动作选择、网络更新、软更新 |
+| `train()` | 主训练循环，含评估与模型保存 |
+
+<SourceCodeCard
+  title="完整源代码"
+  description="点击展开查看完整的 DDPG 训练脚本（约 330 行）"
+  language="python"
+  filename="train_ddpg_invertedpendulum_v5.py"
+>
+  {trainSource}
+</SourceCodeCard>
+
+## 代码详解
+
+### 经验回放缓冲区
+
+使用预分配的 NumPy 数组实现环形缓冲区，避免 Python list 的内存碎片和 GC 开销：
+
+```python
+class ReplayBuffer:
+    def __init__(self, obs_dim: int, action_dim: int, capacity: int) -> None:
+        self.capacity = capacity
+        self.obs = np.zeros((capacity, obs_dim), dtype=np.float32)
+        self.actions = np.zeros((capacity, action_dim), dtype=np.float32)
+        self.rewards = np.zeros((capacity, 1), dtype=np.float32)
+        self.next_obs = np.zeros((capacity, obs_dim), dtype=np.float32)
+        self.dones = np.zeros((capacity, 1), dtype=np.float32)
+        self.ptr = 0
+        self.size = 0
+```
+
+### Actor 网络
+
+Actor 输出经过 `tanh` 激活后，通过线性缩放映射到环境的实际动作范围 `[low, high]`：
+
+```python
+class Actor(nn.Module):
+    def forward(self, obs: torch.Tensor) -> torch.Tensor:
+        raw_action = torch.tanh(self.backbone(obs))
+        return raw_action * self.action_scale + self.action_bias
+```
+
+### 探索策略
+
+训练初期使用随机采样（`start_steps`），之后在确定性动作上叠加高斯噪声进行探索：
+
+```python
+if step <= config.start_steps:
+    action = env.action_space.sample()        # 纯随机探索
+else:
+    action = agent.act(obs, noise_scale=0.1)  # 高斯噪声探索
+```
+
+### Truncation 处理
+
+对于因时间限制截断的 episode，仍然需要 bootstrap 目标值（即 `done=False`），只有真正终止的状态才设为 `done=True`：
+
+```python
+replay_done = float(terminated)  # 只用 terminated，忽略 truncated
+```
+
+## 环境要求
+
+```bash
+pip install gymnasium[mujoco] torch numpy tqdm imageio
+```
+
+如果你本地已经有仓库里的 conda 环境，推荐直接使用：
+
+```bash
+source /home/jj/anaconda3/etc/profile.d/conda.sh
+conda activate easy-robotics
+```
+
+:::tip 硬件说明
+MuJoCo 环境本身不需要 GPU，但 PyTorch 训练可以利用 CUDA 加速。脚本默认 `--device auto` 会自动检测。
+:::
+
+## 快速开始
+
+默认命令会在 `InvertedPendulum-v5` 上训练，并把 actor 权重保存到 `artifacts/ddpg_invertedpendulum_v5_actor.pt`：
+
+```bash
+python projects/ddpg-invertedpendulum-v5/train_ddpg_invertedpendulum_v5.py
+```
+
+如果你想基于这份实现切换到别的 MuJoCo 环境：
+
+```bash
+python projects/ddpg-invertedpendulum-v5/train_ddpg_invertedpendulum_v5.py \
+  --env-id HalfCheetah-v5 \
+  --total-steps 100000 \
+  --start-steps 5000 \
+  --hidden-dim 256 \
+  --batch-size 256 \
+  --gamma 0.99 \
+  --tau 0.005 \
+  --exploration-noise 0.1 \
+  --save-path artifacts/ddpg_halfcheetah_v5_actor.pt
+```
+
+如果你想按“两步走”的方式先保存 checkpoint，再加载模型录制 gif：
+
+```bash
+python projects/ddpg-invertedpendulum-v5/train_ddpg_invertedpendulum_v5.py \
+  --save-path artifacts/ddpg_invertedpendulum_v5_actor.pt
+```
+
+```bash
+python projects/ddpg-invertedpendulum-v5/train_ddpg_invertedpendulum_v5.py \
+  --skip-train \
+  --load-path artifacts/ddpg_invertedpendulum_v5_actor.pt \
+  --record-path projects/ddpg-invertedpendulum-v5/figs/invertedpendulum-success.gif
+```
+
+如果你想看已经拆分好的调参版项目：
+
+- `Reacher-v5`：`/projects/ddpg-reacher-v5`
+- `Pusher-v5`：`/projects/ddpg-pusher-v5`
+
+## 默认参数
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `--env-id` | `InvertedPendulum-v5` | Gymnasium 环境 ID |
+| `--total-steps` | `20000` | 总训练步数 |
+| `--start-steps` | `1000` | 纯随机探索步数 |
+| `--batch-size` | `256` | 每次更新的 batch 大小 |
+| `--buffer-size` | `200000` | 经验回放缓冲区容量 |
+| `--gamma` | `0.99` | 折扣因子 |
+| `--tau` | `0.005` | 目标网络软更新系数 |
+| `--actor-lr` | `1e-3` | Actor 学习率 |
+| `--critic-lr` | `1e-3` | Critic 学习率 |
+| `--hidden-dim` | `256` | 隐藏层维度 |
+| `--exploration-noise` | `0.1` | 探索噪声比例 |
+| `--seed` | `42` | 随机种子 |
+| `--eval-interval` | `2000` | 每隔多少步评估一次 |
+| `--eval-episodes` | `5` | 每次评估的 episode 数 |
+| `--load-path` | `None` | 加载已经训练好的 actor checkpoint |
+| `--skip-train` | `False` | 只加载模型并执行录制，不重新训练 |
+| `--record-path` | `None` | 导出 gif 或 mp4 |
+| `--record-episodes` | `1` | 录制多少个 episode |
+| `--record-fps` | `20` | 导出媒体帧率 |
+| `--record-frame-skip` | `8` | 每隔多少环境步采一帧 |
+| `--save-path` | `artifacts/ddpg_invertedpendulum_v5_actor.pt` | 模型保存路径 |
+| `--device` | `auto` | 设备选择：`auto` / `cpu` / `cuda` |
+
+## 实现要点
+
+- Actor 网络输出经过 `tanh` 映射回环境动作范围
+- Critic 网络输入为 `(obs, action)` 拼接后的向量
+- 训练初期使用纯随机探索，之后在确定性动作上叠加高斯噪声
+- 时间截断 `truncated` 不会被当作真正终止，目标值仍然继续 bootstrap
+- 可以先训练生成 actor checkpoint，再通过 `--load-path` + `--skip-train` 单独录制 gif
+- 这个项目默认聚焦 `InvertedPendulum-v5`，也可以继续作为其他 MuJoCo 任务的起点脚本
+
+## 最终效果
+
+下面这段 gif 使用默认 `seed=42` 训练保存 checkpoint 后，再单独加载模型录制得到：
+
+<Figure src={require('./figs/invertedpendulum-success.gif').default} caption="DDPG InvertedPendulum-v5 成功效果" />
+
+## 训练输出示例
+
+```
+device=cuda env=InvertedPendulum-v5
+training:  10%|██        | 2000/20000 [00:12] episode_return=87.0 avg10=62.3 actor_loss=0.012 critic_loss=0.035
+[eval] step=2000 avg_return=78.40
+training:  20%|████      | 4000/20000 [00:24] episode_return=256.0 avg10=189.5 actor_loss=0.008 critic_loss=0.021
+[eval] step=4000 avg_return=312.60
+...
+saved_actor=artifacts/ddpg_invertedpendulum_v5_actor.pt
+final_eval_return=1000.00
+```
+
+## 适合进一步尝试的方向
+
+- **TD3**：在 DDPG 基础上加入 clipped double-Q、延迟更新和目标策略平滑，显著提升稳定性
+- **SAC**：引入最大熵框架，自动调节探索程度，通常是连续控制的默认选择
+- **多环境对比**：尝试 `Hopper-v5`、`Walker2d-v5`、`Ant-v5` 等更复杂的环境
+- **超参数搜索**：对 `hidden_dim`、学习率、`tau` 等进行网格搜索或贝叶斯优化

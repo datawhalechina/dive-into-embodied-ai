@@ -1,0 +1,127 @@
+---
+sidebar_position: 4
+title: DDPG Reacher-v5
+---
+
+import Figure from '@site/src/components/Figure';
+import SourceCodeCard from '@site/src/components/SourceCodeCard';
+export const trainSource = "import argparse\nimport random\nimport sys\nfrom collections import deque\nfrom dataclasses import dataclass\nfrom pathlib import Path\n\nimport gymnasium as gym\nimport imageio.v2 as imageio\nimport numpy as np\nimport torch\nimport torch.nn as nn\nimport torch.nn.functional as F\nfrom tqdm import trange\n\n\ndef set_seed(seed: int) -> None:\n    random.seed(seed)\n    np.random.seed(seed)\n    torch.manual_seed(seed)\n    if torch.cuda.is_available():\n        torch.cuda.manual_seed_all(seed)\n\n\nclass ReplayBuffer:\n    def __init__(self, obs_dim: int, action_dim: int, capacity: int) -> None:\n        self.capacity = capacity\n        self.obs = np.zeros((capacity, obs_dim), dtype=np.float32)\n        self.actions = np.zeros((capacity, action_dim), dtype=np.float32)\n        self.rewards = np.zeros((capacity, 1), dtype=np.float32)\n        self.next_obs = np.zeros((capacity, obs_dim), dtype=np.float32)\n        self.dones = np.zeros((capacity, 1), dtype=np.float32)\n        self.ptr = 0\n        self.size = 0\n\n    def add(\n        self,\n        obs: np.ndarray,\n        action: np.ndarray,\n        reward: float,\n        next_obs: np.ndarray,\n        done: float,\n    ) -> None:\n        self.obs[self.ptr] = obs\n        self.actions[self.ptr] = action\n        self.rewards[self.ptr] = reward\n        self.next_obs[self.ptr] = next_obs\n        self.dones[self.ptr] = done\n        self.ptr = (self.ptr + 1) % self.capacity\n        self.size = min(self.size + 1, self.capacity)\n\n    def sample(self, batch_size: int, device: torch.device) -> tuple[torch.Tensor, ...]:\n        idx = np.random.randint(0, self.size, size=batch_size)\n        return (\n            torch.as_tensor(self.obs[idx], device=device),\n            torch.as_tensor(self.actions[idx], device=device),\n            torch.as_tensor(self.rewards[idx], device=device),\n            torch.as_tensor(self.next_obs[idx], device=device),\n            torch.as_tensor(self.dones[idx], device=device),\n        )\n\n    def __len__(self) -> int:\n        return self.size\n\n\nclass MLP(nn.Module):\n    def __init__(self, in_dim: int, hidden_dim: int, out_dim: int) -> None:\n        super().__init__()\n        self.net = nn.Sequential(\n            nn.Linear(in_dim, hidden_dim),\n            nn.ReLU(),\n            nn.Linear(hidden_dim, hidden_dim),\n            nn.ReLU(),\n            nn.Linear(hidden_dim, out_dim),\n        )\n\n    def forward(self, x: torch.Tensor) -> torch.Tensor:\n        return self.net(x)\n\n\nclass Actor(nn.Module):\n    def __init__(\n        self,\n        obs_dim: int,\n        action_dim: int,\n        hidden_dim: int,\n        action_low: np.ndarray,\n        action_high: np.ndarray,\n    ) -> None:\n        super().__init__()\n        self.backbone = MLP(obs_dim, hidden_dim, action_dim)\n        action_scale = (action_high - action_low) / 2.0\n        action_bias = (action_high + action_low) / 2.0\n        self.register_buffer(\"action_scale\", torch.as_tensor(action_scale, dtype=torch.float32))\n        self.register_buffer(\"action_bias\", torch.as_tensor(action_bias, dtype=torch.float32))\n\n    def forward(self, obs: torch.Tensor) -> torch.Tensor:\n        raw_action = torch.tanh(self.backbone(obs))\n        return raw_action * self.action_scale + self.action_bias\n\n\nclass Critic(nn.Module):\n    def __init__(self, obs_dim: int, action_dim: int, hidden_dim: int) -> None:\n        super().__init__()\n        self.q = MLP(obs_dim + action_dim, hidden_dim, 1)\n\n    def forward(self, obs: torch.Tensor, action: torch.Tensor) -> torch.Tensor:\n        return self.q(torch.cat([obs, action], dim=-1))\n\n\n@dataclass\nclass DDPGConfig:\n    env_id: str\n    total_steps: int\n    start_steps: int\n    batch_size: int\n    buffer_size: int\n    gamma: float\n    tau: float\n    actor_lr: float\n    critic_lr: float\n    hidden_dim: int\n    exploration_noise: float\n    seed: int\n    eval_interval: int\n    eval_episodes: int\n    demo_episodes: int\n    demo_render: bool\n    record_path: Path | None\n    record_episodes: int\n    record_fps: int\n    record_frame_skip: int\n    save_path: Path\n    device: str\n\n\nclass DDPGAgent:\n    def __init__(\n        self,\n        obs_dim: int,\n        action_dim: int,\n        action_low: np.ndarray,\n        action_high: np.ndarray,\n        config: DDPGConfig,\n    ) -> None:\n        if config.device == \"auto\":\n            device_name = \"cuda\" if torch.cuda.is_available() else \"cpu\"\n        else:\n            device_name = config.device\n        self.device = torch.device(device_name)\n\n        self.actor = Actor(obs_dim, action_dim, config.hidden_dim, action_low, action_high).to(self.device)\n        self.actor_target = Actor(obs_dim, action_dim, config.hidden_dim, action_low, action_high).to(self.device)\n        self.critic = Critic(obs_dim, action_dim, config.hidden_dim).to(self.device)\n        self.critic_target = Critic(obs_dim, action_dim, config.hidden_dim).to(self.device)\n\n        self.actor_target.load_state_dict(self.actor.state_dict())\n        self.critic_target.load_state_dict(self.critic.state_dict())\n\n        self.actor_optim = torch.optim.Adam(self.actor.parameters(), lr=config.actor_lr)\n        self.critic_optim = torch.optim.Adam(self.critic.parameters(), lr=config.critic_lr)\n\n        self.gamma = config.gamma\n        self.tau = config.tau\n        self.action_low = action_low\n        self.action_high = action_high\n        self.action_scale_np = (action_high - action_low) / 2.0\n\n    @torch.no_grad()\n    def act(self, obs: np.ndarray, noise_scale: float = 0.0) -> np.ndarray:\n        obs_tensor = torch.as_tensor(obs, dtype=torch.float32, device=self.device).unsqueeze(0)\n        action = self.actor(obs_tensor).cpu().numpy()[0]\n        if noise_scale > 0.0:\n            noise = np.random.normal(0.0, self.action_scale_np * noise_scale, size=action.shape)\n            action = action + noise\n        return np.clip(action, self.action_low, self.action_high)\n\n    def update(self, replay_buffer: ReplayBuffer, batch_size: int) -> tuple[float, float]:\n        obs, actions, rewards, next_obs, dones = replay_buffer.sample(batch_size, self.device)\n\n        with torch.no_grad():\n            next_actions = self.actor_target(next_obs)\n            target_q = self.critic_target(next_obs, next_actions)\n            backup = rewards + self.gamma * (1.0 - dones) * target_q\n\n        current_q = self.critic(obs, actions)\n        critic_loss = F.mse_loss(current_q, backup)\n        self.critic_optim.zero_grad()\n        critic_loss.backward()\n        self.critic_optim.step()\n\n        actor_loss = -self.critic(obs, self.actor(obs)).mean()\n        self.actor_optim.zero_grad()\n        actor_loss.backward()\n        self.actor_optim.step()\n\n        self.soft_update(self.actor, self.actor_target)\n        self.soft_update(self.critic, self.critic_target)\n        return float(actor_loss.item()), float(critic_loss.item())\n\n    def soft_update(self, source: nn.Module, target: nn.Module) -> None:\n        for target_param, source_param in zip(target.parameters(), source.parameters()):\n            target_param.data.mul_(1.0 - self.tau).add_(source_param.data, alpha=self.tau)\n\n    def save_actor(self, save_path: Path) -> None:\n        save_path.parent.mkdir(parents=True, exist_ok=True)\n        torch.save(self.actor.state_dict(), save_path)\n\n\ndef evaluate_policy(\n    env_id: str,\n    agent: DDPGAgent,\n    episodes: int,\n    seed: int,\n) -> float:\n    eval_env = gym.make(env_id)\n    returns: list[float] = []\n    for episode_idx in range(episodes):\n        obs, _ = eval_env.reset(seed=seed + 10_000 + episode_idx)\n        done = False\n        episode_return = 0.0\n        while not done:\n            action = agent.act(obs, noise_scale=0.0)\n            obs, reward, terminated, truncated, _ = eval_env.step(action)\n            done = terminated or truncated\n            episode_return += reward\n        returns.append(episode_return)\n    eval_env.close()\n    return float(np.mean(returns))\n\n\ndef demo_policy(\n    env_id: str,\n    agent: DDPGAgent,\n    episodes: int,\n    seed: int,\n    render: bool,\n) -> None:\n    render_mode = \"human\" if render else None\n    demo_env = gym.make(env_id, render_mode=render_mode)\n    for episode_idx in range(episodes):\n        obs, _ = demo_env.reset(seed=seed + 20_000 + episode_idx)\n        done = False\n        episode_return = 0.0\n        while not done:\n            action = agent.act(obs, noise_scale=0.0)\n            obs, reward, terminated, truncated, _ = demo_env.step(action)\n            done = terminated or truncated\n            episode_return += reward\n        print(f\"[demo] episode={episode_idx + 1} return={episode_return:.2f}\")\n    demo_env.close()\n\n\ndef record_policy(\n    env_id: str,\n    agent: DDPGAgent,\n    episodes: int,\n    seed: int,\n    record_path: Path,\n    fps: int,\n    frame_skip: int,\n) -> None:\n    if record_path.suffix.lower() not in {\".gif\", \".mp4\"}:\n        raise ValueError(\"record_path must end with .gif or .mp4\")\n\n    record_path.parent.mkdir(parents=True, exist_ok=True)\n    record_env = gym.make(env_id, render_mode=\"rgb_array\")\n    frames: list[np.ndarray] = []\n\n    for episode_idx in range(episodes):\n        obs, _ = record_env.reset(seed=seed + 30_000 + episode_idx)\n        done = False\n        step_idx = 0\n        initial_frame = record_env.render()\n        if initial_frame is not None:\n            frames.append(initial_frame)\n\n        while not done:\n            action = agent.act(obs, noise_scale=0.0)\n            obs, _, terminated, truncated, _ = record_env.step(action)\n            done = terminated or truncated\n            step_idx += 1\n            if step_idx % frame_skip == 0:\n                frame = record_env.render()\n                if frame is not None:\n                    frames.append(frame)\n\n        final_frame = record_env.render()\n        if final_frame is not None:\n            frames.append(final_frame)\n\n    record_env.close()\n\n    if record_path.suffix.lower() == \".gif\":\n        imageio.mimsave(record_path, frames, fps=fps, loop=0)\n    else:\n        with imageio.get_writer(\n            record_path,\n            fps=fps,\n            codec=\"libx264\",\n            format=\"FFMPEG\",\n            macro_block_size=None,\n        ) as writer:\n            for frame in frames:\n                writer.append_data(frame)\n\n    print(f\"saved_recording={record_path}\")\n\n\ndef train(config: DDPGConfig) -> None:\n    set_seed(config.seed)\n    env = gym.make(config.env_id)\n    env.action_space.seed(config.seed)\n\n    obs_dim = int(np.prod(env.observation_space.shape))\n    action_dim = int(np.prod(env.action_space.shape))\n    action_low = env.action_space.low.astype(np.float32)\n    action_high = env.action_space.high.astype(np.float32)\n\n    agent = DDPGAgent(obs_dim, action_dim, action_low, action_high, config)\n    replay_buffer = ReplayBuffer(obs_dim, action_dim, config.buffer_size)\n\n    obs, _ = env.reset(seed=config.seed)\n    episode_return = 0.0\n    episode_length = 0\n    recent_returns: deque[float] = deque(maxlen=10)\n\n    print(f\"device={agent.device} env={config.env_id}\", flush=True)\n    use_tqdm = sys.stderr.isatty()\n    progress = trange(1, config.total_steps + 1, desc=\"training\", leave=True, disable=not use_tqdm)\n    for step in progress:\n        if step <= config.start_steps:\n            action = env.action_space.sample()\n        else:\n            action = agent.act(obs, noise_scale=config.exploration_noise)\n\n        next_obs, reward, terminated, truncated, _ = env.step(action)\n        done = terminated or truncated\n\n        # Only true termination should stop TD bootstrapping.\n        replay_done = float(terminated)\n        replay_buffer.add(obs, action, reward, next_obs, replay_done)\n\n        obs = next_obs\n        episode_return += reward\n        episode_length += 1\n\n        actor_loss = None\n        critic_loss = None\n        if step > config.start_steps and len(replay_buffer) >= config.batch_size:\n            actor_loss, critic_loss = agent.update(replay_buffer, config.batch_size)\n\n        if done:\n            recent_returns.append(episode_return)\n            if use_tqdm:\n                progress.set_postfix(\n                    episode_return=f\"{episode_return:.1f}\",\n                    episode_length=episode_length,\n                    avg10=f\"{np.mean(recent_returns):.1f}\",\n                    actor_loss=f\"{actor_loss:.3f}\" if actor_loss is not None else \"na\",\n                    critic_loss=f\"{critic_loss:.3f}\" if critic_loss is not None else \"na\",\n                )\n            obs, _ = env.reset()\n            episode_return = 0.0\n            episode_length = 0\n\n        if step % config.eval_interval == 0:\n            avg_eval_return = evaluate_policy(config.env_id, agent, config.eval_episodes, config.seed)\n            print(f\"[eval] step={step} avg_return={avg_eval_return:.2f}\")\n\n    env.close()\n    agent.save_actor(config.save_path)\n    final_eval_return = evaluate_policy(config.env_id, agent, config.eval_episodes, config.seed)\n    print(f\"saved_actor={config.save_path}\")\n    print(f\"final_eval_return={final_eval_return:.2f}\")\n\n    if config.demo_episodes > 0:\n        demo_policy(\n            config.env_id,\n            agent,\n            episodes=config.demo_episodes,\n            seed=config.seed,\n            render=config.demo_render,\n        )\n\n    if config.record_path is not None:\n        record_policy(\n            config.env_id,\n            agent,\n            episodes=config.record_episodes,\n            seed=config.seed,\n            record_path=config.record_path,\n            fps=config.record_fps,\n            frame_skip=config.record_frame_skip,\n        )\n\n\ndef parse_args() -> DDPGConfig:\n    parser = argparse.ArgumentParser(description=\"Train a pure PyTorch DDPG demo on Reacher-v5.\")\n    parser.add_argument(\"--env-id\", type=str, default=\"Reacher-v5\")\n    parser.add_argument(\"--total-steps\", type=int, default=80_000)\n    parser.add_argument(\"--start-steps\", type=int, default=4_000)\n    parser.add_argument(\"--batch-size\", type=int, default=256)\n    parser.add_argument(\"--buffer-size\", type=int, default=100_000)\n    parser.add_argument(\"--gamma\", type=float, default=0.99)\n    parser.add_argument(\"--tau\", type=float, default=0.005)\n    parser.add_argument(\"--actor-lr\", type=float, default=1e-3)\n    parser.add_argument(\"--critic-lr\", type=float, default=1e-3)\n    parser.add_argument(\"--hidden-dim\", type=int, default=256)\n    parser.add_argument(\"--exploration-noise\", type=float, default=0.2)\n    parser.add_argument(\"--seed\", type=int, default=42)\n    parser.add_argument(\"--eval-interval\", type=int, default=5_000)\n    parser.add_argument(\"--eval-episodes\", type=int, default=10)\n    parser.add_argument(\"--demo-episodes\", type=int, default=0)\n    parser.add_argument(\"--demo-render\", action=\"store_true\")\n    parser.add_argument(\"--record-path\", type=Path, default=None)\n    parser.add_argument(\"--record-episodes\", type=int, default=1)\n    parser.add_argument(\"--record-fps\", type=int, default=20)\n    parser.add_argument(\"--record-frame-skip\", type=int, default=2)\n    parser.add_argument(\"--save-path\", type=Path, default=Path(\"artifacts/ddpg_reacher_v5_actor.pt\"))\n    parser.add_argument(\"--device\", type=str, default=\"auto\", choices=[\"auto\", \"cpu\", \"cuda\"])\n    args = parser.parse_args()\n    return DDPGConfig(\n        env_id=args.env_id,\n        total_steps=args.total_steps,\n        start_steps=args.start_steps,\n        batch_size=args.batch_size,\n        buffer_size=args.buffer_size,\n        gamma=args.gamma,\n        tau=args.tau,\n        actor_lr=args.actor_lr,\n        critic_lr=args.critic_lr,\n        hidden_dim=args.hidden_dim,\n        exploration_noise=args.exploration_noise,\n        seed=args.seed,\n        eval_interval=args.eval_interval,\n        eval_episodes=args.eval_episodes,\n        demo_episodes=args.demo_episodes,\n        demo_render=args.demo_render,\n        record_path=args.record_path,\n        record_episodes=args.record_episodes,\n        record_fps=args.record_fps,\n        record_frame_skip=args.record_frame_skip,\n        save_path=args.save_path,\n        device=args.device,\n    )\n\n\nif __name__ == \"__main__\":\n    train(parse_args())\n";
+
+# DDPG Reacher-v5 Demo
+
+使用纯 PyTorch 实现 DDPG，在 MuJoCo 的 `Reacher-v5` 环境中训练一个二维机械臂去追踪目标点。
+
+## 项目简介
+
+这个项目是一个针对 `Reacher-v5` 单独整理的可运行 demo。相比默认展示 `InvertedPendulum-v5` 的 `ddpg-invertedpendulum-v5`，这里直接把环境、训练步数、探索强度和模型保存路径都设成了更适合 `Reacher-v5` 的默认值，适合直接上手实验。
+
+## 代码结构
+
+```text
+ddpg-reacher-v5/
+├── index.mdx
+├── reacher-success.gif
+└── train_ddpg_reacher_v5.py
+```
+
+<SourceCodeCard
+  title="完整源代码"
+  description="点击展开查看 Reacher-v5 的 DDPG 训练脚本"
+  language="python"
+  filename="train_ddpg_reacher_v5.py"
+>
+  {trainSource}
+</SourceCodeCard>
+
+## 环境要求
+
+```bash
+pip install gymnasium[mujoco] torch numpy tqdm imageio
+```
+
+如果你本地已经有仓库里的 conda 环境，推荐直接使用：
+
+```bash
+source /home/jj/anaconda3/etc/profile.d/conda.sh
+conda activate easy-robotics
+```
+
+## 快速开始
+
+默认命令会在 `Reacher-v5` 上训练，并把 actor 权重保存到 `artifacts/ddpg_reacher_v5_actor.pt`：
+
+```bash
+python projects/ddpg-reacher-v5/train_ddpg_reacher_v5.py
+```
+
+如果你想训练后直接跑几回合策略演示：
+
+```bash
+python projects/ddpg-reacher-v5/train_ddpg_reacher_v5.py \
+  --total-steps 80000 \
+  --demo-episodes 3 \
+  --demo-render
+```
+
+如果只是先做一次快速冒烟测试：
+
+```bash
+python projects/ddpg-reacher-v5/train_ddpg_reacher_v5.py \
+  --total-steps 200 \
+  --start-steps 50 \
+  --batch-size 32 \
+  --buffer-size 2000 \
+  --eval-interval 100 \
+  --eval-episodes 1 \
+  --device cpu
+```
+
+如果你想在训练结束后直接导出一个 gif：
+
+```bash
+python projects/ddpg-reacher-v5/train_ddpg_reacher_v5.py \
+  --total-steps 80000 \
+  --record-path projects/ddpg-reacher-v5/reacher-success.gif
+```
+
+## 最终效果
+
+使用默认 `seed=42` 训练 `80000` 步后录制得到，对应 `final_eval_return=-4.62`：
+
+<Figure src={require('./reacher-success.gif').default} caption="DDPG Reacher-v5 成功效果" />
+
+## 默认参数
+
+这个 demo 预设了一组面向 `Reacher-v5` 的默认超参数：
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `--env-id` | `Reacher-v5` | 默认环境 |
+| `--total-steps` | `80000` | 总训练步数 |
+| `--start-steps` | `4000` | 纯随机探索步数 |
+| `--batch-size` | `256` | 每次更新的 batch 大小 |
+| `--buffer-size` | `100000` | 回放缓冲区容量 |
+| `--exploration-noise` | `0.2` | 高斯探索噪声比例 |
+| `--eval-interval` | `5000` | 评估间隔 |
+| `--eval-episodes` | `10` | 每次评估回合数 |
+| `--demo-episodes` | `0` | 训练后是否额外跑 demo |
+| `--record-path` | `None` | 如果设置则额外导出 gif 或 mp4 |
+| `--record-episodes` | `1` | 录制多少个 episode |
+| `--record-fps` | `20` | 导出媒体帧率 |
+| `--record-frame-skip` | `2` | 每隔多少环境步采一帧 |
+| `--save-path` | `artifacts/ddpg_reacher_v5_actor.pt` | 模型保存路径 |
+
+## 实现要点
+
+- Actor 网络输出经过 `tanh` 后映射到环境动作范围 `[-1, 1]`
+- Critic 网络输入为 `(obs, action)` 拼接后的向量
+- 经验回放使用预分配的 NumPy 环形缓冲区
+- 时间截断 `truncated` 不会被当作真正终止，目标 Q 值仍然继续 bootstrap
+- 训练结束后可选调用 `demo_policy()` 跑若干回合策略演示
+- 如果设置 `--record-path`，脚本会在离屏 `rgb_array` 模式下自动导出 gif 或 mp4
+
+## 适合进一步尝试的方向
+
+- 把 `exploration-noise` 从 `0.2` 调到 `0.1` 或 `0.3`，比较收敛速度
+- 试试更长训练，比如 `--total-steps 150000`
+- 在这个项目基础上继续扩展成 TD3 版本，观察稳定性差异

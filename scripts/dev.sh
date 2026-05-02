@@ -6,8 +6,12 @@ cd "$SCRIPT_DIR/.."
 
 # Ensure LFS is initialized
 if command -v git-lfs >/dev/null 2>&1; then
-  git lfs install --local >/dev/null 2>&1
-  git lfs pull
+  if ! git lfs install --local >/dev/null 2>&1; then
+    echo "WARN: git-lfs hook setup skipped; existing git hooks were left unchanged."
+  fi
+  if [ "${PULL_LFS:-0}" = "1" ]; then
+    git lfs pull
+  fi
 else
   echo "WARN: git-lfs not installed. Large files may show as pointers."
   echo "      Install: brew install git-lfs (macOS) / apt install git-lfs (Linux)"
