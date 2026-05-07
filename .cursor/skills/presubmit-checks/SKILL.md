@@ -32,7 +32,7 @@ After running the two commands, also confirm:
 
 - Source frontmatter `id:` and `slug:` are stripped.
 - Path prefixes rewritten: `/docs/projects/` → `/docs/practices/...`, `/docs/tutorial/` → `/docs/foundations/...`.
-- GitHub URL rewritten: `github.com/robots-hub/...` → `github.com/datawhalechina/dive-into-embodied-ai/...`.
+- GitHub URL rewritten: upstream source repositories → `github.com/datawhalechina/dive-into-embodied-ai/...`.
 - VLA chapters: source prefix N → target prefix N+1; cross-refs `第 N 讲` shifted by +1 inside the body.
 - Skip non-reader assets like `.paper-work/`, LaTeX sources, `source.bundle`.
 
