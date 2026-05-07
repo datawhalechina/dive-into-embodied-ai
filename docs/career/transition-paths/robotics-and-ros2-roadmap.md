@@ -52,7 +52,7 @@ ROS2 解决的是“这些模块在一个系统里怎么通信、怎么启动、
 
 ## 更适合新人的顺序：先把一条主线走通
 
-如果你准备按站内现有内容来学，最推荐的方式不是跳着看，而是顺着 [机器人运动学与 ROS2 基础教程](/docs/foundations/robotics-basics/intro) 的主线走一遍。
+如果你准备按站内现有内容来学，最推荐的方式不是跳着看，而是顺着 [机器人运动学与 ROS2 基础教程](/docs/foundations/robotics-and-ros2/intro) 的主线走一遍。
 
 这套主线本身就很适合作为第一轮入门，因为它不是把 ROS2 当成单独框架在讲，而是把它放进一个机械臂最小系统里。
 
@@ -64,7 +64,7 @@ ROS2 解决的是“这些模块在一个系统里怎么通信、怎么启动、
 
 先看：
 
-- [课程导论与机器人系统全景](/docs/foundations/robotics-basics/course_introduction)
+- [课程导论与机器人系统全景](/docs/foundations/robotics-and-ros2/course_introduction)
 
 这一步最重要的收获不是某个具体 API，而是回答下面这些问题：
 
@@ -78,8 +78,8 @@ ROS2 解决的是“这些模块在一个系统里怎么通信、怎么启动、
 
 接着看：
 
-- [运动学核心概念与坐标变换](/docs/foundations/robotics-basics/kinematics_transform)
-- [正运动学与逆运动学实现](/docs/foundations/robotics-basics/fk_ik_implementation)
+- [运动学核心概念与坐标变换](/docs/foundations/robotics-and-ros2/kinematics_transform)
+- [正运动学与逆运动学实现](/docs/foundations/robotics-and-ros2/fk_ik_implementation)
 
 这一段建议你重点抓住三件事：
 
@@ -94,10 +94,10 @@ ROS2 解决的是“这些模块在一个系统里怎么通信、怎么启动、
 
 然后进入 ROS2 基础部分：
 
-- [ROS2 工程基础](/docs/foundations/ros2-basics/ros2_engineering_basics)
-- [话题通信 Topic](/docs/foundations/ros2-basics/topics)
-- [服务通信 Service 与动作 Action](/docs/foundations/ros2-basics/services_actions)
-- [参数系统与 Launch 文件](/docs/foundations/ros2-basics/parameters_launch)
+- [ROS2 工程基础](/docs/foundations/robotics-and-ros2/ros2_engineering_basics)
+- [话题通信 Topic](/docs/foundations/robotics-and-ros2/topics)
+- [服务通信 Service 与动作 Action](/docs/foundations/robotics-and-ros2/services_actions)
+- [参数系统与 Launch 文件](/docs/foundations/robotics-and-ros2/parameters_launch)
 
 这一段的重点不是“多会几个命令”，而是知道一个系统是怎样被组织起来的：
 
@@ -112,10 +112,10 @@ ROS2 解决的是“这些模块在一个系统里怎么通信、怎么启动、
 
 最后进入最关键的一段：
 
-- [tf2 坐标变换管理](/docs/foundations/ros2-basics/tf2)
-- [URDF 机器人建模与 robot_state_publisher](/docs/foundations/ros2-basics/urdf_and_rsp)
-- [MoveIt 2 基础与运动规划](/docs/foundations/ros2-basics/moveit2_basics)
-- [MoveIt 2 仿真项目实战](/docs/foundations/ros2-basics/moveit2_project)
+- [tf2 坐标变换管理](/docs/foundations/robotics-and-ros2/tf2)
+- [URDF 机器人建模与 robot_state_publisher](/docs/foundations/robotics-and-ros2/urdf_and_rsp)
+- [MoveIt 2 基础与运动规划](/docs/foundations/robotics-and-ros2/moveit2_basics)
+- [MoveIt 2 仿真项目实战](/docs/foundations/robotics-and-ros2/moveit2_project)
 
 到这一步时，你会发现前面的东西开始真正连起来了：
 
@@ -132,14 +132,14 @@ ROS2 解决的是“这些模块在一个系统里怎么通信、怎么启动、
 
 | 你现在要解决的问题 | 最该看的内容 |
 | --- | --- |
-| 我不知道机器人系统整体长什么样 | [课程导论与机器人系统全景](/docs/foundations/robotics-basics/course_introduction) |
-| 我对坐标变换、FK、IK 还是模糊的 | [运动学核心概念与坐标变换](/docs/foundations/robotics-basics/kinematics_transform)、[正运动学与逆运动学实现](/docs/foundations/robotics-basics/fk_ik_implementation) |
-| 我会写一点代码，但不知道 ROS2 工程怎么组织 | [ROS2 工程基础](/docs/foundations/ros2-basics/ros2_engineering_basics) |
-| 我分不清 Topic / Service / Action 各自该在什么时候用 | [话题通信 Topic](/docs/foundations/ros2-basics/topics)、[服务通信 Service 与动作 Action](/docs/foundations/ros2-basics/services_actions) |
-| 我能跑节点，但一到多节点启动和配置就乱 | [参数系统与 Launch 文件](/docs/foundations/ros2-basics/parameters_launch) |
-| 我不明白 TF 树和 URDF 在系统里各干什么 | [tf2 坐标变换管理](/docs/foundations/ros2-basics/tf2)、[URDF 机器人建模与 robot_state_publisher](/docs/foundations/ros2-basics/urdf_and_rsp) |
-| 我想把前面的基础串起来，做一个真正能跑的闭环 | [MoveIt 2 基础与运动规划](/docs/foundations/ros2-basics/moveit2_basics)、[MoveIt 2 仿真项目实战](/docs/foundations/ros2-basics/moveit2_project) |
-| 我想检验自己是不是只是跟着敲了一遍 | [课程总结与进阶方向](/docs/foundations/ros2-basics/summary_and_next_steps) |
+| 我不知道机器人系统整体长什么样 | [课程导论与机器人系统全景](/docs/foundations/robotics-and-ros2/course_introduction) |
+| 我对坐标变换、FK、IK 还是模糊的 | [运动学核心概念与坐标变换](/docs/foundations/robotics-and-ros2/kinematics_transform)、[正运动学与逆运动学实现](/docs/foundations/robotics-and-ros2/fk_ik_implementation) |
+| 我会写一点代码，但不知道 ROS2 工程怎么组织 | [ROS2 工程基础](/docs/foundations/robotics-and-ros2/ros2_engineering_basics) |
+| 我分不清 Topic / Service / Action 各自该在什么时候用 | [话题通信 Topic](/docs/foundations/robotics-and-ros2/topics)、[服务通信 Service 与动作 Action](/docs/foundations/robotics-and-ros2/services_actions) |
+| 我能跑节点，但一到多节点启动和配置就乱 | [参数系统与 Launch 文件](/docs/foundations/robotics-and-ros2/parameters_launch) |
+| 我不明白 TF 树和 URDF 在系统里各干什么 | [tf2 坐标变换管理](/docs/foundations/robotics-and-ros2/tf2)、[URDF 机器人建模与 robot_state_publisher](/docs/foundations/robotics-and-ros2/urdf_and_rsp) |
+| 我想把前面的基础串起来，做一个真正能跑的闭环 | [MoveIt 2 基础与运动规划](/docs/foundations/robotics-and-ros2/moveit2_basics)、[MoveIt 2 仿真项目实战](/docs/foundations/robotics-and-ros2/moveit2_project) |
+| 我想检验自己是不是只是跟着敲了一遍 | [课程总结与进阶方向](/docs/foundations/robotics-and-ros2/summary_and_next_steps) |
 
 ## 第一轮学习建议：别拖太久，6 到 8 周够了
 
@@ -371,8 +371,8 @@ ROS2 的很多底层能力、性能敏感模块和硬件接口，最终都会把
 
 如果你不想看太多抽象建议，只想知道“从今天开始怎么做”，那就按这个顺序走：
 
-1. 先完整走完 [机器人运动学与 ROS2 基础教程](/docs/foundations/robotics-basics/intro)
-2. 学完后回看 [课程总结与进阶方向](/docs/foundations/ros2-basics/summary_and_next_steps)，检查自己是不是只是跟着敲
+1. 先完整走完 [机器人运动学与 ROS2 基础教程](/docs/foundations/robotics-and-ros2/intro)
+2. 学完后回看 [课程总结与进阶方向](/docs/foundations/robotics-and-ros2/summary_and_next_steps)，检查自己是不是只是跟着敲
 3. 从机械臂、移动机器人、硬件接口里选一个方向
 4. 做两个小项目：一个复现，一个改造
 5. 第三个项目开始再决定自己是否收敛到 MoveIt 2、Nav2、硬件接口或 AI 集成方向

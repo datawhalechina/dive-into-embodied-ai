@@ -12,8 +12,9 @@ sidebar_position: 1
 | 模块 | 核心问题 | 服务于 |
 |------|---------|--------|
 | [具身智能入门](./embodied-ai-intro/placeholder) | 这个方向到底在做什么？ | 全局认知 |
-| [机器人运动学与 ROS2 基础](./robotics-basics/intro) | 运动学、坐标系、ROS2 工程怎么串成一个能跑的系统？ | 机械臂、四足、所有实践项目 |
+| [机器人运动学与 ROS2 基础](./robotics-and-ros2/intro) | 运动学、坐标系、ROS2 工程怎么串成一个能跑的系统? | 机械臂、四足、所有实践项目 |
 | [仿真工具基础](./simulation/intro) | 怎么在仿真中跑机器人？ | 所有实践项目 |
-| [强化学习与控制](./rl-for-robotics/intro) | RL 怎么用在机器人上？ | 四足、双足项目 |
-| [数据采集与模仿学习](./imitation-learning/imitation-learning) | 数据到底长什么样？ | 机械臂、VLA 项目 |
-| [VLM / VLA / World Model](./vlm-vla-world-model/intro) | 当前具身大模型在做什么？ | VLA 相关项目 |
+| [强化学习与控制](./rl-for-robotics/intro) | RL 怎么用在机器人上?含模仿学习(数据驱动的策略学习) | 四足、双足、机械臂项目 |
+| [视觉语言大模型(VLM)](./vlm/intro) | 多模态模型如何理解图像与语言? | VLA 相关项目 |
+| [视觉-语言-动作大模型(VLA)](./vla/vla-intro) | 当前具身大模型在做什么? | VLA 相关项目 |
+| [世界模型(World Model)](./world-model/placeholder) | 世界模型在具身场景下怎么落地? | VLA 相关项目 |
