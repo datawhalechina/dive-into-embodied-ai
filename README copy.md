@@ -56,7 +56,7 @@ https://datawhalechina.github.io/dive-into-embodied-ai/
 
 | 姓名 | 职责 | 简介 |
 | :--- | :--- | :--- |
-| 罗如意 | 项目负责人 | xxx |
+| 罗如意 | 项目负责人 | 智能汽车竞赛国奖&多模态顶会Oral&FunRec开源项目负责人 |
 | 江季  | 项目负责人 | xxx |
 | 康博 | 核心贡献者 | xxx |
 
