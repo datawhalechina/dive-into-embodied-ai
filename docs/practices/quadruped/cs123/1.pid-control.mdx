@@ -2,7 +2,6 @@
 sidebar_position: 1
 id: pid-control
 title: 1. 执行器与 PID 控制
-slug: /cs123/pid-control
 description: "单自由度关节的 PID 位置控制。从电机模型到 MuJoCo 仿真里的第一条控制曲线。"
 ---
 
@@ -19,8 +18,8 @@ import Figure from '@site/src/components/Figure';
 
 ## 前置阅读
 
-- [仿真与可视化 · MuJoCo 快速上手](/docs/tutorial/simulation/mujoco)
-- 想更直观理解，可以点击 [**交互模式**](/cs123/pd-playground) 学习
+- [仿真与可视化 · MuJoCo 快速上手](/docs/foundations/simulation/mujoco)
+- 想更直观理解，可以先看本章的欠阻尼 / 临界阻尼 / 过阻尼曲线；交互模式施工中，后续补上。
 
 ## 章节大纲
 
@@ -462,7 +461,7 @@ for _ in range(4000):                     # 4000 * 0.002s = 8s
 运行完把 `log` 里的 $(t, q)$ 画出来，就得到了本章最核心的那张图——一条从初始角慢慢爬到 $q_d$ 的响应曲线。
 
 :::tip 想立刻看效果?
-不想装 MuJoCo 可以直接打开 [PD/PID Playground](/cs123/pd-playground)，同一套 $K_p/K_d$ 的直觉在无人机悬停场景里也完全成立，拖一拖滑块就能感受欠阻尼/过阻尼的区别。
+不想装 MuJoCo 的话，后续会补一个 PD/PID Playground；同一套 $K_p/K_d$ 的直觉在无人机悬停场景里也完全成立，拖一拖滑块就能感受欠阻尼/过阻尼的区别。
 :::
 
 ### 1.6.3 实验 1：不同 $K_p / K_d$ 下的响应曲线
