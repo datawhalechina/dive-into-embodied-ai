@@ -107,3 +107,57 @@
     border-color: transparent;
   }
 }
+
+/* Auto-numbered figures */
+.markdown {
+  counter-reset: figure;
+}
+
+.doc-figure {
+  text-align: center;
+  margin: 1.75rem auto;
+  counter-increment: figure;
+}
+
+.doc-figure img,
+.doc-figure svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+}
+
+.doc-figure figcaption {
+  font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-top: 0.625rem;
+  line-height: 1.6;
+}
+
+.doc-figure figcaption::before {
+  content: "图 " counter(figure) ": ";
+}
+
+.doc-figure-grid {
+  display: grid;
+  gap: 0.875rem;
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.doc-figure-grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.doc-figure-grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.doc-figure-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0.5rem;
+}

@@ -9,6 +9,7 @@
     "serve": "docusaurus serve",
     "clear": "docusaurus clear",
     "typecheck": "tsc",
+    "check:doc-assets": "node scripts/check-doc-assets.cjs",
     "check:practice-sidebars": "node scripts/check-practice-sidebars.cjs",
     "assets:webp": "python3 scripts/convert-images-to-webp.py",
     "assets:webp:check": "python3 scripts/convert-images-to-webp.py --check",
