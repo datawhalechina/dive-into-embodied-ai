@@ -7,6 +7,8 @@ const cs123Dir = path.join(rootDir, 'docs/practices/quadruped/cs123');
 const cs123FigsDir = path.join(cs123Dir, 'figs');
 const requiredCs123Assets = [
   'actuator-workflow.webp',
+  'bang-bang-control.webp',
+  'bang-bang-limit-cycle.webp',
   'closed-loop-control.webp',
   'coordinate-frames.webp',
   'open-loop-control.webp',
