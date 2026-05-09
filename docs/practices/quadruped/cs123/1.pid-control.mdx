@@ -65,7 +65,7 @@ import Figure from '@site/src/components/Figure';
 
 电动执行器是目前机器人（尤其是消费级、协作级和大多数工业机器人）中最常见的执行器类型，其中又分出两条明显的路线，对之后调 PID 的影响完全不同：
 
-- **高减速比 + 小电机**：谐波减速器 + 伺服电机，典型是 UR、Franka 这类协作机械臂。刚性好、精度高，但几乎不可反向驱动(back-drivable 近乎为零)，你用手推不动它的关节。
+- **高减速比 + 小电机**：谐波减速器 + 伺服电机，典型是 UR、Franka 这类协作机械臂。刚性好、精度高，但几乎不可反向驱动(back-drivable 近乎为零)，我们用手推不动它的关节。
 - **低减速比 + 大电机(准直驱，Quasi-Direct Drive，QDD)**：MIT Mini Cheetah、Unitree A1/Go2 走的路线。减速比通常只有 6:1 ~ 10:1，电机本体扭矩做得很大，好处是**能反向驱动、能靠电流估力矩、落地冲击不容易打坏齿轮**。足式机器人基本都选这条路。
 
 
@@ -96,11 +96,11 @@ import Figure from '@site/src/components/Figure';
 
 最直观的对比是工业机械臂和人形机器人：前者愿意为精度牺牲反向驱动性（用谐波减速器，几乎推不动），后者反过来愿意为反向驱动性牺牲精度（QDD 路线，定位精度比工业臂差一两个数量级）。**没有"更好的执行器"，只有"更适合任务的执行器"**。
 
-本章后续走的是机器人 / 足式视角，所以你会反复在 PD 公式里看到 **反射惯量**、**力矩-转速曲线**、**控制带宽** 这三项；它们也是最容易在仿真和真机之间对不上号的几项——下一小节会专门拆开看。
+本章后续走的是机器人 / 足式视角，所以我们会反复在 PD 公式里看到 **反射惯量**、**力矩-转速曲线**、**控制带宽** 这三项；它们也是最容易在仿真和真机之间对不上号的几项——下一小节会专门拆开看。
 
 ### 1.1.4 齿轮箱
 
-齿轮箱（Gearbox），在机器人和机械工程领域通常被称为减速器（Reducer）或传动装置，你可以把它直观地理解为机器人的**“变速自行车齿轮系统”**。
+齿轮箱（Gearbox），在机器人和机械工程领域通常被称为减速器（Reducer）或传动装置，我们可以把它直观地理解为机器人的**“变速自行车齿轮系统”**。
 
 它的核心功能是：连接在动力源（如电机）和执行端（如机械臂关节、车轮）之间，通过内部不同大小齿轮的物理啮合，来改变旋转的“速度”和“扭力（扭矩）”。
 
@@ -222,7 +222,7 @@ $$
 
 关节在目标左侧就全力右拉，在目标右侧就全力左拉，中间没有"拉多大"的档位。类比开车，油门和刹车各有一个踏板——要么踩到底，要么完全松开。每当系统穿越目标点，执行器在极短时间里从 $+\tau_{max}$ 切换到 $-\tau_{max}$，机械结构上常伴随一声清脆的换向冲击声（Bang!），名字也由此而来。
 
-听上去很粗暴，但只要被控对象足够"慢"，Bang-Bang 就是最便宜也最可靠的解。家用空调是最直观的例子：室温低于设定 → 开压缩机 → 升温到设定上方一两度 → 关压缩机 → 自然耗散 → 跌回设定下方 → 再开。整个循环以分钟为单位，开 / 关切换瞬间的小幅温度波动你完全察觉不到，反而省掉了"开一半压缩机"这种不存在的硬件。同类的逻辑还覆盖了一批日常与工业场景：
+听上去很粗暴，但只要被控对象足够"慢"，Bang-Bang 就是最便宜也最可靠的解。家用空调是最直观的例子：室温低于设定 → 开压缩机 → 升温到设定上方一两度 → 关压缩机 → 自然耗散 → 跌回设定下方 → 再开。整个循环以分钟为单位，开 / 关切换瞬间的小幅温度波动我们完全察觉不到，反而省掉了"开一半压缩机"这种不存在的硬件。同类的逻辑还覆盖了一批日常与工业场景：
 
 | 场景 | 执行器 | 为什么合适 |
 |---|---|---|
@@ -342,7 +342,7 @@ PD 控制给出的回答就是上一节的公式 $\tau = K_p\,(q_d - q) + K_d\,(
 
 1. **它是真机与仿真的共同最底层**。Stanford Pupper、Unitree Go2、大多数机械臂，伺服驱动器里最内层一定有一条 PD/PID。我们后面用的 MuJoCo `position` 执行器内部就是一条 PD。
 2. **它把"反馈"这件事说到最简**。以后讲 MPC、RL、Diffusion Policy，本质都在找更复杂的 $\pi(q,\dot q,\dots)\to \tau$;PD 是所有反馈策略的退化形式。
-3. **它可以徒手推导 + 徒手调参**。在没有学习、没有优化器的前提下，你依然能把一个关节控得像模像样，这是其它方法很难给的"踏实感"。
+3. **它可以徒手推导 + 徒手调参**。在没有学习、没有优化器的前提下，我们依然能把一个关节控得像模像样，这是其它方法很难给的"踏实感"。
 
 ### 1.5.2 从"弹簧-阻尼器"看 PD 的物理直觉
 
@@ -395,19 +395,24 @@ MuJoCo 用 `<actuator>` 标签把控制信号 `ctrl[i]` 翻译成作用在关节
 
 | 标签 | `ctrl[i]` 的含义 | 内部在算什么 |
 |---|---|---|
-| `<motor>` | 直接的关节力矩 $\tau$ | 不做反馈，你自己在 Python 里写 PD |
+| `<motor>` | 直接的关节力矩 $\tau$ | 不做反馈，我们自己在 Python 里写 PD |
 | `<position kp=.. kv=..>` | 目标位置 $q_d$ | 内部自动算 $\tau = k_p(q_d - q) - k_v \dot q$ |
 | `<velocity kv=..>` | 目标速度 $\dot q_d$ | 内部算 $\tau = k_v(\dot q_d - \dot q)$ |
 
-- 如果你想**看清 PD 每一项**、方便画曲线，用 `motor` + 自己写反馈。
-- 如果你只是想让关节稳定跟踪到某个角度，用 `position`(写起来最短，也是 Pupper / 机械臂最常见的配置)。
+- 如果我们想**看清 PD 每一项**、方便画曲线，用 `motor` + 自己写反馈。
+- 如果我们只是想让关节稳定跟踪到某个角度，用 `position`(写起来最短，也是 Pupper / 机械臂最常见的配置)。
 - `velocity` 在轮式底盘、转速环里更常见。
 
 本章我们两种都写一遍：先用 `position` 看效果，再用 `motor` 自己手搓 PD，把 $K_p$、$K_d$ 的作用一个一个拆开看。
 
-### 1.6.2 第一个 MJCF：一根单摆 + 一个 PD
+### 1.6.2 第一个 MJCF：单摆 PD 控制
 
-把下面这段存成 `pendulum.xml`——一根 0.5 m 长的杆子通过 hinge 挂在世界坐标系上，绕 $y$ 轴转，重力向下。
+这一节搭一个最小能跑的 PD 例子，只要两份文件：`pendulum.xml` 描述物理，`pd_single_joint.py` 给执行器写 `ctrl`。我们故意在同一个 MJCF 里同时留下两种 PD 写法，Python 里靠一个开关切换，方便我们亲眼对比"MuJoCo 内置的 `position` 执行器"和"自己手搓的 motor + PD"是同一件事。
+
+把下面这段存成 `pendulum.xml`：一根 0.5 m 长的杆子通过 hinge 挂在世界坐标系上，绕 $y$ 轴转，重力向下。`<actuator>` 里写了两个：
+
+- `pos_act`（写法 A）：调用 MuJoCo 内置 PD，参数就是 `kp / kv`。
+- `tor_act`（写法 B）：纯力矩通道，PD 留给 Python 手算后再写进来。
 
 ```xml
 <mujoco model="single_pendulum">
@@ -421,7 +426,7 @@ MuJoCo 用 `<actuator>` 标签把控制信号 `ctrl[i]` 翻译成作用在关节
   </worldbody>
 
   <actuator>
-    <!-- 写法 A:让 MuJoCo 帮你实现 PD -->
+    <!-- 写法 A:让 MuJoCo 帮我们实现 PD -->
     <position name="pos_act" joint="hinge" kp="20" kv="1" ctrlrange="-3.14 3.14"/>
 
     <!-- 写法 B:自己在 Python 里手搓 PD -->
@@ -430,44 +435,69 @@ MuJoCo 用 `<actuator>` 标签把控制信号 `ctrl[i]` 翻译成作用在关节
 </mujoco>
 ```
 
-对应的最小 Python 脚本 `pd_single_joint.py`：
+对应的脚本 `pd_single_joint.py` 主循环就三件事：读 `qpos / qvel` → 算 PD → 写 `ctrl`，再交给 `mj_step` 推进物理。顶上的 `use_motor` 决定走哪一种写法，默认 `True` 即写法 B；这时要先把 `pos_act` 的增益清零，否则两个执行器会同时往关节上叠力矩，看到的就不是单一 PD 的响应。
 
 ```python
+from pathlib import Path
+import time
+
 import mujoco
+import mujoco.viewer
 import numpy as np
 
-model = mujoco.MjModel.from_xml_path('pendulum.xml')
-data  = mujoco.MjData(model)
+model = mujoco.MjModel.from_xml_path(str(Path(__file__).with_name("pendulum.xml")))
+data = mujoco.MjData(model)
 
-q_des  = 0.8          # 目标角度(rad),约 45.8°
+q_des = 0.8           # 目标角度(rad),约 45.8°
 Kp, Kd = 20.0, 1.0    # 与写法 A 的 kp/kv 一致,方便对照
 
 use_motor = True      # True: 用 motor 手搓 PD; False: 用 position 执行器
 
+if use_motor:
+    # 不关掉 position 执行器的话,它会和手写 motor PD 同时出力
+    pos_act_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_ACTUATOR, "pos_act")
+    model.actuator_gainprm[pos_act_id, :] = 0.0
+    model.actuator_biasprm[pos_act_id, :] = 0.0
+
 log = []
-for _ in range(4000):                     # 4000 * 0.002s = 8s
-    q  = data.qpos[0]
-    dq = data.qvel[0]
+with mujoco.viewer.launch_passive(model, data) as viewer:
+    while viewer.is_running() and data.time < 8.0:
+        step_start = time.time()
 
-    if use_motor:
-        tau = Kp * (q_des - q) + Kd * (0.0 - dq)
-        data.ctrl[1] = np.clip(tau, -5.0, 5.0)   # motor 通道
-    else:
-        data.ctrl[0] = q_des                      # position 通道
+        q = data.qpos[0]
+        dq = data.qvel[0]
 
-    mujoco.mj_step(model, data)
-    log.append((data.time, q, dq, data.ctrl.copy()))
+        if use_motor:
+            tau = Kp * (q_des - q) + Kd * (0.0 - dq)
+            data.ctrl[1] = np.clip(tau, -5.0, 5.0)   # motor 通道
+        else:
+            data.ctrl[0] = q_des                      # position 通道
+
+        mujoco.mj_step(model, data)
+        viewer.sync()
+        log.append((data.time, q, dq, data.ctrl.copy()))
+
+        # 让仿真按 wall-clock 走,viewer 看起来才是实时的
+        dt_left = model.opt.timestep - (time.time() - step_start)
+        if dt_left > 0:
+            time.sleep(dt_left)
 ```
 
-运行完把 `log` 里的 $(t, q)$ 画出来，就得到了本章最核心的那张图——一条从初始角慢慢爬到 $q_d$ 的响应曲线。
+跑起来会弹出 viewer，杆子从竖直向下摆到 $q_d \approx 0.8$ rad 附近稳住——这就是本章最核心的那条响应曲线。
 
-:::tip 想立刻看效果?
-不想装 MuJoCo 的话，可以直接打开 [PD/PID Playground](/cs123/pd-playground)；同一套 $K_p/K_d$ 的直觉在无人机悬停场景里也完全成立，拖一拖滑块就能感受欠阻尼/过阻尼的区别。
-:::
+<div align="center">
+
+![单摆 PD 响应](figs/pd_single_joint.gif)
+
+*$K_p=20,\ K_d=1$，稳态略偏 $q_d$，差值就是 1.6.4 的稳态误差。*
+
+</div>
 
 ### 1.6.3 实验 1：不同 $K_p / K_d$ 下的响应曲线
 
-把上面脚本里的 `Kp, Kd` 改成下面三组，分别录响应曲线，贴出来对比：
+只看 1.6.2 那一条曲线，$K_p$、$K_d$ 像是两个调到不报错就行的旋钮。这一节固定 $K_p$，让 $K_d$ 扫过欠阻尼 / 接近临界 / 过阻尼三个区段，把每个旋钮单独负责什么看清楚。
+
+把脚本里的 `Kp, Kd` 换成下面三组，各跑一遍，把 $(t, q)$ 画到同一张图上对比：
 
 | 组 | $K_p$ | $K_d$ | 预期 $\zeta$ | 现象 |
 |---|---|---|---|---|
@@ -475,13 +505,13 @@ for _ in range(4000):                     # 4000 * 0.002s = 8s
 | B 临界附近 | 40 | 12 | ≈ 0.95 | 最快到达且基本不过冲 |
 | C 过阻尼 | 40 | 40 | ≈ 3.16 | 单调爬升，但慢 |
 
-(近似按 $I \approx m L^2/3 \approx 0.083$ 估算，实际用 MuJoCo 的 `mj_fullM` 读更准。)
+（按 $I \approx m L^2/3 \approx 0.083$ 估算 $\zeta$，需要更准就用 MuJoCo 的 `mj_fullM` 读真实惯量。）
 
-观察点：
+把三条曲线放在一张图上比，几个值得带走的点：
 
-1. $K_p$ 决定**拉回去的劲**，单摆静止时要至少能抵消重力对关节的力矩 $\tau_g = m g L/2 \cdot \sin q_d$，否则永远差一截。
-2. $K_d$ 决定**晃不晃**，不要只靠 MJCF 里的 `damping` 帮忙——那是物理阻尼，不是控制器的 $K_d$。
-3. $K_p$ 加大到某个点以后，仿真会开始出现明显的数值噪声甚至发散，这是**采样周期 = `timestep` 太大**的信号，而不是 PD 理论错了。
+1. **$K_p$ 决定回正力矩的量级**。$K_p$ 要先大到能抵消重力矩 $\tau_g = m g L/2 \cdot \sin q_d$，单摆才能到达 $q_d$ 附近；即便如此稳态仍会偏一截，这个偏差正是 1.6.4 要拆解的稳态误差，调 $K_d$ 不解决。
+2. **$K_d$ 是控制器主动出的阻尼，跟 MJCF 里的 `damping` 不是同一件事**。后者是关节本身的物理阻尼，写在 XML 里、和控制器无关；想干净地观察 $K_d$ 的作用，就把 `damping` 设小一点，避免两份阻尼混在一起。
+3. **$K_p$ 太大会让仿真先于真机崩**。$K_p$ 加到某个值之后曲线出现高频噪声甚至发散，这是 `timestep` 跟不上 $\omega_n = \sqrt{K_p / I}$ 的信号，不是 PD 公式错了；把 `timestep` 调小、或把 $K_p$ 减小，都能压下去。
 
 ### 1.6.4 实验 2：加上扰动看稳态误差
 
@@ -492,7 +522,7 @@ if data.time > 3.0:
     data.qfrc_applied[0] = 2.0   # 恒定外扰,单位 N·m
 ```
 
-你会看到两种明显不同的行为：
+我们会看到两种明显不同的行为：
 
 - **纯 P 控制**($K_d = 0$)：关节稳在一个**偏离 $q_d$ 的新位置**上，差的那一截正好是 $\Delta q = \tau_{dist}/K_p$。这就是"稳态误差"。
 - **PD 控制**：在 P 的基础上抖动更小地到达那个偏移位置，但**稳态误差依然存在**——因为误差一恒定，微分项就为 0，不产生额外的修正力。
@@ -503,7 +533,7 @@ if data.time > 3.0:
 
 把下面这些现象记一下，以后写 Pupper 步态、机械臂 IK 时还会反复遇到：
 
-1. **采样周期 ≠ 物理步长**。MJCF 的 `timestep` 是物理步长;如果你在真机上 500 Hz 读编码器，却在仿真里用 4 kHz 的 PD，那把仿真结果直接搬到真机会**偏快**。建议一开始就让 Python 循环和真机控制频率对齐(比如每 4 个 `mj_step` 更新一次 `ctrl`)。
+1. **采样周期 ≠ 物理步长**。MJCF 的 `timestep` 是物理步长;如果我们在真机上 500 Hz 读编码器，却在仿真里用 4 kHz 的 PD，那把仿真结果直接搬到真机会**偏快**。建议一开始就让 Python 循环和真机控制频率对齐(比如每 4 个 `mj_step` 更新一次 `ctrl`)。
 2. **力矩饱和**。`ctrlrange` 不是摆设——真电机有最大输出。用 `np.clip` 显式限幅，才能在仿真里重现真机的"我已经尽力了"。饱和之后，理论上的 $\omega_n, \zeta$ 也都会失真，别把公式当真理。
 3. **用 `position` 执行器时 `kp/kv` 是绑在一起的**，MuJoCo 默认 $kv = 0$。很多人只填 `kp`，结果得到一条剧烈震荡曲线，误以为 MuJoCo 有 bug——其实是 $\zeta \approx 0$ 的后果。
 4. **别忘了补偿重力/摩擦**。单关节目标是 0.8 rad，单纯 $K_p (q_d - q)$ 要战胜 $\tau_g$;如果电机力矩不够大，关节会卡在半空。严肃的机械臂控制会在 PD 外面再套一层 `mj_rnePostConstraint` 算的逆动力学补偿，本章不展开。
@@ -522,7 +552,7 @@ if data.time > 3.0:
 
 - **MuJoCo 里 `position` 执行器内部就是一条 PD**(`kp` / `kv`)，想看清每一项就用 `motor` 自己手搓。`timestep` 是物理步长，不是控制周期；要对齐真机控制频率，得让 Python 循环每 $N$ 步更新一次 `ctrl`。
 
-到这里，你已经能让一个单自由度关节稳定到达任意目标角度——这是后面所有内容的地基。第 5 章会把同一套 PD 同时套到四足机器人的全部关节上去拼出 trot 步态；再之后的 RL 步态、LLM 控制，本质上都在找一个更复杂的 $\pi(q,\dot q,\dots)\to \tau$，而最内层那条 PD 通常仍然存在。
+到这里，我们已经能让一个单自由度关节稳定到达任意目标角度——这是后面所有内容的地基。第 5 章会把同一套 PD 同时套到四足机器人的全部关节上去拼出 trot 步态；再之后的 RL 步态、LLM 控制，本质上都在找一个更复杂的 $\pi(q,\dot q,\dots)\to \tau$，而最内层那条 PD 通常仍然存在。
 
 ## 思考
 
@@ -532,19 +562,19 @@ if data.time > 3.0:
 
 3. 1.5.2 节把 $K_d$ 称为"阻尼系数"，1.6.5 节又强调"$K_d$ 不是 MJCF 里的 `damping`"。这两个"阻尼"在物理上有什么区别？如果只在 MJCF 里把 `damping` 调大，能不能替代控制器里的 $K_d$？
 
-4. 既然计算力矩控制可以用动力学前馈精确消掉重力带来的稳态误差，是不是任何机器人都可以彻底放弃 I 项？在哪些场景下你仍然必须保留 I？
+4. 既然计算力矩控制可以用动力学前馈精确消掉重力带来的稳态误差，是不是任何机器人都可以彻底放弃 I 项？在哪些场景下我们仍然必须保留 I？
 
-5. `position` 执行器和 `motor` + 自写 PD 在数学上完全等价，但调试体验差别很大。如果你想搞清某次过冲到底是 $K_p$ 太大、$K_d$ 太小，还是力矩饱和触发的，你会优先选哪一种写法？为什么？
+5. `position` 执行器和 `motor` + 自写 PD 在数学上完全等价，但调试体验差别很大。如果我们想搞清某次过冲到底是 $K_p$ 太大、$K_d$ 太小，还是力矩饱和触发的，我们会优先选哪一种写法？为什么？
 
-## 动手任务
+## 组队学习任务
 
-到这里你已经能让一个单关节 PD 稳定到达任意目标。本章动手任务把同一个 PD 接到 Pupper HFE 关节上**换到频域看一遍**——用一系列正弦输入扫频，在 Bode 图上读出 1.5 节那对 $\omega_n, \zeta$，再亲眼看 1.6.5 节"力矩饱和把高频压平"是怎么发生的。
+到这里我们已经能让一个单关节 PD 稳定到达任意目标。组队 Lab 1 把同一个 PD 接到 Pupper HFE 关节上**换到频域看一遍**——用一系列正弦输入扫频，在 Bode 图上读出 1.5 节那对 $\omega_n, \zeta$，再亲眼看 1.6.5 节"力矩饱和把高频压平"是怎么发生的。
 
 <div align="center">
 
-![Ch1 成果预览:HFE 跟踪 0.3 Hz 正弦](figs/lab1_hfe_sine.gif)
+![Lab 1 teaser：HFE 跟踪 0.3 Hz 正弦](figs/lab1_hfe_sine.gif)
 
-*HFE 关节跟踪 0.3 Hz 正弦目标：左侧是 Pupper 单腿响应，右侧是同一组数据实时打到 Bode 图上的两个点（一组幅值、一组相位）。低频 $|G|\approx 1$、相位 $\approx 0$；扫到高频段你会看到增益下降、相位往 $-180°$ 走——本章 1.5 那对 $\omega_n, \zeta$ 在频域留下的指纹。*
+*HFE 关节跟踪 0.3 Hz 正弦目标：左侧是 Pupper 单腿响应，右侧是同一组数据实时打到 Bode 图上的两个点（一组幅值、一组相位）。低频 $|G|\approx 1$、相位 $\approx 0$；扫到高频段我们会看到增益下降、相位往 $-180°$ 走——本章 1.5 那对 $\omega_n, \zeta$ 在频域留下的指纹。*
 
 </div>
 
