@@ -6,7 +6,7 @@ import rehypeMathjax from 'rehype-mathjax';
 const config: Config = {
   title: 'Dive into Embodied AI',
   tagline: '动手学具身智能',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   url: 'https://datawhalechina.github.io',
   baseUrl: '/dive-into-embodied-ai/',

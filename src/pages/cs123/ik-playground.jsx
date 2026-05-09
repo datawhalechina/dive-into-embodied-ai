@@ -11,7 +11,7 @@ export default function IkPlaygroundPage() {
       noFooter
     >
       <PlaygroundHeader currentKey="ik" />
-      <div className="tw-relative tw-overflow-hidden tw-bg-slate-900">
+      <div className="playground-shell">
         <IkPlayground />
       </div>
     </Layout>

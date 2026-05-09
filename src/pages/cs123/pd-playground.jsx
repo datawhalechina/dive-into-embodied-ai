@@ -11,7 +11,7 @@ export default function PdPlaygroundPage() {
       noFooter
     >
       <PlaygroundHeader currentKey="pd" />
-      <div className="tw-relative tw-overflow-hidden tw-bg-slate-900">
+      <div className="playground-shell">
         <PdPlayground />
       </div>
     </Layout>
