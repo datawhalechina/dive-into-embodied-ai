@@ -3,6 +3,7 @@ build/
 .docusaurus/
 .cache-loader/
 .DS_Store
+.env
 .env.local
 .env*.local
 npm-debug.log*
