@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">3-DoF 平面臂解析逆运动学图解</title>
+  <desc id="desc">图解解析逆运动学的三步：已知末端目标，沿末端朝向倒退 L3 得到 wrist 点，再把 base 到 wrist 的距离 r 与 L1 L2 组成三角形。</desc>
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7c3aed"/>
+    </marker>
+    <style>
+      .panel { fill: #fff; stroke: #dbe3ef; stroke-width: 1.5; }
+      .guide { fill: #f8fafc; stroke: #dbe3ef; stroke-width: 1.5; }
+      .axis { stroke: #475569; stroke-width: 2.5; marker-end: url(#arrow-slate); fill: none; }
+      .grid { stroke: #cbd5e1; stroke-width: 1.6; stroke-dasharray: 8 8; fill: none; }
+      .link1 { stroke: #2563eb; stroke-width: 10; stroke-linecap: round; }
+      .link2 { stroke: #16a34a; stroke-width: 10; stroke-linecap: round; }
+      .link3 { stroke: #d97706; stroke-width: 10; stroke-linecap: round; }
+      .rline { stroke: #7c3aed; stroke-width: 4; stroke-dasharray: 10 8; marker-end: url(#arrow-purple); fill: none; }
+      .back { stroke: #dc2626; stroke-width: 4; marker-end: url(#arrow-red); fill: none; }
+      .angle { stroke: #64748b; stroke-width: 2.5; marker-end: url(#arrow-slate); fill: none; }
+      .joint { fill: #fff; stroke: #0f172a; stroke-width: 3; }
+      .wrist { fill: #fff7ed; stroke: #d97706; stroke-width: 3.2; }
+      .target { fill: #dc2626; stroke: #991b1b; stroke-width: 2.8; }
+      .callout { fill: #fff; stroke: #cbd5e1; stroke-width: 1.5; }
+      .callout-line { stroke: #94a3b8; stroke-width: 1.8; fill: none; }
+      .num { fill: #0f172a; font: 700 15px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      .title { font: 700 24px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .label { font: 15px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #334155; }
+      .small { font: 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; }
+      .math { font: italic 21px "Times New Roman", serif; fill: #0f172a; }
+      .math-small { font: italic 18px "Times New Roman", serif; fill: #0f172a; }
+      .step-title { font: 700 16px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+    </style>
+  </defs>
+
+  <rect x="22" y="22" width="1156" height="676" rx="16" class="panel"/>
+  <text x="60" y="64" class="title">解析 IK：先把 3-DoF 问题拆成一个清楚的 2-DoF 三角形</text>
+
+  <!-- Main geometry: O=(120,470), E=(330,345), W=(610,250), T=(880,190) -->
+  <g>
+    <line x1="120" y1="470" x2="980" y2="470" class="axis"/>
+    <line x1="120" y1="470" x2="120" y2="110" class="axis"/>
+    <text x="990" y="476" class="small">x</text>
+    <text x="132" y="120" class="small">y</text>
+
+    <path d="M610 250 V470" class="grid"/>
+    <path d="M120 250 H610" class="grid"/>
+    <path d="M880 190 V470" class="grid"/>
+    <path d="M120 190 H880" class="grid"/>
+
+    <line x1="120" y1="470" x2="330" y2="345" class="link1"/>
+    <line x1="330" y1="345" x2="610" y2="250" class="link2"/>
+    <line x1="610" y1="250" x2="880" y2="190" class="link3"/>
+
+    <path d="M120 470 L610 250" class="rline"/>
+    <text x="340" y="424" class="math">r</text>
+
+    <path d="M880 190 C790 170 690 190 610 250" class="back"/>
+    <text x="712" y="160" class="math">倒退 L<tspan baseline-shift="sub" font-size="13">3</tspan></text>
+
+    <circle cx="120" cy="470" r="10" class="joint"/>
+    <circle cx="330" cy="345" r="9" class="joint"/>
+    <circle cx="610" cy="250" r="10" class="wrist"/>
+    <circle cx="880" cy="190" r="11" class="target"/>
+
+    <text x="214" y="385" class="math">L<tspan baseline-shift="sub" font-size="13">1</tspan></text>
+    <text x="458" y="303" class="math">L<tspan baseline-shift="sub" font-size="13">2</tspan></text>
+    <text x="760" y="235" class="math">L<tspan baseline-shift="sub" font-size="13">3</tspan></text>
+
+    <path d="M178 470 A58 58 0 0 0 168 439" class="angle"/>
+    <text x="184" y="442" class="math">θ<tspan baseline-shift="sub" font-size="13">1</tspan></text>
+    <path d="M382 345 A52 52 0 0 0 373 316" class="angle"/>
+    <text x="390" y="318" class="math">θ<tspan baseline-shift="sub" font-size="13">2</tspan></text>
+    <line x1="610" y1="250" x2="720" y2="250" stroke="#cbd5e1" stroke-width="2"/>
+    <path d="M682 250 A72 72 0 0 0 680 234" class="angle"/>
+    <text x="724" y="242" class="math">φ</text>
+
+    <rect x="56" y="492" width="126" height="42" rx="8" class="callout"/>
+    <text x="82" y="518" class="label">base</text>
+    <path d="M120 492 L120 480" class="callout-line"/>
+
+    <rect x="540" y="280" width="172" height="58" rx="8" class="callout"/>
+    <text x="565" y="305" class="label">wrist 点</text>
+    <text x="565" y="329" class="math-small">(x', y')</text>
+    <path d="M610 280 L610 260" class="callout-line"/>
+
+    <rect x="900" y="154" width="172" height="64" rx="8" class="callout"/>
+    <text x="926" y="179" class="label">目标末端</text>
+    <text x="926" y="204" class="math-small">(X, Y, φ)</text>
+    <path d="M900 184 L891 188" class="callout-line"/>
+  </g>
+
+  <g transform="translate(60 560)">
+    <rect x="0" y="0" width="340" height="98" rx="12" class="guide"/>
+    <circle cx="30" cy="32" r="15" fill="#dbeafe"/>
+    <text x="25" y="38" class="num">1</text>
+    <text x="58" y="31" class="step-title">目标里包含位置和朝向</text>
+    <text x="58" y="64" class="math-small">p<tspan baseline-shift="sub" font-size="12">target</tspan> = (X, Y, φ)</text>
+  </g>
+
+  <g transform="translate(430 560)">
+    <rect x="0" y="0" width="340" height="98" rx="12" class="guide"/>
+    <circle cx="30" cy="32" r="15" fill="#fee2e2"/>
+    <text x="25" y="38" class="num">2</text>
+    <text x="58" y="31" class="step-title">先剥掉最后一节 L3</text>
+    <text x="58" y="61" class="math-small">x' = X - L<tspan baseline-shift="sub" font-size="12">3</tspan> cos φ</text>
+    <text x="58" y="85" class="math-small">y' = Y - L<tspan baseline-shift="sub" font-size="12">3</tspan> sin φ</text>
+  </g>
+
+  <g transform="translate(800 560)">
+    <rect x="0" y="0" width="340" height="98" rx="12" class="guide"/>
+    <circle cx="30" cy="32" r="15" fill="#ede9fe"/>
+    <text x="25" y="38" class="num">3</text>
+    <text x="58" y="31" class="step-title">剩下就是 2-DoF 三角形</text>
+    <text x="58" y="61" class="math-small">r<tspan baseline-shift="super" font-size="12">2</tspan> = x'<tspan baseline-shift="super" font-size="12">2</tspan> + y'<tspan baseline-shift="super" font-size="12">2</tspan></text>
+    <text x="58" y="85" class="math-small">L<tspan baseline-shift="sub" font-size="12">1</tspan>, L<tspan baseline-shift="sub" font-size="12">2</tspan>, r → θ<tspan baseline-shift="sub" font-size="12">2</tspan></text>
+  </g>
+</svg>

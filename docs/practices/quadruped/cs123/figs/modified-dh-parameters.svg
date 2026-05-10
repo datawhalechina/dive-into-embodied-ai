@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 470" role="img" aria-labelledby="title desc">
+  <title id="title">Craig modified DH 四个参数示意图</title>
+  <desc id="desc">示意 modified DH 中 a、alpha、d、theta 四个参数分别对应的距离和角度。</desc>
+  <defs>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#d97706"/>
+    </marker>
+    <style>
+      .panel { fill: #fff; stroke: #dbe3ef; stroke-width: 1.5; }
+      .title { font: 700 22px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .label { font: 15px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #334155; }
+      .small { font: 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; }
+      .math { font: italic 18px "Times New Roman", serif; fill: #0f172a; }
+      .math-small { font: italic 17px "Times New Roman", serif; fill: #0f172a; }
+      .axis { stroke: #475569; stroke-width: 3; marker-end: url(#arrow-slate); fill: none; }
+      .axis-thin { stroke: #64748b; stroke-width: 2; marker-end: url(#arrow-slate); fill: none; }
+      .dist-blue { stroke: #2563eb; stroke-width: 4; marker-end: url(#arrow-blue); fill: none; }
+      .dist-green { stroke: #16a34a; stroke-width: 4; marker-end: url(#arrow-green); fill: none; }
+      .angle-red { stroke: #dc2626; stroke-width: 4; marker-end: url(#arrow-red); fill: none; }
+      .angle-amber { stroke: #d97706; stroke-width: 4; marker-end: url(#arrow-amber); fill: none; }
+      .guide { stroke: #cbd5e1; stroke-width: 2; stroke-dasharray: 6 6; fill: none; }
+      .joint { fill: #0f172a; }
+    </style>
+  </defs>
+
+  <rect x="18" y="18" width="516" height="434" rx="14" class="panel"/>
+  <rect x="566" y="18" width="516" height="434" rx="14" class="panel"/>
+
+  <text x="46" y="58" class="title">相邻关节轴之间的关系</text>
+  <text x="594" y="58" class="title">当前关节自身的运动</text>
+
+  <g transform="translate(54 92)">
+    <line x1="115" y1="255" x2="115" y2="45" class="axis"/>
+    <line x1="360" y1="255" x2="360" y2="45" class="axis"/>
+    <text x="88" y="42" class="math">z<tspan baseline-shift="sub" font-size="13">i-1</tspan></text>
+    <text x="342" y="42" class="math">z<tspan baseline-shift="sub" font-size="13">i</tspan></text>
+    <circle cx="115" cy="185" r="5" class="joint"/>
+    <circle cx="360" cy="185" r="5" class="joint"/>
+
+    <line x1="115" y1="185" x2="360" y2="185" class="dist-blue"/>
+    <text x="224" y="171" class="math">a<tspan baseline-shift="sub" font-size="13">i-1</tspan></text>
+    <text x="168" y="212" class="small">沿 x<tspan baseline-shift="sub">i-1</tspan> 量到下一根 z 轴</text>
+
+    <line x1="115" y1="185" x2="220" y2="185" class="axis-thin"/>
+    <text x="223" y="191" class="math">x<tspan baseline-shift="sub" font-size="13">i-1</tspan></text>
+
+    <path d="M115 125 C150 118 185 122 214 142" class="angle-red"/>
+    <text x="166" y="112" class="math">α<tspan baseline-shift="sub" font-size="13">i-1</tspan></text>
+    <text x="32" y="306" class="math-small">a<tspan baseline-shift="sub" font-size="12">i-1</tspan></text>
+    <text x="72" y="306" class="label">两根相邻 z 轴之间，沿 x<tspan baseline-shift="sub" font-size="11">i-1</tspan> 方向的距离</text>
+    <text x="32" y="336" class="math-small">α<tspan baseline-shift="sub" font-size="12">i-1</tspan></text>
+    <text x="72" y="336" class="label">绕 x<tspan baseline-shift="sub" font-size="11">i-1</tspan>，从 z<tspan baseline-shift="sub" font-size="11">i-1</tspan> 转到 z<tspan baseline-shift="sub" font-size="11">i</tspan> 的角度</text>
+  </g>
+
+  <g transform="translate(602 92)">
+    <line x1="210" y1="260" x2="210" y2="42" class="axis"/>
+    <text x="192" y="38" class="math">z<tspan baseline-shift="sub" font-size="13">i</tspan></text>
+    <circle cx="210" cy="208" r="5" class="joint"/>
+    <circle cx="210" cy="125" r="5" class="joint"/>
+    <line x1="210" y1="208" x2="210" y2="125" class="dist-green"/>
+    <text x="224" y="170" class="math">d<tspan baseline-shift="sub" font-size="13">i</tspan></text>
+    <text x="222" y="212" class="small">沿 z<tspan baseline-shift="sub">i</tspan> 的偏移</text>
+
+    <line x1="210" y1="125" x2="318" y2="125" class="axis-thin"/>
+    <line x1="210" y1="125" x2="282" y2="65" class="axis-thin"/>
+    <text x="321" y="131" class="math">x<tspan baseline-shift="sub" font-size="13">i-1</tspan></text>
+    <text x="286" y="64" class="math">x<tspan baseline-shift="sub" font-size="13">i</tspan></text>
+    <path d="M255 125 A54 54 0 0 0 250 88" class="angle-amber"/>
+    <text x="270" y="103" class="math">θ<tspan baseline-shift="sub" font-size="13">i</tspan></text>
+
+    <path d="M122 208 H210" class="guide"/>
+    <path d="M122 125 H210" class="guide"/>
+    <text x="44" y="306" class="math-small">d<tspan baseline-shift="sub" font-size="12">i</tspan></text>
+    <text x="82" y="306" class="label">沿当前关节轴 z<tspan baseline-shift="sub" font-size="11">i</tspan> 的位移</text>
+    <text x="44" y="336" class="math-small">θ<tspan baseline-shift="sub" font-size="12">i</tspan></text>
+    <text x="82" y="336" class="label">绕 z<tspan baseline-shift="sub" font-size="11">i</tspan>，从 x<tspan baseline-shift="sub" font-size="11">i-1</tspan> 转到 x<tspan baseline-shift="sub" font-size="11">i</tspan> 的角度</text>
+  </g>
+</svg>

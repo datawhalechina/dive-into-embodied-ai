@@ -105,7 +105,7 @@ const sidebars: SidebarsConfig = {
       link: { type: 'doc', id: 'practices/quadruped/cs123/intro' },
       collapsible: false,
       items: [
-        { type: 'doc', id: 'practices/quadruped/cs123/pid-control', label: '1. 执行器与 PID 控制' },
+        { type: 'doc', id: 'practices/quadruped/cs123/pid-control', label: '1. 执行器与 PD 控制' },
         { type: 'doc', id: 'practices/quadruped/cs123/forward-kinematics', label: '2. 正运动学' },
         { type: 'doc', id: 'practices/quadruped/cs123/inverse-kinematics', label: '3. 逆运动学' },
         { type: 'doc', id: 'practices/quadruped/cs123/quadruped-mjcf', label: '4. 搭建四足机器人' },
