@@ -18,6 +18,6 @@ sidebar_position: 1
 
 ## 独立课程
 
-- [从零到一搭建机器人](./quadruped/cs123/intro)：CS123 四足仿真课程，按 8 章独立组织。
+- [从零到一搭建四足机器人](./quadruped/cs123/intro)：CS123 四足仿真课程，按 8 章独立组织。
 - [LeRobot 中文课程讲义](./robot-arm/data-collection/lerobot-course)：机器人学习与 LeRobot 工具链主线。
 - [SO-101 + LeRobot 真机教程](./robot-arm/data-collection/so101-lerobot-real)：从硬件连接到策略回放的最小真机流程。

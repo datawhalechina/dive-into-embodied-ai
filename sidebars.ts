@@ -67,7 +67,7 @@ const sidebars: SidebarsConfig = {
       label: '独立课程',
       collapsed: false,
       items: [
-        { type: 'link', label: '从零到一搭建机器人', href: '/docs/practices/quadruped/cs123/intro' },
+        { type: 'link', label: '从零到一搭建四足机器人', href: '/docs/practices/quadruped/cs123/intro' },
         { type: 'link', label: 'LeRobot 开源课程', href: '/docs/practices/robot-arm/data-collection/lerobot-course' },
         { type: 'link', label: 'SO-101 + LeRobot 真机教程', href: '/docs/practices/robot-arm/data-collection/so101-lerobot-real' },
       ],
@@ -101,7 +101,7 @@ const sidebars: SidebarsConfig = {
   practicesCs123CourseSidebar: [
     {
       type: 'category',
-      label: '从零到一搭建机器人',
+      label: '从零到一搭建四足机器人',
       link: { type: 'doc', id: 'practices/quadruped/cs123/intro' },
       collapsible: false,
       items: [

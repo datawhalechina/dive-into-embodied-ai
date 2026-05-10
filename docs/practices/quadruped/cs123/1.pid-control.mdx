@@ -119,7 +119,11 @@ $$
 
 家用洗衣机、微波炉、按预设脉冲数旋转的步进电机都是典型代表——指令序列在程序里写死，执行端实际走到哪里不会反过来影响后续动作。
 
-<Figure src={require('./figs/open-loop-control.webp').default} caption="开环控制：指令单向下发，执行端状态不回传" />
+<Figure
+  src={require('./figs/open-loop-control.webp').default}
+  caption="开环控制：指令单向下发，执行端状态不回传"
+  width={800}
+/>
 
 开环控制的优点是**简单**，不需要传感器建立反馈通路。但缺点是**无法适应任何外界扰动**，例如机械臂收到"转到 90°"的开环指令，一旦碰到摩擦、负载或障碍物，就会停在偏离 90° 的位置，并且不会自我修正。
 
@@ -135,7 +139,11 @@ $$
 
 每个采样周期，传感器测出当前 $q$，控制器算出 $e$ 并输出 $u$，执行器把 $u$ 作用到被控对象上，下一拍传感器再测一次状态——**控制器 → 执行器 → 被控对象 → 传感器 → 控制器** 由此闭合成回路。
 
-<Figure src={require('./figs/closed-loop-control.webp').default} caption="闭环控制：传感器把实测状态回传，控制器据此修正" />
+<Figure
+  src={require('./figs/closed-loop-control.webp').default}
+  caption="闭环控制：传感器把实测状态回传，控制器据此修正"
+  width={800}
+/>
 
 闭环的关键能力是**自我纠错**：扰动来自哪里并不重要——多挂了 1 kg 负载、电池电压跌了、桌面把关节顶了一下，只要它表现为偏离目标的 $e \ne 0$，控制器在下一拍就能感知并修正。
 
@@ -346,20 +354,24 @@ MuJoCo 用 `<actuator>` 标签把控制信号 `ctrl[i]` 翻译成作用在关节
 
 ```xml
 <mujoco model="single_pendulum">
+  <!-- 重力沿 z 轴向下; timestep=0.002 表示每 2 ms 推进一次物理仿真 -->
   <option gravity="0 0 -9.81" timestep="0.002"/>
 
   <worldbody>
+    <!-- body 原点放在世界坐标 (0,0,1); joint 未写 pos,默认就在这个原点 -->
     <body name="link" pos="0 0 1">
+      <!-- hinge 只允许绕 y 轴转动; damping 是关节自身的物理阻尼,不是控制器的 Kd -->
       <joint name="hinge" type="hinge" axis="0 1 0" damping="0.02"/>
+      <!-- fromto 是 body 局部坐标:胶囊中心线从 (0,0,0) 到 (0,0,-0.5),所以向下 0.5 m -->
       <geom type="capsule" fromto="0 0 0 0 0 -0.5" size="0.04" mass="1"/>
     </body>
   </worldbody>
 
   <actuator>
-    <!-- 写法 A:让 MuJoCo 帮我们实现 PD -->
+    <!-- 写法 A: position 执行器。ctrl[0] 填目标角度 q_des;kp 对应 Kp,kv 对应 Kd 的速度阻尼项 -->
     <position name="pos_act" joint="hinge" kp="20" kv="1" ctrlrange="-3.14 3.14"/>
 
-    <!-- 写法 B:自己在 Python 里手搓 PD -->
+    <!-- 写法 B: motor 执行器。ctrl[1] 直接填关节力矩 tau,PD 公式由 Python 手算 -->
     <motor    name="tor_act" joint="hinge" ctrlrange="-5 5"/>
   </actuator>
 </mujoco>
@@ -378,30 +390,35 @@ import numpy as np
 model = mujoco.MjModel.from_xml_path(str(Path(__file__).with_name("pendulum.xml")))
 data = mujoco.MjData(model)
 
-q_des = 0.8           # 目标角度(rad),约 45.8°
-Kp, Kd = 20.0, 1.0    # 与写法 A 的 kp/kv 一致,方便对照
+q_des = 0.8           # 目标角度(rad),约 45.8°; position 执行器和手写 PD 都跟踪这个目标
+Kp, Kd = 20.0, 1.0    # 手写 PD 的比例/微分增益;刻意与 XML 里的 kp/kv 一致,方便对照
 
-use_motor = True      # True: 用 motor 手搓 PD; False: 用 position 执行器
+use_motor = True      # True: 写 ctrl[1],用 motor 手搓 PD; False: 写 ctrl[0],用 position 执行器
 
 if use_motor:
-    # 不关掉 position 执行器的话,它会和手写 motor PD 同时出力
+    # MJCF 里同时定义了 pos_act 和 tor_act。
+    # 如果不关掉 pos_act,它会继续按 ctrl[0] 输出内置 PD 力矩,
+    # 这样就变成"内置 PD + 手写 PD"叠加,无法单独观察 motor 写法。
     pos_act_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_ACTUATOR, "pos_act")
-    model.actuator_gainprm[pos_act_id, :] = 0.0
-    model.actuator_biasprm[pos_act_id, :] = 0.0
+    model.actuator_gainprm[pos_act_id, :] = 0.0  # 清掉 position 执行器的 kp 增益
+    model.actuator_biasprm[pos_act_id, :] = 0.0  # 清掉 position 执行器的 kv/偏置项
 
 log = []
 with mujoco.viewer.launch_passive(model, data) as viewer:
     while viewer.is_running() and data.time < 8.0:
         step_start = time.time()
 
-        q = data.qpos[0]
-        dq = data.qvel[0]
+        q = data.qpos[0]     # hinge 当前角度 q,对应 XML 里唯一的 joint
+        dq = data.qvel[0]    # hinge 当前角速度 dq/dt
 
         if use_motor:
+            # motor 模式:自己计算 tau = Kp(q_des - q) + Kd(0 - dq)
+            # 目标速度设为 0,表示只要求最终停在目标角度,不要求持续运动。
             tau = Kp * (q_des - q) + Kd * (0.0 - dq)
-            data.ctrl[1] = np.clip(tau, -5.0, 5.0)   # motor 通道
+            data.ctrl[1] = np.clip(tau, -5.0, 5.0)   # 写入 tor_act;clip 对应 XML 的 ctrlrange="-5 5"
         else:
-            data.ctrl[0] = q_des                      # position 通道
+            # position 模式:只给目标角度,MuJoCo 在内部用 kp/kv 自动算出关节力矩。
+            data.ctrl[0] = q_des                      # 写入 pos_act;范围受 ctrlrange="-3.14 3.14" 限制
 
         mujoco.mj_step(model, data)
         viewer.sync()
@@ -411,6 +428,20 @@ with mujoco.viewer.launch_passive(model, data) as viewer:
         dt_left = model.opt.timestep - (time.time() - step_start)
         if dt_left > 0:
             time.sleep(dt_left)
+```
+
+把上面的 XML 保存为 `pendulum.xml`，把 Python 代码保存为 `pd_single_joint.py`，两个文件放在同一个目录下，然后运行：
+
+macOS：
+
+```bash
+mjpython pd_single_joint.py
+```
+
+Linux / Windows：
+
+```bash
+python pd_single_joint.py
 ```
 
 跑起来会弹出 viewer，杆子从竖直向下摆到 $q_d \approx 0.8$ rad 附近稳住——这就是本章最核心的那条响应曲线。
@@ -425,9 +456,92 @@ with mujoco.viewer.launch_passive(model, data) as viewer:
 
 ### 1.6.3 实验 1：不同 $K_p / K_d$ 下的响应曲线
 
-只看 1.6.2 那一条曲线，$K_p$、$K_d$ 像是两个调到不报错就行的旋钮。这一节固定 $K_p$，让 $K_d$ 扫过欠阻尼 / 接近临界 / 过阻尼三个区段，把每个旋钮单独负责什么看清楚。
+只看 1.6.2 里 $K_p=20,\ K_d=1$ 那条单次响应，$K_p$、$K_d$ 仍然像两个调到不报错就行的旋钮。这一节固定 $K_p$，让 $K_d$ 扫过欠阻尼 / 接近临界 / 过阻尼三个区段，把每个旋钮单独负责什么看清楚。
 
-把脚本里的 `Kp, Kd` 换成下面三组，各跑一遍，把 $(t, q)$ 画到同一张图上对比：
+把下面脚本保存为 `pd_experiments.py`，和 `pendulum.xml` 放在同一个目录下。它不打开 viewer，直接跑 MuJoCo 物理并画出实验 1 / 实验 2 的曲线：
+
+```python
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import mujoco
+import numpy as np
+
+q_des = 0.8
+
+
+def make_model():
+    # 每组实验都重新加载一份 model,避免上一组仿真的状态或参数污染下一组。
+    model = mujoco.MjModel.from_xml_path(str(Path(__file__).with_name("pendulum.xml")))
+
+    # 这里统一使用 motor 通道手写 PD。
+    # 所以要关掉 XML 里同时存在的 position 执行器,否则会叠加两份控制力矩。
+    pos_act_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_ACTUATOR, "pos_act")
+    model.actuator_gainprm[pos_act_id, :] = 0.0  # 清掉 position 执行器的 kp
+    model.actuator_biasprm[pos_act_id, :] = 0.0  # 清掉 position 执行器的 kv/偏置项
+    return model
+
+
+def run_pd(Kp, Kd, disturbance=False):
+    model = make_model()
+    data = mujoco.MjData(model)
+    ts, qs = [], []  # 只记录时间和角度,用于画响应曲线
+
+    while data.time < 8.0:
+        q = data.qpos[0]   # 当前关节角度
+        dq = data.qvel[0]  # 当前关节角速度
+
+        # 手写 PD:目标速度设为 0,所以 D 项是 Kd * (0 - dq)。
+        tau = Kp * (q_des - q) + Kd * (0.0 - dq)
+
+        # 写入 motor 执行器的 ctrl[1];clip 对应 XML 里的 ctrlrange="-5 5"。
+        data.ctrl[1] = np.clip(tau, -5.0, 5.0)
+
+        # 实验 2 使用:3 秒后施加恒定外扰,观察 PD 是否能消掉稳态误差。
+        data.qfrc_applied[0] = 2.0 if disturbance and data.time > 3.0 else 0.0
+
+        mujoco.mj_step(model, data)
+        ts.append(data.time)
+        qs.append(data.qpos[0])
+
+    return np.array(ts), np.array(qs)
+
+
+plt.figure(figsize=(8, 4))
+# 实验 1:固定 Kp,只改变 Kd,看欠阻尼 / 临界附近 / 过阻尼三种响应。
+for Kd, label in [(0.5, "A: Kd=0.5"), (12.0, "B: Kd=12"), (40.0, "C: Kd=40")]:
+    t, q = run_pd(Kp=40.0, Kd=Kd)
+    plt.plot(t, q, label=label)
+plt.axhline(q_des, linestyle="--", color="black", label="target")
+plt.xlabel("time (s)")
+plt.ylabel("q (rad)")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.savefig("pd_kd_sweep.png", dpi=200)
+
+plt.figure(figsize=(8, 4))
+# 实验 2:加入恒定外扰,对比纯 P 和 PD 的稳态误差。
+for Kd, label in [(0.0, "P only"), (1.0, "PD")]:
+    t, q = run_pd(Kp=20.0, Kd=Kd, disturbance=True)
+    plt.plot(t, q, label=label)
+plt.axhline(q_des, linestyle="--", color="black", label="target")
+plt.axvline(3.0, linestyle=":", color="gray", label="disturbance")
+plt.xlabel("time (s)")
+plt.ylabel("q (rad)")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.savefig("pd_disturbance_error.png", dpi=200)
+```
+
+运行：
+
+```bash
+python pd_experiments.py
+```
+
+实验 1 用三组参数：
 
 | 组 | $K_p$ | $K_d$ | 预期 $\zeta$ | 现象 |
 |---|---|---|---|---|
@@ -437,7 +551,13 @@ with mujoco.viewer.launch_passive(model, data) as viewer:
 
 （按 $I \approx m L^2/3 \approx 0.083$ 估算 $\zeta$，需要更准就用 MuJoCo 的 `mj_fullM` 读真实惯量。）
 
-把三条曲线放在一张图上比，几个值得带走的点：
+<Figure
+  src={require('./figs/pd-kd-sweep.webp').default}
+  caption="实验 1：固定 Kp=40，只改变 Kd 时的单摆响应曲线"
+  width={800}
+/>
+
+把三条曲线放在一起看，会更容易看出几个现象：
 
 1. **$K_p$ 决定回正力矩的量级**。$K_p$ 要先大到能抵消重力矩 $\tau_g = m g L/2 \cdot \sin q_d$，单摆才能到达 $q_d$ 附近；即便如此稳态仍会偏一截，这个偏差正是 1.6.4 要拆解的稳态误差，调 $K_d$ 不解决。
 2. **$K_d$ 是控制器主动出的阻尼，跟 MJCF 里的 `damping` 不是同一件事**。后者是关节本身的物理阻尼，写在 XML 里、和控制器无关；想干净地观察 $K_d$ 的作用，就把 `damping` 设小一点，避免两份阻尼混在一起。
@@ -445,12 +565,17 @@ with mujoco.viewer.launch_passive(model, data) as viewer:
 
 ### 1.6.4 实验 2：加上扰动看稳态误差
 
-把 `q_des = 0.8` 保持不变，然后在第 3 秒给关节一个持续的外力矩：
+实验 2 用同一个 `pd_experiments.py`，只是在第 3 秒后给关节一个持续外力矩：
 
 ```python
-if data.time > 3.0:
-    data.qfrc_applied[0] = 2.0   # 恒定外扰,单位 N·m
+data.qfrc_applied[0] = 2.0 if disturbance and data.time > 3.0 else 0.0
 ```
+
+<Figure
+  src={require('./figs/pd-disturbance-error.webp').default}
+  caption="实验 2：3 秒后加入恒定外扰，P 和 PD 都会留下稳态误差"
+  width={800}
+/>
 
 我们会看到两种明显不同的行为：
 
@@ -488,7 +613,7 @@ if data.time > 3.0:
 
 5. `position` 执行器和 `motor` + 自写 PD 在数学上完全等价，但调试体验差别很大。如果我们想搞清某次过冲到底是 $K_p$ 太大、$K_d$ 太小，还是力矩饱和触发的，我们会优先选哪一种写法？为什么？
 
-## 组队学习任务
+## 动手任务
 
 到这里我们已经能让一个单关节 PD 稳定到达任意目标。组队 Lab 1 把同一个 PD 接到 Pupper HFE 关节上**换到频域看一遍**——用一系列正弦输入扫频，在 Bode 图上读出 1.5 节那对 $\omega_n, \zeta$，再亲眼看 1.6.5 节"力矩饱和把高频压平"是怎么发生的。
 

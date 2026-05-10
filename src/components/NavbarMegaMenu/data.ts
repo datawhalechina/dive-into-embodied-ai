@@ -196,7 +196,7 @@ export const megaMenus: MegaMenuConfig[] = [
         items: [
           {
             icon: '🐕',
-            title: '从零到一搭建机器人',
+            title: '从零到一搭建四足机器人',
             description: 'CS123 四足仿真课程，8 章从 PD 走到 LLM 控制。',
             to: '/docs/practices/quadruped/cs123/intro',
             activeBasePath: '/docs/practices/quadruped/cs123',
