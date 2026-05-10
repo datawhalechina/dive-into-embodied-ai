@@ -1,6 +1,7 @@
 ---
 title: "岗位技能拆解"
 sidebar_position: 1
+displayed_sidebar: careerJobSkillMapSidebar
 ---
 
 # 岗位技能拆解

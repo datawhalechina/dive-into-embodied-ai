@@ -1,6 +1,7 @@
 ---
 title: "公司技术栈"
 sidebar_position: 1
+displayed_sidebar: careerCompanyTechStacksSidebar
 ---
 
 # 公司技术栈

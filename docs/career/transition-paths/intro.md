@@ -1,6 +1,7 @@
 ---
 title: 学习路径总览
 description: 在开始学习之前，先按模块、背景和目标方向选择更适合自己的具身智能学习路径。
+displayed_sidebar: careerTransitionPathsSidebar
 ---
 
 # 学习路径总览：从零基础到找到第一份相关工作

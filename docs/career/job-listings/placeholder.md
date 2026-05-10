@@ -1,6 +1,7 @@
 ---
 title: "招聘信息"
 sidebar_position: 1
+displayed_sidebar: careerJobListingsSidebar
 ---
 
 # 招聘信息

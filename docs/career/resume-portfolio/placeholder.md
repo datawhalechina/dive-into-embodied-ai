@@ -1,6 +1,7 @@
 ---
 title: "简历与作品集"
 sidebar_position: 1
+displayed_sidebar: careerResumePortfolioSidebar
 ---
 
 # 简历与作品集

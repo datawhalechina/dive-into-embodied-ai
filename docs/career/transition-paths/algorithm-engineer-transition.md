@@ -1,6 +1,7 @@
 ---
 title: 哪些人适合转具身算法？
 description: 不是所有算法工程师都适合转具身算法。这篇文章帮你判断自己是否更容易切进具身算法，以及该怎么开始。
+displayed_sidebar: careerTransitionPathsSidebar
 ---
 
 import Figure from '@site/src/components/Figure';

@@ -1,6 +1,7 @@
 ---
 title: 基础篇概述
 sidebar_position: 1
+displayed_sidebar: foundationsOverviewSidebar
 ---
 
 # 基础篇：建立具身智能工程底座

@@ -11,6 +11,7 @@
     "typecheck": "tsc",
     "check:doc-assets": "node scripts/check-doc-assets.cjs",
     "check:math-refs": "node scripts/check-math-refs.cjs",
+    "check:doc-sidebars": "node scripts/check-doc-sidebars.cjs",
     "check:playgrounds": "node scripts/check-playgrounds.cjs",
     "check:practice-sidebars": "node scripts/check-practice-sidebars.cjs",
     "assets:webp": "python3 scripts/convert-images-to-webp.py",

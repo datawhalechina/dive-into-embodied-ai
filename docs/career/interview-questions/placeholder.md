@@ -1,6 +1,7 @@
 ---
 title: "面经与八股"
 sidebar_position: 1
+displayed_sidebar: careerInterviewQuestionsSidebar
 ---
 
 # 面经与八股

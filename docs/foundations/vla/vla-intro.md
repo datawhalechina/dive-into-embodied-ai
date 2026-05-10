@@ -1,6 +1,7 @@
 ---
 sidebar_position: 0
 title: "导读"
+displayed_sidebar: foundationsVlaSidebar
 ---
 
 # 视觉-语言-动作模型(VLA)系列导读

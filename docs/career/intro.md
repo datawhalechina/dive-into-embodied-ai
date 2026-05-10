@@ -1,6 +1,7 @@
 ---
 title: 求职篇概述
 sidebar_position: 1
+displayed_sidebar: careerOverviewSidebar
 ---
 
 # 求职篇：把项目经验转化成岗位竞争力

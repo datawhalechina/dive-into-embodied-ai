@@ -2,6 +2,7 @@
 title: 机器人学和 ROS2 怎么学？
 description: 围绕现有机器人运动学与 ROS2 教程，给出一条更适合新人的学习顺序、项目路线和学完之后该怎么继续做的建议。
 sidebar_position: 1
+displayed_sidebar: careerTransitionPathsSidebar
 ---
 
 # 机器人学和 ROS2 怎么学？

@@ -1,6 +1,7 @@
 ---
 title: "社区与内推"
 sidebar_position: 1
+displayed_sidebar: careerCommunitySidebar
 ---
 
 # 社区与内推
