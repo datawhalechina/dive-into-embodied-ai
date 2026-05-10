@@ -7,3 +7,4 @@ build/
 .env*.local
 npm-debug.log*
 __pycache__
+.vscode
