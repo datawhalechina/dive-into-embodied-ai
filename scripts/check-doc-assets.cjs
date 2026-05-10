@@ -6,6 +6,7 @@ const rootDir = path.resolve(__dirname, '..');
 const cs123Dir = path.join(rootDir, 'docs/practices/quadruped/cs123');
 const cs123FigsDir = path.join(cs123Dir, 'figs');
 const cs123PidDocPath = path.join(cs123Dir, '1.pid-control.mdx');
+const cs123FkDocPath = path.join(cs123Dir, '2.forward-kinematics.md');
 const requiredCs123Assets = [
   'actuator-workflow.webp',
   'bang-bang-control.webp',
@@ -16,6 +17,7 @@ const requiredCs123Assets = [
   'open-loop-control.webp',
   'pd-spring-damper.webp',
   'pid-three-terms.webp',
+  'joint-link-ee.webp',
 ];
 
 const customCssPath = path.join(rootDir, 'src/css/custom.css');
@@ -104,6 +106,7 @@ for (const assetName of requiredCs123Assets) {
 
 const customCss = fs.readFileSync(customCssPath, 'utf8');
 const cs123PidDoc = fs.readFileSync(cs123PidDocPath, 'utf8');
+const cs123FkDoc = fs.readFileSync(cs123FkDocPath, 'utf8');
 const figureComponent = fs.readFileSync(figureComponentPath, 'utf8');
 const docTableComponent = fs.readFileSync(docTableComponentPath, 'utf8');
 assert.match(
@@ -145,6 +148,11 @@ assert.match(
   cs123PidDoc,
   /import DocTable from '@site\/src\/components\/DocTable';[\s\S]*按能量来源，常见执行器可以分成三大类，如\[表 1\]\(#tab-actuator-types\) 所示：[\s\S]*<DocTable id="tab-actuator-types" caption="常见执行器按能量来源的三大类">[\s\S]*<\/DocTable>/,
   'CS123 PID actuator table should use an anchored numbered table wrapper',
+);
+assert.match(
+  cs123FkDoc,
+  /import DocTable from '@site\/src\/components\/DocTable';[\s\S]*两种约定的对照见\[表 1\]\(#tab-dh-urdf\)。[\s\S]*<DocTable id="tab-dh-urdf" caption="DH 参数与 URDF \/ MJCF 父-子链式约定的对照">[\s\S]*<\/DocTable>/,
+  'CS123 FK DH/URDF table should use an anchored numbered table wrapper',
 );
 assert.match(
   figureComponent,
