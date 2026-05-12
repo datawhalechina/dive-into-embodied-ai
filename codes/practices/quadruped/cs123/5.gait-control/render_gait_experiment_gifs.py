@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 import mujoco
@@ -8,78 +9,34 @@ from PIL import Image, ImageDraw
 
 
 ROOT = Path(__file__).resolve().parents[5]
+EXERCISES_DIR = ROOT / "codes/practices/quadruped/cs123/exercises"
+if str(EXERCISES_DIR) not in sys.path:
+    sys.path.insert(0, str(EXERCISES_DIR))
+
+from shared.kinematics.leg_kinematics import HIP_OFFSETS, LEG_ORDER, ik_pupper_leg  # noqa: E402
+
+
 FIG_DIR = ROOT / "docs/practices/quadruped/cs123/figs"
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
-LEGS = ("FL", "FR", "RL", "RR")
-LEG_Y = {"FL": 0.07, "FR": -0.07, "RL": 0.07, "RR": -0.07}
-LEG_X = {"FL": 0.105, "FR": 0.105, "RL": -0.105, "RR": -0.105}
+MODEL_GAIT_DEMO = Path(__file__).with_name("pupper_gait_demo.xml")
+
+JOINT_SUFFIXES = ("HAA", "HFE", "KFE")
 PHASE_OFFSETS = {"FL": 0.0, "FR": 0.5, "RL": 0.5, "RR": 0.0}
 
-THIGH = 0.105
-CALF = 0.105
 T_CYCLE = 0.4
+DUTY = 0.5
 STEP_HEIGHT = 0.04
-STAND_HEIGHT = 0.17
+STAND_HEIGHT = 0.18
+MAX_TORQUE = 18.0
 
+WIDTH = 720
+HEIGHT = 540
+FPS = 24
+SETTLE_SECONDS = 0.35
+RENDER_SECONDS = 3.2
 
-def build_xml() -> str:
-    legs = []
-    for leg in LEGS:
-        y = LEG_Y[leg]
-        x = LEG_X[leg]
-        side = 1 if y > 0 else -1
-        rgba = "0.10 0.55 0.20 1" if leg in ("FL", "RR") else "0.10 0.32 0.75 1"
-        legs.append(
-            f"""
-            <body name="{leg}_hip" pos="{x:.3f} {y:.3f} 0">
-              <joint name="{leg}_hip" type="hinge" axis="1 0 0" range="-0.8 0.8" damping="1.0" armature="0.01"/>
-              <geom type="sphere" size="0.017" rgba="{rgba}"/>
-              <body name="{leg}_thigh" pos="0 {0.018 * side:.3f} 0">
-                <joint name="{leg}_thigh" type="hinge" axis="0 1 0" range="-1.8 1.8" damping="1.0" armature="0.01"/>
-                <geom type="capsule" fromto="0 0 0 0 0 {-THIGH:.3f}" size="0.011" rgba="0.55 0.55 0.55 1"/>
-                <body name="{leg}_calf" pos="0 0 {-THIGH:.3f}">
-                  <joint name="{leg}_calf" type="hinge" axis="0 1 0" range="-2.4 0.2" damping="1.0" armature="0.01"/>
-                  <geom type="capsule" fromto="0 0 0 0 0 {-CALF:.3f}" size="0.009" rgba="{rgba}"/>
-                  <body name="{leg}_foot" pos="0 0 {-CALF:.3f}">
-                    <geom name="{leg}_foot_geom" type="sphere" size="0.018" friction="1.6 0.02 0.002" rgba="0.07 0.07 0.07 1"/>
-                  </body>
-                </body>
-              </body>
-            </body>
-            """
-        )
-
-    return f"""
-    <mujoco model="cs123_gait_demo">
-      <compiler angle="radian"/>
-      <option timestep="0.002" gravity="0 0 -9.81"/>
-      <visual>
-        <global offwidth="720" offheight="540"/>
-        <headlight diffuse="0.7 0.7 0.7" ambient="0.35 0.35 0.35"/>
-        <quality shadowsize="2048"/>
-      </visual>
-      <asset>
-        <texture name="grid" type="2d" builtin="checker" rgb1="0.92 0.94 0.92" rgb2="0.78 0.83 0.78" width="512" height="512"/>
-        <material name="ground" texture="grid" texrepeat="4 4" reflectance="0.12"/>
-      </asset>
-      <worldbody>
-        <light pos="0 -2 3" dir="0 1 -1" diffuse="0.8 0.8 0.8"/>
-        <geom name="floor" type="plane" size="8 8 0.1" material="ground"/>
-        <body name="torso" pos="0 0 {STAND_HEIGHT:.3f}">
-          <freejoint/>
-          <geom name="torso_geom" type="box" size="0.135 0.052 0.035" rgba="0.72 0.72 0.72 1" mass="2.0"/>
-          {''.join(legs)}
-        </body>
-      </worldbody>
-      <actuator>
-        {''.join(f'<motor joint="{leg}_{joint}" gear="1"/>' for leg in LEGS for joint in ("hip", "thigh", "calf"))}
-      </actuator>
-    </mujoco>
-    """
-
-
-def leg_phase(t: float, leg: str, t_cycle: float = T_CYCLE, duty: float = 0.5) -> tuple[bool, float]:
+def leg_phase(t: float, leg: str, t_cycle: float, duty: float = DUTY) -> tuple[bool, float]:
     t_global = (t / t_cycle) % 1.0
     t_local = (t_global + PHASE_OFFSETS[leg]) % 1.0
     if t_local < duty:
@@ -87,102 +44,239 @@ def leg_phase(t: float, leg: str, t_cycle: float = T_CYCLE, duty: float = 0.5) -
     return False, (t_local - duty) / (1.0 - duty)
 
 
-def foot_trajectory(s: float, in_stance: bool, step_length: float) -> np.ndarray:
+def foot_trajectory(s: float, in_stance: bool, step_length: float, step_height: float, stand_height: float) -> np.ndarray:
     if in_stance:
         x = step_length * (0.5 - s)
-        z = -STAND_HEIGHT
+        z = -stand_height
     else:
         x = step_length * (s - 0.5)
-        z = -STAND_HEIGHT + STEP_HEIGHT * np.sin(np.pi * s)
-    return np.array([x, z])
+        z = -stand_height + step_height * np.sin(np.pi * s)
+    return np.array((x, 0.0, z), dtype=float)
 
 
-def ik_leg_2d(x: float, z: float) -> tuple[float, float]:
-    down = -z
-    reach = np.hypot(x, down)
-    reach = np.clip(reach, 0.045, THIGH + CALF - 0.004)
-    cos_knee = (reach * reach - THIGH * THIGH - CALF * CALF) / (2 * THIGH * CALF)
-    cos_knee = np.clip(cos_knee, -0.98, 0.98)
-    knee = -np.arccos(cos_knee)
-    hip = np.arctan2(x, down) - np.arctan2(CALF * np.sin(knee), THIGH + CALF * np.cos(knee))
-    return hip, knee
+def make_q_seed() -> dict[str, np.ndarray]:
+    return {leg: np.array((0.0, 0.18, -0.36), dtype=float) for leg in LEG_ORDER}
 
 
-def gait_step(t: float, step_length: float) -> np.ndarray:
-    target = np.zeros(12)
-    for i, leg in enumerate(LEGS):
-        in_stance, s = leg_phase(t, leg)
-        foot_xz = foot_trajectory(s, in_stance, step_length)
-        thigh, calf = ik_leg_2d(float(foot_xz[0]), float(foot_xz[1]))
-        target[3 * i : 3 * i + 3] = [0.0, thigh, calf]
-    return target
+def gait_step(
+    t: float,
+    step_length: float,
+    q_seed: dict[str, np.ndarray],
+    *,
+    t_cycle: float,
+    step_height: float,
+    stand_height: float,
+) -> np.ndarray:
+    target_q = np.zeros(12, dtype=float)
+    for k, leg in enumerate(LEG_ORDER):
+        in_stance, s = leg_phase(t, leg, t_cycle)
+        hip_local = foot_trajectory(s, in_stance, step_length, step_height, stand_height)
+        foot_xyz = HIP_OFFSETS[leg] + hip_local
+        q_leg = ik_pupper_leg(foot_xyz, leg=leg, q_seed=q_seed[leg])
+        q_seed[leg] = q_leg
+        target_q[3 * k : 3 * k + 3] = q_leg
+    return target_q
+
+
+def joint_names() -> tuple[str, ...]:
+    return tuple(f"{leg}_{suffix}" for leg in LEG_ORDER for suffix in JOINT_SUFFIXES)
+
+
+def actuator_names() -> tuple[str, ...]:
+    return tuple(f"{leg}_{suffix}_motor" for leg in LEG_ORDER for suffix in JOINT_SUFFIXES)
+
+
+def joint_qpos_qvel_ids(model: mujoco.MjModel) -> tuple[np.ndarray, np.ndarray]:
+    qpos_ids: list[int] = []
+    qvel_ids: list[int] = []
+    for name in joint_names():
+        joint_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_JOINT, name)
+        if joint_id < 0:
+            raise ValueError(f"missing joint {name!r} in {model.names!r}")
+        qpos_ids.append(int(model.jnt_qposadr[joint_id]))
+        qvel_ids.append(int(model.jnt_dofadr[joint_id]))
+    return np.asarray(qpos_ids, dtype=int), np.asarray(qvel_ids, dtype=int)
+
+
+def actuator_ids(model: mujoco.MjModel) -> np.ndarray:
+    ids: list[int] = []
+    for name in actuator_names():
+        actuator_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_ACTUATOR, name)
+        if actuator_id < 0:
+            raise ValueError(f"missing actuator {name!r} in {model.names!r}")
+        ids.append(int(actuator_id))
+    return np.asarray(ids, dtype=int)
+
+
+def body_id(model: mujoco.MjModel, name: str = "base") -> int:
+    body = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, name)
+    if body < 0:
+        raise ValueError(f"missing body {name!r}")
+    return int(body)
+
+
+def reset_pose(
+    model: mujoco.MjModel,
+    data: mujoco.MjData,
+    qpos_ids: np.ndarray,
+    q0: np.ndarray,
+    *,
+    stand_height: float,
+    weld_active: bool,
+) -> None:
+    mujoco.mj_resetData(model, data)
+    if model.neq:
+        data.eq_active[:] = 1 if weld_active else 0
+    data.qpos[:7] = (0.0, 0.0, stand_height, 1.0, 0.0, 0.0, 0.0)
+    data.qpos[qpos_ids] = q0
+    data.qvel[:] = 0.0
+    mujoco.mj_forward(model, data)
+
+
+def apply_pd(
+    data: mujoco.MjData,
+    qpos_ids: np.ndarray,
+    qvel_ids: np.ndarray,
+    ctrl_ids: np.ndarray,
+    target_q: np.ndarray,
+    kp: np.ndarray,
+    kd: np.ndarray,
+) -> None:
+    q = data.qpos[qpos_ids]
+    dq = data.qvel[qvel_ids]
+    tau = kp * (target_q - q) - kd * dq
+    data.ctrl[ctrl_ids] = np.clip(tau, -MAX_TORQUE, MAX_TORQUE)
 
 
 def add_label(frame: np.ndarray, text: str) -> Image.Image:
-    image = Image.fromarray(frame)
+    image = Image.fromarray(frame).convert("RGB")
     draw = ImageDraw.Draw(image, "RGBA")
-    draw.rounded_rectangle((18, 18, 330, 68), radius=10, fill=(255, 255, 255, 210))
+    draw.rounded_rectangle((18, 18, 438, 68), radius=10, fill=(255, 255, 255, 218))
     draw.text((34, 34), text, fill=(20, 30, 40, 255))
     return image
 
 
-def render_experiment(name: str, output: Path, step_length: float, base_speed: float) -> None:
-    model = mujoco.MjModel.from_xml_string(build_xml())
-    data = mujoco.MjData(model)
-    renderer = mujoco.Renderer(model, height=540, width=720)
-
+def make_camera() -> mujoco.MjvCamera:
     camera = mujoco.MjvCamera()
-    camera.lookat[:] = [0.18, 0.0, 0.09]
-    camera.distance = 0.78
-    camera.azimuth = 135
-    camera.elevation = -18
+    camera.type = mujoco.mjtCamera.mjCAMERA_FREE
+    camera.distance = 0.82
+    camera.azimuth = 135.0
+    camera.elevation = -18.0
+    camera.lookat[:] = (0.0, 0.0, 0.10)
+    return camera
 
-    q0 = gait_step(0.0, step_length)
-    data.qpos[:7] = [0.0, 0.0, STAND_HEIGHT, 1.0, 0.0, 0.0, 0.0]
-    data.qpos[7:] = q0
-    mujoco.mj_forward(model, data)
 
-    duration = 3.2
-    fps = 24
+def render_experiment(
+    name: str,
+    model_path: Path,
+    output: Path,
+    *,
+    step_length: float,
+    t_cycle: float,
+    step_height: float,
+    stand_height: float,
+    kp_value: float,
+    kd_value: float,
+    weld_active: bool,
+    weld_speed: float = 0.0,
+) -> None:
+    model = mujoco.MjModel.from_xml_path(str(model_path))
+    model.vis.global_.offwidth = max(model.vis.global_.offwidth, WIDTH)
+    model.vis.global_.offheight = max(model.vis.global_.offheight, HEIGHT)
+    data = mujoco.MjData(model)
+    qpos_ids, qvel_ids = joint_qpos_qvel_ids(model)
+    ctrl_ids = actuator_ids(model)
+    base_id = body_id(model)
+    kp = np.full(12, kp_value)
+    kd = np.full(12, kd_value)
+
+    q_seed = make_q_seed()
+    q0 = gait_step(
+        0.0,
+        step_length,
+        q_seed,
+        t_cycle=t_cycle,
+        step_height=step_height,
+        stand_height=stand_height,
+    )
+    reset_pose(model, data, qpos_ids, q0, stand_height=stand_height, weld_active=weld_active)
+
+    renderer = mujoco.Renderer(model, height=HEIGHT, width=WIDTH)
+    camera = make_camera()
     frames: list[Image.Image] = []
+    next_frame_time = 0.0
 
-    for frame_index in range(int(duration * fps)):
-        t = frame_index / fps
-        q_des = gait_step(t, step_length)
-        # Keep the torso path prescribed so the GIF focuses on gait timing rather than
-        # on model-specific balance tuning.
-        data.qpos[:7] = [base_speed * t, 0.0, STAND_HEIGHT, 1.0, 0.0, 0.0, 0.0]
-        data.qpos[7:] = q_des
-        data.qvel[:] = 0.0
-        mujoco.mj_forward(model, data)
+    try:
+        while data.time < SETTLE_SECONDS + RENDER_SECONDS:
+            gait_t = max(0.0, data.time - SETTLE_SECONDS)
+            if weld_active and model.neq:
+                model.eq_data[0, 0] = weld_speed * gait_t
+            target_q = (
+                q0
+                if data.time < SETTLE_SECONDS
+                else gait_step(
+                    gait_t,
+                    step_length,
+                    q_seed,
+                    t_cycle=t_cycle,
+                    step_height=step_height,
+                    stand_height=stand_height,
+                )
+            )
+            apply_pd(data, qpos_ids, qvel_ids, ctrl_ids, target_q, kp, kd)
+            mujoco.mj_step(model, data)
 
-        camera.lookat[0] = base_speed * t + 0.05
-        renderer.update_scene(data, camera=camera)
-        frames.append(add_label(renderer.render(), name))
+            if data.time < SETTLE_SECONDS:
+                continue
+
+            render_t = data.time - SETTLE_SECONDS
+            if render_t + 0.5 * model.opt.timestep < next_frame_time:
+                continue
+
+            camera.lookat[:] = data.xpos[base_id]
+            camera.lookat[2] = max(float(camera.lookat[2]), 0.09)
+            renderer.update_scene(data, camera=camera)
+            frames.append(add_label(renderer.render(), name))
+            next_frame_time += 1.0 / FPS
+    finally:
+        renderer.close()
 
     frames[0].save(
         output,
         save_all=True,
         append_images=frames[1:],
-        duration=1000 // fps,
+        duration=1000 // FPS,
         loop=0,
         optimize=True,
     )
-    print(f"saved {output} ({len(frames)} frames)")
+    print(f"saved {output} ({len(frames)} frames, xml={model_path}, weld_active={weld_active})")
 
 
 def main() -> None:
     render_experiment(
-        name="Experiment 1: in-place trot",
+        name="In-place trot · pupper_gait_demo.xml",
+        model_path=MODEL_GAIT_DEMO,
         output=FIG_DIR / "lab5_inplace_trot.gif",
         step_length=0.0,
-        base_speed=0.0,
+        t_cycle=T_CYCLE,
+        step_height=STEP_HEIGHT,
+        stand_height=STAND_HEIGHT,
+        kp_value=30.0,
+        kd_value=1.0,
+        weld_active=True,
     )
     render_experiment(
-        name="Experiment 2: forward trot",
+        name="Forward trot · pupper_gait_demo.xml",
+        model_path=MODEL_GAIT_DEMO,
         output=FIG_DIR / "lab5_forward_trot.gif",
-        step_length=0.10,
-        base_speed=0.22,
+        step_length=0.07,
+        t_cycle=0.8,
+        step_height=0.05,
+        stand_height=0.16,
+        kp_value=24.0,
+        kd_value=0.8,
+        weld_active=True,
+        weld_speed=0.12,
     )
 
 
