@@ -93,7 +93,10 @@ function HomepageHeader() {
             <CodeXml size={16} aria-hidden="true" />
             <span>Datawhale open-source robotics curriculum</span>
           </div>
-          <h1 className="site-hero__title">{siteConfig.title}</h1>
+          <h1 className="site-hero__title" aria-label={siteConfig.title}>
+            <span className="site-hero__titleLead">Dive into</span>
+            <span className="site-hero__titleMain">Embodied AI</span>
+          </h1>
           <p className="site-hero__subtitle">{siteConfig.tagline}</p>
           <p className="hero__typewriter">
             <Typewriter />
