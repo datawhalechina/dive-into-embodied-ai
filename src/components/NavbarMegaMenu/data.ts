@@ -109,15 +109,6 @@ export const megaMenus: MegaMenuConfig[] = [
         title: '小脑：运动控制',
         items: [
           {
-            icon: '🦾',
-            title: '机器人运动学与 ROS2 基础',
-            description: '坐标变换、FK/IK、tf2、URDF 与 MoveIt 2。',
-            to: '/docs/foundations/robotics-and-ros2/intro',
-            activeBasePath: '/docs/foundations/robotics-and-ros2',
-            keywords: ['FK', 'IK', 'ROS2'],
-            featured: true,
-          },
-          {
             icon: '🎛️',
             title: '强化学习控制',
             description: '把策略学习接到连续控制和机器人任务上。',
@@ -172,6 +163,15 @@ export const megaMenus: MegaMenuConfig[] = [
       {
         title: '神经 / 硬件 / 数据 / 安全',
         items: [
+          {
+            icon: '🦾',
+            title: 'ROS2',
+            description: '坐标变换、FK/IK、tf2、URDF 与 MoveIt 2。',
+            to: '/docs/foundations/robotics-and-ros2/intro',
+            activeBasePath: '/docs/foundations/robotics-and-ros2',
+            keywords: ['FK', 'IK', 'ROS2'],
+            featured: true,
+          },
           {
             icon: '🔌',
             title: 'CAN 与 MCU 通信',
