@@ -56,7 +56,27 @@ const config: Config = {
     ],
   ],
 
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: [
+    '@docusaurus/theme-mermaid',
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        indexDocs: true,
+        indexBlog: false,
+        indexPages: true,
+        language: ['zh', 'en'],
+        hashed: true,
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+        searchResultLimits: 10,
+        searchResultContextMaxLength: 80,
+        searchBarShortcut: true,
+        searchBarShortcutHint: true,
+        searchBarShortcutKeymap: 'mod+k',
+        searchBarPosition: 'right',
+      },
+    ],
+  ],
 
   themeConfig: {
     colorMode: {
@@ -95,6 +115,10 @@ const config: Config = {
           type: 'custom-navbarMegaMenu',
           menuId: 'career',
           position: 'left',
+        },
+        {
+          type: 'search',
+          position: 'right',
         },
         {
           href: 'https://github.com/datawhalechina/dive-into-embodied-ai',
