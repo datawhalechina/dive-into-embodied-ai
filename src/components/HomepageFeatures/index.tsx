@@ -15,23 +15,23 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: '总览',
-    description: '项目定位、学习路径、公司图谱和不同背景的切入方式。',
-    link: '/docs/overview/intro',
+    title: '零基础入门',
+    description: '学习路径、方向认知和从0到1搭建四足机器人的入门项目。',
+    link: '/docs/overview/learning-path',
     eyebrow: 'Start here',
     icon: Map,
     accent: 'cyan',
   },
   {
-    title: '基础篇',
-    description: '机器人学、ROS2、仿真、强化学习、VLM/VLA 等基础模块。',
+    title: '技能树进阶',
+    description: '按智能决策、运动控制、感知系统、基础设施与数据工程补齐能力。',
     link: '/docs/foundations/intro',
-    eyebrow: 'Core stack',
+    eyebrow: 'Skill tree',
     icon: BrainCircuit,
     accent: 'blue',
   },
   {
-    title: '实践篇',
+    title: '项目实战',
     description: '机械臂、四足、人形、移动操作四类可展示项目。',
     link: '/docs/practices/intro',
     eyebrow: 'Build labs',
@@ -39,7 +39,7 @@ const FeatureList: FeatureItem[] = [
     accent: 'green',
   },
   {
-    title: '求职篇',
+    title: '求职面试',
     description: '岗位拆解、面经、简历表达和公司技术栈。',
     link: '/docs/career/intro',
     eyebrow: 'Career loop',
@@ -72,7 +72,7 @@ export default function HomepageFeatures(): React.JSX.Element {
       <div className="container">
         <div className={styles.sectionHeading}>
           <p>LEARNING MAP</p>
-          <h2>四条路线，围绕开源内容持续生长</h2>
+          <h2>四个阶段，围绕入门、进阶、项目和求职持续生长</h2>
         </div>
         <div className="row">
           {FeatureList.map((props, idx) => (

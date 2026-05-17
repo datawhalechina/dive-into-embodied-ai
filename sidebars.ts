@@ -3,34 +3,90 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 const sidebars: SidebarsConfig = {
   overviewSidebar: [
     'overview/intro',
-    'overview/embodied-ai-roadmap',
     'overview/learning-path',
+    'overview/embodied-ai-roadmap',
+    {
+      type: 'link',
+      label: '从0到1搭建四足机器人',
+      href: '/docs/practices/quadruped/cs123/intro',
+    },
     'overview/company-landscape',
-    'overview/robotics-and-ros2-roadmap',
     'overview/algorithm-engineer-transition',
+    'overview/robotics-and-ros2-roadmap',
   ],
 
   foundationsOverviewSidebar: [
     'foundations/intro',
     {
       type: 'category',
-      label: '系统与工程基础',
+      label: '入门认知',
       collapsed: false,
       items: [
         { type: 'link', label: '具身智能入门', href: '/docs/foundations/embodied-ai-intro/placeholder' },
-        { type: 'link', label: '机器人运动学与 ROS2 基础', href: '/docs/foundations/robotics-and-ros2/intro' },
-        { type: 'link', label: '仿真工具基础', href: '/docs/foundations/simulation/intro' },
       ],
     },
     {
       type: 'category',
-      label: '模型与算法基础',
+      label: '大脑：智能决策',
       collapsed: false,
       items: [
-        { type: 'link', label: '强化学习与控制', href: '/docs/foundations/rl-for-robotics/intro' },
-        { type: 'link', label: '视觉语言大模型(VLM)', href: '/docs/foundations/vlm/intro' },
+        { type: 'link', label: '强化学习决策', href: '/docs/foundations/rl-for-robotics/intro' },
         { type: 'link', label: '视觉-语言-动作大模型(VLA)', href: '/docs/foundations/vla/vla-intro' },
         { type: 'link', label: '世界模型(World Model)', href: '/docs/foundations/world-model/placeholder' },
+      ],
+    },
+    {
+      type: 'category',
+      label: '小脑：运动控制',
+      collapsed: false,
+      items: [
+        { type: 'link', label: '机器人运动学与 ROS2 基础', href: '/docs/foundations/robotics-and-ros2/intro' },
+        { type: 'link', label: '强化学习控制', href: '/docs/foundations/rl-for-robotics/ppo' },
+        { type: 'link', label: '运动规划', href: '/docs/foundations/robotics-and-ros2/moveit2_basics' },
+      ],
+    },
+    {
+      type: 'category',
+      label: '感官：感知系统',
+      collapsed: false,
+      items: [
+        { type: 'link', label: '视觉语言大模型(VLM)', href: '/docs/foundations/vlm/intro' },
+        { type: 'link', label: '定位与触觉感知', href: '/docs/foundations/perception/placeholder' },
+      ],
+    },
+    {
+      type: 'category',
+      label: '神经系统：基础设施与通信',
+      collapsed: false,
+      items: [
+        { type: 'link', label: '仿真工具基础', href: '/docs/foundations/simulation/intro' },
+        { type: 'link', label: 'ROS2 工程基础', href: '/docs/foundations/robotics-and-ros2/ros2_engineering_basics' },
+        { type: 'link', label: 'CAN 与 MCU 通信', href: '/docs/foundations/communication/can-mcu' },
+      ],
+    },
+    {
+      type: 'category',
+      label: '骨骼肌肉：硬件结构',
+      collapsed: false,
+      items: [
+        { type: 'link', label: '机械结构', href: '/docs/foundations/hardware/placeholder' },
+      ],
+    },
+    {
+      type: 'category',
+      label: '消化与造血：数据工程',
+      collapsed: false,
+      items: [
+        { type: 'link', label: '模仿学习', href: '/docs/foundations/rl-for-robotics/imitation-learning' },
+        { type: 'link', label: 'LeRobot 开源课程', href: '/docs/practices/robot-arm/data-collection/lerobot-course' },
+      ],
+    },
+    {
+      type: 'category',
+      label: '反射系统：安全防护',
+      collapsed: false,
+      items: [
+        { type: 'link', label: '安全防护', href: '/docs/foundations/safety/placeholder' },
       ],
     },
   ],
@@ -109,7 +165,7 @@ const sidebars: SidebarsConfig = {
     'practices/intro',
     {
       type: 'category',
-      label: '方向入口',
+      label: '本体方向',
       collapsed: false,
       items: [
         { type: 'link', label: '机械臂方向', href: '/docs/practices/robot-arm/placeholder' },
@@ -120,7 +176,7 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: '独立课程',
+      label: '项目课程',
       collapsed: false,
       items: [
         { type: 'link', label: '从零到一搭建四足机器人', href: '/docs/practices/quadruped/cs123/intro' },
@@ -215,22 +271,21 @@ const sidebars: SidebarsConfig = {
     'career/intro',
     {
       type: 'category',
-      label: '求职准备',
+      label: '核心准备',
       collapsed: false,
       items: [
         { type: 'link', label: '岗位技能拆解', href: '/docs/career/job-skill-map/placeholder' },
         { type: 'link', label: '面经与八股', href: '/docs/career/interview-questions/placeholder' },
-        { type: 'link', label: '简历与作品集', href: '/docs/career/resume-portfolio/placeholder' },
+        { type: 'link', label: '招聘信息', href: '/docs/career/job-listings/placeholder' },
       ],
     },
     {
       type: 'category',
-      label: '信息与路径',
+      label: '补充资料',
       collapsed: false,
       items: [
+        { type: 'link', label: '简历与作品集', href: '/docs/career/resume-portfolio/placeholder' },
         { type: 'link', label: '公司技术栈', href: '/docs/career/company-tech-stacks/placeholder' },
-        { type: 'link', label: '招聘信息', href: '/docs/career/job-listings/placeholder' },
-        { type: 'link', label: '转岗路径', href: '/docs/career/transition-paths/intro' },
         { type: 'link', label: '社区与内推', href: '/docs/career/community/placeholder' },
       ],
     },

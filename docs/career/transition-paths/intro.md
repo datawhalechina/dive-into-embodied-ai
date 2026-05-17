@@ -14,8 +14,8 @@ displayed_sidebar: careerTransitionPathsSidebar
 
 - [按模块学习：机器人学和 ROS2 怎么学？](/docs/career/transition-paths/robotics-and-ros2-roadmap)
 - [按背景选择：哪些人适合转具身算法？](/docs/career/transition-paths/algorithm-engineer-transition)
-- [基础教程总览](/docs/foundations/intro)
-- [项目总览](/docs/practices/intro)
+- [技能树进阶](/docs/foundations/intro)
+- [项目实战](/docs/practices/intro)
 
 ---
 

@@ -1,75 +1,30 @@
 ---
 sidebar_position: 1
-title: 基础教程总览
-description: 基础教程的目录导航页，集中查看系统主线与算法主线下的全部章节入口。
+title: 零基础入门概述
+description: 从零基础进入具身智能的学习路径、方向认知与第一个完整项目入口。
 ---
 
-# 基础教程总览
+# 零基础入门：先建立整体感，再动手做第一个项目
 
-这页是整个“基础教程”区域的入口。你可以先按方向选主线，再进入对应章节连续学习。
+零基础入门面向刚接触具身智能的读者，先解决三个问题：这个方向在做什么、我应该按什么路径学、先做哪个项目最容易形成整体认知。
 
-## 学习主线
+## 入门路径
 
-- 系统主线：机器人运动学与 ROS2 -> 仿真与可视化
-- 算法主线：强化学习 -> 多模态大模型 -> VLA大模型
+- [学习路径](./learning-path)：从零基础到项目和求职的主线安排。
+- [具身智能路线图](./embodied-ai-roadmap)：理解本体、模型、控制、数据和行业方向。
+- [具身公司全景](./company-landscape)：用公司与产品形态判断学习重点。
 
-## 系统主线目录
+## 第一项目
 
-### 机器人运动学与 ROS2
+建议先从一个完整项目建立“机器人系统是怎么拼起来的”的整体感：
 
-- [机器人运动学与 ROS2 基础教程](/docs/foundations/robotics-and-ros2/intro)
-- [1. 系统导览与机器人系统全景](/docs/foundations/robotics-and-ros2/course_introduction)
-- [2. 运动学核心概念与坐标变换](/docs/foundations/robotics-and-ros2/kinematics_transform)
-- [3. 正运动学与逆运动学实现](/docs/foundations/robotics-and-ros2/fk_ik_implementation)
-- [4. ROS2 工程基础](/docs/foundations/robotics-and-ros2/ros2_engineering_basics)
-- [5. 话题通信 Topic](/docs/foundations/robotics-and-ros2/topics)
-- [6. 服务通信 Service 与动作 Action](/docs/foundations/robotics-and-ros2/services_actions)
-- [7. 参数系统与 Launch 文件](/docs/foundations/robotics-and-ros2/parameters_launch)
-- [8. tf2 坐标变换管理](/docs/foundations/robotics-and-ros2/tf2)
-- [9. URDF 机器人建模与 robot_state_publisher](/docs/foundations/robotics-and-ros2/urdf_and_rsp)
-- [10. MoveIt 2 基础与运动规划](/docs/foundations/robotics-and-ros2/moveit2_basics)
-- [11. MoveIt 2 仿真项目实战](/docs/foundations/robotics-and-ros2/moveit2_project)
-- [12. 课程总结与进阶方向](/docs/foundations/robotics-and-ros2/summary_and_next_steps)
+- [从0到1搭建四足机器人](/docs/practices/quadruped/cs123/intro)：用 MuJoCo 从单关节 PD 控制一路搭到四足机器人和语言控制 demo。
 
-### 仿真与可视化
+## 背景迁移
 
-- [仿真与可视化总览](/docs/foundations/simulation/intro)
-- [2. Isaac Sim 入门](/docs/foundations/simulation/isaac_sim)
-- [3. MuJoCo 快速上手](/docs/foundations/simulation/mujoco)
-- [4. Gymnasium 快速上手](/docs/foundations/simulation/gymnasium)
-- [5. PyBullet 快速上手](/docs/foundations/simulation/pybullet)
+- [哪些人适合转具身算法？](./algorithm-engineer-transition)：判断既有经验如何迁移到具身岗位。
+- [机器人学和 ROS2 怎么学？](./robotics-and-ros2-roadmap)：如果你缺机器人系统基础，从这里补工程主线。
 
-## 算法主线目录
+## 下一步
 
-### 强化学习
-
-- [强化学习基础总览](/docs/foundations/rl-for-robotics/intro)
-- [2. 马尔可夫决策过程](/docs/foundations/rl-for-robotics/mdp)
-- [3. 动态规划](/docs/foundations/rl-for-robotics/dynamic-programming)
-- [4. 蒙特卡洛方法](/docs/foundations/rl-for-robotics/monte-carlo)
-- [5. 时序差分方法](/docs/foundations/rl-for-robotics/temporal-difference)
-- [6. DQN 算法](/docs/foundations/rl-for-robotics/dqn)
-- [7. 策略梯度方法](/docs/foundations/rl-for-robotics/policy-gradient)
-- [8. Actor-Critic 算法](/docs/foundations/rl-for-robotics/actor-critic)
-- [9. DDPG 与 TD3 算法](/docs/foundations/rl-for-robotics/ddpg-td3)
-- [10. PPO 算法](/docs/foundations/rl-for-robotics/ppo)
-- [11. SAC 算法](/docs/foundations/rl-for-robotics/sac)
-- [12. 模仿学习](/docs/foundations/rl-for-robotics/imitation-learning)
-
-### 多模态大模型(VLM)
-
-- [VLM 基础总览](/docs/foundations/vlm/intro)
-
-### 视觉-语言-动作大模型(VLA)
-
-- [VLA 系列导读](/docs/foundations/vla/vla-intro)
-
-### 世界模型(World Model)
-
-- [世界模型(施工中)](/docs/foundations/world-model/placeholder)
-
-## 如何使用这页
-
-1. 先选择“系统主线”或“算法主线”。
-2. 再进入对应分组的总览页或具体章节。
-3. 学到项目阶段时，可以继续切换到“项目实战”区域。
+入门阶段不追求把所有理论补完。先走完学习路径和第一项目，再进入 [技能树进阶](/docs/foundations/intro) 按缺口补强化学习、控制、感知、仿真和数据工程。
