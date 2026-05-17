@@ -1,16 +1,16 @@
 # Lab 4：URDF 手术，给 Pupper 换条腿
 
-教程 [§4.5](/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 让原版 Pupper 第一次站住。那是起点，不是终点。你现在要主动改机器人本体：一只原版、一只 long-leg、一只 heavy，三只都要重新找 `stand_pose`，再扫一遍 `PD` 甜点。
+教程 [§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 让原版 Pupper 第一次站住。那是起点，不是终点。你现在要主动改机器人本体：一只原版、一只 long-leg、一只 heavy，三只都要重新找 `stand_pose`，再扫一遍 `PD` 甜点。
 
-这件事是教程 [§4.5](/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 站立脚本和 [§4.6](/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) `Kp/Kd` 对照的延伸：不再只是跑别人调好的 URDF，而是改完 MJCF 之后自己承担后果。Lab 5 的 trot 会继续用这三只 Pupper，它们会有完全不同的步频甜点。
+这件事是教程 [§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 站立脚本和 [§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) `Kp/Kd` 对照的延伸：不再只是跑别人调好的 URDF，而是改完 MJCF 之后自己承担后果。Lab 5 的 trot 会继续用这三只 Pupper，它们会有完全不同的步频甜点。
 
 ## 为什么是这件事
 
 | 候选任务 | 教程是否已覆盖 | 是否主动改机器人 | 作品价值 |
 |---|---|---|---|
-| 4-leg FK | 教程 [§4.1](/docs/practices/quadruped/cs123/quadruped-mjcf#41-pupper-结构) / [§4.5](/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 已覆盖结构与站姿 | 是 | 中，但不出片 |
-| 原版 Pupper 站立 | [§4.5](/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 已演示 | 否 | 重复 |
-| `Kp/Kd` 四格对照 | [§4.6](/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) 已演示 | 否 | 重复 |
+| 4-leg FK | 教程 [§4.1](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#41-pupper-结构) / [§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 已覆盖结构与站姿 | 是 | 中，但不出片 |
+| 原版 Pupper 站立 | [§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 已演示 | 否 | 重复 |
+| `Kp/Kd` 四格对照 | [§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) 已演示 | 否 | 重复 |
 | **URDF 手术：三只 Pupper 变体** | 没覆盖 | **是** | **heatmap + 三联静帧** |
 
 它赢在因果链清楚：改 `fromto` / `mass` 之后，原来的 `stand_pose` 和 `PD` 不再可靠。你必须把 URDF 五件套、站姿和控制器放在同一张桌上处理。
@@ -36,10 +36,10 @@
 
 ## 分步任务
 
-1. **任务 A · 变体 factory（30 min）**：从 `shared/models/skeleton.xml` 注入 default class，写出 `pupper_v3.xml`、`pupper_longleg.xml`、`pupper_heavy.xml`。（对应教程 [§4.2.3](/docs/practices/quadruped/cs123/quadruped-mjcf#423-加载-mesh) 的 `compiler` / `asset` / `mesh` 装配）
-2. **任务 B · stand_pose 求解（40 min）**：把单腿看成二维链，搜索 HFE/KFE，让 foot 回到合理站高。（对应教程 [§4.5](/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 的站立脚本）
-3. **任务 C · PD 甜点扫描（50 min）**：在 $K_p \in \{10,30,60,120\}$、$K_d \in \{0.5,1,2,5\}$ 上跑 6 秒，记录最后 1 秒 base z 标准差。（对应教程 [§4.6](/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) 的 `Kp/Kd` 崩坏模式）
-4. **任务 D · zoo 静帧（20 min）**：用每只 Pupper 的甜点 `PD` 跑到稳定后，渲染三只并排最终站姿。（对应教程 [§4.5](/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 的站立脚本，把 `launch_passive` 换成离屏 `Renderer`）
+1. **任务 A · 变体 factory（30 min）**：从 `shared/models/skeleton.xml` 注入 default class，写出 `pupper_v3.xml`、`pupper_longleg.xml`、`pupper_heavy.xml`。（对应教程 [§4.2.3](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#423-加载-mesh) 的 `compiler` / `asset` / `mesh` 装配）
+2. **任务 B · stand_pose 求解（40 min）**：把单腿看成二维链，搜索 HFE/KFE，让 foot 回到合理站高。（对应教程 [§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 的站立脚本）
+3. **任务 C · PD 甜点扫描（50 min）**：在 $K_p \in \{10,30,60,120\}$、$K_d \in \{0.5,1,2,5\}$ 上跑 6 秒，记录最后 1 秒 base z 标准差。（对应教程 [§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) 的 `Kp/Kd` 崩坏模式）
+4. **任务 D · zoo 静帧（20 min）**：用每只 Pupper 的甜点 `PD` 跑到稳定后，渲染三只并排最终站姿。（对应教程 [§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 的站立脚本，把 `launch_passive` 换成离屏 `Renderer`）
 5. **任务 E · base z 曲线（Stretch）**：把三条调好后的 base z 叠在一张图上，检查是否都稳。
 
 ## MuJoCo 场景
@@ -74,9 +74,9 @@
 
 ## 与教程的衔接
 
-- **复用**：教程 [§4.2](/docs/practices/quadruped/cs123/quadruped-mjcf#42-搭建-pupper-仿真模型) 五件套、[§4.2.3](/docs/practices/quadruped/cs123/quadruped-mjcf#423-加载-mesh) `compiler` / `asset`、[§4.5](/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 站立脚本、[§4.6](/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) `Kp/Kd` 对照。
+- **复用**：教程 [§4.2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#42-搭建-pupper-仿真模型) 五件套、[§4.2.3](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#423-加载-mesh) `compiler` / `asset`、[§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 站立脚本、[§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) `Kp/Kd` 对照。
 - **扩展**：把“读别人的 URDF”变成“改 URDF 后还要负责把它调回能用的状态”。
-- **不重复**：不做 4-leg FK；不重复原版 Pupper 站立；不重画教程 [§4.6](/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) 那张 4 行 PD 表，本 Lab 自己跑 16 格 heatmap。
+- **不重复**：不做 4-leg FK；不重复原版 Pupper 站立；不重画教程 [§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) 那张 4 行 PD 表，本 Lab 自己跑 16 格 heatmap。
 
 ## 运行
 

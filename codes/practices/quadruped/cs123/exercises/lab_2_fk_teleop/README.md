@@ -1,8 +1,8 @@
 # Lab 2：Pupper 单腿混合轴 FK——拖一拖就动
 
-教程 [§2.6](/docs/practices/quadruped/cs123/forward-kinematics#26-平面-3-dof-手推) / [§2.7](/docs/practices/quadruped/cs123/forward-kinematics#27-numpy-与-mujoco) 里练的是 3-DoF **平面**臂：三个关节轴都是 $z$ 轴，链式乘法最干净。真实 Pupper 单腿也是 3-DoF，但语义上是混合轴：`HAA` 绕 $x$，`HFE` / `KFE` 绕 $y$。MJCF 是从 URDF 自动导出的，把这件事编码成了"局部 hinge `axis="0 0 1"` + 父 body 一个固定四元数"，所以你写 FK 时实际乘的还是 `rot_z`，混合轴信息全部塞在我们提前算好的 `T_*_FIXED` 矩阵里。
+教程 [§2.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/forward-kinematics#26-平面-3-dof-手推) / [§2.7](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/forward-kinematics#27-numpy-与-mujoco) 里练的是 3-DoF **平面**臂：三个关节轴都是 $z$ 轴，链式乘法最干净。真实 Pupper 单腿也是 3-DoF，但语义上是混合轴：`HAA` 绕 $x$，`HFE` / `KFE` 绕 $y$。MJCF 是从 URDF 自动导出的，把这件事编码成了"局部 hinge `axis="0 0 1"` + 父 body 一个固定四元数"，所以你写 FK 时实际乘的还是 `rot_z`，混合轴信息全部塞在我们提前算好的 `T_*_FIXED` 矩阵里。
 
-本 Lab 把 [§2](/docs/practices/quadruped/cs123/forward-kinematics) 的平面 FK 搬到 Pupper 真腿上：照着 MJCF 的 body 树写四段 `T_parent_child`，用三条滑杆拖动关节，再像教程 [§2.10](/docs/practices/quadruped/cs123/forward-kinematics#210-末端叠加可视化) 一样把自写 FK 算出的红球叠到 viewer 里。红球贴着 foot site，说明你的乘法顺序和那几个固定四元数都没读反。
+本 Lab 把 [§2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/forward-kinematics) 的平面 FK 搬到 Pupper 真腿上：照着 MJCF 的 body 树写四段 `T_parent_child`，用三条滑杆拖动关节，再像教程 [§2.10](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/forward-kinematics#210-末端叠加可视化) 一样把自写 FK 算出的红球叠到 viewer 里。红球贴着 foot site，说明你的乘法顺序和那几个固定四元数都没读反。
 
 ## 为什么是这件事
 
@@ -10,7 +10,7 @@
 |---|---|---|---|
 | ROS2 topic + RViz（原 Lab 2） | 需 ROS，不行 | 中 | RViz 截图 |
 | **Pupper 单腿 FK + MuJoCo 滑杆遥操作** | 可以 | **高** | **GIF + workspace 散点** |
-| 加 IK（提前做 [§3](/docs/practices/quadruped/cs123/inverse-kinematics) 内容） | 可以 | 高 | 但重复 [§3](/docs/practices/quadruped/cs123/inverse-kinematics) |
+| 加 IK（提前做 [§3](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/inverse-kinematics) 内容） | 可以 | 高 | 但重复 [§3](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/inverse-kinematics) |
 
 滑杆遥操作赢在代码少、反馈快。Lab 1 已经把 Pupper 单腿画出来了，只是 `HAA` 和 `KFE` 被 `<equality>` 锁住；这里删掉那一块，三关节就变成可动的 FK 链。你第一次会真切看到：轴向或乘法顺序错一点，红球马上飞走。
 
@@ -35,10 +35,10 @@
 ## 分步任务
 
 1. **任务 A · 解锁单腿（10 min）**：从 Lab 1 的 `scene.xml` 起步，删掉 `<equality>` 整块；三路 motor 已在 `shared/models/leg.xml` 里，跑 `mj_forward` 确认 `HAA/HFE/KFE` 都能动。
-2. **任务 B · 写 FK chain（40 min）**：按父子链写 `T_world_HAA`、`T_HAA_HFE`、`T_HFE_KFE`、`T_KFE_foot`，连乘后读第 4 列前三行。（对应教程 [§2.6](/docs/practices/quadruped/cs123/forward-kinematics#26-平面-3-dof-手推)）
-3. **任务 C · 对齐 MuJoCo（20 min）**：随机 100 组关节角，用 `mj_forward` 作为真值，要求 `max_err < 1e-10`。（对应教程 [§2.7](/docs/practices/quadruped/cs123/forward-kinematics#27-numpy-与-mujoco)）
-4. **任务 D · 滑杆遥操作（30 min）**：`mujoco.viewer.launch_passive` 跑 viewer，tkinter 线程读三条滑杆，主线程更新 `data.qpos` 并叠红球。（对应教程 [§2.10](/docs/practices/quadruped/cs123/forward-kinematics#210-末端叠加可视化)）
-5. **任务 E · 工作空间葫芦（20 min）**：Monte Carlo 采样 20000 组关节角，画出 3D foot 点云；它是教程 [§2.9](/docs/practices/quadruped/cs123/forward-kinematics#29-工作空间散点) 平面甜甜圈的 Pupper 版。
+2. **任务 B · 写 FK chain（40 min）**：按父子链写 `T_world_HAA`、`T_HAA_HFE`、`T_HFE_KFE`、`T_KFE_foot`，连乘后读第 4 列前三行。（对应教程 [§2.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/forward-kinematics#26-平面-3-dof-手推)）
+3. **任务 C · 对齐 MuJoCo（20 min）**：随机 100 组关节角，用 `mj_forward` 作为真值，要求 `max_err < 1e-10`。（对应教程 [§2.7](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/forward-kinematics#27-numpy-与-mujoco)）
+4. **任务 D · 滑杆遥操作（30 min）**：`mujoco.viewer.launch_passive` 跑 viewer，tkinter 线程读三条滑杆，主线程更新 `data.qpos` 并叠红球。（对应教程 [§2.10](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/forward-kinematics#210-末端叠加可视化)）
+5. **任务 E · 工作空间葫芦（20 min）**：Monte Carlo 采样 20000 组关节角，画出 3D foot 点云；它是教程 [§2.9](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/forward-kinematics#29-工作空间散点) 平面甜甜圈的 Pupper 版。
 
 ## MuJoCo 场景
 
@@ -75,7 +75,7 @@
 
 ## 与教程的衔接
 
-- **复用**：Lab 1 的 `scene.xml` 骨架；教程 [§2.7](/docs/practices/quadruped/cs123/forward-kinematics#27-numpy-与-mujoco) 的 `rot_*` / `trans` 小工具、[§2.9](/docs/practices/quadruped/cs123/forward-kinematics#29-工作空间散点) 的 Monte Carlo 散点、[§2.10](/docs/practices/quadruped/cs123/forward-kinematics#210-末端叠加可视化) 的 viewer 叠加红球。
+- **复用**：Lab 1 的 `scene.xml` 骨架；教程 [§2.7](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/forward-kinematics#27-numpy-与-mujoco) 的 `rot_*` / `trans` 小工具、[§2.9](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/forward-kinematics#29-工作空间散点) 的 Monte Carlo 散点、[§2.10](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/forward-kinematics#210-末端叠加可视化) 的 viewer 叠加红球。
 - **扩展**：第一次处理混合轴；第一次把 FK 接到交互式 UI；第一次把一条 Pupper 腿的三个关节都解锁出来。
 - **不重复**：教程的平面 3-DoF 练习作为前置作业，本 Lab 不再复刻。
 

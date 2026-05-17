@@ -1,6 +1,6 @@
 # Lab 1：Pupper 腿踢脚——HFE 正弦追踪
 
-教程 [§1.6.2](/docs/practices/quadruped/cs123/pid-control#162-单摆-pd) 让一根抽象单摆稳到一个固定角度，[§1.6.4](/docs/practices/quadruped/cs123/pid-control#164-实验扰动误差) 又加了一个常值外扰。两件事在脑子里都讲清楚了，但你手里还没"自己的狗"。
+教程 [§1.6.2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#162-单摆-pd) 让一根抽象单摆稳到一个固定角度，[§1.6.4](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#164-实验扰动误差) 又加了一个常值外扰。两件事在脑子里都讲清楚了，但你手里还没"自己的狗"。
 
 本 Lab 把单摆换成 **Pupper 真腿的 HFE 关节**——`HAA` 和 `KFE` 用 `<equality>` 锁在 0，整条 thigh + calf 以 HFE 为支点，像人抬腿一样前后摆。再把"稳到固定角度"换成"追一条 $q_d(t) = 0.3\sin(2\pi f t)$ 的正弦线"。扫七个频率，你会亲手画出这条 PD 回路的 Bode 图——不靠 `scipy.signal`，全靠仿真数据。
 
@@ -8,11 +8,11 @@
 
 | 候选任务 | 教程已覆盖？ | 出片程度 | 留下的产物 |
 |---|---|---|---|
-| Bang-bang 对比 P | [§1.2](/docs/practices/quadruped/cs123/pid-control#12-控制系统) 讲了，没做实验 | 低 | 一段抖动视频 |
-| 加采样延迟 | [§1.1.2](/docs/practices/quadruped/cs123/pid-control#112-执行器分类) 讲了 gap，没做实验 | 中 | 延迟 → 欠阻尼曲线 |
+| Bang-bang 对比 P | [§1.2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#12-控制系统) 讲了，没做实验 | 低 | 一段抖动视频 |
+| 加采样延迟 | [§1.1.2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#112-执行器分类) 讲了 gap，没做实验 | 中 | 延迟 → 欠阻尼曲线 |
 | **正弦追踪 + Bode 图** | 完全没做 | 高 | **2 段 GIF + 1 张图** |
 
-正弦追踪赢在三件事：视觉最直观（红色目标 / 蓝色实际两条线同屏动）、图表最经典（学生第一次亲手画 Bode）、直接铺垫 [§3](/docs/practices/quadruped/cs123/inverse-kinematics)/[§5](/docs/practices/quadruped/cs123/gait-control)（画圆和踏步本质都是"跟踪一条时变轨迹"，正弦是最简形式）。
+正弦追踪赢在三件事：视觉最直观（红色目标 / 蓝色实际两条线同屏动）、图表最经典（学生第一次亲手画 Bode）、直接铺垫 [§3](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/inverse-kinematics)/[§5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/gait-control)（画圆和踏步本质都是"跟踪一条时变轨迹"，正弦是最简形式）。
 
 ## 你交什么
 
@@ -36,8 +36,8 @@
 
 ## 分步任务
 
-1. **任务 A · 常值目标（20 min）**：先跑 `q_des = 0.3`，PD 把 HFE 稳到约 17°，确认控制器活着——对应教程 [§1.6.2](/docs/practices/quadruped/cs123/pid-control#162-单摆-pd) 的直觉。
-2. **任务 B · 反射惯量 + 自动调 $K_d$（20 min）**：徒手 $mL^2/3$ 不准，混合连杆组合公式不干净；用 `mj_fullM` 读，再代二阶系统经验公式（[§1.5.4](/docs/practices/quadruped/cs123/pid-control#154-pd-调参)）。
+1. **任务 A · 常值目标（20 min）**：先跑 `q_des = 0.3`，PD 把 HFE 稳到约 17°，确认控制器活着——对应教程 [§1.6.2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#162-单摆-pd) 的直觉。
+2. **任务 B · 反射惯量 + 自动调 $K_d$（20 min）**：徒手 $mL^2/3$ 不准，混合连杆组合公式不干净；用 `mj_fullM` 读，再代二阶系统经验公式（[§1.5.4](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#154-pd-调参)）。
 3. **任务 C · 低频正弦 GIF（30 min）**：把目标换成 $q_d(t) = 0.3\sin(2\pi f t)$，用 0.3 Hz 跑 12 秒导出作品集 GIF；0.5 Hz 仍会在任务 D 的 Bode 扫频里测到。
 4. **任务 D · 扫频 + Bode（40 min）**：固定 $K_p$，在 $f \in \{0.2, 0.5, 1, 2, 3, 5, 8\}$ Hz 各跑 5 秒，记录稳态幅值和相位差。横轴 $\log f$，左纵轴 $20\log_{10}(A_\text{out}/A_\text{in})$，右纵轴 $\Delta\phi$，标出 −3 dB 带宽。
 5. **任务 E · 刚度对比（Stretch，20 min）**：$K_p \in \{K_p^*,\ 2K_p^*,\ 5K_p^*\}$ 三组叠到同一张图——刚度越高带宽越高，但更容易振荡。`starter.py` 里只留了 TODO 注释，不强制完成。
@@ -74,12 +74,12 @@ Lab 2 的升级路径很简单：**删掉这块 `<equality>`** 就解锁成 3 Do
 
 ## 与教程的衔接
 
-- **复用**：[§1.6.2](/docs/practices/quadruped/cs123/pid-control#162-单摆-pd) 的脚本骨架、[§1.5.4](/docs/practices/quadruped/cs123/pid-control#154-pd-调参) 的 $\omega_n / \zeta$ 公式
+- **复用**：[§1.6.2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#162-单摆-pd) 的脚本骨架、[§1.5.4](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#154-pd-调参) 的 $\omega_n / \zeta$ 公式
 - **扩展**：
-  - [§1.1.3](/docs/practices/quadruped/cs123/pid-control#113-齿轮箱) 引入了"反射惯量"概念——本 Lab 第一次用 `mj_fullM` 把它读出来
-  - 教程只做 step response（[§1.6.2](/docs/practices/quadruped/cs123/pid-control#162-单摆-pd) / [§1.6.3](/docs/practices/quadruped/cs123/pid-control#163-实验增益响应)）；本 Lab 第一次做 frequency response
+  - [§1.1.3](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#113-齿轮箱) 引入了"反射惯量"概念——本 Lab 第一次用 `mj_fullM` 把它读出来
+  - 教程只做 step response（[§1.6.2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#162-单摆-pd) / [§1.6.3](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#163-实验增益响应)）；本 Lab 第一次做 frequency response
   - 教程用抽象 `pendulum.xml`；本 Lab 第一次把 PD 接到 Pupper 真腿
-- **不重复**：[§1.6.3](/docs/practices/quadruped/cs123/pid-control#163-实验增益响应) 的 $K_p / K_d$ 三组对照、[§1.6.4](/docs/practices/quadruped/cs123/pid-control#164-实验扰动误差) 的稳态误差实验，作为本 Lab 的前置练习，不再重做
+- **不重复**：[§1.6.3](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#163-实验增益响应) 的 $K_p / K_d$ 三组对照、[§1.6.4](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/pid-control#164-实验扰动误差) 的稳态误差实验，作为本 Lab 的前置练习，不再重做
 
 ## 运行
 

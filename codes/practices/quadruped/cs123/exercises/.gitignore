@@ -11,3 +11,4 @@ shared/rl/policies/*.json
 .venv/
 __pycache__/
 *.pyc
+.DS_Store
