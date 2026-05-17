@@ -59,7 +59,9 @@ displayed_sidebar: foundationsControllersSidebar
 常见闭环形式可以写成：
 
 $$
+\begin{equation}\label{eq:controllers-loop-law}
 u_t = f(x_t, x_t^\*, \dot{x}_t^\*, \theta)
+\end{equation}
 $$
 
 其中 $x_t$ 是当前状态，$x_t^\*$ 是目标状态，$u_t$ 是控制输入，$\theta$ 是控制器参数。不同控制器的区别，主要在于函数 $f$ 怎么设计。
