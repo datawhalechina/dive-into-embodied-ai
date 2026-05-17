@@ -71,6 +71,12 @@ const config: Config = {
       },
       items: [
         {
+          to: '/',
+          label: '首页',
+          position: 'left',
+          className: 'navbar-center-start',
+        },
+        {
           type: 'custom-navbarMegaMenu',
           menuId: 'overview',
           position: 'left',

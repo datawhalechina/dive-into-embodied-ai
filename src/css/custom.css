@@ -67,6 +67,14 @@ body {
   background: rgba(2, 6, 23, 0.82);
 }
 
+.navbar .navbar-center-start.navbar__link--active {
+  color: var(--ifm-navbar-link-color) !important;
+}
+
+.navbar .navbar-center-start.navbar__link--active:hover {
+  color: var(--ifm-navbar-link-hover-color) !important;
+}
+
 .header-github-link::before {
   content: '';
   width: 24px;

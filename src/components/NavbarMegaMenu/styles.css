@@ -3,15 +3,15 @@
   padding: 0;
 }
 
-/* Push the mega-menu group to the horizontal center of the navbar.
+/* Push the main navigation group to the horizontal center of the navbar.
  * The first .navbar__items wraps the brand + all left-position items;
- * giving auto margins to the first/last navbar-mega centers the group
+ * giving auto margins to the first/last centered item centers the group
  * while keeping the brand pinned at the very left. */
 .navbar__inner > .navbar__items:first-child {
   flex: 1;
 }
 
-.navbar__inner > .navbar__items:first-child .navbar-mega:first-of-type {
+.navbar__inner > .navbar__items:first-child .navbar-center-start {
   margin-left: auto;
 }
 
