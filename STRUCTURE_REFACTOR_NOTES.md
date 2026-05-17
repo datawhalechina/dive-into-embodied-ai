@@ -7,14 +7,14 @@
 当前教程从旧的「总览 + 基础篇 + 实践篇 + 求职篇」重构为四个一级入口：
 
 1. 零基础入门
-2. 技能树进阶
+2. 理论技能树
 3. 项目实战
 4. 求职面试
 
 顶部导航当前应显示为：
 
 ```text
-首页 / 零基础入门 / 技能树进阶 / 项目实战 / 求职面试
+首页 / 零基础入门 / 项目实战 / 求职面试 / 理论技能树
 ```
 
 ## 已提交 checkpoint
@@ -32,7 +32,7 @@
 - 首页四个入口卡片：`src/components/HomepageFeatures/index.tsx`
 - 文档侧边栏：`sidebars.ts`
 - 零基础入门概述：`docs/overview/intro.md`
-- 技能树进阶概述：`docs/foundations/intro.md`
+- 理论技能树概述：`docs/foundations/intro.md`
 - 项目实战概述：`docs/practices/intro.md`
 - 求职面试概述：`docs/career/intro.md`
 
@@ -47,7 +47,7 @@
 
 已从下拉、`overviewSidebar`、`docs/overview/intro.md` 中移除其他入口。旧内容文件暂时保留，避免历史链接断。
 
-### 技能树进阶
+### 理论技能树
 
 当前下拉拆成 4 列：
 
@@ -56,7 +56,7 @@
 - `感知系统`
 - `工程底座`
 
-用户明确要求：感知和仿真要单独分类出来。
+当前要求：导航顺序为零基础入门、项目实战、求职面试、理论技能树；仿真并入工程底座。
 
 技能树概述页和侧边栏也已同步：
 
@@ -91,14 +91,14 @@
 
 除 `.claude/worktrees/` 外，当前未提交结构变更主要是：
 
-- `README.md` 已按当前「零基础入门 + 技能树进阶 + 项目实战 + 求职面试」结构更新
+- `README.md` 已按当前「零基础入门 + 项目实战 + 求职面试 + 理论技能树」结构更新
 - `docs/career/transition-paths/*` 三篇长文改为兼容入口页，指向 `docs/overview/*` 主版本
 - 删除 `docs/career/transition-paths/figs/*` 下重复图片资源
 - `sidebars.ts` 移除 `careerTransitionPathsSidebar`
 - `docs/overview/intro.md` 收窄为零基础入门两个入口
 - `src/components/NavbarMegaMenu/data.ts`：
   - 零基础入门只保留两个卡片
-  - 技能树进阶保留感知系统，并将仿真、ROS2、通信、硬件和数据合并为工程底座
+  - 理论技能树保留感知系统，并将仿真、ROS2、通信、硬件和数据合并为工程底座
   - 求职面试只保留三项核心准备
 - `docs/foundations/intro.md` 同步技能树说明
 - `src/components/HomepageFeatures/index.tsx` 同步求职面试卡片描述

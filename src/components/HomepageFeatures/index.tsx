@@ -23,14 +23,6 @@ const FeatureList: FeatureItem[] = [
     accent: 'cyan',
   },
   {
-    title: '技能树进阶',
-    description: '按智能决策、运动控制、感知系统、基础设施与数据工程补齐能力。',
-    link: '/docs/foundations/intro',
-    eyebrow: 'Skill tree',
-    icon: BrainCircuit,
-    accent: 'blue',
-  },
-  {
     title: '项目实战',
     description: '机械臂、四足、人形、移动操作四类可展示项目。',
     link: '/docs/practices/intro',
@@ -45,6 +37,14 @@ const FeatureList: FeatureItem[] = [
     eyebrow: 'Career loop',
     icon: BriefcaseBusiness,
     accent: 'amber',
+  },
+  {
+    title: '理论技能树',
+    description: '按智能决策、运动控制、感知系统和工程底座补齐能力。',
+    link: '/docs/foundations/intro',
+    eyebrow: 'Skill tree',
+    icon: BrainCircuit,
+    accent: 'blue',
   },
 ];
 
@@ -72,7 +72,7 @@ export default function HomepageFeatures(): React.JSX.Element {
       <div className="container">
         <div className={styles.sectionHeading}>
           <p>LEARNING MAP</p>
-          <h2>四个阶段，围绕入门、进阶、项目和求职持续生长</h2>
+          <h2>四个阶段，围绕入门、项目、求职和理论补齐持续生长</h2>
         </div>
         <div className="row">
           {FeatureList.map((props, idx) => (

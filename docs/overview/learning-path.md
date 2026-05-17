@@ -15,7 +15,7 @@ sidebar_position: 3
 - [按模块学习：机器人学和 ROS2 怎么学？](/docs/overview/robotics-and-ros2-roadmap)
 - [按背景选择：哪些人适合转具身算法？](/docs/overview/algorithm-engineer-transition)
 - [零基础入门概述](/docs/overview/intro)
-- [技能树进阶](/docs/foundations/intro)
+- [理论技能树](/docs/foundations/intro)
 - [项目实战](/docs/practices/intro)
 
 ---

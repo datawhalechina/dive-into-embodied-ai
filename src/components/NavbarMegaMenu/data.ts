@@ -71,7 +71,7 @@ export const megaMenus: MegaMenuConfig[] = [
   },
   {
     id: 'foundations',
-    label: '技能树进阶',
+    label: '理论技能树',
     activeBasePaths: ['/docs/foundations'],
     panelWidth: 1120,
     columns: [
@@ -152,7 +152,7 @@ export const megaMenus: MegaMenuConfig[] = [
         items: [
           {
             icon: '🧪',
-            title: '仿真工具基础',
+            title: '仿真工具',
             description: 'MuJoCo / Isaac Sim / Gymnasium / PyBullet 快速上手。',
             to: '/docs/foundations/simulation/intro',
             activeBasePath: '/docs/foundations/simulation',
@@ -195,8 +195,8 @@ export const megaMenus: MegaMenuConfig[] = [
       },
     ],
     footer: {
-      text: '先用技能树定位缺口，再进入对应专题。',
-      ctaLabel: '查看技能树进阶',
+      text: '先用理论技能树定位缺口，再进入对应专题。',
+      ctaLabel: '查看理论技能树',
       to: '/docs/foundations/intro',
     },
   },
