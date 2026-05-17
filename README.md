@@ -97,12 +97,6 @@
 | [模仿学习](docs/foundations/rl-for-robotics/12.imitation-learning.md) | BC、DAgger、IRL 等从示教数据学习策略的方法 | ✅ 可用 |
 | [LeRobot 中文课程讲义](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | 机器人学习与 LeRobot 工具链主线 | ✅ 可用 |
 
-### 反射系统：安全防护
-
-| 章节 | 简介 | 状态 |
-| :--- | :--- | :--- |
-| [安全防护](docs/foundations/safety/placeholder.md) | 限位、急停、碰撞检测和实机部署检查 | 🚧 占位中 |
-
 ## 项目实战
 
 | 章节 | 简介 | 状态 |

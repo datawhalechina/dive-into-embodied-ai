@@ -83,14 +83,6 @@ const sidebars: SidebarsConfig = {
         { type: 'link', label: 'LeRobot 开源课程', href: '/docs/practices/robot-arm/data-collection/lerobot-course' },
       ],
     },
-    {
-      type: 'category',
-      label: '反射系统：安全防护',
-      collapsed: false,
-      items: [
-        { type: 'link', label: '安全防护', href: '/docs/foundations/safety/placeholder' },
-      ],
-    },
   ],
 
   foundationsEmbodiedAiIntroSidebar: [

@@ -161,7 +161,7 @@ export const megaMenus: MegaMenuConfig[] = [
         ],
       },
       {
-        title: '神经 / 硬件 / 数据 / 安全',
+        title: '神经 / 硬件 / 数据',
         items: [
           {
             icon: '🦾',
@@ -195,14 +195,6 @@ export const megaMenus: MegaMenuConfig[] = [
             to: '/docs/foundations/rl-for-robotics/imitation-learning',
             activeBasePath: '/docs/foundations/rl-for-robotics',
             keywords: ['数据', 'Imitation'],
-          },
-          {
-            icon: '🛡️',
-            title: '安全防护',
-            description: '限位、急停、碰撞检测和实机部署检查。',
-            to: '/docs/foundations/safety/placeholder',
-            activeBasePath: '/docs/foundations/safety',
-            keywords: ['安全', '真机'],
           },
         ],
       },
