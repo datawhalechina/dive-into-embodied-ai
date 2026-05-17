@@ -41,7 +41,7 @@
 
 ## 技能树进阶
 
-技能树进阶按机器人系统能力拆分。当前优先把已有内容并入技能树,空缺模块先保留占位。
+技能树进阶按当前导航的五列组织:大脑、小脑、感知系统、仿真环境、神经 / 硬件 / 数据。当前优先把已有内容并入技能树,空缺模块先保留占位。
 
 ### 大脑：智能决策
 
@@ -55,8 +55,6 @@
 
 | 章节 | 简介 | 状态 |
 | :--- | :--- | :--- |
-| [机器人运动学与 ROS2 基础](docs/foundations/robotics-and-ros2/0.intro.md) | 坐标变换、正/逆运动学、ROS2 工程、tf2、URDF、MoveIt 2 | ✅ 可用 |
-| [控制器](docs/practices/quadruped/cs123/1.pid-control.mdx) | PID / MPC / Impedance Control / Whole-body Control 等控制基础 | 🚧 部分可用 |
 | [强化学习控制](docs/foundations/rl-for-robotics/10.ppo.md) | 把策略学习接到连续控制和机器人任务上 | ✅ 可用 |
 | [运动规划](docs/foundations/robotics-and-ros2/10.moveit2_basics.md) | Motion Planning 与 MoveIt 2 规划闭环 | ✅ 可用 |
 
@@ -77,25 +75,14 @@
 | :--- | :--- | :--- |
 | [仿真工具基础](docs/foundations/simulation/1.intro.md) | Isaac Sim、MuJoCo、Gymnasium、PyBullet 快速上手 | ✅ 可用 |
 
-### 神经系统：基础设施与通信
+### 神经 / 硬件 / 数据
 
 | 章节 | 简介 | 状态 |
 | :--- | :--- | :--- |
-| [ROS2 工程基础](docs/foundations/robotics-and-ros2/4.ros2_engineering_basics.md) | 工作空间、功能包、节点组织和系统通信 | ✅ 可用 |
+| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) | 坐标变换、FK/IK、tf2、URDF 与 MoveIt 2 | ✅ 可用 |
 | [CAN 与 MCU 通信](docs/foundations/communication/can-mcu.md) | 底层通信、执行器协议和上下位机链路 | 🚧 占位中 |
-
-### 骨骼肌肉：硬件结构
-
-| 章节 | 简介 | 状态 |
-| :--- | :--- | :--- |
 | [机械结构](docs/foundations/hardware/placeholder.md) | 连杆、关节、电机、减速器和末端执行器 | 🚧 占位中 |
-
-### 消化与造血：数据工程
-
-| 章节 | 简介 | 状态 |
-| :--- | :--- | :--- |
-| [模仿学习](docs/foundations/rl-for-robotics/12.imitation-learning.md) | BC、DAgger、IRL 等从示教数据学习策略的方法 | ✅ 可用 |
-| [LeRobot 中文课程讲义](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | 机器人学习与 LeRobot 工具链主线 | ✅ 可用 |
+| [数据工程与模仿学习](docs/foundations/rl-for-robotics/12.imitation-learning.md) | 从遥操作数据到模仿学习、LeRobot 工具链和策略训练 | ✅ 可用 |
 
 ## 项目实战
 

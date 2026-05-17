@@ -63,7 +63,7 @@
 
 - 感知：`docs/foundations/vlm/intro`、`docs/foundations/perception/placeholder`
 - 仿真：`docs/foundations/simulation/intro`
-- 神经系统：ROS2 工程基础、CAN 与 MCU 通信
+- 神经系统：ROS2、CAN 与 MCU 通信
 - 硬件：机械结构
 - 数据：模仿学习、LeRobot
 
