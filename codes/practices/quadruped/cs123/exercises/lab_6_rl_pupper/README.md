@@ -26,7 +26,7 @@
 
 ## 起点与 TODO map
 
-教师版 `starter.py` 已经写好 PPO 配置、训练循环、渲染管线和画图。学生只补 `envs/pupper_env.py` 里三处 TODO。
+当前仓库保留教师版 `envs/pupper_env.py` 和 `starter.py`，方便直接运行测试与生成素材。学生练习版只需要补环境里的三处 TODO；对应提示保留在 `starter_todo.py` 的 TODO 1–3。
 
 | TODO | task | what to write |
 |---|---|---|
@@ -45,7 +45,7 @@
 
 ## MuJoCo scene
 
-复用 Lab 4 / Lab 5 验证过的 `lab4/models/pupper_v3_floating.xml`（浮基 + 棋盘地板 + skybox + spotlight + tracking_cam）。不另起 MJCF。
+复用 Lab 4 / Lab 5 验证过的 `shared/models/pupper_v3_floating.xml`（浮基 + 棋盘地板 + skybox + spotlight + tracking_cam）。不另起 MJCF。
 
 ## Rubric
 
@@ -92,5 +92,5 @@ bash shared/rl/fetch_policies.sh                   # 下载 test_policy.json 到
 uv run python lab_6_rl_pupper/tests.py             # 4 条断言
 uv run python lab_6_rl_pupper/train_ppo.py         # 30–60 min CPU 训练
 uv run python lab_6_rl_pupper/eval_commands.py     # 加载 ckpt 录 GIF + 画图
-uv run python lab_6_rl_pupper/make_artifacts.py    # 一键串
+uv run python lab_6_rl_pupper/make_artifacts.py    # 一键串起训练、GIF、对比图和曲线
 ```

@@ -154,10 +154,7 @@ class PupperEnv(gym.Env):
         gravity = base_local_gravity(self.model, self.data, self._base_id)
         qpos = self.data.qpos[self._joint_qpos_ids].copy()
         qvel = self.data.qvel[self._joint_qvel_ids].copy()
-        foot_contact = np.array([
-            1.0 if self.data.cfrc_ext[bid, 2] > 0.5 else 0.0
-            for bid in self._foot_body_ids
-        ], dtype=np.float32)
+        foot_contact = foot_contact_indicator(self.model, self.data, self._foot_body_ids)
         obs = np.concatenate([
             base_omega,
             gravity,

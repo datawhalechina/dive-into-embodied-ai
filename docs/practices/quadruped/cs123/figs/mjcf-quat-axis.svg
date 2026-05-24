@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 620" role="img" aria-labelledby="title desc">
+  <title id="title">MJCF quat 与 joint axis 的关系</title>
+  <desc id="desc">左侧展示父坐标系中的 body 安装点，右侧展示 body 的 quat 先旋转局部坐标系，joint axis 等于零零一时实际沿旋转后的局部 z 轴转动。</desc>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ea580c"/>
+    </marker>
+    <style>
+      .panel { fill: #fff; stroke: #d8e1ec; stroke-width: 1.5; }
+      .soft { fill: #f8fafc; stroke: #d8e1ec; stroke-width: 1.4; }
+      .title { font: 700 24px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .section { font: 700 17px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .label { font: 15px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #334155; }
+      .small { font: 13px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; }
+      .code { font: 14px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #0f172a; }
+      .axis-x { stroke: #2563eb; stroke-width: 4; marker-end: url(#arrow-blue); fill: none; }
+      .axis-y { stroke: #16a34a; stroke-width: 4; marker-end: url(#arrow-green); fill: none; }
+      .axis-z { stroke: #dc2626; stroke-width: 4; marker-end: url(#arrow-red); fill: none; }
+      .axis-faint { stroke: #94a3b8; stroke-width: 2.4; stroke-dasharray: 8 7; marker-end: url(#arrow-slate); fill: none; }
+      .body { fill: #e0f2fe; stroke: #0284c7; stroke-width: 2.4; }
+      .joint { fill: #fff7ed; stroke: #ea580c; stroke-width: 2.4; }
+      .turn { stroke: #ea580c; stroke-width: 4; marker-end: url(#arrow-orange); fill: none; }
+      .brace { stroke: #94a3b8; stroke-width: 2; fill: none; }
+    </style>
+  </defs>
+
+  <rect x="24" y="24" width="1072" height="572" rx="18" class="panel"/>
+  <text x="56" y="68" class="title">quat 先摆 body 坐标系，axis 再在这个坐标系里取方向</text>
+
+  <rect x="58" y="102" width="458" height="406" rx="14" class="soft"/>
+  <rect x="604" y="102" width="458" height="406" rx="14" class="soft"/>
+
+  <text x="86" y="142" class="section">1. pos 只是在父坐标系里找安装点</text>
+  <text x="632" y="142" class="section">2. quat 把局部坐标系先转过去</text>
+
+  <!-- Left panel: parent frame and body mount -->
+  <g transform="translate(150 405)">
+    <path d="M0 0 H250" class="axis-x"/>
+    <path d="M0 0 L0 -210" class="axis-z"/>
+    <path d="M0 0 L-82 72" class="axis-y"/>
+    <text x="258" y="6" class="label">父 X</text>
+    <text x="8" y="-218" class="label">父 Z</text>
+    <text x="-122" y="92" class="label">父 Y</text>
+
+    <path d="M0 0 L178 -72" class="brace"/>
+    <circle cx="178" cy="-72" r="8" fill="#0f172a"/>
+    <rect x="146" y="-112" width="95" height="60" rx="8" class="body"/>
+    <circle cx="178" cy="-72" r="24" class="joint"/>
+    <text x="146" y="-128" class="code">pos=&quot;0.075 -0.0835 0&quot;</text>
+    <text x="146" y="-18" class="small">这里只决定髋部挂在机身哪里</text>
+  </g>
+
+  <!-- Right panel: local frame rotation -->
+  <g transform="translate(760 355)">
+    <circle cx="0" cy="0" r="32" class="joint"/>
+    <rect x="-58" y="-38" width="116" height="76" rx="9" class="body"/>
+    <text x="-43" y="7" class="code">body</text>
+
+    <!-- faint before axes -->
+    <path d="M0 0 H140" class="axis-faint"/>
+    <path d="M0 0 L0 -130" class="axis-faint"/>
+    <path d="M0 0 L-90 64" class="axis-faint"/>
+    <text x="148" y="5" class="small">原局部 x</text>
+    <text x="8" y="-136" class="small">原局部 z</text>
+    <text x="-135" y="82" class="small">原局部 y</text>
+
+    <!-- rotated axes for q around x -->
+    <path d="M0 0 H150" class="axis-x"/>
+    <path d="M0 0 L0 -145" class="axis-y"/>
+    <path d="M0 0 L0 145" class="axis-z"/>
+    <text x="158" y="6" class="label">局部 x</text>
+    <text x="10" y="-154" class="label">局部 y</text>
+    <text x="10" y="160" class="label">局部 z = joint axis</text>
+
+    <path d="M-72 -78 C-118 -34 -119 48 -72 88" class="turn"/>
+    <text x="-204" y="-18" class="label">绕 X 约 90°</text>
+  </g>
+
+  <rect x="172" y="525" width="780" height="44" rx="9" fill="#f8fafc" stroke="#d8e1ec" stroke-width="1.3"/>
+  <text x="196" y="552" class="code">quat=&quot;0.707105 0.707108 0 0&quot;  ≈  (cos 45°, sin 45°, 0, 0)</text>
+  <text x="650" y="552" class="label">所以它表示绕 X 轴转 90°</text>
+</svg>
