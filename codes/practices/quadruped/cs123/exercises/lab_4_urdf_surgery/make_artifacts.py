@@ -1,4 +1,4 @@
-"""运行 Lab 4 starter，并写出 portfolio 交付物。"""
+"""运行 Lab 4 starter，并写出教程观察图。"""
 
 from __future__ import annotations
 
@@ -23,13 +23,13 @@ def main() -> None:
     PORTFOLIO_DIR.mkdir(parents=True, exist_ok=True)
     results = run_pd_sweeps()
 
-    save_heatmap(results, PORTFOLIO_DIR / "deliverable.png")
+    save_heatmap(results, PORTFOLIO_DIR / "pd_heatmap.png")
     save_zoo_still(results, PORTFOLIO_DIR / "pupper_zoo.png")
     save_stand_z_plot(results, PORTFOLIO_DIR / "stand_z_vs_t.png")
-    save_sweep_pickle(results, PORTFOLIO_DIR / "pd_sweet_spots.pkl")
+    save_sweep_pickle(results, PORTFOLIO_DIR / "pd_stable_gains.pkl")
 
-    print(f"Lab 4 交付物已写入 {PORTFOLIO_DIR}/")
-    print("已写出 deliverable.png / pupper_zoo.png / stand_z_vs_t.png")
+    print(f"Lab 4 观察图已写入 {PORTFOLIO_DIR}/")
+    print("已写出 pd_heatmap.png / pupper_zoo.png / stand_z_vs_t.png")
     for key in ("original", "longleg", "heavy"):
         result = results[key]
         print(

@@ -1,4 +1,4 @@
-"""填完 starter 三处空白后运行的 Lab 4 数值检查。"""
+"""Lab 4 数值检查：验证 starter.py 的变体、站姿和 PD 扫描。"""
 
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ from starter import (  # noqa: E402
     load_model,
     make_all_variants,
     make_variant,
-    pd_sweet_spot,
+    find_stable_pd_gains,
     simulate_stand,
 )
 
@@ -52,7 +52,7 @@ def test_three_variants_stand_under_best_pd() -> dict[str, float]:
     for key, spec in VARIANTS.items():
         model, _ = load_model(paths[key])
         stand_pose = find_stand_pose(model, spec.leg_scale)
-        kp, kd, _grid = pd_sweet_spot(model, stand_pose, KP_GRID, KD_GRID)
+        kp, kd, _grid = find_stable_pd_gains(model, stand_pose, KP_GRID, KD_GRID)
         trace = simulate_stand(
             model,
             stand_pose,
@@ -73,12 +73,12 @@ def test_pd_heatmap_selects_reasonable_original() -> tuple[float, float, float, 
     stand_pose = find_stand_pose(model, 1.0)
     kp_grid = np.array((5.0, 10.0, 30.0, 60.0, 120.0), dtype=float)
     kd_grid = np.array((0.5, 1.0, 2.0, 5.0), dtype=float)
-    kp, kd, grid = pd_sweet_spot(model, stand_pose, kp_grid, kd_grid)
+    kp, kd, grid = find_stable_pd_gains(model, stand_pose, kp_grid, kd_grid)
     soft = float(grid[np.where(kd_grid == 1.0)[0][0], np.where(kp_grid == 5.0)[0][0]])
     best = float(grid[np.where(kd_grid == kd)[0][0], np.where(kp_grid == kp)[0][0]])
-    assert kp >= 30.0, f"原版 Pupper 甜点 Kp 不应过软：Kp={kp:g}"
-    assert kd >= 1.0, f"原版 Pupper 甜点 Kd 不应过低：Kd={kd:g}"
-    assert soft > best + 2e-4, f"过软格没有显著差于甜点：soft={soft:.4g}, best={best:.4g}"
+    assert kp >= 30.0, f"原版 Pupper 的较优 Kp 不应过软：Kp={kp:g}"
+    assert kd >= 1.0, f"原版 Pupper 的较优 Kd 不应过低：Kd={kd:g}"
+    assert soft > best + 2e-4, f"过软格没有显著差于较优参数：soft={soft:.4g}, best={best:.4g}"
     return kp, kd, soft, best
 
 

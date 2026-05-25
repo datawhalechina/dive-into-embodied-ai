@@ -1,7 +1,8 @@
-"""Lab 4 filled starter：Pupper URDF 手术 + PD 甜点扫描。
+"""Lab 4 starter：Pupper URDF 手术 + PD 参数扫描。
 
-作者侧先写 `starter_todo.py`，再把三处 TODO 填成这份 `starter.py`。
-交付学生版时抽走本文件，并把 `starter_todo.py` 改名为 `starter.py`。
+本文件是教程主线使用的完整脚本。建议先直接运行，确认三只
+Pupper 都能站住，再按 `make_variant` -> `find_stand_pose` ->
+`find_stable_pd_gains` 的顺序阅读修改过程。
 """
 
 from __future__ import annotations
@@ -128,7 +129,7 @@ def _read_skeleton_template() -> ET.Element:
 
 
 def make_variant(name: str, *, leg_scale: float = 1.0, torso_mass_scale: float = 1.0) -> Path:
-    """任务 1：写出一份只含 default 注入 + skeleton include 的 Pupper 变体 MJCF。"""
+    """写出一份只含 default 注入 + skeleton include 的 Pupper 变体 MJCF。"""
 
     if leg_scale <= 0.0:
         raise ValueError("leg_scale 必须为正数")
@@ -140,11 +141,16 @@ def make_variant(name: str, *, leg_scale: float = 1.0, torso_mass_scale: float =
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
     path = MODEL_DIR / spec.file_name
 
+    # 所有几何差异都从两个缩放量派生。这样 original / long-leg / heavy
+    # 仍然共享同一份 skeleton.xml，只在 default class 上换参数。
     thigh_len = THIGH_LEN * spec.leg_scale
     calf_len = CALF_LEN * spec.leg_scale
     thigh_mass = THIGH_MASS * spec.leg_scale
     calf_mass = CALF_MASS * spec.leg_scale
     torso_mass = TORSO_MASS * spec.torso_mass_scale
+
+    # heavy 背上的 ballast 是视觉提示，不参与质量计算；真正的质量变化
+    # 已经写进 variant_torso 的 mass。这样不会把 torso 画成不自然的大盒子。
     show_ballast = spec.torso_mass_scale > 1.01
     ballast_size = BALLAST_HALF_SIZE if show_ballast else (0.001, 0.001, 0.001)
     ballast_rgba = "0.18 0.22 0.26 1" if show_ballast else "0 0 0 0"
@@ -165,6 +171,9 @@ def make_variant(name: str, *, leg_scale: float = 1.0, torso_mass_scale: float =
 </mujoco>
 """
     path.write_text(xml, encoding="utf-8")
+
+    # 写完立即让 MuJoCo 编译一次，尽早发现 include 路径、class 名或
+    # fromto 数字问题。后面的测试和渲染都建立在这一步能通过之上。
     mujoco.MjModel.from_xml_path(str(path))
     return path
 
@@ -184,6 +193,9 @@ def write_zoo_scene() -> Path:
     """写出可编译的三 Pupper 场景，用 attach prefix 避免名字冲突。"""
 
     path = MODEL_DIR / "pupper_zoo.xml"
+    # 这里不用连续 include 三份 XML，因为三份模型里都有 base/root/FL_HAA
+    # 这些同名对象，直接 include 会撞名。MuJoCo 的 asset/model + attach
+    # 可以在挂载时给每只机器人加 prefix，因此三只可以放在同一世界里观察。
     xml = """<mujoco model="pupper_zoo">
   <compiler angle="radian" meshdir="../../shared/models/meshes/" autolimits="true"/>
   <asset>
@@ -260,13 +272,15 @@ def _leg_xz(hfe: float, kfe: float, thigh_len: float, calf_len: float) -> tuple[
 
 
 def find_stand_pose(model: mujoco.MjModel, leg_scale: float = 1.0) -> np.ndarray:
-    """任务 2：搜索一组 HAA=0 的 12 维 stand_pose。"""
+    """搜索一组 HAA=0 的 12 维 stand_pose。"""
 
     thigh_len, calf_len = _foot_geometry_lengths(model)
     target_z = -0.14 * max(1.0, min(float(leg_scale), 1.5))
     hfe_grid = np.linspace(0.18, 1.20, 220)
     kfe_grid = np.linspace(-2.30, -0.25, 260)
 
+    # 把单腿近似成 x-z 平面里的二连杆：HAA 固定为 0，只搜索 HFE/KFE。
+    # 分数的三项分别约束足端高度、前后偏移和姿态自然度。
     best_score = np.inf
     best = (0.70, -1.40)
     for hfe in hfe_grid:
@@ -277,6 +291,8 @@ def find_stand_pose(model: mujoco.MjModel, leg_scale: float = 1.0) -> np.ndarray
                 best_score = score
                 best = (float(hfe), float(kfe))
 
+    # 四条腿共用同一组局部关节角。后续如果要做不对称站姿，可以从这里
+    # 改成按 FL/FR/RL/RR 分别搜索。
     haa_hfe_kfe = np.array((0.0, best[0], best[1]), dtype=float)
     return np.tile(haa_hfe_kfe, len(LEG_ORDER))
 
@@ -305,6 +321,8 @@ def base_height_for_pose(model: mujoco.MjModel, stand_pose: np.ndarray) -> float
     """根据 foot site 的最低 z，给 free base 一个刚好离地的高度。"""
 
     data = mujoco.MjData(model)
+    # 先把 base 放在 z=0，并套入关节站姿。此时 foot site 相对 base 的
+    # 最低高度就是"机身需要抬多高才能让脚刚好接近地面"的依据。
     _set_initial_pose(model, data, stand_pose, base_height=0.0, lifted=False)
     z_values = []
     base_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "base")
@@ -312,6 +330,8 @@ def base_height_for_pose(model: mujoco.MjModel, stand_pose: np.ndarray) -> float
     for site_name in _site_names():
         site_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_SITE, site_name)
         z_values.append(float(data.site_xpos[site_id, 2] - base_z))
+    # FOOT_RADIUS 让球形 foot 的最低点贴地；额外 6 mm 给接触求解器一点余量，
+    # 避免初始化时脚已经深插进地面。
     return float(-min(z_values) + FOOT_RADIUS + 0.006)
 
 
@@ -324,9 +344,15 @@ def _pd_step(
     prefix: str = "",
 ) -> float:
     qpos_ids, qvel_ids = _joint_qpos_qvel_ids(model, prefix)
+
+    # floating 模型的 qpos/qvel 前段属于 free base，不能进入关节 PD。
+    # _joint_qpos_qvel_ids 通过关节名取地址，确保这里只拿到 12 个电机关节。
     q = data.qpos[qpos_ids]
     qdot = data.qvel[qvel_ids]
     tau = gains.kp * (stand_pose - q) + gains.kd * (0.0 - qdot)
+
+    # MuJoCo actuator 顺序和 LEG_ORDER/JOINT_SUFFIXES 对齐。力矩先限幅，
+    # 避免某些过硬参数在网格扫描时把仿真直接打飞。
     data.ctrl[:] = 0.0
     data.ctrl[: len(tau)] = np.clip(tau, -MAX_TORQUE, MAX_TORQUE)
     return float(np.sqrt(np.mean((stand_pose - q) ** 2)))
@@ -350,6 +376,8 @@ def simulate_stand(
         base_height = base_height_for_pose(model, stand_pose)
     _set_initial_pose(model, data, stand_pose, base_height=base_height)
 
+    # capture_frames 只在生成图片/GIF 时打开；纯数值扫描时关闭 renderer，
+    # 否则 4x4x3 的 PD 网格会慢很多。
     renderer = mujoco.Renderer(model, height=360, width=420) if capture_frames else None
     camera = mujoco.MjvCamera()
     camera.type = mujoco.mjtCamera.mjCAMERA_FIXED
@@ -366,6 +394,8 @@ def simulate_stand(
     for step in range(steps):
         t = step * DT
         if disturbance:
+            # 给 base 一个很小的竖直周期扰动。没有扰动时，很多偏软参数也能
+            # "安静趴着"，不容易看出控制器余量。
             data.xfrc_applied[base_body_id, 2] = 2.0 * np.sin(2.0 * np.pi * 1.2 * t)
         err = _pd_step(model, data, stand_pose, gains)
         mujoco.mj_step(model, data)
@@ -389,19 +419,21 @@ def simulate_stand(
     )
 
 
-def pd_sweet_spot(
+def find_stable_pd_gains(
     model: mujoco.MjModel,
     stand_pose: np.ndarray,
     kp_grid: np.ndarray = KP_GRID,
     kd_grid: np.ndarray = KD_GRID,
 ) -> tuple[float, float, np.ndarray]:
-    """任务 3：扫描 `(Kp, Kd)` 网格，返回最稳的 PD 甜点。"""
+    """扫描 `(Kp, Kd)` 网格，返回当前网格里较稳定的一组 PD 参数。"""
 
     kp_grid = np.asarray(kp_grid, dtype=float)
     kd_grid = np.asarray(kd_grid, dtype=float)
     z_std = np.zeros((len(kd_grid), len(kp_grid)), dtype=float)
     base_height = base_height_for_pose(model, stand_pose)
 
+    # 每个格子都用同一套 stand_pose 和 base_height，唯一变化是 Kp/Kd。
+    # 指标取最后 1 秒 base z 标准差，避免把"趴得很稳"误判为站稳。
     for i, kd in enumerate(kd_grid):
         for j, kp in enumerate(kp_grid):
             trace = simulate_stand(
@@ -415,6 +447,8 @@ def pd_sweet_spot(
             )
             z_std[i, j] = trace.last_second_z_std
 
+    # 轻微惩罚过软的格子。它们有时 z_std 不差，但抗扰动余量很小，
+    # 不适合作为后续 gait 的默认控制参数。
     score = z_std.copy()
     score += (kp_grid[None, :] < 30.0) * 1e-4
     score += (kd_grid[:, None] < 1.0) * 1e-4
@@ -428,10 +462,12 @@ def run_pd_sweeps() -> dict[str, VariantResult]:
     paths = make_all_variants()
     results: dict[str, VariantResult] = {}
     for key, spec in VARIANTS.items():
+        # 每只变体都单独经历同一套流程。不要把 original 的 stand_pose
+        # 或 Kp/Kd 直接套给 long-leg/heavy，这正是本节想展示的连锁效应。
         model, _ = load_model(paths[key])
         stand_pose = find_stand_pose(model, spec.leg_scale)
         base_height = base_height_for_pose(model, stand_pose)
-        best_kp, best_kd, grid = pd_sweet_spot(model, stand_pose, KP_GRID, KD_GRID)
+        best_kp, best_kd, grid = find_stable_pd_gains(model, stand_pose, KP_GRID, KD_GRID)
         gains = PDGains(kp=best_kp, kd=best_kd)
         tuned = simulate_stand(
             model,
@@ -495,7 +531,7 @@ def _caption_single_frame(frame: np.ndarray, *, label: str) -> np.ndarray:
 
 
 def save_heatmap(results: dict[str, VariantResult], path: Path) -> None:
-    """保存三只 Pupper 的 PD 甜点 heatmap。"""
+    """保存三只 Pupper 的 PD 参数扫描 heatmap。"""
 
     path.parent.mkdir(parents=True, exist_ok=True)
     plot_utils.apply_theme()
@@ -513,7 +549,7 @@ def save_heatmap(results: dict[str, VariantResult], path: Path) -> None:
         )
     if im is not None:
         fig.colorbar(im, ax=axes, shrink=0.85, label="最后 1 秒 base z 标准差 [mm]")
-    fig.suptitle("Lab 4：三只 Pupper 的 PD 甜点扫描")
+    fig.suptitle("Lab 4：三只 Pupper 的 PD 参数扫描")
     fig.savefig(path, dpi=150, bbox_inches="tight")
     plt.close(fig)
 
@@ -563,12 +599,12 @@ def run_experiment() -> dict[str, VariantResult]:
 def main() -> None:
     PORTFOLIO_DIR.mkdir(parents=True, exist_ok=True)
     results = run_experiment()
-    save_heatmap(results, PORTFOLIO_DIR / "deliverable.png")
+    save_heatmap(results, PORTFOLIO_DIR / "pd_heatmap.png")
     save_zoo_still(results, PORTFOLIO_DIR / "pupper_zoo.png")
     save_stand_z_plot(results, PORTFOLIO_DIR / "stand_z_vs_t.png")
-    save_sweep_pickle(results, PORTFOLIO_DIR / "pd_sweet_spots.pkl")
+    save_sweep_pickle(results, PORTFOLIO_DIR / "pd_stable_gains.pkl")
 
-    print(f"Lab 4 交付物已写入 {PORTFOLIO_DIR}/")
+    print(f"Lab 4 观察图已写入 {PORTFOLIO_DIR}/")
     for key in ("original", "longleg", "heavy"):
         result = results[key]
         print(
