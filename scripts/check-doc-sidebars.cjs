@@ -145,7 +145,7 @@ const foundationsCases = [
   {
     sidebarId: 'foundationsWorldModelSidebar',
     docDir: 'docs/foundations/world-model',
-    entryRef: 'foundations/world-model/placeholder',
+    entryRef: 'foundations/world-model/intro',
     forbiddenRefs: ['foundations/robotics-and-ros2', 'foundations/vlm', 'foundations/vla'],
   },
 ];

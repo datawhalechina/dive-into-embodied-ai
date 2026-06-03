@@ -15,7 +15,7 @@ displayed_sidebar: foundationsOverviewSidebar
 | 入门认知 | [具身智能入门](./embodied-ai-intro/placeholder) | 这个方向到底在做什么？ | 全局认知 |
 | 大脑：智能决策 | [强化学习与控制](./rl-for-robotics/intro) | RL 怎么用在机器人上?含模仿学习(数据驱动的策略学习) | 四足、双足、机械臂项目 |
 | 大脑：智能决策 | [视觉-语言-动作大模型(VLA)](./vla/vla-intro) | 当前具身大模型在做什么? | VLA 相关项目 |
-| 大脑：智能决策 | [世界模型(World Model)](./world-model/placeholder) | 世界模型在具身场景下怎么落地? | VLA 相关项目 |
+| 大脑：智能决策 | [世界模型(World Model)](./world-model/intro) | 世界模型在具身场景下怎么落地? | VLA 相关项目 |
 | 小脑：运动控制 | [强化学习控制](./rl-for-robotics/ppo) | 策略学习如何接到连续控制和机器人任务上? | 四足、双足、机械臂项目 |
 | 小脑：运动控制 | [控制器](./controllers/intro) | 如何从 PID、LQR 学到 MPC、阻抗控制和 ROS2 / 仿真集成? | 关节控制、轨迹跟踪、移动机器人项目 |
 | 小脑：运动控制 | [运动规划](./robotics-and-ros2/moveit2_basics) | 如何从模型、坐标树进入 MoveIt 2 规划闭环? | 机械臂、移动操作项目 |

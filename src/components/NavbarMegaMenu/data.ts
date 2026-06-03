@@ -99,7 +99,7 @@ export const megaMenus: MegaMenuConfig[] = [
             icon: '🌍',
             title: 'World-Model',
             description: '世界模型在具身场景下的落地路径。',
-            to: '/docs/foundations/world-model/placeholder',
+            to: '/docs/foundations/world-model/intro',
             activeBasePath: '/docs/foundations/world-model',
             keywords: ['World Model'],
           },
