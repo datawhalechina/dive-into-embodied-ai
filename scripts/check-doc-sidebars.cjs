@@ -97,13 +97,11 @@ function assertSidebarCase(sidebars, sidebarCase) {
 const sidebars = loadSidebars();
 
 assert.ok(sidebars.foundationsOverviewSidebar, 'foundationsOverviewSidebar should exist');
-assert.ok(sidebars.careerOverviewSidebar, 'careerOverviewSidebar should exist');
 
 assertDisplayedSidebar(
   path.join(rootDir, 'docs/foundations/intro.md'),
   'foundationsOverviewSidebar',
 );
-assertDisplayedSidebar(path.join(rootDir, 'docs/career/intro.md'), 'careerOverviewSidebar');
 
 const foundationsCases = [
   {
@@ -150,57 +148,8 @@ const foundationsCases = [
   },
 ];
 
-const careerCases = [
-  {
-    sidebarId: 'careerJobSkillMapSidebar',
-    docDir: 'docs/career/job-skill-map',
-    entryRef: 'career/job-skill-map/placeholder',
-    forbiddenRefs: ['career/interview-questions', 'career/transition-paths'],
-  },
-  {
-    sidebarId: 'careerInterviewQuestionsSidebar',
-    docDir: 'docs/career/interview-questions',
-    entryRef: 'career/interview-questions/placeholder',
-    forbiddenRefs: ['career/job-skill-map', 'career/transition-paths'],
-  },
-  {
-    sidebarId: 'careerResumePortfolioSidebar',
-    docDir: 'docs/career/resume-portfolio',
-    entryRef: 'career/resume-portfolio/placeholder',
-    forbiddenRefs: ['career/job-skill-map', 'career/transition-paths'],
-  },
-  {
-    sidebarId: 'careerCompanyTechStacksSidebar',
-    docDir: 'docs/career/company-tech-stacks',
-    entryRef: 'career/company-tech-stacks/placeholder',
-    forbiddenRefs: ['career/job-skill-map', 'career/transition-paths'],
-  },
-  {
-    sidebarId: 'careerJobListingsSidebar',
-    docDir: 'docs/career/job-listings',
-    entryRef: 'career/job-listings/placeholder',
-    forbiddenRefs: ['career/job-skill-map', 'career/transition-paths'],
-  },
-  {
-    sidebarId: 'careerTransitionPathsSidebar',
-    docDir: 'docs/career/transition-paths',
-    entryRef: 'career/transition-paths/intro',
-    forbiddenRefs: ['career/job-skill-map', 'career/interview-questions'],
-  },
-  {
-    sidebarId: 'careerCommunitySidebar',
-    docDir: 'docs/career/community',
-    entryRef: 'career/community/placeholder',
-    forbiddenRefs: ['career/job-skill-map', 'career/transition-paths'],
-  },
-];
-
 for (const sidebarCase of foundationsCases) {
   assertSidebarCase(sidebars, sidebarCase);
 }
 
-for (const sidebarCase of careerCases) {
-  assertSidebarCase(sidebars, sidebarCase);
-}
-
-console.log('Foundation and career sidebars are isolated.');
+console.log('Foundation sidebars are isolated.');

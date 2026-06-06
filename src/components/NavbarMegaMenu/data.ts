@@ -311,49 +311,6 @@ export const megaMenus: MegaMenuConfig[] = [
       to: '/docs/practices/intro',
     },
   },
-  {
-    id: 'career',
-    label: '求职面试',
-    activeBasePaths: ['/docs/career'],
-    panelWidth: 620,
-    columns: [
-      {
-        title: '核心准备',
-        items: [
-          {
-            icon: '🗺️',
-            title: '岗位技能拆解',
-            description: '把岗位 JD 拆成可学习的技能项。',
-            to: '/docs/career/job-skill-map/placeholder',
-            activeBasePath: '/docs/career/job-skill-map',
-            keywords: ['岗位', '技能图谱'],
-            featured: true,
-          },
-          {
-            icon: '📝',
-            title: '面经与八股',
-            description: '常见面试题与高频考点。',
-            to: '/docs/career/interview-questions/placeholder',
-            activeBasePath: '/docs/career/interview-questions',
-            keywords: ['面试', '八股'],
-          },
-          {
-            icon: '📌',
-            title: '招聘信息',
-            description: '在招岗位与社招/校招通道。',
-            to: '/docs/career/job-listings/placeholder',
-            activeBasePath: '/docs/career/job-listings',
-            keywords: ['招聘', '内推'],
-          },
-        ],
-      },
-    ],
-    footer: {
-      text: '先看岗位拆解，再补面经、招聘信息和简历表达。',
-      ctaLabel: '查看求职面试',
-      to: '/docs/career/intro',
-    },
-  },
 ];
 
 export function getMegaMenuById(id: string): MegaMenuConfig | undefined {

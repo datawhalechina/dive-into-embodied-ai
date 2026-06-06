@@ -108,11 +108,6 @@ const config: Config = {
         },
         {
           type: 'custom-navbarMegaMenu',
-          menuId: 'career',
-          position: 'left',
-        },
-        {
-          type: 'custom-navbarMegaMenu',
           menuId: 'foundations',
           position: 'left',
         },
@@ -136,7 +131,6 @@ const config: Config = {
           items: [
             { label: '零基础入门', to: '/docs/overview/learning-path' },
             { label: '项目实战', to: '/docs/practices/intro' },
-            { label: '求职面试', to: '/docs/career/intro' },
             { label: '理论技能树', to: '/docs/foundations/intro' },
           ],
         },

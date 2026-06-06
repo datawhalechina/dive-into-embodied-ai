@@ -47,7 +47,7 @@ const CONSOLE_LINES = [
 const REPO_METRICS = [
   { label: 'foundation', value: 'ROS2 · RL · VLA' },
   { label: 'practice', value: 'robot arm · quadruped' },
-  { label: 'career', value: 'JD · resume · interview' },
+  { label: 'onboarding', value: 'learning path · quadruped lab' },
 ];
 
 function Typewriter() {
