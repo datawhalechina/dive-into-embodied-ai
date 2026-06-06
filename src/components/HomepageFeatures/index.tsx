@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import { Bot, BrainCircuit, BriefcaseBusiness, Map, type LucideIcon } from 'lucide-react';
+import { Bot, BrainCircuit, Map, type LucideIcon } from 'lucide-react';
 import styles from './styles.module.css';
 
 type FeatureItem = {
@@ -31,14 +31,6 @@ const FeatureList: FeatureItem[] = [
     accent: 'green',
   },
   {
-    title: '求职面试',
-    description: '岗位技能拆解、面经八股和招聘信息。',
-    link: '/docs/career/intro',
-    eyebrow: 'Career loop',
-    icon: BriefcaseBusiness,
-    accent: 'amber',
-  },
-  {
     title: '理论技能树',
     description: '按智能决策、运动控制、感知系统和工程底座补齐能力。',
     link: '/docs/foundations/intro',
@@ -50,7 +42,7 @@ const FeatureList: FeatureItem[] = [
 
 function Feature({ title, description, link, eyebrow, icon: Icon, accent }: FeatureItem) {
   return (
-    <div className={clsx('col col--3', styles.featureCol)}>
+    <div className={clsx('col col--4', styles.featureCol)}>
       <Link to={link} className={clsx(styles.featureCard, styles[`featureCard--${accent}`])}>
         <div className={styles.featureTopline}>
           <span>{eyebrow}</span>
@@ -72,7 +64,7 @@ export default function HomepageFeatures(): React.JSX.Element {
       <div className="container">
         <div className={styles.sectionHeading}>
           <p>LEARNING MAP</p>
-          <h2>四个阶段，围绕入门、项目、求职和理论补齐持续生长</h2>
+          <h2>三个阶段，围绕入门、项目和理论补齐持续生长</h2>
         </div>
         <div className="row">
           {FeatureList.map((props, idx) => (
