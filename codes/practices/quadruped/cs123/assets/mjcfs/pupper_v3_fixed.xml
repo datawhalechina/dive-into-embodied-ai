@@ -4,7 +4,7 @@
         <!-- 初始姿态。fixed 模型的 qpos 只有 12 个腿部关节角，对应 actuator 中的 12 路控制。 -->
         <key name="home" qpos="0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0"
             ctrl="0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0" />
-        <!-- Lab 4.4 实验：如果在 base_link 下打开 freejoint，需要把上面的 fixed home 注释掉，
+        <!-- Lab 4.5 实验：如果在 base_link 下打开 freejoint，需要把上面的 fixed home 注释掉，
              再打开下面这条 floating home。floating qpos = base 位置 3 维 + base 四元数 4 维 + 12 个关节角。
         <key name="home"
             qpos="0 0 0.28             1 0 0 0             0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0             0.0 0.0 0.0"
@@ -104,7 +104,7 @@
             <!-- 机身惯量来自 CAD/转换结果；碰撞体用 box 简化，视觉体用 STL 网格。 -->
             <inertial pos="0.025 0 0.015" quat="0 0.677807 0 0.73524" mass="1.506"
                 diaginertia="0.00854071 0.0085 0.00235929" />
-            <!-- Lab 4.4 实验：打开下面这一行，base_link 就从 fixed 变成 floating。
+            <!-- Lab 4.5 实验：打开下面这一行，base_link 就从 fixed 变成 floating。
                  记得同时把 keyframe 里的 home qpos 切到上面的 floating 版本。
             <freejoint name="world_to_body" />
             -->

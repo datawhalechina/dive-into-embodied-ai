@@ -44,7 +44,7 @@ MODEL_PATH = _DIR.parent / "assets" / "mjcfs" / "pupper_v3.xml"
 # the same loop.
 #
 # To experiment with other postures, change any of these 12 entries. Remember
-# that the left-side HFE / KFE limits are mirrored (see §4.2.1 in the chapter),
+# that the left-side HFE / KFE limits are mirrored (see §4.3.1 in the chapter),
 # so non-zero left-leg targets typically need flipped signs.
 #
 # Example — a symmetric deep squat. Measured to settle at base z ~0.075 m

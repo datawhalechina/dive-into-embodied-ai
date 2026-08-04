@@ -6,10 +6,10 @@
 
 ```
 4.quadruped-mjcf/
-├── run_view_pupper_fixed.py    # §4.3 看固定基座（mj_forward 静态）
-├── run_view_pupper.py          # §4.4 看浮动基座（mj_step 落地 + 伺服拉回）
-├── run_stand_pupper.py         # §4.5 让浮动基座站住并判稳
-└── run_gain_sweep.py           # §4.6 扫 gainprm / biasprm 看刚度
+├── run_view_pupper_fixed.py    # §4.4 看固定基座（mj_forward 静态）
+├── run_view_pupper.py          # §4.5 看浮动基座（mj_step 落地 + 伺服拉回）
+├── run_stand_pupper.py         # §4.6 让浮动基座站住并判稳
+└── run_gain_sweep.py           # §4.7 扫 gainprm / biasprm 看刚度
 ```
 
 模型和 STL 网格统一存放在 `../assets/mjcfs/`，供第 4、5、6 章共用。

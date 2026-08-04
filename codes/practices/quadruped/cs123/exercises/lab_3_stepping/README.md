@@ -35,7 +35,7 @@ Raibert 三角赢在增量刚好：它不重复画圆和抽象三角形，只把
 
 ## 分步任务
 
-1. **任务 A · 把腿挂起来（15 min）**：在 `scene.xml` 里用 `<weld body1="hip" body2="world"/>` 把 hip 固定到世界，跑 `check_scene_mounted(model)` 确认只有这一条 equality。（对应教程 [§4.1](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#41-pupper-结构) 的 MJCF 语法，复用 Lab 1 的 `<equality>` 直觉）
+1. **任务 A · 把腿挂起来（15 min）**：在 `scene.xml` 里用 `<weld body1="hip" body2="world"/>` 把 hip 固定到世界，跑 `check_scene_mounted(model)` 确认只有这一条 equality。（对应教程 [§4.2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#42-pupper-结构) 的 MJCF 语法，复用 Lab 1 的 `<equality>` 直觉）
 2. **任务 B · Raibert 三角轨迹（40 min）**：实现 `raibert_foot_traj(t)`，stance 沿 -x 后扫，swing 用抛物线抬起再落下，支持 `step_length=0` 原地踏步。（对应教程 [§3.8](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/inverse-kinematics#38-实验末端走三角形) 的三角形骨架）
 3. **任务 C · DLS IK（40 min）**：用教程 [§3.4](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/inverse-kinematics#34-dls-数值法) 的 $\Delta q = J^\top(JJ^\top+\lambda^2I)^{-1}e$，雅可比从 `mj_jacSite` 取 foot site 的 3x3 平移部分。（对应教程 [§3.4](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/inverse-kinematics#34-dls-数值法) / [§3.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/inverse-kinematics#36-ik--pd-控制)）
 4. **任务 D · 闭环踏步（30 min）**：每帧目标位置 → DLS IK → PD torque → `mj_step`，并在 viewer 叠绿色目标球和红色 IK foot 预测。（对应教程 [§3.9](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/inverse-kinematics#39-viewer-看-dls-收敛)）

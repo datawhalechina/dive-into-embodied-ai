@@ -1,4 +1,4 @@
-"""4.6 小节用的 gainprm / biasprm 参数扫描脚本。
+"""可选的 gainprm / biasprm 参数扫描脚本。
 
 在本目录运行：
     python run_gain_sweep.py
@@ -495,7 +495,7 @@ def run_viewer(args: argparse.Namespace) -> int:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="扫描 4.6 小节的 gainprm / biasprm 参数组合，不修改 XML。",
+        description="扫描 gainprm / biasprm 参数组合，不修改 XML。",
     )
     parser.add_argument("--seconds", type=float, default=SIM_SECONDS, help="仿真时长")
     parser.add_argument("--fps", type=int, default=GIF_FPS, help="GIF 渲染帧率")

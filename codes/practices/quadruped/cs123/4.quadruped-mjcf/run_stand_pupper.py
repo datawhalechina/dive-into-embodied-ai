@@ -1,17 +1,16 @@
-"""Make the floating-base Pupper stand still under PD position servo.
+"""Hold the floating-base Pupper in its home pose and report stability.
 
 Run from this directory with:
     mjpython run_stand_pupper.py    # macOS
     python run_stand_pupper.py      # Linux / Windows
 
-This extends run_view_pupper.py with two pieces:
+This extends run_view_pupper.py with two small additions:
 
-* A target pose STAND_POSE that is written into ``data.ctrl`` every step, so
-  the position servo pulls the legs into a "knee-bent, body up" stand instead
-  of just collapsing to the home (all zeros) pose.
-* Recording ``data.qpos[2]`` (base z) over time, so when the viewer is closed
+* Write STAND_POSE into ``data.ctrl`` every step so the position servos keep
+  the 12 leg joints at their targets.
+* Record ``data.qpos[2]`` (base z) over time, so when the viewer is closed
   we print the final height and the last-1-second standard deviation as the
-  Lab 4.5 pass criterion (std < 5 mm).
+  section 4.6 pass criterion (std < 5 mm).
 
 macOS note: do not run ``mjpython -m mujoco.viewer --mjcf=...``; see the
 docstring of run_view_pupper.py for the underlying mjpython + runpy
@@ -34,37 +33,9 @@ _DIR = pathlib.Path(__file__).parent
 
 MODEL_PATH = _DIR.parent / "assets" / "mjcfs" / "pupper_v3.xml"
 
+# The body quaternions define joint angle 0 as the knee-bent home stance.
 # Actuator order: front_r {1,2,3}, front_l {1,2,3}, back_r {1,2,3}, back_l {1,2,3}.
-#
-# Pupper's mesh + per-body quaternions are set up so that joint angle = 0
-# already puts each leg into a knee-bent, body-up stance. That means the
-# stand pose is simply the home keyframe's ctrl (all zeros). We still write
-# it into data.ctrl every step so the servo target stays locked even when
-# external code (e.g. the §5 gait controller) starts touching data.ctrl in
-# the same loop.
-#
-# To experiment with other postures, change any of these 12 entries. Remember
-# that the left-side HFE / KFE limits are mirrored (see §4.2.1 in the chapter),
-# so non-zero left-leg targets typically need flipped signs.
-#
-# Example — a symmetric deep squat. Measured to settle at base z ~0.075 m
-# (~45 mm below the z ~0.120 m home stance) while still passing the <5 mm
-# stability check, so the drop is obvious next to run_view_pupper.py:
-#     STAND_POSE = np.array([
-#         0.0, -0.6,  0.6,   # front_r: HAA, HFE, KFE
-#         0.0,  0.6, -0.6,   # front_l (mirrored signs)
-#         0.0, -0.6,  0.6,   # back_r
-#         0.0,  0.6, -0.6,   # back_l
-#     ])
-# STAND_POSE = np.zeros(12, dtype=np.float64)
-
-# 深蹲
-STAND_POSE = np.array([
-        0.0, -0.6,  0.6,   # front_r: HAA, HFE, KFE
-        0.0,  0.6, -0.6,   # front_l (mirrored signs)
-        0.0, -0.6,  0.6,   # back_r
-        0.0,  0.6, -0.6,   # back_l
-    ])
+STAND_POSE = np.zeros(12, dtype=np.float64)
 
 
 def _load_model(path: pathlib.Path) -> tuple[mujoco.MjModel, mujoco.MjData]:

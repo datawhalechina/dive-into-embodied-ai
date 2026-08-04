@@ -1,16 +1,16 @@
 # Lab 4：URDF 手术，给 Pupper 换条腿
 
-教程 [§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 让原版 Pupper 第一次站住。这个目录演示下一步：从同一份 `skeleton.xml` 派生出一只原版、一只 long-leg、一只 heavy，三只分别重新找 `stand_pose`，再扫描一遍 `PD` 参数。
+教程 [§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-让-pupper-站起来) 让原版 Pupper 第一次站住。这个目录演示下一步：从同一份 `skeleton.xml` 派生出一只原版、一只 long-leg、一只 heavy，三只分别重新找 `stand_pose`，再扫描一遍 `PD` 参数。
 
-这件事是教程 [§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 站立脚本和 [§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) `Kp/Kd` 对照的延伸：不再只是跑别人调好的 URDF，而是改完 MJCF 之后自己承担后果。Lab 5 的 trot 会继续用这三只 Pupper，它们会需要不同的步频和控制参数。
+这件事是教程 [§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-让-pupper-站起来) 站立脚本和 [§4.7](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#47-调-gainprm-与-biasprm) `Kp/Kd` 对照的延伸：不再只是跑别人调好的 URDF，而是改完 MJCF 之后自己承担后果。Lab 5 的 trot 会继续用这三只 Pupper，它们会需要不同的步频和控制参数。
 
 ## 为什么看这个例子
 
 | 主题 | 教程是否已覆盖 | 这个例子补上的内容 |
 |---|---|---|
-| 4-leg FK | 教程 [§4.1](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#41-pupper-结构) / [§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 已覆盖结构与站姿 | 不重复写 FK，而是看整机 MJCF 改动后的连锁反应 |
-| 原版 Pupper 站立 | [§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 已演示 | 不只站一只，而是三只变体都重新求站姿 |
-| `Kp/Kd` 四格对照 | [§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) 已演示 | 从手动对比扩展成 4x4 heatmap |
+| 4-leg FK | 教程 [§4.2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#42-pupper-结构) / [§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-让-pupper-站起来) 已覆盖结构与站姿 | 不重复写 FK，而是看整机 MJCF 改动后的连锁反应 |
+| 原版 Pupper 站立 | [§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-让-pupper-站起来) 已演示 | 不只站一只，而是三只变体都重新求站姿 |
+| `Kp/Kd` 四格对照 | [§4.7](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#47-调-gainprm-与-biasprm) 已演示 | 从手动对比扩展成 4x4 heatmap |
 | **URDF 手术：三只 Pupper 变体** | 没覆盖 | **把几何、质量、站姿、PD 参数和可视化串成一条链路** |
 
 它赢在因果链清楚：改 `fromto` / `mass` 之后，原来的 `stand_pose` 和 `PD` 不再可靠。你必须把 URDF 五件套、站姿和控制器放在同一张桌上处理。
@@ -64,9 +64,9 @@
 
 ## 与教程的衔接
 
-- **复用**：教程 [§4.2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#42-搭建-pupper-仿真模型) 五件套、[§4.2.3](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#423-加载-mesh) `compiler` / `asset`、[§4.5](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#45-让-pupper-站起来) 站立脚本、[§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) `Kp/Kd` 对照。
+- **复用**：教程 [§4.3](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#43-搭建-pupper-仿真模型) 五件套、[§4.3.2](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#432-加载-mesh) `compiler` / `asset`、[§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-让-pupper-站起来) 站立脚本、[§4.7](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#47-调-gainprm-与-biasprm) `Kp/Kd` 对照。
 - **扩展**：把“读别人的 URDF”变成“改 URDF 后还要负责把它调回能用的状态”。
-- **不重复**：不做 4-leg FK；不重复原版 Pupper 站立；不重画教程 [§4.6](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#46-调-gainprm-与-biasprm) 那张 4 行 PD 表，本 Lab 自己跑 16 格 heatmap。
+- **不重复**：不做 4-leg FK；不重复原版 Pupper 站立；不重画教程 [§4.7](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf#47-调-gainprm-与-biasprm) 那张 4 行 PD 表，本 Lab 自己跑 16 格 heatmap。
 
 ## 运行
 
