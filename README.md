@@ -42,6 +42,7 @@
 | AMD 专区 | [AUP Learning Cloud 云算力](docs/practices/amd/aup-learning-cloud.md) | Ryzen AI APU、ROCm、JupyterHub 与 Code Server | ✅ 可用 |
 | AMD 专区 | [玩转 Pupper 四足机器人](docs/practices/amd/pupper-control/intro.md) | AMD 平台上的强化学习运动策略与 VLA 实验 | ✅ 可用 |
 | 仿真实战 | [从 0 到 1 搭建四足机器人](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo、PD、运动学、PPO 与 LLM 控制 | ✅ 可用 |
+| 仿真实战 | [MicroDuck RL 小黄鸭双足机器人](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp：GPU 并行 PPO 与双足步态训练 | ✅ 可用 |
 | 仿真实战 | [MuJoCo 机械臂与 DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | MuJoCo 环境与连续控制实验 | ✅ 可用 |
 | 仿真实战 | [ACT 双臂操作训练](docs/practices/vla/act/index.md) | ACT + ALOHA：训练、评估与结果复现 | ✅ 可用 |
 | 仿真实战 | [两轮足 Flamingo · Isaac Lab](docs/practices/wheel-legged/flamingo-isaaclab/preview.md) | PPO / CaT 训练与跨仿真验证 | 🔜 预告 |
@@ -72,6 +73,14 @@
         <img src="docs/practices/vla/act/figs/act_50k_success.gif" height="220" alt="ACT 在 ALOHA 仿真中完成双臂方块交接" />
       </a>
       <br/><sub>✅ <b><a href="docs/practices/vla/act/index.md">ACT · ALOHA 双臂交接</a></b><br/>50k 训练 · MuJoCo 20 回合成功率 50%</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="4">
+      <a href="docs/practices/humanoid/microduck-rl/index.md">
+        <img src="docs/practices/humanoid/microduck-rl/figs/microduck-training-1500.gif" height="260" alt="MicroDuck 小黄鸭双足机器人稳定步态回放" />
+      </a>
+      <br/><sub>✅ <b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · 小黄鸭双足稳定步态</a></b><br/>mjlab + MuJoCo Warp · PPO GPU 并行训练（iteration 1500）</sub>
     </td>
   </tr>
 </table>
