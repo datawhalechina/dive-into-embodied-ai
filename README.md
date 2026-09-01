@@ -40,6 +40,7 @@
 | 分类 | 章节 | 简介 | 状态 |
 | :--- | :--- | :--- | :--- |
 | AMD 专区 | [AUP Learning Cloud 云算力](docs/practices/amd/aup-learning-cloud.md) | Ryzen AI APU、ROCm、JupyterHub 与 Code Server | ✅ 可用 |
+| AMD 专区 | [MicroDuck RL｜AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700、ROCm MuJoCo Warp、动态接触回归与双足 PPO | ✅ 可用 |
 | AMD 专区 | [玩转 Pupper 四足机器人](docs/practices/amd/pupper-control/intro.md) | AMD 平台上的强化学习运动策略与 VLA 实验 | ✅ 可用 |
 | 仿真实战 | [从 0 到 1 搭建四足机器人](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo、PD、运动学、PPO 与 LLM 控制 | ✅ 可用 |
 | 仿真实战 | [MicroDuck RL 小黄鸭双足机器人](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp：GPU 并行 PPO 与双足步态训练 | ✅ 可用 |

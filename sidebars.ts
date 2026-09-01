@@ -161,6 +161,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         { type: 'link', label: 'AUP Learning Cloud 云算力', href: '/docs/practices/amd/aup-learning-cloud' },
+        { type: 'link', label: 'MicroDuck RL｜AMD ROCm', href: '/docs/practices/amd/microduck-rl' },
         { type: 'link', label: 'ACT 双臂操作训练｜AMD ROCm', href: '/docs/practices/amd/vla-act' },
         { type: 'link', label: '玩转 Pupper 四足机器人', href: '/docs/practices/amd/pupper-control/intro' },
       ],
@@ -205,6 +206,11 @@ const sidebars: SidebarsConfig = {
           type: 'doc',
           id: 'practices/amd/aup-learning-cloud',
           label: 'AUP Learning Cloud 云算力',
+        },
+        {
+          type: 'doc',
+          id: 'practices/amd/microduck-rl/index',
+          label: 'MicroDuck RL｜AMD ROCm',
         },
         {
           type: 'doc',

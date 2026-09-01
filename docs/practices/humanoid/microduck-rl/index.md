@@ -11,6 +11,8 @@ description: "在 MuJoCo Warp 与 mjlab 中运行 MicroDuck 双足机器人 PPO 
 
 :::tip[项目状态：已跑通最小闭环]
 当前项目已在 NVIDIA RTX 3050 Laptop 4 GiB、Driver 535.309.01（系统报告 CUDA 12.2）上完成依赖安装、任务注册、GPU stepping 和 5 iteration smoke train。兼容分支将 x86_64 Linux 的 Torch 固定为 `2.7.1+cu126`，无需升级宿主机驱动。
+
+AMD GPU 用户请进入独立的 [MicroDuck RL｜AMD ROCm](/docs/practices/amd/microduck-rl) 教程与代码目录。
 :::
 
 :::info[本章范围]

@@ -18,6 +18,12 @@ displayed_sidebar: practicesAmdSidebar
 
 ## 旗舰项目
 
+### 🐥 [MicroDuck RL｜AMD ROCm](./microduck-rl)
+
+在 Radeon AI PRO R9700 上从源码编译 ROCm Warp / MuJoCo Warp，加入动态接触、graph capture 与 API 兼容回归，再运行 MicroDuck 双足 PPO smoke train 和固定 seed 长训。
+
+`AMD`　`ROCm`　`MuJoCo Warp`　`mjlab`　`PPO`　`Humanoid`
+
 ### 🦾 [ACT 双臂操作训练｜AMD ROCm](./vla-act)
 
 在 Radeon AI PRO R9700 上用 BF16 训练 ACT，完成 ALOHA Transfer Cube 双臂方块

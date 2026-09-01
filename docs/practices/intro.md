@@ -26,11 +26,12 @@ sidebar_position: 1
 
 ## 已上线项目
 
-- [MicroDuck RL：双足机器人 GPU 仿真](./humanoid/microduck-rl/)：从 MJCF、BAM 执行器和 mjlab 任务注册开始，在 MuJoCo Warp 中完成 GPU 并行 PPO smoke train，并导出 ONNX 推理产物。
+- [MicroDuck RL：双足机器人 GPU 仿真](./humanoid/microduck-rl/)：从 MJCF、BAM 执行器和 mjlab 任务注册开始，在 MuJoCo Warp 中完成 NVIDIA/CUDA 并行 PPO 训练，并导出 ONNX 推理产物。
 
 ## AMD 专区
 
 - [AUP Learning Cloud 云算力](./amd/aup-learning-cloud)：在浏览器中使用 Ryzen AI APU、JupyterHub、Code Server 与 ROCm 环境，适合课程练习、端侧推理和小规模实验。
+- [MicroDuck RL｜AMD ROCm](./amd/microduck-rl)：在 Radeon R9700 上编译 ROCm Warp / MuJoCo Warp，修复动态 broadphase 缓存并训练双足 PPO。
 - [ACT 双臂操作训练｜AMD ROCm](./amd/vla-act)：在 Radeon GPU 上完成 ACT BF16 训练、断点续训、20 回合评测与视频导出。
 - [玩转 Pupper 四足机器人](./amd/pupper-control/intro)：AMD 专区旗舰项目，包含 **Pupper Locomotion｜强化学习运动策略**与 **Pupper VLA｜视觉-语言-动作智能**两个方向。
 
@@ -39,7 +40,7 @@ sidebar_position: 1
 | 项目 | 技术主线 | 状态 |
 | --- | --- | --- |
 | [从零到一搭建四足机器人](./quadruped/cs123/intro) | MuJoCo、PD、运动学、PPO、LLM 控制 | 可用 |
-| [MicroDuck RL 小黄鸭双足机器人](./humanoid/microduck-rl/) | mjlab、MuJoCo Warp、GPU 并行 PPO、双足步态 | 可用 |
+| [MicroDuck RL 小黄鸭双足机器人](./humanoid/microduck-rl/) | mjlab、MuJoCo Warp、CUDA 并行 PPO、双足步态 | 可用 |
 | [MuJoCo 仿真入门](./robot-arm/mujoco-arm-pick-place) | MJCF、物理仿真、Python 控制 | 可用 |
 | [DDPG InvertedPendulum](./robot-arm/ddpg-mujoco/invertedpendulum-v5) | 连续控制基础与 DDPG baseline | 可用 |
 | [DDPG Reacher](./robot-arm/ddpg-mujoco/reacher-v5) | 二维机械臂目标追踪 | 可用 |

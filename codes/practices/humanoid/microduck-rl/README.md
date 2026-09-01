@@ -9,7 +9,7 @@
 - `tests/`：配置不变量和奖励函数回归测试。
 - `pyproject.toml` + `uv.lock`：与上游隔离的 Python 3.12 环境。
 
-基础路径是“环境搭建 + GPU smoke test”；本目录还提供一个 500 iteration 的较长训练和可视化复现实验，但不等同于 4096 并行环境的完整训练，也不包含真机部署。完整上游说明保存在 [`UPSTREAM_README.md`](./UPSTREAM_README.md)。
+基础路径是“环境搭建 + GPU smoke test”；本目录还提供一个 500 iteration 的较长训练和可视化复现实验，但不等同于 4096 并行环境的完整训练，也不包含真机部署。完整上游说明保存在 [`UPSTREAM_README.md`](./UPSTREAM_README.md)。AMD/ROCm 独立版本位于 [`codes/practices/amd/microduck-rl`](../../amd/microduck-rl)。
 
 ## 创建环境
 
