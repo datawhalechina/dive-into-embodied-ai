@@ -199,6 +199,83 @@ uv run python scripts/plot_training.py \
 
 视频和曲线的定位是“训练趋势、checkpoint 加载和仿真渲染链路展示”。当前只训练了 500 iteration，画面中的动作不应被解释为已经收敛的稳定步态；完整训练仍需更长 horizon、多个 seed、速度跟踪指标和 sim2real 评估。
 
+## 深度训练：把“能跑”推进到稳定步态
+
+500 iteration 的结果适合展示训练闭环，但回放中仍会侧倒或坐倒。要验收稳定步态，不能只看 reward 曲线，还要同时看存活时长、跌倒终止和固定 checkpoint 的离屏视频。当前兼容分支在 4 GiB RTX 3050 上采用 256 个并行环境，基于已完成的 500 iteration checkpoint 续训：
+
+```bash
+uv run train Mjlab-Velocity-Flat-MicroDuck \
+  --env.scene.num-envs 256 \
+  --env.seed 42 \
+  --agent.seed 42 \
+  --agent.resume True \
+  --agent.load-run '2026-09-01_16-26-47_env256-bench' \
+  --agent.load-checkpoint 'model_518.pt' \
+  --agent.max-iterations 3000 \
+  --agent.save-interval 250 \
+  --agent.logger tensorboard \
+  --agent.experiment-name velocity_long \
+  --agent.run-name env256-long \
+  --agent.upload-model False
+```
+
+训练日志和 checkpoint 保留在本地 `logs/rsl_rl/velocity_long/`，不提交到 Git。可随时用同一个绘图脚本查看中间结果：
+
+```bash
+uv run python scripts/plot_training.py \
+  --run-dir logs/rsl_rl/velocity_long/<run-name> \
+  --out logs/rsl_rl/velocity_long/<run-name>/progress.webp
+```
+
+建议把 checkpoint 标为“稳定”前满足以下条件：
+
+| 验收项 | 建议标准 |
+| --- | --- |
+| 平均 episode length | 相比 500 iteration 的约 58 steps 持续明显上升，并在后段保持平台 |
+| `fell_over` | 后段持续下降，而不是只出现单个低谷 |
+| 速度跟踪 | `error_vel_xy`、`error_vel_yaw` 无发散，曲线波动可解释 |
+| 离屏回放 | 至少 200 帧（4 秒）连续保持直立和交替步态 |
+| 可复现性 | 至少用另一个固定 seed 或重复回放确认不是偶然片段 |
+
+在当前开发机上 CUDA Graphs 因 Driver 535 / CUDA 12.2 被禁用，这是性能降级，不是训练失败；因此 256 环境的吞吐不能直接和上游 4096 环境的 1–2 小时宣传值比较。若长训仍未达到上述标准，应记录为“训练管线已打通、稳定步态尚未验收”，不要用倒地 GIF 代替结果。
+
+### 无显示会话的离屏回放
+
+开发机没有 `DISPLAY` 时，`play --viewer viser` 仍需要较长的 viewer 初始化时间。仓库提供 `scripts/render_checkpoint.py`，直接读取同一策略导出的 ONNX，在 MuJoCo CPU + EGL 渲染 200 帧并输出 MP4/GIF：
+
+```bash
+MUJOCO_GL=egl PYOPENGL_PLATFORM=egl \
+uv run python scripts/render_checkpoint.py \
+  --onnx logs/rsl_rl/velocity_long/<run-name>/<run-name>.onnx \
+  --mp4 logs/rsl_rl/velocity_long/<run-name>/checkpoint.mp4 \
+  --gif logs/rsl_rl/velocity_long/<run-name>/checkpoint.gif \
+  --frames 200 --lin-vel-x 0.15
+```
+
+脚本同时报告 `fallen_fraction`、`min_trunk_z_m`、`min_upright_proxy`，便于把“曲线变好但视频仍倒地”的情况挡在教程发布前。
+
+### 本次深度训练结果：`model_1500.pt`
+
+在兼容分支上从 `model_750.pt` 继续训练到 iteration 1500（256 envs，固定 seed 42，累计 4,608,000 个本轮 transitions）。训练曲线和回放分别如下：
+
+| 指标 | iteration 1500 |
+| --- | ---: |
+| mean reward | 55.92 |
+| mean episode length | 760.23 steps |
+| `fell_over`（原始终止计数） | 0.125 |
+| `time_out`（原始终止计数） | 1.125 |
+| 离屏回放 | 200 帧 / 4 秒 |
+| 离屏验收 | `done_count=0`，`fell_like_fraction=0` |
+| 姿态下界 | `min_trunk_z=0.1029 m`，`min_upright_proxy=0.9784` |
+
+![MicroDuck RL 深度训练曲线](./figs/microduck-training-1500.webp)
+
+下面的 GIF 使用同一个 `model_1500.pt`，在实际 mjlab/BAM 环境中固定前向速度命令渲染；接触帧保持直立并出现交替脚步。[下载 MP4](./figs/microduck-training-1500.mp4)。
+
+![MicroDuck RL 稳定步态回放](./figs/microduck-training-1500.gif)
+
+这里的“稳定”是教程展示级验收：固定单一命令、单个环境、4 秒无 termination。它不是多 seed 鲁棒性、rough terrain 或真机安全结论；checkpoint 和训练日志仍保留在本地，不随教程提交。
+
 ## 当前开发机注意事项
 
 当前开发机是 RTX 3050 Laptop 4 GiB，Driver 535.309.01，系统报告 CUDA 12.2。兼容分支已将 x86_64 Torch 调整为 CUDA 12.6 用户态组件；如果在其他机器上出现 `insufficient driver`、Warp 初始化失败或显存不足，应把错误原文记录下来，不要直接修改任务奖励。CUDA Graphs 被禁用属于已知限制，不等同于 GPU smoke 失败。

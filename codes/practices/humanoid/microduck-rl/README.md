@@ -100,6 +100,41 @@ uv run python scripts/plot_training.py \
 
 本次固定 seed 的结果：初始 mean reward `0.1711`，最终 `2.5424`，最高 `2.7410`；最终 mean episode length `57.69` steps，累计 `768,000` transitions，训练耗时约 16 分钟。该曲线用于展示学习趋势和回归过程，不能替代完整 locomotion 收敛评估。
 
+如果目标是稳定步态，可从 `env256-bench` 的最新 checkpoint 继续训练。当前 4 GiB 开发机上的实测命令如下（本次额外运行 3000 iterations，预计约 2–3 小时）：
+
+```bash
+uv run train Mjlab-Velocity-Flat-MicroDuck \
+  --env.scene.num-envs 256 \
+  --env.seed 42 \
+  --agent.seed 42 \
+  --agent.resume True \
+  --agent.load-run '2026-09-01_16-26-47_env256-bench' \
+  --agent.load-checkpoint 'model_518.pt' \
+  --agent.max-iterations 3000 \
+  --agent.save-interval 250 \
+  --agent.logger tensorboard \
+  --agent.experiment-name velocity_long \
+  --agent.run-name env256-long \
+  --agent.upload-model False
+```
+
+不要仅凭 reward 宣称稳定：至少同时检查 episode length、`Episode_Termination/fell_over`、速度跟踪误差，并用固定 checkpoint 做 200 帧以上离屏回放。训练产物继续留在本地 `logs/`，教程只提交可复现命令、曲线和经过验收的媒体。
+
+无显示会话时，可用 CPU ONNX + EGL 离屏回放，避免启动 Viser：
+
+```bash
+MUJOCO_GL=egl PYOPENGL_PLATFORM=egl \
+uv run python scripts/render_checkpoint.py \
+  --onnx logs/rsl_rl/velocity_long/<run-name>/<run-name>.onnx \
+  --mp4 logs/rsl_rl/velocity_long/<run-name>/checkpoint.mp4 \
+  --gif logs/rsl_rl/velocity_long/<run-name>/checkpoint.gif \
+  --frames 200 --lin-vel-x 0.15
+```
+
+脚本会打印 `fallen_fraction`、`min_trunk_z_m` 和 `min_upright_proxy`。这些是回放验收辅助量，不替代训练环境中的 termination 统计；例如 `fallen_fraction` 较高时，即使 reward 很高，也不应把该 checkpoint 发布成稳定步态。
+
+本次深度训练选用 `model_1500.pt`：从 `model_750.pt` 续训到 iteration 1500，256 envs、固定 seed 42。训练侧最后一轮 mean episode length 为 `760.23` steps，`fell_over=0.125`；实际 mjlab/BAM 离屏回放 200 帧（4 秒）`done_count=0`、`fell_like_fraction=0`，因此可以作为教程展示级稳定步态素材。注意这不是多 seed、rough terrain 或真机验收。
+
 ## 上游与许可证
 
 当前集成基于上游 `develop` 分支 commit `d424a0c899f6b33cbd3daeb279913134349c0b63`。代码按上游 Apache-2.0 许可证保留；3D 模型文件按上游说明使用 CC BY-SA-NC，不能脱离相应署名和非商业条款单独再授权。
