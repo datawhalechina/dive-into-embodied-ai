@@ -4,16 +4,19 @@ select_gpus() indexes an empty list and dies with
 `IndexError: list index out of range` BEFORE the first training step
 (mjlab/utils/gpu.py:70).
 
-The fix (pyproject.toml) routes torch to PyTorch's CUDA index, on aarch64
-only. It has two SILENT break points, locked in by these tests — in both
-cases `uv sync` succeeds and you only find out when you launch a run:
+The fix (pyproject.toml) routes torch to PyTorch's CUDA index on GPU-backed
+Linux platforms. The CUDA 12.2 compatibility branch uses cu126 on x86_64
+and keeps cu129 on aarch64; non-Linux platforms retain the PyPI build. It has
+two SILENT break points, locked in by these tests — in both cases `uv sync`
+succeeds and you only find out when you launch a run:
 
 1. `torch` must stay a DIRECT dependency: uv applies [tool.uv.sources] to
    direct dependencies only, so deleting the `torch==...` line (which looks
    redundant, since torch already comes in via mjlab/rsl_rl) makes the
    source binding a no-op without any warning.
-2. The x86_64 resolution must stay on PyPI, otherwise HF Jobs silently
-   switch wheels.
+2. Each platform marker must resolve to the intended CUDA index/version;
+   otherwise a machine can silently receive a CPU wheel or an unsupported
+   CUDA runtime.
 """
 
 import platform
@@ -65,7 +68,7 @@ def test_torch_is_a_direct_dependency():
     )
 
 
-def test_torch_source_is_pinned_to_a_cuda_index_on_aarch64():
+def test_torch_sources_are_pinned_to_expected_cuda_indexes():
     pyproject = tomllib.loads((_ROOT / "pyproject.toml").read_text())
     uv_cfg = pyproject["tool"]["uv"]
     assert "torch" in uv_cfg.get("sources", {}), (
@@ -74,10 +77,20 @@ def test_torch_source_is_pinned_to_a_cuda_index_on_aarch64():
     )
     sources = uv_cfg["sources"]["torch"]
     indexes = {p["name"]: p["url"] for p in uv_cfg.get("index", [])}
+    expected = {
+        "aarch64": "pytorch-cu129",
+        "x86_64": "pytorch-cu126",
+    }
+    assert len(sources) == len(expected), "unexpected number of CUDA torch sources"
     for src in sources:
-        assert "aarch64" in src["marker"], "the torch source must stay aarch64-scoped"
+        marker = src["marker"]
+        machine = next((m for m in expected if m in marker), None)
+        assert machine is not None, f"unexpected torch source marker: {marker}"
         assert indexes[src["index"]].startswith(_CUDA_INDEX), (
             f"index {src['index']} is not a PyTorch CUDA index"
+        )
+        assert src["index"] == expected[machine], (
+            f"{machine} must use {expected[machine]}, got {src['index']}"
         )
 
 
@@ -95,28 +108,34 @@ def test_lockfile_routes_aarch64_torch_to_cuda_wheels():
     )
 
 
-def test_x86_64_resolution_stays_on_pypi():
-    """HF Jobs run on x86_64: their resolution must not move."""
+def test_x86_64_resolution_uses_cu126():
+    """Driver 535 / CUDA 12.2 machines must use the cu126 build."""
+    torch_pkgs = _packages("torch")
+    x86 = [
+        p
+        for p in torch_pkgs
+        if "platform_machine == 'x86_64'" in _markers(p)
+        and "sys_platform == 'linux'" in _markers(p)
+    ]
+    assert len(x86) == 1, f"expected 1 x86_64 entry, found {len(x86)}"
+    pkg = x86[0]
+    assert _registry(pkg) == "https://download.pytorch.org/whl/cu126"
+    assert pkg["version"] == "2.7.1+cu126"
+    wheels = " ".join(w["url"] for w in pkg["wheels"])
+    assert "cu126" in wheels and "x86_64" in wheels
+
+
+def test_non_linux_resolution_stays_on_pypi_291():
+    """macOS/Windows keep the original PyPI 2.9.1 resolution."""
     others = [
         p
         for p in _packages("torch")
         if "platform_machine == 'aarch64'" not in _markers(p)
+        and "platform_machine == 'x86_64'" not in _markers(p)
     ]
-    assert others, "no non-aarch64 torch entry found"
-    for pkg in others:
-        assert _registry(pkg) == "https://pypi.org/simple", (
-            f"x86_64 torch moved to {_registry(pkg)!r} — HF Jobs would switch "
-            "wheels."
-        )
-        assert "+cu" not in pkg["version"], "x86_64 torch must not be CUDA-pinned"
-
-
-def test_torch_version_identical_across_platforms():
-    """The fix changes only the wheel's SOURCE, not its version: the CUDA
-    index carries newer builds than the PyPI pin, so a `>=` drags torch
-    2.9.1 -> 2.13.0 with nothing having validated that bump."""
-    versions = {p["version"].split("+")[0] for p in _packages("torch")}
-    assert len(versions) == 1, f"torch versions diverge across platforms: {versions}"
+    assert len(others) == 1, f"expected 1 non-Linux entry, found {len(others)}"
+    assert _registry(others[0]) == "https://pypi.org/simple"
+    assert others[0]["version"] == "2.9.1"
 
 
 def _on_spark():

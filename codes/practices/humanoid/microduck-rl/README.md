@@ -33,12 +33,42 @@ uv run list-envs | grep MicroDuck
 再运行 64 个环境、5 个 iteration 的 smoke test：
 
 ```bash
-uv run train Mjlab-Velocity-Flat-MicroDuck \
+WANDB_MODE=offline uv run train Mjlab-Velocity-Flat-MicroDuck \
   --env.scene.num-envs 64 \
   --agent.max_iterations 5
 ```
 
 这个检查只验证环境构建、GPU stepping、观测维度、奖励计算和 NaN 防护，不代表步态已经训练成功。完整训练前应先检查显存和每轮耗时。
+
+在 Driver 535 / 系统 CUDA 12.2 的 x86_64 Linux 机器上，使用兼容分支的 Torch 组合：
+
+```text
+torch==2.7.1+cu126
+warp-lang==1.12.0
+mjlab==1.3.0
+mujoco-warp==3.8.1
+```
+
+该组合已在 RTX 3050 Laptop 4 GiB 上完成 5/5 iteration，退出码为 0；每轮耗时 4.40s、4.21s、3.85s、4.03s、4.23s，生成 `model_4.pt` 与 ONNX 文件。Driver 535 下 CUDA Graphs 会被禁用，但普通 GPU stepping 不受影响。
+
+有桌面显示会话时，可以用最新 smoke checkpoint 打开 viewer：
+
+```bash
+RUN_DIR="$(find logs/rsl_rl/velocity -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)"
+uv run play Mjlab-Velocity-Flat-MicroDuck \
+  --checkpoint-file "$RUN_DIR/model_4.pt" \
+  --num-envs 1
+```
+
+这只是 checkpoint 加载和推理链路 demo；5 iteration 不代表策略已经收敛为稳定步态。
+
+CPU 侧的配置与奖励回归测试：
+
+```bash
+uv run --with pytest pytest tests/ -q
+```
+
+兼容分支最近一次结果：`154 passed, 1 skipped`。
 
 ## 上游与许可证
 
