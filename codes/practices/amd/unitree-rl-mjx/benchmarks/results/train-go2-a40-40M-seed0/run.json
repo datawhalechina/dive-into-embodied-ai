@@ -1,0 +1,15 @@
+{
+  "env": "Go2VelocityFlat",
+  "seed": 0,
+  "num_timesteps_override": 40000000,
+  "num_envs_override": null,
+  "ppo_overrides": {},
+  "xla_flags": null,
+  "wall_s": 1322.9393041320145,
+  "backend": "gpu",
+  "device": "cuda:0",
+  "device_kind": "NVIDIA A40",
+  "jax": "0.11.0",
+  "mujoco": "3.11.0",
+  "host": "a40-box"
+}

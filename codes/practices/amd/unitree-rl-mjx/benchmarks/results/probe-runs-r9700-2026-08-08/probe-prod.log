@@ -1,0 +1,11 @@
+==> leading-6144  [--xla_gpu_enable_command_buffer=] [--ppo-override batch_size=192]
+    NAN (last eval reward nan)
+==> prod-4096  [--xla_gpu_enable_command_buffer=] [--num-envs 4096 --ppo-override num_minibatches=16]
+    PASS (last eval reward 0.9321210980415344)
+==> prod-2048  [--xla_gpu_enable_command_buffer=] [--num-envs 2048 --ppo-override num_minibatches=16]
+    PASS (last eval reward 16.578136444091797)
+
+outcome  last_reward         name          xla_flags
+NAN      nan                 leading-6144  --xla_gpu_enable_command_buffer= --ppo-override batch_size=192
+PASS     0.9321210980415344  prod-4096     --xla_gpu_enable_command_buffer= --num-envs 4096 --ppo-override num_minibatches=16
+PASS     16.578136444091797  prod-2048     --xla_gpu_enable_command_buffer= --num-envs 2048 --ppo-override num_minibatches=16

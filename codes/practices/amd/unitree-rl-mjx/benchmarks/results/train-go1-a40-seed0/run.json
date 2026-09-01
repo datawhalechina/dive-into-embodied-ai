@@ -1,0 +1,12 @@
+{
+  "env": "Go1JoystickFlatTerrain",
+  "seed": 0,
+  "num_timesteps_override": null,
+  "wall_s": 1447.8047058630036,
+  "backend": "gpu",
+  "device": "cuda:0",
+  "device_kind": "NVIDIA A40",
+  "jax": "0.11.0",
+  "mujoco": "3.11.0",
+  "host": "a40-box"
+}

@@ -1,0 +1,48 @@
+# 两阶段课程之一：轻惩罚 bootstrap，先学会行走。
+# 平滑类惩罚全额生效时，学步期"摔倒交税"不如"站桩保本"（总奖励下限裁剪为 0），
+# 20M 步预算下策略会收敛到站着不动。此阶段把平滑惩罚降到最低先突破行走，
+# 再由 smooth_finetune.yaml 恢复全额惩罚打磨步态。
+run:
+  seed: 0
+  total_timesteps: 8000000
+  n_envs: 16
+  device: cpu
+  tensorboard: true
+  output_dir: outputs/bootstrap_walk_8m
+  resume_from: null
+  transfer_from: null
+
+environment:
+  max_steps: 1000
+  # 只削弱平滑类惩罚；跟踪、姿态、站立静止和 dont_wait 保持全额。
+  reward_overrides:
+    lin_vel_z: -0.2
+    ang_vel_xy: -0.02
+    joint_acceleration: 0.0
+    foot_slip: 0.0
+    action_rate: -0.005
+
+gait:
+  enabled: false
+  types: [walk, trot, pace]
+  contact_reward_weight: 0.5
+  switch_steps: 500
+
+ppo:
+  policy: MlpPolicy
+  n_steps: 2048
+  batch_size: 256
+  n_epochs: 4
+  learning_rate: 0.0003
+  gamma: 0.97
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.01
+  ent_coef_final: 0.004
+  net_arch: [256, 256]
+  verbose: 1
+
+checkpoint:
+  every_steps: 1000000
+  name_prefix: pupper_ppo
+  final_name: pupper_ppo

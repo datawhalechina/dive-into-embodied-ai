@@ -1,0 +1,27 @@
+[project]
+name = "cs123-exercises-amd"
+version = "0.1.0"
+description = "CS123 MuJoCo companion Lab for AMD Linux"
+requires-python = ">=3.12"
+dependencies = [
+    "imageio>=2.37.0",
+    "matplotlib>=3.10.8",
+    "mujoco>=3.7.0",
+    "numpy>=2.4.4",
+    "opencv-python>=4.8",
+    "openai>=1.54.3",
+    "pillow>=12.0.0",
+    "pytest>=8.0.0",
+    "python-dotenv>=1.0.1",
+    "stable-baselines3>=2.3.0",
+    "tensorboard>=2.16",
+    "torch>=2.3.0",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

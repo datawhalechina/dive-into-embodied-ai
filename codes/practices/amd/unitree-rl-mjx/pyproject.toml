@@ -1,0 +1,50 @@
+[project]
+name = "unitree_rl_mjx"
+version = "0.0.1"
+description = "Unitree legged RL on MuJoCo MJX — ROCm-first, runs on AMD and NVIDIA GPUs"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+dependencies = [
+  "mujoco>=3.3.6",
+  "mujoco-mjx>=3.3.6",
+  "brax>=0.12.1",
+  "numpy>=1.26",
+  # MuJoCo Playground (PyPI name "playground", import name mujoco_playground):
+  # the env base class and the brax training wrapper.
+  "playground==0.2.0",
+]
+
+[project.optional-dependencies]
+export = [
+  "onnx>=1.16",
+  "onnxruntime>=1.18",
+]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6",
+  "onnx>=1.16",
+  "onnxruntime>=1.18",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/unitree_rl_mjx"]
+
+[tool.ruff]
+# Mirrors the reference repo (unitree_rl_mjlab): 2-space indent, 88-char lines,
+# double quotes.
+line-length = 88
+indent-width = 2
+# Result dirs hold data and captured evidence (executed notebooks), not code.
+extend-exclude = ["benchmarks/results"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

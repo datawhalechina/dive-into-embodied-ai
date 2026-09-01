@@ -3,3 +3,5 @@ __pycache__/
 .pytest_cache/
 *.pyc
 *.zip
+!reports/raw/checkpoints/pupper_ppo_19000000_steps.zip
+!reports/gait_finetune/raw/checkpoints/pupper_gait_finetune_4500000_steps.zip

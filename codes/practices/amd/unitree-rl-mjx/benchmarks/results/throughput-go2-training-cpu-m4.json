@@ -1,0 +1,45 @@
+{
+  "manifest": {
+    "spec": "training",
+    "backend": "cpu",
+    "device": "cpu:0",
+    "device_kind": "cpu",
+    "jax": "0.11.0",
+    "host": "m4-laptop",
+    "python": "3.12.11"
+  },
+  "results": [
+    {
+      "num_envs": 1,
+      "steps": 100,
+      "compile_s": 2.606604834087193,
+      "wall_s": 2.1297397082671523,
+      "steps_per_s": 46.954094724262944,
+      "sim_s_per_wall_s": 0.23477047362131473
+    },
+    {
+      "num_envs": 64,
+      "steps": 100,
+      "compile_s": 2.8697926672175527,
+      "wall_s": 4.109989958349615,
+      "steps_per_s": 1557.1814201146974,
+      "sim_s_per_wall_s": 7.785907100573487
+    },
+    {
+      "num_envs": 256,
+      "steps": 100,
+      "compile_s": 2.980004417244345,
+      "wall_s": 5.138523166999221,
+      "steps_per_s": 4981.976176425377,
+      "sim_s_per_wall_s": 24.90988088212689
+    },
+    {
+      "num_envs": 1024,
+      "steps": 100,
+      "compile_s": 3.612153625115752,
+      "wall_s": 9.875841000117362,
+      "steps_per_s": 10368.737204131083,
+      "sim_s_per_wall_s": 51.84368602065541
+    }
+  ]
+}

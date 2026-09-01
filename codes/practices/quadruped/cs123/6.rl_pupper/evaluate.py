@@ -147,10 +147,10 @@ def main() -> None:
     env = PupperEnv()
     model = PPO.load(args.checkpoint, env=env)
     render_demo(model, env, output_dir / "demo.gif")
-    render_velocity(model, env, output_dir / "velocity_tracking.png")
+    render_velocity(model, env, output_dir / "velocity_tracking.webp")
     print(
         f"已生成 {output_dir / 'demo.gif'} 和 "
-        f"{output_dir / 'velocity_tracking.png'}",
+        f"{output_dir / 'velocity_tracking.webp'}",
     )
 
 

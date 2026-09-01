@@ -157,33 +157,38 @@ const sidebars: SidebarsConfig = {
     'practices/intro',
     {
       type: 'category',
-      label: '本体方向',
-      collapsed: false,
-      items: [
-        { type: 'link', label: '机械臂方向', href: '/docs/practices/robot-arm/placeholder' },
-        { type: 'link', label: '四足机器人', href: '/docs/practices/quadruped/placeholder' },
-        { type: 'link', label: '双足 / 人形机器人', href: '/docs/practices/humanoid/placeholder' },
-        { type: 'link', label: '移动操作', href: '/docs/practices/mobile-manipulation/placeholder' },
-        { type: 'link', label: '轮足机器人', href: '/docs/practices/wheel-legged/placeholder' },
-      ],
-    },
-    {
-      type: 'category',
-      label: '项目课程',
-      collapsed: false,
-      items: [
-        { type: 'link', label: '从零到一搭建四足机器人', href: '/docs/practices/quadruped/cs123/intro' },
-        { type: 'link', label: 'LeRobot 开源课程', href: '/docs/practices/robot-arm/data-collection/lerobot-course' },
-        { type: 'link', label: 'SO-101 + LeRobot 真机教程', href: '/docs/practices/robot-arm/data-collection/so101-lerobot-real' },
-        { type: 'link', label: '两轮足 Flamingo · Isaac Lab', href: '/docs/practices/wheel-legged/flamingo-isaaclab/preview' },
-      ],
-    },
-    {
-      type: 'category',
       label: 'AMD 专区',
       collapsed: false,
       items: [
-        { type: 'link', label: '玩转CS123机器人控制', href: '/docs/practices/amd/cs123/intro' },
+        { type: 'link', label: 'AUP Learning Cloud 云算力', href: '/docs/practices/amd/aup-learning-cloud' },
+        { type: 'link', label: 'ACT 双臂操作训练｜AMD ROCm', href: '/docs/practices/amd/vla-act' },
+        { type: 'link', label: '玩转 Pupper 四足机器人', href: '/docs/practices/amd/pupper-control/intro' },
+      ],
+    },
+    {
+      type: 'category',
+      label: '仿真实战',
+      collapsed: false,
+      items: [
+        { type: 'link', label: '从零到一搭建四足机器人', href: '/docs/practices/quadruped/cs123/intro' },
+        { type: 'link', label: 'MuJoCo 仿真入门', href: '/docs/practices/robot-arm/mujoco-arm-pick-place' },
+        { type: 'link', label: 'DDPG InvertedPendulum', href: '/docs/practices/robot-arm/ddpg-mujoco/invertedpendulum-v5' },
+        { type: 'link', label: 'DDPG Reacher', href: '/docs/practices/robot-arm/ddpg-mujoco/reacher-v5' },
+        { type: 'link', label: 'DDPG Pusher', href: '/docs/practices/robot-arm/ddpg-mujoco/pusher-v5' },
+        { type: 'link', label: 'ACT 双臂操作训练', href: '/docs/practices/vla/act' },
+        { type: 'link', label: '两轮足 Flamingo · Isaac Lab', href: '/docs/practices/wheel-legged/flamingo-isaaclab/preview' },
+        { type: 'link', label: 'Sim2Sim 验证', href: '/docs/practices/quadruped/sim2sim/placeholder' },
+      ],
+    },
+    {
+      type: 'category',
+      label: '真机实战',
+      collapsed: false,
+      items: [
+        { type: 'link', label: 'SO-101 + LeRobot 真机教程', href: '/docs/practices/robot-arm/data-collection/so101-lerobot-real' },
+        { type: 'link', label: 'LeRobot 中文课程讲义', href: '/docs/practices/robot-arm/data-collection/lerobot-course' },
+        { type: 'link', label: 'ROS2 机械臂控制', href: '/docs/practices/robot-arm/ros2-arm-control/placeholder' },
+        { type: 'link', label: 'Sim2Real 指南', href: '/docs/practices/quadruped/sim2real-guide/placeholder' },
       ],
     },
   ],
@@ -195,7 +200,34 @@ const sidebars: SidebarsConfig = {
       link: { type: 'doc', id: 'practices/amd/intro' },
       collapsible: false,
       items: [
-        { type: 'doc', id: 'practices/amd/cs123/intro', label: '玩转CS123机器人控制' },
+        {
+          type: 'doc',
+          id: 'practices/amd/aup-learning-cloud',
+          label: 'AUP Learning Cloud 云算力',
+        },
+        {
+          type: 'doc',
+          id: 'practices/amd/vla-act/index',
+          label: 'ACT 双臂操作训练｜AMD ROCm',
+        },
+        {
+          type: 'category',
+          label: '玩转 Pupper 四足机器人',
+          link: { type: 'doc', id: 'practices/amd/pupper-control/intro' },
+          collapsed: false,
+          items: [
+            {
+              type: 'doc',
+              id: 'practices/amd/pupper-control/locomotion',
+              label: 'Pupper Locomotion｜强化学习运动策略',
+            },
+            {
+              type: 'doc',
+              id: 'practices/amd/pupper-control/vla',
+              label: 'Pupper VLA｜视觉-语言-动作智能',
+            },
+          ],
+        },
       ],
     },
   ],

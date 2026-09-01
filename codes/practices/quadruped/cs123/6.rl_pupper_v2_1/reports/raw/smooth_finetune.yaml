@@ -1,0 +1,43 @@
+# 两阶段课程之二：从 bootstrap_walk 的策略续训，恢复全额平滑惩罚打磨步态。
+# 起点已会行走（跟踪收益远高于站桩），惩罚只会修剪抖动、不会再诱发冻结。
+# 注意：resume_from 会沿用 checkpoint 内的学习率和裁剪参数，
+# 此处 ppo 段仅 ent_coef / ent_coef_final 通过回调实际生效。
+run:
+  seed: 0
+  total_timesteps: 8000000
+  n_envs: 16
+  device: cpu
+  tensorboard: true
+  output_dir: outputs/smooth_finetune_8m
+  resume_from: outputs/bootstrap_walk_8m/pupper_ppo.zip
+  transfer_from: null
+
+environment:
+  max_steps: 1000
+  # 空覆盖 = 使用 pupper_env.py 的全额平滑惩罚权重。
+  reward_overrides: {}
+
+gait:
+  enabled: false
+  types: [walk, trot, pace]
+  contact_reward_weight: 0.5
+  switch_steps: 500
+
+ppo:
+  policy: MlpPolicy
+  n_steps: 2048
+  batch_size: 256
+  n_epochs: 4
+  learning_rate: 0.0003
+  gamma: 0.97
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.002
+  ent_coef_final: 0.0005
+  net_arch: [256, 256]
+  verbose: 1
+
+checkpoint:
+  every_steps: 1000000
+  name_prefix: pupper_ppo
+  final_name: pupper_ppo

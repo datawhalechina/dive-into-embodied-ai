@@ -1,0 +1,15 @@
+# Pretrained RL policies — fetched via shared/rl/fetch_policies.sh
+# (test_policy.json ≈ 38 MB; pulled from cs123-stanford/lab_5_fall_2025)
+shared/rl/policies/*.json
+
+# Generated artifacts
+**/tmp/
+**/portfolio/
+**/tb/
+
+# uv / Python
+.venv/
+.venv-mjx/
+__pycache__/
+*.pyc
+.DS_Store

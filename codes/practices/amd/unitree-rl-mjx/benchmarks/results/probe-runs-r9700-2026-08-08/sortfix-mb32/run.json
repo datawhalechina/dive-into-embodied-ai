@@ -1,0 +1,15 @@
+{
+  "env": "Go1JoystickFlatTerrain",
+  "seed": 0,
+  "num_timesteps_override": 3300000,
+  "num_envs_override": 2048,
+  "ppo_overrides": {},
+  "xla_flags": "--xla_gpu_enable_command_buffer=",
+  "wall_s": 330.0286161050317,
+  "backend": "gpu",
+  "device": "rocm:0",
+  "device_kind": "AMD Radeon AI PRO R9700",
+  "jax": "0.11.0",
+  "mujoco": "3.11.0",
+  "host": "r9700-box"
+}

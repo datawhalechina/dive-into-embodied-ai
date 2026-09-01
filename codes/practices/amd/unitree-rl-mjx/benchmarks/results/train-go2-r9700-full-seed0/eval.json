@@ -1,0 +1,33 @@
+{
+  "params": "benchmarks/results/train-go2-r9700-full-seed0/params.bin",
+  "episodes": 32,
+  "seed_base": 10000,
+  "episode_steps": 1000,
+  "metrics": {
+    "lin_vel_error_mean": 0.22601852416992188,
+    "ang_vel_error_mean": 0.07490903472900391,
+    "survival_rate": 1.0,
+    "air_time_cv": 0.2614632174372673,
+    "air_time_cv_per_foot": [
+      0.2687236964702606,
+      0.270738810300827,
+      0.23404425382614136,
+      0.2723461091518402
+    ],
+    "episode_return_mean": 58.805458068847656
+  },
+  "thresholds": {
+    "lin_vel_error_mean": 0.278,
+    "ang_vel_error_mean": 0.0875,
+    "survival_rate": 0.95,
+    "air_time_cv": 0.333,
+    "episode_return_mean": 52.9
+  },
+  "passed": {
+    "lin_vel_error_mean": true,
+    "ang_vel_error_mean": true,
+    "survival_rate": true,
+    "air_time_cv": true,
+    "episode_return_mean": true
+  }
+}

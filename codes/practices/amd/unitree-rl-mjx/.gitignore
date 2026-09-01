@@ -1,0 +1,7 @@
+# Fetched by scripts/fetch_go2_meshes.sh; never committed here.
+src/unitree_rl_mjx/assets/robots/unitree_go2/xmls/assets/*.obj
+# Local environment
+.venv/
+__pycache__/
+env-manifest.txt
+runs/

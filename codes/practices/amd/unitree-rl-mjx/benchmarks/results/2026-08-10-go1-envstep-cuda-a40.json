@@ -1,0 +1,61 @@
+{
+  "manifest": {
+    "measures": "env_step (physics + observations + rewards), Playground Go1JoystickFlatTerrain",
+    "runner": "one process per batch size",
+    "backend": "gpu",
+    "device": "cuda:0",
+    "device_kind": "NVIDIA A40",
+    "jax": "0.11.0",
+    "mujoco": "3.11.0",
+    "host": "a40-box",
+    "python": "3.14.3",
+    "xla_flags": null
+  },
+  "results": [
+    {
+      "num_envs": 512,
+      "steps": 100,
+      "compile_s": 16.177223516162485,
+      "wall_s": 15.171659091953188,
+      "steps_per_s": 3374.71331841062,
+      "vram_mb": 36706.0,
+      "vram_tool": "nvidia-smi"
+    },
+    {
+      "num_envs": 1024,
+      "steps": 100,
+      "compile_s": 17.185102839022875,
+      "wall_s": 17.041760392021388,
+      "steps_per_s": 6008.768909105284,
+      "vram_mb": 36714.0,
+      "vram_tool": "nvidia-smi"
+    },
+    {
+      "num_envs": 2048,
+      "steps": 100,
+      "compile_s": 16.251047286204994,
+      "wall_s": 15.862242375034839,
+      "steps_per_s": 12911.16319861114,
+      "vram_mb": 36706.0,
+      "vram_tool": "nvidia-smi"
+    },
+    {
+      "num_envs": 4096,
+      "steps": 100,
+      "compile_s": 19.621677136048675,
+      "wall_s": 19.718580803833902,
+      "steps_per_s": 20772.28600145306,
+      "vram_mb": 36716.0,
+      "vram_tool": "nvidia-smi"
+    },
+    {
+      "num_envs": 8192,
+      "steps": 100,
+      "compile_s": 17.597400947008282,
+      "wall_s": 18.676968397106975,
+      "steps_per_s": 43861.50806609987,
+      "vram_mb": 36718.0,
+      "vram_tool": "nvidia-smi"
+    }
+  ]
+}

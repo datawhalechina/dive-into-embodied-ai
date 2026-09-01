@@ -1,0 +1,28 @@
+<mujoco model="lab1_hfe_bode">
+  <option timestep="0.005" gravity="0 0 -9.81"/>
+  <compiler angle="radian" meshdir="../../shared/models/meshes/"/>
+
+  <include file="../../shared/models/leg.xml"/>
+
+  <asset>
+    <texture name="lab1_grid" type="2d" builtin="checker" width="512" height="512"
+        rgb1=".2 .4 .6" rgb2=".4 .6 .8"/>
+    <material name="lab1_grid" texture="lab1_grid" texrepeat="1 1" texuniform="true"
+        reflectance="0"/>
+  </asset>
+
+  <visual>
+    <global offwidth="640" offheight="400"/>
+  </visual>
+
+  <worldbody>
+    <geom name="floor" type="plane" size="0.7 0.7 0.02" pos="0 0 0"
+        material="lab1_grid"/>
+  </worldbody>
+
+  <!-- Lab 1：只让 HFE 实际可动。Lab 2 删除这一块即可解锁。 -->
+  <equality>
+    <joint joint1="HAA" polycoef="0 0 0 0 0"/>
+    <joint joint1="KFE" polycoef="0 0 0 0 0"/>
+  </equality>
+</mujoco>

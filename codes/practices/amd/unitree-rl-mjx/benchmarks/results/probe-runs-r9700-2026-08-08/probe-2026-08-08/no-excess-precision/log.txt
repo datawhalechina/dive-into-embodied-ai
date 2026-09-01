@@ -1,0 +1,11 @@
+           0 steps  reward 0.0010505421087145805
+   1,638,400 steps  reward nan
+   3,276,800 steps  reward nan
+   4,915,200 steps  reward nan
+   6,553,600 steps  reward nan
+   8,192,000 steps  reward nan
+   9,830,400 steps  reward nan
+  11,468,800 steps  reward nan
+  13,107,200 steps  reward nan
+  14,745,600 steps  reward nan
+done in 350s -> runs/probe-2026-08-08/no-excess-precision

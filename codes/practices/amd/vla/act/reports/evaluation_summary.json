@@ -1,0 +1,13 @@
+{
+  "optimizer_steps": 10001,
+  "evaluation_episodes": 20,
+  "successful_episodes": 10,
+  "success_rate_percent": 50.0,
+  "average_sum_reward": 138.75,
+  "average_max_reward": 2.7,
+  "evaluation_seconds": 185.02469301223755,
+  "selected_demo_episode": 1,
+  "selected_demo_duration_seconds": 4.44,
+  "selected_demo_sum_reward": 159.0,
+  "selected_demo_max_reward": 4.0
+}

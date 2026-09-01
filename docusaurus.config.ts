@@ -98,17 +98,12 @@ const config: Config = {
         },
         {
           type: 'custom-navbarMegaMenu',
-          menuId: 'overview',
+          menuId: 'foundations',
           position: 'left',
         },
         {
           type: 'custom-navbarMegaMenu',
           menuId: 'practices',
-          position: 'left',
-        },
-        {
-          type: 'custom-navbarMegaMenu',
-          menuId: 'foundations',
           position: 'left',
         },
         {
@@ -129,9 +124,8 @@ const config: Config = {
         {
           title: '内容',
           items: [
-            { label: '零基础入门', to: '/docs/overview/learning-path' },
+            { label: '理论基础', to: '/docs/foundations/intro' },
             { label: '项目实战', to: '/docs/practices/intro' },
-            { label: '理论技能树', to: '/docs/foundations/intro' },
           ],
         },
         {

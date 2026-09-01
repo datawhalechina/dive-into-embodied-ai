@@ -1,0 +1,30 @@
+[project]
+name = "cs123-quadruped-amd"
+version = "0.1.0"
+description = "Datawhale 具身智能教程 CS123 四足机器人课程 AMD Linux 依赖"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "gymnasium==1.2.2",
+    "mujoco==3.7.0",
+    "stable-baselines3>=2.7.1",
+    "tensorboard>=2.20.0",
+    "torch==2.10.0+rocm7.0",
+    "triton-rocm==3.6.0; sys_platform == 'linux'",
+    "imageio>=2.37.0",
+    "matplotlib>=3.10.8",
+    "pillow>=12.0.0",
+    "pytest>=8.0.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+torch = { index = "pytorch-rocm" }
+triton-rocm = { index = "pytorch-rocm" }
+
+[[tool.uv.index]]
+name = "pytorch-rocm"
+url = "https://download.pytorch.org/whl/rocm7.0"
+explicit = true

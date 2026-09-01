@@ -1,0 +1,26 @@
+==> baseline  [--xla_gpu_enable_command_buffer= ]
+    NAN (last eval reward nan)
+==> fast-min-max-off  [--xla_gpu_enable_command_buffer= --xla_gpu_enable_fast_min_max=false]
+    NAN (last eval reward nan)
+==> block-level-fusion-off  [--xla_gpu_enable_command_buffer= --xla_gpu_experimental_enable_fusion_block_level_rewriter=false]
+    NAN (last eval reward nan)
+==> heroless-priority-fusion-off  [--xla_gpu_enable_command_buffer= --xla_gpu_experimental_enable_triton_heroless_priority_fusion=false]
+    NAN (last eval reward nan)
+==> dynamic-slice-fusion-off  [--xla_gpu_enable_command_buffer= --xla_gpu_enable_dynamic_slice_fusion=false]
+    NAN (last eval reward nan)
+==> deterministic-ops  [--xla_gpu_enable_command_buffer= --xla_gpu_deterministic_ops=true]
+    NAN (last eval reward nan)
+==> no-excess-precision  [--xla_gpu_enable_command_buffer= --xla_allow_excess_precision=false]
+    NAN (last eval reward nan)
+==> scheduler-off  [--xla_gpu_enable_command_buffer= --xla_gpu_enable_latency_hiding_scheduler=false --xla_gpu_enable_while_loop_double_buffering=false]
+    NAN (last eval reward nan)
+
+outcome  last_reward  name                          xla_flags
+NAN      nan          baseline                      --xla_gpu_enable_command_buffer= 
+NAN      nan          fast-min-max-off              --xla_gpu_enable_command_buffer= --xla_gpu_enable_fast_min_max=false
+NAN      nan          block-level-fusion-off        --xla_gpu_enable_command_buffer= --xla_gpu_experimental_enable_fusion_block_level_rewriter=false
+NAN      nan          heroless-priority-fusion-off  --xla_gpu_enable_command_buffer= --xla_gpu_experimental_enable_triton_heroless_priority_fusion=false
+NAN      nan          dynamic-slice-fusion-off      --xla_gpu_enable_command_buffer= --xla_gpu_enable_dynamic_slice_fusion=false
+NAN      nan          deterministic-ops             --xla_gpu_enable_command_buffer= --xla_gpu_deterministic_ops=true
+NAN      nan          no-excess-precision           --xla_gpu_enable_command_buffer= --xla_allow_excess_precision=false
+NAN      nan          scheduler-off                 --xla_gpu_enable_command_buffer= --xla_gpu_enable_latency_hiding_scheduler=false --xla_gpu_enable_while_loop_double_buffering=false

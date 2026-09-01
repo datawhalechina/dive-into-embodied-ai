@@ -1,0 +1,28 @@
+run:
+  seed: 0
+  total_timesteps: 20000000
+  n_envs: 16
+  device: cpu
+  tensorboard: true
+  output_dir: outputs/m3_ultra_cpu_20m
+  resume_from: null
+environment:
+  max_steps: 1000
+ppo:
+  policy: MlpPolicy
+  n_steps: 2048
+  batch_size: 256
+  n_epochs: 4
+  learning_rate: 0.0003
+  gamma: 0.97
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.01
+  net_arch:
+  - 256
+  - 256
+  verbose: 1
+checkpoint:
+  every_steps: 1000000
+  name_prefix: pupper_ppo
+  final_name: pupper_ppo

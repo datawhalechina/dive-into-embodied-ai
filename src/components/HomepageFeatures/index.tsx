@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import { Bot, BrainCircuit, Map, type LucideIcon } from 'lucide-react';
+import { Bot, BrainCircuit, type LucideIcon } from 'lucide-react';
 import styles from './styles.module.css';
 
 type FeatureItem = {
@@ -15,34 +15,26 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: '零基础入门',
-    description: '学习路径、方向认知和从0到1搭建四足机器人的入门项目。',
-    link: '/docs/overview/learning-path',
-    eyebrow: 'Start here',
-    icon: Map,
-    accent: 'cyan',
-  },
-  {
-    title: '项目实战',
-    description: '机械臂、四足、人形、移动操作项目与 AMD 专区。',
-    link: '/docs/practices/intro',
-    eyebrow: 'Build labs',
-    icon: Bot,
-    accent: 'green',
-  },
-  {
-    title: '理论技能树',
+    title: '理论基础',
     description: '按智能决策、运动控制、感知系统和工程底座补齐能力。',
     link: '/docs/foundations/intro',
     eyebrow: 'Skill tree',
     icon: BrainCircuit,
     accent: 'blue',
   },
+  {
+    title: '项目实战',
+    description: '按 AMD 专区、仿真实战和真机实战进入可复现项目。',
+    link: '/docs/practices/intro',
+    eyebrow: 'Build labs',
+    icon: Bot,
+    accent: 'green',
+  },
 ];
 
 function Feature({ title, description, link, eyebrow, icon: Icon, accent }: FeatureItem) {
   return (
-    <div className={clsx('col col--4', styles.featureCol)}>
+    <div className={clsx('col col--6', styles.featureCol)}>
       <Link to={link} className={clsx(styles.featureCard, styles[`featureCard--${accent}`])}>
         <div className={styles.featureTopline}>
           <span>{eyebrow}</span>
@@ -64,7 +56,7 @@ export default function HomepageFeatures(): React.JSX.Element {
       <div className="container">
         <div className={styles.sectionHeading}>
           <p>LEARNING MAP</p>
-          <h2>三个阶段，围绕入门、项目和理论补齐持续生长</h2>
+          <h2>两大模块，从理论基础走向项目实战</h2>
         </div>
         <div className="row">
           {FeatureList.map((props, idx) => (

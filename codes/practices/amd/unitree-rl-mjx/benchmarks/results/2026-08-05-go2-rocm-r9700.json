@@ -1,0 +1,60 @@
+{
+  "manifest": {
+    "backend": "gpu",
+    "device": "rocm:0",
+    "device_kind": "AMD Radeon AI PRO R9700",
+    "jax": "0.11.0",
+    "host": "r9700-box",
+    "python": "3.12.3"
+  },
+  "results": [
+    {
+      "num_envs": 1,
+      "steps": 100,
+      "compile_s": 7.2472326820134185,
+      "wall_s": 3.0727282680163626,
+      "steps_per_s": 32.54436815675739,
+      "sim_s_per_wall_s": 0.16272184078378696
+    },
+    {
+      "num_envs": 64,
+      "steps": 100,
+      "compile_s": 7.346856610005489,
+      "wall_s": 3.428837940999074,
+      "steps_per_s": 1866.5215767343052,
+      "sim_s_per_wall_s": 9.332607883671526
+    },
+    {
+      "num_envs": 256,
+      "steps": 100,
+      "compile_s": 9.00617122100084,
+      "wall_s": 4.127431778004393,
+      "steps_per_s": 6202.404152728979,
+      "sim_s_per_wall_s": 31.012020763644895
+    },
+    {
+      "num_envs": 1024,
+      "steps": 100,
+      "compile_s": 9.129444094985956,
+      "wall_s": 4.803839616011828,
+      "steps_per_s": 21316.282012972988,
+      "sim_s_per_wall_s": 106.58141006486494
+    },
+    {
+      "num_envs": 4096,
+      "steps": 100,
+      "compile_s": 15.9316992929962,
+      "wall_s": 6.478908679011511,
+      "steps_per_s": 63220.52374760325,
+      "sim_s_per_wall_s": 316.10261873801625
+    },
+    {
+      "num_envs": 8192,
+      "steps": 100,
+      "compile_s": 15.97377570302342,
+      "wall_s": 7.149564538005507,
+      "steps_per_s": 114580.4049526812,
+      "sim_s_per_wall_s": 572.902024763406
+    }
+  ]
+}

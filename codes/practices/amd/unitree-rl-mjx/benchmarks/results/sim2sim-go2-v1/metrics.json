@@ -1,0 +1,110 @@
+{
+  "segments": [
+    {
+      "name": "forward",
+      "command": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "steps": 5441,
+      "transient_skipped_s": 2.0,
+      "mean_body_velocity": [
+        0.8474224680929505,
+        -0.0094398168652304,
+        -0.0069958852330453975
+      ],
+      "lin_vel_error_mean": 0.1610144508815308,
+      "ang_vel_error_mean": 0.04766154772376402
+    },
+    {
+      "name": "halt",
+      "command": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "steps": 886,
+      "transient_skipped_s": 1.0010558805,
+      "mean_body_velocity": [
+        0.0012179885275988456,
+        0.00015920509445299443,
+        0.0001580650553047404
+      ],
+      "lin_vel_error_mean": 0.001229012748380056,
+      "ang_vel_error_mean": 0.0001580650553047404
+    },
+    {
+      "name": "lateral",
+      "command": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "steps": 5399,
+      "transient_skipped_s": 2.0,
+      "mean_body_velocity": [
+        0.013973854139635278,
+        0.18185241774081798,
+        0.0032910354344493427
+      ],
+      "lin_vel_error_mean": 0.21941327824678697,
+      "ang_vel_error_mean": 0.01897642895228894
+    },
+    {
+      "name": "halt",
+      "command": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "steps": 904,
+      "transient_skipped_s": 1.00102117,
+      "mean_body_velocity": [
+        0.0003796771799506913,
+        0.0003901761745997961,
+        -0.000935104321902655
+      ],
+      "lin_vel_error_mean": 0.0005493394473931242,
+      "ang_vel_error_mean": 0.000935104321902655
+    },
+    {
+      "name": "turn",
+      "command": [
+        0.0,
+        0.0,
+        0.8
+      ],
+      "steps": 3673,
+      "transient_skipped_s": 2.0,
+      "mean_body_velocity": [
+        -0.003711278130927923,
+        0.00903077980727726,
+        0.40975197331881297
+      ],
+      "lin_vel_error_mean": 0.03493519874309335,
+      "ang_vel_error_mean": 0.390235026681187
+    },
+    {
+      "name": "halt",
+      "command": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "steps": 900,
+      "transient_skipped_s": 1.0010399,
+      "mean_body_velocity": [
+        0.0008154585846034447,
+        0.00043790469768103374,
+        0.0002607204488888889
+      ],
+      "lin_vel_error_mean": 0.0009263684947502263,
+      "ang_vel_error_mean": 0.0002607204488872487
+    }
+  ],
+  "pooled_moving": {
+    "lin_vel_error_mean": 0.1384543092904704,
+    "ang_vel_error_mean": 0.15229100111907998
+  }
+}

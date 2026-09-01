@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+portfolio/*.gif
+portfolio/*.png

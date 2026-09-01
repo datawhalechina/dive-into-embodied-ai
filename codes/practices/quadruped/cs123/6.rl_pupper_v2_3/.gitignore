@@ -1,0 +1,7 @@
+outputs/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.zip
+!reports/raw/checkpoints/pupper_ppo_2000000_steps.zip
+!reports/raw/checkpoints/pupper_ppo_5000000_steps.zip

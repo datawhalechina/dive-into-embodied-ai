@@ -1,15 +1,16 @@
 # 4. 搭建四足机器人 · 配套代码
 
-第 4 章 [搭建四足机器人](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf) 的配套代码：Pupper v3 的 MJCF 模型，以及在 MuJoCo 里看模型、让它站住、扫 PD 增益的几个脚本。
+第 4 章 [搭建四足机器人](https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/quadruped-mjcf) 的配套代码：Pupper v3 的 MJCF 模型，以及在 MuJoCo 里查看模型和保持站立的脚本。
 
 ## 目录结构
 
 ```
 4.quadruped-mjcf/
-├── run_view_pupper_fixed.py    # §4.3 看固定基座（mj_forward 静态）
-├── run_view_pupper.py          # §4.4 看浮动基座（mj_step 落地 + 伺服拉回）
-├── run_stand_pupper.py         # §4.5 让浮动基座站住并判稳
-└── run_gain_sweep.py           # §4.6 扫 gainprm / biasprm 看刚度
+├── run_view_pupper_fixed.py    # §4.4 看固定基座（mj_forward 静态）
+├── run_view_pupper.py          # §4.5 看浮动基座（mj_step 落地 + 伺服拉回）
+├── run_stand_pupper.py         # §4.6 让浮动基座站住并判稳
+├── run_gain_sweep.py           # 可选扩展：扫描 gainprm / biasprm
+└── pupper_variants/            # Pupper 形态与站姿探索
 ```
 
 模型和 STL 网格统一存放在 `../assets/mjcfs/`，供第 4、5、6 章共用。
@@ -60,7 +61,7 @@ uv run python 4.quadruped-mjcf/run_stand_pupper.py
 # uv run mjpython 4.quadruped-mjcf/run_stand_pupper.py
 ```
 
-### 扫增益看刚度变化
+### 可选：扫增益看刚度变化
 
 批量模式不开窗口（用 Agg 后端），为每组 `Kp / Kd` 重新加载模型、只在内存里改 actuator 参数，结果写到 `4.quadruped-mjcf/outputs/`（CSV + 曲线 + GIF）：
 
@@ -74,5 +75,16 @@ macOS 上想开窗口单独看某一组参数：
 ```bash
 uv run mjpython 4.quadruped-mjcf/run_gain_sweep.py --viewer default
 ```
+
+### 探索形态与站姿
+
+从同一份骨架派生 `original`、`long-leg` 和 `heavy` 三种模型，分别搜索站姿并验证稳定性：
+
+```bash
+uv run python 4.quadruped-mjcf/pupper_variants/run_pupper_variants.py
+uv run python 4.quadruped-mjcf/pupper_variants/test_pupper_variants.py
+```
+
+生成结果写入 `4.quadruped-mjcf/outputs/pupper_variants/`。详细说明见 [`pupper_variants/README.md`](pupper_variants/README.md)。
 
 > macOS 上不要走 `mjpython -m mujoco.viewer --mjcf=...`：mjpython 启动时已经 import 过一次 `mujoco.viewer` 来占用 GUI 主线程，再用 `-m` 经 runpy 跑第二次会撞出 `RuntimeError: Caught an unknown exception!`。用脚本入口 `mjpython <script>.py` 绕开它。

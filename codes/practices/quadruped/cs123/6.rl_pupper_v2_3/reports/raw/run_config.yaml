@@ -1,0 +1,37 @@
+run:
+  seed: 1
+  total_timesteps: 5000000
+  n_envs: 16
+  device: cpu
+  tensorboard: true
+  output_dir: outputs/trot_finetune_5m
+  resume_from: null
+  transfer_from: ../6.rl_pupper_v2_2/reports/raw/checkpoints/pupper_ppo_8000000_steps.zip
+environment:
+  max_steps: 1000
+  reward_overrides: {}
+gait:
+  enabled: true
+  types:
+  - trot
+  contact_reward_weight: 4.0
+  switch_steps: 0
+ppo:
+  policy: MlpPolicy
+  n_steps: 2048
+  batch_size: 256
+  n_epochs: 4
+  learning_rate: 0.0001
+  gamma: 0.97
+  gae_lambda: 0.95
+  clip_range: 0.15
+  ent_coef: 0.001
+  ent_coef_final: 0.0005
+  net_arch:
+  - 256
+  - 256
+  verbose: 1
+checkpoint:
+  every_steps: 1000000
+  name_prefix: pupper_ppo
+  final_name: pupper_ppo

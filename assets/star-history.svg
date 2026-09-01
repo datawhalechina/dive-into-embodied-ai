@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title description">
+  <title id="title">datawhalechina/dive-into-embodied-ai Star History</title>
+  <desc id="description">Cumulative GitHub stars for datawhalechina/dive-into-embodied-ai: 369</desc>
+  <defs>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.42" />
+      <stop offset="100%" stop-color="#58a6ff" stop-opacity="0.03" />
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+  </defs>
+  <rect width="960" height="560" rx="18" fill="#0d1117" />
+  <rect x="0.5" y="0.5" width="959" height="559" rx="17.5" fill="none" stroke="#30363d" />
+  <text x="48" y="50" fill="#f0f6fc" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="25" font-weight="700">datawhalechina/dive-into-embodied-ai Star History</text>
+  <text x="48" y="79" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="15">369 stars · updated through 2026-09-01</text>
+  <line x1="88" y1="456.00" x2="920" y2="456.00" stroke="#21262d" stroke-width="1" />
+  <text x="74" y="461.00" text-anchor="end" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">0</text>
+  <line x1="88" y1="370.00" x2="920" y2="370.00" stroke="#21262d" stroke-width="1" />
+  <text x="74" y="375.00" text-anchor="end" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">125</text>
+  <line x1="88" y1="284.00" x2="920" y2="284.00" stroke="#21262d" stroke-width="1" />
+  <text x="74" y="289.00" text-anchor="end" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">250</text>
+  <line x1="88" y1="198.00" x2="920" y2="198.00" stroke="#21262d" stroke-width="1" />
+  <text x="74" y="203.00" text-anchor="end" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">375</text>
+  <line x1="88" y1="112.00" x2="920" y2="112.00" stroke="#21262d" stroke-width="1" />
+  <text x="74" y="117.00" text-anchor="end" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">500</text>
+  <line x1="88.00" y1="112" x2="88.00" y2="456" stroke="#21262d" stroke-width="1" stroke-dasharray="3 5" />
+  <text x="88.00" y="485" text-anchor="start" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">2026-05-07</text>
+  <line x1="365.33" y1="112" x2="365.33" y2="456" stroke="#21262d" stroke-width="1" stroke-dasharray="3 5" />
+  <text x="365.33" y="485" text-anchor="middle" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">2026-06-15</text>
+  <line x1="642.67" y1="112" x2="642.67" y2="456" stroke="#21262d" stroke-width="1" stroke-dasharray="3 5" />
+  <text x="642.67" y="485" text-anchor="middle" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">2026-07-24</text>
+  <line x1="920.00" y1="112" x2="920.00" y2="456" stroke="#21262d" stroke-width="1" stroke-dasharray="3 5" />
+  <text x="920.00" y="485" text-anchor="end" fill="#8b949e" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">2026-09-01</text>
+  <path d="M 88.00 456 L 88.00 456.00 L 95.11 453.94 L 102.22 452.56 L 109.33 447.74 L 116.44 445.68 L 123.56 444.99 L 130.67 444.30 L 137.78 442.93 L 144.89 440.18 L 152.00 439.49 L 166.22 436.05 L 173.33 435.36 L 180.44 434.67 L 187.56 432.61 L 201.78 431.92 L 208.89 431.23 L 216.00 429.86 L 223.11 428.48 L 237.33 427.79 L 244.44 427.10 L 265.78 425.04 L 272.89 420.22 L 280.00 418.85 L 287.11 415.41 L 294.22 414.72 L 308.44 413.34 L 322.67 411.97 L 329.78 409.90 L 336.89 409.22 L 351.11 408.53 L 358.22 407.84 L 365.33 407.15 L 372.44 405.09 L 386.67 404.40 L 393.78 403.02 L 400.89 402.34 L 408.00 400.27 L 415.11 398.21 L 422.22 397.52 L 429.33 393.39 L 436.44 392.70 L 443.56 392.02 L 457.78 391.33 L 464.89 390.64 L 472.00 388.58 L 479.11 386.51 L 486.22 385.82 L 493.33 385.14 L 507.56 383.07 L 514.67 382.38 L 528.89 379.63 L 550.22 378.26 L 557.33 376.88 L 564.44 373.44 L 571.56 371.38 L 578.67 367.25 L 592.89 364.50 L 600.00 363.12 L 614.22 360.37 L 621.33 358.30 L 628.44 357.62 L 635.56 354.18 L 642.67 352.80 L 649.78 350.74 L 656.89 350.05 L 664.00 349.36 L 671.11 348.67 L 678.22 347.98 L 685.33 345.92 L 692.44 345.23 L 699.56 343.17 L 713.78 342.48 L 720.89 338.35 L 728.00 334.22 L 735.11 330.10 L 742.22 329.41 L 749.33 327.34 L 756.44 319.09 L 763.56 312.90 L 770.67 303.26 L 777.78 288.82 L 784.89 281.94 L 792.00 275.74 L 799.11 268.86 L 806.22 261.98 L 813.33 258.54 L 820.44 254.42 L 827.56 248.91 L 834.67 242.72 L 841.78 238.59 L 848.89 235.84 L 856.00 232.40 L 863.11 228.27 L 870.22 223.46 L 877.33 214.51 L 884.44 212.45 L 891.56 210.38 L 898.67 206.94 L 905.78 205.57 L 912.89 202.82 L 920.00 202.13 L 920.00 456 Z" fill="url(#area)" />
+  <path d="M 88.00 456.00 L 95.11 453.94 L 102.22 452.56 L 109.33 447.74 L 116.44 445.68 L 123.56 444.99 L 130.67 444.30 L 137.78 442.93 L 144.89 440.18 L 152.00 439.49 L 166.22 436.05 L 173.33 435.36 L 180.44 434.67 L 187.56 432.61 L 201.78 431.92 L 208.89 431.23 L 216.00 429.86 L 223.11 428.48 L 237.33 427.79 L 244.44 427.10 L 265.78 425.04 L 272.89 420.22 L 280.00 418.85 L 287.11 415.41 L 294.22 414.72 L 308.44 413.34 L 322.67 411.97 L 329.78 409.90 L 336.89 409.22 L 351.11 408.53 L 358.22 407.84 L 365.33 407.15 L 372.44 405.09 L 386.67 404.40 L 393.78 403.02 L 400.89 402.34 L 408.00 400.27 L 415.11 398.21 L 422.22 397.52 L 429.33 393.39 L 436.44 392.70 L 443.56 392.02 L 457.78 391.33 L 464.89 390.64 L 472.00 388.58 L 479.11 386.51 L 486.22 385.82 L 493.33 385.14 L 507.56 383.07 L 514.67 382.38 L 528.89 379.63 L 550.22 378.26 L 557.33 376.88 L 564.44 373.44 L 571.56 371.38 L 578.67 367.25 L 592.89 364.50 L 600.00 363.12 L 614.22 360.37 L 621.33 358.30 L 628.44 357.62 L 635.56 354.18 L 642.67 352.80 L 649.78 350.74 L 656.89 350.05 L 664.00 349.36 L 671.11 348.67 L 678.22 347.98 L 685.33 345.92 L 692.44 345.23 L 699.56 343.17 L 713.78 342.48 L 720.89 338.35 L 728.00 334.22 L 735.11 330.10 L 742.22 329.41 L 749.33 327.34 L 756.44 319.09 L 763.56 312.90 L 770.67 303.26 L 777.78 288.82 L 784.89 281.94 L 792.00 275.74 L 799.11 268.86 L 806.22 261.98 L 813.33 258.54 L 820.44 254.42 L 827.56 248.91 L 834.67 242.72 L 841.78 238.59 L 848.89 235.84 L 856.00 232.40 L 863.11 228.27 L 870.22 223.46 L 877.33 214.51 L 884.44 212.45 L 891.56 210.38 L 898.67 206.94 L 905.78 205.57 L 912.89 202.82 L 920.00 202.13" fill="none" stroke="#58a6ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="920.00" cy="202.13" r="6" fill="#58a6ff" filter="url(#glow)" />
+  <circle cx="920.00" cy="202.13" r="2.5" fill="#f0f6fc" />
+  <text x="88" y="532" fill="#6e7681" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="12">Generated from GitHub stargazer timestamps</text>
+</svg>

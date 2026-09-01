@@ -1,0 +1,35 @@
+<mujoco model="planar_3dof_ik">
+  <option gravity="0 0 0" timestep="0.002"/>
+
+  <worldbody>
+    <body name="link1" pos="0 0 0">
+      <joint name="j1" type="hinge" axis="0 0 1" damping="0.02"/>
+      <geom type="capsule" fromto="0 0 0 0.3 0 0" size="0.02" mass="0.3"/>
+
+      <body name="link2" pos="0.3 0 0">
+        <joint name="j2" type="hinge" axis="0 0 1" damping="0.02"/>
+        <geom type="capsule" fromto="0 0 0 0.25 0 0" size="0.018" mass="0.25"/>
+
+        <body name="link3" pos="0.25 0 0">
+          <joint name="j3" type="hinge" axis="0 0 1" damping="0.02"/>
+          <geom type="capsule" fromto="0 0 0 0.15 0 0" size="0.015" mass="0.15"/>
+          <site name="end_site" pos="0.15 0 0" size="0.01"/>
+        </body>
+      </body>
+    </body>
+
+    <body name="target_marker" mocap="true" pos="0.45 0.1 0.04">
+      <geom type="sphere" size="0.028" rgba="0.2 0.9 0.2 1" contype="0" conaffinity="0"/>
+    </body>
+
+    <body name="end_marker" mocap="true" pos="0.45 0.1 0.08">
+      <geom type="sphere" size="0.014" rgba="0.9 0.2 0.2 1" contype="0" conaffinity="0"/>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor name="m1" joint="j1" ctrlrange="-4 4"/>
+    <motor name="m2" joint="j2" ctrlrange="-4 4"/>
+    <motor name="m3" joint="j3" ctrlrange="-4 4"/>
+  </actuator>
+</mujoco>

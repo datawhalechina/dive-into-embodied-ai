@@ -1,0 +1,23 @@
+<mujoco model="lab2_fk_teleop">
+  <option timestep="0.005" gravity="0 0 -9.81"/>
+  <compiler angle="radian" meshdir="../../shared/models/meshes/"/>
+
+  <include file="../../shared/models/leg.xml"/>
+
+  <asset>
+    <texture name="lab2_grid" type="2d" builtin="checker" width="512" height="512"
+        rgb1=".2 .4 .6" rgb2=".4 .6 .8"/>
+    <material name="lab2_grid" texture="lab2_grid" texrepeat="1 1" texuniform="true"
+        reflectance="0"/>
+  </asset>
+
+  <visual>
+    <global offwidth="720" offheight="400"/>
+  </visual>
+
+  <worldbody>
+    <geom name="floor" type="plane" size="0.7 0.7 0.02" pos="0 0 0"
+        material="lab2_grid"/>
+    <camera name="iso" pos="0.55 -0.9 0.72" xyaxes="0.86 0.51 0 -0.27 0.46 0.85"/>
+  </worldbody>
+</mujoco>

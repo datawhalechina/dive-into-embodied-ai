@@ -1,0 +1,36 @@
+[project]
+name = "lerobot-act-amd-example"
+version = "0.1.0"
+description = "LeRobot ACT training example for AMD GPUs with PyTorch ROCm"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "lerobot[aloha,training]==0.6.1",
+    "matplotlib>=3.10,<4.0",
+    "torch==2.10.0+rocm7.0",
+    "torchcodec==0.10.0",
+    "torchvision==0.25.0+rocm7.0",
+    "triton-rocm==3.6.0; sys_platform == 'linux'",
+]
+
+[tool.uv]
+package = false
+environments = [
+    "sys_platform == 'linux' and platform_machine == 'x86_64'",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-rocm" }
+torchcodec = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-rocm" }
+triton-rocm = { index = "pytorch-rocm" }
+
+[[tool.uv.index]]
+name = "pytorch-rocm"
+url = "https://download.pytorch.org/whl/rocm7.0"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

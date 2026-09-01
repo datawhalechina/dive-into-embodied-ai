@@ -1,0 +1,114 @@
+<mujoco model="shared_pupper_skeleton">
+  <!-- Lab 4+: 完整 12-DoF Pupper skeleton。变体文件在 include 前注入 variant_* default。 -->
+  <asset>
+    <texture name="grid" type="2d" builtin="checker" width="512" height="512" rgb1=".2 .4 .6" rgb2=".4 .6 .8"/>
+    <material name="grid" texture="grid" texrepeat="1 1" texuniform="true" reflectance="0"/>
+    <mesh name="body" file="BodyV4v70_001.stl"/>
+    <mesh name="hip_mesh" file="LegAssemblyForFlangedv26_010.stl" scale="1 -1 1"/>
+    <mesh name="upper_leg_mesh" file="LegAssemblyForFlangedv26_011.stl" scale="1 1 -1"/>
+    <mesh name="lower_leg_mesh" file="LegAssemblyForFlangedv26_012.stl" scale="1 1 -1"/>
+  </asset>
+
+  <option gravity="0 0 -9.81" timestep="0.004" cone="elliptic" impratio="50"/>
+
+  <worldbody>
+    <geom name="floor" type="plane" size="2 2 .05" material="grid" condim="3" contype="1" conaffinity="1"/>
+    <light name="key" pos="0 0 3" dir="0 0 -1" diffuse="1 1 1"/>
+    <camera name="iso" pos="0.70 -0.95 0.58" xyaxes="0.805 0.593 0 -0.233 0.316 0.920"/>
+
+    <body name="base" pos="0 0 0.18">
+      <freejoint name="root"/>
+      <geom name="torso_mass" class="variant_torso" pos="0.01 0 0.02"/>
+      <geom name="torso_ballast" class="variant_ballast" pos="0.01 0 0.075"/>
+      <geom name="torso_mesh" type="mesh" mesh="body" quat="0.499998 -0.5 -0.500002 0.5" group="1" contype="0" conaffinity="0" density="0"/>
+      <site name="body_imu_site" pos="0.08 0 0.03" size="0.006"/>
+
+      <body name="FL_hip" pos="0.075 0.0835 0">
+        <joint name="FL_HAA" type="hinge" axis="1 0 0" range="-0.8 0.8"/>
+        <geom name="FL_hip_mass" class="variant_hip"/>
+        <geom name="FL_hip_mesh" type="mesh" mesh="hip_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+        <body name="FL_thigh">
+          <joint name="FL_HFE" type="hinge" axis="0 1 0" range="-1.8 1.2"/>
+          <geom name="FL_thigh_capsule" class="variant_thigh"/>
+          <geom name="FL_thigh_mesh" type="mesh" mesh="upper_leg_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+          <body name="FL_calf" pos="0 0 -0.08">
+            <joint name="FL_KFE" type="hinge" axis="0 1 0" range="-2.6 0.1"/>
+            <geom name="FL_calf_capsule" class="variant_calf"/>
+            <geom name="FL_calf_mesh" type="mesh" mesh="lower_leg_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+            <geom name="FL_foot_geom" class="variant_foot"/>
+            <site name="FL_foot" class="variant_foot"/>
+          </body>
+        </body>
+      </body>
+
+      <body name="FR_hip" pos="0.075 -0.0835 0">
+        <joint name="FR_HAA" type="hinge" axis="1 0 0" range="-0.8 0.8"/>
+        <geom name="FR_hip_mass" class="variant_hip"/>
+        <geom name="FR_hip_mesh" type="mesh" mesh="hip_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+        <body name="FR_thigh">
+          <joint name="FR_HFE" type="hinge" axis="0 1 0" range="-1.8 1.2"/>
+          <geom name="FR_thigh_capsule" class="variant_thigh"/>
+          <geom name="FR_thigh_mesh" type="mesh" mesh="upper_leg_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+          <body name="FR_calf" pos="0 0 -0.08">
+            <joint name="FR_KFE" type="hinge" axis="0 1 0" range="-2.6 0.1"/>
+            <geom name="FR_calf_capsule" class="variant_calf"/>
+            <geom name="FR_calf_mesh" type="mesh" mesh="lower_leg_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+            <geom name="FR_foot_geom" class="variant_foot"/>
+            <site name="FR_foot" class="variant_foot"/>
+          </body>
+        </body>
+      </body>
+
+      <body name="RL_hip" pos="-0.075 0.0725 0">
+        <joint name="RL_HAA" type="hinge" axis="1 0 0" range="-0.8 0.8"/>
+        <geom name="RL_hip_mass" class="variant_hip"/>
+        <geom name="RL_hip_mesh" type="mesh" mesh="hip_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+        <body name="RL_thigh">
+          <joint name="RL_HFE" type="hinge" axis="0 1 0" range="-1.8 1.2"/>
+          <geom name="RL_thigh_capsule" class="variant_thigh"/>
+          <geom name="RL_thigh_mesh" type="mesh" mesh="upper_leg_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+          <body name="RL_calf" pos="0 0 -0.08">
+            <joint name="RL_KFE" type="hinge" axis="0 1 0" range="-2.6 0.1"/>
+            <geom name="RL_calf_capsule" class="variant_calf"/>
+            <geom name="RL_calf_mesh" type="mesh" mesh="lower_leg_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+            <geom name="RL_foot_geom" class="variant_foot"/>
+            <site name="RL_foot" class="variant_foot"/>
+          </body>
+        </body>
+      </body>
+
+      <body name="RR_hip" pos="-0.075 -0.0725 0">
+        <joint name="RR_HAA" type="hinge" axis="1 0 0" range="-0.8 0.8"/>
+        <geom name="RR_hip_mass" class="variant_hip"/>
+        <geom name="RR_hip_mesh" type="mesh" mesh="hip_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+        <body name="RR_thigh">
+          <joint name="RR_HFE" type="hinge" axis="0 1 0" range="-1.8 1.2"/>
+          <geom name="RR_thigh_capsule" class="variant_thigh"/>
+          <geom name="RR_thigh_mesh" type="mesh" mesh="upper_leg_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+          <body name="RR_calf" pos="0 0 -0.08">
+            <joint name="RR_KFE" type="hinge" axis="0 1 0" range="-2.6 0.1"/>
+            <geom name="RR_calf_capsule" class="variant_calf"/>
+            <geom name="RR_calf_mesh" type="mesh" mesh="lower_leg_mesh" group="1" contype="0" conaffinity="0" density="0"/>
+            <geom name="RR_foot_geom" class="variant_foot"/>
+            <site name="RR_foot" class="variant_foot"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <general name="FL_HAA_motor" joint="FL_HAA" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+    <general name="FL_HFE_motor" joint="FL_HFE" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+    <general name="FL_KFE_motor" joint="FL_KFE" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+    <general name="FR_HAA_motor" joint="FR_HAA" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+    <general name="FR_HFE_motor" joint="FR_HFE" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+    <general name="FR_KFE_motor" joint="FR_KFE" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+    <general name="RL_HAA_motor" joint="RL_HAA" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+    <general name="RL_HFE_motor" joint="RL_HFE" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+    <general name="RL_KFE_motor" joint="RL_KFE" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+    <general name="RR_HAA_motor" joint="RR_HAA" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+    <general name="RR_HFE_motor" joint="RR_HFE" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+    <general name="RR_KFE_motor" joint="RR_KFE" forcerange="-18 18" forcelimited="true" gainprm="1 0 0" biasprm="0 0 0"/>
+  </actuator>
+</mujoco>

@@ -1,0 +1,42 @@
+# 第四阶段：在 v2.3 的 trot 条件化策略上继续微调，配合本目录新增的摆动整形——
+# AIR_TIME_TARGET 0.1 → 0.25 秒（抑制 5 Hz 小碎步，步频落向 trot 时钟的 2 Hz）、
+# foot_clearance 奖励项（摆动相足端目标高度 3.5cm，产生可见抬腿）。
+# 从 v2.3 的 5M checkpoint（节律最佳，接触匹配率 62.2%）同结构续训。
+run:
+  seed: 1
+  total_timesteps: 8000000
+  n_envs: 16
+  device: cpu
+  tensorboard: true
+  output_dir: outputs/trot_finetune_8m
+  resume_from: ../6.rl_pupper_v2_3/reports/raw/checkpoints/pupper_ppo_5000000_steps.zip
+  transfer_from: null
+
+environment:
+  max_steps: 1000
+  reward_overrides: {}
+
+gait:
+  enabled: true
+  types: [trot]
+  contact_reward_weight: 4.0
+  switch_steps: 0
+
+ppo:
+  policy: MlpPolicy
+  n_steps: 2048
+  batch_size: 256
+  n_epochs: 4
+  learning_rate: 0.0001
+  gamma: 0.97
+  gae_lambda: 0.95
+  clip_range: 0.15
+  ent_coef: 0.001
+  ent_coef_final: 0.0005
+  net_arch: [256, 256]
+  verbose: 1
+
+checkpoint:
+  every_steps: 1000000
+  name_prefix: pupper_ppo
+  final_name: pupper_ppo

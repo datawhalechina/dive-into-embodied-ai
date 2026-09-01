@@ -1,0 +1,61 @@
+{
+  "manifest": {
+    "measures": "env_step (physics + observations + rewards), Playground Go1JoystickFlatTerrain",
+    "runner": "one process per batch size",
+    "backend": "gpu",
+    "device": "rocm:0",
+    "device_kind": "AMD Radeon AI PRO R9700",
+    "jax": "0.11.0",
+    "mujoco": "3.11.0",
+    "host": "r9700-box",
+    "python": "3.12.3",
+    "xla_flags": "--xla_gpu_enable_command_buffer="
+  },
+  "results": [
+    {
+      "num_envs": 512,
+      "steps": 100,
+      "compile_s": 6.278524804976769,
+      "wall_s": 5.643478467944078,
+      "steps_per_s": 9072.418773425778,
+      "vram_mb": 27043.00032,
+      "vram_tool": "rocm-smi"
+    },
+    {
+      "num_envs": 1024,
+      "steps": 100,
+      "compile_s": 6.842941230977885,
+      "wall_s": 5.689490721095353,
+      "steps_per_s": 17998.09596671347,
+      "vram_mb": 27063.681024,
+      "vram_tool": "rocm-smi"
+    },
+    {
+      "num_envs": 2048,
+      "steps": 100,
+      "compile_s": 9.984994434053078,
+      "wall_s": 6.6186487210216,
+      "steps_per_s": 30942.871971665656,
+      "vram_mb": 27150.364672,
+      "vram_tool": "rocm-smi"
+    },
+    {
+      "num_envs": 4096,
+      "steps": 100,
+      "compile_s": 15.796630683005787,
+      "wall_s": 8.194531679037027,
+      "steps_per_s": 49984.55263133888,
+      "vram_mb": 27150.68416,
+      "vram_tool": "rocm-smi"
+    },
+    {
+      "num_envs": 8192,
+      "steps": 100,
+      "compile_s": 9.956872627022676,
+      "wall_s": 10.038173657027073,
+      "steps_per_s": 81608.47062319262,
+      "vram_mb": 27244.756992,
+      "vram_tool": "rocm-smi"
+    }
+  ]
+}

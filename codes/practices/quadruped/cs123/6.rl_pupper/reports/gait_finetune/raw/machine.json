@@ -1,0 +1,13 @@
+{
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "python": "3.12.13",
+  "logical_cpu_count": 28,
+  "memory_bytes": 103079215104,
+  "gpu": "Graphics/Displays:\n\n    Apple M3 Ultra:\n\n      Chipset Model: Apple M3 Ultra\n      Type: GPU\n      Bus: Built-In\n      Total Number of Cores: 60\n      Vendor: Apple (0x106b)\n      Metal Support: Metal 4\n      Displays:\n        Studio Display XDR:\n          Display Type: Retina XDR LCD\n          Resolution: 5120 x 2880 Retina\n          Display Serial Number: D4KQ345XWP\n          Display Firmware Version: Version 26.4 (Build 23E246)\n          Main Display: Yes\n          Mirror: Off\n          Online: Yes\n          Automatically Adjust Brightness: Yes\n        R27U91:\n          Resolution: 3840 x 2160 (2160p/4K UHD 1 - Ultra High Definition)\n          UI Looks like: 1920 x 1080 @ 144.00Hz\n          Mirror: Off\n          Online: Yes\n          Rotation: Supported",
+  "torch": "2.13.0",
+  "stable_baselines3": "2.9.0",
+  "mujoco": "3.7.0",
+  "mps_available": true,
+  "cuda_available": false
+}

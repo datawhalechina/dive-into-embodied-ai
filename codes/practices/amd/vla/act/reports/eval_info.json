@@ -1,0 +1,131 @@
+{
+  "per_task": [
+    {
+      "task_group": "aloha",
+      "task_id": 0,
+      "metrics": {
+        "sum_rewards": [
+          3.0,
+          159.0,
+          73.0,
+          14.0,
+          237.0,
+          11.0,
+          72.0,
+          236.0,
+          300.0,
+          247.0,
+          270.0,
+          4.0,
+          280.0,
+          70.0,
+          270.0,
+          2.0,
+          41.0,
+          243.0,
+          243.0,
+          0.0
+        ],
+        "max_rewards": [
+          2.0,
+          4.0,
+          1.0,
+          2.0,
+          4.0,
+          2.0,
+          1.0,
+          4.0,
+          4.0,
+          4.0,
+          4.0,
+          2.0,
+          4.0,
+          1.0,
+          4.0,
+          1.0,
+          2.0,
+          4.0,
+          4.0,
+          0.0
+        ],
+        "successes": [
+          false,
+          true,
+          false,
+          false,
+          true,
+          false,
+          false,
+          true,
+          true,
+          true,
+          true,
+          false,
+          true,
+          false,
+          true,
+          false,
+          false,
+          true,
+          true,
+          false
+        ],
+        "video_paths": [
+          "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_0.mp4",
+          "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_1.mp4",
+          "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_2.mp4",
+          "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_3.mp4",
+          "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_4.mp4",
+          "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_5.mp4",
+          "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_6.mp4",
+          "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_7.mp4",
+          "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_8.mp4",
+          "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_9.mp4"
+        ],
+        "predicted_video_paths": []
+      }
+    }
+  ],
+  "per_group": {
+    "aloha": {
+      "avg_sum_reward": 138.75,
+      "avg_max_reward": 2.7,
+      "pc_success": 50.0,
+      "n_episodes": 20,
+      "video_paths": [
+        "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_0.mp4",
+        "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_1.mp4",
+        "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_2.mp4",
+        "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_3.mp4",
+        "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_4.mp4",
+        "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_5.mp4",
+        "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_6.mp4",
+        "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_7.mp4",
+        "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_8.mp4",
+        "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_9.mp4"
+      ],
+      "predicted_video_paths": []
+    }
+  },
+  "overall": {
+    "avg_sum_reward": 138.75,
+    "avg_max_reward": 2.7,
+    "pc_success": 50.0,
+    "n_episodes": 20,
+    "eval_s": 185.02469301223755,
+    "eval_ep_s": 9.251234662532806,
+    "video_paths": [
+      "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_0.mp4",
+      "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_1.mp4",
+      "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_2.mp4",
+      "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_3.mp4",
+      "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_4.mp4",
+      "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_5.mp4",
+      "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_6.mp4",
+      "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_7.mp4",
+      "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_8.mp4",
+      "outputs/eval_act_aloha_transfer_rocm_10k/videos/aloha_0/eval_episode_9.mp4"
+    ],
+    "predicted_video_paths": []
+  }
+}

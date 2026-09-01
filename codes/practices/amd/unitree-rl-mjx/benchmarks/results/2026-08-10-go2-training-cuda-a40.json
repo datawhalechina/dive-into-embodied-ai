@@ -1,0 +1,62 @@
+{
+  "manifest": {
+    "spec": "training",
+    "backend": "gpu",
+    "device": "cuda:0",
+    "device_kind": "NVIDIA A40",
+    "jax": "0.11.0",
+    "host": "a40-box",
+    "python": "3.14.3",
+    "xla_flags": null
+  },
+  "results": [
+    {
+      "num_envs": 1,
+      "steps": 100,
+      "compile_s": 13.703365915920585,
+      "wall_s": 13.747106710914522,
+      "steps_per_s": 7.274257929532543,
+      "sim_s_per_wall_s": 0.036371289647662716
+    },
+    {
+      "num_envs": 64,
+      "steps": 100,
+      "compile_s": 16.144607052905485,
+      "wall_s": 15.3616889170371,
+      "steps_per_s": 416.6208568969255,
+      "sim_s_per_wall_s": 2.0831042844846275
+    },
+    {
+      "num_envs": 256,
+      "steps": 100,
+      "compile_s": 14.475945475045592,
+      "wall_s": 14.85414062300697,
+      "steps_per_s": 1723.4251815516818,
+      "sim_s_per_wall_s": 8.61712590775841
+    },
+    {
+      "num_envs": 1024,
+      "steps": 100,
+      "compile_s": 17.062819813843817,
+      "wall_s": 17.275381163926795,
+      "steps_per_s": 5927.510312410605,
+      "sim_s_per_wall_s": 29.637551562053027
+    },
+    {
+      "num_envs": 4096,
+      "steps": 100,
+      "compile_s": 20.530953892040998,
+      "wall_s": 21.547600846970454,
+      "steps_per_s": 19009.0768298963,
+      "sim_s_per_wall_s": 95.0453841494815
+    },
+    {
+      "num_envs": 8192,
+      "steps": 100,
+      "compile_s": 18.622734680073336,
+      "wall_s": 20.549687130842358,
+      "steps_per_s": 39864.35388451678,
+      "sim_s_per_wall_s": 199.32176942258388
+    }
+  ]
+}

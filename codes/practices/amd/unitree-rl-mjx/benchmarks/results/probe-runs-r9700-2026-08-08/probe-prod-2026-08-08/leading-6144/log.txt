@@ -1,0 +1,11 @@
+           0 steps  reward 0.0010779325384646654
+   1,228,800 steps  reward nan
+   2,457,600 steps  reward nan
+   3,686,400 steps  reward nan
+   4,915,200 steps  reward nan
+   6,144,000 steps  reward nan
+   7,372,800 steps  reward nan
+   8,601,600 steps  reward nan
+   9,830,400 steps  reward nan
+  11,059,200 steps  reward nan
+done in 308s -> runs/probe-prod-2026-08-08/leading-6144

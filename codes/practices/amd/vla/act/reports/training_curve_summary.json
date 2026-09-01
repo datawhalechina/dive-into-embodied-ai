@@ -1,0 +1,13 @@
+{
+  "steps": 10001,
+  "recorded_points": 1002,
+  "initial_loss": 99.21453094,
+  "final_loss": 0.12136867,
+  "best_loss": 0.08601788,
+  "final_l1_loss": 0.07924142,
+  "final_kld_loss": 0.00421272,
+  "elapsed_hours": 0.8411763888888889,
+  "median_steps_per_second_last_20_percent": 3.34883,
+  "peak_gpu_memory_gb": 6.1006,
+  "ema_span": 80
+}

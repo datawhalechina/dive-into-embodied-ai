@@ -1,0 +1,18 @@
+<mujoco model="single_pendulum">
+  <option gravity="0 0 -9.81" timestep="0.002"/>
+
+  <worldbody>
+    <body name="link" pos="0 0 1">
+      <joint name="hinge" type="hinge" axis="0 1 0" damping="0.02"/>
+      <geom type="capsule" fromto="0 0 0 0 0 -0.5" size="0.04" mass="1"/>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <!-- 写法 A:让 MuJoCo 帮你实现 PD -->
+    <position name="pos_act" joint="hinge" kp="20" kv="1" ctrlrange="-3.14 3.14"/>
+
+    <!-- 写法 B:自己在 Python 里手搓 PD -->
+    <motor    name="tor_act" joint="hinge" ctrlrange="-5 5"/>
+  </actuator>
+</mujoco>

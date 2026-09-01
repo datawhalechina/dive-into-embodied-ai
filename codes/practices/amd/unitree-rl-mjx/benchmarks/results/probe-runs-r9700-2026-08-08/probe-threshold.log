@@ -1,0 +1,14 @@
+==> envs-2048  [--xla_gpu_enable_command_buffer=] [--num-envs 2048]
+    NAN (last eval reward nan)
+==> minibatches-16  [--xla_gpu_enable_command_buffer=] [--ppo-override num_minibatches=16]
+    PASS (last eval reward 16.35683822631836)
+==> envs-512  [--xla_gpu_enable_command_buffer=] [--num-envs 512]
+    NAN (last eval reward nan)
+==> minibatches-8-cmdbuf  [] [--ppo-override num_minibatches=8]
+    CRASH-139 (last eval reward -)
+
+outcome    last_reward        name                  xla_flags
+NAN        nan                envs-2048             --xla_gpu_enable_command_buffer= --num-envs 2048
+PASS       16.35683822631836  minibatches-16        --xla_gpu_enable_command_buffer= --ppo-override num_minibatches=16
+NAN        nan                envs-512              --xla_gpu_enable_command_buffer= --num-envs 512
+CRASH-139  -                  minibatches-8-cmdbuf   --ppo-override num_minibatches=8

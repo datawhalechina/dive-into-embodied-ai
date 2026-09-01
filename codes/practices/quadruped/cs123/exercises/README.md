@@ -10,7 +10,6 @@
 | Ch1 PID | `lab_1_pid_bode` | `bode_pupper_hfe.png` + HFE 正弦踢腿 GIF |
 | Ch2 FK | `lab_2_fk_teleop` | `leg_teleop.gif` + 单腿工作空间图 |
 | Ch3 IK | `lab_3_stepping` | `leg_stepping.gif` |
-| Ch4 URDF | `lab_4_urdf_surgery` | `pupper_zoo.gif` + PD 调参图 |
 | Ch6 RL | `lab_6_rl_pupper` | `rl_pupper_commands.gif` + PPO checkpoint |
 | Ch7 LLM | `lab_7_llm_control` | 5 张任务卡 GIF + 消息轨迹 |
 | Ch8 视觉 | `lab_8_ball_chase` | `ball_chase.gif` |

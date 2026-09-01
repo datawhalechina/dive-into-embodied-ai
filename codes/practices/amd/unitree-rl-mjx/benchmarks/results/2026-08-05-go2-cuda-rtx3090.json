@@ -1,0 +1,60 @@
+{
+  "manifest": {
+    "backend": "gpu",
+    "device": "cuda:0",
+    "device_kind": "NVIDIA GeForce RTX 3090",
+    "jax": "0.11.0",
+    "host": "a40-box",
+    "python": "3.14.3"
+  },
+  "results": [
+    {
+      "num_envs": 1,
+      "steps": 100,
+      "compile_s": 11.337182878050953,
+      "wall_s": 11.492643725010566,
+      "steps_per_s": 8.701218135073448,
+      "sim_s_per_wall_s": 0.04350609067536724
+    },
+    {
+      "num_envs": 64,
+      "steps": 100,
+      "compile_s": 13.244715502951294,
+      "wall_s": 13.501970088924281,
+      "steps_per_s": 474.0049013476889,
+      "sim_s_per_wall_s": 2.3700245067384444
+    },
+    {
+      "num_envs": 256,
+      "steps": 100,
+      "compile_s": 12.824061912950128,
+      "wall_s": 12.764718786929734,
+      "steps_per_s": 2005.5279264132935,
+      "sim_s_per_wall_s": 10.027639632066467
+    },
+    {
+      "num_envs": 1024,
+      "steps": 100,
+      "compile_s": 13.813683877000585,
+      "wall_s": 14.029392390046269,
+      "steps_per_s": 7298.961861858815,
+      "sim_s_per_wall_s": 36.49480930929408
+    },
+    {
+      "num_envs": 4096,
+      "steps": 100,
+      "compile_s": 14.024038661038503,
+      "wall_s": 14.627669649082236,
+      "steps_per_s": 28001.726168713343,
+      "sim_s_per_wall_s": 140.00863084356672
+    },
+    {
+      "num_envs": 8192,
+      "steps": 100,
+      "compile_s": 19.928228414966725,
+      "wall_s": 20.629051764961332,
+      "steps_per_s": 39710.98668681515,
+      "sim_s_per_wall_s": 198.55493343407574
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+# 实验二：从实验一的 19M checkpoint 迁移，快速验证 gait 条件和接触奖励。
+# 这是迁移微调，不用于和从零训练的无 gait 模型做严格公平对比。
+run:
+  seed: 1
+  total_timesteps: 5000000
+  n_envs: 16
+  device: cpu
+  tensorboard: true
+  output_dir: outputs/gait_finetune_5m
+  resume_from: null
+  transfer_from: reports/raw/checkpoints/pupper_ppo_19000000_steps.zip
+
+environment:
+  max_steps: 1000
+
+gait:
+  enabled: true
+  types: [walk, trot, pace]
+  contact_reward_weight: 0.5
+  switch_steps: 500
+
+ppo:
+  policy: MlpPolicy
+  n_steps: 2048
+  batch_size: 256
+  n_epochs: 4
+  learning_rate: 0.0001
+  gamma: 0.97
+  gae_lambda: 0.95
+  clip_range: 0.15
+  ent_coef: 0.001
+  net_arch: [256, 256]
+  verbose: 1
+
+checkpoint:
+  every_steps: 500000
+  name_prefix: pupper_gait_finetune
+  final_name: pupper_gait_finetune_final

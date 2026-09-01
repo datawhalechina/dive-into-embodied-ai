@@ -1,0 +1,11 @@
+==> unroll-10  [--xla_gpu_enable_command_buffer= ] [--ppo-override unroll_length=10]
+    NAN (last eval reward nan)
+==> minibatches-8  [--xla_gpu_enable_command_buffer= ] [--ppo-override num_minibatches=8]
+    PASS (last eval reward 13.853818893432617)
+==> batch-128  [--xla_gpu_enable_command_buffer= ] [--ppo-override batch_size=128]
+    PASS (last eval reward 16.704721450805664)
+
+outcome  last_reward         name           xla_flags
+NAN      nan                 unroll-10      --xla_gpu_enable_command_buffer=  --ppo-override unroll_length=10
+PASS     13.853818893432617  minibatches-8  --xla_gpu_enable_command_buffer=  --ppo-override num_minibatches=8
+PASS     16.704721450805664  batch-128      --xla_gpu_enable_command_buffer=  --ppo-override batch_size=128

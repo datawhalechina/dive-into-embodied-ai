@@ -82,6 +82,15 @@ assert.ok(sidebars.practicesLerobotCourseSidebar, 'practicesLerobotCourseSidebar
 assert.ok(sidebars.practicesSo101CourseSidebar, 'practicesSo101CourseSidebar should exist');
 assert.ok(sidebars.practicesAmdSidebar, 'practicesAmdSidebar should exist');
 
+const overviewCategories = sidebars.practicesOverviewSidebar.filter(
+  (item) => item && typeof item === 'object' && item.type === 'category',
+);
+assert.deepEqual(
+  overviewCategories.map((category) => category.label),
+  ['AMD 专区', '仿真实战', '真机实战'],
+  'Practice overview should use the three top-level project groups',
+);
+
 const cs123Refs = collectSidebarRefs(sidebars.practicesCs123CourseSidebar);
 assert.ok(
   cs123Refs.includes('practices/quadruped/cs123/intro'),
@@ -112,8 +121,15 @@ assert.deepEqual(
 const amdRefs = collectSidebarRefs(sidebars.practicesAmdSidebar);
 assert.deepEqual(
   amdRefs,
-  ['practices/amd/intro', 'practices/amd/cs123/intro'],
-  'AMD sidebar should only include its section overview and CS123 project',
+  [
+    'practices/amd/intro',
+    'practices/amd/aup-learning-cloud',
+    'practices/amd/vla-act/index',
+    'practices/amd/pupper-control/intro',
+    'practices/amd/pupper-control/locomotion',
+    'practices/amd/pupper-control/vla',
+  ],
+  'AMD sidebar should only include its overview, cloud guide, ACT tutorial, and Pupper project',
 );
 
 for (const docPath of listDocs(path.join(rootDir, 'docs/practices/quadruped/cs123'))) {

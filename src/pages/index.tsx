@@ -28,7 +28,7 @@ const TYPEWRITER_PHRASES = [
 const PROJECT_SIGNALS = [
   { label: 'License', value: 'CC BY-NC-SA 4.0' },
   { label: 'Status', value: 'Alpha' },
-  { label: 'Tracks', value: '4 learning routes' },
+  { label: 'Tracks', value: 'theory · practice' },
   { label: 'Labs', value: 'CS123 playgrounds' },
 ];
 
@@ -46,8 +46,8 @@ const CONSOLE_LINES = [
 
 const REPO_METRICS = [
   { label: 'foundation', value: 'ROS2 · RL · VLA' },
-  { label: 'practice', value: 'robot arm · quadruped' },
-  { label: 'onboarding', value: 'learning path · quadruped lab' },
+  { label: 'simulation', value: 'MuJoCo · Isaac Lab' },
+  { label: 'hardware', value: 'AMD · SO-101' },
 ];
 
 function Typewriter() {
@@ -102,11 +102,10 @@ function HomepageHeader() {
             <Typewriter />
           </p>
           <p className="site-hero__copy">
-            给想入门、转行或求职具身智能的同学准备。用开源教程、可运行实验和机器人项目，
-            把「认知 → 项目 → 面试」连成一条能持续迭代的学习路线。
+            用开源教程建立理论基础，再通过 AMD、仿真与真机项目把算法、控制和感知落到可运行实验中。
           </p>
           <div className="site-hero__actions">
-            <Link className="site-button site-button--primary" to="/docs/overview/intro">
+            <Link className="site-button site-button--primary" to="/docs/foundations/intro">
               <PlayCircle size={18} aria-hidden="true" />
               开始学习
             </Link>

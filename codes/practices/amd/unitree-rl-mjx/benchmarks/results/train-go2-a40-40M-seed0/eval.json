@@ -1,0 +1,33 @@
+{
+  "params": "benchmarks/results/train-go2-a40-40M-seed0/params.bin",
+  "episodes": 32,
+  "seed_base": 10000,
+  "episode_steps": 1000,
+  "metrics": {
+    "lin_vel_error_mean": 0.25593794250488283,
+    "ang_vel_error_mean": 0.0868243637084961,
+    "survival_rate": 1.0,
+    "air_time_cv": 0.46358727663755417,
+    "air_time_cv_per_foot": [
+      0.38156813383102417,
+      0.48111802339553833,
+      0.5142050385475159,
+      0.4774579107761383
+    ],
+    "episode_return_mean": 54.60078430175781
+  },
+  "thresholds": {
+    "lin_vel_error_mean": null,
+    "ang_vel_error_mean": null,
+    "survival_rate": null,
+    "air_time_cv": null,
+    "episode_return_mean": null
+  },
+  "passed": {
+    "lin_vel_error_mean": null,
+    "ang_vel_error_mean": null,
+    "survival_rate": null,
+    "air_time_cv": null,
+    "episode_return_mean": null
+  }
+}

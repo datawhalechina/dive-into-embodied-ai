@@ -1,0 +1,50 @@
+{
+  "params": "benchmarks/results/train-go2-r9700-full-seed1/params.bin",
+  "results": {
+    "forward": {
+      "command": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "steps": 300,
+      "mean_body_velocity": [
+        0.9298044222593308,
+        0.020448054919640222,
+        0.0036224836304609197
+      ],
+      "lin_vel_error_mean": 0.11627138666903368,
+      "ang_vel_error_mean": 0.05111038169285166
+    },
+    "lateral": {
+      "command": [
+        0.0,
+        0.4,
+        0.0
+      ],
+      "steps": 300,
+      "mean_body_velocity": [
+        0.0441091315758725,
+        0.2959152162075043,
+        0.007025430017577794
+      ],
+      "lin_vel_error_mean": 0.12934864518753997,
+      "ang_vel_error_mean": 0.04631952983424223
+    },
+    "turn": {
+      "command": [
+        0.0,
+        0.0,
+        0.8
+      ],
+      "steps": 300,
+      "mean_body_velocity": [
+        0.028768240388017147,
+        0.01794030058546923,
+        0.8048897393544515
+      ],
+      "lin_vel_error_mean": 0.07304951211737216,
+      "ang_vel_error_mean": 0.05958004744847616
+    }
+  }
+}

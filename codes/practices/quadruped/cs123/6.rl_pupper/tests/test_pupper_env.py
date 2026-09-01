@@ -1,7 +1,7 @@
 import mujoco
 import numpy as np
 
-from pupper_env import PupperEnv, REWARD_WEIGHTS
+from pupper_env import GAIT_NAMES, PupperEnv, REWARD_WEIGHTS
 
 
 def test_spaces():
@@ -80,3 +80,66 @@ def test_truncation_at_max_steps():
         if terminated:
             break
     assert truncated is True
+
+
+def test_gait_features_are_appended_without_changing_base_observation():
+    base_env = PupperEnv()
+    gait_env = PupperEnv(gait_enabled=True)
+    base_obs, _ = base_env.reset(seed=7)
+    gait_obs, _ = gait_env.reset(seed=7)
+
+    assert gait_env.observation_space.shape == (50,)
+    assert gait_obs.shape == (50,)
+    assert np.allclose(base_obs, gait_obs[:45])
+    assert np.isclose(np.sum(gait_obs[45:48]), 1.0)
+    assert np.isclose(np.linalg.norm(gait_obs[48:50]), 1.0)
+
+
+def test_gait_contact_reward_and_diagnostics_present():
+    env = PupperEnv(gait_enabled=True, gait_switch_steps=0)
+    env.reset(seed=0)
+    env.set_gait("trot")
+    _, _, _, _, info = env.step(np.zeros(12, np.float32))
+
+    assert info["gait_name"] == "trot"
+    assert "r_gait_contact" in info
+    assert 0.0 <= info["gait_contact_match"] <= 1.0
+    assert len(info["expected_contacts"]) == 4
+    assert len(info["actual_contacts"]) == 4
+
+
+def test_expected_contact_patterns_at_phase_zero():
+    env = PupperEnv(gait_enabled=True, gait_switch_steps=0)
+    env.reset(seed=0)
+    expected = {
+        "walk": [True, True, True, True],
+        "trot": [True, True, True, True],
+        "pace": [True, True, True, True],
+    }
+    # phase=0 位于边界；向周期内推进一点，检查每种步态的支撑足组合。
+    for gait_name in GAIT_NAMES:
+        env.set_gait(gait_name)
+        env.gait_phase = 0.01
+        pattern = env._expected_contacts().tolist()
+        if gait_name == "walk":
+            expected[gait_name] = [True, False, True, True]
+        elif gait_name == "trot":
+            expected[gait_name] = [False, True, True, False]
+        else:
+            expected[gait_name] = [False, True, False, True]
+        assert pattern == expected[gait_name]
+
+
+def test_gait_switch_keeps_episode_step_count():
+    env = PupperEnv(
+        gait_enabled=True,
+        gait_types=("walk", "trot"),
+        gait_switch_steps=1,
+        max_steps=3,
+    )
+    env.reset(seed=0)
+    first_gait = env.gait_name
+    env.step(np.zeros(12, np.float32))
+    assert env.gait_name != first_gait
+    assert env.gait_phase == 0.0
+    assert env.step_count == 1

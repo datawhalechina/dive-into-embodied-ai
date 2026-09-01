@@ -103,6 +103,13 @@ PD 调参对比扫描，出 CSV / 图 / GIF（无窗口）：
 uv run python 4.quadruped-mjcf/run_gain_sweep.py
 ```
 
+生成 `original`、`long-leg` 和 `heavy` 三种形态，搜索对应站姿并验证稳定性：
+
+```bash
+uv run python 4.quadruped-mjcf/pupper_variants/run_pupper_variants.py
+uv run python 4.quadruped-mjcf/pupper_variants/test_pupper_variants.py
+```
+
 ### 5.gait-control
 
 渲染原地 / 前进步态 GIF（默认 trot，可选 walk / pace / bound / gallop）：
@@ -146,3 +153,16 @@ uv run python 6.rl_pupper/evaluate.py
 ```
 
 训练参数和控制设计见 [`6.rl_pupper/README.md`](6.rl_pupper/README.md)。
+
+### 6.rl_pupper_v2 系列（优化迭代）
+
+`6.rl_pupper` 的逐步优化迭代，每个目录只引入一组改动、结构与 v1 一一对应，v1 保持原样作为对照基线：
+
+- [`6.rl_pupper_v2`](6.rl_pupper_v2/README.md)：观测追加机身线速度（45 → 48 维）、补齐防抖/防打滑/站立静止/dont_wait 奖励、命令重采样与随机扰动、两阶段课程训练。演示步态显著更平稳（前进速度波动 -64%、机身弹跳 -79%、命令切换零摔倒）。
+- [`6.rl_pupper_v2_1`](6.rl_pupper_v2_1/README.md)：在 v2 上仅新增钉腿超时惩罚 `feet_stance_time`，修复 v2 的"三腿跛行"（一条腿 92% 时间钉地当锚，看起来像只有前腿驱动）。
+- [`6.rl_pupper_v2_2`](6.rl_pupper_v2_2/README.md)：在 v2.1 上仅新增动作低通滤波（EMA α=0.5），用手写步态"频带受限"的先验消除高频抖动，保留 RL 闭环平衡。
+- [`6.rl_pupper_v2_3`](6.rl_pupper_v2_3/README.md)：在 v2.2 上新增第三阶段 trot 步态条件化微调（48 → 53 维迁移 + 对角接触时序奖励），给涌现步态加"节拍器"先验；演示渲染升级为 20 fps + 相机平滑。
+- [`6.rl_pupper_v2_4`](6.rl_pupper_v2_4/README.md)：在 v2.3 上做摆动整形——腾空目标 0.25 秒治高频小碎步、foot_clearance 奖励产生可见抬腿（目标 3.5cm），并新增与手写演示同速档的 0.15 m/s 巡航 GIF。
+- [`6.rl_pupper_v2_5`](6.rl_pupper_v2_5/README.md)：v2.4 的纯配置稳定性打磨——加强竖直/横滚阻尼、提高速度跟踪权重、低熵收尾，治摆动整形带来的机身晃动回升。
+
+训练与评估命令以各自 README 为准。

@@ -1,0 +1,127 @@
+{
+  "runs": [
+    {
+      "run": "train-go2-a40-full-seed0",
+      "device_kind": "NVIDIA A40",
+      "wall_s": 21117.783480826998,
+      "training_s": 20591.37727189064,
+      "eval_s": 467.3678469657898,
+      "residual_s": 59.038361970568076,
+      "epochs": 19,
+      "first_epoch_s": 996.1519486904144,
+      "median_epoch_s": 1098.6637448072433,
+      "est_train_compile_s": -102.51179611682892,
+      "steady_sps_median": 47153.93147798786,
+      "e2e_sps": 46610.85539084488
+    },
+    {
+      "run": "train-go2-a40-full-seed1",
+      "device_kind": "NVIDIA A40",
+      "wall_s": 19274.18979837303,
+      "training_s": 18759.703355789185,
+      "eval_s": 455.313814163208,
+      "residual_s": 59.17262842063792,
+      "epochs": 19,
+      "first_epoch_s": 1039.3798871040344,
+      "median_epoch_s": 985.0595051050186,
+      "est_train_compile_s": 54.32038199901581,
+      "steady_sps_median": 52592.128768255745,
+      "e2e_sps": 51069.22585576531
+    },
+    {
+      "run": "train-go2-a40-full-seed2",
+      "device_kind": "NVIDIA A40",
+      "wall_s": 18600.864262725925,
+      "training_s": 18080.90502333641,
+      "eval_s": 460.74577260017395,
+      "residual_s": 59.2134667893406,
+      "epochs": 19,
+      "first_epoch_s": 961.6192858219147,
+      "median_epoch_s": 950.0273457765579,
+      "est_train_compile_s": 11.59194004535675,
+      "steady_sps_median": 54531.412600173426,
+      "e2e_sps": 52917.86113253159
+    },
+    {
+      "run": "train-go2-r9700-full-seed0",
+      "device_kind": "AMD Radeon AI PRO R9700",
+      "wall_s": 28285.798242083983,
+      "training_s": 27854.461134433746,
+      "eval_s": 394.16590452194214,
+      "residual_s": 37.17120312829502,
+      "epochs": 19,
+      "first_epoch_s": 1542.5269892215729,
+      "median_epoch_s": 1467.2400612831116,
+      "est_train_compile_s": 75.2869279384613,
+      "steady_sps_median": 35308.7041503619,
+      "e2e_sps": 34799.016226295455
+    },
+    {
+      "run": "train-go2-r9700-full-seed1",
+      "device_kind": "AMD Radeon AI PRO R9700",
+      "wall_s": 28320.040276066982,
+      "training_s": 27894.046974658966,
+      "eval_s": 388.4118297100067,
+      "residual_s": 37.58147169800941,
+      "epochs": 19,
+      "first_epoch_s": 1542.4685850143433,
+      "median_epoch_s": 1472.512154698372,
+      "est_train_compile_s": 69.95643031597137,
+      "steady_sps_median": 35182.19620657434,
+      "e2e_sps": 34756.940399969644
+    },
+    {
+      "run": "train-go2-r9700-full-seed2",
+      "device_kind": "AMD Radeon AI PRO R9700",
+      "wall_s": 28372.907770009013,
+      "training_s": 27943.04895377159,
+      "eval_s": 392.8357753753662,
+      "residual_s": 37.023040862055495,
+      "epochs": 19,
+      "first_epoch_s": 1549.527634382248,
+      "median_epoch_s": 1469.6559183597565,
+      "est_train_compile_s": 79.87171602249146,
+      "steady_sps_median": 35250.575168902724,
+      "e2e_sps": 34692.17748067587
+    }
+  ],
+  "summary": {
+    "NVIDIA A40": {
+      "mean_wall_s": 19664.279180641985,
+      "mean_training_s": 19143.995217005413,
+      "mean_eval_s": 461.14247790972394,
+      "mean_residual_s": 59.14148572684886,
+      "mean_steady_sps": 51425.824282139016,
+      "mean_est_train_compile_s": -12.199824690818787
+    },
+    "AMD Radeon AI PRO R9700": {
+      "mean_wall_s": 28326.24876271999,
+      "mean_training_s": 27897.185687621433,
+      "mean_eval_s": 391.80450320243835,
+      "mean_residual_s": 37.258571896119975,
+      "mean_steady_sps": 35247.158508612985,
+      "mean_est_train_compile_s": 75.03835809230804
+    }
+  },
+  "ratios_second_over_first": {
+    "wall": 1.4404926060348588,
+    "training": 1.4572290356007116,
+    "steady_sps": 1.4590062421506294
+  },
+  "rollout_update_split_4096": {
+    "NVIDIA A40": {
+      "env_step_sps_4096": 84524.0051711107,
+      "step_us": 19.445483158688337,
+      "rollout_us": 11.830958530367752,
+      "learner_and_wrappers_us": 7.614524628320584,
+      "rollout_share": 0.6084167944719657
+    },
+    "AMD Radeon AI PRO R9700": {
+      "env_step_sps_4096": 40850.451507762875,
+      "step_us": 28.371081310161223,
+      "rollout_us": 24.479533593648735,
+      "learner_and_wrappers_us": 3.8915477165124877,
+      "rollout_share": 0.8628340007922535
+    }
+  }
+}

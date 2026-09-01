@@ -1,0 +1,11 @@
+           0 steps  reward 0.0010897646425291896
+     819,200 steps  reward nan
+   1,638,400 steps  reward nan
+   2,457,600 steps  reward nan
+   3,276,800 steps  reward nan
+   4,096,000 steps  reward nan
+   4,915,200 steps  reward nan
+   5,734,400 steps  reward nan
+   6,553,600 steps  reward nan
+   7,372,800 steps  reward nan
+done in 264s -> runs/probe-shapes-2026-08-08/unroll-10

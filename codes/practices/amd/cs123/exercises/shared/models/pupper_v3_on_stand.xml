@@ -1,0 +1,28 @@
+<mujoco model="pupper_v3_on_stand">
+  <compiler angle="radian" meshdir="meshes/" autolimits="true"/>
+  <visual>
+    <headlight ambient="0.45 0.45 0.45" diffuse="0.55 0.55 0.55" specular="0.1 0.1 0.1"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+  </visual>
+  <asset>
+    <texture name="skybox" type="skybox" builtin="gradient" rgb1=".3 .5 .7" rgb2="0 0 0" width="512" height="512"/>
+  </asset>
+  <default>
+    <joint armature="0.003" damping="0.04" frictionloss="0.002" limited="true"/>
+    <geom rgba="0.62 0.72 0.86 1" contype="0" conaffinity="0"/>
+    <default class="variant_torso"><geom type="box" size="0.1 0.055 0.025" mass="1.506" rgba="0 0 0 0"/></default>
+    <default class="variant_ballast"><geom type="box" size="0.001 0.001 0.001" mass="0" rgba="0 0 0 0" contype="0" conaffinity="0"/></default>
+    <default class="variant_hip"><geom type="sphere" size="0.026" mass="0.045" rgba="0 0 0 0"/></default>
+    <default class="variant_thigh"><geom type="capsule" fromto="0 0 0 0 0 -0.08" size="0.013" mass="0.186" rgba="0 0 0 0"/></default>
+    <default class="variant_calf"><geom type="capsule" fromto="0 0 0 0 0 -0.11" size="0.011" mass="0.05" rgba="0 0 0 0"/></default>
+    <default class="variant_foot"><geom type="sphere" pos="0 0 -0.11" size="0.018" mass="0.02" rgba="0.86 0.22 0.22 1" contype="1" conaffinity="1" condim="3" friction="1.2 0.04 0.01"/><site pos="0 0 -0.11" size="0.015" rgba="1 0.2 0.2 1"/></default>
+  </default>
+  <include file="skeleton.xml"/>
+  <worldbody>
+    <light name="spotlight" mode="targetbodycom" target="base" diffuse="0.9 0.9 0.9" specular="0.3 0.3 0.3" pos="0 -4 4" cutoff="100"/>
+  </worldbody>
+  <equality>
+    <!-- Lab 5 用 weld 把完整 Pupper 固定在空中，只看 gait phase pattern。 -->
+    <weld body1="world" body2="base" relpose="0 0 0.18 1 0 0 0" solref="0.001 1" solimp="0.99 0.99 0.001"/>
+  </equality>
+</mujoco>

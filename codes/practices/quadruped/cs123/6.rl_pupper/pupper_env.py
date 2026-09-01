@@ -1,8 +1,9 @@
 """精简版 Pupper RL 环境。
 
-- 观测：45 维，包含角速度、重力方向、命令、关节状态和上一步动作。
+- 基础观测：45 维，包含角速度、重力方向、命令、关节状态和上一步动作。
+- 步态观测：可选追加 gait one-hot 和相位 sin/cos，共 50 维。
 - 动作：12 维关节位置残差，由 PD 位置伺服器执行。
-- 奖励：速度跟踪、姿态、能耗、平滑性、足端腾空时间和终止惩罚。
+- 奖励：速度跟踪、姿态、能耗、平滑性、足端腾空时间、可选步态接触和终止惩罚。
 - 物理频率 250 Hz，控制频率 50 Hz。
 """
 
@@ -77,6 +78,27 @@ TERMINAL_BODY_ANGLE = 0.52
 INIT_HEIGHT = 0.28
 JOINT_INIT_NOISE = 0.05
 STAND_STILL_THRESHOLD = 0.1
+BASE_OBS_DIM = 45
+GAIT_FEATURE_DIM = 5
+GAIT_NAMES = ("walk", "trot", "pace")
+GAIT_SPECS = {
+    # 足端顺序为 FR、FL、RR、RL；offset 表示各足进入支撑相的周期位置。
+    "walk": {
+        "offsets": np.array([0.75, 0.25, 0.50, 0.00]),
+        "duty_factor": 0.75,
+        "cycle_time": 0.90,
+    },
+    "trot": {
+        "offsets": np.array([0.50, 0.00, 0.00, 0.50]),
+        "duty_factor": 0.50,
+        "cycle_time": 0.50,
+    },
+    "pace": {
+        "offsets": np.array([0.50, 0.00, 0.50, 0.00]),
+        "duty_factor": 0.50,
+        "cycle_time": 0.50,
+    },
+}
 
 
 class PupperEnv(gym.Env):
@@ -84,7 +106,15 @@ class PupperEnv(gym.Env):
 
     metadata = {"render_modes": ["rgb_array"]}
 
-    def __init__(self, xml: str = MODEL_PATH, max_steps: int = MAX_STEPS):
+    def __init__(
+        self,
+        xml: str = MODEL_PATH,
+        max_steps: int = MAX_STEPS,
+        gait_enabled: bool = False,
+        gait_types: tuple[str, ...] | list[str] = GAIT_NAMES,
+        gait_contact_weight: float = 0.5,
+        gait_switch_steps: int = 500,
+    ):
         super().__init__()
         self.model = mujoco.MjModel.from_xml_path(xml)
         self.data = mujoco.MjData(self.model)
@@ -92,9 +122,21 @@ class PupperEnv(gym.Env):
         self.dt = DT_CONTROL
         self.n_substeps = max(1, round(DT_CONTROL / DT_PHYSICS))
         self.max_steps = max_steps
+        self.gait_enabled = bool(gait_enabled)
+        self.gait_types = tuple(gait_types)
+        unknown_gaits = sorted(set(self.gait_types) - set(GAIT_NAMES))
+        if not self.gait_types:
+            raise ValueError("gait_types 不能为空")
+        if unknown_gaits:
+            raise ValueError(f"未知步态：{', '.join(unknown_gaits)}")
+        self.gait_contact_weight = float(gait_contact_weight)
+        self.gait_switch_steps = int(gait_switch_steps)
+        if self.gait_switch_steps < 0:
+            raise ValueError("gait_switch_steps 不能小于 0")
 
         self.action_space = spaces.Box(-1.0, 1.0, (12,), np.float32)
-        self.observation_space = spaces.Box(-100.0, 100.0, (45,), np.float32)
+        obs_dim = BASE_OBS_DIM + (GAIT_FEATURE_DIM if self.gait_enabled else 0)
+        self.observation_space = spaces.Box(-100.0, 100.0, (obs_dim,), np.float32)
 
         self._base_id = mujoco.mj_name2id(
             self.model, mujoco.mjtObj.mjOBJ_BODY, "base_link",
@@ -126,6 +168,8 @@ class PupperEnv(gym.Env):
         self.last_contact = np.zeros(4, dtype=bool)
         self.cmd = np.zeros(3, dtype=np.float32)
         self.step_count = 0
+        self.gait_name = self.gait_types[0]
+        self.gait_phase = 0.0
 
     def reset(self, *, seed=None, options=None):
         super().reset(seed=seed)
@@ -149,6 +193,9 @@ class PupperEnv(gym.Env):
         self.last_contact[:] = False
         self.cmd = self._sample_command()
         self.step_count = 0
+        if self.gait_enabled:
+            self._sample_gait()
+            self.gait_phase = float(self.np_random.uniform(0.0, 1.0))
         return self._get_obs(), {}
 
     def step(self, action):
@@ -177,17 +224,34 @@ class PupperEnv(gym.Env):
         )
 
         reward, info = self._compute_reward(
-            action, rotation, first_contact, terminated,
+            action, rotation, contact, first_contact, terminated,
         )
 
         self.feet_air_time *= (~contact).astype(np.float64)
         self.last_contact = contact
         self.last_action = action.copy()
         self.step_count += 1
+        if self.gait_enabled:
+            cycle_time = float(GAIT_SPECS[self.gait_name]["cycle_time"])
+            self.gait_phase = (self.gait_phase + self.dt / cycle_time) % 1.0
+            if (
+                self.gait_switch_steps > 0
+                and self.step_count % self.gait_switch_steps == 0
+                and self.step_count < self.max_steps
+            ):
+                self._sample_gait(exclude_current=True)
+                self.gait_phase = 0.0
         truncated = self.step_count >= self.max_steps
         return self._get_obs(), reward, terminated, truncated, info
 
-    def _compute_reward(self, action, rotation, first_contact, terminated):
+    def _compute_reward(
+        self,
+        action,
+        rotation,
+        contact,
+        first_contact,
+        terminated,
+    ):
         local_lin = rotation.T @ self.data.qvel[0:3]
         local_ang = rotation.T @ self.data.qvel[3:6]
         vx, vy, wz = map(float, self.cmd)
@@ -217,8 +281,20 @@ class PupperEnv(gym.Env):
             "termination": 1.0 if terminated else 0.0,
         }
         scaled = {key: REWARD_WEIGHTS[key] * value for key, value in terms.items()}
+        if self.gait_enabled:
+            expected_contact = self._expected_contacts()
+            contact_match = float(np.mean(contact == expected_contact))
+            scaled["gait_contact"] = self.gait_contact_weight * contact_match
         reward = float(np.clip(sum(scaled.values()) * self.dt, 0.0, 10000.0))
         info = {f"r_{key}": float(value) for key, value in scaled.items()}
+        if self.gait_enabled:
+            info.update({
+                "gait_name": self.gait_name,
+                "gait_phase": float(self.gait_phase),
+                "gait_contact_match": contact_match,
+                "expected_contacts": expected_contact.astype(np.int8).tolist(),
+                "actual_contacts": contact.astype(np.int8).tolist(),
+            })
         return reward, info
 
     def _get_obs(self):
@@ -238,8 +314,41 @@ class PupperEnv(gym.Env):
             joint_angles - DEFAULT_POSE,
             joint_vel,
             self.last_action.astype(np.float64),
-        ]).astype(np.float32)
+        ])
+        if self.gait_enabled:
+            gait_one_hot = np.zeros(len(GAIT_NAMES), dtype=np.float64)
+            gait_one_hot[GAIT_NAMES.index(self.gait_name)] = 1.0
+            phase_angle = 2.0 * np.pi * self.gait_phase
+            obs = np.concatenate([
+                obs,
+                gait_one_hot,
+                [np.sin(phase_angle), np.cos(phase_angle)],
+            ])
+        obs = obs.astype(np.float32)
         return np.clip(obs, -100.0, 100.0)
+
+    def set_gait(self, gait_name: str, *, reset_phase: bool = True) -> None:
+        """固定当前步态，供评估和交互演示使用。"""
+        if gait_name not in GAIT_NAMES:
+            raise ValueError(f"未知步态：{gait_name}")
+        if gait_name not in self.gait_types:
+            raise ValueError(f"步态未在 gait_types 中启用：{gait_name}")
+        self.gait_name = gait_name
+        if reset_phase:
+            self.gait_phase = 0.0
+
+    def _sample_gait(self, *, exclude_current: bool = False) -> None:
+        candidates = self.gait_types
+        if exclude_current and len(candidates) > 1:
+            candidates = tuple(name for name in candidates if name != self.gait_name)
+        self.gait_name = str(self.np_random.choice(candidates))
+
+    def _expected_contacts(self) -> np.ndarray:
+        spec = GAIT_SPECS[self.gait_name]
+        local_phase = (
+            self.gait_phase - np.asarray(spec["offsets"], dtype=np.float64)
+        ) % 1.0
+        return local_phase < float(spec["duty_factor"])
 
     def _sample_command(self):
         if self.np_random.uniform() < ZERO_CMD_PROB:

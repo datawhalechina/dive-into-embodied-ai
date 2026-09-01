@@ -1,0 +1,48 @@
+# 第五阶段：稳定性打磨（纯配置迭代，代码与 v2.4 一致）。
+# v2.4 的摆动整形让步子变大变慢，平均支撑腿减少，机身弹跳与速度波动回升。
+# 本阶段行为不再重塑，只用 reward_overrides 收紧稳定性：
+# - lin_vel_z 恢复满额 -2.0（bootstrap 时代为防冻结降到 -1.0，现已无此风险）
+# - ang_vel_xy 加倍到 -0.1，抑制横滚/俯仰摇摆
+# - tracking_lin_vel 提到 2.0，治"忽快忽慢"
+# 熵降至 0.0002 收尾。从 v2.4 的 7M checkpoint 同结构续训。
+run:
+  seed: 1
+  total_timesteps: 8000000
+  n_envs: 16
+  device: cpu
+  tensorboard: true
+  output_dir: outputs/stability_polish_8m
+  resume_from: ../6.rl_pupper_v2_4/reports/raw/checkpoints/pupper_ppo_7000000_steps.zip
+  transfer_from: null
+
+environment:
+  max_steps: 1000
+  reward_overrides:
+    tracking_lin_vel: 2.0
+    lin_vel_z: -2.0
+    ang_vel_xy: -0.1
+
+gait:
+  enabled: true
+  types: [trot]
+  contact_reward_weight: 4.0
+  switch_steps: 0
+
+ppo:
+  policy: MlpPolicy
+  n_steps: 2048
+  batch_size: 256
+  n_epochs: 4
+  learning_rate: 0.0001
+  gamma: 0.97
+  gae_lambda: 0.95
+  clip_range: 0.15
+  ent_coef: 0.0005
+  ent_coef_final: 0.0002
+  net_arch: [256, 256]
+  verbose: 1
+
+checkpoint:
+  every_steps: 1000000
+  name_prefix: pupper_ppo
+  final_name: pupper_ppo
