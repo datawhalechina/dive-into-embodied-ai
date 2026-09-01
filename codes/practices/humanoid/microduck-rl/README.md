@@ -9,7 +9,7 @@
 - `tests/`：配置不变量和奖励函数回归测试。
 - `pyproject.toml` + `uv.lock`：与上游隔离的 Python 3.12 环境。
 
-本次教程范围是“环境搭建 + GPU smoke test”，不包含 4096 并行环境的完整训练，也不包含真机部署。完整上游说明保存在 [`UPSTREAM_README.md`](./UPSTREAM_README.md)。
+基础路径是“环境搭建 + GPU smoke test”；本目录还提供一个 500 iteration 的较长训练和可视化复现实验，但不等同于 4096 并行环境的完整训练，也不包含真机部署。完整上游说明保存在 [`UPSTREAM_README.md`](./UPSTREAM_README.md)。
 
 ## 创建环境
 
@@ -69,6 +69,36 @@ uv run --with pytest pytest tests/ -q
 ```
 
 兼容分支最近一次结果：`154 passed, 1 skipped`。
+
+## 较长训练与可视化
+
+如果希望观察策略从随机探索到较持续控制的变化，可以在当前 Driver 535 兼容环境中运行 500 iteration：
+
+```bash
+uv run train Mjlab-Velocity-Flat-MicroDuck \
+  --env.scene.num-envs 64 \
+  --env.seed 42 \
+  --agent.seed 42 \
+  --agent.max-iterations 500 \
+  --agent.save-interval 100 \
+  --agent.logger tensorboard \
+  --agent.experiment-name velocity_long \
+  --agent.run-name cuda122-500 \
+  --agent.upload-model False
+```
+
+训练结束后，用 TensorBoard event 文件生成静态报告：
+
+```bash
+RUN_DIR="$(find logs/rsl_rl/velocity_long -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)"
+uv run python scripts/plot_training.py \
+  --run-dir "$RUN_DIR" \
+  --out "$RUN_DIR/microduck-training-500.webp"
+```
+
+脚本绘制 mean reward、episode length、速度命令跟踪误差和终止原因；也可以直接查看本次实测的[训练曲线](../../../../docs/practices/humanoid/microduck-rl/figs/microduck-training-500.webp)和[近景 GIF](../../../../docs/practices/humanoid/microduck-rl/figs/microduck-training-500.gif)，或下载[原始 MP4](../../../../docs/practices/humanoid/microduck-rl/figs/microduck-training-500.mp4)。
+
+本次固定 seed 的结果：初始 mean reward `0.1711`，最终 `2.5424`，最高 `2.7410`；最终 mean episode length `57.69` steps，累计 `768,000` transitions，训练耗时约 16 分钟。该曲线用于展示学习趋势和回归过程，不能替代完整 locomotion 收敛评估。
 
 ## 上游与许可证
 

@@ -155,6 +155,50 @@ uv run --with pytest pytest tests/ -q
 
 兼容分支最近一次结果为 `154 passed, 1 skipped`；跳过项是仅针对 linux-aarch64 + GPU 的实机检查。单元测试不替代 GPU smoke train，二者分别覆盖“逻辑回归”和“运行时闭环”。
 
+## 较长训练与可视化展示
+
+Smoke test 之后，可以用固定 seed 做一个 500 iteration 的较长训练，观察奖励、存活时间和命令跟踪误差的趋势：
+
+```bash
+uv run train Mjlab-Velocity-Flat-MicroDuck \
+  --env.scene.num-envs 64 \
+  --env.seed 42 \
+  --agent.seed 42 \
+  --agent.max-iterations 500 \
+  --agent.save-interval 100 \
+  --agent.logger tensorboard \
+  --agent.experiment-name velocity_long \
+  --agent.run-name cuda122-500 \
+  --agent.upload-model False
+```
+
+训练完成后，用仓库内的 `scripts/plot_training.py` 从 TensorBoard event 文件生成报告：
+
+```bash
+RUN_DIR="$(find logs/rsl_rl/velocity_long -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)"
+uv run python scripts/plot_training.py \
+  --run-dir "$RUN_DIR" \
+  --out "$RUN_DIR/microduck-training-500.webp"
+```
+
+### 本次实测曲线
+
+| 指标 | 结果 |
+| --- | --- |
+| 训练规模 | 64 envs × 500 iterations，累计 768,000 transitions |
+| mean reward | `0.1711` → `2.5424`，最高 `2.7410` |
+| mean episode length | 约 `34` → `57.69` steps |
+| action std | `1.00` → `0.73` |
+| 训练状态 | 退出码 `0`，无 NaN、Inf、OOM 或 CUDA error |
+
+![MicroDuck RL 500 iteration 训练曲线](./figs/microduck-training-500.webp)
+
+下面的近景 GIF 来自最终 `model_499.pt` 的 200 帧离屏回放；同一段内容也提供 [MP4 下载](./figs/microduck-training-500.mp4)。
+
+![MicroDuck RL checkpoint 近景回放](./figs/microduck-training-500.gif)
+
+视频和曲线的定位是“训练趋势、checkpoint 加载和仿真渲染链路展示”。当前只训练了 500 iteration，画面中的动作不应被解释为已经收敛的稳定步态；完整训练仍需更长 horizon、多个 seed、速度跟踪指标和 sim2real 评估。
+
 ## 当前开发机注意事项
 
 当前开发机是 RTX 3050 Laptop 4 GiB，Driver 535.309.01，系统报告 CUDA 12.2。兼容分支已将 x86_64 Torch 调整为 CUDA 12.6 用户态组件；如果在其他机器上出现 `insufficient driver`、Warp 初始化失败或显存不足，应把错误原文记录下来，不要直接修改任务奖励。CUDA Graphs 被禁用属于已知限制，不等同于 GPU smoke 失败。
