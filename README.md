@@ -50,6 +50,16 @@
 | 真机实战 | [LeRobot 中文课程讲义](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | 数据集、工具链与真机学习流程的前置知识 | ✅ 可用 |
 | 真机实战 | [Sim2Real 指南](docs/practices/quadruped/sim2real-guide/placeholder.md) | 仿真策略部署与真机验证 | 🚧 占位中 |
 
+### 最新 Demo：MicroDuck RL 小黄鸭
+
+<p align="center">
+  <a href="docs/practices/humanoid/microduck-rl/index.md">
+    <img src="docs/practices/humanoid/microduck-rl/figs/microduck-training-1500.gif" width="640" alt="MicroDuck 小黄鸭双足机器人稳定步态回放" />
+  </a>
+  <br/>
+  <sub>✅ <b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · 小黄鸭双足稳定步态</a></b><br/>mjlab + MuJoCo Warp · PPO GPU 并行训练（iteration 1500）</sub>
+</p>
+
 <table align="center">
   <tr>
     <td align="center" width="25%">
@@ -73,14 +83,6 @@
         <img src="docs/practices/vla/act/figs/act_50k_success.gif" height="220" alt="ACT 在 ALOHA 仿真中完成双臂方块交接" />
       </a>
       <br/><sub>✅ <b><a href="docs/practices/vla/act/index.md">ACT · ALOHA 双臂交接</a></b><br/>50k 训练 · MuJoCo 20 回合成功率 50%</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" colspan="4">
-      <a href="docs/practices/humanoid/microduck-rl/index.md">
-        <img src="docs/practices/humanoid/microduck-rl/figs/microduck-training-1500.gif" height="260" alt="MicroDuck 小黄鸭双足机器人稳定步态回放" />
-      </a>
-      <br/><sub>✅ <b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · 小黄鸭双足稳定步态</a></b><br/>mjlab + MuJoCo Warp · PPO GPU 并行训练（iteration 1500）</sub>
     </td>
   </tr>
 </table>

@@ -39,6 +39,7 @@ sidebar_position: 1
 | 项目 | 技术主线 | 状态 |
 | --- | --- | --- |
 | [从零到一搭建四足机器人](./quadruped/cs123/intro) | MuJoCo、PD、运动学、PPO、LLM 控制 | 可用 |
+| [MicroDuck RL 小黄鸭双足机器人](./humanoid/microduck-rl/) | mjlab、MuJoCo Warp、GPU 并行 PPO、双足步态 | 可用 |
 | [MuJoCo 仿真入门](./robot-arm/mujoco-arm-pick-place) | MJCF、物理仿真、Python 控制 | 可用 |
 | [DDPG InvertedPendulum](./robot-arm/ddpg-mujoco/invertedpendulum-v5) | 连续控制基础与 DDPG baseline | 可用 |
 | [DDPG Reacher](./robot-arm/ddpg-mujoco/reacher-v5) | 二维机械臂目标追踪 | 可用 |

@@ -171,6 +171,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         { type: 'link', label: '从零到一搭建四足机器人', href: '/docs/practices/quadruped/cs123/intro' },
+        { type: 'link', label: 'MicroDuck RL 小黄鸭双足机器人', href: '/docs/practices/humanoid/microduck-rl' },
         { type: 'link', label: 'MuJoCo 仿真入门', href: '/docs/practices/robot-arm/mujoco-arm-pick-place' },
         { type: 'link', label: 'DDPG InvertedPendulum', href: '/docs/practices/robot-arm/ddpg-mujoco/invertedpendulum-v5' },
         { type: 'link', label: 'DDPG Reacher', href: '/docs/practices/robot-arm/ddpg-mujoco/reacher-v5' },

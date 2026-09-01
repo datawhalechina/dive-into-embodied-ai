@@ -217,6 +217,15 @@ export const megaMenus: MegaMenuConfig[] = [
             featured: true,
           },
           {
+            icon: '🐥',
+            title: 'MicroDuck RL 小黄鸭双足机器人',
+            description: 'mjlab + MuJoCo Warp GPU 并行 PPO 与稳定步态训练。',
+            to: '/docs/practices/humanoid/microduck-rl',
+            activeBasePath: '/docs/practices/humanoid/microduck-rl',
+            keywords: ['MicroDuck', 'mjlab', 'PPO'],
+            featured: true,
+          },
+          {
             icon: '🦾',
             title: 'MuJoCo 机械臂与 DDPG',
             description: '从环境搭建到 InvertedPendulum、Reacher 与 Pusher 连续控制。',

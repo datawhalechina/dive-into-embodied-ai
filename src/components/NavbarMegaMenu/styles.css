@@ -80,7 +80,10 @@
 }
 
 .navbar-mega__surface {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: calc(100vh - var(--ifm-navbar-height) - 18px);
+  overscroll-behavior: contain;
   position: relative;
   isolation: isolate;
   border-radius: 20px;
