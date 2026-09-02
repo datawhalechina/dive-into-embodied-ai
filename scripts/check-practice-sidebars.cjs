@@ -124,12 +124,13 @@ assert.deepEqual(
   [
     'practices/amd/intro',
     'practices/amd/aup-learning-cloud',
+    'practices/amd/microduck-rl/index',
     'practices/amd/vla-act/index',
     'practices/amd/pupper-control/intro',
     'practices/amd/pupper-control/locomotion',
     'practices/amd/pupper-control/vla',
   ],
-  'AMD sidebar should only include its overview, cloud guide, ACT tutorial, and Pupper project',
+  'AMD sidebar should only include its overview, cloud guide, MicroDuck, ACT tutorial, and Pupper project',
 );
 
 for (const docPath of listDocs(path.join(rootDir, 'docs/practices/quadruped/cs123'))) {
