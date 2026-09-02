@@ -17,6 +17,7 @@ import {
   Wrench,
 } from 'lucide-react';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import HomepageProjects from '@site/src/components/HomepageProjects';
 
 const TYPEWRITER_PHRASES = [
   'open curriculum for embodied AI',
@@ -245,6 +246,7 @@ export default function Home(): React.JSX.Element {
       <main className="homepage-main">
         <OpenSourceBand />
         <RepoConsole />
+        <HomepageProjects />
         <HomepageFeatures />
         <LabPipeline />
       </main>
