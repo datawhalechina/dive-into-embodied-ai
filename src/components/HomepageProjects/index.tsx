@@ -4,7 +4,7 @@ import { ArrowRight, Bot, Boxes, BrainCircuit, Cog } from 'lucide-react';
 import styles from './styles.module.css';
 
 const microDuckDemo = require(
-  '@site/docs/practices/humanoid/microduck-rl/figs/microduck-training-1500.gif',
+  '@site/docs/practices/humanoid/microduck-rl/figs/microduck-velocity-flat.gif',
 ).default as string;
 
 type Project = {
@@ -23,7 +23,7 @@ const projects: Project[] = [
   {
     title: 'MicroDuck RL 小黄鸭双足机器人',
     category: '双足 · GPU 仿真',
-    description: 'mjlab + MuJoCo Warp 并行 PPO，展示从 MJCF 资产到稳定步态回放的完整链路。',
+    description: 'mjlab + MuJoCo Warp 并行 PPO，从走路、起身到轮式动作都有可播放的仿真结果。',
     link: '/docs/practices/humanoid/microduck-rl',
     status: '稳定步态 Demo',
     accent: 'cyan',
