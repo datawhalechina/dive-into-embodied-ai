@@ -1,46 +1,26 @@
 # MicroDuck RL：独立仿真环境
 
-这是 Dive into Embodied AI 对 [pollen-robotics/microduck_rl](https://github.com/pollen-robotics/microduck_rl) 的教程集成。项目使用 MuJoCo、mjlab、MuJoCo Warp 和 PPO，为约 800 g 的 MicroDuck 双足机器人训练速度跟踪策略。
+这是 Dive into Embodied AI 对 [pollen-robotics/microduck_rl](https://github.com/pollen-robotics/microduck_rl) 的教程集成。项目使用 MuJoCo、mjlab、MuJoCo Warp 和 PPO，为约 800 g 的 MicroDuck 双足机器人训练走路、起身、拾取、踢球、轮式移动和翻滚等 18 个动作模式。
 
-## 本目录做什么
+教程页面在 [`docs/practices/humanoid/microduck-rl`](../../../../docs/practices/humanoid/microduck-rl/)，里面有动作 GIF / MP4、训练流程、奖励设计、完整模式表和复现命令。本 README 只保留代码目录的快速入口。
 
-- `src/mjlab_microduck/`：机器人 MJCF、网格资产、执行器模型和任务配置。
-- `scripts/`：训练后播放、ONNX 导出、CPU 推理和观测对比工具。
-- `tests/`：配置不变量和奖励函数回归测试。
-- `pyproject.toml` + `uv.lock`：与上游隔离的 Python 3.12 环境。
+## 目录
 
-基础路径是“环境搭建 + GPU smoke test”；本目录还提供一个 500 iteration 的较长训练和可视化复现实验，但不等同于 4096 并行环境的完整训练，也不包含真机部署。完整上游说明保存在 [`UPSTREAM_README.md`](./UPSTREAM_README.md)。AMD/ROCm 独立版本位于 [`codes/practices/amd/microduck-rl`](../../amd/microduck-rl)。
+- `src/mjlab_microduck/`：机器人 MJCF、STL 网格、BAM 执行器和任务配置。
+- `scripts/`：训练、续训、离屏渲染、评估和汇总工具。
+- `tests/`：配置不变量、奖励函数和数值防护测试。
+- `pyproject.toml` + `uv.lock`：独立的 Python 3.12 环境。
 
 ## 创建环境
-
-在本目录执行：
 
 ```bash
 cd codes/practices/humanoid/microduck-rl
 UV_HTTP_TIMEOUT=600 uv sync --locked
 ```
 
-首次安装会下载 Torch、CUDA runtime、Warp 和 MuJoCo 等大型依赖。需要 NVIDIA GPU；如果机器驱动与 CUDA 组件不匹配，应优先修复驱动或改用 GPU 容器。
+首次同步会下载 Torch、CUDA runtime、Warp 和 MuJoCo 等较大的 wheel。需要 NVIDIA GPU；如果驱动与用户态 CUDA 组件不匹配，先跑下面的 smoke test确认问题范围。
 
-## 最小验证
-
-先确认任务注册：
-
-```bash
-uv run list-envs | grep MicroDuck
-```
-
-再运行 64 个环境、5 个 iteration 的 smoke test：
-
-```bash
-WANDB_MODE=offline uv run train Mjlab-Velocity-Flat-MicroDuck \
-  --env.scene.num-envs 64 \
-  --agent.max_iterations 5
-```
-
-这个检查只验证环境构建、GPU stepping、观测维度、奖励计算和 NaN 防护，不代表步态已经训练成功。完整训练前应先检查显存和每轮耗时。
-
-在 Driver 535 / 系统 CUDA 12.2 的 x86_64 Linux 机器上，使用兼容分支的 Torch 组合：
+本次训练使用的兼容组合是：
 
 ```text
 torch==2.7.1+cu126
@@ -49,94 +29,69 @@ mjlab==1.3.0
 mujoco-warp==3.8.1
 ```
 
-该组合已在 RTX 3050 Laptop 4 GiB 上完成 5/5 iteration，退出码为 0；每轮耗时 4.40s、4.21s、3.85s、4.03s、4.23s，生成 `model_4.pt` 与 ONNX 文件。Driver 535 下 CUDA Graphs 会被禁用，但普通 GPU stepping 不受影响。
+它在 Driver 535 / 系统 CUDA 12.2 的机器上可用。Driver 535 下 CUDA Graphs 会被禁用，这是性能降级，不影响普通 GPU stepping。
 
-有桌面显示会话时，可以用最新 smoke checkpoint 打开 viewer：
+## 最小验证
 
 ```bash
-RUN_DIR="$(find logs/rsl_rl/velocity -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)"
-uv run play Mjlab-Velocity-Flat-MicroDuck \
-  --checkpoint-file "$RUN_DIR/model_4.pt" \
-  --num-envs 1
+uv run list-envs | grep MicroDuck
+
+WANDB_MODE=offline uv run train Mjlab-Velocity-Flat-MicroDuck \
+  --env.scene.num-envs 64 \
+  --env.seed 42 \
+  --agent.seed 42 \
+  --agent.max-iterations 5
 ```
 
-这只是 checkpoint 加载和推理链路 demo；5 iteration 不代表策略已经收敛为稳定步态。
+5 个 iteration 只验证任务注册、MJCF / 网格加载、GPU stepping、观测奖励计算和 NaN / OOM 防护；它不代表步态已经收敛。
 
-CPU 侧的配置与奖励回归测试：
+CPU 侧回归测试：
 
 ```bash
 uv run --with pytest pytest tests/ -q
 ```
 
-兼容分支最近一次结果：`154 passed, 1 skipped`。
+## 18 个模式的训练和评估
 
-## 较长训练与可视化
-
-如果希望观察策略从随机探索到较持续控制的变化，可以在当前 Driver 535 兼容环境中运行 500 iteration：
+项目提供两个串行阶段脚本。它们从各模式的 smoke checkpoint 续训，按任务设定的里程碑保存 checkpoint；串行执行是为了控制显存和日志数量，**每个模式仍然拥有自己的 PPO 网络权重**。
 
 ```bash
-uv run train Mjlab-Velocity-Flat-MicroDuck \
-  --env.scene.num-envs 64 \
-  --env.seed 42 \
-  --agent.seed 42 \
-  --agent.max-iterations 500 \
-  --agent.save-interval 100 \
-  --agent.logger tensorboard \
-  --agent.experiment-name velocity_long \
-  --agent.run-name cuda122-500 \
-  --agent.upload-model False
+./scripts/train_stable_matrix_stage1.sh
+./scripts/train_stable_matrix_stage2.sh
+./scripts/evaluate_stable_matrix.sh
+uv run python scripts/summarize_training_matrix.py
 ```
 
-训练结束后，用 TensorBoard event 文件生成静态报告：
+评估脚本会从每个任务的最后 checkpoint 渲染 200 帧 MP4 / GIF，并把回放统计写入 `logs/mode_matrix_stable/videos/evaluation_status.tsv`。训练日志和模型文件保留在本地，不提交到教程仓库；教程只挑选必要的可视化素材。
+
+本次正式训练在 `dev1-docker` 的 8 × RTX 4090 上完成，18/18 个任务生成 checkpoint，18/18 个任务完成离屏回放。结果边界、模式清单和视频入口请以教程页面为准：
+
+<https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/humanoid/microduck-rl>
+
+## 单个 checkpoint 回放
+
+有显示会话时：
 
 ```bash
-RUN_DIR="$(find logs/rsl_rl/velocity_long -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)"
-uv run python scripts/plot_training.py \
-  --run-dir "$RUN_DIR" \
-  --out "$RUN_DIR/microduck-training-500.webp"
+uv run play Mjlab-Velocity-Flat-MicroDuck \
+  --checkpoint-file logs/rsl_rl/mode_matrix_stable/<run>/model_3000.pt \
+  --num-envs 1
 ```
 
-脚本绘制 mean reward、episode length、速度命令跟踪误差和终止原因；也可以直接查看本次实测的[训练曲线](../../../../docs/practices/humanoid/microduck-rl/figs/microduck-training-500.webp)和[近景 GIF](../../../../docs/practices/humanoid/microduck-rl/figs/microduck-training-500.gif)，或下载[原始 MP4](../../../../docs/practices/humanoid/microduck-rl/figs/microduck-training-500.mp4)。
-
-本次固定 seed 的结果：初始 mean reward `0.1711`，最终 `2.5424`，最高 `2.7410`；最终 mean episode length `57.69` steps，累计 `768,000` transitions，训练耗时约 16 分钟。该曲线用于展示学习趋势和回归过程，不能替代完整 locomotion 收敛评估。
-
-如果目标是稳定步态，可从 `env256-bench` 的最新 checkpoint 继续训练。当前 4 GiB 开发机上的实测命令如下（本次额外运行 3000 iterations，预计约 2–3 小时）：
-
-```bash
-uv run train Mjlab-Velocity-Flat-MicroDuck \
-  --env.scene.num-envs 256 \
-  --env.seed 42 \
-  --agent.seed 42 \
-  --agent.resume True \
-  --agent.load-run '2026-09-01_16-26-47_env256-bench' \
-  --agent.load-checkpoint 'model_518.pt' \
-  --agent.max-iterations 3000 \
-  --agent.save-interval 250 \
-  --agent.logger tensorboard \
-  --agent.experiment-name velocity_long \
-  --agent.run-name env256-long \
-  --agent.upload-model False
-```
-
-不要仅凭 reward 宣称稳定：至少同时检查 episode length、`Episode_Termination/fell_over`、速度跟踪误差，并用固定 checkpoint 做 200 帧以上离屏回放。训练产物继续留在本地 `logs/`，教程只提交可复现命令、曲线和经过验收的媒体。
-
-无显示会话时，可用 CPU ONNX + EGL 离屏回放，避免启动 Viser：
+无 `DISPLAY` 时，使用实际 mjlab / BAM 环境离屏渲染：
 
 ```bash
 MUJOCO_GL=egl PYOPENGL_PLATFORM=egl \
-uv run python scripts/render_checkpoint.py \
-  --onnx logs/rsl_rl/velocity_long/<run-name>/<run-name>.onnx \
-  --mp4 logs/rsl_rl/velocity_long/<run-name>/checkpoint.mp4 \
-  --gif logs/rsl_rl/velocity_long/<run-name>/checkpoint.gif \
+uv run python scripts/render_mjlab_checkpoint.py \
+  Mjlab-Velocity-Flat-MicroDuck \
+  --checkpoint logs/rsl_rl/mode_matrix_stable/<run>/model_3000.pt \
+  --mp4 /tmp/microduck-velocity.mp4 \
+  --gif /tmp/microduck-velocity.gif \
   --frames 200 --lin-vel-x 0.15
 ```
 
-脚本会打印 `fallen_fraction`、`min_trunk_z_m` 和 `min_upright_proxy`。这些是回放验收辅助量，不替代训练环境中的 termination 统计；例如 `fallen_fraction` 较高时，即使 reward 很高，也不应把该 checkpoint 发布成稳定步态。
-
-本次深度训练选用 `model_1500.pt`：从 `model_750.pt` 续训到 iteration 1500，256 envs、固定 seed 42。训练侧最后一轮 mean episode length 为 `760.23` steps，`fell_over=0.125`；实际 mjlab/BAM 离屏回放 200 帧（4 秒）`done_count=0`、`fell_like_fraction=0`，因此可以作为教程展示级稳定步态素材。注意这不是多 seed、rough terrain 或真机验收。
+视频是 checkpoint 的评估结果，不是训练真值。要迁移到真机，还需要多 seed、更多速度和地形范围、舵机延迟与摩擦校准、限位保护以及低速 sim2real 测试。
 
 ## 上游与许可证
 
-当前集成基于上游 `develop` 分支 commit `d424a0c899f6b33cbd3daeb279913134349c0b63`。代码按上游 Apache-2.0 许可证保留；3D 模型文件按上游说明使用 CC BY-SA-NC，不能脱离相应署名和非商业条款单独再授权。
-
-上游项目：<https://github.com/pollen-robotics/microduck_rl>
+当前集成基于上游 `develop` 分支 commit `d424a0c899f6b33cbd3daeb279913134349c0b63`。代码按 Apache-2.0 许可证保留；3D 模型文件按上游说明使用 CC BY-SA-NC，不能脱离相应署名和非商业条款单独再授权。

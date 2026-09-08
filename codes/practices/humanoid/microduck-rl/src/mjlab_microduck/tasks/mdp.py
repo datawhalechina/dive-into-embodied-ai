@@ -155,6 +155,39 @@ def _servo_default_joint_pos(env: "ManagerBasedRlEnv", asset: Entity) -> torch.T
     return asset.data.default_joint_pos[:, _servo_joint_ids(env, asset)]
 
 
+def _normalize_servo_joint_indices(
+    env: "ManagerBasedRlEnv", asset: Entity, joint_indices: Optional[list]
+) -> Optional[list]:
+    """Convert articulated-joint indices to the servo-only view when needed.
+
+    Most MicroDuck configs use the canonical 14-servo layout.  The roller
+    model is the exception: four passive wheel joints are interleaved between
+    the leg and neck joints, so its recovery config documents articulated
+    indices such as ``[0, 1, 2, 3, 4, 11, ...]``.  Pose rewards operate on the
+    servo-only tensor returned by :func:`_servo_joint_pos`, therefore those
+    articulated indices must be remapped before indexing it.
+
+    For the ordinary 14-joint model the mapping is the identity.  We detect
+    the articulated convention conservatively when an index is outside the
+    servo-only range; invalid mixed conventions fail with a clear error rather
+    than an asynchronous CUDA device-side assert.
+    """
+    if joint_indices is None:
+        return None
+    indices = list(joint_indices)
+    servo_ids = list(_servo_joint_ids(env, asset))
+    if not indices or max(indices) < len(servo_ids):
+        return indices
+    full_to_servo = {full_id: servo_id for servo_id, full_id in enumerate(servo_ids)}
+    missing = [idx for idx in indices if idx not in full_to_servo]
+    if missing:
+        raise ValueError(
+            "joint_indices mix articulated and passive/non-servo indices: "
+            f"{missing}; servo joint ids are {servo_ids}"
+        )
+    return [full_to_servo[idx] for idx in indices]
+
+
 def reset_with_forward_velocity(
     env: ManagerBasedRlEnv,
     env_ids: torch.Tensor,
@@ -842,6 +875,7 @@ def standing_composite_score(
     upright_score = torch.exp(-tilt_sq / (upright_std * upright_std))
 
     target = _servo_default_joint_pos(env, asset).clone()
+    joint_indices = _normalize_servo_joint_indices(env, asset, joint_indices)
     if target_overrides:
         for idx, val in target_overrides.items():
             target[:, idx] = val
@@ -2076,6 +2110,7 @@ def pose_target_match(
             to ``asset.data.default_joint_pos`` (the home/standing pose).
     """
     asset = env.scene[asset_cfg.name]
+    joint_indices = _normalize_servo_joint_indices(env, asset, joint_indices)
     joint_pos = _servo_joint_pos(env, asset)
     target = _servo_default_joint_pos(env, asset).clone()
     if target_overrides:
@@ -2407,6 +2442,7 @@ def pose_target_match(
     from t=0 to the end of the episode.
     """
     asset = env.scene[asset_cfg.name]
+    joint_indices = _normalize_servo_joint_indices(env, asset, joint_indices)
     target = _servo_default_joint_pos(env, asset).clone()
     if target_overrides:
         for idx, val in target_overrides.items():
@@ -2426,6 +2462,7 @@ def pose_l1_penalty(
 ) -> torch.Tensor:
     """L1 companion to ``pose_target_match`` (constant gradient toward target)."""
     asset = env.scene[asset_cfg.name]
+    joint_indices = _normalize_servo_joint_indices(env, asset, joint_indices)
     target = _servo_default_joint_pos(env, asset).clone()
     if target_overrides:
         for idx, val in target_overrides.items():
