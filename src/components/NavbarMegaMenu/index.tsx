@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from 'react';
 import type {CSSProperties} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
+import {ChevronDown} from 'lucide-react';
 import {useLocalPathname} from '@docusaurus/theme-common/internal';
 import {getMegaMenuById, type MegaMenuConfig, type MegaMenuItem} from './data';
 
@@ -63,6 +64,9 @@ function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
+        if (containerRef.current?.contains(document.activeElement)) {
+          triggerRef.current?.focus();
+        }
         clearCloseTimeout();
         setOpen(false);
       }
@@ -125,6 +129,12 @@ function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
       }
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          clearCloseTimeout();
+          setOpen(false);
+        }
+      }}
     >
       <button
         ref={triggerRef}
@@ -134,13 +144,16 @@ function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
           'navbar-mega__trigger--open': open,
         })}
         aria-expanded={open}
-        aria-haspopup="true"
-        onClick={() => {
+        aria-controls={`navbar-panel-${menu.id}`}
+        id={`navbar-trigger-${menu.id}`}
+        onClick={(event) => {
           clearCloseTimeout();
-          setOpen((value) => !value);
+          // Hover already opens the disclosure for a pointer; keyboard activation toggles it.
+          setOpen((value) => event.detail === 0 ? !value : true);
         }}
       >
         <span>{menu.label}</span>
+        <ChevronDown size={14} aria-hidden="true" />
       </button>
 
       {open && (
@@ -155,6 +168,9 @@ function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
       )}
 
       <div
+        id={`navbar-panel-${menu.id}`}
+        role="region"
+        aria-labelledby={`navbar-trigger-${menu.id}`}
         className={clsx('navbar-mega__panel', {'navbar-mega__panel--open': open})}
         style={panelLeft ? ({left: `${panelLeft}px`} as CSSProperties) : undefined}
       >
@@ -178,7 +194,6 @@ function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
                       }}
                     >
                       <div className="navbar-mega__itemRow">
-                        {item.icon && <span className="navbar-mega__itemIcon" aria-hidden="true">{item.icon}</span>}
                         <div className="navbar-mega__itemBody">
                           <div className="navbar-mega__itemTitle">{item.title}</div>
                           <p className="navbar-mega__itemDescription">{item.description}</p>

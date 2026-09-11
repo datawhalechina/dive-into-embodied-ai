@@ -1,0 +1,65 @@
+.home {background: var(--site-canvas); color: var(--site-ink);}
+.hero {padding: 4rem 0 3.5rem;}
+.heroGrid {display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 4rem;}
+.eyebrow {font-size: .8125rem; font-weight: 600; color: var(--site-muted); letter-spacing: .035em; margin: 0 0 1.75rem;}
+.eyebrow span {padding: 0 .7rem; color: var(--site-muted);}
+.heroCopy h1 {font-size: clamp(2.75rem, 4.8vw, 4.5rem); line-height: 1.16; letter-spacing: -.045em; font-weight: 700; margin: 0 0 1.6rem;}
+.heroCopy h1 > span {color: var(--site-blue);}
+.intro {font-size: 1.125rem; line-height: 1.85; color: var(--site-muted); margin: 0;}
+.actions {display: flex; align-items: center; flex-wrap: wrap; gap: 1.75rem; margin-top: 2rem;}
+.heroNotes {display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 2rem; color: var(--site-muted); font-size: .8125rem;}
+.heroNotes > span {display: inline-flex; align-items: center; gap: .45rem;}
+.robotCard {margin: 0; overflow: hidden; background: #101820; border-radius: 24px; box-shadow: 0 20px 50px -25px #162f4859; color: #f5f5f7;}
+.robotHeading {display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding: 1.15rem 1.4rem; color: #d1dae3; font-size: .8125rem;}
+.robotTag {color: #aabccc; font-family: var(--ifm-font-family-monospace); font-size: .75rem;}
+.robotVideo {display: block; width: 100%; aspect-ratio: 4 / 3; background: #000; object-fit: contain;}
+.robotCaption {display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.4rem 1.2rem;}
+.robotCaption strong {display: block; font-size: 1.125rem; font-weight: 600; letter-spacing: -.02em;}
+.robotCaption div > span {display: block; color: #bbc6d0; font-size: .875rem; margin-top: .2rem;}
+.robotCaption > a {display: grid; flex-shrink: 0; place-items: center; width: 44px; height: 44px; border: 1px solid #71808d; border-radius: 50%; color: #fff;}
+.robotCaption > a:hover {background: #253343;}
+.playgrounds {padding: 5.5rem 0; background: var(--site-panel);}
+.playgroundGrid {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem;}
+.playgroundCard {display: flex; flex-direction: column; padding: 1.75rem; border-radius: 20px; background: var(--site-canvas); color: var(--site-ink); border: 1px solid transparent; transition: border-color .18s ease;}
+.playgroundCard:hover {color: var(--site-ink); text-decoration: none; border-color: var(--site-blue);}
+.playgroundTop {display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.1rem; color: var(--site-blue);}
+.playgroundTop > span {font-family: var(--ifm-font-family-monospace); font-size: .75rem; color: var(--site-muted);}
+.playgroundCard .playgroundSubtitle {margin: 0 0 .5rem; font-size: .875rem; font-weight: 600; color: var(--site-muted);}
+.playgroundCard h3 {font-size: 1.3rem; line-height: 1.5; margin: 0 0 .75rem;}
+.playgroundCard > p {color: var(--site-muted); font-size: 1rem; line-height: 1.75;}
+.playgroundCard > span {margin-top: auto; padding-top: 1rem;}
+.community {padding: 4.5rem 0;}
+.communityInner {display: flex; align-items: center; justify-content: space-between; gap: 3rem;}
+.community h2 {font-size: clamp(1.5rem, 2.5vw, 2rem); letter-spacing: -.025em; line-height: 1.45; margin-bottom: 1rem;}
+.community p:not(:first-child) {color: var(--site-muted); line-height: 1.8; margin-bottom: 0;}
+.communityLinks {flex-shrink: 0;}
+.communityLinks > div {display: flex; justify-content: center; gap: 1.75rem; margin-top: 1rem;}
+.communityLinks > div a {display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem;}
+@media (max-width: 996px) {
+  .hero {padding: 3rem 0;}
+  .heroGrid {gap: 2rem;}
+  .heroCopy h1 {font-size: 3.1rem;}
+  .desktopBreak {display: none;}
+  .robotHeading {padding: 1rem;}
+  .robotTag {display: none;}
+  .actions {gap: 1rem;}
+  .heroNotes {gap: .8rem;}
+  .playgroundGrid {gap: 1rem;}
+  .playgroundCard {padding: 1.25rem;}
+  .communityInner {align-items: flex-start; flex-direction: column; gap: 1.5rem;}
+}
+@media (max-width: 700px) {
+  .heroGrid {grid-template-columns: 1fr; gap: 2.5rem;}
+  .heroCopy h1 {font-size: clamp(2.5rem, 10vw, 3.5rem);}
+  .hero {padding: 2.5rem 0;}
+  .eyebrow {margin-bottom: 1.25rem; font-size: .75rem;}
+  .intro {font-size: 1rem;}
+  .heroNotes {margin-top: 1.5rem;}
+  .robotCard {border-radius: 20px;}
+  .playgrounds {padding: 3.25rem 0;}
+  .playgroundGrid {grid-template-columns: 1fr;}
+  .playgroundTop {margin-bottom: 1.5rem;}
+  .playgroundCard {padding: 1.5rem;}
+  .community {padding: 3rem 0;}
+  .communityLinks {flex-shrink: 1; max-width: 100%;}
+}

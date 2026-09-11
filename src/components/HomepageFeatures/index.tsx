@@ -1,66 +1,29 @@
 import React from 'react';
-import clsx from 'clsx';
 import Link from '@docusaurus/Link';
-import { Bot, BrainCircuit, type LucideIcon } from 'lucide-react';
+import {ArrowRight, BookOpen, FlaskConical} from 'lucide-react';
 import styles from './styles.module.css';
 
-type FeatureItem = {
-  title: string;
-  description: string;
-  link: string;
-  eyebrow: string;
-  icon: LucideIcon;
-  accent: 'cyan' | 'green' | 'amber' | 'blue';
-};
-
-const FeatureList: FeatureItem[] = [
-  {
-    title: '理论基础',
-    description: '按智能决策、运动控制、感知系统和工程底座补齐能力。',
-    link: '/docs/foundations/intro',
-    eyebrow: 'Skill tree',
-    icon: BrainCircuit,
-    accent: 'blue',
-  },
-  {
-    title: '项目实战',
-    description: '按 AMD 专区、仿真实战和真机实战进入可复现项目。',
-    link: '/docs/practices/intro',
-    eyebrow: 'Build labs',
-    icon: Bot,
-    accent: 'green',
-  },
+const tracks = [
+  {title: '理论基础', lead: '先理解，机器人如何思考。', description: '从智能决策、运动控制与感知，建立具身智能的知识框架。', to: '/docs/foundations/intro', label: '查看学习路线', icon: BookOpen, topics: ['机器人学与 ROS2', '强化学习', '视觉语言动作模型']},
+  {title: '项目实战', lead: '再动手，让算法走进现实。', description: '跟着完整项目，在仿真和真机上跑通训练、控制与部署。', to: '/docs/practices/intro', label: '选择实践项目', icon: FlaskConical, topics: ['MuJoCo 仿真', '机器人控制', 'AMD 实践专区']},
 ];
-
-function Feature({ title, description, link, eyebrow, icon: Icon, accent }: FeatureItem) {
-  return (
-    <div className={clsx('col col--6', styles.featureCol)}>
-      <Link to={link} className={clsx(styles.featureCard, styles[`featureCard--${accent}`])}>
-        <div className={styles.featureTopline}>
-          <span>{eyebrow}</span>
-          <Icon size={20} aria-hidden="true" />
-        </div>
-        <div>
-          <h3>{title}</h3>
-          <p>{description}</p>
-        </div>
-        <span className={styles.featureLink}>进入模块</span>
-      </Link>
-    </div>
-  );
-}
 
 export default function HomepageFeatures(): React.JSX.Element {
   return (
-    <section className={styles.features}>
-      <div className="container">
-        <div className={styles.sectionHeading}>
-          <p>LEARNING MAP</p>
-          <h2>两大模块，从理论基础走向项目实战</h2>
+    <section className={styles.features} aria-labelledby="learning-title">
+      <div className="home-container">
+        <div className="home-section-heading">
+          <div><p className="section-kicker">你的学习路线</p><h2 id="learning-title">理解原理，也亲手实现。</h2></div>
+          <p>刚入门，从理论开始。已有基础，直接动手做项目。</p>
         </div>
-        <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
+        <div className={styles.grid}>
+          {tracks.map(({title, lead, description, to, label, icon: Icon, topics}) => (
+            <Link className={styles.card} to={to} key={to}>
+              <div className={styles.topline}><span><Icon size={20} strokeWidth={1.7} aria-hidden="true" />{title}</span><ArrowRight size={20} aria-hidden="true" /></div>
+              <h3>{lead}</h3><p>{description}</p>
+              <ul className={styles.topics}>{topics.map(topic => <li key={topic}>{topic}</li>)}</ul>
+              <span className="site-text-link">{label} <ArrowRight size={16} aria-hidden="true" /></span>
+            </Link>
           ))}
         </div>
       </div>

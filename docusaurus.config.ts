@@ -38,6 +38,26 @@ const config: Config = {
     mermaid: true,
   },
 
+  plugins: [
+    function nativeCssLayers() {
+      return {
+        name: 'native-css-layers',
+        configurePostCss(options) {
+          // Stylesheets are processed separately. Polyfilling layers adds ID-level
+          // specificity to Infima but not to our overrides. Keep native layers so
+          // the browser can resolve the cascade across the complete stylesheet.
+          options.plugins = options.plugins.map((plugin) => {
+            if (Array.isArray(plugin) && String(plugin[0]).includes('postcss-preset-env')) {
+              return [plugin[0], {...plugin[1], features: {...plugin[1]?.features, 'cascade-layers': false}}];
+            }
+            return plugin;
+          });
+          return options;
+        },
+      };
+    },
+  ],
+
   presets: [
     [
       'classic',
@@ -86,7 +106,7 @@ const config: Config = {
     navbar: {
       title: 'Dive into Embodied AI',
       logo: {
-        alt: 'Logo',
+        alt: 'Embodied AI',
         src: 'img/logo.svg',
       },
       items: [

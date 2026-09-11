@@ -1,136 +1,17 @@
-.features {
-  padding: 4.5rem 0 3.5rem;
-  width: 100%;
-}
-
-.sectionHeading {
-  max-width: 720px;
-  margin-bottom: 1.75rem;
-}
-
-.sectionHeading p {
-  margin: 0 0 0.45rem;
-  color: var(--site-accent-cyan);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.sectionHeading h2 {
-  margin: 0;
-  color: var(--ifm-heading-color);
-  font-size: 2.15rem;
-}
-
-.featureCol {
-  margin-bottom: 1rem;
-}
-
-.featureCard {
-  position: relative;
-  display: flex;
-  min-height: 240px;
-  height: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.75rem;
-  padding: 1.35rem;
-  overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  border: 1px solid var(--site-border);
-  border-radius: 8px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.88)),
-    var(--ifm-background-surface-color);
-  box-shadow: 0 18px 42px -34px rgba(15, 23, 42, 0.45);
-  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-}
-
-.featureCard::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--feature-accent);
-}
-
-.featureCard:hover {
-  color: inherit;
-  text-decoration: none;
-  transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--feature-accent) 45%, var(--site-border));
-  box-shadow: 0 24px 55px -38px rgba(15, 23, 42, 0.55);
-}
-
-.featureCard h3 {
-  margin: 0 0 0.65rem;
-  font-size: 1.18rem;
-}
-
-.featureCard p {
-  margin: 0;
-  color: var(--ifm-color-emphasis-700);
-  line-height: 1.7;
-}
-
-.featureTopline {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  color: var(--feature-accent);
-}
-
-.featureTopline span {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.featureLink {
-  color: var(--ifm-color-emphasis-800);
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.featureCard--cyan {
-  --feature-accent: #0891b2;
-}
-
-.featureCard--blue {
-  --feature-accent: #2563eb;
-}
-
-.featureCard--green {
-  --feature-accent: #16a34a;
-}
-
-.featureCard--amber {
-  --feature-accent: #d97706;
-}
-
-[data-theme='dark'] .featureCard {
-  background:
-    linear-gradient(180deg, rgba(15, 23, 42, 0.94), rgba(2, 6, 23, 0.86)),
-    var(--ifm-background-surface-color);
-  box-shadow: 0 18px 42px -34px rgba(0, 0, 0, 0.72);
-}
-
-[data-theme='dark'] .featureCard p {
-  color: rgba(226, 232, 240, 0.76);
-}
-
-[data-theme='dark'] .featureLink {
-  color: rgba(248, 250, 252, 0.9);
-}
-
-@media (max-width: 996px) {
-  .sectionHeading h2 {
-    font-size: 1.85rem;
-  }
+.features {padding: 1.5rem 0 4.5rem;}
+.grid {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem;}
+.card {display: flex; flex-direction: column; padding: 2rem; background: var(--site-panel); border: 1px solid var(--site-border); border-radius: 22px; color: var(--site-ink); transition: border-color .18s ease, box-shadow .18s ease;}
+.card:hover {color: var(--site-ink); text-decoration: none; border-color: var(--site-blue); box-shadow: 0 12px 32px -24px #0066cc50;}
+.topline {display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; color: var(--site-blue);}
+.topline > span {display: inline-flex; align-items: center; gap: .65rem; font-size: .9375rem; font-weight: 600;}
+.card h3 {font-size: 1.5rem; line-height: 1.5; letter-spacing: -.025em; margin: 0 0 .65rem;}
+.card p {font-size: 1rem; line-height: 1.8; margin-bottom: 1.25rem; color: var(--site-muted); max-width: 26rem;}
+.topics {display: flex; flex-wrap: wrap; gap: .45rem .6rem; list-style: none; padding: 0; margin: 0 0 1.5rem;}
+.topics li {padding: .3rem .7rem; background: var(--site-canvas); color: var(--site-muted); border-radius: 6px; font-size: .8125rem;}
+.card > span {margin-top: auto;}
+@media (max-width: 700px) {
+  .features {padding: 1.25rem 0 3rem;}
+  .grid {grid-template-columns: 1fr; gap: 1rem;}
+  .card {padding: 1.5rem;}
+  .card h3 {font-size: 1.3rem;}
 }

@@ -1,237 +1,89 @@
-import React, { useEffect, useState } from 'react';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import React from 'react';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
-import {
-  ArrowRight,
-  BookOpen,
-  Code2,
-  CodeXml,
-  Cpu,
-  ExternalLink,
-  GitFork,
-  PlayCircle,
-  Terminal,
-  Users,
-  Wrench,
-} from 'lucide-react';
+import {ArrowRight, ArrowUpRight, BookOpen, Code2, GitFork, SlidersHorizontal, Move3D, Crosshair} from 'lucide-react';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import HomepageProjects from '@site/src/components/HomepageProjects';
+import styles from './index.module.css';
 
-const TYPEWRITER_PHRASES = [
-  'open curriculum for embodied AI',
-  'robotics · simulation · control · VLA',
-  'from readable notes to runnable labs',
-  'built in the open with Datawhale',
+const microDuckVideo = require('@site/docs/practices/humanoid/microduck-rl/figs/microduck-velocity-flat.mp4').default as string;
+const playgrounds = [
+  {number: '01', title: '调好第一个控制器', subtitle: 'PD 控制', description: '调整增益，观察响应、超调与稳定性的变化。', to: '/cs123/pd-playground', icon: SlidersHorizontal},
+  {number: '02', title: '看懂关节如何运动', subtitle: '正运动学', description: '转动关节，观察足端位置与坐标系的关系。', to: '/cs123/fk-playground', icon: Move3D},
+  {number: '03', title: '让足端走到目标点', subtitle: '逆运动学', description: '移动目标点，探索机器人腿的可达空间。', to: '/cs123/ik-playground', icon: Crosshair},
 ];
-
-const PROJECT_SIGNALS = [
-  { label: 'License', value: 'CC BY-NC-SA 4.0' },
-  { label: 'Status', value: 'Alpha' },
-  { label: 'Tracks', value: 'theory · practice' },
-  { label: 'Labs', value: 'CS123 playgrounds' },
-];
-
-const LAB_PIPELINE = [
-  { icon: BookOpen, title: '读懂主线', text: '从路线图、机器人学、仿真与 VLA 建立最小知识闭环。' },
-  { icon: Terminal, title: '跑通实验', text: '用可交互 playground 和 MuJoCo / ROS2 项目把公式落到代码。' },
-  { icon: GitFork, title: '参与共建', text: '围绕 Issue、章节修订和实验复现沉淀可复用的开源材料。' },
-];
-
-const CONSOLE_LINES = [
-  '$ git clone datawhalechina/dive-into-embodied-ai',
-  '$ npm run dev',
-  '$ open /cs123/pd-playground',
-];
-
-const REPO_METRICS = [
-  { label: 'foundation', value: 'ROS2 · RL · VLA' },
-  { label: 'simulation', value: 'MuJoCo · Isaac Lab' },
-  { label: 'hardware', value: 'AMD · SO-101' },
-];
-
-function Typewriter() {
-  const [text, setText] = useState('');
-  useEffect(() => {
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-    let timer: ReturnType<typeof setTimeout>;
-
-    const tick = () => {
-      const word = TYPEWRITER_PHRASES[phraseIndex];
-      charIndex += deleting ? -1 : 1;
-      setText(word.substring(0, charIndex));
-
-      let delay = deleting ? 45 : 90;
-      if (!deleting && charIndex === word.length) {
-        delay = 2200;
-        deleting = true;
-      } else if (deleting && charIndex === 0) {
-        deleting = false;
-        phraseIndex = (phraseIndex + 1) % TYPEWRITER_PHRASES.length;
-        delay = 400;
-      }
-      timer = setTimeout(tick, delay);
-    };
-
-    timer = setTimeout(tick, 800);
-    return () => clearTimeout(timer);
-  }, []);
-
-  return <span className="typewriter">{text}</span>;
-}
 
 function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
-  const heroImage = useBaseUrl('/img/career.webp');
+  const poster = useBaseUrl('/img/microduck-poster.webp');
   return (
-    <header className="site-hero" style={{ backgroundImage: `url(${heroImage})` }}>
-      <div className="container site-hero__inner">
-        <div className="site-hero__content">
-          <div className="site-hero__eyebrow">
-            <CodeXml size={16} aria-hidden="true" />
-            <span>Datawhale open-source robotics curriculum</span>
+    <header className={styles.hero}>
+      <div className="home-container">
+        <div className={styles.heroGrid}>
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}>DATAWHALE <span aria-hidden="true">/</span> 开源具身智能教程</p>
+            <h1>动手学<br /><span>具身智能。</span></h1>
+            <p className={styles.intro}>从理解一个算法，到迈出机器人的第一步。<br className={styles.desktopBreak} />在理论、仿真与真机之间，找到你的学习路线。</p>
+            <div className={styles.actions}>
+              <Link className="site-button site-button--primary" to="/docs/foundations/intro">开始学习 <ArrowRight size={18} aria-hidden="true" /></Link>
+              <Link className="site-text-link" to="/docs/practices/intro">探索实战项目 <ArrowRight size={17} aria-hidden="true" /></Link>
+            </div>
+            <div className={styles.heroNotes} aria-label="课程特色">
+              <span><BookOpen size={15} aria-hidden="true" />中文教程</span>
+              <span><Code2 size={15} aria-hidden="true" />可运行代码</span>
+              <span><GitFork size={15} aria-hidden="true" />社区共建</span>
+            </div>
           </div>
-          <h1 className="site-hero__title" aria-label={siteConfig.title}>
-            <span className="site-hero__titleLead">Dive into</span>
-            <span className="site-hero__titleMain">Embodied AI</span>
-          </h1>
-          <p className="site-hero__subtitle">{siteConfig.tagline}</p>
-          <p className="hero__typewriter">
-            <Typewriter />
-          </p>
-          <p className="site-hero__copy">
-            用开源教程建立理论基础，再通过 AMD、仿真与真机项目把算法、控制和感知落到可运行实验中。
-          </p>
-          <div className="site-hero__actions">
-            <Link className="site-button site-button--primary" to="/docs/foundations/intro">
-              <PlayCircle size={18} aria-hidden="true" />
-              开始学习
-            </Link>
-            <a
-              className="site-button site-button--ghost"
-              href="https://github.com/datawhalechina/dive-into-embodied-ai"
-            >
-              <GitFork size={18} aria-hidden="true" />
-              GitHub
-              <ExternalLink size={15} aria-hidden="true" />
-            </a>
-          </div>
-          <div className="site-hero__signals" aria-label="项目状态">
-            {PROJECT_SIGNALS.map((item) => (
-              <div className="site-hero__signal" key={item.label}>
-                <span>{item.label}</span>
-                <strong>{item.value}</strong>
-              </div>
-            ))}
-          </div>
+          <figure className={styles.robotCard}>
+            <div className={styles.robotHeading}><span>从仿真开始，迈出第一步</span><span className={styles.robotTag}>MuJoCo · PPO</span></div>
+            <video className={styles.robotVideo} controls playsInline loop muted preload="none" poster={poster} aria-label="MicroDuck 双足机器人步态回放，无音频">
+              <source src={microDuckVideo} type="video/mp4" />
+              你的浏览器不支持视频播放，可在下方项目教程中查看实验结果。
+            </video>
+            <figcaption className={styles.robotCaption}>
+              <div><strong>MicroDuck</strong><span>用强化学习，让小黄鸭学会行走。</span></div>
+              <Link to="/docs/practices/humanoid/microduck-rl" aria-label="阅读 MicroDuck 项目教程"><ArrowUpRight size={22} aria-hidden="true" /></Link>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </header>
   );
 }
 
-function OpenSourceBand() {
+function Playgrounds() {
   return (
-    <section className="oss-band" aria-label="开源项目协作入口">
-      <div className="container oss-band__inner">
-        <div>
-          <p className="section-kicker">OPEN SOURCE FIRST</p>
-          <h2>像维护工程仓库一样维护学习路线</h2>
-          <p>
-            章节、代码、实验和求职材料都围绕可复现、可讨论、可贡献来组织。读者不是只消费内容，
-            也可以通过 Issue、PR 和组队学习把自己的复现经验回流到项目里。
-          </p>
+    <section className={styles.playgrounds} aria-labelledby="playgrounds-title">
+      <div className="home-container">
+        <div className="home-section-heading">
+          <div><p className="section-kicker">交互实验</p><h2 id="playgrounds-title">动一下，原理就清楚了。</h2></div>
+          <p>无需安装环境，在浏览器里试试控制与运动学。</p>
         </div>
-        <div className="oss-band__links">
-          <a href="https://github.com/datawhalechina/dive-into-embodied-ai/issues">
-            <Code2 size={18} aria-hidden="true" />
-            提 Issue
-          </a>
-          <a href="https://github.com/datawhalechina/dive-into-embodied-ai/discussions">
-            <Users size={18} aria-hidden="true" />
-            参与讨论
-          </a>
-          <Link to="/docs/practices/quadruped/cs123/intro">
-            <Wrench size={18} aria-hidden="true" />
-            进入实验
-          </Link>
+        <div className={styles.playgroundGrid}>
+          {playgrounds.map(({number, title, subtitle, description, to, icon: Icon}) => (
+            <Link to={to} className={styles.playgroundCard} key={to}>
+              <div className={styles.playgroundTop}><Icon size={26} strokeWidth={1.6} aria-hidden="true" /><span>CS123 / {number}</span></div>
+              <p className={styles.playgroundSubtitle}>{subtitle}</p>
+              <h3>{title}</h3><p>{description}</p>
+              <span className="site-text-link">打开实验 <ArrowUpRight size={17} aria-hidden="true" /></span>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function RepoConsole() {
+function Community() {
   return (
-    <section className="repo-console" aria-label="开源仓库与机器人实验台">
-      <div className="container repo-console__inner">
-        <div className="repo-console__copy">
-          <p className="section-kicker">REPO TO ROBOT</p>
-          <h2>把教程做成可运行、可复现、可贡献的实验台</h2>
-          <p>
-            首页给路线，文档给原理，Playground 给可拖动的反馈。它应该看起来像一个正在生长的开源仓库，
-            也像一套机器人实验记录，而不是静态宣传页。
-          </p>
-          <Link to="/docs/practices/intro" className="repo-console__link">
-            查看实践项目 <ArrowRight size={16} aria-hidden="true" />
-          </Link>
-        </div>
-        <div className="repo-console__terminal" aria-label="本地运行命令示例">
-          <div className="repo-console__terminalTop">
-            <span />
-            <span />
-            <span />
-            <strong>embodied-ai.local</strong>
+    <section className={styles.community} aria-labelledby="community-title">
+      <div className="home-container">
+        <div className={styles.communityInner}>
+          <div><p className="section-kicker">与 DATAWHALE 一起学习</p><h2 id="community-title">每一次复现，都让开源更进一步。</h2><p>分享实验结果，修正一处笔误，或提出一个好问题。<br />你的学习经验，也可以成为下一个人的起点。</p></div>
+          <div className={styles.communityLinks}>
+            <a className="site-button site-button--primary" href="https://github.com/datawhalechina/dive-into-embodied-ai">在 GitHub 参与共建 <ArrowUpRight size={18} aria-hidden="true" /></a>
+            <div><a href="https://github.com/datawhalechina/dive-into-embodied-ai/issues">反馈问题</a><a href="https://github.com/datawhalechina/dive-into-embodied-ai/discussions">参与讨论</a></div>
           </div>
-          <div className="repo-console__terminalBody">
-            {CONSOLE_LINES.map((line) => (
-              <code key={line}>{line}</code>
-            ))}
-          </div>
-          <div className="repo-console__metrics">
-            {REPO_METRICS.map((item) => (
-              <div key={item.label}>
-                <span>{item.label}</span>
-                <strong>{item.value}</strong>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function LabPipeline() {
-  return (
-    <section className="lab-pipeline" aria-label="学习到实验的链路">
-      <div className="container">
-        <div className="section-heading">
-          <p className="section-kicker">ROBOTICS WORKFLOW</p>
-          <h2>从开源路线到机器人实验闭环</h2>
-        </div>
-        <div className="lab-pipeline__grid">
-          {LAB_PIPELINE.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <article className="lab-pipeline__item" key={item.title}>
-                <div className="lab-pipeline__step">0{index + 1}</div>
-                <Icon size={22} aria-hidden="true" />
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </article>
-            );
-          })}
-        </div>
-        <div className="lab-pipeline__cta">
-          <Cpu size={18} aria-hidden="true" />
-          <span>优先推荐从 CS123 Playground 开始，把控制、运动学和步态规划先拖动起来。</span>
-          <Link to="/cs123/pd-playground">
-            打开 Playground <ArrowRight size={16} aria-hidden="true" />
-          </Link>
         </div>
       </div>
     </section>
@@ -239,16 +91,14 @@ function LabPipeline() {
 }
 
 export default function Home(): React.JSX.Element {
-  const { siteConfig } = useDocusaurusContext();
   return (
-    <Layout title={siteConfig.title} description={siteConfig.tagline}>
-      <HomepageHeader />
-      <main className="homepage-main">
-        <OpenSourceBand />
-        <RepoConsole />
-        <HomepageProjects />
+    <Layout title="动手学具身智能" description="Datawhale 开源具身智能教程。从机器人学、强化学习与 VLA 理论，到 MuJoCo 仿真、交互实验和真机项目。">
+      <main className={styles.home}>
+        <HomepageHeader />
         <HomepageFeatures />
-        <LabPipeline />
+        <HomepageProjects />
+        <Playgrounds />
+        <Community />
       </main>
     </Layout>
   );
