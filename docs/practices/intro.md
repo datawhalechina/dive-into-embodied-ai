@@ -1,11 +1,12 @@
 ---
 title: 项目实战概述
 sidebar_position: 1
+displayed_sidebar: practicesOverviewSidebar
 ---
 
 # 项目实战：从仿真验证走向真机部署
 
-项目实战按企业关心的本体和任务组织，每个项目统一模板：项目背景 → 岗位映射 → 技术路线 → 代码实战 → 实验结果 → 简历写法 → 面试追问。
+选择一个具体任务，通过独立项目、Demo 或复现案例跑通环境、训练、控制与评估。希望按章节学习完整系统，可以进入 [系列教程](/docs/tutorials/intro)；查找论文、数据和代码来源，可以进入 [具身信息](/docs/information/intro)。
 
 ## 方向一览
 
@@ -16,13 +17,6 @@ sidebar_position: 1
 | [双足 / 人形](./humanoid/placeholder) | 1 个已上线，2 个规划中 | 进阶控制 / 强化学习 / 任务规划 |
 | [移动操作](./mobile-manipulation/placeholder) | 3 个 | 导航 + 操作综合 |
 | [轮足机器人](./wheel-legged/placeholder) | 预告 | 欠驱动平衡 / Isaac Lab / 跨仿真验证 |
-
-## 独立课程
-
-- [从零到一搭建四足机器人](./quadruped/cs123/intro)：CS123 四足仿真课程，按 8 章独立组织。
-- [LeRobot 中文课程讲义](./robot-arm/data-collection/lerobot-course)：机器人学习与 LeRobot 工具链主线。
-- [SO-101 + LeRobot 真机教程](./robot-arm/data-collection/so101-lerobot-real)：从硬件连接到策略回放的最小真机流程。
-- [两轮足 Flamingo · Isaac Lab](./wheel-legged/flamingo-isaaclab/preview)：Isaac Lab + rsl_rl 训练两轮足策略，导出 ONNX 后在 MuJoCo 中零样本验证。
 
 ## 已上线项目
 
@@ -39,14 +33,12 @@ sidebar_position: 1
 
 | 项目 | 技术主线 | 状态 |
 | --- | --- | --- |
-| [从零到一搭建四足机器人](./quadruped/cs123/intro) | MuJoCo、PD、运动学、PPO、LLM 控制 | 可用 |
 | [MicroDuck RL：走路、起身和翻滚](./humanoid/microduck-rl/) | mjlab、MuJoCo Warp、CUDA 并行 PPO、18 个动作模式 | 可用 |
 | [MuJoCo 仿真入门](./robot-arm/mujoco-arm-pick-place) | MJCF、物理仿真、Python 控制 | 可用 |
 | [DDPG InvertedPendulum](./robot-arm/ddpg-mujoco/invertedpendulum-v5) | 连续控制基础与 DDPG baseline | 可用 |
 | [DDPG Reacher](./robot-arm/ddpg-mujoco/reacher-v5) | 二维机械臂目标追踪 | 可用 |
 | [DDPG Pusher](./robot-arm/ddpg-mujoco/pusher-v5) | 机械臂接触操作与奖励设计 | 可用 |
 | [ACT 双臂操作训练](./vla/act) | ALOHA、模仿学习、ACT、多回合评估 | 可用 |
-| [两轮足 Flamingo · Isaac Lab](./wheel-legged/flamingo-isaaclab/preview) | PPO / CaT、Sim2Sim、鲁棒性验证 | 预告 |
 | [Sim2Sim 验证](./quadruped/sim2sim/placeholder) | 跨仿真策略验证 | 施工中 |
 
 ## 真机实战
@@ -54,6 +46,5 @@ sidebar_position: 1
 | 项目 | 技术主线 | 状态 |
 | --- | --- | --- |
 | [SO-101 + LeRobot 真机教程](./robot-arm/data-collection/so101-lerobot-real) | 硬件连通、安全测试、动作回放 | 可用 |
-| [LeRobot 中文课程讲义](./robot-arm/data-collection/lerobot-course) | 数据集、机器人学习工具链、真机流程前置知识 | 可用 |
 | [ROS2 机械臂控制](./robot-arm/ros2-arm-control/placeholder) | ROS2 控制链路与机械臂执行 | 施工中 |
 | [Sim2Real 指南](./quadruped/sim2real-guide/placeholder) | 仿真策略部署与真机验证 | 施工中 |

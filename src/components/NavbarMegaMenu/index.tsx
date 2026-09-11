@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
-import type {CSSProperties} from 'react';
+import type {CSSProperties, MouseEventHandler} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import {ChevronDown} from 'lucide-react';
@@ -9,6 +9,7 @@ import {getMegaMenuById, type MegaMenuConfig, type MegaMenuItem} from './data';
 type NavbarMegaMenuProps = {
   menuId: string;
   mobile?: boolean;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
 function normalizePath(pathname: string): string {
@@ -29,7 +30,8 @@ function isItemActive(item: MegaMenuItem, pathname: string): boolean {
 }
 
 function isMenuActive(menu: MegaMenuConfig, pathname: string): boolean {
-  return menu.activeBasePaths.some((basePath) => matchesPath(pathname, basePath));
+  return menu.activeBasePaths.some((basePath) => matchesPath(pathname, basePath))
+    && !menu.excludedBasePaths?.some((basePath) => matchesPath(pathname, basePath));
 }
 
 function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
@@ -234,19 +236,20 @@ function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
   );
 }
 
-function NavbarMegaMenuMobile({menu}: {menu: MegaMenuConfig}) {
+function NavbarMegaMenuMobile({menu, onClick}: {menu: MegaMenuConfig; onClick?: MouseEventHandler<HTMLAnchorElement>}) {
   const pathname = useLocalPathname();
   const active = isMenuActive(menu, pathname);
   return (
     <Link
       to={menu.footer.to}
+      onClick={onClick}
       className={clsx('menu__link', {'menu__link--active': active})}>
       {menu.label}
     </Link>
   );
 }
 
-export default function NavbarMegaMenu({menuId, mobile = false}: NavbarMegaMenuProps) {
+export default function NavbarMegaMenu({menuId, mobile = false, onClick}: NavbarMegaMenuProps) {
   const menu = getMegaMenuById(menuId);
 
   if (!menu) {
@@ -254,7 +257,7 @@ export default function NavbarMegaMenu({menuId, mobile = false}: NavbarMegaMenuP
   }
 
   if (mobile) {
-    return <NavbarMegaMenuMobile menu={menu} />;
+    return <NavbarMegaMenuMobile menu={menu} onClick={onClick} />;
   }
 
   return <NavbarMegaMenuDesktop menu={menu} />;

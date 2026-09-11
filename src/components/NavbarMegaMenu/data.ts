@@ -23,10 +23,18 @@ export type MegaMenuConfig = {
   id: string;
   label: string;
   activeBasePaths: string[];
+  excludedBasePaths?: string[];
   panelWidth: number;
   columns: MegaMenuColumn[];
   footer: MegaMenuFooter;
 };
+
+// Keep existing course URLs while giving each course a single navigation home.
+const tutorialBasePaths = [
+  '/docs/practices/quadruped/cs123',
+  '/docs/practices/robot-arm/data-collection/lerobot-course',
+  '/docs/practices/wheel-legged/flamingo-isaaclab',
+];
 
 export const megaMenus: MegaMenuConfig[] = [
   {
@@ -169,9 +177,59 @@ export const megaMenus: MegaMenuConfig[] = [
     },
   },
   {
+    id: 'tutorials',
+    label: '系列教程',
+    activeBasePaths: ['/docs/tutorials', '/cs123', ...tutorialBasePaths],
+    panelWidth: 760,
+    columns: [
+      {
+        title: '按章节系统学习',
+        items: [
+          {
+            title: '从零到一搭建四足机器人',
+            description: '沿着 8 章主线，从 PD 控制与运动学走到策略训练和感知。',
+            to: '/docs/practices/quadruped/cs123/intro',
+            activeBasePath: '/docs/practices/quadruped/cs123',
+            keywords: ['CS123', 'MuJoCo', '8 章'],
+            featured: true,
+          },
+          {
+            title: 'LeRobot 中文课程讲义',
+            description: '按课程顺序学习机器人数据、工具链与经典机器人学。',
+            to: '/docs/practices/robot-arm/data-collection/lerobot-course',
+            keywords: ['LeRobot', '中文讲义'],
+          },
+        ],
+      },
+      {
+        title: '学习准备与课程预告',
+        items: [
+          {
+            title: '选择一套教程',
+            description: '对照前置知识、学习目标和内容进度，选择学习主线。',
+            to: '/docs/tutorials/intro',
+          },
+          {
+            title: '两轮足 Flamingo · 课程预告',
+            description: '了解 Isaac Lab 训练与跨仿真验证课程的规划。',
+            to: '/docs/practices/wheel-legged/flamingo-isaaclab/preview',
+            activeBasePath: '/docs/practices/wheel-legged/flamingo-isaaclab',
+            keywords: ['Isaac Lab', '预告'],
+          },
+        ],
+      },
+    ],
+    footer: {
+      text: '围绕一条主线，按章节逐步完成一个系统。',
+      ctaLabel: '查看系列教程',
+      to: '/docs/tutorials/intro',
+    },
+  },
+  {
     id: 'practices',
     label: '项目实战',
     activeBasePaths: ['/docs/practices'],
+    excludedBasePaths: tutorialBasePaths,
     panelWidth: 1180,
     columns: [
       {
@@ -208,15 +266,6 @@ export const megaMenus: MegaMenuConfig[] = [
         title: '仿真实战',
         items: [
           {
-            icon: '🐕',
-            title: '从零到一搭建四足机器人',
-            description: 'CS123 四足仿真课程，8 章从 PD 走到 LLM 控制。',
-            to: '/docs/practices/quadruped/cs123/intro',
-            activeBasePath: '/docs/practices/quadruped/cs123',
-            keywords: ['CS123', 'MuJoCo', 'PPO'],
-            featured: true,
-          },
-          {
             icon: '🐥',
             title: 'MicroDuck RL 小黄鸭双足机器人',
             description: 'mjlab + MuJoCo Warp GPU 并行 PPO 与稳定步态训练。',
@@ -241,14 +290,6 @@ export const megaMenus: MegaMenuConfig[] = [
             activeBasePath: '/docs/practices/vla/act',
             keywords: ['ACT', 'ALOHA', '模仿学习'],
           },
-          {
-            icon: '🛞',
-            title: '两轮足 Flamingo · Isaac Lab',
-            description: 'Isaac Lab + PPO/CaT 训练与跨仿真验证。',
-            to: '/docs/practices/wheel-legged/flamingo-isaaclab/preview',
-            activeBasePath: '/docs/practices/wheel-legged/flamingo-isaaclab',
-            keywords: ['Flamingo', 'Isaac Lab', 'Sim2Sim'],
-          },
         ],
       },
       {
@@ -262,14 +303,6 @@ export const megaMenus: MegaMenuConfig[] = [
             activeBasePath: '/docs/practices/robot-arm/data-collection/so101-lerobot-real',
             keywords: ['SO-101', 'LeRobot', '真机'],
             featured: true,
-          },
-          {
-            icon: '🤗',
-            title: 'LeRobot 中文课程讲义',
-            description: '补齐机器人数据、工具链与真机学习流程的前置知识。',
-            to: '/docs/practices/robot-arm/data-collection/lerobot-course',
-            activeBasePath: '/docs/practices/robot-arm/data-collection/lerobot-course',
-            keywords: ['LeRobot', '数据采集', '机器人学习'],
           },
           {
             icon: '🔁',
@@ -286,6 +319,55 @@ export const megaMenus: MegaMenuConfig[] = [
       text: '按平台专区、仿真验证与真机部署选择项目。',
       ctaLabel: '查看项目实战',
       to: '/docs/practices/intro',
+    },
+  },
+  {
+    id: 'information',
+    label: '具身信息',
+    activeBasePaths: ['/docs/information'],
+    panelWidth: 760,
+    columns: [
+      {
+        title: '论文与数据',
+        items: [
+          {
+            title: '论文与研究',
+            description: '按研究主题收集原论文、项目主页和站内解读。',
+            to: '/docs/information/papers',
+            keywords: ['ACT', 'Diffusion Policy', 'VLA'],
+            featured: true,
+          },
+          {
+            title: '具身数据集',
+            description: '整理机器人示教数据、任务类型与评测基准。',
+            to: '/docs/information/datasets',
+            keywords: ['Open X-Embodiment', 'LIBERO'],
+            featured: true,
+          },
+        ],
+      },
+      {
+        title: '代码与工具',
+        items: [
+          {
+            title: '开源项目',
+            description: '查找模型代码、训练框架和相关实战入口。',
+            to: '/docs/information/open-source',
+            keywords: ['LeRobot', 'OpenVLA', 'ACT'],
+          },
+          {
+            title: '仿真与工具',
+            description: '收集仿真引擎、学习环境与官方文档。',
+            to: '/docs/information/tools',
+            keywords: ['MuJoCo', 'Isaac Lab', 'Gymnasium'],
+          },
+        ],
+      },
+    ],
+    footer: {
+      text: '找到论文、数据与工具，再连接到学习和实践。',
+      ctaLabel: '查看具身信息',
+      to: '/docs/information/intro',
     },
   },
 ];

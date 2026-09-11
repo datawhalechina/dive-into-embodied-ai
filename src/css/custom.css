@@ -91,6 +91,8 @@ a {text-underline-offset: .2em;}
 .navbar__search-input::placeholder {color: var(--site-muted); opacity: 1;}
 [data-theme='dark'] .navbar__search-input {background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23b5b5bd' stroke-width='2'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5'/%3E%3Cpath d='m16 16 5 5'/%3E%3C/svg%3E");}
 .navbar-sidebar {background: var(--site-panel);}
+/* A backdrop filter would confine the fixed mobile drawer to navbar height. */
+.navbar.navbar-sidebar--show {backdrop-filter: none;}
 .navbar-sidebar .menu__link {min-height: 48px; align-items: center;}
 
 .header-github-link::before {

@@ -26,4 +26,12 @@
 .navbar-mega__footer {display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .5rem 1.5rem; border-top: 1px solid var(--site-border); background: var(--site-canvas);}
 .navbar-mega__footerText {font-size: .875rem; color: var(--site-muted);}
 .navbar-mega__footerLink {display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; font-weight: 600; color: var(--site-blue);}
+.navbar-mega__trigger, .navbar-center-start {white-space: nowrap; flex-shrink: 0;}
+@media (min-width: 997px) and (max-width: 1199px) {
+  .navbar {padding-inline: 1rem;}
+  .navbar__brand {max-width: 210px; margin-right: .5rem;}
+  .navbar__title {font-size: .875rem;}
+  .navbar-mega__trigger {padding-inline: .6rem;}
+  .navbar__search-input {width: 9rem;}
+}
 @media (max-width: 996px) {.navbar-mega {display: none !important;}}

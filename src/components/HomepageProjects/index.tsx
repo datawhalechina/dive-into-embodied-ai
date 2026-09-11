@@ -6,12 +6,12 @@ import styles from './styles.module.css';
 
 const projects = [
   {title: 'MicroDuck 双足机器人', category: '双足行走 / 强化学习', description: '从 PPO 训练到动作回放，探索行走、起身与轮式动作。', to: '/docs/practices/humanoid/microduck-rl', image: '/img/microduck-poster.webp', alt: 'MicroDuck 双足机器人在 MuJoCo 仿真中行走', tags: ['MuJoCo Warp', 'PPO']},
-  {title: '从零搭建四足机器人', category: '四足控制 / CS123', description: '从 PD 控制与运动学出发，一步步实现四足机器人的行走。', to: '/docs/practices/quadruped/cs123/intro', image: '/img/pupper-poster.webp', alt: 'Pupper 四足机器人前进步态仿真', tags: ['MuJoCo', '运动控制']},
+  {title: '玩转 Pupper 四足机器人', category: 'AMD 实践 / 四足控制', description: '在 AMD 平台上探索 Pupper 的强化学习运动策略与 VLA 实验。', to: '/docs/practices/amd/pupper-control/intro', image: '/img/pupper-poster.webp', alt: 'Pupper 四足机器人前进步态仿真', tags: ['AMD', '运动控制']},
   {title: 'ACT 双臂操作训练', category: '双臂协作 / 模仿学习', description: '使用 ALOHA 仿真数据训练策略，在评测中验证双臂操作能力。', to: '/docs/practices/vla/act', image: '/img/act-poster.webp', alt: 'ALOHA 双臂机器人操作任务仿真', tags: ['ACT', 'ALOHA']},
 ];
 const moreProjects = [
   {title: 'MuJoCo 机械臂与 DDPG', description: '探索机械臂的连续控制任务', to: '/docs/practices/robot-arm/mujoco-arm-pick-place', icon: Bot, status: '机械臂'},
-  {title: 'Flamingo 轮足机器人', description: 'Isaac Lab 训练与 Sim2Sim 迁移', to: '/docs/practices/wheel-legged/flamingo-isaaclab/preview', icon: Cog, status: '内容预告'},
+  {title: 'SO-101 + LeRobot 真机实践', description: '硬件连通、基础测试与动作回放', to: '/docs/practices/robot-arm/data-collection/so101-lerobot-real', icon: Cog, status: '真机'},
 ];
 function ProjectCard({project}: {project: typeof projects[number]}) {
   return (
