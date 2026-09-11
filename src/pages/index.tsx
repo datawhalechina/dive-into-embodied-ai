@@ -1,13 +1,13 @@
-import React from 'react';
-import useBaseUrl from '@docusaurus/useBaseUrl';
+import React, {useEffect, useRef, useState} from 'react';
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
-import {ArrowRight, ArrowUpRight, BookOpen, Code2, GitFork, SlidersHorizontal, Move3D, Crosshair} from 'lucide-react';
+import {ArrowRight, ArrowUpRight, BookOpen, Code2, GitFork, SlidersHorizontal, Move3D, Crosshair, Pause, Play, ArrowDown} from 'lucide-react';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import HomepageProjects from '@site/src/components/HomepageProjects';
 import styles from './index.module.css';
 
-const microDuckVideo = require('@site/docs/practices/humanoid/microduck-rl/figs/microduck-velocity-flat.mp4').default as string;
+const heroVideo = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4';
 const playgrounds = [
   {number: '01', title: '调好第一个控制器', subtitle: 'PD 控制', description: '调整增益，观察响应、超调与稳定性的变化。', to: '/cs123/pd-playground', icon: SlidersHorizontal},
   {number: '02', title: '看懂关节如何运动', subtitle: '正运动学', description: '转动关节，观察足端位置与坐标系的关系。', to: '/cs123/fk-playground', icon: Move3D},
@@ -15,36 +15,86 @@ const playgrounds = [
 ];
 
 function HomepageHeader() {
-  const poster = useBaseUrl('/img/microduck-poster.webp');
+  const robotPoster = useBaseUrl('/img/microduck-poster.webp');
+  const stageRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [motionAllowed, setMotionAllowed] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => {
+      setMotionAllowed(!preference.matches);
+      if (preference.matches) videoRef.current?.pause();
+    };
+    update();
+    preference.addEventListener('change', update);
+    return () => preference.removeEventListener('change', update);
+  }, []);
+
+  const resetPerspective = () => {
+    stageRef.current?.style.setProperty('--scene-x', '0px');
+    stageRef.current?.style.setProperty('--scene-y', '0px');
+  };
+  const movePerspective = (event: React.PointerEvent<HTMLElement>) => {
+    if (!motionAllowed || event.pointerType !== 'mouse') return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    event.currentTarget.style.setProperty('--scene-x', `${(event.clientX - rect.left - rect.width / 2) * .012}px`);
+    event.currentTarget.style.setProperty('--scene-y', `${(event.clientY - rect.top - rect.height / 2) * .012}px`);
+  };
+  const toggleVideo = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      try { await video.play(); } catch { setPlaying(false); }
+    } else video.pause();
+  };
+
   return (
-    <header className={styles.hero}>
-      <div className="home-container">
-        <div className={styles.heroGrid}>
-          <div className={styles.heroCopy}>
-            <p className={styles.eyebrow}>DATAWHALE <span aria-hidden="true">/</span> 开源具身智能教程</p>
-            <h1>动手学<br /><span>具身智能。</span></h1>
-            <p className={styles.intro}>从理解一个算法，到迈出机器人的第一步。<br className={styles.desktopBreak} />在理论、仿真与真机之间，找到你的学习路线。</p>
-            <div className={styles.actions}>
-              <Link className="site-button site-button--primary" to="/docs/foundations/intro">开始学习 <ArrowRight size={18} aria-hidden="true" /></Link>
-              <Link className="site-text-link" to="/docs/practices/intro">探索实战项目 <ArrowRight size={17} aria-hidden="true" /></Link>
-            </div>
-            <div className={styles.heroNotes} aria-label="课程特色">
-              <span><BookOpen size={15} aria-hidden="true" />中文教程</span>
-              <span><Code2 size={15} aria-hidden="true" />可运行代码</span>
-              <span><GitFork size={15} aria-hidden="true" />社区共建</span>
-            </div>
+    <header ref={stageRef} className={styles.hero} onPointerMove={movePerspective} onPointerLeave={resetPerspective}>
+      <div className={styles.sceneFallback} style={{visibility: ready && !failed && motionAllowed ? 'hidden' : 'visible'}} aria-hidden="true">
+        <div className={styles.orbit} /><div className={styles.orbitInner} />
+        <div className={styles.core}><div /><div /><div /><div /><div /><div /></div>
+        <div className={styles.groundShadow} />
+      </div>
+      <video
+        ref={videoRef}
+        className={`${styles.heroVideo} ${ready && !failed ? styles.videoReady : ''}`}
+        src={motionAllowed ? heroVideo : undefined}
+        autoPlay={motionAllowed} muted loop playsInline preload="none" tabIndex={-1} aria-hidden="true"
+        onLoadedData={() => setReady(true)} onError={() => setFailed(true)}
+        onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}
+      />
+      <div className={styles.heroVeil} aria-hidden="true" />
+      <div className={styles.sceneLabel} aria-hidden="true"><span>ROBOT LEARNING / 具身智能</span><span>感知 → 决策 → 控制</span></div>
+      <div className={styles.heroContent}>
+        <div className={styles.heroCopy}>
+          <Link className={styles.eyebrow} to="/docs/overview/intro"><span className={styles.statusDot} /> DATAWHALE · 开源具身智能教程 <ArrowUpRight size={14} aria-hidden="true" /></Link>
+          <h1>让机器人，<br /><span>感知并行动。</span></h1>
+          <p className={styles.intro}>从理解一个算法，到迈出机器人的第一步。<br />动手连接感知、学习与控制，在仿真中走向真实。</p>
+          <div className={styles.actions}>
+            <Link className={styles.heroCta} to="/docs/foundations/intro">开始学习 <ArrowRight size={17} aria-hidden="true" /></Link>
+            <Link className={styles.heroSecondary} to="/docs/practices/intro">探索实战 <ArrowUpRight size={16} aria-hidden="true" /></Link>
           </div>
-          <figure className={styles.robotCard}>
-            <div className={styles.robotHeading}><span>从仿真开始，迈出第一步</span><span className={styles.robotTag}>MuJoCo · PPO</span></div>
-            <video className={styles.robotVideo} controls playsInline loop muted preload="none" poster={poster} aria-label="MicroDuck 双足机器人步态回放，无音频">
-              <source src={microDuckVideo} type="video/mp4" />
-              你的浏览器不支持视频播放，可在下方项目教程中查看实验结果。
-            </video>
-            <figcaption className={styles.robotCaption}>
-              <div><strong>MicroDuck</strong><span>用强化学习，让小黄鸭学会行走。</span></div>
-              <Link to="/docs/practices/humanoid/microduck-rl" aria-label="阅读 MicroDuck 项目教程"><ArrowUpRight size={22} aria-hidden="true" /></Link>
-            </figcaption>
-          </figure>
+          <div className={styles.heroNotes} aria-label="课程特色">
+            <span><BookOpen size={14} aria-hidden="true" />中文教程</span>
+            <span><Code2 size={14} aria-hidden="true" />可运行代码</span>
+            <span><GitFork size={14} aria-hidden="true" />社区共建</span>
+          </div>
+        </div>
+      </div>
+      <Link className={styles.robotSpotlight} to="/docs/practices/humanoid/microduck-rl">
+        <img src={robotPoster} alt="MicroDuck 双足机器人仿真" width="88" height="72" />
+        <div><span>从这里开始一次机器人实验</span><strong>让 MicroDuck 学会行走</strong><small>MuJoCo 仿真 · 强化学习</small></div>
+        <ArrowUpRight size={19} aria-hidden="true" />
+      </Link>
+      <div className={styles.heroBottom}>
+        <a href="#learning-paths" className={styles.scrollHint}>向下探索学习路线 <ArrowDown size={14} aria-hidden="true" /></a>
+        <div className={styles.sceneControls}>
+          <span>从数字仿真，到物理世界</span>
+          {motionAllowed && !failed && <button type="button" onClick={toggleVideo} aria-label={playing ? '暂停背景动画' : '播放背景动画'} title={playing ? '暂停背景动画' : '播放背景动画'}>{playing ? <Pause size={15} aria-hidden="true" /> : <Play size={15} aria-hidden="true" />}</button>}
         </div>
       </div>
     </header>
@@ -92,10 +142,10 @@ function Community() {
 
 export default function Home(): React.JSX.Element {
   return (
-    <Layout title="动手学具身智能" description="Datawhale 开源具身智能教程。从机器人学、强化学习与 VLA 理论，到 MuJoCo 仿真、交互实验和真机项目。">
+    <Layout wrapperClassName={styles.homeLayout} title="动手学具身智能" description="Datawhale 开源具身智能教程。从机器人学、强化学习与 VLA 理论，到 MuJoCo 仿真、交互实验和真机项目。">
       <main className={styles.home}>
         <HomepageHeader />
-        <HomepageFeatures />
+        <div id="learning-paths" className={styles.learningPaths}><HomepageFeatures /></div>
         <HomepageProjects />
         <Playgrounds />
         <Community />

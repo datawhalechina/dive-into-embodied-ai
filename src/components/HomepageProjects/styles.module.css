@@ -22,3 +22,8 @@
 .moreCard p {margin: .3rem 0 0; color: var(--site-muted); font-size: .875rem;}
 @media (max-width: 996px) {.grid, .moreProjects {gap: 1rem;} .body {padding: 1.2rem;} .body h3 {font-size: 1.15rem;} .moreCard {padding: 1.1rem;}}
 @media (max-width: 700px) {.projects {padding: 3rem 0;} .grid, .moreProjects {grid-template-columns: 1fr;} .body {padding: 1.5rem;} .body h3 {font-size: 1.35rem;} .moreIcon {display: none;}}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card {transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;}
+  .card:hover {transform: perspective(1000px) rotateX(1.5deg) translateY(-5px); box-shadow: 0 24px 40px -28px #24436170;}
+}

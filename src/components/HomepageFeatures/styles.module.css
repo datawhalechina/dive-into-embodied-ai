@@ -15,3 +15,8 @@
   .card {padding: 1.5rem;}
   .card h3 {font-size: 1.3rem;}
 }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card {transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;}
+  .card:hover {transform: perspective(1000px) rotateX(1.5deg) translateY(-5px); box-shadow: 0 24px 40px -28px #24436170;}
+}

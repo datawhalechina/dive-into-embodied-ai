@@ -1,23 +1,89 @@
 .home {background: var(--site-canvas); color: var(--site-ink);}
-.hero {padding: 4rem 0 3.5rem;}
-.heroGrid {display: grid; grid-template-columns: 1.08fr 1fr; align-items: center; gap: 4rem;}
-.eyebrow {font-size: .8125rem; font-weight: 600; color: var(--site-muted); letter-spacing: .035em; margin: 0 0 1.75rem;}
-.eyebrow span {padding: 0 .7rem; color: var(--site-muted);}
-.heroCopy h1 {font-size: clamp(2.75rem, 4.8vw, 4.5rem); line-height: 1.16; letter-spacing: -.045em; font-weight: 700; margin: 0 0 1.6rem;}
-.heroCopy h1 > span {color: var(--site-blue);}
-.intro {font-size: 1.125rem; line-height: 1.85; color: var(--site-muted); margin: 0;}
-.actions {display: flex; align-items: center; flex-wrap: wrap; gap: 1.75rem; margin-top: 2rem;}
-.heroNotes {display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 2rem; color: var(--site-muted); font-size: .8125rem;}
-.heroNotes > span {display: inline-flex; align-items: center; gap: .45rem;}
-.robotCard {margin: 0; overflow: hidden; background: #101820; border-radius: 24px; box-shadow: 0 20px 50px -25px #162f4859; color: #f5f5f7;}
-.robotHeading {display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding: 1.15rem 1.4rem; color: #d1dae3; font-size: .8125rem;}
-.robotTag {color: #aabccc; font-family: var(--ifm-font-family-monospace); font-size: .75rem;}
-.robotVideo {display: block; width: 100%; aspect-ratio: 4 / 3; background: #000; object-fit: contain;}
-.robotCaption {display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.4rem 1.2rem;}
-.robotCaption strong {display: block; font-size: 1.125rem; font-weight: 600; letter-spacing: -.02em;}
-.robotCaption div > span {display: block; color: #bbc6d0; font-size: .875rem; margin-top: .2rem;}
-.robotCaption > a {display: grid; flex-shrink: 0; place-items: center; width: 44px; height: 44px; border: 1px solid #71808d; border-radius: 50%; color: #fff;}
-.robotCaption > a:hover {background: #253343;}
+.homeLayout {background: #f0f0ee;}
+:global(html):has(.homeLayout) :global(.navbar) {width: min(1180px, calc(100% - 3rem)); margin: 1rem auto 0; top: 1rem; border: 1px solid #ffffffa6; border-radius: 999px; background: #ededece6; box-shadow: 0 3px 5px #fff9 inset, 0 12px 35px -22px #292c324d; padding-inline: 1.5rem;}
+:global(html):has(.homeLayout) :global(.navbar__inner) {width: 100%;}
+.hero {--scene-x: 0px; --scene-y: 0px; position: relative; isolation: isolate; min-height: max(740px, 100svh); margin-top: -5rem; overflow: hidden; background: #f0f0ee; color: #202328;}
+.heroVideo {position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 58% center; opacity: 0; transform: translate3d(var(--scene-x), var(--scene-y), 0) scale(1.035); transition: opacity 1s ease; pointer-events: none;}
+.videoReady {opacity: 1;}
+.heroVeil {position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, #f0f0eef5 0%, #f0f0eed4 23%, #f0f0ee70 42%, #f0f0ee00 64%), linear-gradient(0deg, #f0f0ee 0%, #f0f0ee00 20%);}
+.heroContent {position: relative; z-index: 1; width: min(1180px, calc(100% - 7rem)); min-height: inherit; margin: auto; display: flex; align-items: flex-end; padding: 10rem 0 8.5rem; pointer-events: none;}
+.heroCopy {max-width: 580px; pointer-events: auto;}
+.eyebrow {display: inline-flex; align-items: center; gap: .65rem; font-size: .75rem; font-weight: 600; color: #0066cc; letter-spacing: .065em; margin: 0 0 1.6rem;}
+.eyebrow:hover {color: #0054a8; text-decoration: none;}
+.statusDot {width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px #0066cc0d;}
+.heroCopy h1 {color: inherit; font-size: clamp(3rem, 4.4vw, 4.5rem); line-height: 1.22; letter-spacing: -.055em; font-weight: 550; margin: 0 0 1.5rem;}
+.heroCopy h1 span {color: #626b77;}
+.intro {font-size: 1rem; line-height: 1.9; color: #626973; margin: 0;}
+.actions {display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.6rem;}
+.heroCta {display: inline-flex; align-items: center; justify-content: center; gap: 1.3rem; padding: .7rem 1.4rem; border: 1px solid #438bdb; border-radius: 999px; color: #0066cc; font-size: .875rem; font-weight: 550; min-height: 46px; background: #ffffff38; box-shadow: 0 1px 0 #fff inset, 0 5px 12px -8px #0066cc40; transition: background .2s, color .2s, box-shadow .2s;}
+.heroCta:hover {background: #0066cc; color: white; text-decoration: none; box-shadow: 0 8px 22px -10px #0066cc80;}
+.heroCta svg, .heroSecondary svg, .eyebrow svg {transition: transform .2s;}
+.heroCta:hover svg, .heroSecondary:hover svg, .eyebrow:hover svg {transform: translateX(3px);}
+.heroSecondary {display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; font-size: .8125rem; color: #525d6b;}
+.heroNotes {display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 1.8rem; color: #69717a; font-size: .7rem;}
+.heroNotes > span {display: inline-flex; align-items: center; gap: .4rem;}
+.sceneLabel {position: absolute; right: max(3.5rem, calc((100% - 1180px) / 2)); top: 9rem; display: grid; gap: .4rem; text-align: right; color: #677079; font-size: .625rem; letter-spacing: .18em;}
+.sceneLabel span:last-child {font-size: .75rem; letter-spacing: .22em;}
+.heroBottom {position: absolute; bottom: 1.75rem; left: max(3.5rem, calc((100% - 1180px) / 2)); right: max(3.5rem, calc((100% - 1180px) / 2)); display: flex; align-items: center; justify-content: space-between; gap: 1rem;}
+.scrollHint {display: inline-flex; align-items: center; gap: 1rem; min-height: 44px; color: #626973; font-size: .7rem; letter-spacing: .06em;}
+.sceneControls {display: flex; align-items: center; gap: 1rem; font-size: .7rem; color: #626973;}
+.sceneControls button {display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #b6bcc3; background: #ffffff70; border-radius: 50%; cursor: pointer; color: #4b5665;}
+.sceneControls button:hover {background: #fff;}
+.learningPaths {padding-top: 3.5rem; scroll-margin-top: 7rem;}
+/* CSS-only sculpture remains visible when video is unavailable or motion is reduced. */
+.sceneFallback {position: absolute; width: 600px; height: 600px; top: 48%; left: 68%; transform: translate(calc(-50% + var(--scene-x)), calc(-50% + var(--scene-y))); perspective: 1000px;}
+.core {position: absolute; left: 200px; top: 180px; width: 200px; height: 200px; transform-style: preserve-3d; transform: rotateX(-24deg) rotateY(-32deg) rotateZ(12deg);}
+.core > div {position: absolute; width: 200px; height: 200px; border: 1px solid #ffffffcc; border-radius: 22px; background: linear-gradient(145deg, #f8fbff, #bac4d1 65%, #7f91a6); box-shadow: inset 0 0 25px #ffffff66;}
+.core > div:nth-child(1) {transform: translateZ(100px); background: radial-gradient(circle, #79caff 0%, #1675c9 24%, #dae4ee 25%, #f5f8fa 32%, #b7c3d0 70%);}
+.core > div:nth-child(2) {transform: rotateY(180deg) translateZ(100px);}
+.core > div:nth-child(3) {transform: rotateY(90deg) translateZ(100px);}
+.core > div:nth-child(4) {transform: rotateY(-90deg) translateZ(100px);}
+.core > div:nth-child(5) {transform: rotateX(90deg) translateZ(100px);}
+.core > div:nth-child(6) {transform: rotateX(-90deg) translateZ(100px);}
+.orbit, .orbitInner {position: absolute; inset: 55px; border-radius: 50%; border: 2px solid #b6c7d5; box-shadow: 0 3px 2px #fff, inset 0 2px 1px #fff; transform: rotateX(62deg) rotateZ(-28deg);}
+.orbitInner {inset: 25px; transform: rotateY(58deg) rotateZ(30deg); border-color: #ffffff;}
+.groundShadow {position: absolute; width: 340px; height: 40px; left: 140px; bottom: 30px; border-radius: 50%; background: #5f6d8050; filter: blur(24px);}
+[data-theme='dark'] .homeLayout {background: #161617;}
+:global(html[data-theme='dark']):has(.homeLayout) :global(.navbar) {background: #25272beb; border-color: #ffffff24; box-shadow: 0 1px 0 #ffffff14 inset, 0 12px 35px -22px #0009;}
+[data-theme='dark'] .hero {background: #171a20; color: #f4f6f8;}
+[data-theme='dark'] .heroVideo {filter: brightness(.65);}
+[data-theme='dark'] .heroVeil {background: linear-gradient(90deg, #171a20fa 0%, #171a20e6 23%, #171a2080 45%, #171a2010 75%), linear-gradient(0deg, #171a20, transparent 25%);}
+[data-theme='dark'] .heroCopy h1 span {color: #b7c4d5;}
+[data-theme='dark'] :is(.intro, .heroNotes, .heroSecondary, .sceneLabel, .scrollHint, .sceneControls) {color: #b9c4d3;}
+[data-theme='dark'] :is(.eyebrow, .heroCta) {color: #8dc5ff;}
+[data-theme='dark'] .heroCta {background: #152d4350;}
+[data-theme='dark'] .heroCta:hover {background: #0066cc; color: #fff;}
+[data-theme='dark'] .sceneControls button {color: #e4edfa; background: #293441; border-color: #617082;}
+@media (max-width: 996px) {
+  :global(html):has(.homeLayout) :global(.navbar) {width: calc(100% - 2rem); padding-inline: 1rem;}
+  .heroContent {width: calc(100% - 4rem);}
+  .heroCopy h1 {font-size: 3.4rem;}
+  .heroBottom {left: 2rem; right: 2rem;}
+  .sceneLabel {right: 2rem;}
+  .heroVideo {object-position: 60% center;}
+}
+@media (max-width: 700px) {
+  :global(html):has(.homeLayout) :global(.navbar) {width: calc(100% - 1.5rem); top: .75rem; margin-top: .75rem; padding-inline: .75rem;}
+  .hero {min-height: max(780px, 100svh); margin-top: -4.75rem;}
+  .heroContent {width: calc(100% - 3rem); padding-top: 23rem; padding-bottom: 6.5rem;}
+  .heroCopy h1 {font-size: clamp(2.5rem, 9.5vw, 3.5rem);}
+  .heroVideo {height: 62%; object-position: 64% center;}
+  .heroVeil {background: linear-gradient(0deg, #f0f0ee 0%, #f0f0ee 35%, #f0f0eeeb 44%, #f0f0ee00 68%);}
+  .sceneLabel {top: 7rem; right: 1.5rem; font-size: .5rem;}
+  .sceneLabel span:last-child {font-size: .625rem;}
+  .eyebrow {margin-bottom: 1rem; font-size: .6875rem;}
+  .intro {font-size: .875rem;}
+  .heroNotes {gap: .9rem; margin-top: 1.25rem;}
+  .heroBottom {left: 1.5rem; right: 1.5rem; bottom: 1rem;}
+  .sceneControls > span {display: none;}
+  .sceneFallback {top: 26%; left: 57%; scale: .58; transform-origin: 0 0;}
+  .learningPaths {padding-top: 1.5rem;}
+  [data-theme='dark'] .heroVeil {background: linear-gradient(0deg, #171a20 0%, #171a20 35%, #171a20eb 44%, #171a2000 68%);}
+}
+@media (prefers-reduced-motion: reduce) {
+  .heroVideo {display: none;}
+  .sceneFallback {--scene-x: 0px; --scene-y: 0px;}
+}
 .playgrounds {padding: 5.5rem 0; background: var(--site-panel);}
 .playgroundGrid {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem;}
 .playgroundCard {display: flex; flex-direction: column; padding: 1.75rem; border-radius: 20px; background: var(--site-canvas); color: var(--site-ink); border: 1px solid transparent; transition: border-color .18s ease;}
@@ -36,26 +102,11 @@
 .communityLinks > div {display: flex; justify-content: center; gap: 1.75rem; margin-top: 1rem;}
 .communityLinks > div a {display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem;}
 @media (max-width: 996px) {
-  .hero {padding: 3rem 0;}
-  .heroGrid {gap: 2rem;}
-  .heroCopy h1 {font-size: 3.1rem;}
-  .desktopBreak {display: none;}
-  .robotHeading {padding: 1rem;}
-  .robotTag {display: none;}
-  .actions {gap: 1rem;}
-  .heroNotes {gap: .8rem;}
   .playgroundGrid {gap: 1rem;}
   .playgroundCard {padding: 1.25rem;}
   .communityInner {align-items: flex-start; flex-direction: column; gap: 1.5rem;}
 }
 @media (max-width: 700px) {
-  .heroGrid {grid-template-columns: 1fr; gap: 2.5rem;}
-  .heroCopy h1 {font-size: clamp(2.5rem, 10vw, 3.5rem);}
-  .hero {padding: 2.5rem 0;}
-  .eyebrow {margin-bottom: 1.25rem; font-size: .75rem;}
-  .intro {font-size: 1rem;}
-  .heroNotes {margin-top: 1.5rem;}
-  .robotCard {border-radius: 20px;}
   .playgrounds {padding: 3.25rem 0;}
   .playgroundGrid {grid-template-columns: 1fr;}
   .playgroundTop {margin-bottom: 1.5rem;}
@@ -63,3 +114,23 @@
   .community {padding: 3rem 0;}
   .communityLinks {flex-shrink: 1; max-width: 100%;}
 }
+
+.robotSpotlight {position: absolute; z-index: 2; right: max(3.5rem, calc((100% - 1180px) / 2)); bottom: 8rem; display: flex; align-items: center; gap: 1rem; width: 355px; padding: .7rem; border: 1px solid #ffffffba; border-radius: 18px; background: #f7f8f9cf; backdrop-filter: blur(16px); color: #26303c; box-shadow: 0 2px 0 #fff9 inset, 0 18px 40px -22px #243a5a70; transform: perspective(900px) rotateY(-5deg) rotateX(3deg); transition: transform .25s, box-shadow .25s;}
+.robotSpotlight:hover {text-decoration: none; color: #0066cc; transform: perspective(900px) rotateY(0) translateY(-5px); box-shadow: 0 24px 40px -22px #243a5a80;}
+.robotSpotlight img {width: 78px; height: 78px; object-fit: cover; border-radius: 11px; background: #182231;}
+.robotSpotlight > div {flex: 1;}
+.robotSpotlight span, .robotSpotlight small {display: block; font-size: .625rem; color: #627080;}
+.robotSpotlight strong {display: block; font-size: .875rem; font-weight: 600; margin: .2rem 0;}
+.robotSpotlight > svg {margin-right: .35rem; flex-shrink: 0;}
+[data-theme='dark'] .robotSpotlight {background: #252d38dc; border-color: #5c6b7b; color: #e8f0f8; box-shadow: 0 18px 40px -22px #0009;}
+[data-theme='dark'] .robotSpotlight :is(span, small) {color: #b0bfd0;}
+@media (max-width: 1100px) and (min-width: 701px) {.robotSpotlight {right: 2rem; bottom: 8rem; width: 290px;} .robotSpotlight img {width: 58px; height: 64px;} .heroCopy {max-width: 470px;} .heroCopy h1 {font-size: 3.3rem;}}
+@media (max-width: 700px) {.robotSpotlight {position: relative; right: auto; bottom: auto; margin: -5rem 1.5rem 6rem; width: calc(100% - 3rem); transform: none;} .hero {min-height: max(920px, 100svh);} .heroContent {min-height: 800px; padding-bottom: 8rem;} .heroVideo {height: 52%;} .heroVeil {background: linear-gradient(0deg, #f0f0ee 0%, #f0f0ee 46%, #f0f0eeeb 54%, #f0f0ee00 77%);} [data-theme='dark'] .heroVeil {background: linear-gradient(0deg, #171a20 0%, #171a20 46%, #171a20eb 54%, #171a2000 77%);}}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {.playgroundCard:hover {transform: perspective(900px) rotateX(2deg) translateY(-6px); box-shadow: 0 22px 35px -25px #24436160;}}
+.playgroundCard {transition: transform .25s, border-color .25s, box-shadow .25s; box-shadow: 0 2px 0 #ffffff30 inset, 0 6px 15px -12px #24436140;}
+
+@media (max-width: 700px) {.heroVideo {top: -50px;}}
+/* Keep Docusaurus' mobile drawer fixed to the viewport. */
+:global(html):has(.homeLayout) :global(.navbar-sidebar--show) {backdrop-filter: none; border-radius: 0; transform: none;}
+
+@media (max-width: 700px) {.heroVideo {mask-image: linear-gradient(#000 65%, transparent 98%);} [data-theme='dark'] .heroVideo {filter: brightness(.42);}}
