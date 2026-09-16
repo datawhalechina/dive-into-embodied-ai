@@ -67,6 +67,10 @@ from .microduck_roulade_env_cfg import (
     make_microduck_roulade_env_cfg,
     MicroduckRouladeRlCfg,
 )
+from .microduck_laugh_env_cfg import (
+    make_microduck_laugh_env_cfg,
+    MicroduckLaughRlCfg,
+)
 from .backlash import make_backlash_variant
 
 # Standard velocity task
@@ -222,6 +226,16 @@ register_mjlab_task(
     env_cfg=make_microduck_roulade_env_cfg(),
     play_env_cfg=make_microduck_roulade_env_cfg(play=True),
     rl_cfg=MicroduckRouladeRlCfg,
+    runner_cls=MicroduckOnPolicyRunner,
+)
+
+# Laugh gesture — a phase-conditioned body/head gesture using the existing
+# 14-servo model.  A real mouth-open variant needs a new jaw actuator.
+register_mjlab_task(
+    task_id="Mjlab-Laugh-Flat-MicroDuck",
+    env_cfg=make_microduck_laugh_env_cfg(),
+    play_env_cfg=make_microduck_laugh_env_cfg(play=True),
+    rl_cfg=MicroduckLaughRlCfg,
     runner_cls=MicroduckOnPolicyRunner,
 )
 

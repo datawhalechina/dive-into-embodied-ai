@@ -2897,6 +2897,85 @@ def phase_pose_track_l1(
     return -(cur - target).abs().mean(dim=-1)
 
 
+def _laugh_pose_error(
+    env: ManagerBasedRlEnv,
+    asset_cfg: SceneEntityCfg,
+    command_name: str,
+    source_pose: dict,
+    amplitude_pose: dict,
+    gesture_start: float,
+    gesture_end: float,
+):
+    """Return the current pose and a two-bob laugh target.
+
+    The target is neutral outside ``[gesture_start, gesture_end]``.  Inside
+    that window it follows two smooth oscillations with a raised-cosine
+    envelope, so the policy gets a clear rhythm without a discontinuity at the
+    beginning or end of the gesture.
+    """
+    if not source_pose or not amplitude_pose:
+        raise ValueError("_laugh_pose_error requires source and amplitude poses")
+    if not 0.0 <= gesture_start < gesture_end <= 1.0:
+        raise ValueError("laugh gesture window must satisfy 0 <= start < end <= 1")
+
+    asset: Entity = env.scene[asset_cfg.name]
+    cmd = env.command_manager.get_command(command_name)
+    phase = (torch.atan2(cmd[:, 1], cmd[:, 0]) / (2 * torch.pi)) % 1.0
+    names = list(amplitude_pose.keys())
+    ids = [int(asset.find_joints([n])[0][0]) for n in names]
+
+    source = torch.tensor(
+        [source_pose[n] for n in names], device=env.device, dtype=asset.data.joint_pos.dtype
+    )
+    amplitude = torch.tensor(
+        [amplitude_pose[n] for n in names], device=env.device, dtype=asset.data.joint_pos.dtype
+    )
+    t = ((phase - gesture_start) / (gesture_end - gesture_start)).clamp(0.0, 1.0)
+    active = (phase >= gesture_start) & (phase <= gesture_end)
+    envelope = torch.sin(torch.pi * t).square()
+    oscillation = torch.sin(4.0 * torch.pi * t)
+    target = source.unsqueeze(0) + (
+        envelope * oscillation * active.float()
+    ).unsqueeze(-1) * amplitude.unsqueeze(0)
+    current = asset.data.joint_pos[:, ids]
+    return current, target
+
+
+def laugh_pose_track(
+    env: ManagerBasedRlEnv,
+    command_name: str = "twist",
+    source_pose: Optional[dict] = None,
+    amplitude_pose: Optional[dict] = None,
+    gesture_start: float = 0.08,
+    gesture_end: float = 0.88,
+    std: float = 0.25,
+    asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+    """Gaussian tracking reward for the two-bob laugh trajectory."""
+    current, target = _laugh_pose_error(
+        env, asset_cfg, command_name, source_pose or {}, amplitude_pose or {},
+        gesture_start, gesture_end,
+    )
+    return torch.exp(-((current - target) / std) ** 2).mean(dim=-1)
+
+
+def laugh_pose_track_l1(
+    env: ManagerBasedRlEnv,
+    command_name: str = "twist",
+    source_pose: Optional[dict] = None,
+    amplitude_pose: Optional[dict] = None,
+    gesture_start: float = 0.08,
+    gesture_end: float = 0.88,
+    asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+    """Bootstrap L1 reward for the two-bob laugh trajectory."""
+    current, target = _laugh_pose_error(
+        env, asset_cfg, command_name, source_pose or {}, amplitude_pose or {},
+        gesture_start, gesture_end,
+    )
+    return -(current - target).abs().mean(dim=-1)
+
+
 def phase_pose_match(
     env: ManagerBasedRlEnv,
     asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
