@@ -71,6 +71,12 @@ from .microduck_laugh_env_cfg import (
     make_microduck_laugh_env_cfg,
     MicroduckLaughRlCfg,
 )
+from .microduck_laugh_choreo_env_cfg import (
+    make_microduck_laugh_choreo_env_cfg,
+    MicroduckLaughChoreoRlCfg,
+    make_microduck_laugh_arm_stage_env_cfg,
+    MicroduckLaughArmStageRlCfg,
+)
 from .backlash import make_backlash_variant
 
 # Standard velocity task
@@ -236,6 +242,22 @@ register_mjlab_task(
     env_cfg=make_microduck_laugh_env_cfg(),
     play_env_cfg=make_microduck_laugh_env_cfg(play=True),
     rl_cfg=MicroduckLaughRlCfg,
+    runner_cls=MicroduckOnPolicyRunner,
+)
+
+register_mjlab_task(
+    task_id="Mjlab-LaughChoreo-Flat-MicroDuck",
+    env_cfg=make_microduck_laugh_choreo_env_cfg(),
+    play_env_cfg=make_microduck_laugh_choreo_env_cfg(play=True),
+    rl_cfg=MicroduckLaughChoreoRlCfg,
+    runner_cls=MicroduckOnPolicyRunner,
+)
+
+register_mjlab_task(
+    task_id="Mjlab-LaughArmStage-Flat-MicroDuck",
+    env_cfg=make_microduck_laugh_arm_stage_env_cfg(),
+    play_env_cfg=make_microduck_laugh_arm_stage_env_cfg(play=True),
+    rl_cfg=MicroduckLaughArmStageRlCfg,
     runner_cls=MicroduckOnPolicyRunner,
 )
 

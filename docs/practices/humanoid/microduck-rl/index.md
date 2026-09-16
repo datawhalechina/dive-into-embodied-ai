@@ -52,6 +52,16 @@ description: "从 MicroDuck 机器人模型、mjlab 和 MuJoCo Warp，到三个�
 
 [下载踢球 MP4](./figs/focus-final/ballkick_final.mp4)
 
+## 实验中的新动作：奶龙大笑
+
+这个动作需要手臂参与：先双手捧腹、身体前仰大笑，再向后倒，随后左手左腿、右手右腿交替敲击地面，最后回到抱腹姿态。原始 MicroDuck 模型只有腿部和头部的 14 个舵机，因此我为这个实验动作增加了左右肩、左右肘四个手臂关节，以及手掌碰撞几何。
+
+![MicroDuck 奶龙大笑动作参考轨迹](./figs/experimental/laugh_choreo_reference.gif)
+
+[下载奶龙大笑动作参考 MP4](./figs/experimental/laugh_choreo_reference.mp4)
+
+这段视频是按同一组动作关键帧生成的稳定参考轨迹，用来确认动作设计和镜头效果；带手臂的 PPO 策略仍在训练和验收中，暂不计入上面的三个正式结果。当前模型没有独立下颌舵机，所以视频里的“大笑”由捧腹、身体后仰、头部动作和交替敲地表达，嘴部开合需要后续加入真实的 jaw actuator。
+
 ## 其余训练 case
 
 其余任务的 checkpoint、日志和原始回放继续保留在开发机实验目录，当前不进入教程发布页。发布页只展示上面三段已经人工验收过的动作，避免读者把静态姿态、失稳过程或 episode 重置误认为完成动作。
