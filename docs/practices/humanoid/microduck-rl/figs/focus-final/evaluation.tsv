@@ -1,0 +1,4 @@
+action\tcheckpoint\tframes\tduration_s\tdone_count\tmin_trunk_z_m\tmin_upright_proxy\tfell_like_frames\tfell_like_fraction\tnote
+Velocity-Flat\tmode_matrix_stable/2026-09-04_05-35-02_velocity-flat-stage2/model_2999.pt\t300\t6.0\t0\t0.1151\t0.9988\t0\t0.0000\tfresh clean mjlab render
+RollerStandUp\tmode_matrix_stable/2026-09-06_11-24-43_roller-standup-stage2/model_4000.pt\t300\t6.0\t1\t0.0600\t0.9942\t1\t0.0033\tfresh clean mjlab recheck; delivered clip is the same validated checkpoint
+Velocity-Swizzle\tmode_matrix_stable/2026-09-06_10-16-51_roller-swizzle-stage2/model_3000.pt\t300\t6.0\t1\t-\t-\t0\t0.0000\tmatrix clean replay status: timeout=1, fell_over=0; visual clip stable

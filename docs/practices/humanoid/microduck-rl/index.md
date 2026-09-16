@@ -171,6 +171,20 @@ uv run python scripts/summarize_training_matrix.py
 
 ## 训练结果：18 个模式各自有一份策略
 
+## 组会演示：三个完成度高的动作
+
+本轮按实际 mjlab 的固定条件回放重新筛选主展示动作。最终使用速度行走、轮式起身和轮式转向：它们的动作过程清楚，短片中没有明显倒地段，适合直接放在教程首页。
+
+| 动作 | 说明 | 固定条件验收 | GIF | MP4 |
+| --- | --- | --- | --- | --- |
+| Velocity-Flat | 稳定行走 | `0/300` 疑似倒地帧；最低躯干高度 0.115 m | [播放](./figs/focus-final/velocity_flat_final.gif) | [下载](./figs/focus-final/velocity_flat_final.mp4) |
+| RollerStandUp | 从地面起身并站稳 | `1/300` 疑似倒地帧；`done_count=1` | [播放](./figs/focus-final/roller_standup_final.gif) | [下载](./figs/focus-final/roller_standup_final.mp4) |
+| Velocity-Swizzle | 轮式转向 | 矩阵回放 `fell_over=0`；视频保持稳定 | [播放](./figs/focus-final/roller_swizzle_final.gif) | [下载](./figs/focus-final/roller_swizzle_final.mp4) |
+
+三段视频和完整验收字段见 [`figs/focus-final/evaluation.tsv`](./figs/focus-final/evaluation.tsv)。统一验收方式是实际 mjlab 环境、固定 seed 42、单环境、50 Hz；`fell_like` 只用于筛查画面中的明显失稳，不能替代多 seed 或真机测试。
+
+原先集中训练的 `StandUp-Flat`、`GroundPick-Flat`、`BallKick-Flat` 仍保留在训练脚本和实验日志中。当前复核显示 StandUp 能完成但中间姿态不连贯，GroundPick 微调后仍停在低伏姿态，BallKick 能触球但部分回合会摔倒，因此暂不作为首页主展示。
+
 下表里的“轮数”是最终 checkpoint 的 iteration；“回放”表示该 checkpoint 已经被离屏脚本加载并生成视频。`ok` 是工程验收状态，不代表在所有随机地形、所有速度和真机上都稳定。
 
 | 模式 | 任务 ID | checkpoint | 回放 |

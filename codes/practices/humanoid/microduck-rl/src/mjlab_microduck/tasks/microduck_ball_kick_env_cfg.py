@@ -616,6 +616,10 @@ def make_microduck_ball_kick_env_cfg(
             },
         )
 
+    import os
+    if os.environ.get("MICRODUCK_COMPLETION") == "1":
+        from mjlab_microduck.tasks.completion_rewards import apply
+        apply(cfg)
     return cfg
 
 

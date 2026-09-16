@@ -661,6 +661,10 @@ def make_microduck_ground_pick_env_cfg(play: bool = False, rough: bool = False) 
             },
         )
 
+    import os
+    if os.environ.get("MICRODUCK_COMPLETION") == "1":
+        from mjlab_microduck.tasks.completion_rewards import apply_ground
+        apply_ground(cfg)
     return cfg
 
 
