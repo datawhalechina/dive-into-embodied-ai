@@ -1,11 +1,11 @@
 ---
-title: "MicroDuck RL：让小黄鸭学会走路、起身和翻滚"
+title: "MicroDuck RL：让小黄鸭学会起身、转向和踢球"
 sidebar_position: 2
 displayed_sidebar: practicesHumanoidSidebar
-description: "从 MicroDuck 机器人模型、mjlab 和 MuJoCo Warp，到 18 个动作模式的 PPO 训练与离屏回放。"
+description: "从 MicroDuck 机器人模型、mjlab 和 MuJoCo Warp，到三个经过验收的动作演示。"
 ---
 
-# MicroDuck RL：让小黄鸭学会走路、起身和翻滚
+# MicroDuck RL：让小黄鸭学会起身、转向和踢球
 
 先看结果，再拆训练过程。
 
@@ -52,51 +52,9 @@ description: "从 MicroDuck 机器人模型、mjlab 和 MuJoCo Warp，到 18 个
 
 [下载踢球 MP4](./figs/focus-final/ballkick_final.mp4)
 
-## 其他动作模式（对照素材）
+## 其余训练 case
 
-### 走路：Velocity
-
-速度跟踪是最基础、也最能看出训练质量的模式。策略接收期望速度，输出 14 个舵机的目标位置，小黄鸭需要一边保持身体直立，一边把实际速度跟上命令。
-
-![MicroDuck 速度跟踪回放](./figs/microduck-velocity-flat.gif)
-
-[下载 Velocity MP4](./figs/microduck-velocity-flat.mp4) · [粗糙地面版本](./figs/microduck-velocity-rough.gif)
-
-### 起身：StandUp / Roller StandUp
-
-起身不是“把关节角度插值一遍”这么简单。机器人要先利用身体和脚的接触找到支撑，再把重心抬回可站立区域。滚轮版的起身还要处理被动轮和更窄的支撑面。
-
-![MicroDuck 从地面起身](./figs/microduck-standup-flat.gif)
-
-[下载 StandUp MP4](./figs/microduck-standup-flat.mp4)
-
-![MicroDuck 轮式状态起身](./figs/microduck-roller-standup.gif)
-
-[下载 Roller StandUp MP4](./figs/microduck-roller-standup.mp4)
-
-### 做事：GroundPick / BallKick
-
-这两个任务比单纯走路更像“机器人动作”：它要在完成目标的同时保持身体不要失稳。GroundPick 需要靠近并降低头部，BallKick 则需要把踢球动作和支撑脚的稳定性配合起来。
-
-![MicroDuck 接近并拾取目标](./figs/microduck-groundpick-flat.gif)
-
-[下载 GroundPick MP4](./figs/microduck-groundpick-flat.mp4)
-
-![MicroDuck 踢球](./figs/microduck-ballkick-flat.gif)
-
-[下载 BallKick MP4](./figs/microduck-ballkick-flat.mp4)
-
-### 玩起来：Spin / Roulade
-
-Spin 是原地旋转，Roulade 是翻滚。它们的目标不是“走得更远”，所以会使用不同的命令和奖励配方；沿用走路策略的权重，通常只会得到一个很别扭的局部最优。
-
-![MicroDuck 原地旋转](./figs/microduck-spin-flat.gif)
-
-[下载 Spin MP4](./figs/microduck-spin-flat.mp4)
-
-![MicroDuck 翻滚](./figs/microduck-roulade-flat.gif)
-
-[下载 Roulade MP4](./figs/microduck-roulade-flat.mp4)
+其余任务的 checkpoint、日志和原始回放继续保留在开发机实验目录，当前不进入教程发布页。发布页只展示上面三段已经人工验收过的动作，避免读者把静态姿态、失稳过程或 episode 重置误认为完成动作。
 
 ## 这个项目到底在做什么
 
@@ -236,29 +194,7 @@ uv run python scripts/summarize_training_matrix.py
 | 原地旋转 | `Spin` | 3000 | ✅ |
 | 翻滚 | `Roulade` | 6000 | ✅ |
 
-完整素材都在本页的 `figs/` 目录。想快速浏览时，优先看上面的 7 个重点动作；想逐个检查时，可以直接下载对应 MP4：
-
-<details>
-<summary>展开完整回放索引</summary>
-
-| 模式 | GIF | MP4 |
-| --- | --- | --- |
-| Velocity Flat | [播放](./figs/microduck-velocity-flat.gif) | [下载](./figs/microduck-velocity-flat.mp4) |
-| Velocity Rough | [播放](./figs/microduck-velocity-rough.gif) | [下载](./figs/microduck-velocity-rough.mp4) |
-| VelStand Flat / Rough | [Flat](./figs/microduck-velstand-flat.gif) · [Rough](./figs/microduck-velstand-rough.gif) | [Flat](./figs/microduck-velstand-flat.mp4) · [Rough](./figs/microduck-velstand-rough.mp4) |
-| StandUp Flat / Rough | [Flat](./figs/microduck-standup-flat.gif) · [Rough](./figs/microduck-standup-rough.gif) | [Flat](./figs/microduck-standup-flat.mp4) · [Rough](./figs/microduck-standup-rough.mp4) |
-| SitStand Flat / Rough | [Flat](./figs/microduck-sitstand-flat.gif) · [Rough](./figs/microduck-sitstand-rough.gif) | [Flat](./figs/microduck-sitstand-flat.mp4) · [Rough](./figs/microduck-sitstand-rough.mp4) |
-| GroundPick Flat / Rough | [Flat](./figs/microduck-groundpick-flat.gif) · [Rough](./figs/microduck-groundpick-rough.gif) | [Flat](./figs/microduck-groundpick-flat.mp4) · [Rough](./figs/microduck-groundpick-rough.mp4) |
-| BallKick | [播放](./figs/microduck-ballkick-flat.gif) | [下载](./figs/microduck-ballkick-flat.mp4) |
-| Roller Velocity | [播放](./figs/microduck-roller-velocity.gif) | [下载](./figs/microduck-roller-velocity.mp4) |
-| Roller Swizzle | [播放](./figs/microduck-roller-swizzle.gif) | [下载](./figs/microduck-roller-swizzle.mp4) |
-| Roller Crouch | [播放](./figs/microduck-roller-crouch.gif) | [下载](./figs/microduck-roller-crouch.mp4) |
-| Roller Slope | [播放](./figs/microduck-roller-slope.gif) | [下载](./figs/microduck-roller-slope.mp4) |
-| Roller StandUp | [播放](./figs/microduck-roller-standup.gif) | [下载](./figs/microduck-roller-standup.mp4) |
-| Spin | [播放](./figs/microduck-spin-flat.gif) | [下载](./figs/microduck-spin-flat.mp4) |
-| Roulade | [播放](./figs/microduck-roulade-flat.gif) | [下载](./figs/microduck-roulade-flat.mp4) |
-
-</details>
+其余训练 case 的 checkpoint 和日志仍可按训练脚本复现；教程仓库只保留精选的三段 GIF/MP4，避免把未通过画面验收的素材继续作为结果传播。
 
 ## 如何自己播放一个 checkpoint
 
