@@ -37,6 +37,13 @@ def _apply_clean_play_config(env_cfg, task: str) -> None:
     env_cfg.seed = 42
     events = env_cfg.events
 
+    # Rendered tutorial media should show the robot and the terrain only.  The
+    # command visualizers are useful in an interactive viewer but add large
+    # arrows to offline action clips.
+    for command_cfg in env_cfg.commands.values():
+        if hasattr(command_cfg, "debug_vis"):
+            command_cfg.debug_vis = False
+
     # No external disturbance during the action demonstration.
     events.pop("push_robot", None)
 
@@ -73,25 +80,42 @@ def _apply_clean_play_config(env_cfg, task: str) -> None:
         term = events.get("set_ground_state")
         if term is not None:
             params = term.params
-            params.update(
-                face_down_prob=0.0,
-                face_up_prob=0.0,
-                sitting_prob=1.0,
-                standing_prob=0.0,
-                sitting_joint_noise_std=0.0,
-                sitting_tilt_max=0.0,
-                sitting_z_min=0.060,
-                sitting_z_max=0.060,
-            )
+            if "roller" in task_lower:
+                # The roller standup task has prone/supine/standing buckets;
+                # it deliberately has no sitting bucket.  Setting
+                # ``sitting_prob`` here silently falls back to a standing
+                # reset, which made the published clip skip the very action
+                # it was meant to demonstrate.
+                params.update(
+                    face_down_prob=1.0,
+                    face_up_prob=0.0,
+                    sitting_prob=0.0,
+                    standing_prob=0.0,
+                    prone_z_min=0.076,
+                    prone_z_max=0.090,
+                )
+            else:
+                params.update(
+                    face_down_prob=0.0,
+                    face_up_prob=0.0,
+                    sitting_prob=1.0,
+                    standing_prob=0.0,
+                    sitting_joint_noise_std=0.0,
+                    sitting_tilt_max=0.0,
+                    sitting_z_min=0.060,
+                    sitting_z_max=0.060,
+                )
     elif "ballkick" in task_lower:
         # Remove ball placement noise while preserving the trained kick-foot
         # offset and the actual task reset callback.
         term = events.get("reset_ball")
         if term is not None:
             term.params["noise_xy"] = 0.0
-    elif "groundpick" in task_lower:
-        # GroundPick already starts upright; with pushes and DR removed its
-        # phase command is the only changing input in the demo.
+    elif "groundpick" in task_lower or "spin" in task_lower:
+        # GroundPick and Spin are phase-driven tasks.  Their ``twist`` command
+        # is a deterministic [cos(phi), sin(phi), 0] phase signal, rather than
+        # a user-supplied velocity.  Freeze the phase origin so the action is
+        # repeatable and preserve the command in the rollout below.
         env_cfg.commands["twist"].randomize_phase = False
 
 
@@ -108,6 +132,8 @@ def render(
     lin_vel_x: float,
     lin_vel_y: float,
     ang_vel_z: float,
+    head_yaw: float,
+    head_pitch: float,
     clean: bool,
 ) -> dict[str, float]:
     configure_torch_backends()
@@ -151,8 +177,15 @@ def render(
                 # overridden between steps.
                 for name in ("head_pose", "body_pose"):
                     if name in env.command_manager.active_terms:
-                        env.command_manager.get_command(name).zero_()
-                if "groundpick" not in task.lower():
+                        command = env.command_manager.get_command(name)
+                        command.zero_()
+                        if name == "head_pose":
+                            command[0, 1] = head_pitch
+                            command[0, 2] = head_yaw
+                # GroundPick and Spin encode their action in the phase command;
+                # overriding it with a zero velocity makes both demos look
+                # static.  Ordinary velocity tasks use the explicit CLI command.
+                if not any(name in task.lower() for name in ("groundpick", "spin")):
                     twist = env.command_manager.get_command("twist")
                     twist.zero_()
                     twist[0, 0] = lin_vel_x
@@ -218,6 +251,8 @@ def main() -> None:
     parser.add_argument("--lin-vel-x", type=float, default=0.15)
     parser.add_argument("--lin-vel-y", type=float, default=0.0)
     parser.add_argument("--ang-vel-z", type=float, default=0.0)
+    parser.add_argument("--head-yaw", type=float, default=0.0)
+    parser.add_argument("--head-pitch", type=float, default=0.0)
     parser.add_argument(
         "--clean",
         action="store_true",
@@ -239,6 +274,8 @@ def main() -> None:
         args.lin_vel_x,
         args.lin_vel_y,
         args.ang_vel_z,
+        args.head_yaw,
+        args.head_pitch,
         args.clean,
     )
 
