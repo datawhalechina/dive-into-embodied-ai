@@ -2897,6 +2897,258 @@ def phase_pose_track_l1(
     return -(cur - target).abs().mean(dim=-1)
 
 
+def _laugh_pose_error(
+    env: ManagerBasedRlEnv,
+    asset_cfg: SceneEntityCfg,
+    command_name: str,
+    source_pose: dict,
+    amplitude_pose: dict,
+    gesture_start: float,
+    gesture_end: float,
+):
+    """Return the current pose and a two-bob laugh target.
+
+    The target is neutral outside ``[gesture_start, gesture_end]``.  Inside
+    that window it follows two smooth oscillations with a raised-cosine
+    envelope, so the policy gets a clear rhythm without a discontinuity at the
+    beginning or end of the gesture.
+    """
+    if not source_pose or not amplitude_pose:
+        raise ValueError("_laugh_pose_error requires source and amplitude poses")
+    if not 0.0 <= gesture_start < gesture_end <= 1.0:
+        raise ValueError("laugh gesture window must satisfy 0 <= start < end <= 1")
+
+    asset: Entity = env.scene[asset_cfg.name]
+    cmd = env.command_manager.get_command(command_name)
+    phase = (torch.atan2(cmd[:, 1], cmd[:, 0]) / (2 * torch.pi)) % 1.0
+    names = list(amplitude_pose.keys())
+    ids = [int(asset.find_joints([n])[0][0]) for n in names]
+
+    source = torch.tensor(
+        [source_pose[n] for n in names], device=env.device, dtype=asset.data.joint_pos.dtype
+    )
+    amplitude = torch.tensor(
+        [amplitude_pose[n] for n in names], device=env.device, dtype=asset.data.joint_pos.dtype
+    )
+    t = ((phase - gesture_start) / (gesture_end - gesture_start)).clamp(0.0, 1.0)
+    active = (phase >= gesture_start) & (phase <= gesture_end)
+    envelope = torch.sin(torch.pi * t).square()
+    oscillation = torch.sin(4.0 * torch.pi * t)
+    target = source.unsqueeze(0) + (
+        envelope * oscillation * active.float()
+    ).unsqueeze(-1) * amplitude.unsqueeze(0)
+    current = asset.data.joint_pos[:, ids]
+    return current, target
+
+
+def laugh_pose_track(
+    env: ManagerBasedRlEnv,
+    command_name: str = "twist",
+    source_pose: Optional[dict] = None,
+    amplitude_pose: Optional[dict] = None,
+    gesture_start: float = 0.08,
+    gesture_end: float = 0.88,
+    std: float = 0.25,
+    asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+    """Gaussian tracking reward for the two-bob laugh trajectory."""
+    current, target = _laugh_pose_error(
+        env, asset_cfg, command_name, source_pose or {}, amplitude_pose or {},
+        gesture_start, gesture_end,
+    )
+    return torch.exp(-((current - target) / std) ** 2).mean(dim=-1)
+
+
+def laugh_pose_track_l1(
+    env: ManagerBasedRlEnv,
+    command_name: str = "twist",
+    source_pose: Optional[dict] = None,
+    amplitude_pose: Optional[dict] = None,
+    gesture_start: float = 0.08,
+    gesture_end: float = 0.88,
+    asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+    """Bootstrap L1 reward for the two-bob laugh trajectory."""
+    current, target = _laugh_pose_error(
+        env, asset_cfg, command_name, source_pose or {}, amplitude_pose or {},
+        gesture_start, gesture_end,
+    )
+    return -(current - target).abs().mean(dim=-1)
+
+
+def _laugh_choreography_pose_error(
+    env: ManagerBasedRlEnv,
+    asset_cfg: SceneEntityCfg,
+    command_name: str,
+    keyframes: tuple,
+):
+    """Evaluate a smooth, phase-indexed laugh choreography.
+
+    ``keyframes`` is a tuple of ``(phase, pose_dict)`` pairs.  The phase is
+    cyclic, while the pose interpolation is piecewise smoothstep so the task
+    has a readable sequence without command discontinuities.
+    """
+    if len(keyframes) < 2:
+        raise ValueError("laugh choreography needs at least two keyframes")
+    phases = [float(item[0]) for item in keyframes]
+    if phases[0] != 0.0 or phases[-1] != 1.0 or any(
+        not (lo < hi) for lo, hi in zip(phases, phases[1:])
+    ):
+        raise ValueError("laugh choreography phases must be increasing from 0 to 1")
+
+    asset: Entity = env.scene[asset_cfg.name]
+    cmd = env.command_manager.get_command(command_name)
+    phase = (torch.atan2(cmd[:, 1], cmd[:, 0]) / (2 * torch.pi)) % 1.0
+    names = list(keyframes[0][1].keys())
+    if any(list(pose.keys()) != names for _, pose in keyframes[1:]):
+        raise ValueError("all laugh choreography keyframes must share joint names/order")
+    ids = [int(asset.find_joints([name])[0][0]) for name in names]
+    dtype = asset.data.joint_pos.dtype
+    frame_values = torch.tensor(
+        [[pose[name] for name in names] for _, pose in keyframes],
+        device=env.device,
+        dtype=dtype,
+    )
+
+    # Start with the first frame, then select the segment containing each env.
+    target = frame_values[0].unsqueeze(0).expand(env.num_envs, -1).clone()
+    for index, (lo, hi) in enumerate(zip(phases, phases[1:])):
+        w = ((phase - lo) / (hi - lo)).clamp(0.0, 1.0)
+        w = w * w * (3.0 - 2.0 * w)  # smoothstep
+        candidate = frame_values[index] + w.unsqueeze(-1) * (
+            frame_values[index + 1] - frame_values[index]
+        )
+        in_segment = (phase >= lo) & (phase <= hi)
+        target = torch.where(in_segment.unsqueeze(-1), candidate, target)
+    current = asset.data.joint_pos[:, ids]
+    return current, target, phase
+
+
+def laugh_choreography_track(
+    env: ManagerBasedRlEnv,
+    command_name: str = "twist",
+    keyframes: tuple = (),
+    std: float = 0.20,
+    asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+    """Gaussian pose tracking for the multi-stage laugh sequence."""
+    current, target, _ = _laugh_choreography_pose_error(
+        env, asset_cfg, command_name, keyframes,
+    )
+    return torch.exp(-((current - target) / std) ** 2).mean(dim=-1)
+
+
+def laugh_choreography_track_l1(
+    env: ManagerBasedRlEnv,
+    command_name: str = "twist",
+    keyframes: tuple = (),
+    asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+    """Dense L1 direction for the multi-stage laugh sequence."""
+    current, target, _ = _laugh_choreography_pose_error(
+        env, asset_cfg, command_name, keyframes,
+    )
+    return -(current - target).abs().mean(dim=-1)
+
+
+def laugh_alternating_hand_contact_reward(
+    env: ManagerBasedRlEnv,
+    sensor_name: str,
+    command_name: str = "twist",
+    left_start: float = 0.58,
+    left_end: float = 0.72,
+    right_start: float = 0.72,
+    right_end: float = 0.88,
+) -> torch.Tensor:
+    """Reward left-then-right palm contact during the tap section.
+
+    The contact sensor is configured with the left palm first and right palm
+    second.  Outside the two tap windows this term is silent, which lets the
+    arms hug the belly during the opening forward/back laugh.
+    """
+    if sensor_name not in env.scene.sensors:
+        return torch.zeros(env.num_envs, device=env.device)
+    cmd = env.command_manager.get_command(command_name)
+    phase = (torch.atan2(cmd[:, 1], cmd[:, 0]) / (2 * torch.pi)) % 1.0
+    sensor = env.scene.sensors[sensor_name]
+    found = sensor.data.found
+    if found.dim() == 3:
+        found = found.any(dim=-1)
+    found = found.bool()
+    if found.shape[1] < 2:
+        return torch.zeros(env.num_envs, device=env.device)
+    left_expected = (phase >= left_start) & (phase < left_end)
+    right_expected = (phase >= right_start) & (phase < right_end)
+    left = found[:, 0]
+    right = found[:, 1]
+    correct = left.float() * left_expected.float() + right.float() * right_expected.float()
+    wrong = right.float() * left_expected.float() + left.float() * right_expected.float()
+    active = left_expected | right_expected
+    return (correct - 0.5 * wrong) * active.float()
+
+
+def laugh_hand_height_track(
+    env: ManagerBasedRlEnv,
+    command_name: str = "twist",
+    left_start: float = 0.72,
+    left_end: float = 0.82,
+    right_start: float = 0.84,
+    right_end: float = 0.94,
+    target_height: float = 0.011,
+    std: float = 0.025,
+    asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+    """Give a dense gradient for lowering the expected palm to the floor."""
+    asset: Entity = env.scene[asset_cfg.name]
+    site_ids = asset.find_sites(list(asset_cfg.site_names))[0]
+    hand_z = asset.data.site_pos_w[:, site_ids, 2]
+    cmd = env.command_manager.get_command(command_name)
+    phase = (torch.atan2(cmd[:, 1], cmd[:, 0]) / (2 * torch.pi)) % 1.0
+    left_expected = (phase >= left_start) & (phase < left_end)
+    right_expected = (phase >= right_start) & (phase < right_end)
+    left_score = torch.exp(-((hand_z[:, 0] - target_height) / std) ** 2)
+    right_score = torch.exp(-((hand_z[:, 1] - target_height) / std) ** 2)
+    return left_score * left_expected.float() + right_score * right_expected.float()
+
+
+def laugh_trunk_lean_track(
+    env: ManagerBasedRlEnv,
+    command_name: str = "twist",
+    keyframes: tuple = ((0.0, 0.0), (1.0, 0.0)),
+    std: float = 0.10,
+    asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+    """Track the forward-then-back trunk lean in the laugh choreography.
+
+    The projected gravity x component is a pitch proxy: positive is forward
+    for this robot.  The small target angles keep the gesture readable while
+    preserving a recoverable support margin.
+    """
+    if len(keyframes) < 2:
+        raise ValueError("laugh trunk lean needs at least two keyframes")
+    phases = [float(item[0]) for item in keyframes]
+    if phases[0] != 0.0 or phases[-1] != 1.0 or any(
+        not (lo < hi) for lo, hi in zip(phases, phases[1:])
+    ):
+        raise ValueError("laugh trunk lean phases must be increasing from 0 to 1")
+
+    asset: Entity = env.scene[asset_cfg.name]
+    cmd = env.command_manager.get_command(command_name)
+    phase = (torch.atan2(cmd[:, 1], cmd[:, 0]) / (2 * torch.pi)) % 1.0
+    target = torch.full_like(phase, float(keyframes[0][1]))
+    values = torch.tensor(
+        [float(value) for _, value in keyframes], device=env.device, dtype=phase.dtype
+    )
+    for index, (lo, hi) in enumerate(zip(phases, phases[1:])):
+        w = ((phase - lo) / (hi - lo)).clamp(0.0, 1.0)
+        w = w * w * (3.0 - 2.0 * w)
+        candidate = values[index] + w * (values[index + 1] - values[index])
+        in_segment = (phase >= lo) & (phase <= hi)
+        target = torch.where(in_segment, candidate, target)
+    lean = asset.data.projected_gravity_b[:, 0]
+    return torch.exp(-((lean - target) / std) ** 2)
+
+
 def phase_pose_match(
     env: ManagerBasedRlEnv,
     asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,

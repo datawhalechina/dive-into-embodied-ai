@@ -16,6 +16,9 @@ _ROBOT_DIR: Path = Path(os.path.dirname(__file__)) / "microduck"
 MICRODUCK_WALK_XML: Path = _ROBOT_DIR / "robot_walk.xml"
 # Full-collision model, shared by standup / ground-pick / walk-rollers tasks.
 MICRODUCK_ALLCOLLISIONS_XML: Path = _ROBOT_DIR / "robot_allcollisions.xml"
+# Laugh choreography model: the base 14-servo robot plus two procedural arms
+# (shoulder + elbow on each side) and palm contact geoms.
+MICRODUCK_LAUGH_XML: Path = _ROBOT_DIR / "robot_allcollisions_laugh.xml"
 # 70mm / 15g ball prop for the BallKick task.
 MICRODUCK_BALL_XML: Path = _ROBOT_DIR / "ball.xml"
 # Roller-skate model: 14 actuated joints + passive wheel hinges (passive_*wheel).
@@ -29,6 +32,7 @@ MICRODUCK_ALLCOLLISIONS_ROLLERS_BACKLASH_XML: Path = _ROBOT_DIR / "robot_allcoll
 
 assert MICRODUCK_WALK_XML.exists(), f"XML not found: {MICRODUCK_WALK_XML}"
 assert MICRODUCK_ALLCOLLISIONS_XML.exists(), f"XML not found: {MICRODUCK_ALLCOLLISIONS_XML}"
+assert MICRODUCK_LAUGH_XML.exists(), f"XML not found: {MICRODUCK_LAUGH_XML}"
 assert MICRODUCK_BALL_XML.exists(), f"XML not found: {MICRODUCK_BALL_XML}"
 assert MICRODUCK_ALLCOLLISIONS_ROLLERS_XML.exists(), f"XML not found: {MICRODUCK_ALLCOLLISIONS_ROLLERS_XML}"
 assert MICRODUCK_ALLCOLLISIONS_BACKLASH_XML.exists(), f"XML not found: {MICRODUCK_ALLCOLLISIONS_BACKLASH_XML}"
@@ -46,6 +50,10 @@ def get_standup_spec() -> mujoco.MjSpec:
 
 def get_ground_pick_spec() -> mujoco.MjSpec:
     return mujoco.MjSpec.from_file(str(MICRODUCK_ALLCOLLISIONS_XML))
+
+
+def get_laugh_spec() -> mujoco.MjSpec:
+    return mujoco.MjSpec.from_file(str(MICRODUCK_LAUGH_XML))
 
 
 def get_walk_rollers_spec() -> mujoco.MjSpec:
@@ -92,6 +100,20 @@ HOME_FRAME = EntityCfg.InitialStateCfg(
         r".*head_pitch.*": 0.3491,
         r".*head_yaw.*": 0.0,
         r".*head_roll.*": 0.0,
+    },
+    joint_vel={".*": 0.0},
+)
+
+# The laugh model starts with its lightweight arms hanging beside the trunk.
+# The task's phase target then pulls them into the belly-hug and alternating-tap
+# portions of the gesture.
+LAUGH_HOME_FRAME = EntityCfg.InitialStateCfg(
+    joint_pos={
+        **HOME_FRAME.joint_pos,
+        r".*left_shoulder_pitch.*": 0.82,
+        r".*left_elbow_pitch.*": -1.62,
+        r".*right_shoulder_pitch.*": 0.82,
+        r".*right_elbow_pitch.*": -1.62,
     },
     joint_vel={".*": 0.0},
 )
@@ -179,6 +201,16 @@ MICRODUCK_STANDUP_ROBOT_CFG = EntityCfg(
 MICRODUCK_GROUND_PICK_ROBOT_CFG = EntityCfg(
     spec_fn=get_ground_pick_spec,
     init_state=HOME_FRAME,
+    collisions=(FULL_COLLISION,),
+    articulation=EntityArticulationInfoCfg(
+        actuators=(actuators,),
+        soft_joint_pos_limit_factor=0.9,
+    ),
+)
+
+MICRODUCK_LAUGH_ROBOT_CFG = EntityCfg(
+    spec_fn=get_laugh_spec,
+    init_state=LAUGH_HOME_FRAME,
     collisions=(FULL_COLLISION,),
     articulation=EntityArticulationInfoCfg(
         actuators=(actuators,),

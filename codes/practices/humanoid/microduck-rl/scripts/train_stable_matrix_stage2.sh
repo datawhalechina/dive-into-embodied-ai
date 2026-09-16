@@ -11,7 +11,7 @@ set -u
 
 cd "$(dirname "$0")/.."
 
-experiment="mode_matrix_stable"
+experiment="${MICRODUCK_EXPERIMENT:-mode_matrix_stable}"
 root="logs/rsl_rl/${experiment}"
 run_log_root="logs/${experiment}"
 mkdir -p "$root" "$run_log_root"
@@ -96,7 +96,7 @@ for spec in "${tasks[@]}"; do
 
   echo "[stable-matrix] ${task}: ${current} -> ${target} (+${additional}), ${envs} envs"
   set +e
-  WANDB_MODE=offline uv run train "$task" \
+  WANDB_MODE=offline uv run --no-sync train "$task" \
     --env.scene.num-envs "$envs" \
     --env.seed 42 --agent.seed 42 \
     --agent.resume True \

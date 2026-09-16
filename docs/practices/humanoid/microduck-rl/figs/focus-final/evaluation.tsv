@@ -1,0 +1,4 @@
+action	checkpoint	frames	duration_s	done_count	min_trunk_z_m	min_upright_proxy	fell_like_frames	fell_like_fraction	note
+RollerStandUp	mode_matrix_stable/2026-09-06_11-24-43_roller-standup-stage2/model_4000.pt	200	4.0	0	0.0718	0.0068	8	0.0400	clean prone reset; rises by about 0.6 s and stays standing afterward; initial ground pose accounts for the screened frames
+Velocity-Swizzle	mode_matrix_stable/2026-09-06_10-16-51_roller-swizzle-stage2/model_3000.pt	150	3.0	0	0.0975	0.9887	0	0.0000	clean phase-command replay with heading input 0.8; command visualizer disabled
+BallKick-Flat	focus_three_completion/2026-09-15_22-44-12_ballkick-flat-stage2/model_1500.pt	120	2.4	0	0.0955	0.7072	0	0.0000	first 120 frames of the 300-frame clean replay; keeps contact and stable recovery, trims the later episode reset

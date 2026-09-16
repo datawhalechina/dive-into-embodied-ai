@@ -16,7 +16,7 @@ set -u
 
 cd "$(dirname "$0")/.."
 
-experiment="mode_matrix_stable"
+experiment="${MICRODUCK_EXPERIMENT:-mode_matrix_stable}"
 stage_root="logs/rsl_rl/${experiment}"
 run_log_root="logs/${experiment}"
 mkdir -p "$stage_root" "$run_log_root"
@@ -27,13 +27,13 @@ tasks=(
   "Mjlab-Velocity-Rough-MicroDuck|mode_matrix_smoke|2026-09-03_14-18-26_Velocity_Rough_MicroDuck|model_49.pt|64|500|velocity-rough-stage1"
   "Mjlab-VelStand-Flat-MicroDuck|mode_matrix_smoke|2026-09-03_14-21-43_VelStand_Flat_MicroDuck|model_49.pt|64|500|velstand-flat-stage1"
   "Mjlab-VelStand-Rough-MicroDuck|mode_matrix_smoke|2026-09-03_14-23-51_VelStand_Rough_MicroDuck|model_49.pt|64|500|velstand-rough-stage1"
-  "Mjlab-StandUp-Flat-MicroDuck|mode_matrix_smoke|2026-09-03_14-15-24_standup-flat-smoke|model_9.pt|64|500|standup-flat-stage1"
+  "Mjlab-StandUp-Flat-MicroDuck|mode_matrix_stable|stage_resume_standup-flat-stage1|model_9.pt|64|500|standup-flat-stage1"
   "Mjlab-StandUp-Rough-MicroDuck|mode_matrix_smoke|2026-09-03_14-26-49_StandUp_Rough_MicroDuck|model_49.pt|64|500|standup-rough-stage1"
   "Mjlab-SitStand-Flat-MicroDuck|mode_matrix_smoke|2026-09-03_14-29-40_SitStand_Flat_MicroDuck|model_49.pt|64|500|sitstand-flat-stage1"
   "Mjlab-SitStand-Rough-MicroDuck|mode_matrix_smoke|2026-09-03_14-31-43_SitStand_Rough_MicroDuck|model_49.pt|64|500|sitstand-rough-stage1"
-  "Mjlab-GroundPick-Flat-MicroDuck|mode_matrix_smoke|2026-09-03_14-34-29_GroundPick_Flat_MicroDuck|model_49.pt|64|500|groundpick-flat-stage1"
+  "Mjlab-GroundPick-Flat-MicroDuck|mode_matrix_stable|stage_resume_groundpick-flat-stage1|model_49.pt|64|500|groundpick-flat-stage1"
   "Mjlab-GroundPick-Rough-MicroDuck|mode_matrix_smoke|2026-09-03_14-36-51_GroundPick_Rough_MicroDuck|model_49.pt|64|500|groundpick-rough-stage1"
-  "Mjlab-BallKick-Flat-MicroDuck|mode_matrix_smoke|2026-09-03_14-39-37_BallKick_Flat_MicroDuck|model_49.pt|64|500|ballkick-flat-stage1"
+  "Mjlab-BallKick-Flat-MicroDuck|mode_matrix_stable|stage_resume_ballkick-flat-stage1|model_49.pt|64|500|ballkick-flat-stage1"
   "Mjlab-Velocity-Flat-MicroDuck-Rollers|mode_matrix_smoke|2026-09-03_14-42-20_Velocity_Flat_MicroDuck_Rollers|model_49.pt|64|500|roller-velocity-stage1"
   "Mjlab-Velocity-Swizzle-MicroDuck|mode_matrix_smoke|2026-09-03_14-44-54_Velocity_Swizzle_MicroDuck|model_49.pt|64|500|roller-swizzle-stage1"
   "Mjlab-RollerCrouch-Flat-MicroDuck|mode_matrix_smoke|2026-09-03_14-47-11_RollerCrouch_Flat_MicroDuck|model_49.pt|64|500|roller-crouch-stage1"
@@ -98,7 +98,7 @@ for spec in "${tasks[@]}"; do
 
   echo "[stable-matrix] ${task}: resume ${latest_name} -> ${desired_final} (+${additional}), ${envs} envs"
   set +e
-  WANDB_MODE=offline uv run train "$task" \
+  WANDB_MODE=offline uv run --no-sync train "$task" \
     --env.scene.num-envs "$envs" \
     --env.seed 42 --agent.seed 42 \
     --agent.resume True \

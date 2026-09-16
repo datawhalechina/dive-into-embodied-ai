@@ -1,11 +1,11 @@
 ---
-title: "MicroDuck RL：让小黄鸭学会走路、起身和翻滚"
+title: "MicroDuck RL：让小黄鸭学会起身、转向和踢球"
 sidebar_position: 2
 displayed_sidebar: practicesHumanoidSidebar
-description: "从 MicroDuck 机器人模型、mjlab 和 MuJoCo Warp，到 18 个动作模式的 PPO 训练与离屏回放。"
+description: "从 MicroDuck 机器人模型、mjlab 和 MuJoCo Warp，到三个经过验收的动作演示。"
 ---
 
-# MicroDuck RL：让小黄鸭学会走路、起身和翻滚
+# MicroDuck RL：让小黄鸭学会起身、转向和踢球
 
 先看结果，再拆训练过程。
 
@@ -24,51 +24,47 @@ description: "从 MicroDuck 机器人模型、mjlab 和 MuJoCo Warp，到 18 个
 
 :::
 
-## 先看小黄鸭会什么
+## 三个可直接观看的动作
 
-### 走路：Velocity
+下面三段是本页的主展示素材，统一使用实际 mjlab 环境、固定 seed 42 和近距离镜头渲染。GIF 直接嵌在教程里，点击下方链接可以下载同源 MP4。
 
-速度跟踪是最基础、也最能看出训练质量的模式。策略接收期望速度，输出 14 个舵机的目标位置，小黄鸭需要一边保持身体直立，一边把实际速度跟上命令。
+### 轮式起身
 
-![MicroDuck 速度跟踪回放](./figs/microduck-velocity-flat.gif)
+从趴地状态起身，完成后保持站立。
 
-[下载 Velocity MP4](./figs/microduck-velocity-flat.mp4) · [粗糙地面版本](./figs/microduck-velocity-rough.gif)
+![MicroDuck 轮式起身：从地面恢复站立](./figs/focus-final/roller_standup_final.gif)
 
-### 起身：StandUp / Roller StandUp
+[下载轮式起身 MP4](./figs/focus-final/roller_standup_final.mp4)
 
-起身不是“把关节角度插值一遍”这么简单。机器人要先利用身体和脚的接触找到支撑，再把重心抬回可站立区域。滚轮版的起身还要处理被动轮和更窄的支撑面。
+### 轮式转向
 
-![MicroDuck 从地面起身](./figs/microduck-standup-flat.gif)
+使用 Swizzle 的阶段命令完成转向，转过来后保持稳定。
 
-[下载 StandUp MP4](./figs/microduck-standup-flat.mp4)
+![MicroDuck 轮式转向](./figs/focus-final/roller_swizzle_final.gif)
 
-![MicroDuck 轮式状态起身](./figs/microduck-roller-standup.gif)
+[下载轮式转向 MP4](./figs/focus-final/roller_swizzle_final.mp4)
 
-[下载 Roller StandUp MP4](./figs/microduck-roller-standup.mp4)
+### 踢球
 
-### 做事：GroundPick / BallKick
+策略抬脚完成触球，视频保留触球和收势过程，避免把后续 episode 重置画面混进演示。
 
-这两个任务比单纯走路更像“机器人动作”：它要在完成目标的同时保持身体不要失稳。GroundPick 需要靠近并降低头部，BallKick 则需要把踢球动作和支撑脚的稳定性配合起来。
+![MicroDuck 踢球](./figs/focus-final/ballkick_final.gif)
 
-![MicroDuck 接近并拾取目标](./figs/microduck-groundpick-flat.gif)
+[下载踢球 MP4](./figs/focus-final/ballkick_final.mp4)
 
-[下载 GroundPick MP4](./figs/microduck-groundpick-flat.mp4)
+## 实验中的新动作：奶龙大笑
 
-![MicroDuck 踢球](./figs/microduck-ballkick-flat.gif)
+这个动作需要手臂参与：先双手捧腹、身体前仰大笑，再向后倒，随后左手左腿、右手右腿交替敲击地面，最后回到抱腹姿态。原始 MicroDuck 模型只有腿部和头部的 14 个舵机，因此我为这个实验动作增加了左右肩、左右肘四个手臂关节，以及手掌碰撞几何。
 
-[下载 BallKick MP4](./figs/microduck-ballkick-flat.mp4)
+![MicroDuck 奶龙大笑动作参考轨迹](./figs/experimental/laugh_choreo_reference.gif)
 
-### 玩起来：Spin / Roulade
+[下载奶龙大笑动作参考 MP4](./figs/experimental/laugh_choreo_reference.mp4)
 
-Spin 是原地旋转，Roulade 是翻滚。它们的目标不是“走得更远”，所以会使用不同的命令和奖励配方；沿用走路策略的权重，通常只会得到一个很别扭的局部最优。
+这段视频是按同一组动作关键帧生成的稳定参考轨迹，用来确认动作设计和镜头效果；带手臂的 PPO 策略仍在训练和验收中，暂不计入上面的三个正式结果。当前模型没有独立下颌舵机，所以视频里的“大笑”由捧腹、身体后仰、头部动作和交替敲地表达，嘴部开合需要后续加入真实的 jaw actuator。
 
-![MicroDuck 原地旋转](./figs/microduck-spin-flat.gif)
+## 其余训练 case
 
-[下载 Spin MP4](./figs/microduck-spin-flat.mp4)
-
-![MicroDuck 翻滚](./figs/microduck-roulade-flat.gif)
-
-[下载 Roulade MP4](./figs/microduck-roulade-flat.mp4)
+其余任务的 checkpoint、日志和原始回放继续保留在开发机实验目录，当前不进入教程发布页。发布页只展示上面三段已经人工验收过的动作，避免读者把静态姿态、失稳过程或 episode 重置误认为完成动作。
 
 ## 这个项目到底在做什么
 
@@ -171,6 +167,20 @@ uv run python scripts/summarize_training_matrix.py
 
 ## 训练结果：18 个模式各自有一份策略
 
+## 验收记录：三个主展示动作
+
+本轮按实际 mjlab 的固定条件回放重新筛选主展示动作。最终使用轮式起身、轮式转向和踢球：动作过程清楚，素材经过近距离裁切，踢球片段还截去了后续重置画面。
+
+| 动作 | 说明 | 固定条件验收 | GIF | MP4 |
+| --- | --- | --- | --- | --- |
+| RollerStandUp | 从趴地状态起身并站稳 | 起身后保持站立；初始趴地帧单独计入筛查 | [播放](./figs/focus-final/roller_standup_final.gif) | [下载](./figs/focus-final/roller_standup_final.mp4) |
+| Velocity-Swizzle | 轮式转向 | `0/150` 疑似倒地帧；最低躯干高度 0.0975 m；直立度最低 0.9887 | [播放](./figs/focus-final/roller_swizzle_final.gif) | [下载](./figs/focus-final/roller_swizzle_final.mp4) |
+| BallKick-Flat | 踢球并收势 | `0/120` 疑似倒地帧；最低躯干高度 0.0955 m；直立度最低 0.7072 | [播放](./figs/focus-final/ballkick_final.gif) | [下载](./figs/focus-final/ballkick_final.mp4) |
+
+三段视频和完整验收字段见 [`figs/focus-final/evaluation.tsv`](./figs/focus-final/evaluation.tsv)。统一验收方式是实际 mjlab 环境、固定 seed 42、单环境、50 Hz；`fell_like` 只用于筛查画面中的明显失稳，不能替代多 seed 或真机测试。
+
+原先集中训练的 `StandUp-Flat`、`GroundPick-Flat` 仍保留在训练脚本和实验日志中。当前复核显示 StandUp 中间姿态不连贯，GroundPick 微调后仍停在低伏姿态，因此暂不作为首页主展示。踢球主展示使用的是单独固定条件回放，并截取了完成踢球后的稳定收势段。
+
 下表里的“轮数”是最终 checkpoint 的 iteration；“回放”表示该 checkpoint 已经被离屏脚本加载并生成视频。`ok` 是工程验收状态，不代表在所有随机地形、所有速度和真机上都稳定。
 
 | 模式 | 任务 ID | checkpoint | 回放 |
@@ -194,29 +204,7 @@ uv run python scripts/summarize_training_matrix.py
 | 原地旋转 | `Spin` | 3000 | ✅ |
 | 翻滚 | `Roulade` | 6000 | ✅ |
 
-完整素材都在本页的 `figs/` 目录。想快速浏览时，优先看上面的 7 个重点动作；想逐个检查时，可以直接下载对应 MP4：
-
-<details>
-<summary>展开完整回放索引</summary>
-
-| 模式 | GIF | MP4 |
-| --- | --- | --- |
-| Velocity Flat | [播放](./figs/microduck-velocity-flat.gif) | [下载](./figs/microduck-velocity-flat.mp4) |
-| Velocity Rough | [播放](./figs/microduck-velocity-rough.gif) | [下载](./figs/microduck-velocity-rough.mp4) |
-| VelStand Flat / Rough | [Flat](./figs/microduck-velstand-flat.gif) · [Rough](./figs/microduck-velstand-rough.gif) | [Flat](./figs/microduck-velstand-flat.mp4) · [Rough](./figs/microduck-velstand-rough.mp4) |
-| StandUp Flat / Rough | [Flat](./figs/microduck-standup-flat.gif) · [Rough](./figs/microduck-standup-rough.gif) | [Flat](./figs/microduck-standup-flat.mp4) · [Rough](./figs/microduck-standup-rough.mp4) |
-| SitStand Flat / Rough | [Flat](./figs/microduck-sitstand-flat.gif) · [Rough](./figs/microduck-sitstand-rough.gif) | [Flat](./figs/microduck-sitstand-flat.mp4) · [Rough](./figs/microduck-sitstand-rough.mp4) |
-| GroundPick Flat / Rough | [Flat](./figs/microduck-groundpick-flat.gif) · [Rough](./figs/microduck-groundpick-rough.gif) | [Flat](./figs/microduck-groundpick-flat.mp4) · [Rough](./figs/microduck-groundpick-rough.mp4) |
-| BallKick | [播放](./figs/microduck-ballkick-flat.gif) | [下载](./figs/microduck-ballkick-flat.mp4) |
-| Roller Velocity | [播放](./figs/microduck-roller-velocity.gif) | [下载](./figs/microduck-roller-velocity.mp4) |
-| Roller Swizzle | [播放](./figs/microduck-roller-swizzle.gif) | [下载](./figs/microduck-roller-swizzle.mp4) |
-| Roller Crouch | [播放](./figs/microduck-roller-crouch.gif) | [下载](./figs/microduck-roller-crouch.mp4) |
-| Roller Slope | [播放](./figs/microduck-roller-slope.gif) | [下载](./figs/microduck-roller-slope.mp4) |
-| Roller StandUp | [播放](./figs/microduck-roller-standup.gif) | [下载](./figs/microduck-roller-standup.mp4) |
-| Spin | [播放](./figs/microduck-spin-flat.gif) | [下载](./figs/microduck-spin-flat.mp4) |
-| Roulade | [播放](./figs/microduck-roulade-flat.gif) | [下载](./figs/microduck-roulade-flat.mp4) |
-
-</details>
+其余训练 case 的 checkpoint 和日志仍可按训练脚本复现；教程仓库只保留精选的三段 GIF/MP4，避免把未通过画面验收的素材继续作为结果传播。
 
 ## 如何自己播放一个 checkpoint
 
