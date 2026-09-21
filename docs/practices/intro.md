@@ -39,6 +39,7 @@ displayed_sidebar: practicesOverviewSidebar
 | [DDPG Reacher](./robot-arm/ddpg-mujoco/reacher-v5) | 二维机械臂目标追踪 | 可用 |
 | [DDPG Pusher](./robot-arm/ddpg-mujoco/pusher-v5) | 机械臂接触操作与奖励设计 | 可用 |
 | [ACT 双臂操作训练](./vla/act) | ALOHA、模仿学习、ACT、多回合评估 | 可用 |
+| [π₀.₅ + RECAP：LIBERO 复现](./vla/recap) | 价值模型、优势标注、ACP、LIBERO 评估 | 可用 |
 | [Sim2Sim 验证](./quadruped/sim2sim/placeholder) | 跨仿真策略验证 | 施工中 |
 
 ## 真机实战
