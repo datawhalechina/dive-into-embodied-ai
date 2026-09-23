@@ -268,15 +268,6 @@ export default function LearningMap(): React.JSX.Element {
             </div>
             <div className={styles.nextSteps}><div><strong>想继续深入一个方向？</strong><p>把问题写清楚：机器人看到什么、输出什么动作、什么条件下算成功。再选择方法和对照实验。</p></div><Link to="/docs/overview/learning-path" className="site-text-link">查看进阶学习路径 <ArrowRight size={17} aria-hidden="true" /></Link></div>
           </section>
-          <aside className={styles.references} aria-labelledby="references-title">
-            <h2 id="references-title">参考与延伸</h2>
-            <p>本地图结合以下两份指南的总纲，按本站课程重新组织。感谢开源作者与社区的整理。</p>
-            <ul>
-              <li><a href="https://github.com/TianxingChen/Embodied-AI-Guide/blob/main/README.md">Embodied-AI-Guide <ArrowUpRight size={14} aria-hidden="true" /></a><span>算法、基础设施、控制与硬件的广度。</span></li>
-              <li><a href="https://github.com/jiangranlv/embodied-ai-start">PKU EPIC Lab · embodied-ai-start <ArrowUpRight size={14} aria-hidden="true" /></a><span>从任务定义出发，理解机器人技能与研究方法。</span></li>
-            </ul>
-            <p className={styles.coverageNote}>继续探索：灵巧手、触觉、三维视觉和移动操作也是重要方向；本站的专题覆盖会逐步补齐，可先通过上述指南了解全貌。</p>
-          </aside>
         </div>
       </main>
     </Layout>

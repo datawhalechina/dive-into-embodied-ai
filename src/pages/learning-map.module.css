@@ -69,13 +69,6 @@
 .nextSteps {display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-top: 1.5rem; padding: 1.5rem 0;}
 .nextSteps p {max-width: 45rem; color: var(--site-muted); font-size: .9375rem; margin: .35rem 0 0;}
 .nextSteps a {flex-shrink: 0;}
-.references {padding: 2rem 0 3.5rem; border-top: 1px solid var(--site-border); color: var(--site-muted);}
-.references h2 {font-size: 1.125rem; margin: 0 0 .6rem;}
-.references p {font-size: .875rem; margin: 0 0 .6rem;}
-.references ul {list-style: none; padding: 0; margin: 0 0 1rem;}
-.references li {display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 1rem; font-size: .875rem;}
-.references a {display: inline-flex; align-items: center; gap: .3rem; min-height: 44px;}
-.references .coverageNote {font-size: .8125rem;}
 .srOnly {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;}
 
 @media (max-width: 996px) {
@@ -110,8 +103,6 @@
   .foundations article + article {border-top: 1px solid var(--site-border); padding-top: 1.5rem;}
   .methodNote {grid-template-columns: 1fr; gap: .5rem;}
   .directions article {padding: 1.25rem;}
-  .references {padding-bottom: 2.5rem;}
-  .references li {margin-bottom: .5rem;}
 }
 
 @media (prefers-contrast: more) {
