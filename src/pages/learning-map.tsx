@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Link from '@docusaurus/Link';
 import useBrokenLinks from '@docusaurus/useBrokenLinks';
 import Layout from '@theme/Layout';
+import EmbodiedFootballDemo from '@site/src/components/EmbodiedFootballDemo';
 import {
   ArrowDown, ArrowRight, ArrowUpRight, BrainCircuit, Check,
   Database, Eye, FlaskConical, Move3D, RotateCcw, Settings2,
@@ -9,6 +10,13 @@ import {
 import styles from './learning-map.module.css';
 
 const scenarios = [
+  {
+    name: '机器人踢足球',
+    goal: '观察防守位置，把足球踢进球门。',
+    success: '足球进入球门，踢球过程中保持身体平衡。',
+    stages: ['从相机图像中识别足球、球门和守门员，估计相对位置。', '根据防守位置选择射门空当，安排靠近足球与踢球的动作。', '协调腿部关节和身体重心，执行站位调整与踢球动作。'],
+    feedback: '球向哪里运动？是否进入球门？根据新的观测判断结果并调整下一步。',
+  },
   {
     name: '机械臂拿杯子',
     goal: '把桌上的杯子拿起，放进指定区域。',
@@ -217,7 +225,7 @@ function KnowledgeMap() {
 export default function LearningMap(): React.JSX.Element {
   const {collectAnchor} = useBrokenLinks();
   // Register section targets so links from MDX are checked during the build.
-  ['what-is-embodied-ai', 'knowledge-map', 'first-steps', 'directions'].forEach(collectAnchor);
+  ['what-is-embodied-ai', 'knowledge-map', 'first-steps', 'directions', 'references'].forEach(collectAnchor);
 
   return (
     <Layout title="具身智能学习地图" description="面向新人的具身智能学习地图：理解感知、决策、控制、仿真、数据与硬件的关系，从第一个实验走向机器人项目。">
@@ -240,10 +248,10 @@ export default function LearningMap(): React.JSX.Element {
               <div><p className={styles.kicker}>概念起点</p><h2 id="definition-title">什么是具身智能？</h2></div>
             </div>
             <div className={styles.definition}>
-              <p>具身智能（Embodied AI）研究智能体如何<strong>通过身体与环境交互</strong>，感知世界、学习技能并完成任务。身体决定它能获取哪些信息、能执行哪些动作；行动改变环境，新的观测又帮助它调整下一步。</p>
-              <p>例如，让机器人拿起杯子，需要找到杯子、决定抓取方式、驱动机械臂，并根据视觉或触觉反馈判断是否抓稳。这就形成了“感知 → 决策 → 行动 → 反馈”的闭环。</p>
-              <p className={styles.definitionScope}>这里的“身体”可以是机械臂、四足机器人或移动底盘，也可以是仿真环境中的虚拟机器人。</p>
+              <p>具身智能（Embodied AI）是指将人工智能技术集成到具有物理实体（如机器人、智能汽车等）的系统之中，让AI通过“身体”的<strong>感知、决策与行动闭环</strong>与真实物理世界进行动态交互。</p>
+              <p>例如，让机器人踢足球，需要看清球和球门、判断防守位置、选择射门方向，再控制身体保持平衡并踢球。踢出后，它还要观察球的运动，判断结果并调整下一步。这就形成了“感知 → 决策 → 行动 → 反馈”的闭环。</p>
             </div>
+            <EmbodiedFootballDemo />
           </section>
           <KnowledgeMap />
           <section id="first-steps" className={styles.section} aria-labelledby="steps-title">
@@ -278,6 +286,12 @@ export default function LearningMap(): React.JSX.Element {
               ))}
             </div>
             <div className={styles.nextSteps}><div><strong>想继续深入一个方向？</strong><p>把问题写清楚：机器人看到什么、输出什么动作、什么条件下算成功。再选择方法和对照实验。</p></div><Link to="/docs/overview/learning-path" className="site-text-link">查看进阶学习路径 <ArrowRight size={17} aria-hidden="true" /></Link></div>
+          </section>
+          <section id="references" className={styles.section} aria-labelledby="references-title">
+            <div className={styles.sectionHeading}><h2 id="references-title">参考</h2></div>
+            <ol className={styles.references}>
+              <li><Link href="https://www.nvidia.cn/glossary/embodied-ai/">NVIDIA：什么是具身智能？<ArrowUpRight size={16} aria-hidden="true" /></Link></li>
+            </ol>
           </section>
         </div>
       </main>

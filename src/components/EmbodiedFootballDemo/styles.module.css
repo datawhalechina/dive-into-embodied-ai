@@ -1,0 +1,61 @@
+.demo {margin: 1.75rem 0 0; padding: 1.5rem; border: 1px solid var(--site-border); border-radius: 20px; background: var(--site-panel); overflow: hidden;}
+.header {display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.5rem;}
+.eyebrow {margin: 0 0 .3rem; font-size: .8125rem; color: var(--site-muted);}
+.header h3 {margin: 0; font-size: 1.25rem; line-height: 1.5;}
+.controls {display: flex; flex-wrap: wrap; gap: .65rem;}
+.controls button {display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 44px; padding: .55rem .9rem; font-size: .875rem; line-height: 1.5; font-weight: 550; background: var(--site-panel); color: var(--site-ink); border: 1px solid var(--site-border); border-radius: 10px; cursor: pointer;}
+.controls button:hover {border-color: var(--site-blue);}
+.controls .playButton {background: var(--site-blue); color: var(--site-panel); border-color: var(--site-blue);}
+.controls svg {flex-shrink: 0;}
+.playbackRates {display: flex; align-items: center; padding: 2px; gap: 2px; border: 1px solid var(--site-border); border-radius: 10px; background: var(--site-canvas);}
+.controls .playbackRates button {min-width: 48px; padding: .4rem .5rem; border-color: transparent; border-radius: 7px; background: transparent; color: var(--site-muted); font-variant-numeric: tabular-nums;}
+.controls .playbackRates button:hover {color: var(--site-blue);}
+.controls .playbackRates button[aria-pressed='true'] {background: var(--site-panel); color: var(--site-blue); border-color: var(--site-border); box-shadow: 0 1px 3px #0000000d;}
+.world {position: relative; margin-inline: -1.5rem; background: #101c2b; color: #edf5ff;}
+.canvasHost {height: clamp(340px, 48vw, 540px); width: 100%;}
+.canvasHost canvas {display: block; max-width: 100%; cursor: grab;}
+.canvasHost canvas:active {cursor: grabbing;}
+.canvasHost canvas:focus-visible {outline-offset: -4px; outline-color: #8cdfff;}
+.worldLabels {position: absolute; top: 1.1rem; left: 1.5rem; display: flex; flex-wrap: wrap; gap: 1.2rem; font-size: .8125rem; pointer-events: none;}
+.worldLabels span {display: inline-flex; align-items: center; gap: .45rem;}
+.worldLabels i {width: 8px; height: 8px; border-radius: 50%; background: #68abff;}
+.worldLabels span:last-child i {background: #ffad6c;}
+.viewControls {position: absolute; bottom: .85rem; left: 1.5rem; right: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .25rem 1rem; font-size: .8125rem; pointer-events: none;}
+.viewControls > span {padding: .35rem .6rem; border-radius: 6px; background: #101c2bc9;}
+.viewControls button {display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; padding: .4rem .75rem; color: #edf5ff; background: #101c2be6; border: 1px solid #66788b; border-radius: 8px; cursor: pointer; pointer-events: auto;}
+.viewControls button:hover {background: #243b54;}
+.sceneMessage {position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 2rem; margin: 0; font-size: .9375rem; text-align: center; background: #101c2b;}
+.explanation {padding-top: 1.15rem;}
+.stages {display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem;}
+.stages button {display: flex; align-items: center; gap: .85rem; width: 100%; min-height: 72px; padding: .75rem; text-align: start; border: 1px solid transparent; border-radius: 10px; color: var(--site-muted); background: transparent; cursor: pointer;}
+.stages button:hover {background: var(--site-canvas);}
+.stages button[aria-pressed='true'] {color: var(--site-blue); background: var(--ifm-menu-color-background-active); border-color: var(--site-blue);}
+.stages svg {flex-shrink: 0;}
+.stages strong {display: block; color: var(--site-ink); font-size: .9375rem; font-weight: 600;}
+.stages button > span > span {display: block; color: var(--site-muted); font-size: .8125rem; line-height: 1.6; margin-top: .15rem;}
+.returnLoop {display: flex; align-items: center; justify-content: center; gap: .5rem; margin: .85rem 0 0; font-size: .8125rem; color: var(--site-muted);}
+.returnLoop svg {flex-shrink: 0;}
+.status {display: flex; align-items: baseline; gap: 1rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--site-border); font-size: .9375rem; line-height: 1.75;}
+.status strong {flex-shrink: 0; font-weight: 600;}
+.status span {color: var(--site-muted);}
+.caption {margin-top: .75rem; font-size: .8125rem; line-height: 1.75; color: var(--site-muted);}
+@media (max-width: 760px) {
+  .stages {grid-template-columns: repeat(2, minmax(0, 1fr));}
+  .canvasHost {height: 370px;}
+}
+@media (max-width: 580px) {
+  .demo {padding: 1rem; border-radius: 16px;}
+  .header {margin-bottom: 1rem;}
+  .header h3 {font-size: 1.125rem;}
+  .controls {gap: .5rem;}
+  .controls button {padding-inline: .7rem;}
+  .world {margin-inline: -1rem;}
+  .worldLabels {top: .85rem; left: 1rem; gap: .85rem;}
+  .viewControls {left: 1rem; right: 1rem; bottom: .6rem;}
+  .viewControls > span {max-width: 9rem; font-size: .75rem;}
+  .stages button {gap: .6rem;}
+  .status {gap: .7rem;}
+}
+@media (prefers-contrast: more) {
+  .stages button {border-color: var(--site-muted);}
+}
