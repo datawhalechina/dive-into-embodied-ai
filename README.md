@@ -11,18 +11,18 @@
 > 推荐使用网页版，支持全文搜索、章节导航和交互演示。初次学习可从 **[在线学习地图 →](https://datawhalechina.github.io/dive-into-embodied-ai/learning-map)** 开始。
 
 <p align="center">
-  <a href="https://datawhalechina.github.io/dive-into-embodied-ai/"><img alt="在线阅读" src="https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E9%98%85%E8%AF%BB-datawhalechina-blue" /></a>
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="许可协议" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
   <img alt="状态" src="https://img.shields.io/badge/status-Alpha-orange" />
 </p>
 
+<h3 align="center">🤝 合作支持</h3>
+
 <p align="center">
-  <sub>合作支持</sub><br />
   <a href="docs/practices/amd/intro.md">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/logo/logo_amd_wht.svg" />
       <source media="(prefers-color-scheme: light)" srcset="assets/logo/logo_amd.svg" />
-      <img src="assets/logo/logo_amd.svg" width="220" alt="AMD University Program" />
+      <img src="assets/logo/logo_amd.svg" width="320" alt="AMD University Program" />
     </picture>
   </a>
 </p>
