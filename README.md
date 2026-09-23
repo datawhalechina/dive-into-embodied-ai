@@ -22,7 +22,7 @@
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/logo/logo_amd_wht.svg" />
       <source media="(prefers-color-scheme: light)" srcset="assets/logo/logo_amd.svg" />
-      <img src="assets/logo/logo_amd.svg" width="320" alt="AMD University Program" />
+      <img src="assets/logo/logo_amd.svg" width="220" alt="AMD University Program" />
     </picture>
   </a>
 </p>
