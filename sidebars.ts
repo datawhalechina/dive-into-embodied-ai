@@ -25,7 +25,12 @@ const sidebars: SidebarsConfig = {
   ],
 
   overviewSidebar: [
+    { type: 'link', label: '学习地图', href: '/learning-map' },
+    'overview/intro',
+    'overview/embodied-ai-roadmap',
     'overview/learning-path',
+    'overview/robotics-and-ros2-roadmap',
+    'overview/algorithm-engineer-transition',
     {
       type: 'link',
       label: '从0到1搭建四足机器人',

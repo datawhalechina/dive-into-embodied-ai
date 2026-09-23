@@ -1,0 +1,120 @@
+.page {background: var(--site-canvas); color: var(--site-ink);}
+.container {width: min(1120px, calc(100% - 4rem)); margin-inline: auto;}
+.hero {padding: 4rem 0 2.75rem;}
+.kicker {margin: 0 0 .6rem; font-size: .875rem; font-weight: 600; color: var(--site-muted);}
+.hero h1 {margin: 0 0 .8rem; font-size: clamp(2rem, 3.5vw, 2.75rem); line-height: 1.3; letter-spacing: -.04em;}
+.lead {margin: 0 0 .75rem; font-size: 1.375rem; font-weight: 550;}
+.intro {margin: 0; color: var(--site-muted); line-height: 1.85;}
+.pageNav {display: flex; flex-wrap: wrap; gap: .5rem 1.75rem; margin-top: 1.3rem;}
+.pageNav a {display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; font-size: .9375rem; font-weight: 550;}
+.section {padding-bottom: 4rem; scroll-margin-top: 6rem;}
+.sectionHeading {display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 1.5rem;}
+.sectionHeading h2 {font-size: clamp(1.5rem, 2.5vw, 1.875rem); line-height: 1.4; letter-spacing: -.025em; margin: 0;}
+.sectionHeading > p {color: var(--site-muted); font-size: .9375rem; margin: 0;}
+.map {padding: 1.5rem; border: 1px solid var(--site-border); border-radius: 20px; background: var(--site-panel);}
+.scenarioBar {display: flex; align-items: center; flex-wrap: wrap; gap: .75rem 1.5rem;}
+.scenarioBar > span {font-size: .875rem; font-weight: 600;}
+.scenarioOptions {display: flex; flex-wrap: wrap; gap: .5rem;}
+.scenarioOptions button {display: inline-flex; align-items: center; justify-content: center; gap: .35rem; min-height: 44px; padding: .5rem 1rem; border: 1px solid var(--site-border); border-radius: 999px; font-size: .875rem; font-weight: 550; color: var(--site-muted); background: var(--site-panel); cursor: pointer;}
+.scenarioOptions button:hover {border-color: var(--site-blue); color: var(--site-blue);}
+.scenarioOptions button[aria-pressed='true'] {border-color: var(--site-blue); background: var(--ifm-menu-color-background-active); color: var(--site-blue);}
+.taskDefinition {display: grid; grid-template-columns: 1fr 1fr; gap: .5rem 2rem; margin: 1.25rem 0; padding: 1rem 0; border-top: 1px solid var(--site-border); border-bottom: 1px solid var(--site-border);}
+.taskDefinition p {margin: 0; font-size: .9375rem;}
+.taskDefinition span {display: block; font-size: .8125rem; color: var(--site-muted); margin-bottom: .25rem;}
+.loop {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem;}
+.capability {position: relative; min-width: 0;}
+.capabilityHeading {display: flex; align-items: center; gap: .6rem; margin-bottom: .65rem;}
+.capabilityHeading > svg {flex-shrink: 0; color: var(--site-muted);}
+.capabilityHeading h3 {font-size: 1.125rem; line-height: 1.5; margin: 0;}
+.question {margin: 0 0 .75rem; font-size: .875rem; font-weight: 550;}
+.example {min-height: 5.5rem; padding: .75rem 1rem; margin: 0 0 .75rem; background: var(--site-canvas); border-radius: 10px; font-size: .9375rem; line-height: 1.75;}
+.concepts {font-size: .8125rem; color: var(--site-muted); margin: 0 0 .6rem;}
+.topicLinks {list-style: none; padding: 0; margin: 0;}
+.topicLinks a {display: flex; align-items: center; justify-content: space-between; gap: .5rem; min-height: 44px; font-size: .875rem; padding: .35rem 0; line-height: 1.6;}
+.topicLinks svg {flex-shrink: 0;}
+.flowArrow {position: absolute; top: 7.25rem; right: -1.7rem; color: var(--site-muted);}
+.feedback {display: flex; align-items: center; justify-content: center; gap: .75rem; padding: .9rem 1rem; margin-top: 1rem; border: 1px solid var(--site-border); border-top: 0; border-radius: 0 0 12px 12px;}
+.feedback > svg {flex-shrink: 0; color: var(--site-muted);}
+.feedback p {margin: 0; font-size: .875rem;}
+.feedback strong {font-weight: 550;}
+.feedback span {display: block; color: var(--site-muted);}
+.modelNote {margin: .75rem 0 1.5rem; font-size: .8125rem; color: var(--site-muted); text-align: center;}
+.foundationLabel {display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; color: var(--site-muted); font-size: .8125rem;}
+.foundationLabel::before, .foundationLabel::after {content: ''; height: 1px; flex: 1; background: var(--site-border);}
+.foundations {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem;}
+.foundations > article {min-width: 0;}
+.foundations h3 {font-size: 1rem;}
+.foundations article > p:not(.concepts) {margin: 0 0 .6rem; color: var(--site-muted); font-size: .9375rem; line-height: 1.75;}
+.methodNote {display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; margin-top: 1.5rem; font-size: .9375rem;}
+.methodNote strong {font-weight: 600;}
+.methodNote p {margin: 0; color: var(--site-muted);}
+.steps {list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--site-border);}
+.steps > li {display: grid; grid-template-columns: 3rem 1fr auto; gap: 1.5rem; align-items: center; padding: 1.5rem 0; border-bottom: 1px solid var(--site-border);}
+.stepNumber {align-self: start; padding-top: .1rem; color: var(--site-muted); font-family: var(--ifm-font-family-monospace); font-size: 1.375rem;}
+.stepBody h3 {font-size: 1.125rem; margin: 0 0 .45rem;}
+.stepBody p {margin: 0; color: var(--site-muted); font-size: .9375rem;}
+.stepBody .preparation {font-size: .8125rem; margin-bottom: .35rem;}
+.stepBody .outcome {display: flex; align-items: baseline; gap: .5rem; margin-top: .45rem; font-size: .875rem; color: var(--site-ink);}
+.outcome svg {align-self: center; flex-shrink: 0;}
+.stepLink {display: flex; align-items: center; gap: .65rem; min-height: 44px; max-width: 16rem; font-size: .9375rem; font-weight: 550;}
+.stepLink svg {flex-shrink: 0;}
+.preparationNote {font-size: .875rem; color: var(--site-muted); margin: 1.25rem 0 0;}
+.directions {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem;}
+.directions article {padding: 1.5rem; border: 1px solid var(--site-border); border-radius: 16px; background: var(--site-panel);}
+.directionEnglish {font-size: .8125rem; color: var(--site-muted); margin: 0 0 .25rem;}
+.directions h3 {font-size: 1.25rem; margin: 0 0 .75rem;}
+.directions article > p:not(.directionEnglish) {color: var(--site-muted); font-size: .9375rem;}
+.directions article .directionPath {padding: .8rem 0; margin: 0 0 .75rem; border-top: 1px solid var(--site-border); border-bottom: 1px solid var(--site-border); font-size: .875rem; line-height: 1.9; color: var(--site-ink);}
+.directions article .directionNote {font-size: .8125rem; margin: .6rem 0 0;}
+.nextSteps {display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-top: 1.5rem; padding: 1.5rem 0;}
+.nextSteps p {max-width: 45rem; color: var(--site-muted); font-size: .9375rem; margin: .35rem 0 0;}
+.nextSteps a {flex-shrink: 0;}
+.references {padding: 2rem 0 3.5rem; border-top: 1px solid var(--site-border); color: var(--site-muted);}
+.references h2 {font-size: 1.125rem; margin: 0 0 .6rem;}
+.references p {font-size: .875rem; margin: 0 0 .6rem;}
+.references ul {list-style: none; padding: 0; margin: 0 0 1rem;}
+.references li {display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 1rem; font-size: .875rem;}
+.references a {display: inline-flex; align-items: center; gap: .3rem; min-height: 44px;}
+.references .coverageNote {font-size: .8125rem;}
+.srOnly {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;}
+
+@media (max-width: 996px) {
+  .sectionHeading {align-items: start; flex-direction: column; gap: .75rem;}
+  .sectionHeading > p br {display: none;}
+  .loop, .foundations {gap: 1.5rem;}
+  .flowArrow {right: -1.45rem; width: 19px;}
+  .steps > li {grid-template-columns: 2.5rem 1fr; gap: .75rem 1rem;}
+  .stepLink {grid-column: 2; max-width: none;}
+  .directions {grid-template-columns: 1fr;}
+  .nextSteps {align-items: start; flex-direction: column; gap: .75rem;}
+}
+
+@media (max-width: 760px) {
+  .container {width: calc(100% - 2.5rem);}
+  .hero {padding: 2.5rem 0;}
+  .lead {font-size: 1.125rem;}
+  .desktopBreak {display: none;}
+  .pageNav {gap: .25rem 1.25rem;}
+  .section {padding-bottom: 3rem;}
+  .map {padding: 1.1rem; border-radius: 16px;}
+  .scenarioBar {align-items: start; flex-direction: column; gap: .5rem;}
+  .scenarioOptions {gap: .5rem;}
+  .scenarioOptions button {padding-inline: .75rem;}
+  .taskDefinition {grid-template-columns: 1fr; gap: .75rem;}
+  .loop, .foundations {grid-template-columns: 1fr; gap: 2.5rem;}
+  .example {min-height: 0;}
+  .flowArrow {top: auto; right: auto; bottom: -2rem; left: calc(50% - 10px); transform: rotate(90deg);}
+  .feedback {justify-content: start; padding-inline: .5rem;}
+  .modelNote {text-align: left;}
+  .foundations {gap: 1.5rem;}
+  .foundations article + article {border-top: 1px solid var(--site-border); padding-top: 1.5rem;}
+  .methodNote {grid-template-columns: 1fr; gap: .5rem;}
+  .directions article {padding: 1.25rem;}
+  .references {padding-bottom: 2.5rem;}
+  .references li {margin-bottom: .5rem;}
+}
+
+@media (prefers-contrast: more) {
+  .scenarioOptions button {border-color: var(--site-muted);}
+  .scenarioOptions button[aria-pressed='true'] {outline: 2px solid var(--site-blue); outline-offset: -2px;}
+}

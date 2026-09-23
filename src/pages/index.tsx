@@ -75,7 +75,7 @@ function HomepageHeader() {
           <h1>让机器人，<br /><span>感知并行动。</span></h1>
           <p className={styles.intro}>从理解一个算法，到迈出机器人的第一步。<br />动手连接感知、学习与控制，在仿真中走向真实。</p>
           <div className={styles.actions}>
-            <Link className={styles.heroCta} to="/docs/foundations/intro">开始学习 <ArrowRight size={17} aria-hidden="true" /></Link>
+            <Link className={styles.heroCta} to="/learning-map">查看学习地图 <ArrowRight size={17} aria-hidden="true" /></Link>
             <Link className={styles.heroSecondary} to="/docs/practices/intro">探索实战 <ArrowUpRight size={16} aria-hidden="true" /></Link>
           </div>
           <div className={styles.heroNotes} aria-label="课程特色">
