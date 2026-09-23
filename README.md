@@ -199,7 +199,7 @@ npm run dev
 
 <a id="star-history"></a>
 
-## ⭐ Star History
+## ⭐ Star 曲线
 
 <p align="center">
   <a href="assets/star-history.svg">
