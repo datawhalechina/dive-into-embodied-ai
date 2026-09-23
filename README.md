@@ -5,6 +5,11 @@
 <h1 align="center">Dive into Embodied AI</h1>
 <p align="center"><b>具身智能入门与求职开源教程</b></p>
 
+> [!TIP]
+> **📖 在线阅读：[点击进入完整教程 →](https://datawhalechina.github.io/dive-into-embodied-ai/)**
+>
+> 推荐使用网页版，支持全文搜索、章节导航和交互演示。初次学习可从 **[在线学习地图 →](https://datawhalechina.github.io/dive-into-embodied-ai/learning-map)** 开始。
+
 <p align="center">
   <a href="https://datawhalechina.github.io/dive-into-embodied-ai/"><img alt="在线阅读" src="https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E9%98%85%E8%AF%BB-datawhalechina-blue" /></a>
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="许可协议" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
@@ -25,19 +30,25 @@
 > [!CAUTION]
 > **Alpha 内测版本**:仍在迁移和重构中,部分章节是占位页,欢迎提 Issue 反馈问题或建议。
 
-## 项目定位
+<a id="项目定位"></a>
+
+## 🎯 项目定位
 
 从零到一搭建一台具身智能机器人：深入强化学习、World-Model、VLA 等智能决策方法的工程落地，贯穿仿真环境、控制器、运动规划、感知系统等技能树模块,并在真实项目中跑通"决策—控制—感知"完整链路。
 
-新手建议先看 [具身智能学习地图](LEARNING_MAP.md)，了解知识全景与入门路线。
+🧭 **新手入口：[具身智能学习地图](LEARNING_MAP.md)** — 了解知识全景与入门路线。
 
-## 内容大纲
+<a id="内容大纲"></a>
+
+## 🗂️ 内容大纲
 
 网站分为「理论基础、系列教程、项目实战、具身信息」四个栏目：理论基础讲解原理，系列教程沿章节主线学习，项目实战提供独立 Demo 与复现案例，具身信息整理论文、数据集、开源项目和工具。项目实战继续按「AMD 专区、仿真实战、真机实战」归类。
 
 状态标记说明:**✅ 可用** = 章节内容完整,可直接阅读;**🚧 部分可用** = 一部分章节有内容、一部分仍是占位;**🚧 占位中** = 目录已建但只有占位页;**⏳ 待补充** = 暂未开工。
 
-### 系列教程
+<a id="系列教程"></a>
+
+### 📚 系列教程
 
 从 [系列教程总览](docs/tutorials/intro.md) 选择学习主线，原课程文章与代码路径保持不变。
 
@@ -47,7 +58,9 @@
 | [LeRobot 中文课程讲义](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | 机器人学习、数据集、工具链与经典机器人学 | 已整理 Unit 0–2 |
 | [Flamingo 轮足课程](docs/practices/wheel-legged/flamingo-isaaclab/preview.md) | Isaac Lab 训练与跨仿真验证 | 课程预告 |
 
-### 具身信息
+<a id="具身信息"></a>
+
+### 📰 具身信息
 
 从 [具身信息总览](docs/information/intro.md) 查找公开学习与研究资源：
 
@@ -56,7 +69,9 @@
 - [开源项目](docs/information/open-source.md)：模型代码与训练框架。
 - [仿真与工具](docs/information/tools.md)：仿真引擎、学习环境与官方文档。
 
-### 项目实战
+<a id="项目实战"></a>
+
+### 🛠️ 项目实战
 
 | 分类 | 章节 | 简介 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -69,7 +84,9 @@
 | 真机实战 | [SO-101 + LeRobot 真机教程](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) | 硬件连通、安全测试与动作回放 | ✅ 可用 |
 | 真机实战 | [Sim2Real 指南](docs/practices/quadruped/sim2real-guide/placeholder.md) | 仿真策略部署与真机验证 | 🚧 占位中 |
 
-### 最新 Demo：MicroDuck RL 小黄鸭
+<a id="最新-demomicroduck-rl-小黄鸭"></a>
+
+### 🦆 最新 Demo：MicroDuck RL 小黄鸭
 
 <p align="center">
   <a href="docs/practices/humanoid/microduck-rl/index.md">
@@ -106,7 +123,9 @@
   </tr>
 </table>
 
-### 理论基础
+<a id="理论基础"></a>
+
+### 📐 理论基础
 
 理论基础按当前导航的四列组织:大脑、小脑、感知系统、工程底座。当前优先把已有内容并入技能树,空缺模块先保留占位。
 
@@ -148,14 +167,18 @@
 | [机械结构](docs/foundations/hardware/placeholder.md) | 连杆、关节、电机、减速器和末端执行器 | 🚧 占位中 |
 | [数据工程与模仿学习](docs/foundations/rl-for-robotics/12.imitation-learning.md) | 从遥操作数据到模仿学习、LeRobot 工具链和策略训练 | ✅ 可用 |
 
-## 组队学习
+<a id="组队学习"></a>
+
+## 👥 组队学习
 
 Datawhale 会围绕本教程组织组队学习。历史与在筹备中的组队学习计划文档会集中放在 `docs/team-learning/`(施工中),包括每期的学习路线、打卡要求和对应章节的导读。
 
 - 最新一期报名入口:施工中
 - 往期学习资料归档:施工中
 
-## 本地预览
+<a id="本地预览"></a>
+
+## 💻 本地预览
 
 仓库使用 **Git LFS** 存放视频和 GIF。clone 之后必须先装 `git-lfs` 再 `git lfs pull`,否则本地看到的图/视频是 pointer 文本而不是真内容。完整步骤见 [CONTRIBUTING.md](CONTRIBUTING.md#首次克隆必读)。
 
@@ -174,7 +197,9 @@ npm install
 npm run dev
 ```
 
-## Star History
+<a id="star-history"></a>
+
+## ⭐ Star History
 
 <p align="center">
   <a href="assets/star-history.svg">
@@ -184,7 +209,9 @@ npm run dev
   <sub>由 GitHub Actions 自动更新</sub>
 </p>
 
-## 贡献者名单
+<a id="贡献者名单"></a>
+
+## 🤝 贡献者名单
 
 | 姓名 | 职责 | 简介 |
 | :--- | :--- | :--- |
@@ -193,13 +220,17 @@ npm run dev
 | 黄潇 | 项目负责人 | 同济大学毕业，智驾算法工程师 |
 | 罗如意 | 项目负责人 | 智能汽车竞赛国奖&FunRec开源项目负责人 |
 
-## 关注我们
+<a id="关注我们"></a>
+
+## 📣 关注我们
 
 <div align=center>
 <p>扫描下方二维码关注公众号:Datawhale</p>
 <img src="https://raw.githubusercontent.com/datawhalechina/pumpkin-book/master/res/qrcode.jpeg" width = "180" height = "180">
 </div>
 
-## LICENSE
+<a id="license"></a>
+
+## 📄 LICENSE
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a><br />本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
