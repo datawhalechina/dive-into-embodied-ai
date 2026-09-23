@@ -217,7 +217,7 @@ function KnowledgeMap() {
 export default function LearningMap(): React.JSX.Element {
   const {collectAnchor} = useBrokenLinks();
   // Register section targets so links from MDX are checked during the build.
-  ['knowledge-map', 'first-steps', 'directions'].forEach(collectAnchor);
+  ['what-is-embodied-ai', 'knowledge-map', 'first-steps', 'directions'].forEach(collectAnchor);
 
   return (
     <Layout title="具身智能学习地图" description="面向新人的具身智能学习地图：理解感知、决策、控制、仿真、数据与硬件的关系，从第一个实验走向机器人项目。">
@@ -227,13 +227,24 @@ export default function LearningMap(): React.JSX.Element {
             <p className={styles.kicker}>新手指南 · 从这里开始</p>
             <h1>具身智能学习地图</h1>
             <p className={styles.lead}>先看全局，再找到你的第一步。</p>
-            <p className={styles.intro}>具身智能，让智能体通过身体感知环境、采取行动，并在交互中完成任务。<br className={styles.desktopBreak} />这张地图以机器人为主线，帮你连接概念、方法与实践。</p>
+            <p className={styles.intro}>这张地图以机器人为主线，帮你连接概念、方法与实践。</p>
             <nav className={styles.pageNav} aria-label="学习地图页内导航">
+              <a href="#what-is-embodied-ai">认识具身智能 <ArrowDown size={15} aria-hidden="true" /></a>
               <a href="#knowledge-map">看知识全景 <ArrowDown size={15} aria-hidden="true" /></a>
               <a href="#first-steps">从零开始学 <ArrowDown size={15} aria-hidden="true" /></a>
               <a href="#directions">选择实践方向 <ArrowDown size={15} aria-hidden="true" /></a>
             </nav>
           </header>
+          <section id="what-is-embodied-ai" className={styles.section} aria-labelledby="definition-title">
+            <div className={styles.sectionHeading}>
+              <div><p className={styles.kicker}>概念起点</p><h2 id="definition-title">什么是具身智能？</h2></div>
+            </div>
+            <div className={styles.definition}>
+              <p>具身智能（Embodied AI）研究智能体如何<strong>通过身体与环境交互</strong>，感知世界、学习技能并完成任务。身体决定它能获取哪些信息、能执行哪些动作；行动改变环境，新的观测又帮助它调整下一步。</p>
+              <p>例如，让机器人拿起杯子，需要找到杯子、决定抓取方式、驱动机械臂，并根据视觉或触觉反馈判断是否抓稳。这就形成了“感知 → 决策 → 行动 → 反馈”的闭环。</p>
+              <p className={styles.definitionScope}>这里的“身体”可以是机械臂、四足机器人或移动底盘，也可以是仿真环境中的虚拟机器人。</p>
+            </div>
+          </section>
           <KnowledgeMap />
           <section id="first-steps" className={styles.section} aria-labelledby="steps-title">
             <div className={styles.sectionHeading}>

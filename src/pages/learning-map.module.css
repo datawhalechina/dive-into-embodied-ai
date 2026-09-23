@@ -11,6 +11,10 @@
 .sectionHeading {display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 1.5rem;}
 .sectionHeading h2 {font-size: clamp(1.5rem, 2.5vw, 1.875rem); line-height: 1.4; letter-spacing: -.025em; margin: 0;}
 .sectionHeading > p {color: var(--site-muted); font-size: .9375rem; margin: 0;}
+.definition {max-width: 52rem; line-height: 1.85;}
+.definition p {margin: 0 0 .9rem;}
+.definition strong {font-weight: 600;}
+.definition .definitionScope {margin-bottom: 0; font-size: .9375rem; color: var(--site-muted);}
 .map {padding: 1.5rem; border: 1px solid var(--site-border); border-radius: 20px; background: var(--site-panel);}
 .scenarioBar {display: flex; align-items: center; flex-wrap: wrap; gap: .75rem 1.5rem;}
 .scenarioBar > span {font-size: .875rem; font-weight: 600;}
@@ -86,7 +90,6 @@
   .container {width: calc(100% - 2.5rem);}
   .hero {padding: 2.5rem 0;}
   .lead {font-size: 1.125rem;}
-  .desktopBreak {display: none;}
   .pageNav {gap: .25rem 1.25rem;}
   .section {padding-bottom: 3rem;}
   .map {padding: 1.1rem; border-radius: 16px;}
