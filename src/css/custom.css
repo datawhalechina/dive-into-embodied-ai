@@ -80,7 +80,7 @@ a {text-underline-offset: .2em;}
 /* The navbar is the only translucent surface; content remains opaque. */
 .navbar {background: var(--site-nav); border-bottom: 1px solid var(--site-border); box-shadow: none; backdrop-filter: blur(20px); padding-inline: 2rem;}
 .navbar__inner {max-width: 1440px; margin-inline: auto;}
-.navbar__brand {min-width: 0; gap: .6rem;}
+.navbar__brand {min-width: 0; gap: .6rem; flex-shrink: 0;}
 .navbar__logo {display: block; height: 28px; margin: 0;}
 .navbar__title {color: var(--site-ink); font-size: 1rem; font-weight: 650; letter-spacing: -.035em;}
 .navbar__link {display: inline-flex; align-items: center; justify-content: center; font-size: .875rem; font-weight: 500; line-height: 1.5;}
@@ -94,6 +94,22 @@ a {text-underline-offset: .2em;}
 /* A backdrop filter would confine the fixed mobile drawer to navbar height. */
 .navbar.navbar-sidebar--show {backdrop-filter: none;}
 .navbar-sidebar .menu__link {min-height: 48px; align-items: center;}
+
+.translation-notice {margin-block: 1.25rem; padding: 1rem 1.25rem; border: 1px solid var(--site-border); border-radius: .75rem; background: var(--site-panel); color: var(--site-muted); font-size: .875rem; line-height: 1.7;}
+.translation-notice a {text-decoration: underline; text-underline-offset: .15em;}
+
+/* Keep the language menu and longer English labels from overlapping. */
+@media (min-width: 997px) and (max-width: 1399px) {
+  .navbar__brand .navbar__title {display: none;}
+  .navbar .navbar__search-input {width: 8rem;}
+  .navbar__search [class*='searchHintContainer'] {display: none;}
+}
+@media (min-width: 997px) and (max-width: 1100px) {
+  /* The logo still links home when there is no room for the duplicate link. */
+  .navbar .navbar-center-start {display: none;}
+  .navbar .navbar__link {padding-inline: .5rem;}
+  .navbar .navbar__search-input {width: 5.5rem;}
+}
 
 .header-github-link::before {
   content: '';

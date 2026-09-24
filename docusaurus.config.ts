@@ -31,7 +31,11 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans'],
+    locales: ['zh-Hans', 'en'],
+    localeConfigs: {
+      'zh-Hans': {label: '中文', htmlLang: 'zh-Hans'},
+      en: {label: 'English', htmlLang: 'en'},
+    },
   },
 
   markdown: {
@@ -143,6 +147,10 @@ const config: Config = {
           type: 'custom-navbarMegaMenu',
           menuId: 'information',
           position: 'left',
+        },
+        {
+          type: 'localeDropdown',
+          position: 'right',
         },
         {
           type: 'search',

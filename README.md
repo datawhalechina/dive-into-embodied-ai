@@ -5,6 +5,8 @@
 <h1 align="center">Dive into Embodied AI</h1>
 <p align="center"><b>具身智能入门与求职开源教程</b></p>
 
+<p align="center"><b>中文</b> · <a href="README.en.md" lang="en">English</a></p>
+
 > [!TIP]
 > **📖 在线阅读：[点击进入完整教程 →](https://datawhalechina.github.io/dive-into-embodied-ai/)**
 >
@@ -90,7 +92,7 @@
 
 <p align="center">
   <a href="docs/practices/humanoid/microduck-rl/index.md">
-    <img src="docs/practices/humanoid/microduck-rl/figs/microduck-training-1500.gif" width="640" alt="MicroDuck 小黄鸭双足机器人稳定步态回放" />
+    <img src="docs/practices/humanoid/microduck-rl/figs/microduck-training-1500.webp" width="640" alt="MicroDuck 小黄鸭双足机器人稳定步态回放" />
   </a>
   <br/>
   <sub>✅ <b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · 小黄鸭双足稳定步态</a></b><br/>mjlab + MuJoCo Warp · PPO GPU 并行训练（iteration 1500）</sub>
@@ -135,7 +137,7 @@
 | :--- | :--- | :--- |
 | [强化学习决策](docs/foundations/rl-for-robotics/1.intro.md) | MDP、DQN、PPO、SAC、DDPG/TD3 与模仿学习 | ✅ 可用 |
 | [视觉-语言-动作大模型(VLA)](docs/foundations/vla/vla-intro.md) | RT-1/RT-2、OpenVLA、ACT、Diffusion Policy、π 系列 | ✅ 可用 |
-| [World-Model](docs/foundations/world-model/placeholder.md) | 世界模型在具身场景下的落地路径 | 🚧 占位中 |
+| [World-Model](docs/foundations/world-model/0.intro.md) | 世界模型在具身场景下的落地路径 | ✅ 可用 |
 
 #### 小脑：运动控制
 
@@ -196,6 +198,19 @@ git lfs pull
 npm install
 npm run dev
 ```
+
+网站默认中文，可通过导航栏的语言菜单切换为 English。英文版目前覆盖 README、首页导航与[学习地图](https://datawhalechina.github.io/dive-into-embodied-ai/en/learning-map)，其他教程正文与独立实验页暂时显示中文，并标注翻译状态。
+
+```bash
+# 单独启动英文开发环境（开发服务器一次只运行一种语言）
+npm run start -- --locale en
+
+# 构建并预览两种语言，检查跨语言切换
+npm run build
+npm run serve
+```
+
+界面译文保存在 `i18n/en/code.json`，导航和页脚译文位于 `i18n/en/docusaurus-theme-classic/`。后续章节的英文 Markdown 可按原目录结构放入 `i18n/en/docusaurus-plugin-content-docs/current/`，保留原文的文档 ID 和 slug。缺少英文稿时，Docusaurus 会显示中文原文。
 
 <a id="star-history"></a>
 

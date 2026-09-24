@@ -1,3 +1,4 @@
+import {translate} from '@docusaurus/Translate';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -23,7 +24,7 @@ export function createSkillScene(host: HTMLDivElement, skill: Skill, onUnavailab
   const canvas = renderer.domElement;
   canvas.tabIndex = 0;
   canvas.setAttribute('role', 'img');
-  canvas.setAttribute('aria-label', `${skillDemos[skill].scene}拖动或用方向键旋转，Home 键复位视角。`);
+  canvas.setAttribute('aria-label', translate({message: '{scene}拖动或用方向键旋转，Home 键复位视角。'}, {scene: skillDemos[skill].scene}));
   canvas.style.touchAction = 'pan-y';
   host.appendChild(canvas);
   const controls = new OrbitControls(camera, canvas);
@@ -90,6 +91,9 @@ export function createSkillScene(host: HTMLDivElement, skill: Skill, onUnavailab
     context.beginPath(); context.roundRect(4, 4, 504, 120, 24); context.fill();
     context.strokeStyle = '#56728b'; context.lineWidth = 2; context.stroke();
     context.fillStyle = color; context.font = '500 48px system-ui, sans-serif';
+    // English labels can be longer than Chinese; fit them inside the badge.
+    const textWidth = context.measureText(text).width;
+    if (textWidth > 464) context.font = `500 ${48 * 464 / textWidth}px system-ui, sans-serif`;
     context.textAlign = 'center'; context.textBaseline = 'middle'; context.fillText(text, 256, 66);
     const texture = new THREE.CanvasTexture(textureCanvas);
     texture.colorSpace = THREE.SRGBColorSpace;
@@ -191,8 +195,8 @@ export function createSkillScene(host: HTMLDivElement, skill: Skill, onUnavailab
     const cube = box(scene, [.46, .46, .46], [.9, .24, .25], orange, .045);
     box(cube, [.27, .007, .27], [0, .234, 0], white, .025);
     const marker = ring(scene, .48, [.9, .035, .25], cyan);
-    label('目标物体', [1.5, .3, 1.05], '#ffcf91');
-    label('平行夹爪', [-.65, .6, -1.15]);
+    label(translate({message: "目标物体"}), [1.5, .3, 1.05], '#ffcf91');
+    label(translate({message: "平行夹爪"}), [-.65, .6, -1.15]);
     animate = p => {
       const pose = graspPose(p); robot.update(pose.grip, pose.opening);
       cube.position.set(...pose.object);
@@ -218,7 +222,7 @@ export function createSkillScene(host: HTMLDivElement, skill: Skill, onUnavailab
     for (const z of [-.25, .25]) rod(drawer, [.28, .94, z], [.17, .94, z], .033, silver);
     rod(drawer, [.17, .94, -.25], [.17, .94, .25], .041, silver);
     box(drawer, [.28, .2, .26], [1.05, .73, .14], orange);
-    label('沿滑轨拉开', [.9, .24, 1.18], '#9feeff');
+    label(translate({message: "沿滑轨拉开"}), [.9, .24, 1.18], '#9feeff');
     animate = p => {
       const pose = drawerPose(p);
       drawer.position.x = -pose.distance;
@@ -248,8 +252,8 @@ export function createSkillScene(host: HTMLDivElement, skill: Skill, onUnavailab
       const hipCap = cylinder(hip, .092, .2, [0, 0, 0], silver); hipCap.rotation.x = Math.PI / 2;
       return {upper, lower, hip, knee, foot, offset: vector([i < 2 ? .55 : -.55, -.08, i % 2 ? .36 : -.36])};
     });
-    label('落脚与支撑', [-2.65, .25, 1.42]);
-    label('逐级抬高身体', [2.15, .94, -1.3], '#9feeff');
+    label(translate({message: "落脚与支撑"}), [-2.65, .25, 1.42]);
+    label(translate({message: "逐级抬高身体"}), [2.15, .94, -1.3], '#9feeff');
     animate = p => {
       const pose = walkPose(p);
       body.position.set(...pose.body); body.rotation.z = pose.pitch; body.updateMatrixWorld(true);
@@ -283,8 +287,8 @@ export function createSkillScene(host: HTMLDivElement, skill: Skill, onUnavailab
     const start = routePoint(0), end = routePoint(1);
     ring(scene, .45, [start[0], .042, start[2]], silver);
     const goal = ring(scene, .47, [end[0], .042, end[2]], orange);
-    label('起点', [start[0], .35, start[2] + .7]);
-    label('目标', [end[0], .5, end[2] - .55], '#ffcf91');
+    label(translate({message: "起点"}), [start[0], .35, start[2] + .7]);
+    label(translate({message: "目标"}), [end[0], .5, end[2] - .55], '#ffcf91');
     class Route extends THREE.Curve<THREE.Vector3> {
       constructor() {super();}
       getPoint(t: number, target = new THREE.Vector3()) {return target.set(...routePoint(t));}

@@ -1,3 +1,4 @@
+import {translate} from '@docusaurus/Translate';
 import React, {useEffect, useId, useRef, useState} from 'react';
 import {ArrowRight, Pause, Play, RotateCcw} from 'lucide-react';
 import {skillDemos} from './content';
@@ -86,39 +87,39 @@ export default function SkillDemo({skill}: {skill: Skill}) {
   return (
     <figure ref={figure} className={styles.demo} aria-labelledby={`${id}-title`} data-skill={skill}>
       <header className={styles.header}>
-        <div><p>3D 技能示意</p><h4 id={`${id}-title`}>{demo.title}</h4></div>
+        <div><p>{translate({message: "3D 技能示意"})}</p><h4 id={`${id}-title`}>{demo.title}</h4></div>
         <div className={styles.controls}>
           <button type="button" className={styles.play} onClick={toggle} disabled={sceneState === 'loading'}>
-            <PlaybackIcon size={16} aria-hidden="true" />{stepMode ? '下一阶段' : playing ? '暂停' : complete ? '重播' : '播放'}
+            <PlaybackIcon size={16} aria-hidden="true" />{stepMode ? translate({message: "下一阶段"}) : playing ? translate({message: "暂停"}) : complete ? translate({message: "重播"}) : translate({message: "播放"})}
           </button>
-          {!stepMode && <div className={styles.rates} role="group" aria-label={`${demo.title}播放速度`}>
-            {[.5, 1, 2].map(value => <button type="button" key={value} aria-label={`${value} 倍速`} aria-pressed={value === rate} onClick={() => setRate(value)}>{value}×</button>)}
+          {!stepMode && <div className={styles.rates} role="group" aria-label={translate({message: '{title}播放速度'}, {title: demo.title})}>
+            {[.5, 1, 2].map(value => <button type="button" key={value} aria-label={translate({message: '{rate} 倍速'}, {rate: value})} aria-pressed={value === rate} onClick={() => setRate(value)}>{value}×</button>)}
           </div>}
         </div>
       </header>
       <div className={styles.world}>
         <div className={styles.canvas} ref={host} />
         {sceneState !== 'ready' && <div className={styles.sceneMessage} role="status">
-          <strong>{sceneState === 'loading' ? '正在准备 3D 场景…' : '暂时无法显示 3D 场景'}</strong>
+          <strong>{sceneState === 'loading' ? translate({message: "正在准备 3D 场景…"}) : translate({message: "暂时无法显示 3D 场景"})}</strong>
           <span>{demo.scene}</span>
-          {sceneState === 'unavailable' && <span>可以使用下方阶段按钮继续查看动作说明。</span>}
+          {sceneState === 'unavailable' && <span>{translate({message: "可以使用下方阶段按钮继续查看动作说明。"})}</span>}
         </div>}
         {sceneState === 'ready' && <div className={styles.cameraControls}>
-          <span>拖动旋转 · 方向键调整视角</span>
-          <button type="button" onClick={() => scene.current?.resetView()}><RotateCcw size={14} aria-hidden="true" />复位视角</button>
+          <span>{translate({message: "拖动旋转 · 方向键调整视角"})}</span>
+          <button type="button" onClick={() => scene.current?.resetView()}><RotateCcw size={14} aria-hidden="true" />{translate({message: "复位视角"})}</button>
         </div>}
       </div>
       <div className={styles.timeline}>
-        <label className={styles.srOnly} htmlFor={`${id}-progress`}>{demo.title}演示进度</label>
+        <label className={styles.srOnly} htmlFor={`${id}-progress`}>{demo.title}{translate({message: "演示进度"})}</label>
         <input id={`${id}-progress`} type="range" min="0" max="100" step="1" value={Math.round(progress * 100)}
-          aria-valuetext={`${Math.round(progress * 100)}%，${demo.phases[stage].name}`}
+          aria-valuetext={translate({message: '{progress}%，{stage}'}, {progress: Math.round(progress * 100), stage: demo.phases[stage].name})}
           onChange={event => {setPlaying(false); seek(Number(event.target.value) / 100);}} />
-        <div className={styles.phases} role="group" aria-label={`${demo.title}动作阶段`}>
+        <div className={styles.phases} role="group" aria-label={translate({message: '{title}动作阶段'}, {title: demo.title})}>
           {demo.phases.map((phase, index) => <button type="button" key={phase.name} aria-pressed={stage === index} onClick={() => selectStage(index)}><span aria-hidden="true">{index + 1}</span>{phase.name}</button>)}
         </div>
         <p className={styles.status} role="status" aria-live="polite" aria-atomic="true"><strong>{demo.phases[stage].name}</strong><span>{demo.phases[stage].detail}</span></p>
       </div>
-      <figcaption className={styles.caption}>{demo.focus}<span>{reducedMotion ? '已按减少动态效果的偏好改为逐步查看。' : '可拖动进度条或点击阶段逐步查看。'}动作已简化，用于理解技能。</span></figcaption>
+      <figcaption className={styles.caption}>{demo.focus}<span>{reducedMotion ? translate({message: "已按减少动态效果的偏好改为逐步查看。"}) : translate({message: "可拖动进度条或点击阶段逐步查看。"})}{translate({message: "动作已简化，用于理解技能。"})}</span></figcaption>
     </figure>
   );
 }

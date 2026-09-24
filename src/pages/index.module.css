@@ -1,6 +1,6 @@
 .home {background: var(--site-canvas); color: var(--site-ink);}
 .homeLayout {background: #f0f0ee;}
-:global(html):has(.homeLayout) :global(.navbar) {width: min(1180px, calc(100% - 3rem)); margin: 1rem auto 0; top: 1rem; border: 1px solid #ffffffa6; border-radius: 999px; background: #ededece6; box-shadow: 0 3px 5px #fff9 inset, 0 12px 35px -22px #292c324d; padding-inline: 1.5rem;}
+:global(html):has(.homeLayout) :global(.navbar) {width: min(1360px, calc(100% - 3rem)); margin: 1rem auto 0; top: 1rem; border: 1px solid #ffffffa6; border-radius: 999px; background: #ededece6; box-shadow: 0 3px 5px #fff9 inset, 0 12px 35px -22px #292c324d; padding-inline: 1.5rem;}
 :global(html):has(.homeLayout) :global(.navbar__inner) {width: 100%;}
 .hero {--scene-x: 0px; --scene-y: 0px; position: relative; isolation: isolate; min-height: max(740px, 100svh); margin-top: -5rem; overflow: hidden; background: #f0f0ee; color: #202328;}
 .heroVideo {position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 58% center; opacity: 0; transform: translate3d(var(--scene-x), var(--scene-y), 0) scale(1.035); transition: opacity 1s ease; pointer-events: none;}

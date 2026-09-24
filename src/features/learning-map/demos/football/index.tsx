@@ -1,3 +1,4 @@
+import {translate} from '@docusaurus/Translate';
 import React, {useEffect, useId, useRef, useState} from 'react';
 import {ArrowRight, BrainCircuit, Eye, Move3D, Pause, Play, RotateCcw, Shuffle} from 'lucide-react';
 import FootballScene3D from './FootballScene3D';
@@ -8,10 +9,10 @@ const DURATION = 14000;
 const NORMAL_PLAYBACK_DURATION = 8000;
 const playbackRates = [0.5, 1, 2];
 const stages = [
-  {name: '感知', summary: '看见足球、球门和守门员', icon: Eye, sample: 0},
-  {name: '决策', summary: '找到空当，选择射门方向', icon: BrainCircuit, sample: 4500},
-  {name: '行动', summary: '调整站位，驱动关节踢球', icon: Move3D, sample: 8750},
-  {name: '反馈', summary: '跟踪足球，检查射门结果', icon: RotateCcw, sample: 12500},
+  {name: translate({message: "感知"}), summary: translate({message: "看见足球、球门和守门员"}), icon: Eye, sample: 0},
+  {name: translate({message: "决策"}), summary: translate({message: "找到空当，选择射门方向"}), icon: BrainCircuit, sample: 4500},
+  {name: translate({message: "行动"}), summary: translate({message: "调整站位，驱动关节踢球"}), icon: Move3D, sample: 8750},
+  {name: translate({message: "反馈"}), summary: translate({message: "跟踪足球，检查射门结果"}), icon: RotateCcw, sample: 12500},
 ];
 
 export default function FootballDemo(): React.JSX.Element {
@@ -90,25 +91,27 @@ export default function FootballDemo(): React.JSX.Element {
   };
 
   const details = [
-    hasMoved ? '守门员换了位置，机器人重新观察足球和防守区域。' : '摄像头捕捉场上信息，识别足球、球门和守门员的位置。',
-    `守门员挡住${keeperNear ? '近' : '远'}侧，选择${keeperNear ? '远' : '近'}侧空当作为射门目标。`,
-    '根据射门方向调整站位，控制身体平衡，再驱动腿部关节踢球。',
-    '球进入球门。新的视觉观测帮助机器人判断结果，并决定下一步行动。',
+    hasMoved ? translate({message: "守门员换了位置，机器人重新观察足球和防守区域。"}) : translate({message: "摄像头捕捉场上信息，识别足球、球门和守门员的位置。"}),
+    keeperNear
+      ? translate({message: '守门员挡住近侧，选择远侧空当作为射门目标。'})
+      : translate({message: '守门员挡住远侧，选择近侧空当作为射门目标。'}),
+    translate({message: "根据射门方向调整站位，控制身体平衡，再驱动腿部关节踢球。"}),
+    translate({message: "球进入球门。新的视觉观测帮助机器人判断结果，并决定下一步行动。"}),
   ];
   const PlaybackIcon = reducedMotion ? ArrowRight : playing ? Pause : complete ? RotateCcw : Play;
 
   return (
     <figure ref={figureRef} className={styles.demo} aria-labelledby={`${id}-title`}>
       <div className={styles.header}>
-        <div><p className={styles.eyebrow}>机器人足球 · 3D 闭环演示</p><h3 id={`${id}-title`}>让机器人把球踢进球门</h3></div>
+        <div><p className={styles.eyebrow}>{translate({message: "机器人足球 · 3D 闭环演示"})}</p><h3 id={`${id}-title`}>{translate({message: "让机器人把球踢进球门"})}</h3></div>
         <div className={styles.controls}>
           <button type="button" className={styles.playButton} onClick={togglePlayback}>
-            <PlaybackIcon size={17} aria-hidden="true" />{reducedMotion ? '下一阶段' : playing ? '暂停演示' : complete ? '重播射门' : '播放射门'}
+            <PlaybackIcon size={17} aria-hidden="true" />{reducedMotion ? translate({message: "下一阶段"}) : playing ? translate({message: "暂停演示"}) : complete ? translate({message: "重播射门"}) : translate({message: "播放射门"})}
           </button>
-          <button type="button" onClick={moveKeeper}><Shuffle size={17} aria-hidden="true" />移动守门员</button>
-          {!reducedMotion && <div className={styles.playbackRates} role="group" aria-label="播放速度">
+          <button type="button" onClick={moveKeeper}><Shuffle size={17} aria-hidden="true" />{translate({message: "移动守门员"})}</button>
+          {!reducedMotion && <div className={styles.playbackRates} role="group" aria-label={translate({message: "播放速度"})}>
             {playbackRates.map(rate => (
-              <button type="button" key={rate} aria-label={`${rate} 倍速`} aria-pressed={playbackRate === rate} onClick={() => setPlaybackRate(rate)}>{rate}×</button>
+              <button type="button" key={rate} aria-label={translate({message: '{rate} 倍速'}, {rate})} aria-pressed={playbackRate === rate} onClick={() => setPlaybackRate(rate)}>{rate}×</button>
             ))}
           </div>}
         </div>
@@ -116,18 +119,18 @@ export default function FootballDemo(): React.JSX.Element {
       <div className={styles.content}>
         <FootballScene3D elapsed={elapsed} keeperNear={keeperNear} stage={stageIndex} />
         <div className={styles.explanation}>
-          <div className={styles.stages} role="group" aria-label="逐步查看具身智能闭环">
+          <div className={styles.stages} role="group" aria-label={translate({message: "逐步查看具身智能闭环"})}>
             {stages.map(({name, summary, icon: Icon}, index) => (
               <button type="button" key={name} aria-pressed={index === stageIndex} onClick={() => selectStage(index)}>
                 <Icon size={21} strokeWidth={1.7} aria-hidden="true" /><span><strong>{name}</strong><span>{summary}</span></span>
               </button>
             ))}
           </div>
-          <p className={styles.returnLoop}><RotateCcw size={16} aria-hidden="true" />新的观测，再次进入感知</p>
+          <p className={styles.returnLoop}><RotateCcw size={16} aria-hidden="true" />{translate({message: "新的观测，再次进入感知"})}</p>
         </div>
       </div>
       <div className={styles.status} role="status" aria-live="polite" aria-atomic="true"><strong>{stages[stageIndex].name}</strong><span>{details[stageIndex]}</span></div>
-      <figcaption className={styles.caption}>{reducedMotion ? '已按减少动态效果的偏好改为逐步查看。' : '可播放或点击阶段逐步查看。'}移动守门员会重新开始演示，观察射门方向如何变化。动作已简化，用来理解闭环。</figcaption>
+      <figcaption className={styles.caption}>{reducedMotion ? translate({message: "已按减少动态效果的偏好改为逐步查看。"}) : translate({message: "可播放或点击阶段逐步查看。"})}{translate({message: "移动守门员会重新开始演示，观察射门方向如何变化。动作已简化，用来理解闭环。"})}</figcaption>
     </figure>
   );
 }

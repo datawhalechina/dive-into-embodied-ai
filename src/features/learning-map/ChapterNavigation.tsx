@@ -1,3 +1,4 @@
+import {translate} from '@docusaurus/Translate';
 import React, {useEffect, useState} from 'react';
 import {chapters} from './content';
 import styles from './styles.module.css';
@@ -48,7 +49,7 @@ export default function ChapterNavigation() {
 
   return (
     <nav className={styles.chapterNav} aria-labelledby="chapter-nav-title">
-      <p id="chapter-nav-title" className={styles.chapterNavTitle}>本页目录</p>
+      <p id="chapter-nav-title" className={styles.chapterNavTitle}>{translate({message: "本页目录"})}</p>
       <ol className={styles.chapterLinks}>
         {chapters.map(({id, label}) => (
           <li key={id}>

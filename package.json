@@ -9,6 +9,7 @@
     "serve": "docusaurus serve",
     "clear": "docusaurus clear",
     "typecheck": "tsc",
+    "check:i18n": "node scripts/check-i18n.cjs",
     "check:doc-assets": "node scripts/check-doc-assets.cjs",
     "check:math-refs": "node scripts/check-math-refs.cjs",
     "check:doc-sidebars": "node scripts/check-doc-sidebars.cjs",

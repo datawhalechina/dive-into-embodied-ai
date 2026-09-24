@@ -1,3 +1,4 @@
+import {translate} from '@docusaurus/Translate';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -58,7 +59,7 @@ export function createFootballScene(host: HTMLDivElement, onUnavailable: () => v
   renderer.toneMappingExposure = 1.2;
   renderer.domElement.tabIndex = 0;
   renderer.domElement.setAttribute('role', 'img');
-  renderer.domElement.setAttribute('aria-label', '可旋转的三维机器人足球场。拖动或使用方向键旋转视角，Home 键复位。');
+  renderer.domElement.setAttribute('aria-label', translate({message: "可旋转的三维机器人足球场。拖动或使用方向键旋转视角，Home 键复位。"}));
   host.appendChild(renderer.domElement);
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.target.set(.7, .7, 0);

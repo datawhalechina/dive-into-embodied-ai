@@ -1,3 +1,4 @@
+import {translate} from '@docusaurus/Translate';
 import React, {useState} from 'react';
 import Link from '@docusaurus/Link';
 import {ArrowRight, ArrowUpRight, Check, RotateCcw} from 'lucide-react';
@@ -21,12 +22,12 @@ export default function KnowledgeMap() {
   return (
     <section id="knowledge-map" className={styles.section} aria-labelledby="map-title">
       <div className={styles.sectionHeading}>
-        <div><p className={styles.kicker}>知识全景</p><h2 id="map-title">从一个任务，看懂整个系统。</h2></div>
-        <p>上层串起行动闭环，下层支撑开发与验证。<br />选择知识点，就能进入对应教程。</p>
+        <div><p className={styles.kicker}>{translate({message: "知识全景"})}</p><h2 id="map-title">{translate({message: "从一个任务，看懂整个系统。"})}</h2></div>
+        <p>{translate({message: "上层串起行动闭环，下层支撑开发与验证。"})}<br />{translate({message: "选择知识点，就能进入对应教程。"})}</p>
       </div>
       <div className={styles.map}>
         <div className={styles.scenarioBar}>
-          <span id="scenario-label">换个任务理解</span>
+          <span id="scenario-label">{translate({message: "换个任务理解"})}</span>
           <div className={styles.scenarioOptions} role="group" aria-labelledby="scenario-label">
             {scenarios.map(({name}, index) => (
               <button key={name} type="button" aria-pressed={scenarioIndex === index}
@@ -37,11 +38,14 @@ export default function KnowledgeMap() {
           </div>
         </div>
         <div id="task-example" className={styles.taskDefinition}>
-          <p><span>任务目标</span>{scenario.goal}</p>
-          <p><span>怎样算完成</span>{scenario.success}</p>
+          <p><span>{translate({message: "任务目标"})}</span>{scenario.goal}</p>
+          <p><span>{translate({message: "怎样算完成"})}</span>{scenario.success}</p>
         </div>
         <p className={styles.srOnly} role="status">
-          {scenario.name}。{scenario.goal}{scenario.stages.join('')}{scenario.feedback}完成标准：{scenario.success}
+          {translate({message: '{name}。{goal}{stages}{feedback}完成标准：{success}'}, {
+            name: scenario.name, goal: scenario.goal, stages: scenario.stages.join(' '),
+            feedback: scenario.feedback, success: scenario.success,
+          })}
         </p>
         <div className={styles.loop}>
           {capabilities.map(({title, question, icon: Icon, concepts, links}, index) => (
@@ -55,9 +59,9 @@ export default function KnowledgeMap() {
             </article>
           ))}
         </div>
-        <div className={styles.feedback}><RotateCcw size={18} aria-hidden="true" /><p><strong>行动改变环境，新的观测再次进入闭环。</strong><span>{scenario.feedback}</span></p></div>
-        <p className={styles.modelNote}>这是按功能理解系统的方式；实际系统可以用多个模块协作，也可以用一个模型承担多种功能。</p>
-        <div className={styles.foundationLabel}><span>支撑整个闭环</span></div>
+        <div className={styles.feedback}><RotateCcw size={18} aria-hidden="true" /><p><strong>{translate({message: "行动改变环境，新的观测再次进入闭环。"})}</strong><span>{scenario.feedback}</span></p></div>
+        <p className={styles.modelNote}>{translate({message: "这是按功能理解系统的方式；实际系统可以用多个模块协作，也可以用一个模型承担多种功能。"})}</p>
+        <div className={styles.foundationLabel}><span>{translate({message: "支撑整个闭环"})}</span></div>
         <div className={styles.foundations}>
           {foundations.map(({title, icon: Icon, description, concepts, links}) => (
             <article key={title}>
@@ -69,8 +73,8 @@ export default function KnowledgeMap() {
         </div>
       </div>
       <div className={styles.methodNote}>
-        <strong>算法在地图里的位置</strong>
-        <p>模仿学习（IL）从示范中学动作，强化学习（RL）用奖励改进策略；VLA 把视觉与语言连接到动作，世界模型预测动作的后果。控制和规划同样可以独立解决任务，也可以与学习方法组合。</p>
+        <strong>{translate({message: "算法在地图里的位置"})}</strong>
+        <p>{translate({message: "模仿学习（IL）从示范中学动作，强化学习（RL）用奖励改进策略；VLA 把视觉与语言连接到动作，世界模型预测动作的后果。控制和规划同样可以独立解决任务，也可以与学习方法组合。"})}</p>
       </div>
     </section>
   );
