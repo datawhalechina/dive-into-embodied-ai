@@ -1,5 +1,13 @@
 .page {background: var(--site-canvas); color: var(--site-ink);}
 .container {width: min(1120px, calc(100% - 4rem)); margin-inline: auto;}
+.content {min-width: 0;}
+.sidebar {display: none;}
+.chapterNav {position: sticky; top: calc(var(--ifm-navbar-height) + 2rem); max-height: calc(100vh - var(--ifm-navbar-height) - 4rem); padding: .5rem; margin: -.5rem; overflow-y: auto;}
+.chapterNavTitle {margin: 0 0 .75rem; color: var(--site-ink); font-size: .875rem; font-weight: 600;}
+.chapterLinks {list-style: none; padding: 0; margin: 0; border-inline-start: 1px solid var(--site-border);}
+.chapterLinks a {display: flex; align-items: center; min-height: 44px; padding: .65rem 1rem; margin-inline-start: -1px; border-inline-start: 2px solid transparent; color: var(--site-muted); font-size: .9375rem; line-height: 1.5; text-decoration: none;}
+.chapterLinks a:hover {color: var(--site-blue); background: var(--ifm-menu-color-background-active);}
+.chapterLinks a[aria-current='location'] {border-inline-start-color: var(--site-blue); color: var(--site-blue); font-weight: 600;}
 .hero {padding: 4rem 0 2.75rem;}
 .kicker {margin: 0 0 .6rem; font-size: .875rem; font-weight: 600; color: var(--site-muted);}
 .hero h1 {margin: 0 0 .8rem; font-size: clamp(2rem, 3.5vw, 2.75rem); line-height: 1.3; letter-spacing: -.04em;}
@@ -77,6 +85,12 @@
 .references a {display: inline-flex; align-items: center; gap: .4rem; min-height: 44px;}
 .references svg {flex-shrink: 0;}
 .srOnly {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;}
+
+@media (min-width: 1280px) {
+  .container {display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 4rem; width: min(1376px, calc(100% - 4rem));}
+  .sidebar {display: block; padding-top: 4rem;}
+  .pageNav {display: none;}
+}
 
 @media (max-width: 996px) {
   .sectionHeading {align-items: start; flex-direction: column; gap: .75rem;}

@@ -1,0 +1,52 @@
+.demo {grid-column: 1 / -1; min-width: 0; margin: .25rem 0 0; border: 1px solid var(--site-border); border-radius: 18px; overflow: hidden; background: var(--site-panel);}
+.header {display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1.25rem 1.5rem;}
+.header p {margin: 0 0 .3rem; color: var(--site-muted); font-size: .8125rem;}
+.header h4 {margin: 0; font-size: 1.125rem; line-height: 1.5; font-weight: 600;}
+.controls, .rates {display: flex; align-items: center; gap: .5rem;}
+.demo button {display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 44px; padding: .5rem .9rem; border: 1px solid var(--site-border); border-radius: 8px; background: var(--site-panel); color: var(--site-ink); font: inherit; font-size: .875rem; cursor: pointer;}
+.demo button:hover {border-color: var(--site-blue); color: var(--site-blue);}
+.demo button:disabled {opacity: .5; cursor: wait;}
+.controls .play {min-width: 84px; background: var(--site-blue); border-color: var(--site-blue); color: var(--site-panel);}
+.controls .play:hover {filter: brightness(1.08); color: var(--site-panel);}
+.rates {gap: 0; padding: 2px; background: var(--site-canvas); border: 1px solid var(--site-border); border-radius: 10px;}
+.rates button {min-width: 44px; padding-inline: .55rem; border-color: transparent; background: transparent; color: var(--site-muted);}
+.rates button[aria-pressed='true'] {background: var(--site-panel); color: var(--site-blue); border-color: var(--site-border); font-weight: 600;}
+.world {position: relative; height: clamp(300px, 39vw, 430px); background: #142132;}
+.canvas {position: absolute; inset: 0;}
+.canvas canvas {display: block; width: 100%; height: 100%;}
+.canvas canvas:focus-visible {outline: 3px solid #87dfff; outline-offset: -5px;}
+.cameraControls {position: absolute; bottom: .85rem; inset-inline: 1rem; display: flex; align-items: center; justify-content: space-between; gap: .5rem; pointer-events: none;}
+.cameraControls > span {padding: .4rem .6rem; color: #dbe7f2; background: #142132e6; border-radius: 5px; font-size: .75rem;}
+.cameraControls button {pointer-events: auto; min-height: 36px; color: #e6f1fb; background: #142132e6; border-color: #5a718a; font-size: .75rem;}
+.cameraControls button:hover {color: #fff; border-color: #9feeff;}
+.sceneMessage {position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: .75rem; padding: 2rem; color: #dfeeff; font-size: .9375rem; text-align: center;}
+.sceneMessage strong {font-size: 1rem;}
+.sceneMessage span {max-width: 32rem; align-self: center;}
+.timeline {padding: .75rem 1.5rem 0;}
+.timeline input {display: block; width: 100%; height: 28px; margin: 0 0 .5rem; accent-color: var(--site-blue); cursor: pointer;}
+.phases {display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem;}
+.phases button {padding: .5rem; font-size: .8125rem; white-space: nowrap; border-color: transparent; justify-content: flex-start;}
+.phases button > span {display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; flex-shrink: 0; border: 1px solid var(--site-border); border-radius: 50%; font-size: .75rem; color: var(--site-muted);}
+.phases button[aria-pressed='true'] {background: var(--ifm-menu-color-background-active); color: var(--site-blue); font-weight: 600;}
+.phases button[aria-pressed='true'] > span {background: var(--site-blue); border-color: var(--site-blue); color: var(--site-panel);}
+.status {display: flex; align-items: baseline; gap: .85rem; min-height: 3.5rem; margin: 1rem 0 .5rem; font-size: .875rem; line-height: 1.8;}
+.status strong {flex-shrink: 0; font-weight: 600;}
+.status > span {color: var(--site-muted);}
+.caption {margin: 0; padding: 1rem 1.5rem; border-top: 1px solid var(--site-border); font-size: .875rem; line-height: 1.8;}
+.caption > span {display: block; margin-top: .35rem; font-size: .75rem; color: var(--site-muted);}
+.demo button:focus-visible, .demo input:focus-visible {outline: 3px solid var(--site-blue); outline-offset: 3px;}
+.srOnly {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;}
+
+@media (max-width: 600px) {
+  .header {padding: 1rem; gap: .85rem;}
+  .header h4 {font-size: 1rem;}
+  .controls {width: 100%; justify-content: space-between; gap: .4rem;}
+  .world {height: 320px;}
+  .cameraControls {inset-inline: .7rem; bottom: .6rem; justify-content: flex-end;}
+  .cameraControls > span {display: none;}
+  .cameraControls button {min-height: 44px;}
+  .timeline {padding-inline: .75rem;}
+  .phases {grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25rem;}
+  .status {flex-direction: column; gap: .2rem; min-height: 6.5rem; margin-top: .75rem;}
+  .caption {padding: 1rem;}
+}

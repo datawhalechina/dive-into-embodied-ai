@@ -14,7 +14,7 @@ const stages = [
   {name: '反馈', summary: '跟踪足球，检查射门结果', icon: RotateCcw, sample: 12500},
 ];
 
-export default function EmbodiedFootballDemo(): React.JSX.Element {
+export default function FootballDemo(): React.JSX.Element {
   const [elapsed, setElapsed] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);

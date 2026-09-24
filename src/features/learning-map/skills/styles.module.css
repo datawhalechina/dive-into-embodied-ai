@@ -1,0 +1,75 @@
+.heading {margin-bottom: 1.5rem;}
+.kicker {margin: 0 0 .6rem; color: var(--site-muted); font-size: .875rem; font-weight: 600;}
+.heading h2 {margin: 0 0 .75rem; font-size: clamp(1.5rem, 2.5vw, 1.875rem); line-height: 1.4; letter-spacing: -.025em;}
+.introduction {max-width: 52rem; margin-bottom: 1.5rem; line-height: 1.85;}
+.introduction p {margin: 0 0 .9rem;}
+.introduction p:last-child {margin-bottom: 0;}
+.introduction strong {font-weight: 600;}
+.groups {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; padding: 1.5rem 0; border-block: 1px solid var(--site-border);}
+.group {min-width: 0;}
+.group + .group {border-inline-start: 1px solid var(--site-border); padding-inline-start: 2rem;}
+.group h3 {margin: 0 0 1rem; font-size: 1.125rem;}
+.relationship {display: flex; align-items: center; gap: 1rem;}
+.relationship a {display: flex; flex-direction: column; justify-content: center; min-height: 64px; text-decoration: none;}
+.relationship strong {font-size: 1.0625rem; font-weight: 600;}
+.relationship a > span {font-size: .875rem; color: var(--site-muted);}
+.relationship a:hover strong {text-decoration: underline;}
+.connector {display: flex; flex-direction: column; align-items: center; gap: .25rem; color: var(--site-muted); font-size: .75rem;}
+.group > p {margin: .75rem 0 0; color: var(--site-muted); font-size: .9375rem; line-height: 1.8;}
+.bodyNote {margin: 1.25rem 0 2rem; color: var(--site-muted); font-size: .9375rem; line-height: 1.85;}
+.ability {display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 2rem; padding: 1.75rem 0; border-bottom: 1px solid var(--site-border); scroll-margin-top: 6rem;}
+.ability:first-child {padding-top: 0;}
+.abilityHeading > p {margin: 0 0 .3rem; font-size: .875rem; color: var(--site-muted);}
+.abilityHeading h3 {margin: 0 0 .6rem; font-size: 1.25rem; line-height: 1.5;}
+.abilityHeading > span {display: block; max-width: 10rem; font-size: .875rem; color: var(--site-muted); line-height: 1.8;}
+.explanation {min-width: 0;}
+.explanation p {margin: 0 0 .85rem; font-size: .9375rem; line-height: 1.9;}
+.explanation p:last-child {margin-bottom: 0;}
+.explanation a, .combinations a, .table td a {text-decoration: underline; text-decoration-thickness: .06em;}
+.comparison {margin-top: 2.5rem;}
+.comparison h3, .combinations h3, .hierarchy h3 {margin: 0 0 .8rem; font-size: 1.25rem; line-height: 1.5;}
+.comparison > p, .combinations > p, .hierarchy > p {font-size: .9375rem; line-height: 1.85;}
+.comparison > p {color: var(--site-muted);}
+.tableScroll {max-width: 100%; overflow-x: auto; border: 1px solid var(--site-border); border-radius: 12px; background: var(--site-panel);}
+.tableScroll:focus-visible {outline: 3px solid var(--site-blue); outline-offset: 4px;}
+.table {display: table; width: 100%; min-width: 940px; margin: 0; table-layout: fixed; border-collapse: separate; border-spacing: 0; font-size: .8125rem; line-height: 1.8;}
+.table th, .table td {padding: .9rem .8rem; border: 0; border-bottom: 1px solid var(--site-border); vertical-align: top; text-align: start; overflow-wrap: anywhere;}
+.table thead th {background: var(--site-canvas); font-weight: 600;}
+.table tr {background: var(--site-panel); border: 0;}
+.table tbody tr:last-child > * {border-bottom: 0;}
+.table th:first-child {position: sticky; left: 0; width: 9rem; background: var(--site-panel); border-right: 1px solid var(--site-border);}
+.table thead th:first-child {background: var(--site-canvas);}
+.table tbody th > span, .table small {display: block; color: var(--site-muted); font-size: .75rem; font-weight: 400; margin-top: .25rem;}
+.table tbody th a {display: inline-flex; align-items: center; min-height: 32px; font-weight: 600;}
+.comparison .tableHint {display: none; margin: .65rem 0 0; font-size: .8125rem;}
+.combinations {margin-top: 2.5rem;}
+.combinations dl {margin: 0 0 1.25rem;}
+.combinations dl > div {display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--site-border);}
+.combinations dt {font-size: .9375rem; font-weight: 600;}
+.combinations dt span {display: block; font-size: .8125rem; font-weight: 400; color: var(--site-muted);}
+.combinations dd {margin: 0; font-size: .9375rem; line-height: 1.85;}
+.combinations > p {color: var(--site-muted); margin-bottom: 0;}
+.hierarchy {margin-top: 2.5rem;}
+.hierarchy > p:last-child {margin-bottom: 0;}
+.controlLayers {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; padding: 1.25rem 0; margin: 1.25rem 0; gap: 2.5rem; border-block: 1px solid var(--site-border);}
+.controlLayers li {position: relative; min-width: 0;}
+.controlLayers li + li::before {content: '→'; position: absolute; left: -1.75rem; top: .4rem; color: var(--site-muted);}
+.controlLayers strong {display: block; font-size: .9375rem; font-weight: 600;}
+.controlLayers span {display: block; margin-top: .3rem; color: var(--site-muted); font-size: .8125rem;}
+.srOnly {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;}
+
+@media (max-width: 1023px) {
+  .comparison .tableHint {display: block;}
+}
+
+@media (max-width: 760px) {
+  .groups {grid-template-columns: 1fr; gap: 1.5rem;}
+  .group + .group {border-inline-start: 0; border-top: 1px solid var(--site-border); padding-inline-start: 0; padding-top: 1.5rem;}
+  .relationship {gap: 1.25rem;}
+  .ability {grid-template-columns: 1fr; gap: 1rem;}
+  .abilityHeading > span {max-width: none;}
+  .abilityHeading h3 {margin-bottom: .3rem;}
+  .combinations dl > div {grid-template-columns: 1fr; gap: .6rem;}
+  .controlLayers {grid-template-columns: 1fr; gap: 2.25rem;}
+  .controlLayers li + li::before {content: '↓'; left: 0; top: -1.9rem;}
+}

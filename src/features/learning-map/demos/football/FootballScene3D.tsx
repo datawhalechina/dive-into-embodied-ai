@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {RotateCcw} from 'lucide-react';
-import type {FootballFrame, FootballScene} from './footballScene';
+import type {FootballFrame, FootballScene} from './scene';
 import styles from './styles.module.css';
 
 export default function FootballScene3D(frame: FootballFrame): React.JSX.Element {
@@ -12,7 +12,7 @@ export default function FootballScene3D(frame: FootballFrame): React.JSX.Element
 
   useEffect(() => {
     let cancelled = false;
-    import('./footballScene').then(({createFootballScene}) => {
+    import('./scene').then(({createFootballScene}) => {
       if (cancelled || !host.current) return;
       try {
         scene.current = createFootballScene(host.current, () => setState('unavailable'));
