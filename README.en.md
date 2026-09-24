@@ -60,7 +60,8 @@ Start with the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-d
 | [3. Robot skills](i18n/en/docusaurus-plugin-content-docs/current/introduction/3.tasks-and-skills.md) | Defining tasks; grasping, manipulation, locomotion, and navigation |
 | [4. Embodied AI platforms](i18n/en/docusaurus-plugin-content-docs/current/introduction/4.embodiments.md) | Humanoids, arms, wheeled and legged robots, mobile manipulators, and simulated bodies |
 | [5. Key challenges](i18n/en/docusaurus-plugin-content-docs/current/introduction/5.challenges.md) | Data, sim-to-real transfer, generalization, real-time execution, safety, and evaluation |
-| [6. Technology stack](i18n/en/docusaurus-plugin-content-docs/current/introduction/6.tech-stack.md) | Foundation models, manipulation, motion control, navigation, simulation, data, deployment, hardware, and related roles |
+| [6. Technology stack](i18n/en/docusaurus-plugin-content-docs/current/introduction/6.tech-stack.md) | Introductions and learning links for VLMs, VLAs, world models, manipulation, motion control, navigation, and more |
+| [7. Career roles](i18n/en/docusaurus-plugin-content-docs/current/introduction/7.careers.md) | Responsibilities and interview preparation for brain algorithms, motion control, perception and navigation, engineering platforms, and hardware |
 
 The introduction's [resources](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/index.md) collect public learning and research materials:
 

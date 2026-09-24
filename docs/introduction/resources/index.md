@@ -1,7 +1,7 @@
 ---
 title: 领域资源
 description: 按主题整理具身智能论文、数据集、开源项目与仿真工具，连接原始资源与站内学习内容。
-sidebar_position: 8
+sidebar_position: 9
 displayed_sidebar: introductionSidebar
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 具身数据集
 description: 收集机器人示教数据与评测基准，整理数据类型、用途和官方获取入口。
-sidebar_position: 10
+sidebar_position: 11
 displayed_sidebar: introductionSidebar
 ---
 

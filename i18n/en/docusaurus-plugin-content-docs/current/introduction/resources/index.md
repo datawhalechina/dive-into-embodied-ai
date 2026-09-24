@@ -1,7 +1,7 @@
 ---
 title: Resources
 description: Embodied AI papers, datasets, open source projects, and simulation tools organized by topic, linking original sources with learning material on this site.
-sidebar_position: 8
+sidebar_position: 9
 displayed_sidebar: introductionSidebar
 ---
 

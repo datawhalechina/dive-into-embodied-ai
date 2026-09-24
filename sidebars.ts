@@ -24,6 +24,7 @@ const sidebars: SidebarsConfig = {
     'introduction/embodiments',
     'introduction/challenges',
     'introduction/tech-stack',
+    'introduction/careers',
     {
       type: 'category',
       label: '领域资源',

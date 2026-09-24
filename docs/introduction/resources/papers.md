@@ -1,7 +1,7 @@
 ---
 title: 论文与研究
 description: 按研究主题整理论文、项目主页、代码与中文解读。
-sidebar_position: 9
+sidebar_position: 10
 displayed_sidebar: introductionSidebar
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Papers and research
 description: Papers, project pages, code, and explanations organized by research topic.
-sidebar_position: 9
+sidebar_position: 10
 displayed_sidebar: introductionSidebar
 ---
 

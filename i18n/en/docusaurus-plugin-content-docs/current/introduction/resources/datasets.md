@@ -1,7 +1,7 @@
 ---
 title: Embodied AI datasets
 description: Robot demonstration data and evaluation benchmarks, with data types, uses, and official download pages.
-sidebar_position: 10
+sidebar_position: 11
 displayed_sidebar: introductionSidebar
 ---
 

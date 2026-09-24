@@ -1,7 +1,7 @@
 ---
 title: 开源项目
 description: 整理具身智能模型与训练框架的原始代码入口，并关联站内教程和实战。
-sidebar_position: 11
+sidebar_position: 12
 displayed_sidebar: introductionSidebar
 ---
 

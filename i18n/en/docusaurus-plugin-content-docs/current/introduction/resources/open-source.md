@@ -1,7 +1,7 @@
 ---
 title: Open source projects
 description: Original code for embodied AI models and training frameworks, linked to tutorials and projects on this site.
-sidebar_position: 11
+sidebar_position: 12
 displayed_sidebar: introductionSidebar
 ---
 
