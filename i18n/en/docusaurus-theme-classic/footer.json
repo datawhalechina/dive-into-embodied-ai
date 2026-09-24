@@ -11,6 +11,9 @@
   "link.item.label.学习地图": {
     "message": "Learning map"
   },
+  "link.item.label.具身导论": {
+    "message": "Introduction"
+  },
   "link.item.label.理论基础": {
     "message": "Foundations"
   },
@@ -19,8 +22,5 @@
   },
   "link.item.label.项目实战": {
     "message": "Projects"
-  },
-  "link.item.label.具身信息": {
-    "message": "Resources"
   }
 }

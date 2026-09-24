@@ -103,13 +103,15 @@ assertDisplayedSidebar(
   'foundationsOverviewSidebar',
 );
 
+// The introduction is a top-level section with its own sidebar.
+assertSidebarCase(sidebars, {
+  sidebarId: 'introductionSidebar',
+  docDir: 'docs/introduction',
+  entryRef: 'introduction/intro',
+  forbiddenRefs: ['foundations/', 'practices/', 'tutorials/'],
+});
+
 const foundationsCases = [
-  {
-    sidebarId: 'foundationsEmbodiedAiIntroSidebar',
-    docDir: 'docs/foundations/embodied-ai-intro',
-    entryRef: 'foundations/embodied-ai-intro/placeholder',
-    forbiddenRefs: ['foundations/robotics-and-ros2', 'foundations/simulation', 'foundations/vla'],
-  },
   {
     sidebarId: 'foundationsRoboticsAndRos2Sidebar',
     docDir: 'docs/foundations/robotics-and-ros2',
@@ -152,4 +154,4 @@ for (const sidebarCase of foundationsCases) {
   assertSidebarCase(sidebars, sidebarCase);
 }
 
-console.log('Foundation sidebars are isolated.');
+console.log('Introduction and foundation sidebars are isolated.');

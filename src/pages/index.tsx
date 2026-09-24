@@ -144,7 +144,7 @@ function Community() {
 
 export default function Home(): React.JSX.Element {
   return (
-    <Layout wrapperClassName={styles.homeLayout} title={translate({message: "动手学具身智能"})} description={translate({message: "Datawhale 开源具身智能学习站：理论基础、系列教程、项目实战与具身信息，连接机器人学习、论文、数据集和开源工具。"})}>
+    <Layout wrapperClassName={styles.homeLayout} title={translate({message: "动手学具身智能"})} description={translate({message: "Datawhale 开源具身智能学习站：具身导论、理论基础、系列教程与项目实战，连接机器人学习、论文、数据集和开源工具。"})}>
       <main className={styles.home}>
         <HomepageHeader />
         <div id="learning-paths" className={styles.learningPaths}>

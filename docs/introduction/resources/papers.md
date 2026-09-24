@@ -1,17 +1,17 @@
 ---
 title: 论文与研究
 description: 按研究主题整理论文、项目主页、代码与中文解读。
-sidebar_position: 2
-displayed_sidebar: informationSidebar
+sidebar_position: 9
+displayed_sidebar: introductionSidebar
 ---
 
 # 论文与研究
 
 从研究问题出发，连接原论文、作者项目主页与站内解读。首批收录与现有教程相关的工作，后续逐步补充运动控制、感知和世界模型等主题。
 
-## 模仿学习与动作生成
+## 模仿学习与动作生成 \{#imitation-learning}
 
-### ACT · Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware
+### ACT · Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware \{#act}
 
 **2023 · 双臂操作 / 模仿学习 / 动作分块**
 
@@ -21,7 +21,7 @@ displayed_sidebar: informationSidebar
 - 站内阅读：[ACT 架构与关键机制](/docs/foundations/vla/act_action_chunking)
 - 动手实践：[ACT 双臂操作训练](/docs/practices/vla/act)
 
-### Diffusion Policy · Visuomotor Policy Learning via Action Diffusion
+### Diffusion Policy · Visuomotor Policy Learning via Action Diffusion \{#diffusion-policy}
 
 **2023 · 视觉运动策略 / 扩散模型 / 连续动作**
 
@@ -30,9 +30,9 @@ displayed_sidebar: informationSidebar
 - 原始来源：[论文](https://arxiv.org/abs/2303.04137) · [作者项目主页](https://diffusion-policy.cs.columbia.edu/)
 - 站内阅读：[Diffusion Policy 动作建模](/docs/foundations/vla/diffusion_policy)
 
-## 视觉语言动作模型
+## 视觉语言动作模型 \{#vla}
 
-### OpenVLA · An Open-Source Vision-Language-Action Model
+### OpenVLA · An Open-Source Vision-Language-Action Model \{#openvla}
 
 **2024 · VLA / 多机器人数据 / 模型微调**
 

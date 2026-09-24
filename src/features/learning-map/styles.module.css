@@ -26,6 +26,7 @@
 .definition p {margin: 0 0 .9rem;}
 .definition strong {font-weight: 600;}
 .definition p:last-child {margin-bottom: 0;}
+.readMore {margin-top: 1rem;}
 .map {padding: 1.5rem; border: 1px solid var(--site-border); border-radius: 20px; background: var(--site-panel);}
 .scenarioBar {display: flex; align-items: center; flex-wrap: wrap; gap: .75rem 1.5rem;}
 .scenarioBar > span {font-size: .875rem; font-weight: 600;}

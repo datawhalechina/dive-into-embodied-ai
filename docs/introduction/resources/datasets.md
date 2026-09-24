@@ -1,17 +1,17 @@
 ---
 title: 具身数据集
 description: 收集机器人示教数据与评测基准，整理数据类型、用途和官方获取入口。
-sidebar_position: 3
-displayed_sidebar: informationSidebar
+sidebar_position: 10
+displayed_sidebar: introductionSidebar
 ---
 
 # 具身数据集
 
 这里收集可用于机器人学习的数据资源和评测基准。选择时先确认机器人形态、观测与动作定义、任务范围，再看它是否适合自己的训练或评估目标。
 
-## 真实机器人数据
+## 真实机器人数据 \{#real-robot-data}
 
-### Open X-Embodiment（OXE）
+### Open X-Embodiment（OXE） \{#open-x-embodiment}
 
 汇集多种机器人平台的操作轨迹，并提供标准化数据格式，适合了解跨机器人数据混合与通用策略训练。
 
@@ -20,9 +20,9 @@ displayed_sidebar: informationSidebar
 - 使用前查看：子数据集说明、动作空间与采样频率、下载规模和各自使用条款。
 - 站内阅读：[Open X-Embodiment 与数据扩展](/docs/foundations/vla/openx_data_scaling)。
 
-## 仿真数据与评测基准
+## 仿真数据与评测基准 \{#simulation-benchmarks}
 
-### LIBERO
+### LIBERO \{#libero}
 
 围绕终身机器人学习与知识迁移组织操作任务，提供仿真环境、任务套件和示教数据，可用于训练与比较机器人操作策略。
 
@@ -30,7 +30,7 @@ displayed_sidebar: informationSidebar
 - 获取入口：[官方代码、数据下载与任务说明](https://github.com/Lifelong-Robot-Learning/LIBERO)。
 - 使用前查看：任务套件、训练与测试划分、环境版本，以及评估使用的策略和观测设置。
 
-## 阅读数据说明时看什么
+## 阅读数据说明时看什么 \{#reading-dataset-docs}
 
 | 关注点 | 需要确认的内容 |
 | --- | --- |

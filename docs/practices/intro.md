@@ -6,7 +6,7 @@ displayed_sidebar: practicesOverviewSidebar
 
 # 项目实战：从仿真验证走向真机部署
 
-选择一个具体任务，通过独立项目、Demo 或复现案例跑通环境、训练、控制与评估。希望按章节学习完整系统，可以进入 [系列教程](/docs/tutorials/intro)；查找论文、数据和代码来源，可以进入 [具身信息](/docs/information/intro)。
+选择一个具体任务，通过独立项目、Demo 或复现案例跑通环境、训练、控制与评估。希望按章节学习完整系统，可以进入 [系列教程](/docs/tutorials/intro)；查找论文、数据和代码来源，可以进入具身导论的 [领域资源](/docs/introduction/resources)。
 
 ## 方向一览
 

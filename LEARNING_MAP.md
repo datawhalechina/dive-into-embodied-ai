@@ -33,6 +33,8 @@ flowchart LR
 
 这是按功能理解系统的方式。实际系统可以由多个模块协作，也可以用一个模型承担多种功能。
 
+想系统了解具身智能的概念、发展脉络、任务与载体、系统范式和核心挑战，请阅读 [具身导论](docs/introduction/intro.md)。
+
 ## 知识全景
 
 前三个模块串起行动闭环，后三个模块支撑整个系统的开发、训练与验证。
@@ -42,7 +44,7 @@ flowchart LR
 | **感知与理解** | 视觉与三维几何、状态估计、视觉语言模型（VLM） | [传感器、坐标系与标定](docs/foundations/perception/1.sensor-calibration-sim2real.md)、[VLM 基础](docs/foundations/vlm/0.intro.md) |
 | **学习与决策** | 模仿学习、强化学习、视觉语言动作模型（VLA）、世界模型 | [模仿学习](docs/foundations/rl-for-robotics/12.imitation-learning.md)、[强化学习](docs/foundations/rl-for-robotics/1.intro.md)、[VLA](docs/foundations/vla/vla-intro.md)、[世界模型](docs/foundations/world-model/0.intro.md) |
 | **运动与控制** | 运动学与动力学、运动规划、反馈控制 | [坐标变换与正逆运动学](docs/foundations/robotics-and-ros2/2.kinematics_transform.md)、[PID 到 MPC](docs/foundations/controllers/intro.md)、[MoveIt 2](docs/foundations/robotics-and-ros2/10.moveit2_basics.md) |
-| **仿真与评测** | 物理仿真、评测基准、仿真到真实（Sim2Real） | [仿真工具](docs/foundations/simulation/1.intro.md)、[数据集与评测基准](docs/information/datasets.md) |
+| **仿真与评测** | 物理仿真、评测基准、仿真到真实（Sim2Real） | [仿真工具](docs/foundations/simulation/1.intro.md)、[数据集与评测基准](docs/introduction/resources/datasets.md) |
 | **数据与训练** | 遥操作、示教数据、数据质量、策略训练与验证 | [LeRobot 数据与工具链](docs/practices/robot-arm/data-collection/lerobot-course/index.md)、[从示范中学习动作](docs/foundations/rl-for-robotics/12.imitation-learning.md) |
 | **本体与系统** | 机械结构、传感器与电机、ROS2、嵌入式 | [机器人系统全景](docs/foundations/robotics-and-ros2/1.course_introduction.md)、[SO-101 真机连接与调试](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) |
 
@@ -54,7 +56,7 @@ flowchart LR
 
 | 步骤 | 学习入口 | 完成标志 |
 | :--- | :--- | :--- |
-| **1. 建立系统概念** | 阅读 [机器人系统全景](docs/foundations/robotics-and-ros2/1.course_introduction.md)，无需设备。 | 能用踢球、拿杯子或行走的例子，说明观测、动作、目标和反馈。 |
+| **1. 建立系统概念** | 阅读 [具身导论](docs/introduction/1.what-is-embodied-ai.md)，无需设备。 | 能用踢球、拿杯子或行走的例子，说明观测、动作、目标和反馈。 |
 | **2. 亲手体验一个原理** | 打开 [PD 控制实验](https://datawhalechina.github.io/dive-into-embodied-ai/cs123/pd-playground)，在浏览器中调整参数。 | 能解释响应、超调和稳定性怎样随参数变化。 |
 | **3. 跑通最小仿真** | 按 [MuJoCo 教程](docs/foundations/simulation/3.mujoco.md) 加载模型、推进仿真并施加控制。 | 保存一份自己能运行、能修改的仿真实验。 |
 | **4. 沿一条主线完成项目** | 跟随 [从零到一搭建四足机器人](docs/practices/quadruped/cs123/0.intro.md)，从单关节控制走到步态与策略训练。 | 记录实验条件、结果与失败原因，完成一次可复现的项目实践。 |

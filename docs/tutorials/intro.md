@@ -27,4 +27,4 @@ displayed_sidebar: tutorialsOverviewSidebar
 3. 遇到概念缺口时，到 [理论基础](/docs/foundations/intro) 查阅对应模块。
 4. 完成主线后，到 [项目实战](/docs/practices/intro) 选择独立任务继续练习。
 
-如果希望先体验一个具体效果，可以直接尝试 [MicroDuck 小黄鸭](/docs/practices/humanoid/microduck-rl) 或 [ACT 双臂操作](/docs/practices/vla/act)。查找原论文、数据和代码入口，请看 [具身信息](/docs/information/intro)。
+如果希望先体验一个具体效果，可以直接尝试 [MicroDuck 小黄鸭](/docs/practices/humanoid/microduck-rl) 或 [ACT 双臂操作](/docs/practices/vla/act)。查找原论文、数据和代码入口，请看具身导论的 [领域资源](/docs/introduction/resources)。

@@ -44,9 +44,31 @@
 
 ## 🗂️ 内容大纲
 
-网站分为「理论基础、系列教程、项目实战、具身信息」四个栏目：理论基础讲解原理，系列教程沿章节主线学习，项目实战提供独立 Demo 与复现案例，具身信息整理论文、数据集、开源项目和工具。项目实战继续按「AMD 专区、仿真实战、真机实战」归类。
+网站分为「具身导论、理论基础、系列教程、项目实战」四个栏目：具身导论介绍领域全貌，并整理论文、数据集、开源项目和工具；理论基础讲解原理，系列教程沿章节主线学习，项目实战提供独立 Demo 与复现案例。项目实战继续按「AMD 专区、仿真实战、真机实战」归类。
 
 状态标记说明:**✅ 可用** = 章节内容完整,可直接阅读;**🚧 部分可用** = 一部分章节有内容、一部分仍是占位;**🚧 占位中** = 目录已建但只有占位页;**⏳ 待补充** = 暂未开工。
+
+<a id="具身导论"></a>
+
+### 🧭 具身导论
+
+从 [具身导论](docs/introduction/intro.md) 建立对具身智能的全局认识，再进入理论基础与教程学习具体技术：
+
+| 章节 | 内容 |
+| :--- | :--- |
+| [1. 什么是具身智能](docs/introduction/1.what-is-embodied-ai.md) | 定义、感知—决策—行动闭环，以及身体为什么重要 |
+| [2. 发展脉络](docs/introduction/2.history.md) | 从 Shakey 与行为主义，到深度学习、VLA 与世界模型 |
+| [3. 任务与技能](docs/introduction/3.tasks-and-skills.md) | 定义任务，认识抓取、操作、运动与导航 |
+| [4. 具身载体](docs/introduction/4.embodiments.md) | 人形、机械臂、轮式、四足、移动操作与仿真载体 |
+| [5. 系统范式与方法](docs/introduction/5.system-paradigms.md) | 模块化与端到端、分层协作，以及主要方法路线 |
+| [6. 核心挑战](docs/introduction/6.challenges.md) | 数据、仿真到真实、泛化、实时性、安全与评测 |
+
+导论中的 [领域资源](docs/introduction/resources/index.md) 整理公开的学习与研究资源：
+
+- [论文与研究](docs/introduction/resources/papers.md)：原论文、项目主页与站内解读。
+- [具身数据集](docs/introduction/resources/datasets.md)：机器人示教数据与评测基准。
+- [开源项目](docs/introduction/resources/open-source.md)：模型代码与训练框架。
+- [仿真与工具](docs/introduction/resources/tools.md)：仿真引擎、学习环境与官方文档。
 
 <a id="系列教程"></a>
 
@@ -59,17 +81,6 @@
 | [从零到一搭建四足机器人](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo、PD、运动学、策略训练、语言控制与感知 | 总览与 8 章可读 |
 | [LeRobot 中文课程讲义](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | 机器人学习、数据集、工具链与经典机器人学 | 已整理 Unit 0–2 |
 | [Flamingo 轮足课程](docs/practices/wheel-legged/flamingo-isaaclab/preview.md) | Isaac Lab 训练与跨仿真验证 | 课程预告 |
-
-<a id="具身信息"></a>
-
-### 📰 具身信息
-
-从 [具身信息总览](docs/information/intro.md) 查找公开学习与研究资源：
-
-- [论文与研究](docs/information/papers.md)：原论文、项目主页与站内解读。
-- [具身数据集](docs/information/datasets.md)：机器人示教数据与评测基准。
-- [开源项目](docs/information/open-source.md)：模型代码与训练框架。
-- [仿真与工具](docs/information/tools.md)：仿真引擎、学习环境与官方文档。
 
 <a id="项目实战"></a>
 
@@ -199,7 +210,7 @@ npm install
 npm run dev
 ```
 
-网站默认中文，可通过导航栏的语言菜单切换为 English。英文版目前覆盖 README、首页导航与[学习地图](https://datawhalechina.github.io/dive-into-embodied-ai/en/learning-map)，其他教程正文与独立实验页暂时显示中文，并标注翻译状态。
+网站默认中文，可通过导航栏的语言菜单切换为 English。英文版目前覆盖 README、首页导航、[学习地图](https://datawhalechina.github.io/dive-into-embodied-ai/en/learning-map)与[具身导论](https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/introduction/intro)，其他教程正文与独立实验页暂时显示中文，并标注翻译状态。
 
 ```bash
 # 单独启动英文开发环境（开发服务器一次只运行一种语言）

@@ -8,11 +8,12 @@ displayed_sidebar: foundationsOverviewSidebar
 
 理论技能树围绕后续项目实践需要什么就补什么，让学习者按“大脑、小脑、感知系统、工程底座”的方式定位能力缺口，再进入已有专题连续学习。
 
+还不了解这个领域的全貌，可以先读 [具身导论](/docs/introduction/intro)：它介绍具身智能的概念、发展脉络、任务与载体、系统范式和核心挑战，并在[第 5 章](/docs/introduction/system-paradigms#site-framework)解释这套技能树的分组方式。
+
 ## 当前可学习模块
 
 | 技能树位置 | 当前模块 | 核心问题 | 服务于 |
 |------|------|---------|--------|
-| 入门认知 | [具身智能入门](./embodied-ai-intro/placeholder) | 这个方向到底在做什么？ | 全局认知 |
 | 大脑：智能决策 | [强化学习与控制](./rl-for-robotics/intro) | RL 怎么用在机器人上?含模仿学习(数据驱动的策略学习) | 四足、双足、机械臂项目 |
 | 大脑：智能决策 | [视觉-语言-动作大模型(VLA)](./vla/vla-intro) | 当前具身大模型在做什么? | VLA 相关项目 |
 | 大脑：智能决策 | [世界模型(World Model)](./world-model/intro) | 世界模型在具身场景下怎么落地? | VLA 相关项目 |

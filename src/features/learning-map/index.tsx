@@ -47,6 +47,7 @@ export default function LearningMap(): React.JSX.Element {
                 <p>{translate({message: "例如，让机器人踢足球，需要看清球和球门、判断防守位置、选择射门方向，再控制身体保持平衡并踢球。踢出后，它还要观察球的运动，判断结果并调整下一步。这就形成了“感知 → 决策 → 行动 → 反馈”的闭环。"})}</p>
               </div>
               <FootballDemo />
+              <Link to="/docs/introduction/what-is-embodied-ai" className={`site-text-link ${styles.readMore}`}>{translate({message: "深入了解具身智能"})}<ArrowRight size={16} aria-hidden="true" /></Link>
             </section>
             <RobotSkills className={styles.section} />
             <EmbodiedCarriers className={styles.section} />
@@ -90,8 +91,6 @@ export default function LearningMap(): React.JSX.Element {
                 <li><Link href="https://www.nvidia.cn/glossary/embodied-ai/">{translate({message: "NVIDIA：什么是具身智能？"})}<ArrowUpRight size={16} aria-hidden="true" /></Link></li>
                 <li><Link href="https://modernrobotics.northwestern.edu/nu-gm-book-resource/grasping-and-manipulation/">{translate({message: "Modern Robotics：抓取与操作"})}<ArrowUpRight size={16} aria-hidden="true" /></Link></li>
                 <li><Link href="https://modernrobotics.northwestern.edu/nu-gm-book-resource/13-1-wheeled-mobile-robots/">{translate({message: "Modern Robotics：轮式机器人与移动操作"})}<ArrowUpRight size={16} aria-hidden="true" /></Link></li>
-                <li><Link href="https://aihabitat.org/challenge/2023/">{translate({message: "Habitat：ObjectNav 与 ImageNav 任务及评测"})}<ArrowUpRight size={16} aria-hidden="true" /></Link></li>
-                <li><Link href="https://arxiv.org/abs/2004.02857">{translate({message: "VLN-CE：连续环境中的视觉语言导航"})}<ArrowUpRight size={16} aria-hidden="true" /></Link></li>
               </ol>
             </section>
           </div>

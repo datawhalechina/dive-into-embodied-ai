@@ -125,9 +125,6 @@
   "动手学具身智能": {
     "message": "Dive into Embodied AI"
   },
-  "Datawhale 开源具身智能学习站：理论基础、系列教程、项目实战与具身信息，连接机器人学习、论文、数据集和开源工具。": {
-    "message": "Datawhale’s open embodied AI course: foundations, tutorials, projects, and resources connecting robot learning with papers, datasets, and open source tools."
-  },
   "理论基础": {
     "message": "Foundations"
   },
@@ -188,35 +185,17 @@
   "AMD 实践专区": {
     "message": "AMD projects"
   },
-  "具身信息": {
-    "message": "Resources"
-  },
-  "找到研究，也找到资源。": {
-    "message": "Find research and the tools to explore it."
-  },
-  "按主题整理具身智能论文、数据集、开源项目与开发工具。": {
-    "message": "Browse embodied AI papers, datasets, open source projects, and development tools by topic."
-  },
-  "浏览具身信息": {
-    "message": "Browse resources"
-  },
   "论文与研究": {
     "message": "Papers and research"
   },
   "具身数据集": {
     "message": "Embodied AI datasets"
   },
-  "开源与工具": {
-    "message": "Open source and tools"
-  },
   "学习与探索": {
     "message": "Learn and explore"
   },
   "从理解原理，到动手探索。": {
     "message": "From understanding to experimenting."
-  },
-  "补理论、跟课程、做项目，或寻找下一篇论文和数据集。": {
-    "message": "Study the foundations, follow a course, build a project, or find your next paper and dataset."
   },
   "MicroDuck 双足机器人": {
     "message": "MicroDuck biped"
@@ -503,17 +482,11 @@
   "查看项目实战": {
     "message": "View projects"
   },
-  "论文与数据": {
-    "message": "Papers and data"
-  },
   "按研究主题收集原论文、项目主页和站内解读。": {
     "message": "Find original papers, project pages, and our explanations by research topic."
   },
   "整理机器人示教数据、任务类型与评测基准。": {
     "message": "Browse robot demonstrations, task types, and evaluation benchmarks."
-  },
-  "代码与工具": {
-    "message": "Code and tools"
   },
   "开源项目": {
     "message": "Open source projects"
@@ -526,12 +499,6 @@
   },
   "收集仿真引擎、学习环境与官方文档。": {
     "message": "Explore simulation engines, learning environments, and official documentation."
-  },
-  "找到论文、数据与工具，再连接到学习和实践。": {
-    "message": "Connect papers, data, and tools to learning and practice."
-  },
-  "查看具身信息": {
-    "message": "View resources"
   },
   "具身智能学习地图": {
     "message": "Embodied AI learning map"
@@ -616,12 +583,6 @@
   },
   "Modern Robotics：轮式机器人与移动操作": {
     "message": "Modern Robotics: Wheeled robots and mobile manipulation"
-  },
-  "Habitat：ObjectNav 与 ImageNav 任务及评测": {
-    "message": "Habitat: ObjectNav and ImageNav tasks and evaluation"
-  },
-  "VLN-CE：连续环境中的视觉语言导航": {
-    "message": "VLN-CE: Vision-and-language navigation in continuous environments"
   },
   "本页目录": {
     "message": "On this page"
@@ -842,9 +803,6 @@
   "能说明一个动作背后有哪些模块在协作。": {
     "message": "Explain which modules work together to produce an action."
   },
-  "阅读机器人系统全景": {
-    "message": "Read the robotics system overview"
-  },
   "亲手体验一个原理": {
     "message": "Try a principle yourself"
   },
@@ -986,39 +944,6 @@
   "通俗来讲，就是让机器人用夹爪、灵巧手或吸盘把物体拿稳，为后续移动和操作做好准备。例如，把桌面上的小方块放进指定盒子时，需要先夹住并提起它；其中，建立并保持稳定夹持是抓取，后续还要完成搬运、放置和松开，才构成完整的拾取与放置操作。": {
     "message": "In everyday terms, a robot uses a gripper, dexterous hand, or suction cup to hold an object securely before moving or manipulating it. To put a small block into a box, it first grips and lifts the block. Establishing and maintaining that hold is grasping; transporting, placing, and releasing it complete the pick-and-place task."
   },
-  "典型的抓取检测（grasp detection）以点云或 RGB-D 图像为输入，为平行夹爪预测抓取位姿：三维位置、三维朝向（6-DoF）与夹爪开度，再结合可达性和碰撞检查执行。": {
-    "message": "Typical grasp detection takes point clouds or RGB-D images as input and predicts a grasp pose for a parallel gripper: 3D position, 3D orientation (6-DoF), and gripper width. Execution also requires reachability and collision checks."
-  },
-  "几何与力学方法分析形封闭（form closure）、力封闭（force closure）等条件；数据驱动方法学习抓取质量或直接生成抓取位姿。代表项目包括": {
-    "message": "Geometric and mechanical approaches analyze conditions such as form closure and force closure. Data-driven methods learn grasp quality or generate grasp poses directly. Representative projects include "
-  },
-  "、作为数据集与评测基准的": {
-    "message": ", the dataset and benchmark "
-  },
-  "，以及": {
-    "message": ", and "
-  },
-  "。解析模型也可以用于生成学习所需的数据。": {
-    "message": ". Analytical models can also generate training data."
-  },
-  "抓取可以先规划再执行，也可以通过视觉、力觉或触觉持续修正；例如 AnyGrasp 支持抓取位姿跟踪。受控工位中的规则刚体抓取已有较成熟方案，灵巧手、透明或柔性物体、严重遮挡与复杂堆叠仍对可靠性提出挑战。": {
-    "message": "A grasp can be planned before execution or continuously corrected through vision, force, or touch; AnyGrasp, for example, supports grasp pose tracking. Grasping regular rigid objects in controlled workcells is relatively mature. Dexterous hands, transparent or deformable objects, heavy occlusion, and clutter remain reliability challenges."
-  },
-  "点云 / RGB-D；也可加入力觉、触觉": {
-    "message": "Point clouds / RGB-D; optionally force and touch"
-  },
-  "抓取位姿、夹爪开度或接触参数": {
-    "message": "Grasp pose, gripper width, or contact parameters"
-  },
-  "按任务触发，或连续更新抓取目标": {
-    "message": "Triggered by the task or updated continuously"
-  },
-  "几何与力学分析、监督学习": {
-    "message": "Geometry and mechanics, supervised learning"
-  },
-  "受控工位较成熟；复杂物体与接触仍有挑战": {
-    "message": "Mature in controlled workcells; complex objects and contacts remain challenging"
-  },
   "操作": {
     "message": "Manipulation"
   },
@@ -1034,48 +959,6 @@
   "通俗来讲，就是让机器人通过推、拉、搬、转等动作，把物体变成任务要求的状态。例如，机器人先抓住抽屉把手，再沿导轨向外拉，直到抽屉打开到指定位置。": {
     "message": "In everyday terms, a robot pushes, pulls, carries, or rotates something into the desired state. For example, it grasps a drawer handle and pulls along the rails until the drawer reaches a target opening."
   },
-  "操作的含义比抓取更广，抓取是其中一个子问题。典型的稳定抓取通常希望维持末端与物体的接触关系，让物体随末端一起运动；操作则允许接触点和接触方式随任务需要反复变化，例如在手内转动物体时换指、滚动或重新抓取。接触点是否固定，并不是抓取与操作的绝对分界。": {
-    "message": "Manipulation is broader than grasping, which is one of its subproblems. A stable grasp usually maintains the end-effector–object contact relationship so the object moves with the end effector. Manipulation may change contacts repeatedly, such as switching fingers, rolling, or regrasping during in-hand rotation. Fixed contact points are not an absolute boundary between grasping and manipulation."
-  },
-  "操作的范围包括抓取、搬运、推、拨、翻转、手内操作（in-hand manipulation），也包括叠衣服、整理绳索、开门和抽屉、使用工具、双臂协作与长时序任务。推物体或踢足球属于不需要先抓住物体的非抓取式操作。": {
-    "message": "Manipulation includes grasping, transporting, pushing, nudging, flipping, and in-hand manipulation, as well as folding clothes, arranging ropes, opening doors and drawers, using tools, bimanual coordination, and long-horizon tasks. Pushing an object or kicking a ball is non-prehensile manipulation: neither requires first grasping the object."
-  },
-  "复杂操作常需要根据图像、本体感知，以及可选的语言目标，持续决定下一步动作。模仿学习（IL）与视觉语言动作模型（VLA）是重要研究路线：": {
-    "message": "Complex manipulation often requires continuously choosing actions from images, proprioception, and optional language goals. Imitation learning (IL) and vision-language-action models (VLA) are important research directions: "
-  },
-  "预测动作片段，": {
-    "message": " predicts action chunks; "
-  },
-  "结合动作生成与滚动执行，": {
-    "message": " combines action generation with receding-horizon execution; "
-  },
-  "、": {
-    "message": ", "
-  },
-  "则探索多任务的视觉语言动作策略。": {
-    "message": " explore multitask vision-language-action policies."
-  },
-  "难点包括丰富且易变化的接触（contact-rich）、无法直接观测的状态、同一目标对应多种合理动作，以及误差在长序列中的累积。闭环反馈对复杂操作很重要，抓取同样可以使用闭环。判断能力时，应区分固定任务复现与新物体、新环境下的泛化。": {
-    "message": "Challenges include rich and changing contacts, partially observed states, multiple valid actions for one goal, and errors accumulating over long sequences. Closed-loop feedback matters for complex manipulation and can also be used for grasping. Distinguish reproducing a fixed task from generalizing to new objects and environments."
-  },
-  "图像、本体感知；可加入语言、力觉与触觉": {
-    "message": "Images and proprioception; optionally language, force, and touch"
-  },
-  "末端或关节动作、动作片段": {
-    "message": "End-effector or joint actions, action chunks"
-  },
-  "ACT 示例": {
-    "message": "ACT example"
-  },
-  "：50 Hz 动作执行": {
-    "message": ": actions executed at 50 Hz"
-  },
-  "规划与控制、IL、RL、VLA": {
-    "message": "Planning and control, IL, RL, VLA"
-  },
-  "任务间差异大；通用、长时序操作仍有挑战": {
-    "message": "Varies by task; general and long-horizon manipulation remain challenging"
-  },
   "运动": {
     "message": "Locomotion"
   },
@@ -1090,48 +973,6 @@
   },
   "通俗来讲，就是解决机器人“身体怎么动起来、怎样动得稳”。例如，四足机器人迈上台阶时，需要协调抬腿、落脚和重心转移，避免绊倒或失去平衡。": {
     "message": "In everyday terms, it is about getting the robot’s body moving and keeping it stable. A quadruped climbing a step must coordinate leg lifts, foot placement, and weight shifts to avoid tripping or losing balance."
-  },
-  "足式机器人需要处理步态、平衡、台阶、斜坡和跌倒恢复；轮式机器人也属于这一范畴，需要应对转向约束、打滑和不平地形。全身协调控制还可以把移动与操作连接起来。": {
-    "message": "Legged robots must handle gaits, balance, steps, slopes, and fall recovery. Wheeled robots also perform locomotion, dealing with steering constraints, slipping, and uneven terrain. Whole-body control can further connect mobility with manipulation."
-  },
-  "观测常包括关节位置与速度、惯性测量单元（IMU）提供的姿态和角速度，以及可选的深度图或高程图。策略可输出关节目标，再由底层控制器跟踪，也可以直接输出力矩。步态策略的更新频率与关节伺服频率需要分开看。": {
-    "message": "Observations often include joint positions and velocities, orientation and angular velocity from an inertial measurement unit (IMU), and optional depth or elevation maps. A policy may output joint targets for a low-level controller to track, or output torques directly. Distinguish the gait policy update rate from the joint servo rate."
-  },
-  "模型预测控制（MPC）和仿真到真实的强化学习（sim-to-real RL）都是常见路线。": {
-    "message": "Model predictive control (MPC) and sim-to-real reinforcement learning are common approaches. "
-  },
-  "用 Isaac Gym 中的大规模并行仿真训练 ANYmal；域随机化帮助应对现实差异，教师—学生训练可把带有额外信息的技能迁移到机载观测。": {
-    "message": " trains ANYmal through massively parallel simulation in Isaac Gym. Domain randomization helps bridge reality gaps; teacher–student training can transfer skills learned with privileged information to onboard observations. Work such as "
-  },
-  "等工作进一步研究依靠视觉选择与执行越障技能。": {
-    "message": " further explores using vision to select and execute obstacle-crossing skills."
-  },
-  "四足机器人在多种已验证场景中已有很强的运动能力；极端地形、低摩擦接触、长期可靠性，以及人形机器人和负载变化下的全身协调，仍需要针对具体条件验证。": {
-    "message": "Quadrupeds have demonstrated strong locomotion in many tested settings. Extreme terrain, low-friction contacts, long-term reliability, and whole-body coordination for humanoids or changing payloads still require validation under specific conditions."
-  },
-  "关节状态、IMU；可加入地形感知": {
-    "message": "Joint states and IMU; optionally terrain sensing"
-  },
-  "关节目标、力矩或足端目标": {
-    "message": "Joint targets, torques, or foot targets"
-  },
-  "50 Hz 策略 / 200 Hz 仿真控制": {
-    "message": "50 Hz policy / 200 Hz simulation control"
-  },
-  "按": {
-    "message": "Derived from the "
-  },
-  "legged_gym 基础配置": {
-    "message": "legged_gym base configuration"
-  },
-  "折算": {
-    "message": "."
-  },
-  "MPC、全身控制、sim-to-real RL": {
-    "message": "MPC, whole-body control, sim-to-real RL"
-  },
-  "多种四足场景已验证；复杂地形与全身协同仍有挑战": {
-    "message": "Demonstrated in many quadruped settings; complex terrain and whole-body coordination remain challenging"
   },
   "导航": {
     "message": "Navigation"
@@ -1151,29 +992,8 @@
   "导航涉及定位、建图、路径规划与避障。经典系统通常组合定位 / SLAM、全局规划（如 A*）与局部规划或控制（如 DWA、MPC）；已知地图与受控环境中已有成熟的工程方案。": {
     "message": "Navigation involves localization, mapping, path planning, and obstacle avoidance. Classical systems often combine localization / SLAM, a global planner such as A*, and local planning or control such as DWA or MPC. Mature engineering solutions exist for known maps and controlled environments."
   },
-  "具身导航任务还可以按目标形式区分：PointNav 前往指定坐标，ObjectNav 寻找某类物体，ImageNav 寻找图像对应的地点或物体，VLN 按自然语言指令行进。输入可包含 RGB-D、激光雷达、里程计和目标描述，输出可以是速度指令，也可以是前进、转向、停止等离散动作。": {
-    "message": "Embodied navigation tasks can also be classified by goal: PointNav reaches specified coordinates; ObjectNav searches for an object category; ImageNav finds a place or object matching an image; VLN follows natural-language instructions. Inputs may include RGB-D, LiDAR, odometry, and goal descriptions. Outputs may be velocity commands or discrete actions such as move forward, turn, and stop."
-  },
   "导航常把移动能力作为执行基础：先决定目标或路径，再由运动控制把指令落到身体上。部分仿真基准简化了底层移动；真实部署还要处理定位误差、打滑、动态障碍和执行失败。比较结果时要同时看任务定义、传感器、成功条件与路径效率，不能把某个 PointNav 基准的高成功率推广到所有导航任务。": {
     "message": "Navigation often relies on locomotion for execution: first choose a goal or path, then use motion control to carry it out. Some simulation benchmarks simplify low-level movement. Real deployment must also handle localization errors, slipping, dynamic obstacles, and execution failures. Compare task definitions, sensors, success conditions, and path efficiency together; a high success rate on one PointNav benchmark does not generalize to every navigation task."
-  },
-  "视觉 / 激光雷达、位姿估计、目标描述": {
-    "message": "Vision / LiDAR, pose estimates, goal descriptions"
-  },
-  "路径、航点、速度或离散动作": {
-    "message": "Paths, waypoints, velocities, or discrete actions"
-  },
-  "高层按需更新；": {
-    "message": "High-level updates as needed; "
-  },
-  "Nav2 局部控制默认 20 Hz": {
-    "message": "Nav2 local control defaults to 20 Hz"
-  },
-  "定位 / SLAM、规划与控制、学习方法": {
-    "message": "Localization / SLAM, planning and control, learned methods"
-  },
-  "已知地图较成熟；开放环境与语义目标仍有挑战": {
-    "message": "Mature with known maps; open environments and semantic goals remain challenging"
   },
   "用夹爪、灵巧手或吸盘等末端执行器，建立并维持对物体的稳定约束。典型的抓取检测（grasp detection）以点云或 RGB-D 图像为输入，为平行夹爪预测抓取位姿：三维位置、三维朝向（6-DoF）与夹爪开度，再结合可达性和碰撞检查执行。": {
     "message": "Use a gripper, dexterous hand, suction cup, or other end effector to establish and maintain stable constraints on an object. Typical grasp detection takes point clouds or RGB-D images and predicts a parallel gripper’s grasp pose: 3D position, 3D orientation (6-DoF), and gripper width. Execution also requires reachability and collision checks."
@@ -1199,12 +1019,6 @@
   "如何合理地建模任务、确定目标与评价指标，往往比模型选择与优化更为关键。": {
     "message": "Modeling the task well and choosing appropriate goals and evaluation metrics are often more important than model selection and optimization."
   },
-  "在选择方法之前，先明确：希望机器人学会什么技能？在什么环境和约束下完成任务？使用哪些传感器，输入的观测与输出的动作分别是什么？如何判断任务完成，并用成功率、完成时间等指标评价表现？": {
-    "message": "Before choosing a method, clarify the desired skill, environment, and constraints. Which sensors will you use? What are the input observations and output actions? What counts as completion, and how will you measure performance through success rate, completion time, or other metrics?"
-  },
-  "同样需要审视任务设定是否合理，以及能否通过调整设定改善问题。例如，当顶部相机对环境的观测不够充分时，可以考虑加装腕部相机，补充近距离视角。传感器配置的改变也意味着观测条件发生了变化，实验中应明确记录，并在一致的设定下比较方法。": {
-    "message": "Also examine whether the task setup is appropriate and whether changing it could help. For example, if an overhead camera cannot observe enough of the environment, a wrist camera may provide a useful close-up view. Changing sensors changes the observation conditions: document this explicitly and compare methods under consistent settings."
-  },
   "对机器人技能的研究，可以先从四类常见任务入手：": {
     "message": "A useful starting point is four common skill categories: "
   },
@@ -1214,86 +1028,8 @@
   "。抓取与操作关注改变物体的状态，运动与导航关注移动机器人自身。": {
     "message": ". Grasping and manipulation change object states; locomotion and navigation move the robot itself."
   },
-  "放在一起看": {
-    "message": "Compare the skills"
-  },
-  "频率描述的是某一层的更新速度。下面列出具体系统的示例；策略推理、动作执行、仿真步进与关节伺服频率应分别核对。": {
-    "message": "A frequency describes the update rate of a particular layer. The examples below come from specific systems. Check policy inference, action execution, simulation stepping, and joint servo rates separately."
-  },
-  "四类机器人技能的输入、输出、时间尺度、方法与适用边界": {
-    "message": "Inputs, outputs, timescales, methods, and limitations of four robot skills"
-  },
-  "技能": {
-    "message": "Skill"
-  },
-  "典型输入": {
-    "message": "Typical inputs"
-  },
-  "典型输出": {
-    "message": "Typical outputs"
-  },
-  "时间尺度示例": {
-    "message": "Example timescale"
-  },
-  "常见方法": {
-    "message": "Common methods"
-  },
-  "进展与边界": {
-    "message": "Progress and limitations"
-  },
   "窄屏可左右滚动查看完整表格。": {
     "message": "On narrow screens, scroll horizontally to view the full table."
-  },
-  "组合起来，完成一个真实任务": {
-    "message": "Combine skills for a real task"
-  },
-  "移动操作": {
-    "message": "Mobile manipulation"
-  },
-  "把移动与操作连接起来，通常需要导航找到工作位置，再协调底盘和机械臂完成任务。例如“去厨房，把杯子拿回来”。": {
-    "message": "Connect mobility with manipulation: navigate to a work location, then coordinate the base and arm to complete a task. For example, “Go to the kitchen and bring back the cup.”"
-  },
-  "运动与操作协同": {
-    "message": "Loco-manipulation"
-  },
-  "强调移动、平衡与接触操作之间的耦合，例如四足带臂搬运物体，或人形机器人一边保持平衡一边开门。": {
-    "message": "Emphasizes the coupling of motion, balance, and contact-based manipulation, such as an armed quadruped carrying an object or a humanoid opening a door while balancing. "
-  },
-  "是足式全身操作的一个例子。": {
-    "message": " is one example of legged whole-body manipulation."
-  },
-  "人形机器人执行日常任务时，可能同时涉及这四类能力；具体能做到什么，取决于硬件、感知、控制与训练，而不只取决于外形。": {
-    "message": "A humanoid performing everyday tasks may use all four capabilities. What it can do depends on hardware, perception, control, and training, as well as its physical form."
-  },
-  "为什么系统常采用分层协作？": {
-    "message": "Why do systems often use multiple control layers?"
-  },
-  "这些任务的观测类型、动作空间和反馈时限不同。导航或任务规划给出目标，操作或步态策略生成动作，底层控制器跟踪关节与接触状态；新的反馈再回到上层。": {
-    "message": "These tasks differ in observations, action spaces, and feedback deadlines. Navigation or task planning sets goals; manipulation or gait policies generate actions; low-level controllers track joint and contact states. New feedback returns to the higher layers."
-  },
-  "一种常见的控制分工，反馈会逐层返回": {
-    "message": "A common division of control, with feedback returning through the layers"
-  },
-  "导航 / 任务规划": {
-    "message": "Navigation / Task planning"
-  },
-  "决定去哪里、做什么": {
-    "message": "Decide where to go and what to do"
-  },
-  "操作 / 运动策略": {
-    "message": "Manipulation / Locomotion policies"
-  },
-  "生成可执行的动作": {
-    "message": "Generate executable actions"
-  },
-  "关节 / 全身控制": {
-    "message": "Joint / Whole-body control"
-  },
-  "跟踪目标，协调力与平衡": {
-    "message": "Track targets, coordinate forces and balance"
-  },
-  "VLA 可以连接视觉、语言与操作动作，RL 或 MPC 可以承担运动控制，全身控制器（WBC）可以协调臂、腿与身体。系统也可以学习统一的全身策略。理解一种方法时，先看它负责哪一层、接收什么观测、输出什么动作，以及由谁处理执行误差。": {
-    "message": "VLA can connect vision and language to manipulation actions. RL or MPC can handle motion control, and a whole-body controller (WBC) can coordinate arms, legs, and the body. Systems can also learn a unified whole-body policy. To understand a method, identify its layer, observations, action outputs, and which component handles execution errors."
   },
   "改变物体": {
     "message": "Change objects"
@@ -1634,9 +1370,6 @@
   "可组合研究，依具体配置而定": {
     "message": "Can be studied together, depending on the configuration"
   },
-  "双足行走、平衡、手臂与身体的全身协调，以及移动中操作物体。手部结构、传感器与控制接口会影响可以开展的实验。": {
-    "message": "Biped walking, balance, whole-body coordination of arms and body, and manipulation while moving. Hand design, sensors, and control interfaces determine which experiments are possible."
-  },
   "固定基座机械臂": {
     "message": "Fixed-base robot arms"
   },
@@ -1645,9 +1378,6 @@
   },
   "抓取、操作": {
     "message": "Grasping, manipulation"
-  },
-  "桌面抓取、装配、双臂协作与模仿学习。适合聚焦末端与物体的交互，工作范围受到机械臂可达空间的限制。": {
-    "message": "Tabletop grasping, assembly, bimanual coordination, and imitation learning. Useful for focusing on end-effector–object interaction, with a workspace limited by the arms’ reach."
   },
   "轮式移动机器人": {
     "message": "Wheeled mobile robots"
@@ -1658,9 +1388,6 @@
   "运动、导航": {
     "message": "Locomotion, navigation"
   },
-  "定位、建图、路径规划、避障与多机器人协作。运动控制仍需考虑转向约束、轮地接触和打滑等问题。": {
-    "message": "Localization, mapping, path planning, obstacle avoidance, and multirobot coordination. Motion control must account for steering constraints, wheel–ground contact, and slipping."
-  },
   "四足机器人": {
     "message": "Quadruped robots"
   },
@@ -1669,9 +1396,6 @@
   },
   "加装机械臂后可扩展操作技能": {
     "message": "Adding an arm enables manipulation skills"
-  },
-  "步态、平衡、复杂地形通过、感知与运动协同，以及仿真到真实的策略迁移。导航与运动能力需要在目标环境中共同验证。": {
-    "message": "Gaits, balance, challenging terrain, perception–locomotion coordination, and sim-to-real policy transfer. Navigation and locomotion must be validated together in the target environment."
   },
   "移动操作平台": {
     "message": "Mobile manipulation platforms"
@@ -1682,9 +1406,6 @@
   "强调移动与操作的配合": {
     "message": "Emphasize coordination of mobility and manipulation"
   },
-  "先到达工作位置，再完成取放、开门或搬运等任务。底座可以是轮式或足式，需要协调底座位置、机械臂可达性与身体稳定性。": {
-    "message": "Reach a work location, then pick and place objects, open doors, or carry items. The base may use wheels or legs; its position must be coordinated with arm reach and body stability."
-  },
   "仿真载体": {
     "message": "Simulated bodies"
   },
@@ -1693,9 +1414,6 @@
   },
   "取决于模拟的身体与任务": {
     "message": "Depend on the simulated body and task"
-  },
-  "在可配置的场景中研究导航、操作或运动，采集交互数据并进行可重复评测。观测、动作和物理过程的设定决定实验能说明什么。": {
-    "message": "Study navigation, manipulation, or locomotion in configurable scenes, collect interaction data, and run repeatable evaluations. Observations, actions, and physics settings determine what the experiment can demonstrate."
   },
   "从技能到身体": {
     "message": "From skills to bodies"
@@ -1706,9 +1424,6 @@
   "围绕前面的四类技能，可以先认识以下五类常见物理载体，再了解用于研究的仿真载体。": {
     "message": "With the four skills in mind, explore these five common types of physical platform, followed by simulated bodies used in research."
   },
-  "具身智能常见载体的代表平台、关联技能与研究问题": {
-    "message": "Representative embodied platforms, related skills, and research questions"
-  },
   "载体": {
     "message": "Body type"
   },
@@ -1718,17 +1433,11 @@
   "关联技能": {
     "message": "Related skills"
   },
-  "常见研究问题": {
-    "message": "Common research questions"
-  },
   "这些分类有交叉：人形机器人、带臂四足机器人也可以是移动操作平台。": {
     "message": "These categories overlap: humanoids and quadrupeds with arms can also be mobile manipulation platforms. "
   },
   "身体形态提供了实现技能的条件，实际能力仍需要在具体任务中验证。": {
     "message": "The body enables skills; actual capabilities still require validation in specific tasks."
-  },
-  "仿真载体指仿真中的机器人或智能体；表中的 Habitat、Isaac Lab、MuJoCo 是构建或运行这些载体的平台与工具。虚拟身体同样需要明确传感器、动作空间及其与环境的交互方式。": {
-    "message": "A simulated body is a robot or agent in simulation. Habitat, Isaac Lab, and MuJoCo in the table are platforms and tools for building or running these bodies. Virtual bodies also require explicitly defined sensors, action spaces, and interactions with the environment."
   },
   "要让它进一步自主选择路线并到达门口，还需要与": {
     "message": " To choose its own route and reach a doorway, it must also coordinate with "
@@ -1738,24 +1447,6 @@
   },
   "通俗来讲，就是解决“我在哪里、要去哪里、应该怎么走”。例如，机器人从房间一端出发，绕过地上的障碍物，到达门口的指定区域。": {
     "message": "In everyday terms, navigation answers: where am I, where should I go, and how do I get there? A robot might cross a room, avoid obstacles on the floor, and reach a designated area at the doorway."
-  },
-  "导航决定“去哪、走哪条路”，运动负责“身体怎样把这段路走出来”。": {
-    "message": "Navigation chooses the destination and route; locomotion determines how the body moves along that route."
-  },
-  "在常见的分层系统中，导航给出路径、航点或期望速度，运动控制再协调步态、落脚点、关节或轮速，将指令落实到身体上。例如，四足机器人去门口时，导航选择绕过纸箱、经过台阶的路线；运动控制负责上台阶时怎样抬腿、落脚和保持平衡。": {
-    "message": " In a typical layered system, navigation provides paths, waypoints, or desired velocities. Motion control coordinates gaits, footholds, joints, or wheel speeds to execute them. For a quadruped heading to a doorway, navigation may choose a route around boxes and over steps; motion control handles leg lifts, foot placement, and balance on those steps."
-  },
-  "两者需要持续配合：规划路线时，要考虑机器人能否通过狭窄通道、跨过台阶；执行中若出现打滑或受阻，新的状态反馈又会促使系统调整速度或重新规划。这个分工可以由独立模块实现，也可以通过联合规划或学习策略协调。": {
-    "message": "The two must continually cooperate. Planning must consider whether the robot can pass a narrow opening or climb a step. If it slips or is blocked, state feedback prompts a speed adjustment or replanning. This coordination can use separate modules, joint planning, or learned policies."
-  },
-  "导航涉及定位、建图、路径规划与避障。经典系统通常组合定位 / SLAM、全局规划（如 A*）与局部规划或控制（如 DWA、MPC），": {
-    "message": "Navigation involves localization, mapping, path planning, and obstacle avoidance. Classical systems often combine localization / SLAM, global planning such as A*, and local planning or control such as DWA or MPC. "
-  },
-  "是一个包含这些环节的导航框架；已知地图与受控环境中已有成熟的工程方案。": {
-    "message": " is a navigation framework covering these components. Mature engineering solutions exist for known maps and controlled environments."
-  },
-  "部分仿真基准简化了底层移动；真实部署还要处理定位误差、打滑、动态障碍和执行失败。比较结果时要同时看任务定义、传感器、成功条件与路径效率，不能把某个 PointNav 基准的高成功率推广到所有导航任务。": {
-    "message": "Some simulation benchmarks simplify low-level movement. Real deployment must also handle localization errors, slipping, dynamic obstacles, and execution failures. Compare task definitions, sensors, success conditions, and path efficiency together; a high success rate on one PointNav benchmark does not generalize to all navigation tasks."
   },
   "theme.DocItem.mobileDirectory.defaultLabel": {
     "message": "Contents"
@@ -1843,5 +1534,95 @@
   },
   "官方演示为原片节选，保留原有速度与画面标注；完整演示见来源链接。": {
     "message": "Official clips preserve the original playback speed and visual labels. Follow the source links for the full demonstrations."
+  },
+  "具身导论": {
+    "message": "Introduction"
+  },
+  "看清全局，认识具身智能。": {
+    "message": "See embodied AI as a whole."
+  },
+  "了解具身智能的概念、发展、任务与载体，查找论文、数据集与开源工具。": {
+    "message": "Learn the concepts, history, tasks, and platforms of embodied AI, and find papers, datasets, and open source tools."
+  },
+  "阅读具身导论": {
+    "message": "Read the introduction"
+  },
+  "任务与载体": {
+    "message": "Tasks and platforms"
+  },
+  "论文与数据集": {
+    "message": "Papers and datasets"
+  },
+  "先看全局，再补理论、跟课程、做项目。": {
+    "message": "Start with the big picture, then study the foundations, follow a course, or build a project."
+  },
+  "定义、感知—决策—行动闭环，以及身体为什么重要。": {
+    "message": "The definition, the perception–decision–action loop, and why the body matters."
+  },
+  "发展脉络": {
+    "message": "A brief history"
+  },
+  "从 Shakey 与行为主义，到深度学习、VLA 与世界模型。": {
+    "message": "From Shakey and behavior-based robots to deep learning, VLA, and world models."
+  },
+  "任务与技能": {
+    "message": "Tasks and skills"
+  },
+  "定义任务，认识抓取、操作、运动与导航。": {
+    "message": "Define tasks, then explore grasping, manipulation, locomotion, and navigation."
+  },
+  "系统与挑战": {
+    "message": "Systems and challenges"
+  },
+  "具身载体": {
+    "message": "Embodied platforms"
+  },
+  "人形、机械臂、轮式、四足、移动操作与仿真载体。": {
+    "message": "Humanoids, arms, wheeled and quadruped robots, mobile manipulators, and simulated bodies."
+  },
+  "系统范式与方法": {
+    "message": "System paradigms and methods"
+  },
+  "模块化与端到端、分层协作，以及主要方法路线。": {
+    "message": "Modular and end-to-end systems, layered control, and the main method families."
+  },
+  "核心挑战": {
+    "message": "Key challenges"
+  },
+  "数据、仿真到真实、泛化、实时性、安全与评测。": {
+    "message": "Data, sim-to-real transfer, generalization, real-time execution, safety, and evaluation."
+  },
+  "领域资源": {
+    "message": "Resources"
+  },
+  "先建立全局认识，再进入理论基础与教程。": {
+    "message": "See the big picture, then move on to the foundations and tutorials."
+  },
+  "查看具身导论": {
+    "message": "View the introduction"
+  },
+  "具身智能常见载体的代表平台与关联技能": {
+    "message": "Representative embodied platforms and related skills"
+  },
+  "深入了解具身载体": {
+    "message": "Learn more about embodied platforms"
+  },
+  "深入了解具身智能": {
+    "message": "Learn more about embodied AI"
+  },
+  "深入了解抓取": {
+    "message": "Learn more about grasping"
+  },
+  "深入了解操作": {
+    "message": "Learn more about manipulation"
+  },
+  "深入了解运动": {
+    "message": "Learn more about locomotion"
+  },
+  "深入了解导航": {
+    "message": "Learn more about navigation"
+  },
+  "Datawhale 开源具身智能学习站：具身导论、理论基础、系列教程与项目实战，连接机器人学习、论文、数据集和开源工具。": {
+    "message": "Datawhale’s open embodied AI course: introduction, foundations, tutorials, and projects connecting robot learning with papers, datasets, and open source tools."
   }
 }

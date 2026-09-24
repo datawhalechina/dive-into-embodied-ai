@@ -39,6 +39,85 @@ const tutorialBasePaths = [
 
 export const megaMenus: MegaMenuConfig[] = [
   {
+    id: 'introduction',
+    label: translate({message: "具身导论"}),
+    activeBasePaths: ['/docs/introduction'],
+    panelWidth: 1040,
+    columns: [
+      {
+        title: translate({message: "认识具身智能"}),
+        items: [
+          {
+            title: translate({message: "什么是具身智能"}),
+            description: translate({message: "定义、感知—决策—行动闭环，以及身体为什么重要。"}),
+            to: '/docs/introduction/what-is-embodied-ai',
+            featured: true,
+          },
+          {
+            title: translate({message: "发展脉络"}),
+            description: translate({message: "从 Shakey 与行为主义，到深度学习、VLA 与世界模型。"}),
+            to: '/docs/introduction/history',
+          },
+          {
+            title: translate({message: "任务与技能"}),
+            description: translate({message: "定义任务，认识抓取、操作、运动与导航。"}),
+            to: '/docs/introduction/tasks-and-skills',
+          },
+        ],
+      },
+      {
+        title: translate({message: "系统与挑战"}),
+        items: [
+          {
+            title: translate({message: "具身载体"}),
+            description: translate({message: "人形、机械臂、轮式、四足、移动操作与仿真载体。"}),
+            to: '/docs/introduction/embodiments',
+          },
+          {
+            title: translate({message: "系统范式与方法"}),
+            description: translate({message: "模块化与端到端、分层协作，以及主要方法路线。"}),
+            to: '/docs/introduction/system-paradigms',
+          },
+          {
+            title: translate({message: "核心挑战"}),
+            description: translate({message: "数据、仿真到真实、泛化、实时性、安全与评测。"}),
+            to: '/docs/introduction/challenges',
+          },
+        ],
+      },
+      {
+        title: translate({message: "领域资源"}),
+        items: [
+          {
+            title: translate({message: "论文与研究"}),
+            description: translate({message: "按研究主题收集原论文、项目主页和站内解读。"}),
+            to: '/docs/introduction/resources/papers',
+          },
+          {
+            title: translate({message: "具身数据集"}),
+            description: translate({message: "整理机器人示教数据、任务类型与评测基准。"}),
+            to: '/docs/introduction/resources/datasets',
+          },
+          {
+            title: translate({message: "开源项目"}),
+            description: translate({message: "查找模型代码、训练框架和相关实战入口。"}),
+            to: '/docs/introduction/resources/open-source',
+          },
+          {
+            title: translate({message: "仿真与工具"}),
+            description: translate({message: "收集仿真引擎、学习环境与官方文档。"}),
+            to: '/docs/introduction/resources/tools',
+          },
+        ],
+      },
+    ],
+    footer: {
+      text: translate({message: "先建立全局认识，再进入理论基础与教程。"}),
+      ctaLabel: translate({message: "查看具身导论"}),
+      to: '/docs/introduction/intro',
+    },
+  },
+  {
     id: 'foundations',
     label: translate({message: "理论基础"}),
     activeBasePaths: ['/docs/foundations'],
@@ -320,55 +399,6 @@ export const megaMenus: MegaMenuConfig[] = [
       text: translate({message: "按平台专区、仿真验证与真机部署选择项目。"}),
       ctaLabel: translate({message: "查看项目实战"}),
       to: '/docs/practices/intro',
-    },
-  },
-  {
-    id: 'information',
-    label: translate({message: "具身信息"}),
-    activeBasePaths: ['/docs/information'],
-    panelWidth: 760,
-    columns: [
-      {
-        title: translate({message: "论文与数据"}),
-        items: [
-          {
-            title: translate({message: "论文与研究"}),
-            description: translate({message: "按研究主题收集原论文、项目主页和站内解读。"}),
-            to: '/docs/information/papers',
-            keywords: ['ACT', 'Diffusion Policy', 'VLA'],
-            featured: true,
-          },
-          {
-            title: translate({message: "具身数据集"}),
-            description: translate({message: "整理机器人示教数据、任务类型与评测基准。"}),
-            to: '/docs/information/datasets',
-            keywords: ['Open X-Embodiment', 'LIBERO'],
-            featured: true,
-          },
-        ],
-      },
-      {
-        title: translate({message: "代码与工具"}),
-        items: [
-          {
-            title: translate({message: "开源项目"}),
-            description: translate({message: "查找模型代码、训练框架和相关实战入口。"}),
-            to: '/docs/information/open-source',
-            keywords: ['LeRobot', 'OpenVLA', 'ACT'],
-          },
-          {
-            title: translate({message: "仿真与工具"}),
-            description: translate({message: "收集仿真引擎、学习环境与官方文档。"}),
-            to: '/docs/information/tools',
-            keywords: ['MuJoCo', 'Isaac Lab', 'Gymnasium'],
-          },
-        ],
-      },
-    ],
-    footer: {
-      text: translate({message: "找到论文、数据与工具，再连接到学习和实践。"}),
-      ctaLabel: translate({message: "查看具身信息"}),
-      to: '/docs/information/intro',
     },
   },
 ];

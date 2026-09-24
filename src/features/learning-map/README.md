@@ -2,16 +2,18 @@
 
 `src/pages/learning-map.tsx` 是 Docusaurus 路由入口，页面实现集中在本目录。
 
+学习地图负责指路：概念部分只保留定义、演示和导论链接。技能的方法、代表工作与对比表，以及载体的研究问题，写在 `docs/introduction/` 的具身导论第 3、4 章，修改时同步对应的英文译稿。
+
 | 修改内容 | 对应文件 |
 | --- | --- |
 | 页面结构、概念介绍、参考 | `index.tsx` |
 | 目录名称、任务案例、学习路线与课程链接 | `content.ts` |
 | 侧边目录与滚动定位 | `ChapterNavigation.tsx` |
 | 知识全景的任务切换与展示 | `KnowledgeMap.tsx` |
-| 四类技能的介绍与对比数据 | `skills/content.tsx` |
-| 技能章节的排版与组合关系 | `skills/index.tsx` |
+| 四类技能的定义与导论链接 | `skills/content.tsx` |
+| 技能章节的排版 | `skills/index.tsx` |
 | 技能类型 | `skills/types.ts` |
-| 具身智能载体的分类、平台与研究问题 | `carriers/content.ts` |
+| 具身智能载体的分类、平台与关联技能 | `carriers/content.ts` |
 | 载体章节的排版与对照表 | `carriers/index.tsx` |
 | 足球演示 | `demos/football/` |
 | 四类技能的演示 | `demos/skills/` |

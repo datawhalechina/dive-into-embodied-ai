@@ -130,6 +130,11 @@ const config: Config = {
         },
         {
           type: 'custom-navbarMegaMenu',
+          menuId: 'introduction',
+          position: 'left',
+        },
+        {
+          type: 'custom-navbarMegaMenu',
           menuId: 'foundations',
           position: 'left',
         },
@@ -141,11 +146,6 @@ const config: Config = {
         {
           type: 'custom-navbarMegaMenu',
           menuId: 'practices',
-          position: 'left',
-        },
-        {
-          type: 'custom-navbarMegaMenu',
-          menuId: 'information',
           position: 'left',
         },
         {
@@ -171,10 +171,10 @@ const config: Config = {
           title: '内容',
           items: [
             { label: '学习地图', to: '/learning-map' },
+            { label: '具身导论', to: '/docs/introduction/intro' },
             { label: '理论基础', to: '/docs/foundations/intro' },
             { label: '系列教程', to: '/docs/tutorials/intro' },
             { label: '项目实战', to: '/docs/practices/intro' },
-            { label: '具身信息', to: '/docs/information/intro' },
           ],
         },
         {

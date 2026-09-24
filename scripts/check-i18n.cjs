@@ -53,7 +53,7 @@ assert(english.includes('Embodied AI learning map'));
 assert(main(english), 'The English learning map must render on the server');
 assert(!/\p{Script=Han}/u.test(text(main(english))), 'The rendered English learning map contains Chinese text');
 assert(!chinese.includes('Translation status'), 'The Chinese page should not show an English translation notice');
-assert(english.includes('Tutorial chapters and standalone playgrounds are currently in Chinese.'));
+assert(english.includes('Other tutorial chapters and standalone playgrounds are currently in Chinese.'));
 
 const anchors = html => attributes(main(html), 'id').sort();
 assert.deepEqual(anchors(english), anchors(chinese), 'Language switching must preserve section anchors');
@@ -73,6 +73,18 @@ const originalLink = fallback.match(/<a\b[^>]*>read the Chinese version<\/a>/)?.
 assert(originalLink, 'Missing original-language link in the fallback notice');
 assert.equal(attributes(originalLink, 'href')[0], '/dive-into-embodied-ai/docs/foundations/controllers/intro');
 
+// The introduction is translated, so its English pages must not fall back to Chinese.
+const headingIds = html => [...main(html).matchAll(/<h[2-6]\b[^>]*>/g)].flatMap(([tag]) => attributes(tag, 'id')).sort();
+const introductionPages = walk('build/docs/introduction').filter(file => file.endsWith('.html'));
+assert(introductionPages.length > 0, 'Missing introduction pages');
+for (const file of introductionPages) {
+  const chinesePage = read(file);
+  const englishPage = read(file.replace('build/', 'build/en/'));
+  assert(!englishPage.includes('This page is currently available in Chinese.'), `${file}: the English introduction falls back to Chinese`);
+  assert(!/\p{Script=Han}/u.test(text(main(englishPage))), `${file}: the English introduction contains Chinese text`);
+  assert.deepEqual(headingIds(englishPage), headingIds(chinesePage), `${file}: section anchors differ between languages`);
+}
+
 for (const file of ['build/en/index.html', 'build/en/learning-map.html']) {
   const html = read(file);
   // Internal content links should stay in the selected locale.
@@ -83,4 +95,4 @@ for (const file of ['build/en/index.html', 'build/en/learning-map.html']) {
   }
 }
 
-console.log(`i18n checks passed: ${checked} UI messages, matching learning-map anchors, and ${docs.length} alternate tutorial routes.`);
+console.log(`i18n checks passed: ${checked} UI messages, matching learning-map anchors, ${introductionPages.length} translated introduction pages, and ${docs.length} alternate tutorial routes.`);

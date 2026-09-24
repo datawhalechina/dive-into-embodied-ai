@@ -163,6 +163,9 @@ a {text-underline-offset: .2em;}
 .theme-doc-markdown.markdown th {color: var(--site-ink); background: var(--site-canvas);}
 .theme-doc-markdown.markdown td, .theme-doc-markdown.markdown th {border-color: var(--site-border); padding: .8rem 1rem;}
 .markdown table {display: block !important; width: max-content; max-width: 100%; margin: 1.5em auto !important; overflow-x: auto;}
+/* Wide comparison tables scroll sideways instead of squeezing each column to a few characters. */
+.wide-table table :is(th, td) {min-width: 8rem;}
+.wide-table table :is(th, td):first-child {min-width: 5.5rem;}
 .theme-code-block, .theme-code-block pre {border-radius: 12px !important;}
 .theme-code-block {border: 1px solid var(--site-border); box-shadow: none;}
 .alert {border-radius: 12px; border-width: 1px;}

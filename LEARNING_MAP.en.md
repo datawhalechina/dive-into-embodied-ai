@@ -8,7 +8,7 @@ See the big picture, then find your first step. This guide connects concepts, kn
 
 Open the [interactive learning map](https://datawhalechina.github.io/dive-into-embodied-ai/en/learning-map) to switch between robot tasks and explore the [3D robot soccer demo](https://datawhalechina.github.io/dive-into-embodied-ai/en/learning-map#what-is-embodied-ai), with camera rotation and playback-speed controls.
 
-> The learning map is available in English. Linked tutorial chapters and standalone playgrounds are currently in Chinese.
+> The learning map and introduction are available in English. Other linked tutorial chapters and standalone playgrounds are currently in Chinese.
 
 ## Understand embodied AI
 
@@ -35,6 +35,8 @@ flowchart LR
 
 This is a functional view of the system. A real system may use several collaborating modules or a single model with multiple roles.
 
+For a systematic overview of the concepts, history, tasks and platforms, system paradigms, and key challenges, read the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md).
+
 ## Knowledge map
 
 The first three modules form the action loop. The other three support development, training, and validation of the whole system.
@@ -44,7 +46,7 @@ The first three modules form the action loop. The other three support developmen
 | **Perception and understanding** | Vision and 3D geometry, state estimation, vision-language models (VLM) | [Sensors, frames, and calibration](docs/foundations/perception/1.sensor-calibration-sim2real.md), [VLM foundations](docs/foundations/vlm/0.intro.md) |
 | **Learning and decision making** | Imitation learning, reinforcement learning, vision-language-action models (VLA), world models | [Imitation learning](docs/foundations/rl-for-robotics/12.imitation-learning.md), [reinforcement learning](docs/foundations/rl-for-robotics/1.intro.md), [VLA](docs/foundations/vla/vla-intro.md), [world models](docs/foundations/world-model/0.intro.md) |
 | **Motion and control** | Kinematics and dynamics, motion planning, feedback control | [Coordinate transforms and FK/IK](docs/foundations/robotics-and-ros2/2.kinematics_transform.md), [PID to MPC](docs/foundations/controllers/intro.md), [MoveIt 2](docs/foundations/robotics-and-ros2/10.moveit2_basics.md) |
-| **Simulation and evaluation** | Physics simulation, benchmarks, simulation to reality (Sim2Real) | [Simulation tools](docs/foundations/simulation/1.intro.md), [datasets and benchmarks](docs/information/datasets.md) |
+| **Simulation and evaluation** | Physics simulation, benchmarks, simulation to reality (Sim2Real) | [Simulation tools](docs/foundations/simulation/1.intro.md), [datasets and benchmarks](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/datasets.md) |
 | **Data and training** | Teleoperation, demonstrations, data quality, policy training and validation | [LeRobot data and toolchains](docs/practices/robot-arm/data-collection/lerobot-course/index.md), [learning actions from demonstrations](docs/foundations/rl-for-robotics/12.imitation-learning.md) |
 | **Hardware and systems** | Mechanical design, sensors and motors, ROS2, embedded systems | [Robotics system overview](docs/foundations/robotics-and-ros2/1.course_introduction.md), [connecting and debugging SO-101](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) |
 
@@ -56,7 +58,7 @@ Try an experiment, learn the foundations, then complete a project. Each step pro
 
 | Step | Learning entry point | Completion goal |
 | :--- | :--- | :--- |
-| **1. Understand the system** | Read the [robotics system overview](docs/foundations/robotics-and-ros2/1.course_introduction.md). No hardware is required. | Explain observations, actions, goals, and feedback using soccer, cup picking, or walking. |
+| **1. Understand the system** | Read the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/1.what-is-embodied-ai.md). No hardware is required. | Explain observations, actions, goals, and feedback using soccer, cup picking, or walking. |
 | **2. Try a principle yourself** | Open the [PD control experiment](https://datawhalechina.github.io/dive-into-embodied-ai/en/cs123/pd-playground) and adjust parameters in your browser. | Explain how response, overshoot, and stability change with the parameters. |
 | **3. Run a minimal simulation** | Follow the [MuJoCo tutorial](docs/foundations/simulation/3.mujoco.md) to load a model, step the simulation, and apply control. | Save a simulation experiment you can run and modify yourself. |
 | **4. Complete a project along one path** | Follow [Build a quadruped from scratch](docs/practices/quadruped/cs123/0.intro.md), from single-joint control to gaits and policy training. | Record conditions, results, and failure causes to complete a reproducible project. |

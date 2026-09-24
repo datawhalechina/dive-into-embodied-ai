@@ -11,7 +11,7 @@
 >
 > The website offers full-text search, chapter navigation, and interactive demos. Start with the **[English learning map →](https://datawhalechina.github.io/dive-into-embodied-ai/en/learning-map)**.
 >
-> The README and learning map are available in English. Tutorial chapters and standalone playgrounds are currently in Chinese. Use the language menu to switch between 中文 and English on the same page.
+> The README, learning map, and introduction are available in English. Other tutorial chapters and standalone playgrounds are currently in Chinese. Use the language menu to switch between 中文 and English on the same page.
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="License" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
@@ -43,9 +43,31 @@ Build an embodied AI robot from scratch. Explore practical implementations of re
 
 ## 🗂️ Course outline
 
-The website has four sections: **Foundations**, **Tutorials**, **Projects**, and **Resources**. Foundations explain the principles; tutorials follow a structured sequence of chapters; projects offer standalone demos and reproduction studies; resources collect papers, datasets, open source projects, and tools. Projects are grouped into AMD projects, simulation projects, and real robot projects.
+The website has four sections: **Introduction**, **Foundations**, **Tutorials**, and **Projects**. The introduction gives an overview of the field and collects papers, datasets, open source projects, and tools; foundations explain the principles; tutorials follow a structured sequence of chapters; projects offer standalone demos and reproduction studies. Projects are grouped into AMD projects, simulation projects, and real robot projects.
 
 Status labels: **✅ Available** means the content is ready to read; **🚧 Partially available** means some chapters are complete and others are placeholders; **🚧 Placeholder** means only a placeholder page exists; **⏳ Planned** means work has not started. These labels describe the Chinese source content.
+
+<a id="introduction"></a>
+
+### 🧭 Introduction
+
+Start with the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md) to see the big picture, then move on to the foundations and tutorials for specific techniques:
+
+| Chapter | Contents |
+| :--- | :--- |
+| [1. What is embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/1.what-is-embodied-ai.md) | Definition, the perception–decision–action loop, and why the body matters |
+| [2. A brief history](i18n/en/docusaurus-plugin-content-docs/current/introduction/2.history.md) | From Shakey and behavior-based robots to deep learning, VLA, and world models |
+| [3. Tasks and skills](i18n/en/docusaurus-plugin-content-docs/current/introduction/3.tasks-and-skills.md) | Defining tasks; grasping, manipulation, locomotion, and navigation |
+| [4. Embodied platforms](i18n/en/docusaurus-plugin-content-docs/current/introduction/4.embodiments.md) | Humanoids, arms, wheeled and legged robots, mobile manipulators, and simulated bodies |
+| [5. System paradigms and methods](i18n/en/docusaurus-plugin-content-docs/current/introduction/5.system-paradigms.md) | Modular and end-to-end systems, layered control, and the main method families |
+| [6. Key challenges](i18n/en/docusaurus-plugin-content-docs/current/introduction/6.challenges.md) | Data, sim-to-real transfer, generalization, real-time execution, safety, and evaluation |
+
+The introduction's [resources](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/index.md) collect public learning and research materials:
+
+- [Papers and research](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/papers.md): original papers, project pages, and explanations.
+- [Embodied AI datasets](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/datasets.md): robot demonstrations and evaluation benchmarks.
+- [Open source projects](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/open-source.md): model code and training frameworks.
+- [Simulation and tools](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/tools.md): simulation engines, learning environments, and official documentation.
 
 ### 📚 Tutorials
 
@@ -56,15 +78,6 @@ Choose a learning path from the [tutorial overview](docs/tutorials/intro.md). Ex
 | [Build a quadruped from scratch](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo, PD control, kinematics, policy training, language control, and perception | Overview and 8 chapters available |
 | [LeRobot course notes in Chinese](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | Robot learning, datasets, toolchains, and classical robotics | Units 0–2 compiled |
 | [Flamingo wheeled-biped course](docs/practices/wheel-legged/flamingo-isaaclab/preview.md) | Isaac Lab training and cross-simulator validation | Course preview |
-
-### 📰 Resources
-
-Find public learning and research materials in the [resources overview](docs/information/intro.md):
-
-- [Papers and research](docs/information/papers.md): original papers, project pages, and explanations.
-- [Embodied AI datasets](docs/information/datasets.md): robot demonstrations and evaluation benchmarks.
-- [Open source projects](docs/information/open-source.md): model code and training frameworks.
-- [Simulation and tools](docs/information/tools.md): simulation engines, learning environments, and official documentation.
 
 ### 🛠️ Projects
 

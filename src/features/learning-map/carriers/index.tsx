@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 import {translate} from '@docusaurus/Translate';
+import {ArrowRight} from 'lucide-react';
 import {embodiedCarriers} from './content';
 import CarrierDemos from '../demos/carriers';
 import styles from './styles.module.css';
@@ -21,17 +22,16 @@ export default function EmbodiedCarriers({className}: {className?: string}) {
 
       <div className={styles.tableScroll} role="region" aria-labelledby="carriers-title" tabIndex={0}>
         <table className={styles.table}>
-          <caption className={styles.srOnly}>{translate({message: '具身智能常见载体的代表平台、关联技能与研究问题'})}</caption>
+          <caption className={styles.srOnly}>{translate({message: '具身智能常见载体的代表平台与关联技能'})}</caption>
           <thead>
             <tr>
               <th scope="col">{translate({message: '载体'})}</th>
               <th scope="col">{translate({message: '代表平台 / 工具'})}</th>
               <th scope="col">{translate({message: '关联技能'})}</th>
-              <th scope="col">{translate({message: '常见研究问题'})}</th>
             </tr>
           </thead>
           <tbody>
-            {embodiedCarriers.map(({name, body, platforms, skills, skillNote, research}) => (
+            {embodiedCarriers.map(({name, body, platforms, skills, skillNote}) => (
               <tr key={name}>
                 <th scope="row">{name}<span className={styles.note}>{body}</span></th>
                 <td>
@@ -40,7 +40,6 @@ export default function EmbodiedCarriers({className}: {className?: string}) {
                   </ul>
                 </td>
                 <td>{skills}{skillNote && <span className={styles.note}>{skillNote}</span>}</td>
-                <td>{research}</td>
               </tr>
             ))}
           </tbody>
@@ -50,8 +49,10 @@ export default function EmbodiedCarriers({className}: {className?: string}) {
 
       <div className={styles.context}>
         <p>{translate({message: '这些分类有交叉：人形机器人、带臂四足机器人也可以是移动操作平台。'})}<strong>{translate({message: '身体形态提供了实现技能的条件，实际能力仍需要在具体任务中验证。'})}</strong></p>
-        <p>{translate({message: '仿真载体指仿真中的机器人或智能体；表中的 Habitat、Isaac Lab、MuJoCo 是构建或运行这些载体的平台与工具。虚拟身体同样需要明确传感器、动作空间及其与环境的交互方式。'})}</p>
       </div>
+      <Link to="/docs/introduction/embodiments" className={`site-text-link ${styles.readMore}`}>
+        {translate({message: '深入了解具身载体'})}<ArrowRight size={16} aria-hidden="true" />
+      </Link>
     </section>
   );
 }

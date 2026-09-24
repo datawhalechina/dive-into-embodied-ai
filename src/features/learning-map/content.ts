@@ -89,7 +89,7 @@ export const foundations = [
     concepts: translate({message: "物理仿真 · 评测基准 · 仿真到真实（Sim2Real）"}),
     links: [
       {label: translate({message: "认识仿真工具"}), to: '/docs/foundations/simulation/intro'},
-      {label: translate({message: "数据集与评测基准"}), to: '/docs/information/datasets'},
+      {label: translate({message: "数据集与评测基准"}), to: '/docs/introduction/resources/datasets'},
     ],
   },
   {
@@ -117,7 +117,7 @@ export const firstSteps = [
     title: translate({message: "建立系统概念"}), preparation: translate({message: "从这里开始 · 无需设备"}),
     description: translate({message: "用一个机器人任务，分清观测、动作、目标和反馈。"}),
     outcome: translate({message: "能说明一个动作背后有哪些模块在协作。"}),
-    link: {label: translate({message: "阅读机器人系统全景"}), to: '/docs/foundations/robotics-and-ros2/course_introduction'},
+    link: {label: translate({message: "阅读具身导论"}), to: '/docs/introduction/what-is-embodied-ai'},
   },
   {
     title: translate({message: "亲手体验一个原理"}), preparation: translate({message: "浏览器即可"}),

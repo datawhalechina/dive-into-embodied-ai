@@ -13,7 +13,6 @@ export type EmbodiedCarrier = {
   platforms: {name: string; href: string}[];
   skills: string;
   skillNote?: string;
-  research: string;
 };
 
 export const embodiedCarriers: EmbodiedCarrier[] = [
@@ -33,7 +32,6 @@ export const embodiedCarriers: EmbodiedCarrier[] = [
     ],
     skills: translate({message: '抓取、操作、运动、导航'}),
     skillNote: translate({message: '可组合研究，依具体配置而定'}),
-    research: translate({message: '双足行走、平衡、手臂与身体的全身协调，以及移动中操作物体。手部结构、传感器与控制接口会影响可以开展的实验。'}),
   },
   {
     id: 'arm',
@@ -51,7 +49,6 @@ export const embodiedCarriers: EmbodiedCarrier[] = [
       {name: 'SO-101', href: 'https://huggingface.co/docs/lerobot/so101'},
     ],
     skills: translate({message: '抓取、操作'}),
-    research: translate({message: '桌面抓取、装配、双臂协作与模仿学习。适合聚焦末端与物体的交互，工作范围受到机械臂可达空间的限制。'}),
   },
   {
     id: 'wheeled',
@@ -69,7 +66,6 @@ export const embodiedCarriers: EmbodiedCarrier[] = [
       {name: 'Husky A300', href: 'https://clearpathrobotics.com/husky-a300-unmanned-ground-vehicle-robot/'},
     ],
     skills: translate({message: '运动、导航'}),
-    research: translate({message: '定位、建图、路径规划、避障与多机器人协作。运动控制仍需考虑转向约束、轮地接触和打滑等问题。'}),
   },
   {
     id: 'quadruped',
@@ -87,7 +83,6 @@ export const embodiedCarriers: EmbodiedCarrier[] = [
     ],
     skills: translate({message: '运动、导航'}),
     skillNote: translate({message: '加装机械臂后可扩展操作技能'}),
-    research: translate({message: '步态、平衡、复杂地形通过、感知与运动协同，以及仿真到真实的策略迁移。导航与运动能力需要在目标环境中共同验证。'}),
   },
   {
     id: 'mobile-manipulator',
@@ -106,7 +101,6 @@ export const embodiedCarriers: EmbodiedCarrier[] = [
     ],
     skills: translate({message: '抓取、操作、运动、导航'}),
     skillNote: translate({message: '强调移动与操作的配合'}),
-    research: translate({message: '先到达工作位置，再完成取放、开门或搬运等任务。底座可以是轮式或足式，需要协调底座位置、机械臂可达性与身体稳定性。'}),
   },
   {
     id: 'simulation',
@@ -124,6 +118,5 @@ export const embodiedCarriers: EmbodiedCarrier[] = [
       {name: 'MuJoCo', href: 'https://mujoco.org/'},
     ],
     skills: translate({message: '取决于模拟的身体与任务'}),
-    research: translate({message: '在可配置的场景中研究导航、操作或运动，采集交互数据并进行可重复评测。观测、动作和物理过程的设定决定实验能说明什么。'}),
   },
 ];
