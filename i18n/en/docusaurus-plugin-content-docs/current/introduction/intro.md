@@ -7,7 +7,7 @@ displayed_sidebar: introductionSidebar
 
 # Introduction
 
-This introduction gives an overview of embodied AI: what it studies, where it came from, which skills and body types robots have, and which problems remain open. The final two chapters explain how to learn the technical modules and how career roles divide the work. After the introduction, move on to the foundations and tutorials to learn specific techniques.
+This introduction gives an overview of embodied AI: what it studies, where it came from, which skills and body types robots have, and which problems remain open. The final two chapters explain how to learn the technical modules and how career roles divide the work. After the introduction, move on to the foundations and projects to learn specific techniques.
 
 ## Where the introduction fits \{#site-structure}
 
@@ -15,8 +15,7 @@ This introduction gives an overview of embodied AI: what it studies, where it ca
 | --- | --- | --- |
 | Introduction | Helps beginners get started: what the field is, why it is hard, and which approaches exist | On your first visit, to build an overall understanding |
 | [Foundations](/docs/foundations/intro) | Explains the principles: reinforcement learning, VLA, control, perception, simulation, and more | When you hit a specific knowledge gap |
-| [Tutorials](/docs/tutorials/intro) | Builds a complete system chapter by chapter | When you want to follow one structured path |
-| [Projects](/docs/practices/intro) | Offers standalone experiments, demos, and reproductions | When you want to test a method yourself |
+| [Projects](/docs/practices/intro) | Offers projects organized into chapters, standalone experiments, demos, and reproductions | When you want to build a complete system or test a method yourself |
 
 ## Chapters \{#chapters}
 

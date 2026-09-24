@@ -22,7 +22,6 @@ A collection of papers, datasets, open source projects, and tools for learning a
 
 - For an overview of the field: read the chapters of the [introduction](../intro.md).
 - To understand a method: follow a paper entry to the related explanation in the [foundations](/docs/foundations/intro).
-- To learn systematically: choose a [tutorial](/docs/tutorials/intro) and follow its chapters.
-- To test results: find a matching experiment in the [projects](/docs/practices/intro).
+- To put ideas into practice: choose a project organized into chapters or a standalone experiment in [projects](/docs/practices/intro), then implement and evaluate it.
 
 The collection starts with resources related to content on this site and will grow by topic. Each entry lists its original source and the date it was compiled, so it can be traced and updated.

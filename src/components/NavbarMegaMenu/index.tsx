@@ -30,8 +30,7 @@ function isItemActive(item: MegaMenuItem, pathname: string): boolean {
 }
 
 function isMenuActive(menu: MegaMenuConfig, pathname: string): boolean {
-  return menu.activeBasePaths.some((basePath) => matchesPath(pathname, basePath))
-    && !menu.excludedBasePaths?.some((basePath) => matchesPath(pathname, basePath));
+  return menu.activeBasePaths.some((basePath) => matchesPath(pathname, basePath));
 }
 
 function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {

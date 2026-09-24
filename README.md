@@ -44,7 +44,7 @@
 
 ## 🗂️ 内容大纲
 
-网站分为「具身导论、理论基础、系列教程、项目实战」四个栏目：具身导论介绍领域全貌，并整理论文、数据集、开源项目和工具；理论基础讲解原理，系列教程沿章节主线学习，项目实战提供独立 Demo 与复现案例。项目实战继续按「AMD 专区、仿真实战、真机实战」归类。
+网站分为「具身导论、理论基础、项目实战」三个栏目：具身导论介绍领域全貌，并整理论文、数据集、开源项目和工具；理论基础讲解原理；项目实战包含分章项目、独立 Demo 与复现案例，按「AMD 专区、仿真实战、真机实战」归类。
 
 状态标记说明:**✅ 可用** = 章节内容完整,可直接阅读;**🚧 部分可用** = 一部分章节有内容、一部分仍是占位;**🚧 占位中** = 目录已建但只有占位页;**⏳ 待补充** = 暂未开工。
 
@@ -52,7 +52,7 @@
 
 ### 🧭 具身导论
 
-从 [具身导论](docs/introduction/intro.md) 建立对具身智能的全局认识，再进入理论基础与教程学习具体技术：
+从 [具身导论](docs/introduction/intro.md) 建立对具身智能的全局认识，再进入理论基础与项目实战学习具体技术：
 
 | 章节 | 内容 |
 | :--- | :--- |
@@ -71,30 +71,23 @@
 - [开源项目](docs/introduction/resources/open-source.md)：模型代码与训练框架。
 - [仿真与工具](docs/introduction/resources/tools.md)：仿真引擎、学习环境与官方文档。
 
-<a id="系列教程"></a>
-
-### 📚 系列教程
-
-从 [系列教程总览](docs/tutorials/intro.md) 选择学习主线，原课程文章与代码路径保持不变。
-
-| 教程 | 学习主线 | 进度 |
-| :--- | :--- | :--- |
-| [从零到一搭建四足机器人](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo、PD、运动学、策略训练、语言控制与感知 | 总览与 8 章可读 |
-| [LeRobot 中文课程讲义](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | 机器人学习、数据集、工具链与经典机器人学 | 已整理 Unit 0–2 |
-| [Flamingo 轮足课程](docs/practices/wheel-legged/flamingo-isaaclab/preview.md) | Isaac Lab 训练与跨仿真验证 | 课程预告 |
-
 <a id="项目实战"></a>
 
 ### 🛠️ 项目实战
+
+从 [项目实战总览](docs/practices/intro.md) 选择分章项目或独立实验，按步骤完成实现与评测。
 
 | 分类 | 章节 | 简介 | 状态 |
 | :--- | :--- | :--- | :--- |
 | AMD 专区 | [AUP Learning Cloud 云算力](docs/practices/amd/aup-learning-cloud.md) | Ryzen AI APU、ROCm、JupyterHub 与 Code Server | ✅ 可用 |
 | AMD 专区 | [MicroDuck RL｜AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700、ROCm MuJoCo Warp、动态接触回归与双足 PPO | ✅ 可用 |
 | AMD 专区 | [玩转 Pupper 四足机器人](docs/practices/amd/pupper-control/intro.md) | AMD 平台上的强化学习运动策略与 VLA 实验 | ✅ 可用 |
+| 仿真实战 | [从零到一搭建四足机器人](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo、PD、运动学、策略训练、语言控制与感知 | ✅ 总览与 8 章可读 |
 | 仿真实战 | [MicroDuck RL 小黄鸭双足机器人](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp：GPU 并行 PPO 与双足步态训练 | ✅ 可用 |
 | 仿真实战 | [MuJoCo 机械臂与 DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | MuJoCo 环境与连续控制实验 | ✅ 可用 |
 | 仿真实战 | [ACT 双臂操作训练](docs/practices/vla/act/index.md) | ACT + ALOHA：训练、评估与结果复现 | ✅ 可用 |
+| 仿真实战 | [Flamingo 轮足课程](docs/practices/wheel-legged/flamingo-isaaclab/preview.md) | Isaac Lab 训练与跨仿真验证 | 🚧 课程预告 |
+| 真机实战 | [LeRobot 中文课程讲义](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | 机器人学习、数据集、工具链与经典机器人学，为真机实践做准备 | 🚧 已整理 Unit 0–2 |
 | 真机实战 | [SO-101 + LeRobot 真机教程](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) | 硬件连通、安全测试与动作回放 | ✅ 可用 |
 | 真机实战 | [Sim2Real 指南](docs/practices/quadruped/sim2real-guide/placeholder.md) | 仿真策略部署与真机验证 | 🚧 占位中 |
 

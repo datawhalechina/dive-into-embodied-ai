@@ -1,21 +1,6 @@
 import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 
 const sidebars: SidebarsConfig = {
-  tutorialsOverviewSidebar: [
-    'tutorials/intro',
-    {
-      type: 'category',
-      label: '系列课程',
-      collapsed: false,
-      items: [
-        { type: 'link', label: '从零到一搭建四足机器人', href: '/docs/practices/quadruped/cs123/intro' },
-        { type: 'link', label: 'LeRobot 中文课程讲义', href: '/docs/practices/robot-arm/data-collection/lerobot-course' },
-        { type: 'link', label: 'Flamingo 轮足课程 · 预告', href: '/docs/practices/wheel-legged/flamingo-isaaclab/preview' },
-      ],
-    },
-    { type: 'link', label: '学习路径总览', href: '/docs/overview/learning-path' },
-  ],
-
   introductionSidebar: [
     'introduction/intro',
     'introduction/what-is-embodied-ai',
@@ -197,6 +182,7 @@ const sidebars: SidebarsConfig = {
       label: '仿真实战',
       collapsed: false,
       items: [
+        { type: 'link', label: '从零到一搭建四足机器人', href: '/docs/practices/quadruped/cs123/intro' },
         { type: 'link', label: 'MicroDuck RL：走路、起身和翻滚', href: '/docs/practices/humanoid/microduck-rl' },
         { type: 'link', label: 'MuJoCo 仿真入门', href: '/docs/practices/robot-arm/mujoco-arm-pick-place' },
         { type: 'link', label: 'DDPG InvertedPendulum', href: '/docs/practices/robot-arm/ddpg-mujoco/invertedpendulum-v5' },
@@ -205,6 +191,7 @@ const sidebars: SidebarsConfig = {
         { type: 'link', label: 'ACT 双臂操作训练', href: '/docs/practices/vla/act' },
         { type: 'link', label: 'π₀.₅ + RECAP：LIBERO 复现', href: '/docs/practices/vla/recap' },
         { type: 'link', label: 'Sim2Sim 验证', href: '/docs/practices/quadruped/sim2sim/placeholder' },
+        { type: 'link', label: 'Flamingo 轮足课程 · 预告', href: '/docs/practices/wheel-legged/flamingo-isaaclab/preview' },
       ],
     },
     {
@@ -212,6 +199,7 @@ const sidebars: SidebarsConfig = {
       label: '真机实战',
       collapsed: false,
       items: [
+        { type: 'link', label: 'LeRobot 中文课程讲义', href: '/docs/practices/robot-arm/data-collection/lerobot-course' },
         { type: 'link', label: 'SO-101 + LeRobot 真机教程', href: '/docs/practices/robot-arm/data-collection/so101-lerobot-real' },
         { type: 'link', label: 'ROS2 机械臂控制', href: '/docs/practices/robot-arm/ros2-arm-control/placeholder' },
         { type: 'link', label: 'Sim2Real 指南', href: '/docs/practices/quadruped/sim2real-guide/placeholder' },
@@ -288,7 +276,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   practicesCs123CourseSidebar: [
-    { type: 'link', label: '← 系列教程', href: '/docs/tutorials/intro' },
+    { type: 'link', label: '← 项目实战', href: '/docs/practices/intro' },
     {
       type: 'category',
       label: '从零到一搭建四足机器人',
@@ -308,7 +296,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   practicesLerobotCourseSidebar: [
-    { type: 'link', label: '← 系列教程', href: '/docs/tutorials/intro' },
+    { type: 'link', label: '← 项目实战', href: '/docs/practices/intro' },
     {
       type: 'category',
       label: 'LeRobot 开源课程',
@@ -359,7 +347,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   practicesFlamingoCourseSidebar: [
-    { type: 'link', label: '← 系列教程', href: '/docs/tutorials/intro' },
+    { type: 'link', label: '← 项目实战', href: '/docs/practices/intro' },
     {
       type: 'category',
       label: '两轮足 Flamingo · Isaac Lab',

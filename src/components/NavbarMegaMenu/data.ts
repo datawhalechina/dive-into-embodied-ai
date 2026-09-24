@@ -24,18 +24,10 @@ export type MegaMenuConfig = {
   id: string;
   label: string;
   activeBasePaths: string[];
-  excludedBasePaths?: string[];
   panelWidth: number;
   columns: MegaMenuColumn[];
   footer: MegaMenuFooter;
 };
-
-// Keep existing course URLs while giving each course a single navigation home.
-const tutorialBasePaths = [
-  '/docs/practices/quadruped/cs123',
-  '/docs/practices/robot-arm/data-collection/lerobot-course',
-  '/docs/practices/wheel-legged/flamingo-isaaclab',
-];
 
 export const megaMenus: MegaMenuConfig[] = [
   {
@@ -178,59 +170,9 @@ export const megaMenus: MegaMenuConfig[] = [
     },
   },
   {
-    id: 'tutorials',
-    label: translate({message: "系列教程"}),
-    activeBasePaths: ['/docs/tutorials', '/cs123', ...tutorialBasePaths],
-    panelWidth: 760,
-    columns: [
-      {
-        title: translate({message: "按章节系统学习"}),
-        items: [
-          {
-            title: translate({message: "从零到一搭建四足机器人"}),
-            description: translate({message: "沿着 8 章主线，从 PD 控制与运动学走到策略训练和感知。"}),
-            to: '/docs/practices/quadruped/cs123/intro',
-            activeBasePath: '/docs/practices/quadruped/cs123',
-            keywords: ['CS123', 'MuJoCo', translate({message: "8 章"})],
-            featured: true,
-          },
-          {
-            title: translate({message: "LeRobot 中文课程讲义"}),
-            description: translate({message: "按课程顺序学习机器人数据、工具链与经典机器人学。"}),
-            to: '/docs/practices/robot-arm/data-collection/lerobot-course',
-            keywords: ['LeRobot', translate({message: "中文讲义"})],
-          },
-        ],
-      },
-      {
-        title: translate({message: "学习准备与课程预告"}),
-        items: [
-          {
-            title: translate({message: "选择一套教程"}),
-            description: translate({message: "对照前置知识、学习目标和内容进度，选择学习主线。"}),
-            to: '/docs/tutorials/intro',
-          },
-          {
-            title: translate({message: "两轮足 Flamingo · 课程预告"}),
-            description: translate({message: "了解 Isaac Lab 训练与跨仿真验证课程的规划。"}),
-            to: '/docs/practices/wheel-legged/flamingo-isaaclab/preview',
-            activeBasePath: '/docs/practices/wheel-legged/flamingo-isaaclab',
-            keywords: ['Isaac Lab', translate({message: "预告"})],
-          },
-        ],
-      },
-    ],
-    footer: {
-      text: translate({message: "围绕一条主线，按章节逐步完成一个系统。"}),
-      ctaLabel: translate({message: "查看系列教程"}),
-      to: '/docs/tutorials/intro',
-    },
-  },
-  {
     id: 'practices',
     label: translate({message: "项目实战"}),
-    activeBasePaths: ['/docs/practices'],
-    excludedBasePaths: tutorialBasePaths,
+    activeBasePaths: ['/docs/practices', '/cs123'],
     panelWidth: 1180,
     columns: [
       {
@@ -267,6 +209,13 @@ export const megaMenus: MegaMenuConfig[] = [
         title: translate({message: "仿真实战"}),
         items: [
           {
+            title: translate({message: "从零到一搭建四足机器人"}),
+            description: translate({message: "沿着 8 章主线，从 PD 控制与运动学走到策略训练和感知。"}),
+            to: '/docs/practices/quadruped/cs123/intro',
+            activeBasePath: '/docs/practices/quadruped/cs123',
+            keywords: ['CS123', 'MuJoCo', translate({message: "8 章"})],
+          },
+          {
             icon: '🐥',
             title: translate({message: "MicroDuck RL 小黄鸭双足机器人"}),
             description: translate({message: "mjlab + MuJoCo Warp GPU 并行 PPO 与稳定步态训练。"}),
@@ -291,11 +240,24 @@ export const megaMenus: MegaMenuConfig[] = [
             activeBasePath: '/docs/practices/vla/act',
             keywords: ['ACT', 'ALOHA', translate({message: "模仿学习"})],
           },
+          {
+            title: translate({message: "两轮足 Flamingo · 课程预告"}),
+            description: translate({message: "了解 Isaac Lab 训练与跨仿真验证课程的规划。"}),
+            to: '/docs/practices/wheel-legged/flamingo-isaaclab/preview',
+            activeBasePath: '/docs/practices/wheel-legged/flamingo-isaaclab',
+            keywords: ['Isaac Lab', translate({message: "预告"})],
+          },
         ],
       },
       {
         title: translate({message: "真机实战"}),
         items: [
+          {
+            title: translate({message: "LeRobot 中文课程讲义"}),
+            description: translate({message: "从数据集、工具链与经典机器人学，为真机学习做好准备。"}),
+            to: '/docs/practices/robot-arm/data-collection/lerobot-course',
+            keywords: ['LeRobot', translate({message: "中文讲义"})],
+          },
           {
             icon: '🦾',
             title: translate({message: "SO-101 + LeRobot 真机教程"}),

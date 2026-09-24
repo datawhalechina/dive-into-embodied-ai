@@ -22,7 +22,6 @@ displayed_sidebar: introductionSidebar
 
 - 想先了解领域全貌：阅读 [具身导论](../intro.md) 的各章。
 - 想理解方法：从论文条目进入 [理论基础](/docs/foundations/intro) 的相关解读。
-- 想系统学习：选择 [系列教程](/docs/tutorials/intro)，沿着章节主线推进。
-- 想验证效果：在 [项目实战](/docs/practices/intro) 中找到对应实验。
+- 想动手实践：在 [项目实战](/docs/practices/intro) 中选择分章项目或独立实验，完成实现与评测。
 
 当前先整理与站内内容有关的资源，后续按主题补充。资源条目附原始来源与整理日期，便于追溯和更新。

@@ -135,11 +135,6 @@ const config: Config = {
         },
         {
           type: 'custom-navbarMegaMenu',
-          menuId: 'tutorials',
-          position: 'left',
-        },
-        {
-          type: 'custom-navbarMegaMenu',
           menuId: 'practices',
           position: 'left',
         },
@@ -167,7 +162,6 @@ const config: Config = {
           items: [
             { label: '具身导论', to: '/docs/introduction/intro' },
             { label: '理论基础', to: '/docs/foundations/intro' },
-            { label: '系列教程', to: '/docs/tutorials/intro' },
             { label: '项目实战', to: '/docs/practices/intro' },
           ],
         },

@@ -15,7 +15,7 @@ export default function TranslationNotice({translated = false}: {translated?: bo
     <aside className="translation-notice" lang="en" aria-label="Translation status">
       {translated ? (
         <>
-          The <Link href="https://github.com/datawhalechina/dive-into-embodied-ai/blob/master/README.en.md">README</Link> and <Link to="/docs/introduction/intro">introduction</Link> are available in English.
+          The <Link href="https://github.com/datawhalechina/dive-into-embodied-ai/blob/master/README.en.md">README</Link>, <Link to="/docs/introduction/intro">introduction</Link>, and <Link to="/docs/practices/intro">project overview</Link> are available in English.
           {' '}Other tutorial chapters and standalone playgrounds are currently in Chinese.
         </>
       ) : (

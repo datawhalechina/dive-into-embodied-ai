@@ -2,5 +2,68 @@
   "sidebar.introductionSidebar.category.领域资源": {
     "message": "Resources",
     "description": "The label for category 领域资源 in sidebar introductionSidebar"
+  },
+  "sidebar.practicesOverviewSidebar.category.AMD 专区": {
+    "message": "AMD projects"
+  },
+  "sidebar.practicesOverviewSidebar.category.仿真实战": {
+    "message": "Simulation projects"
+  },
+  "sidebar.practicesOverviewSidebar.category.真机实战": {
+    "message": "Real robot projects"
+  },
+  "sidebar.practicesOverviewSidebar.link.AUP Learning Cloud 云算力": {
+    "message": "AUP Learning Cloud"
+  },
+  "sidebar.practicesOverviewSidebar.link.MicroDuck RL｜AMD ROCm": {
+    "message": "MicroDuck RL · AMD ROCm"
+  },
+  "sidebar.practicesOverviewSidebar.link.ACT 双臂操作训练｜AMD ROCm": {
+    "message": "ACT bimanual training · AMD ROCm"
+  },
+  "sidebar.practicesOverviewSidebar.link.玩转 Pupper 四足机器人": {
+    "message": "Explore the Pupper quadruped"
+  },
+  "sidebar.practicesOverviewSidebar.link.从零到一搭建四足机器人": {
+    "message": "Build a quadruped from scratch"
+  },
+  "sidebar.practicesOverviewSidebar.link.MicroDuck RL：走路、起身和翻滚": {
+    "message": "MicroDuck RL: walking, standing up, and rolling"
+  },
+  "sidebar.practicesOverviewSidebar.link.MuJoCo 仿真入门": {
+    "message": "Getting started with MuJoCo"
+  },
+  "sidebar.practicesOverviewSidebar.link.ACT 双臂操作训练": {
+    "message": "ACT bimanual training"
+  },
+  "sidebar.practicesOverviewSidebar.link.π₀.₅ + RECAP：LIBERO 复现": {
+    "message": "π₀.₅ + RECAP: LIBERO reproduction"
+  },
+  "sidebar.practicesOverviewSidebar.link.Sim2Sim 验证": {
+    "message": "Sim2Sim validation"
+  },
+  "sidebar.practicesOverviewSidebar.link.Flamingo 轮足课程 · 预告": {
+    "message": "Flamingo wheeled biped · Preview"
+  },
+  "sidebar.practicesOverviewSidebar.link.LeRobot 中文课程讲义": {
+    "message": "LeRobot course notes in Chinese"
+  },
+  "sidebar.practicesOverviewSidebar.link.SO-101 + LeRobot 真机教程": {
+    "message": "SO-101 + LeRobot hardware tutorial"
+  },
+  "sidebar.practicesOverviewSidebar.link.ROS2 机械臂控制": {
+    "message": "ROS2 arm control"
+  },
+  "sidebar.practicesOverviewSidebar.link.Sim2Real 指南": {
+    "message": "Sim2Real guide"
+  },
+  "sidebar.practicesCs123CourseSidebar.link.← 项目实战": {
+    "message": "← Projects"
+  },
+  "sidebar.practicesLerobotCourseSidebar.link.← 项目实战": {
+    "message": "← Projects"
+  },
+  "sidebar.practicesFlamingoCourseSidebar.link.← 项目实战": {
+    "message": "← Projects"
   }
 }

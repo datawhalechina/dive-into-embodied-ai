@@ -43,7 +43,7 @@ Build an embodied AI robot from scratch. Explore practical implementations of re
 
 ## 🗂️ Course outline
 
-The website has four sections: **Introduction**, **Foundations**, **Tutorials**, and **Projects**. The introduction gives an overview of the field and collects papers, datasets, open source projects, and tools; foundations explain the principles; tutorials follow a structured sequence of chapters; projects offer standalone demos and reproduction studies. Projects are grouped into AMD projects, simulation projects, and real robot projects.
+The website has three sections: **Introduction**, **Foundations**, and **Projects**. The introduction gives an overview of the field and collects papers, datasets, open source projects, and tools; foundations explain the principles; projects offer both a sequence of chapters and standalone demos or reproduction studies. Projects are grouped into AMD projects, simulation projects, and real robot projects.
 
 Status labels: **✅ Available** means the content is ready to read; **🚧 Partially available** means some chapters are complete and others are placeholders; **🚧 Placeholder** means only a placeholder page exists; **⏳ Planned** means work has not started. These labels describe the Chinese source content.
 
@@ -51,7 +51,7 @@ Status labels: **✅ Available** means the content is ready to read; **🚧 Part
 
 ### 🧭 Introduction
 
-Start with the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md) to see the big picture, then move on to the foundations and tutorials for specific techniques:
+Start with the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md) to see the big picture, then move on to the foundations and projects for specific techniques:
 
 | Chapter | Contents |
 | :--- | :--- |
@@ -70,26 +70,21 @@ The introduction's [resources](i18n/en/docusaurus-plugin-content-docs/current/in
 - [Open source projects](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/open-source.md): model code and training frameworks.
 - [Simulation and tools](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/tools.md): simulation engines, learning environments, and official documentation.
 
-### 📚 Tutorials
-
-Choose a learning path from the [tutorial overview](docs/tutorials/intro.md). Existing article and code paths remain unchanged.
-
-| Tutorial | Learning path | Progress |
-| :--- | :--- | :--- |
-| [Build a quadruped from scratch](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo, PD control, kinematics, policy training, language control, and perception | Overview and 8 chapters available |
-| [LeRobot course notes in Chinese](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | Robot learning, datasets, toolchains, and classical robotics | Units 0–2 compiled |
-| [Flamingo wheeled-biped course](docs/practices/wheel-legged/flamingo-isaaclab/preview.md) | Isaac Lab training and cross-simulator validation | Course preview |
-
 ### 🛠️ Projects
+
+Use the [project overview](i18n/en/docusaurus-plugin-content-docs/current/practices/intro.md) to choose a project organized into chapters or a standalone experiment, then work through implementation and evaluation.
 
 | Category | Project | Description | Status |
 | :--- | :--- | :--- | :--- |
 | AMD | [AUP Learning Cloud](docs/practices/amd/aup-learning-cloud.md) | Ryzen AI APUs, ROCm, JupyterHub, and Code Server | ✅ Available |
 | AMD | [MicroDuck RL · AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700, ROCm MuJoCo Warp, dynamic-contact regression tests, and biped PPO | ✅ Available |
 | AMD | [Explore the Pupper quadruped](docs/practices/amd/pupper-control/intro.md) | RL locomotion policies and VLA experiments on AMD hardware | ✅ Available |
+| Simulation | [Build a quadruped from scratch](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo, PD control, kinematics, policy training, language control, and perception | ✅ Overview and 8 chapters available |
 | Simulation | [MicroDuck RL biped](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp: parallel PPO and biped gait training on GPUs | ✅ Available |
 | Simulation | [MuJoCo robot arms and DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | MuJoCo environments and continuous-control experiments | ✅ Available |
 | Simulation | [ACT bimanual training](docs/practices/vla/act/index.md) | ACT + ALOHA: training, evaluation, and reproduction | ✅ Available |
+| Simulation | [Flamingo wheeled-biped course](docs/practices/wheel-legged/flamingo-isaaclab/preview.md) | Isaac Lab training and cross-simulator validation | 🚧 Course preview |
+| Real robots | [LeRobot course notes in Chinese](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | Robot learning, datasets, toolchains, and classical robotics as preparation for hardware projects | 🚧 Units 0–2 compiled |
 | Real robots | [SO-101 + LeRobot hardware tutorial](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) | Hardware connectivity, safety tests, and action playback | ✅ Available |
 | Real robots | [Sim2Real guide](docs/practices/quadruped/sim2real-guide/placeholder.md) | Deploying simulation policies and validating on hardware | 🚧 Placeholder |
 

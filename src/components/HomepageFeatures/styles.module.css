@@ -1,5 +1,5 @@
 .features {padding: 1.5rem 0 4.5rem;}
-.grid {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem;}
+.grid {display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem;}
 .card {display: flex; flex-direction: column; padding: 2rem; background: var(--site-panel); border: 1px solid var(--site-border); border-radius: 22px; color: var(--site-ink); transition: border-color .18s ease, box-shadow .18s ease;}
 .card:hover {color: var(--site-ink); text-decoration: none; border-color: var(--site-blue); box-shadow: 0 12px 32px -24px #0066cc50;}
 .topline {display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; color: var(--site-blue);}
@@ -9,7 +9,7 @@
 .topics {display: flex; flex-wrap: wrap; gap: .45rem .6rem; list-style: none; padding: 0; margin: 0 0 1.5rem;}
 .topics li {padding: .3rem .7rem; background: var(--site-canvas); color: var(--site-muted); border-radius: 6px; font-size: .8125rem;}
 .card > span {margin-top: auto;}
-@media (max-width: 700px) {
+@media (max-width: 996px) {
   .features {padding: 1.25rem 0 3rem;}
   .grid {grid-template-columns: 1fr; gap: 1rem;}
   .card {padding: 1.5rem;}

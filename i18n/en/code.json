@@ -146,18 +146,6 @@
   "视觉语言动作模型": {
     "message": "Vision-language-action models"
   },
-  "系列教程": {
-    "message": "Tutorials"
-  },
-  "沿着主线，搭建完整系统。": {
-    "message": "Follow a course. Build a complete system."
-  },
-  "跟随有章节顺序的课程，从基础准备逐步走到系统实现。": {
-    "message": "Work through structured chapters, from prerequisites to a working system."
-  },
-  "选择系列教程": {
-    "message": "Choose a tutorial"
-  },
   "从零到一搭建四足机器人": {
     "message": "Build a quadruped from scratch"
   },
@@ -169,9 +157,6 @@
   },
   "动手实验，让算法跑起来。": {
     "message": "Run an experiment. Bring algorithms to life."
-  },
-  "选择一个独立项目或 Demo，在仿真和真机中验证具体方法。": {
-    "message": "Choose a project or demo and test a method in simulation or on a real robot."
   },
   "选择实践项目": {
     "message": "Choose a project"
@@ -371,9 +356,6 @@
   "查看理论技能树": {
     "message": "Explore the foundations"
   },
-  "按章节系统学习": {
-    "message": "Learn chapter by chapter"
-  },
   "沿着 8 章主线，从 PD 控制与运动学走到策略训练和感知。": {
     "message": "Follow eight chapters, from PD control and kinematics to policy training and perception."
   },
@@ -383,20 +365,8 @@
   "LeRobot 中文课程讲义": {
     "message": "LeRobot course notes in Chinese"
   },
-  "按课程顺序学习机器人数据、工具链与经典机器人学。": {
-    "message": "Study robotics data, toolchains, and classical robotics in course order."
-  },
   "中文讲义": {
     "message": "Chinese notes"
-  },
-  "学习准备与课程预告": {
-    "message": "Preparation and upcoming courses"
-  },
-  "选择一套教程": {
-    "message": "Choose a course"
-  },
-  "对照前置知识、学习目标和内容进度，选择学习主线。": {
-    "message": "Compare prerequisites, learning goals, and available content to choose your path."
   },
   "两轮足 Flamingo · 课程预告": {
     "message": "Flamingo wheeled biped · Preview"
@@ -406,12 +376,6 @@
   },
   "预告": {
     "message": "Preview"
-  },
-  "围绕一条主线，按章节逐步完成一个系统。": {
-    "message": "Follow one path and build a system chapter by chapter."
-  },
-  "查看系列教程": {
-    "message": "View tutorials"
   },
   "AMD 专区": {
     "message": "AMD projects"
@@ -950,12 +914,6 @@
   "论文与数据集": {
     "message": "Papers and datasets"
   },
-  "先看全局，再补理论、跟课程、做项目。": {
-    "message": "Start with the big picture, then study the foundations, follow a course, or build a project."
-  },
-  "Datawhale 开源具身智能学习站：具身导论、理论基础、系列教程与项目实战，连接机器人学习、论文、数据集和开源工具。": {
-    "message": "Datawhale’s open embodied AI course: introduction, foundations, tutorials, and projects connecting robot learning with papers, datasets, and open source tools."
-  },
   "感知与理解": {
     "message": "Perception and understanding"
   },
@@ -1099,5 +1057,17 @@
   },
   "按信息流理解系统；真实机器人中的各环节以不同频率持续运行。": {
     "message": "A view of information flow: in a real robot, these stages run continuously at different rates."
+  },
+  "跟随完整项目逐章实践，或选择一个 Demo，在仿真和真机中验证方法。": {
+    "message": "Follow a complete project chapter by chapter, or choose a demo to test methods in simulation and on real robots."
+  },
+  "先看全局，再理解原理、动手做项目。": {
+    "message": "Start with the big picture, understand the principles, then build a project."
+  },
+  "从数据集、工具链与经典机器人学，为真机学习做好准备。": {
+    "message": "Prepare for robot learning with datasets, toolchains, and classical robotics."
+  },
+  "Datawhale 开源具身智能学习站：具身导论、理论基础与项目实战，连接机器人学习、论文、数据集和开源工具。": {
+    "message": "Datawhale’s open embodied AI course: introduction, foundations, and projects connecting robot learning with papers, datasets, and open source tools."
   }
 }
