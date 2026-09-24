@@ -1,13 +1,13 @@
 ---
 title: Introduction
-description: "See embodied AI as a whole: concepts, history, tasks and skills, robot platforms, system paradigms, and key challenges, plus papers, datasets, open source projects, and tools."
+description: "See embodied AI as a whole: concepts, history, robot skills, embodied AI platforms, and key challenges, plus papers, datasets, open source projects, and tools."
 sidebar_position: 1
 displayed_sidebar: introductionSidebar
 ---
 
 # Introduction
 
-This introduction gives an overview of embodied AI: what it studies, where it came from, which tasks robots perform, how systems are organized, and which problems remain open. After the introduction, move on to the foundations and tutorials to learn specific techniques.
+This introduction gives an overview of embodied AI: what it studies, where it came from, which skills and body types robots have, and which problems remain open. After the introduction, move on to the foundations and tutorials to learn specific techniques.
 
 ## Where the introduction fits \{#site-structure}
 
@@ -24,10 +24,9 @@ This introduction gives an overview of embodied AI: what it studies, where it ca
 | --- | --- |
 | [1. What is embodied AI](./1.what-is-embodied-ai.md) | What does embodied AI study? How does it differ from AI that only processes text and images? |
 | [2. A brief history](./2.history.md) | Which periods has embodied AI gone through, and where did robot capabilities come from in each? |
-| [3. Tasks and skills](./3.tasks-and-skills.md) | How do you define a robot task? What are grasping, manipulation, locomotion, and navigation? |
-| [4. Embodied platforms](./4.embodiments.md) | What are the common robot bodies? How does the body shape which experiments are possible? |
-| [5. System paradigms and methods](./5.system-paradigms.md) | How does a system turn observations into actions? Where do planning and control, reinforcement learning, imitation learning, VLA, and world models fit? |
-| [6. Key challenges](./6.challenges.md) | Why are data, sim-to-real transfer, generalization, real-time execution, safety, and evaluation hard? |
+| [3. Robot skills](./3.tasks-and-skills.md) | How do you define a robot task? What are grasping, manipulation, locomotion, and navigation? |
+| [4. Embodied AI platforms](./4.embodiments.md) | What are the common robot bodies? How does the body shape which experiments are possible? |
+| [5. Key challenges](./5.challenges.md) | Why are data, sim-to-real transfer, generalization, real-time execution, safety, and evaluation hard? |
 
 ## Resources \{#resources}
 
@@ -43,7 +42,7 @@ The [resources](./resources/index.md) collect papers, datasets, open source proj
 ## How to read \{#how-to-read}
 
 - New to embodied AI: read chapters 1 → 3 → 4, then go to [projects](/docs/practices/intro) to choose your first experiment.
-- Already familiar with machine learning: read chapters 1 → 2 → 5 → 6 for an overview of methods and open problems.
+- Already familiar with machine learning: read chapters 1 → 2 → 5 for an overview of the field's history and open problems.
 - Looking for papers, data, or code: go straight to the [resources](./resources/index.md).
 
 The introduction requires no programming or math background. Each chapter ends with further reading on this site for when you want to go deeper.

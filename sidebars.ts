@@ -22,7 +22,6 @@ const sidebars: SidebarsConfig = {
     'introduction/history',
     'introduction/tasks-and-skills',
     'introduction/embodiments',
-    'introduction/system-paradigms',
     'introduction/challenges',
     {
       type: 'category',

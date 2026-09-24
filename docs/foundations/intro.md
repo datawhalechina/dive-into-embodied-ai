@@ -8,7 +8,7 @@ displayed_sidebar: foundationsOverviewSidebar
 
 理论技能树围绕后续项目实践需要什么就补什么，让学习者按“大脑、小脑、感知系统、工程底座”的方式定位能力缺口，再进入已有专题连续学习。
 
-还不了解这个领域的全貌，可以先读 [具身导论](/docs/introduction/intro)：它介绍具身智能的概念、发展脉络、任务与载体、系统范式和核心挑战，并在[第 5 章](/docs/introduction/system-paradigms#site-framework)解释这套技能树的分组方式。
+还不了解这个领域的全貌，可以先读 [具身导论](/docs/introduction/intro)：它介绍具身智能的概念、发展脉络、机器人的技能、具身智能的载体和核心挑战。
 
 ## 当前可学习模块
 

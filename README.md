@@ -58,10 +58,9 @@
 | :--- | :--- |
 | [1. 什么是具身智能](docs/introduction/1.what-is-embodied-ai.md) | 定义、感知—决策—行动闭环，以及身体为什么重要 |
 | [2. 发展脉络](docs/introduction/2.history.md) | 规则编程、模型控制、深度强化学习和大模型四个时期 |
-| [3. 任务与技能](docs/introduction/3.tasks-and-skills.md) | 定义任务，认识抓取、操作、运动与导航 |
-| [4. 具身载体](docs/introduction/4.embodiments.md) | 人形、机械臂、轮式、四足、移动操作与仿真载体 |
-| [5. 系统范式与方法](docs/introduction/5.system-paradigms.md) | 模块化与端到端、分层协作，以及主要方法路线 |
-| [6. 核心挑战](docs/introduction/6.challenges.md) | 数据、仿真到真实、泛化、实时性、安全与评测 |
+| [3. 机器人的技能](docs/introduction/3.tasks-and-skills.md) | 定义任务，认识抓取、操作、运动与导航 |
+| [4. 具身智能的载体](docs/introduction/4.embodiments.md) | 人形、机械臂、轮式、四足、移动操作与仿真载体 |
+| [5. 核心挑战](docs/introduction/5.challenges.md) | 数据、仿真到真实、泛化、实时性、安全与评测 |
 
 导论中的 [领域资源](docs/introduction/resources/index.md) 整理公开的学习与研究资源：
 
