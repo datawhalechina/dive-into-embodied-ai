@@ -45,8 +45,6 @@ Build an embodied AI robot from scratch. Explore practical implementations of re
 
 The website has three sections: **Introduction**, **Foundations**, and **Projects**. The introduction gives an overview of the field and collects papers, datasets, open source projects, and tools; foundations explain the principles; projects offer both a sequence of chapters and standalone demos or reproduction studies. Projects are grouped into AMD projects, simulation projects, and real robot projects.
 
-Status labels: **✅ Available** means the content is ready to read; **🚧 Partially available** means some chapters are complete and others are placeholders; **🚧 Placeholder** means only a placeholder page exists; **⏳ Planned** means work has not started. These labels describe the Chinese source content.
-
 <a id="introduction"></a>
 
 ### 🧭 Introduction
@@ -74,19 +72,17 @@ The introduction's [resources](i18n/en/docusaurus-plugin-content-docs/current/in
 
 Use the [project overview](i18n/en/docusaurus-plugin-content-docs/current/practices/intro.md) to choose a project organized into chapters or a standalone experiment, then work through implementation and evaluation.
 
-| Category | Project | Description | Status |
-| :--- | :--- | :--- | :--- |
-| AMD | [AUP Learning Cloud](docs/practices/amd/aup-learning-cloud.md) | Ryzen AI APUs, ROCm, JupyterHub, and Code Server | ✅ Available |
-| AMD | [MicroDuck RL · AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700, ROCm MuJoCo Warp, dynamic-contact regression tests, and biped PPO | ✅ Available |
-| AMD | [Explore the Pupper quadruped](docs/practices/amd/pupper-control/intro.md) | RL locomotion policies and VLA experiments on AMD hardware | ✅ Available |
-| Simulation | [Build a quadruped from scratch](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo, PD control, kinematics, policy training, language control, and perception | ✅ Overview and 8 chapters available |
-| Simulation | [MicroDuck RL biped](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp: parallel PPO and biped gait training on GPUs | ✅ Available |
-| Simulation | [MuJoCo robot arms and DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | MuJoCo environments and continuous-control experiments | ✅ Available |
-| Simulation | [ACT bimanual training](docs/practices/vla/act/index.md) | ACT + ALOHA: training, evaluation, and reproduction | ✅ Available |
-| Simulation | [Flamingo wheeled-biped course](docs/practices/wheel-legged/flamingo-isaaclab/preview.md) | Isaac Lab training and cross-simulator validation | 🚧 Course preview |
-| Real robots | [LeRobot course notes in Chinese](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | Robot learning, datasets, toolchains, and classical robotics as preparation for hardware projects | 🚧 Units 0–2 compiled |
-| Real robots | [SO-101 + LeRobot hardware tutorial](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) | Hardware connectivity, safety tests, and action playback | ✅ Available |
-| Real robots | [Sim2Real guide](docs/practices/quadruped/sim2real-guide/placeholder.md) | Deploying simulation policies and validating on hardware | 🚧 Placeholder |
+| Category | Project | Description |
+| :--- | :--- | :--- |
+| AMD | [AUP Learning Cloud](docs/practices/amd/aup-learning-cloud.md) | Ryzen AI APUs, ROCm, JupyterHub, and Code Server |
+| AMD | [MicroDuck RL · AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700, ROCm MuJoCo Warp, dynamic-contact regression tests, and biped PPO |
+| AMD | [Explore the Pupper quadruped](docs/practices/amd/pupper-control/intro.md) | RL locomotion policies and VLA experiments on AMD hardware |
+| Simulation | [Build a quadruped from scratch](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo, PD control, kinematics, policy training, language control, and perception |
+| Simulation | [MicroDuck RL biped](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp: parallel PPO and biped gait training on GPUs |
+| Simulation | [MuJoCo robot arms and DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | MuJoCo environments and continuous-control experiments |
+| Simulation | [ACT bimanual training](docs/practices/vla/act/index.md) | ACT + ALOHA: training, evaluation, and reproduction |
+| Real robots | [LeRobot course notes in Chinese](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | Units 0–2: robot learning, datasets, toolchains, and classical robotics as preparation for hardware projects |
+| Real robots | [SO-101 + LeRobot hardware tutorial](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) | Hardware connectivity, safety tests, and action playback |
 
 ### 🦆 Latest demo: MicroDuck RL
 
@@ -95,75 +91,66 @@ Use the [project overview](i18n/en/docusaurus-plugin-content-docs/current/practi
     <img src="docs/practices/humanoid/microduck-rl/figs/microduck-training-1500.webp" width="640" alt="MicroDuck biped stable gait playback" />
   </a>
   <br/>
-  <sub>✅ <b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · Stable biped locomotion</a></b><br/>mjlab + MuJoCo Warp · Parallel PPO training on GPUs (iteration 1500)</sub>
+  <sub><b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · Stable biped locomotion</a></b><br/>mjlab + MuJoCo Warp · Parallel PPO training on GPUs (iteration 1500)</sub>
 </p>
 
 <table align="center">
   <tr>
-    <td align="center" width="25%">
+    <td align="center" width="33%">
       <a href="https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/practices/quadruped/cs123/intro">
         <img src="assets/lab5_forward_gait_comparison.gif" height="220" alt="CS123 quadruped gait comparison" />
       </a>
-      <br/><sub>✅ <b><a href="https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/practices/quadruped/cs123/intro">Build a quadruped from scratch</a></b><br/>CS123 simulation course · MuJoCo + PPO + LLM control</sub>
+      <br/><sub><b><a href="https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/practices/quadruped/cs123/intro">Build a quadruped from scratch</a></b><br/>CS123 simulation course · MuJoCo + PPO + LLM control</sub>
     </td>
-    <td align="center" width="25%">
-      <a href="docs/practices/wheel-legged/flamingo-isaaclab/preview.md">
-        <img src="assets/hero_swarm.gif" height="220" alt="Flamingo wheeled biped training in Isaac Lab" />
-      </a>
-      <br/><sub>🔜 <b><a href="docs/practices/wheel-legged/flamingo-isaaclab/preview.md">Flamingo · Isaac Lab</a></b><br/>Course preview · Isaac Lab + PPO / CaT training</sub>
-    </td>
-    <td align="center" width="25%">
+    <td align="center" width="33%">
       <img src="assets/rebot_act_training.gif" height="220" alt="ReBot-Act robot arm using an ACT policy" />
-      <br/><sub>✅ <b>ReBot-Act · ACT training results</b><br/>Visual imitation learning on hardware · Block pick-and-place</sub>
+      <br/><sub><b>ReBot-Act · ACT training results</b><br/>Visual imitation learning on hardware · Block pick-and-place</sub>
     </td>
-    <td align="center" width="25%">
+    <td align="center" width="33%">
       <a href="docs/practices/vla/act/index.md">
         <img src="docs/practices/vla/act/figs/act_50k_success.gif" height="220" alt="ACT transferring a block between two arms in ALOHA simulation" />
       </a>
-      <br/><sub>✅ <b><a href="docs/practices/vla/act/index.md">ACT · ALOHA bimanual transfer</a></b><br/>50k training · 50% success over 20 MuJoCo episodes</sub>
+      <br/><sub><b><a href="docs/practices/vla/act/index.md">ACT · ALOHA bimanual transfer</a></b><br/>50k training · 50% success over 20 MuJoCo episodes</sub>
     </td>
   </tr>
 </table>
 
 ### 📐 Foundations
 
-The foundations follow the four groups in the site navigation: decision making, motion control, perception, and engineering foundations. Existing content is being integrated into this knowledge map; missing modules remain placeholders.
+The foundations follow the four groups in the site navigation: decision making, motion control, perception, and engineering foundations.
 
 #### Decision making
 
-| Topic | Description | Status |
-| :--- | :--- | :--- |
-| [Reinforcement learning for decisions](docs/foundations/rl-for-robotics/1.intro.md) | MDPs, DQN, PPO, SAC, DDPG/TD3, and imitation learning | ✅ Available |
-| [Vision-language-action models (VLA)](docs/foundations/vla/vla-intro.md) | RT-1/RT-2, OpenVLA, ACT, Diffusion Policy, and the π family | ✅ Available |
-| [World models](docs/foundations/world-model/0.intro.md) | Applying world models to embodied tasks | ✅ Available |
+| Topic | Description |
+| :--- | :--- |
+| [Reinforcement learning for decisions](docs/foundations/rl-for-robotics/1.intro.md) | MDPs, DQN, PPO, SAC, DDPG/TD3, and imitation learning |
+| [Vision-language-action models (VLA)](docs/foundations/vla/vla-intro.md) | RT-1/RT-2, OpenVLA, ACT, Diffusion Policy, and the π family |
+| [World models](docs/foundations/world-model/0.intro.md) | Applying world models to embodied tasks |
 
 #### Motion control
 
-| Topic | Description | Status |
-| :--- | :--- | :--- |
-| [Reinforcement learning for control](docs/foundations/rl-for-robotics/10.ppo.md) | Connecting policy learning to continuous control and robotics | ✅ Available |
-| [Controllers](docs/foundations/controllers/intro.md) | PID, LQR, MPC, impedance control, and system integration | ✅ Available |
-| [Motion planning](docs/foundations/robotics-and-ros2/10.moveit2_basics.md) | Motion planning and closed-loop planning with MoveIt 2 | ✅ Available |
+| Topic | Description |
+| :--- | :--- |
+| [Reinforcement learning for control](docs/foundations/rl-for-robotics/10.ppo.md) | Connecting policy learning to continuous control and robotics |
+| [Controllers](docs/foundations/controllers/intro.md) | PID, LQR, MPC, impedance control, and system integration |
+| [Motion planning](docs/foundations/robotics-and-ros2/10.moveit2_basics.md) | Motion planning and closed-loop planning with MoveIt 2 |
 
 #### Perception
 
 Robots need to estimate their position, orientation, velocity, and stability. Relevant observations come from cameras, LiDAR, touch, motor currents, IMUs, foot contacts, body pose, and end-effector position.
 
-| Topic | Description | Status |
-| :--- | :--- | :--- |
-| [Visual perception and VLMs](docs/foundations/vlm/0.intro.md) | Transformers, ViT, vision encoders, and multimodal fusion | ✅ Available |
-| [Localization, touch, and sensor calibration](docs/foundations/perception/placeholder.md) | SLAM, foot contact, tactile sensing, multisensor fusion, and sim2real calibration | 🚧 Partially available |
-| [Sensor calibration and sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) | Coordinate frames, synchronization, extrinsic-error amplification, and online calibration monitoring | ✅ Available |
+| Topic | Description |
+| :--- | :--- |
+| [Visual perception and VLMs](docs/foundations/vlm/0.intro.md) | Transformers, ViT, vision encoders, and multimodal fusion |
+| [Sensor calibration and sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) | Coordinate frames, synchronization, extrinsic-error amplification, and online calibration monitoring |
 
 #### Engineering foundations
 
-| Topic | Description | Status |
-| :--- | :--- | :--- |
-| [Simulation tools](docs/foundations/simulation/1.intro.md) | Getting started with Isaac Sim, MuJoCo, Gymnasium, and PyBullet | ✅ Available |
-| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) | Coordinate transforms, FK/IK, tf2, URDF, and MoveIt 2 | ✅ Available |
-| [CAN and MCU communication](docs/foundations/communication/can-mcu.md) | Low-level communication, actuator protocols, and host–controller links | 🚧 Placeholder |
-| [Mechanical design](docs/foundations/hardware/placeholder.md) | Links, joints, motors, gearboxes, and end effectors | 🚧 Placeholder |
-| [Data engineering and imitation learning](docs/foundations/rl-for-robotics/12.imitation-learning.md) | Teleoperation data, imitation learning, LeRobot toolchains, and policy training | ✅ Available |
+| Topic | Description |
+| :--- | :--- |
+| [Simulation tools](docs/foundations/simulation/1.intro.md) | Getting started with Isaac Sim, MuJoCo, Gymnasium, and PyBullet |
+| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) | Coordinate transforms, FK/IK, tf2, URDF, and MoveIt 2 |
+| [Data engineering and imitation learning](docs/foundations/rl-for-robotics/12.imitation-learning.md) | Teleoperation data, imitation learning, LeRobot toolchains, and policy training |
 
 ## 👥 Study groups
 

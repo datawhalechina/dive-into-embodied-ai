@@ -46,8 +46,6 @@
 
 网站分为「具身导论、理论基础、项目实战」三个栏目：具身导论介绍领域全貌，并整理论文、数据集、开源项目和工具；理论基础讲解原理；项目实战包含分章项目、独立 Demo 与复现案例，按「AMD 专区、仿真实战、真机实战」归类。
 
-状态标记说明:**✅ 可用** = 章节内容完整,可直接阅读;**🚧 部分可用** = 一部分章节有内容、一部分仍是占位;**🚧 占位中** = 目录已建但只有占位页;**⏳ 待补充** = 暂未开工。
-
 <a id="具身导论"></a>
 
 ### 🧭 具身导论
@@ -77,19 +75,17 @@
 
 从 [项目实战总览](docs/practices/intro.md) 选择分章项目或独立实验，按步骤完成实现与评测。
 
-| 分类 | 章节 | 简介 | 状态 |
-| :--- | :--- | :--- | :--- |
-| AMD 专区 | [AUP Learning Cloud 云算力](docs/practices/amd/aup-learning-cloud.md) | Ryzen AI APU、ROCm、JupyterHub 与 Code Server | ✅ 可用 |
-| AMD 专区 | [MicroDuck RL｜AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700、ROCm MuJoCo Warp、动态接触回归与双足 PPO | ✅ 可用 |
-| AMD 专区 | [玩转 Pupper 四足机器人](docs/practices/amd/pupper-control/intro.md) | AMD 平台上的强化学习运动策略与 VLA 实验 | ✅ 可用 |
-| 仿真实战 | [从零到一搭建四足机器人](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo、PD、运动学、策略训练、语言控制与感知 | ✅ 总览与 8 章可读 |
-| 仿真实战 | [MicroDuck RL 小黄鸭双足机器人](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp：GPU 并行 PPO 与双足步态训练 | ✅ 可用 |
-| 仿真实战 | [MuJoCo 机械臂与 DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | MuJoCo 环境与连续控制实验 | ✅ 可用 |
-| 仿真实战 | [ACT 双臂操作训练](docs/practices/vla/act/index.md) | ACT + ALOHA：训练、评估与结果复现 | ✅ 可用 |
-| 仿真实战 | [Flamingo 轮足课程](docs/practices/wheel-legged/flamingo-isaaclab/preview.md) | Isaac Lab 训练与跨仿真验证 | 🚧 课程预告 |
-| 真机实战 | [LeRobot 中文课程讲义](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | 机器人学习、数据集、工具链与经典机器人学，为真机实践做准备 | 🚧 已整理 Unit 0–2 |
-| 真机实战 | [SO-101 + LeRobot 真机教程](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) | 硬件连通、安全测试与动作回放 | ✅ 可用 |
-| 真机实战 | [Sim2Real 指南](docs/practices/quadruped/sim2real-guide/placeholder.md) | 仿真策略部署与真机验证 | 🚧 占位中 |
+| 分类 | 章节 | 简介 |
+| :--- | :--- | :--- |
+| AMD 专区 | [AUP Learning Cloud 云算力](docs/practices/amd/aup-learning-cloud.md) | Ryzen AI APU、ROCm、JupyterHub 与 Code Server |
+| AMD 专区 | [MicroDuck RL｜AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700、ROCm MuJoCo Warp、动态接触回归与双足 PPO |
+| AMD 专区 | [玩转 Pupper 四足机器人](docs/practices/amd/pupper-control/intro.md) | AMD 平台上的强化学习运动策略与 VLA 实验 |
+| 仿真实战 | [从零到一搭建四足机器人](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo、PD、运动学、策略训练、语言控制与感知 |
+| 仿真实战 | [MicroDuck RL 小黄鸭双足机器人](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp：GPU 并行 PPO 与双足步态训练 |
+| 仿真实战 | [MuJoCo 机械臂与 DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | MuJoCo 环境与连续控制实验 |
+| 仿真实战 | [ACT 双臂操作训练](docs/practices/vla/act/index.md) | ACT + ALOHA：训练、评估与结果复现 |
+| 真机实战 | [LeRobot 中文课程讲义](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | Unit 0–2：机器人学习、数据集、工具链与经典机器人学，为真机实践做准备 |
+| 真机实战 | [SO-101 + LeRobot 真机教程](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) | 硬件连通、安全测试与动作回放 |
 
 <a id="最新-demomicroduck-rl-小黄鸭"></a>
 
@@ -100,32 +96,26 @@
     <img src="docs/practices/humanoid/microduck-rl/figs/microduck-training-1500.webp" width="640" alt="MicroDuck 小黄鸭双足机器人稳定步态回放" />
   </a>
   <br/>
-  <sub>✅ <b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · 小黄鸭双足稳定步态</a></b><br/>mjlab + MuJoCo Warp · PPO GPU 并行训练（iteration 1500）</sub>
+  <sub><b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · 小黄鸭双足稳定步态</a></b><br/>mjlab + MuJoCo Warp · PPO GPU 并行训练（iteration 1500）</sub>
 </p>
 
 <table align="center">
   <tr>
-    <td align="center" width="25%">
+    <td align="center" width="33%">
       <a href="https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/intro">
         <img src="assets/lab5_forward_gait_comparison.gif" height="220" alt="CS123 四足步态对比" />
       </a>
-      <br/><sub>✅ <b><a href="https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/intro">从 0 到 1 搭建四足机器人</a></b><br/>CS123 仿真版 · MuJoCo + PPO + LLM 控制</sub>
+      <br/><sub><b><a href="https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/intro">从 0 到 1 搭建四足机器人</a></b><br/>CS123 仿真版 · MuJoCo + PPO + LLM 控制</sub>
     </td>
-    <td align="center" width="25%">
-      <a href="docs/practices/wheel-legged/flamingo-isaaclab/preview.md">
-        <img src="assets/hero_swarm.gif" height="220" alt="Flamingo 两轮足在 Isaac Lab 中训练" />
-      </a>
-      <br/><sub>🔜 <b><a href="docs/practices/wheel-legged/flamingo-isaaclab/preview.md">两轮足 Flamingo · Isaac Lab</a></b><br/>新章预告 · Isaac Lab + PPO / CaT 训练</sub>
-    </td>
-    <td align="center" width="25%">
+    <td align="center" width="33%">
       <img src="assets/rebot_act_training.gif" height="220" alt="ReBot-Act 机械臂 ACT 策略训练效果" />
-      <br/><sub>✅ <b>ReBot-Act · ACT 训练效果</b><br/>真机视觉模仿学习 · 方块抓取与放置</sub>
+      <br/><sub><b>ReBot-Act · ACT 训练效果</b><br/>真机视觉模仿学习 · 方块抓取与放置</sub>
     </td>
-    <td align="center" width="25%">
+    <td align="center" width="33%">
       <a href="docs/practices/vla/act/index.md">
         <img src="docs/practices/vla/act/figs/act_50k_success.gif" height="220" alt="ACT 在 ALOHA 仿真中完成双臂方块交接" />
       </a>
-      <br/><sub>✅ <b><a href="docs/practices/vla/act/index.md">ACT · ALOHA 双臂交接</a></b><br/>50k 训练 · MuJoCo 20 回合成功率 50%</sub>
+      <br/><sub><b><a href="docs/practices/vla/act/index.md">ACT · ALOHA 双臂交接</a></b><br/>50k 训练 · MuJoCo 20 回合成功率 50%</sub>
     </td>
   </tr>
 </table>
@@ -134,23 +124,23 @@
 
 ### 📐 理论基础
 
-理论基础按当前导航的四列组织:大脑、小脑、感知系统、工程底座。当前优先把已有内容并入技能树,空缺模块先保留占位。
+理论基础按当前导航的四列组织：大脑、小脑、感知系统、工程底座。
 
 #### 大脑：智能决策
 
-| 章节 | 简介 | 状态 |
-| :--- | :--- | :--- |
-| [强化学习决策](docs/foundations/rl-for-robotics/1.intro.md) | MDP、DQN、PPO、SAC、DDPG/TD3 与模仿学习 | ✅ 可用 |
-| [视觉-语言-动作大模型(VLA)](docs/foundations/vla/vla-intro.md) | RT-1/RT-2、OpenVLA、ACT、Diffusion Policy、π 系列 | ✅ 可用 |
-| [World-Model](docs/foundations/world-model/0.intro.md) | 世界模型在具身场景下的落地路径 | ✅ 可用 |
+| 章节 | 简介 |
+| :--- | :--- |
+| [强化学习决策](docs/foundations/rl-for-robotics/1.intro.md) | MDP、DQN、PPO、SAC、DDPG/TD3 与模仿学习 |
+| [视觉-语言-动作大模型(VLA)](docs/foundations/vla/vla-intro.md) | RT-1/RT-2、OpenVLA、ACT、Diffusion Policy、π 系列 |
+| [World-Model](docs/foundations/world-model/0.intro.md) | 世界模型在具身场景下的落地路径 |
 
 #### 小脑：运动控制
 
-| 章节 | 简介 | 状态 |
-| :--- | :--- | :--- |
-| [强化学习控制](docs/foundations/rl-for-robotics/10.ppo.md) | 把策略学习接到连续控制和机器人任务上 | ✅ 可用 |
-| [控制器](docs/foundations/controllers/intro.md) | PID、LQR、MPC、阻抗控制与系统集成教程 | ✅ 可用 |
-| [运动规划](docs/foundations/robotics-and-ros2/10.moveit2_basics.md) | Motion Planning 与 MoveIt 2 规划闭环 | ✅ 可用 |
+| 章节 | 简介 |
+| :--- | :--- |
+| [强化学习控制](docs/foundations/rl-for-robotics/10.ppo.md) | 把策略学习接到连续控制和机器人任务上 |
+| [控制器](docs/foundations/controllers/intro.md) | PID、LQR、MPC、阻抗控制与系统集成教程 |
+| [运动规划](docs/foundations/robotics-and-ros2/10.moveit2_basics.md) | Motion Planning 与 MoveIt 2 规划闭环 |
 
 #### 感官：感知系统
 
@@ -158,21 +148,18 @@
 
 外部感知：相机、雷达、触觉、电机电流、IMU、足端接触、机身姿态、末端位置。
 
-| 章节 | 简介 | 状态 |
-| :--- | :--- | :--- |
-| [视觉感知与 VLM](docs/foundations/vlm/0.intro.md) | Transformer、ViT、视觉编码器与多模态融合 | ✅ 可用 |
-| [定位、触觉与传感器标定](docs/foundations/perception/placeholder.md) | SLAM、足端接触、触觉传感、多传感器融合和 sim2real 标定 | 🚧 部分可用 |
-| [传感器标定与 sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) | 坐标系、时间同步、外参误差放大和在线标定监控 | ✅ 可用 |
+| 章节 | 简介 |
+| :--- | :--- |
+| [视觉感知与 VLM](docs/foundations/vlm/0.intro.md) | Transformer、ViT、视觉编码器与多模态融合 |
+| [传感器标定与 sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) | 坐标系、时间同步、外参误差放大和在线标定监控 |
 
 #### 工程底座
 
-| 章节 | 简介 | 状态 |
-| :--- | :--- | :--- |
-| [仿真工具](docs/foundations/simulation/1.intro.md) | Isaac Sim、MuJoCo、Gymnasium、PyBullet 快速上手 | ✅ 可用 |
-| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) | 坐标变换、FK/IK、tf2、URDF 与 MoveIt 2 | ✅ 可用 |
-| [CAN 与 MCU 通信](docs/foundations/communication/can-mcu.md) | 底层通信、执行器协议和上下位机链路 | 🚧 占位中 |
-| [机械结构](docs/foundations/hardware/placeholder.md) | 连杆、关节、电机、减速器和末端执行器 | 🚧 占位中 |
-| [数据工程与模仿学习](docs/foundations/rl-for-robotics/12.imitation-learning.md) | 从遥操作数据到模仿学习、LeRobot 工具链和策略训练 | ✅ 可用 |
+| 章节 | 简介 |
+| :--- | :--- |
+| [仿真工具](docs/foundations/simulation/1.intro.md) | Isaac Sim、MuJoCo、Gymnasium、PyBullet 快速上手 |
+| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) | 坐标变换、FK/IK、tf2、URDF 与 MoveIt 2 |
+| [数据工程与模仿学习](docs/foundations/rl-for-robotics/12.imitation-learning.md) | 从遥操作数据到模仿学习、LeRobot 工具链和策略训练 |
 
 <a id="组队学习"></a>
 
