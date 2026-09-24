@@ -955,5 +955,149 @@
   },
   "Datawhale 开源具身智能学习站：具身导论、理论基础、系列教程与项目实战，连接机器人学习、论文、数据集和开源工具。": {
     "message": "Datawhale’s open embodied AI course: introduction, foundations, tutorials, and projects connecting robot learning with papers, datasets, and open source tools."
+  },
+  "感知与理解": {
+    "message": "Perception and understanding"
+  },
+  "相机 · 本体传感器": {
+    "message": "Cameras · Body sensors"
+  },
+  "观测 → 状态": {
+    "message": "Observations → State"
+  },
+  "世界和自己，现在是什么状态？": {
+    "message": "What is the state of the world and the robot?"
+  },
+  "相机图像、关节角度与身体姿态。": {
+    "message": "Camera images, joint angles, and body pose."
+  },
+  "识别足球、球门和守门员，估计它们相对机器人的位置。": {
+    "message": "Detect the ball, goal, and goalkeeper; estimate their positions relative to the robot."
+  },
+  "场景与身体的状态估计。": {
+    "message": "An estimate of the scene and the robot’s state."
+  },
+  "看见足球在前方，守门员挡住了球门右侧。": {
+    "message": "See the ball ahead and the goalkeeper covering the right side of the goal."
+  },
+  "学习与决策": {
+    "message": "Learning and decision making"
+  },
+  "策略 · 规划": {
+    "message": "Policy · Planning"
+  },
+  "状态 → 目标": {
+    "message": "State → Targets"
+  },
+  "为了完成任务，下一步做什么？": {
+    "message": "What should the robot do next to reach its goal?"
+  },
+  "场景状态、身体状态与进球目标。": {
+    "message": "The scene, the robot’s state, and the goal of scoring."
+  },
+  "比较可用的射门空当，选择靠近路线与射门方向。": {
+    "message": "Compare openings in the goal, then choose an approach and a shooting direction."
+  },
+  "目标站位、射门方向与期望运动。": {
+    "message": "A target position, shooting direction, and desired motion."
+  },
+  "选择球门左侧空当，规划站位与踢球动作。": {
+    "message": "Aim at the opening on the left and plan the stance and kick."
+  },
+  "运动与控制": {
+    "message": "Motion and control"
+  },
+  "控制器 · 执行器": {
+    "message": "Controllers · Actuators"
+  },
+  "目标 → 动作": {
+    "message": "Targets → Actions"
+  },
+  "怎样把动作准确、稳定地做出来？": {
+    "message": "How can the robot act accurately and stably?"
+  },
+  "期望运动与实时关节反馈。": {
+    "message": "Desired motion and real-time joint feedback."
+  },
+  "调整站位和重心，协调关节，跟踪目标动作。": {
+    "message": "Adjust stance and center of mass, coordinate joints, and track the desired motion."
+  },
+  "关节力矩与身体运动。": {
+    "message": "Joint torques and body motion."
+  },
+  "支撑腿保持平衡，摆动腿触球，把球踢向左侧。": {
+    "message": "Balance on the support leg and swing the other leg to kick the ball to the left."
+  },
+  "环境与结果": {
+    "message": "Environment and outcomes"
+  },
+  "足球 · 球门 · 守门员": {
+    "message": "Ball · Goal · Goalkeeper"
+  },
+  "动作 → 新观测": {
+    "message": "Actions → Observations"
+  },
+  "行动之后发生了什么？": {
+    "message": "What happened after the action?"
+  },
+  "机器人与足球、地面的物理交互。": {
+    "message": "Physical interaction between the robot, ball, and ground."
+  },
+  "足球运动，守门员与环境继续变化，传感器获得新的观测。": {
+    "message": "The ball moves, the goalkeeper and environment keep changing, and sensors gather new observations."
+  },
+  "更新后的场景观测与身体反馈。": {
+    "message": "Updated observations of the scene and feedback from the body."
+  },
+  "观察球是否进门；如果踢偏，就根据球的新位置重新调整。": {
+    "message": "Check whether the ball went in. If it missed, adjust using the ball’s new position."
+  },
+  "具身智能 · 信息与动作的闭环": {
+    "message": "Embodied AI · Information and action"
+  },
+  "从观察世界，到改变世界": {
+    "message": "From observing the world to changing it"
+  },
+  "点选一个环节，查看它的输入、处理与输出。": {
+    "message": "Select a stage to explore its inputs, processing, and outputs."
+  },
+  "持续循环": {
+    "message": "Continuous loop"
+  },
+  "选择闭环环节": {
+    "message": "Select a stage of the embodied AI loop"
+  },
+  "机器人内部": {
+    "message": "Inside the robot"
+  },
+  "外部环境": {
+    "message": "External world"
+  },
+  "新的观测与反馈": {
+    "message": "New observations and feedback"
+  },
+  "再次感知，修正下一次行动": {
+    "message": "Observe again. Adjust the next action."
+  },
+  "回到感知": {
+    "message": "Back to perception"
+  },
+  "下一环节": {
+    "message": "Next stage"
+  },
+  "输入": {
+    "message": "Input"
+  },
+  "处理": {
+    "message": "Processing"
+  },
+  "输出": {
+    "message": "Output"
+  },
+  "在足球场上": {
+    "message": "On the soccer field"
+  },
+  "按信息流理解系统；真实机器人中的各环节以不同频率持续运行。": {
+    "message": "A view of information flow: in a real robot, these stages run continuously at different rates."
   }
 }
