@@ -61,6 +61,7 @@
 | [3. 机器人的技能](docs/introduction/3.tasks-and-skills.md) | 定义任务，认识抓取、操作、运动与导航 |
 | [4. 具身智能的载体](docs/introduction/4.embodiments.md) | 人形、机械臂、轮式、四足、移动操作与仿真载体 |
 | [5. 核心挑战](docs/introduction/5.challenges.md) | 数据、仿真到真实、泛化、实时性、安全与评测 |
+| [6. 技术栈](docs/introduction/6.tech-stack.md) | 大模型、操作、运控、导航、仿真、数据、部署与硬件，以及对应岗位 |
 
 导论中的 [领域资源](docs/introduction/resources/index.md) 整理公开的学习与研究资源：
 

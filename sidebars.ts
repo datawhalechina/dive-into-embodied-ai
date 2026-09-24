@@ -23,6 +23,7 @@ const sidebars: SidebarsConfig = {
     'introduction/tasks-and-skills',
     'introduction/embodiments',
     'introduction/challenges',
+    'introduction/tech-stack',
     {
       type: 'category',
       label: '领域资源',

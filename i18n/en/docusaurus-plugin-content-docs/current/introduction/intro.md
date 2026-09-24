@@ -1,13 +1,13 @@
 ---
 title: Introduction
-description: "See embodied AI as a whole: concepts, history, robot skills, embodied AI platforms, and key challenges, plus papers, datasets, open source projects, and tools."
+description: "See embodied AI as a whole: concepts, history, robot skills, embodied AI platforms, key challenges, and the technology stack, plus papers, datasets, open source projects, and tools."
 sidebar_position: 1
 displayed_sidebar: introductionSidebar
 ---
 
 # Introduction
 
-This introduction gives an overview of embodied AI: what it studies, where it came from, which skills and body types robots have, and which problems remain open. After the introduction, move on to the foundations and tutorials to learn specific techniques.
+This introduction gives an overview of embodied AI: what it studies, where it came from, which skills and body types robots have, which problems remain open, and which technologies each area uses. After the introduction, move on to the foundations and tutorials to learn specific techniques.
 
 ## Where the introduction fits \{#site-structure}
 
@@ -27,6 +27,7 @@ This introduction gives an overview of embodied AI: what it studies, where it ca
 | [3. Robot skills](./3.tasks-and-skills.md) | How do you define a robot task? What are grasping, manipulation, locomotion, and navigation? |
 | [4. Embodied AI platforms](./4.embodiments.md) | What are the common robot bodies? How does the body shape which experiments are possible? |
 | [5. Key challenges](./5.challenges.md) | Why are data, sim-to-real transfer, generalization, real-time execution, safety, and evaluation hard? |
+| [6. Technology stack](./6.tech-stack.md) | What problems does each technical area solve, and which roles use it? |
 
 ## Resources \{#resources}
 
@@ -43,6 +44,7 @@ The [resources](./resources/index.md) collect papers, datasets, open source proj
 
 - New to embodied AI: read chapters 1 → 3 → 4, then go to [projects](/docs/practices/intro) to choose your first experiment.
 - Already familiar with machine learning: read chapters 1 → 2 → 5 for an overview of the field's history and open problems.
+- Exploring technical areas: read [6. Technology stack](./6.tech-stack.md), then follow each section's links to continue learning.
 - Looking for papers, data, or code: go straight to the [resources](./resources/index.md).
 
 The introduction requires no programming or math background. Each chapter ends with further reading on this site for when you want to go deeper.
