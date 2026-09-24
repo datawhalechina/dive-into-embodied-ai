@@ -15,13 +15,13 @@ export default function TranslationNotice({translated = false}: {translated?: bo
     <aside className="translation-notice" lang="en" aria-label="Translation status">
       {translated ? (
         <>
-          The <Link href="https://github.com/datawhalechina/dive-into-embodied-ai/blob/master/README.en.md">README</Link>, learning map, and <Link to="/docs/introduction/intro">introduction</Link> are available in English.
+          The <Link href="https://github.com/datawhalechina/dive-into-embodied-ai/blob/master/README.en.md">README</Link> and <Link to="/docs/introduction/intro">introduction</Link> are available in English.
           {' '}Other tutorial chapters and standalone playgrounds are currently in Chinese.
         </>
       ) : (
         <>
           This page is currently available in Chinese.
-          {' '}Explore the English <Link to="/docs/introduction/intro">introduction</Link> and <Link to="/learning-map">learning map</Link>, or{' '}
+          {' '}Explore the English <Link to="/docs/introduction/intro">introduction</Link>, or{' '}
           <Link autoAddBaseUrl={false} to={`pathname://${createUrl({locale: i18n.defaultLocale, fullyQualified: false})}${search}${hash}`}>
             read the Chinese version
           </Link>.

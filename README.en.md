@@ -9,9 +9,9 @@
 > [!TIP]
 > **📖 Read online: [Open the course →](https://datawhalechina.github.io/dive-into-embodied-ai/en/)**
 >
-> The website offers full-text search, chapter navigation, and interactive demos. Start with the **[English learning map →](https://datawhalechina.github.io/dive-into-embodied-ai/en/learning-map)**.
+> The website offers full-text search, chapter navigation, and interactive demos. **[Get started with the introduction →](https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/introduction/intro)**.
 >
-> The README, learning map, and introduction are available in English. Other tutorial chapters and standalone playgrounds are currently in Chinese. Use the language menu to switch between 中文 and English on the same page.
+> The README, homepage navigation, and introduction are available in English. Other tutorial chapters and standalone playgrounds are currently in Chinese. Use the language menu to switch between 中文 and English on the same page.
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="License" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
@@ -37,7 +37,7 @@
 
 Build an embodied AI robot from scratch. Explore practical implementations of reinforcement learning, world models, and vision-language-action models (VLA), alongside simulation, controllers, motion planning, and perception. Connect decision making, control, and perception in real projects.
 
-🧭 **Start here: [Embodied AI learning map](LEARNING_MAP.en.md)** — an overview of the field and a path for beginners.
+🧭 **Get started: [Introduction](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md)** — explore embodied AI concepts, tasks, platforms, and methods.
 
 <a id="course-outline"></a>
 

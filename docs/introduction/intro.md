@@ -13,8 +13,7 @@ displayed_sidebar: introductionSidebar
 
 | 栏目 | 负责什么 | 什么时候看 |
 | --- | --- | --- |
-| [学习地图](/learning-map) | 指路：从哪里开始，下一步去哪 | 第一次来，想选一条学习路线 |
-| 具身导论 | 讲全局：这个领域是什么，难在哪里，有哪些路线 | 想先建立整体认识 |
+| 具身导论 | 新手入门：这个领域是什么，难在哪里，有哪些路线 | 第一次来，想先建立整体认识 |
 | [理论基础](/docs/foundations/intro) | 讲原理：强化学习、VLA、控制、感知、仿真等专题 | 遇到具体的知识缺口 |
 | [系列教程](/docs/tutorials/intro) | 按章节完成一个系统 | 想沿一条主线系统学习 |
 | [项目实战](/docs/practices/intro) | 独立实验、Demo 与复现 | 想动手验证一个方法 |
@@ -43,7 +42,7 @@ displayed_sidebar: introductionSidebar
 
 ## 怎样阅读 \{#how-to-read}
 
-- 第一次接触具身智能：按 1 → 3 → 4 的顺序读，再到 [学习地图](/learning-map#first-steps) 选择第一个实验。
+- 第一次接触具身智能：按 1 → 3 → 4 的顺序读，再到 [项目实战](/docs/practices/intro) 选择第一个实验。
 - 已有机器学习基础：按 1 → 2 → 5 → 6 的顺序读，了解方法全貌和主要难题。
 - 只想查论文、数据或代码：直接进入 [领域资源](./resources/index.md)。
 

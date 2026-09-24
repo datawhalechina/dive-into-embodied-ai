@@ -13,8 +13,7 @@ This introduction gives an overview of embodied AI: what it studies, where it ca
 
 | Section | What it does | When to read it |
 | --- | --- | --- |
-| [Learning map](/learning-map) | Shows the way: where to start and what to do next | On your first visit, to choose a learning path |
-| Introduction | Explains the big picture: what the field is, why it is hard, and which approaches exist | When you want an overall understanding first |
+| Introduction | Helps beginners get started: what the field is, why it is hard, and which approaches exist | On your first visit, to build an overall understanding |
 | [Foundations](/docs/foundations/intro) | Explains the principles: reinforcement learning, VLA, control, perception, simulation, and more | When you hit a specific knowledge gap |
 | [Tutorials](/docs/tutorials/intro) | Builds a complete system chapter by chapter | When you want to follow one structured path |
 | [Projects](/docs/practices/intro) | Offers standalone experiments, demos, and reproductions | When you want to test a method yourself |
@@ -43,7 +42,7 @@ The [resources](./resources/index.md) collect papers, datasets, open source proj
 
 ## How to read \{#how-to-read}
 
-- New to embodied AI: read chapters 1 → 3 → 4, then go to the [learning map](/learning-map#first-steps) to choose your first experiment.
+- New to embodied AI: read chapters 1 → 3 → 4, then go to [projects](/docs/practices/intro) to choose your first experiment.
 - Already familiar with machine learning: read chapters 1 → 2 → 5 → 6 for an overview of methods and open problems.
 - Looking for papers, data, or code: go straight to the [resources](./resources/index.md).
 

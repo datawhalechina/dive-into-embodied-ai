@@ -39,7 +39,6 @@ const sidebars: SidebarsConfig = {
   ],
 
   overviewSidebar: [
-    { type: 'link', label: '学习地图', href: '/learning-map' },
     { type: 'link', label: '零基础入门', href: '/docs/introduction/intro' },
     'overview/embodied-ai-roadmap',
     'overview/learning-path',

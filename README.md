@@ -10,7 +10,7 @@
 > [!TIP]
 > **📖 在线阅读：[点击进入完整教程 →](https://datawhalechina.github.io/dive-into-embodied-ai/)**
 >
-> 推荐使用网页版，支持全文搜索、章节导航和交互演示。初次学习可从 **[在线学习地图 →](https://datawhalechina.github.io/dive-into-embodied-ai/learning-map)** 开始。
+> 推荐使用网页版，支持全文搜索、章节导航和交互演示。初次学习可从 **[新手入门：具身导论 →](https://datawhalechina.github.io/dive-into-embodied-ai/docs/introduction/intro)** 开始。
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="许可协议" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
@@ -38,7 +38,7 @@
 
 从零到一搭建一台具身智能机器人：深入强化学习、World-Model、VLA 等智能决策方法的工程落地，贯穿仿真环境、控制器、运动规划、感知系统等技能树模块,并在真实项目中跑通"决策—控制—感知"完整链路。
 
-🧭 **新手入口：[具身智能学习地图](LEARNING_MAP.md)** — 了解知识全景与入门路线。
+🧭 **新手入门：[具身导论](docs/introduction/intro.md)** — 了解具身智能的概念、任务、载体与方法。
 
 <a id="内容大纲"></a>
 
@@ -210,7 +210,7 @@ npm install
 npm run dev
 ```
 
-网站默认中文，可通过导航栏的语言菜单切换为 English。英文版目前覆盖 README、首页导航、[学习地图](https://datawhalechina.github.io/dive-into-embodied-ai/en/learning-map)与[具身导论](https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/introduction/intro)，其他教程正文与独立实验页暂时显示中文，并标注翻译状态。
+网站默认中文，可通过导航栏的语言菜单切换为 English。英文版目前覆盖 README、首页导航与[具身导论](https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/introduction/intro)，其他教程正文与独立实验页暂时显示中文，并标注翻译状态。
 
 ```bash
 # 单独启动英文开发环境（开发服务器一次只运行一种语言）

@@ -16,7 +16,6 @@ const sources = [
   'src/components/HomepageFeatures/index.tsx',
   'src/components/HomepageProjects/index.tsx',
   'src/components/NavbarMegaMenu/data.ts',
-  ...walk('src/features/learning-map').filter(file => /\.tsx?$/.test(file)),
   ...walk('src/components/docs/introduction').filter(file => /\.tsx?$/.test(file)),
 ];
 let checked = 0;
@@ -40,8 +39,8 @@ for (const file of sources) {
   visit(source);
 }
 
-const chinese = read('build/learning-map.html');
-const english = read('build/en/learning-map.html');
+const chinese = read('build/index.html');
+const english = read('build/en/index.html');
 const main = html => html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)?.[1] ?? '';
 const text = html => html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, '').replace(/<[^>]*>/g, '');
 // Production minification may omit quotes around HTML attribute values.
@@ -49,17 +48,23 @@ const attributes = (html, name) => [...html.matchAll(new RegExp(`\\s${name}=(?:"
   .map(match => match[1] ?? match[2] ?? match[3]);
 assert.equal(attributes(chinese.match(/<html[^>]*>/)[0], 'lang')[0], 'zh-Hans');
 assert.equal(attributes(english.match(/<html[^>]*>/)[0], 'lang')[0], 'en');
-assert(chinese.includes('具身智能学习地图'));
-assert(english.includes('Embodied AI learning map'));
-assert(main(english), 'The English learning map must render on the server');
-assert(!/\p{Script=Han}/u.test(text(main(english))), 'The rendered English learning map contains Chinese text');
+assert(main(english), 'The English homepage must render on the server');
+assert(!/\p{Script=Han}/u.test(text(main(english))), 'The rendered English homepage contains Chinese text');
 assert(!chinese.includes('Translation status'), 'The Chinese page should not show an English translation notice');
 assert(english.includes('Other tutorial chapters and standalone playgrounds are currently in Chinese.'));
 
 const anchors = html => attributes(main(html), 'id').sort();
 assert.deepEqual(anchors(english), anchors(chinese), 'Language switching must preserve section anchors');
-assert(attributes(english, 'href').includes('/dive-into-embodied-ai/learning-map'), 'Missing Chinese language link');
-assert(attributes(chinese, 'href').includes('/dive-into-embodied-ai/en/learning-map'), 'Missing English language link');
+assert(attributes(english, 'href').includes('/dive-into-embodied-ai/'), 'Missing Chinese language link');
+assert(attributes(chinese, 'href').includes('/dive-into-embodied-ai/en/'), 'Missing English language link');
+
+// The introduction is the entry point for beginners in both languages.
+for (const [html, label, locale] of [[chinese, '新手入门', ''], [english, 'Get started', 'en/']]) {
+  const entry = [...main(html).matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g)]
+    .map(([link]) => link).find(link => text(link) === label);
+  assert(entry, `Missing beginner entry: ${label}`);
+  assert.equal(attributes(entry, 'href')[0], `/dive-into-embodied-ai/${locale}docs/introduction/intro`);
+}
 
 // Every Chinese tutorial must remain reachable after switching to English.
 const docs = walk('build/docs').filter(file => file.endsWith('.html'));
@@ -86,7 +91,7 @@ for (const file of introductionPages) {
   assert.deepEqual(headingIds(englishPage), headingIds(chinesePage), `${file}: section anchors differ between languages`);
 }
 
-for (const file of ['build/en/index.html', 'build/en/learning-map.html']) {
+for (const file of ['build/en/index.html', 'build/en/docs/introduction/intro.html']) {
   const html = read(file);
   // Internal content links should stay in the selected locale.
   for (const href of attributes(main(html), 'href')) {
@@ -96,4 +101,4 @@ for (const file of ['build/en/index.html', 'build/en/learning-map.html']) {
   }
 }
 
-console.log(`i18n checks passed: ${checked} UI messages, matching learning-map anchors, ${introductionPages.length} translated introduction pages, and ${docs.length} alternate tutorial routes.`);
+console.log(`i18n checks passed: ${checked} UI messages, bilingual beginner entries, matching homepage anchors, ${introductionPages.length} translated introduction pages, and ${docs.length} alternate tutorial routes.`);

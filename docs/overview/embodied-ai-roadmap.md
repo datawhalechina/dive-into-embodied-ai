@@ -1,12 +1,12 @@
 ---
 title: 具身智能技术路线全景图
-description: 从任务、方法与工程支撑三个视角理解具身智能，并进入交互学习地图。
+description: 从任务、方法与工程支撑三个视角理解具身智能，并找到导论、教程与实践入口。
 sidebar_position: 2
 ---
 
 # 具身智能技术路线全景图
 
-先打开 [具身智能学习地图](/learning-map)，用具体任务查看感知、决策、控制与工程底座之间的关系。
+先阅读 [具身导论](/docs/introduction/intro)，了解机器人任务、载体，以及感知、决策、控制与工程底座之间的关系。
 
 ## 用三个视角定位一项技术
 
@@ -20,9 +20,9 @@ sidebar_position: 2
 
 ## 从理解走向实践
 
-1. 在 [学习地图](/learning-map#knowledge-map) 中选择一个任务，理解完整闭环。
-2. 沿 [新手路线](/learning-map#first-steps) 完成浏览器实验与最小仿真。
-3. 根据 [实践方向](/learning-map#directions) 选择一条主线，记录结果并分析失败原因。
+1. 从 [具身导论](/docs/introduction/intro) 开始，理解感知、决策与行动的完整闭环。
+2. 沿 [系列教程](/docs/tutorials/intro) 完成实验，逐步搭建一个完整系统。
+3. 到 [项目实战](/docs/practices/intro) 选择一个具体任务，记录结果并分析失败原因。
 4. 遇到知识缺口时，到 [理论基础](/docs/foundations/intro) 查找对应专题。
 
 ## 参考总纲

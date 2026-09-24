@@ -122,13 +122,6 @@ const config: Config = {
           className: 'navbar-center-start',
         },
         {
-          to: '/learning-map',
-          label: '学习地图',
-          position: 'left',
-          activeBaseRegex: '/(learning-map|docs/overview)(/|$)',
-          className: 'navbar-learning-map',
-        },
-        {
           to: '/docs/introduction/intro',
           label: '具身导论',
           position: 'left',
@@ -172,7 +165,6 @@ const config: Config = {
         {
           title: '内容',
           items: [
-            { label: '学习地图', to: '/learning-map' },
             { label: '具身导论', to: '/docs/introduction/intro' },
             { label: '理论基础', to: '/docs/foundations/intro' },
             { label: '系列教程', to: '/docs/tutorials/intro' },
