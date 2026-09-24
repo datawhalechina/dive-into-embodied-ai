@@ -5,7 +5,7 @@ import path from 'node:path';
 import {kinds} from './scene.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const output = path.join(root, 'static/img/learning-map/carriers');
+const output = path.join(root, 'static/img/introduction/carriers');
 await mkdir(output, {recursive: true});
 for (const kind of kinds) {
   const frames = path.join(root, '.agents/carrier-gifs/frames', kind);

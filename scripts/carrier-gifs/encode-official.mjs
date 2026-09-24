@@ -7,7 +7,7 @@ import path from 'node:path';
 const directory = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(directory, '../..');
 const sources = path.join(root, '.agents/carrier-gifs/sources');
-const output = path.join(root, 'static/img/learning-map/carriers/official');
+const output = path.join(root, 'static/img/introduction/carriers/official');
 const clips = JSON.parse(await readFile(path.join(directory, 'official-sources.json'), 'utf8'));
 await mkdir(sources, {recursive: true});
 await mkdir(output, {recursive: true});

@@ -18,10 +18,10 @@ function CarrierDemo({carrier, mode}: {carrier: EmbodiedCarrier; mode: DemoMode}
   const [visible, setVisible] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);
   const [failed, setFailed] = useState(false);
-  const directory = `/img/learning-map/carriers/${isOfficial ? 'official/' : ''}`;
+  const directory = `/img/introduction/carriers/${isOfficial ? 'official/' : ''}`;
   const poster = useBaseUrl(`${directory}${id}.webp`);
-  const gif = useBaseUrl(`/img/learning-map/carriers/${id}.gif`);
-  const video = useBaseUrl(`/img/learning-map/carriers/official/${id}.mp4`);
+  const gif = useBaseUrl(`/img/introduction/carriers/${id}.gif`);
+  const video = useBaseUrl(`/img/introduction/carriers/official/${id}.mp4`);
   const animated = playing && visible && pageVisible && !failed;
 
   useEffect(() => {
