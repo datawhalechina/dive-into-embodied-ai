@@ -23,7 +23,7 @@ This introduction gives an overview of embodied AI: what it studies, where it ca
 | Chapter | Questions it answers |
 | --- | --- |
 | [1. What is embodied AI](./1.what-is-embodied-ai.md) | What does embodied AI study? How does it differ from AI that only processes text and images? |
-| [2. A brief history](./2.history.md) | Where did the field come from? Which major shifts in methods has it gone through? |
+| [2. A brief history](./2.history.md) | Which periods has embodied AI gone through, and where did robot capabilities come from in each? |
 | [3. Tasks and skills](./3.tasks-and-skills.md) | How do you define a robot task? What are grasping, manipulation, locomotion, and navigation? |
 | [4. Embodied platforms](./4.embodiments.md) | What are the common robot bodies? How does the body shape which experiments are possible? |
 | [5. System paradigms and methods](./5.system-paradigms.md) | How does a system turn observations into actions? Where do planning and control, reinforcement learning, imitation learning, VLA, and world models fit? |

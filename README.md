@@ -57,7 +57,7 @@
 | 章节 | 内容 |
 | :--- | :--- |
 | [1. 什么是具身智能](docs/introduction/1.what-is-embodied-ai.md) | 定义、感知—决策—行动闭环，以及身体为什么重要 |
-| [2. 发展脉络](docs/introduction/2.history.md) | 从 Shakey 与行为主义，到深度学习、VLA 与世界模型 |
+| [2. 发展脉络](docs/introduction/2.history.md) | 规则编程、模型控制、深度强化学习和大模型四个时期 |
 | [3. 任务与技能](docs/introduction/3.tasks-and-skills.md) | 定义任务，认识抓取、操作、运动与导航 |
 | [4. 具身载体](docs/introduction/4.embodiments.md) | 人形、机械臂、轮式、四足、移动操作与仿真载体 |
 | [5. 系统范式与方法](docs/introduction/5.system-paradigms.md) | 模块化与端到端、分层协作，以及主要方法路线 |

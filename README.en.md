@@ -56,7 +56,7 @@ Start with the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-d
 | Chapter | Contents |
 | :--- | :--- |
 | [1. What is embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/1.what-is-embodied-ai.md) | Definition, the perception–decision–action loop, and why the body matters |
-| [2. A brief history](i18n/en/docusaurus-plugin-content-docs/current/introduction/2.history.md) | From Shakey and behavior-based robots to deep learning, VLA, and world models |
+| [2. A brief history](i18n/en/docusaurus-plugin-content-docs/current/introduction/2.history.md) | Four periods: programmed rules, model-based control, deep reinforcement learning, and foundation models |
 | [3. Tasks and skills](i18n/en/docusaurus-plugin-content-docs/current/introduction/3.tasks-and-skills.md) | Defining tasks; grasping, manipulation, locomotion, and navigation |
 | [4. Embodied platforms](i18n/en/docusaurus-plugin-content-docs/current/introduction/4.embodiments.md) | Humanoids, arms, wheeled and legged robots, mobile manipulators, and simulated bodies |
 | [5. System paradigms and methods](i18n/en/docusaurus-plugin-content-docs/current/introduction/5.system-paradigms.md) | Modular and end-to-end systems, layered control, and the main method families |
