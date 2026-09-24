@@ -2,11 +2,7 @@ import React, {type ReactNode, useMemo} from 'react';
 import clsx from 'clsx';
 import {useLocation} from '@docusaurus/router';
 import {translate} from '@docusaurus/Translate';
-import {
-  Collapsible,
-  ThemeClassNames,
-  useCollapsible,
-} from '@docusaurus/theme-common';
+import {ThemeClassNames} from '@docusaurus/theme-common';
 import {useDoc, useDocsSidebar} from '@docusaurus/plugin-content-docs/client';
 import DocSidebarItems from '@theme/DocSidebarItems';
 import TOCItems from '@theme/TOCItems';
@@ -32,31 +28,25 @@ function InteractiveModeLink({href}: {href: string}) {
   return (
     <Link to={href} className={styles.interactiveModeLink}>
       <Gamepad2 size={16} aria-hidden="true" />
-      <span>交互模式</span>
+      <span>{translate({id: 'theme.DocItem.interactiveMode', message: '交互模式'})}</span>
     </Link>
   );
 }
 
-function MobileDirectoryButton({
-  collapsed,
+function DirectorySection({
   label,
-  onClick,
+  className,
+  children,
 }: {
-  collapsed: boolean;
   label: string;
-  onClick: () => void;
+  className?: string;
+  children: ReactNode;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={clsx(
-        'clean-btn',
-        styles.mobileDirectoryButton,
-        !collapsed && styles.mobileDirectoryButtonExpanded,
-      )}>
-      {label}
-    </button>
+    <details className={clsx(styles.directorySection, className)}>
+      <summary className={styles.directorySummary}>{label}</summary>
+      <nav aria-label={label} className={styles.directoryContent}>{children}</nav>
+    </details>
   );
 }
 
@@ -97,9 +87,6 @@ export default function DocItemTOCMobile(): ReactNode {
   const directory = useMobileDocDirectory();
   const interactiveHref = getInteractiveHref(pathname);
   const canRenderToc = !frontMatter.hide_table_of_contents && toc.length > 0;
-  const {collapsed, toggleCollapsed} = useCollapsible({
-    initialState: true,
-  });
 
   if (!directory && !canRenderToc && !interactiveHref) {
     return null;
@@ -107,27 +94,14 @@ export default function DocItemTOCMobile(): ReactNode {
 
   return (
     <div
+      key={pathname}
       className={clsx(
         ThemeClassNames.docs.docTocMobile,
         styles.mobileDirectory,
       )}>
       {interactiveHref && <InteractiveModeLink href={interactiveHref} />}
-      <MobileDirectoryButton
-        collapsed={collapsed}
-        onClick={toggleCollapsed}
-        label={
-          directory?.label ??
-          translate({
-            id: 'theme.TOCCollapsible.toggleButtonLabel',
-            message: '本页总览',
-          })
-        }
-      />
-      <Collapsible
-        lazy
-        className={styles.mobileDirectoryContent}
-        collapsed={collapsed}>
-        {directory ? (
+      {directory && (
+        <DirectorySection label={directory.label} className={styles.chapterDirectory}>
           <ul
             className={clsx(
               ThemeClassNames.docs.docSidebarMenu,
@@ -136,14 +110,17 @@ export default function DocItemTOCMobile(): ReactNode {
             )}>
             <DocSidebarItems items={directory.items} activePath={pathname} level={1} />
           </ul>
-        ) : (
+        </DirectorySection>
+      )}
+      {canRenderToc && (
+        <DirectorySection label={translate({id: 'theme.DocItem.tocTitle', message: '本页目录'})}>
           <TOCItems
             toc={toc}
             minHeadingLevel={frontMatter.toc_min_heading_level}
             maxHeadingLevel={frontMatter.toc_max_heading_level}
           />
-        )}
-      </Collapsible>
+        </DirectorySection>
+      )}
     </div>
   );
 }

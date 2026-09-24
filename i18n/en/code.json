@@ -1,4 +1,10 @@
 {
+  "theme.DocItem.tocTitle": {
+    "message": "On this page"
+  },
+  "theme.DocItem.interactiveMode": {
+    "message": "Interactive mode"
+  },
   "调好第一个控制器": {
     "message": "Tune your first controller"
   },
@@ -813,7 +819,7 @@
     "message": "Simulated bodies"
   },
   "theme.DocItem.mobileDirectory.defaultLabel": {
-    "message": "Contents"
+    "message": "Chapters"
   },
   "双足交替迈步，手臂与身体协调运动。": {
     "message": "The legs alternate steps as the arms and body move together."

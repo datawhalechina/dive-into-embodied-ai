@@ -1,0 +1,48 @@
+.desktopToc {
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+  max-height: calc(100vh - var(--ifm-navbar-height) - 2rem);
+  overflow-y: auto;
+  padding: 0.25rem;
+}
+
+.tocTitle {
+  margin: 0 0 0.75rem;
+  padding-inline-start: 1rem;
+  color: var(--site-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.desktopToc :global(.table-of-contents__link) {
+  display: block;
+  padding-block: 0.2rem;
+}
+
+.desktopToc :global(.table-of-contents__link--active) {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.interactiveModeLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  margin-bottom: 1rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  background: var(--site-blue);
+  color: var(--site-panel);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.interactiveModeLink:hover {
+  color: var(--site-panel);
+}
+
+@media print {
+  .desktopToc {display: none;}
+}

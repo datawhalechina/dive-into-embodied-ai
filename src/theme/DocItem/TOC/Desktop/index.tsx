@@ -1,12 +1,15 @@
 import React, {type ReactNode} from 'react';
+import clsx from 'clsx';
+import {translate} from '@docusaurus/Translate';
 import {ThemeClassNames} from '@docusaurus/theme-common';
 import {useDoc} from '@docusaurus/plugin-content-docs/client';
 import {useLocation} from '@docusaurus/router';
 import Link from '@docusaurus/Link';
-import TOC from '@theme/TOC';
+import TOCItems from '@theme/TOCItems';
 import {Gamepad2} from 'lucide-react';
 // Single source of truth for playground pages (shared with PlaygroundHeader).
 import {PLAYGROUNDS} from '@site/src/components/PlaygroundHeader';
+import styles from './styles.module.css';
 
 function normalizePath(pathname: string): string {
   return pathname.replace(/\/$/, '');
@@ -24,25 +27,9 @@ function InteractiveModeButton({href}: {href: string}) {
   return (
     <Link
       to={href}
-      aria-label="打开交互模式"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 6,
-        padding: '10px 14px',
-        marginBottom: 14,
-        borderRadius: 10,
-        background: 'var(--ifm-color-primary)',
-        color: '#ffffff',
-        fontWeight: 600,
-        fontSize: 13,
-        letterSpacing: '0.02em',
-        textDecoration: 'none',
-        boxShadow: '0 4px 12px -4px rgba(15, 23, 42, 0.35)',
-      }}>
+      className={styles.interactiveModeLink}>
       <Gamepad2 size={16} aria-hidden="true" />
-      <span>交互模式</span>
+      <span>{translate({id: 'theme.DocItem.interactiveMode', message: '交互模式'})}</span>
     </Link>
   );
 }
@@ -51,22 +38,21 @@ export default function DocItemTOCDesktop(): ReactNode {
   const {toc, frontMatter} = useDoc();
   const {pathname} = useLocation();
   const interactiveHref = getInteractiveHref(pathname);
+  const label = translate({id: 'theme.DocItem.tocTitle', message: '本页目录'});
 
   return (
-    <div
-      style={{
-        position: 'sticky',
-        top: 'calc(var(--ifm-navbar-height) + 1rem)',
-        maxHeight: 'calc(100vh - (var(--ifm-navbar-height) + 2rem))',
-        overflowY: 'auto',
-      }}>
+    <nav
+      aria-label={label}
+      className={clsx(ThemeClassNames.docs.docTocDesktop, styles.desktopToc, 'thin-scrollbar')}>
       {interactiveHref && <InteractiveModeButton href={interactiveHref} />}
-      <TOC
+      <div className={styles.tocTitle}>{label}</div>
+      <TOCItems
         toc={toc}
         minHeadingLevel={frontMatter.toc_min_heading_level}
         maxHeadingLevel={frontMatter.toc_max_heading_level}
-        className={ThemeClassNames.docs.docTocDesktop}
+        linkClassName="table-of-contents__link toc-highlight"
+        linkActiveClassName="table-of-contents__link--active"
       />
-    </div>
+    </nav>
   );
 }

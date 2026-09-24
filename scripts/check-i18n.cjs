@@ -16,6 +16,7 @@ const sources = [
   'src/components/HomepageFeatures/index.tsx',
   'src/components/HomepageProjects/index.tsx',
   'src/components/NavbarMegaMenu/data.ts',
+  ...walk('src/theme/DocItem/TOC').filter(file => /\.tsx?$/.test(file)),
   ...walk('src/components/docs/introduction').filter(file => /\.tsx?$/.test(file)),
 ];
 let checked = 0;

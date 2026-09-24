@@ -39,11 +39,11 @@ const expectedText = [
   },
   {
     file: 'src/theme/DocItem/TOC/Desktop/index.tsx',
-    snippets: ['function getInteractiveHref', 'currentPath.endsWith(readingPath)', '<span>交互模式</span>'],
+    snippets: ['function getInteractiveHref', 'currentPath.endsWith(readingPath)', "id: 'theme.DocItem.interactiveMode'"],
   },
   {
     file: 'src/theme/DocItem/TOC/Mobile/index.tsx',
-    snippets: ['function getInteractiveHref', 'currentPath.endsWith(readingPath)', '<span>交互模式</span>'],
+    snippets: ['function getInteractiveHref', 'currentPath.endsWith(readingPath)', "id: 'theme.DocItem.interactiveMode'"],
   },
 ];
 

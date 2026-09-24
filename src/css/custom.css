@@ -152,7 +152,43 @@ a {text-underline-offset: .2em;}
 
 
 /* Reading surfaces: quiet navigation, generous type, and restrained separators. */
-.theme-doc-markdown {max-width: 860px; color: var(--site-ink);}
+:root {--site-doc-reading-width: 860px;}
+.theme-doc-markdown {max-width: var(--site-doc-reading-width); color: var(--site-ink);}
+/* Keep the reading group near the chapter sidebar instead of centering it in all remaining space. */
+@media (min-width: 997px) {
+  .docs-doc-page main > .container {
+    margin-inline: 0;
+    padding-inline: 2rem;
+  }
+  .site-doc-layout > .row {
+    display: grid;
+    grid-template-columns: minmax(0, var(--site-doc-reading-width));
+    gap: 2.5rem;
+    margin-inline: 0;
+  }
+  .site-doc-layout > .row > .col {
+    width: auto;
+    min-width: 0;
+    padding-inline: 0;
+  }
+}
+/* Match the theme layer so its important 75% column cap cannot shrink the grid's reading column. */
+@layer docusaurus.theme-classic {
+  @media (min-width: 997px) {
+    .docs-doc-page main > .container {
+      max-width: calc(var(--site-doc-reading-width) + 20.5rem) !important;
+    }
+    .site-doc-layout > .row > .col {max-width: none !important;}
+  }
+}
+@media (min-width: 1280px) {
+  .site-doc-layout > .row:has(> .col--3) {
+    grid-template-columns: minmax(0, var(--site-doc-reading-width)) 14rem;
+  }
+}
+@media (max-width: 1279px) {
+  .site-doc-layout > .row > .col--3 {display: none;}
+}
 .theme-doc-markdown.markdown {font-size: 1rem; line-height: 1.85;}
 .theme-doc-markdown.markdown h1 {font-size: clamp(2rem, 3vw, 2.7rem); line-height: 1.35; letter-spacing: -.035em; margin-bottom: 1.5rem; text-wrap: balance; overflow-wrap: anywhere;}
 .theme-doc-markdown.markdown h2 {font-size: 1.75rem; line-height: 1.5; letter-spacing: -.02em; margin-top: 3rem; padding-top: .75rem;}
