@@ -6,34 +6,13 @@
 
 [认识具身智能](#认识具身智能) · [知识全景](#知识全景) · [从零开始](#从零开始) · [选择实践方向](#选择实践方向)
 
-也可以打开 [交互版学习地图](https://datawhalechina.github.io/dive-into-embodied-ai/learning-map)，切换机器人任务，或观看可旋转、可调速的 [3D 机器人足球演示](https://datawhalechina.github.io/dive-into-embodied-ai/learning-map#what-is-embodied-ai)。
+也可以打开 [交互版学习地图](https://datawhalechina.github.io/dive-into-embodied-ai/learning-map)，切换机器人任务，查看各知识模块对应的教程。
 
 ## 认识具身智能
 
 具身智能（Embodied AI）关注智能体如何依托身体，通过 **感知、决策与行动闭环** 与环境交互并完成任务。本项目以机器人等物理系统为主线，连接概念、算法和工程实践。
 
-机器人是具身智能的重要载体。机器人学研究机器人的设计、构建与控制；具身智能强调智能、身体与环境之间的协同。
-
-以机器人踢足球为例，目标是把球踢进球门，同时保持身体平衡：
-
-```mermaid
-flowchart LR
-    perception[感知与理解] --> decision[学习与决策]
-    decision --> control[运动与控制]
-    control --> environment[环境与结果]
-    environment -->|新的观测与反馈| perception
-```
-
-| 环节 | 要回答的问题 | 踢足球时发生了什么 |
-| :--- | :--- | :--- |
-| 感知 | 世界和自己，现在是什么状态？ | 识别足球、球门和守门员，估计位置与身体姿态。 |
-| 决策 | 为了完成任务，下一步做什么？ | 观察防守位置，选择射门空当，安排靠近和踢球动作。 |
-| 行动 | 怎样把动作准确、稳定地做出来？ | 调整站位与重心，协调关节，驱动腿部踢球。 |
-| 反馈 | 行动之后发生了什么？ | 跟踪球的运动、检查射门结果，用新的观测调整下一步。 |
-
-这是按功能理解系统的方式。实际系统可以由多个模块协作，也可以用一个模型承担多种功能。
-
-想系统了解具身智能的概念、发展脉络、任务与载体、系统范式和核心挑战，请阅读 [具身导论](docs/introduction/intro.md)。
+零基础可以先读 [具身导论](docs/introduction/intro.md)。它从机器人踢足球讲起，介绍具身智能的发展、机器人要掌握的技能、常见的机器人身体和尚未解决的难题，网页版还配有可以交互的 3D 演示。
 
 ## 知识全景
 
@@ -56,7 +35,7 @@ flowchart LR
 
 | 步骤 | 学习入口 | 完成标志 |
 | :--- | :--- | :--- |
-| **1. 建立系统概念** | 阅读 [具身导论](docs/introduction/1.what-is-embodied-ai.md)，无需设备。 | 能用踢球、拿杯子或行走的例子，说明观测、动作、目标和反馈。 |
+| **1. 建立系统概念** | 阅读 [具身导论](docs/introduction/intro.md)，无需设备。 | 能用踢球、拿杯子或行走的例子，说明观测、动作、目标和反馈。 |
 | **2. 亲手体验一个原理** | 打开 [PD 控制实验](https://datawhalechina.github.io/dive-into-embodied-ai/cs123/pd-playground)，在浏览器中调整参数。 | 能解释响应、超调和稳定性怎样随参数变化。 |
 | **3. 跑通最小仿真** | 按 [MuJoCo 教程](docs/foundations/simulation/3.mujoco.md) 加载模型、推进仿真并施加控制。 | 保存一份自己能运行、能修改的仿真实验。 |
 | **4. 沿一条主线完成项目** | 跟随 [从零到一搭建四足机器人](docs/practices/quadruped/cs123/0.intro.md)，从单关节控制走到步态与策略训练。 | 记录实验条件、结果与失败原因，完成一次可复现的项目实践。 |

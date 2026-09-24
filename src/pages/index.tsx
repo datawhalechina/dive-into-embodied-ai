@@ -73,7 +73,7 @@ function HomepageHeader() {
       <div className={styles.sceneLabel} aria-hidden="true"><span>{translate({message: "ROBOT LEARNING / 具身智能"})}</span><span>{translate({message: "感知 → 决策 → 控制"})}</span></div>
       <div className={styles.heroContent}>
         <div className={styles.heroCopy}>
-          <Link className={styles.eyebrow} to="/docs/overview/intro"><span className={styles.statusDot} /> {translate({message: "DATAWHALE · 开源具身智能教程"})}<ArrowUpRight size={14} aria-hidden="true" /></Link>
+          <Link className={styles.eyebrow} to="/docs/introduction/intro"><span className={styles.statusDot} /> {translate({message: "DATAWHALE · 开源具身智能教程"})}<ArrowUpRight size={14} aria-hidden="true" /></Link>
           <h1>{translate({message: "让机器人，"})}<br /><span>{translate({message: "感知并行动。"})}</span></h1>
           <p className={styles.intro}>{translate({message: "从理解一个算法，到迈出机器人的第一步。"})}<br />{translate({message: "动手连接感知、学习与控制，在仿真中走向真实。"})}</p>
           <div className={styles.actions}>

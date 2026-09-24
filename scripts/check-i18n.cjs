@@ -17,6 +17,7 @@ const sources = [
   'src/components/HomepageProjects/index.tsx',
   'src/components/NavbarMegaMenu/data.ts',
   ...walk('src/features/learning-map').filter(file => /\.tsx?$/.test(file)),
+  ...walk('src/components/docs/introduction').filter(file => /\.tsx?$/.test(file)),
 ];
 let checked = 0;
 for (const file of sources) {

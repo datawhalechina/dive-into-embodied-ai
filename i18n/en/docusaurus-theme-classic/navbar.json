@@ -4,5 +4,8 @@
   },
   "item.label.学习地图": {
     "message": "Learning map"
+  },
+  "item.label.具身导论": {
+    "message": "Introduction"
   }
 }

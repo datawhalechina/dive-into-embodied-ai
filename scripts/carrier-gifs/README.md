@@ -14,7 +14,7 @@ node scripts/carrier-gifs/encode-official.mjs
 
 脚本下载清单中的公开原片到忽略目录 `.agents/carrier-gifs/sources/`，校验内容后生成用于网页播放的 640 × 400、24 FPS MP4 和 WebP 封面，输出到 `static/img/learning-map/carriers/official/`。通过等比缩放和补边保留完整画面，不改变原片速度，不裁去水印或速度标注。ALOHA 2 真机片段是原片中标注为 4× 的遥操作演示；仿真片段同样来自官方项目页，不能标为真机演示。
 
-每张卡片链接到对应官方来源，正文与英文翻译在 `src/features/learning-map/carriers/content.ts` 和 `i18n/en/code.json` 中维护。第三方素材的权利归原作者；本项目许可证不用于重新授权这些原片。
+每张卡片链接到对应官方来源，正文与英文翻译在 `src/components/docs/introduction/embodiments/CarrierDemos/content.ts` 和 `i18n/en/code.json` 中维护。第三方素材的权利归原作者；本项目许可证不用于重新授权这些原片。
 
 ## 3D 示意
 

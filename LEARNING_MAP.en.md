@@ -6,7 +6,7 @@ See the big picture, then find your first step. This guide connects concepts, kn
 
 [Understand embodied AI](#understand-embodied-ai) · [Knowledge map](#knowledge-map) · [Start from scratch](#start-from-scratch) · [Choose a project direction](#choose-a-project-direction)
 
-Open the [interactive learning map](https://datawhalechina.github.io/dive-into-embodied-ai/en/learning-map) to switch between robot tasks and explore the [3D robot soccer demo](https://datawhalechina.github.io/dive-into-embodied-ai/en/learning-map#what-is-embodied-ai), with camera rotation and playback-speed controls.
+Open the [interactive learning map](https://datawhalechina.github.io/dive-into-embodied-ai/en/learning-map) to switch between robot tasks and find the tutorials for each knowledge module.
 
 > The learning map and introduction are available in English. Other linked tutorial chapters and standalone playgrounds are currently in Chinese.
 
@@ -14,28 +14,7 @@ Open the [interactive learning map](https://datawhalechina.github.io/dive-into-e
 
 Embodied AI studies how agents use a body to interact with the environment and complete tasks through a **closed loop of perception, decision making, and action**. This project focuses on physical systems such as robots, connecting concepts, algorithms, and engineering practice.
 
-Robots are an important platform for embodied AI. Robotics studies their design, construction, and control; embodied AI emphasizes the interaction of intelligence, body, and environment.
-
-For a robot playing soccer, the goal is to score while keeping its body balanced:
-
-```mermaid
-flowchart LR
-    perception[Perception and understanding] --> decision[Learning and decision making]
-    decision --> control[Motion and control]
-    control --> environment[Environment and outcomes]
-    environment -->|New observations and feedback| perception
-```
-
-| Stage | Key question | What happens in robot soccer |
-| :--- | :--- | :--- |
-| Perception | What is the state of the world and the robot? | Detect the ball, goal, and goalkeeper; estimate positions and body pose. |
-| Decision | What should the robot do next? | Observe the defense, choose an opening, and plan the approach and kick. |
-| Action | How can the robot act accurately and stably? | Adjust stance and center of mass, coordinate joints, and kick. |
-| Feedback | What happened after the action? | Track the ball, check the result, and use new observations to adjust the next move. |
-
-This is a functional view of the system. A real system may use several collaborating modules or a single model with multiple roles.
-
-For a systematic overview of the concepts, history, tasks and platforms, system paradigms, and key challenges, read the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md).
+If you are new to the field, start with the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md). It begins with a robot playing soccer and covers the history of embodied AI, the skills robots need, common robot bodies, and open problems. The website version also includes interactive 3D demos.
 
 ## Knowledge map
 
@@ -58,7 +37,7 @@ Try an experiment, learn the foundations, then complete a project. Each step pro
 
 | Step | Learning entry point | Completion goal |
 | :--- | :--- | :--- |
-| **1. Understand the system** | Read the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/1.what-is-embodied-ai.md). No hardware is required. | Explain observations, actions, goals, and feedback using soccer, cup picking, or walking. |
+| **1. Understand the system** | Read the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md). No hardware is required. | Explain observations, actions, goals, and feedback using soccer, cup picking, or walking. |
 | **2. Try a principle yourself** | Open the [PD control experiment](https://datawhalechina.github.io/dive-into-embodied-ai/en/cs123/pd-playground) and adjust parameters in your browser. | Explain how response, overshoot, and stability change with the parameters. |
 | **3. Run a minimal simulation** | Follow the [MuJoCo tutorial](docs/foundations/simulation/3.mujoco.md) to load a model, step the simulation, and apply control. | Save a simulation experiment you can run and modify yourself. |
 | **4. Complete a project along one path** | Follow [Build a quadruped from scratch](docs/practices/quadruped/cs123/0.intro.md), from single-joint control to gaits and policy training. | Record conditions, results, and failure causes to complete a reproducible project. |

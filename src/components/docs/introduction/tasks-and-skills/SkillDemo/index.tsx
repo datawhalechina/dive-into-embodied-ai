@@ -2,7 +2,7 @@ import {translate} from '@docusaurus/Translate';
 import React, {useEffect, useId, useRef, useState} from 'react';
 import {ArrowRight, Pause, Play, RotateCcw} from 'lucide-react';
 import {skillDemos} from './content';
-import type {Skill} from '../../skills/types';
+import type {Skill} from './types';
 import type {SkillScene} from './scene';
 import styles from './styles.module.css';
 

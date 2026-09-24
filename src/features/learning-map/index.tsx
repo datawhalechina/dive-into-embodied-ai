@@ -1,24 +1,26 @@
 import {translate} from '@docusaurus/Translate';
-import React from 'react';
+import React, {useEffect} from 'react';
 import Link from '@docusaurus/Link';
+import {useBaseUrlUtils} from '@docusaurus/useBaseUrl';
 import useBrokenLinks from '@docusaurus/useBrokenLinks';
 import Layout from '@theme/Layout';
 import TranslationNotice from '@site/src/components/TranslationNotice';
 import {ArrowDown, ArrowRight, ArrowUpRight, Check} from 'lucide-react';
 import ChapterNavigation from './ChapterNavigation';
 import KnowledgeMap from './KnowledgeMap';
-import RobotSkills from './skills';
-import EmbodiedCarriers from './carriers';
-import FootballDemo from './demos/football';
-import {chapters, directions, firstSteps} from './content';
-import {robotSkillAnchors} from './skills/content';
+import {chapters, directions, firstSteps, movedSections} from './content';
 import styles from './styles.module.css';
 
 export default function LearningMap(): React.JSX.Element {
   const {collectAnchor} = useBrokenLinks();
+  const {withBaseUrl} = useBaseUrlUtils();
   // Register section targets so links from MDX are checked during the build.
   chapters.forEach(({id}) => collectAnchor(id));
-  robotSkillAnchors.forEach(collectAnchor);
+
+  useEffect(() => {
+    const target = movedSections[window.location.hash.slice(1)];
+    if (target) window.location.replace(withBaseUrl(target));
+  }, [withBaseUrl]);
 
   return (
     <Layout title={translate({message: "具身智能学习地图"})} description={translate({message: "面向新人的具身智能学习地图：理解感知、决策、控制、仿真、数据与硬件的关系，从第一个实验走向机器人项目。"})}>
@@ -44,13 +46,10 @@ export default function LearningMap(): React.JSX.Element {
               </div>
               <div className={styles.definition}>
                 <p>{translate({message: "具身智能（Embodied AI）是指将人工智能技术集成到具有物理实体（如机器人、智能汽车等）的系统之中，让AI通过“身体”的"})}<strong>{translate({message: "感知、决策与行动闭环"})}</strong>{translate({message: "与真实物理世界进行动态交互。"})}</p>
-                <p>{translate({message: "例如，让机器人踢足球，需要看清球和球门、判断防守位置、选择射门方向，再控制身体保持平衡并踢球。踢出后，它还要观察球的运动，判断结果并调整下一步。这就形成了“感知 → 决策 → 行动 → 反馈”的闭环。"})}</p>
+                <p>{translate({message: "零基础可以先读具身导论。它从机器人踢足球讲起，介绍具身智能的发展、机器人要掌握的技能、常见的机器人身体和尚未解决的难题，并配有可以交互的 3D 演示。"})}</p>
               </div>
-              <FootballDemo />
-              <Link to="/docs/introduction/what-is-embodied-ai" className={`site-text-link ${styles.readMore}`}>{translate({message: "深入了解具身智能"})}<ArrowRight size={16} aria-hidden="true" /></Link>
+              <Link to="/docs/introduction/intro" className={`site-text-link ${styles.readMore}`}>{translate({message: "阅读具身导论"})}<ArrowRight size={16} aria-hidden="true" /></Link>
             </section>
-            <RobotSkills className={styles.section} />
-            <EmbodiedCarriers className={styles.section} />
             <KnowledgeMap />
             <section id="first-steps" className={styles.section} aria-labelledby="steps-title">
               <div className={styles.sectionHeading}>
@@ -89,8 +88,6 @@ export default function LearningMap(): React.JSX.Element {
               <div className={styles.sectionHeading}><h2 id="references-title">{translate({message: "参考"})}</h2></div>
               <ol className={styles.references}>
                 <li><Link href="https://www.nvidia.cn/glossary/embodied-ai/">{translate({message: "NVIDIA：什么是具身智能？"})}<ArrowUpRight size={16} aria-hidden="true" /></Link></li>
-                <li><Link href="https://modernrobotics.northwestern.edu/nu-gm-book-resource/grasping-and-manipulation/">{translate({message: "Modern Robotics：抓取与操作"})}<ArrowUpRight size={16} aria-hidden="true" /></Link></li>
-                <li><Link href="https://modernrobotics.northwestern.edu/nu-gm-book-resource/13-1-wheeled-mobile-robots/">{translate({message: "Modern Robotics：轮式机器人与移动操作"})}<ArrowUpRight size={16} aria-hidden="true" /></Link></li>
               </ol>
             </section>
           </div>

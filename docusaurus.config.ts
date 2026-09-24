@@ -129,9 +129,11 @@ const config: Config = {
           className: 'navbar-learning-map',
         },
         {
-          type: 'custom-navbarMegaMenu',
-          menuId: 'introduction',
+          to: '/docs/introduction/intro',
+          label: '具身导论',
           position: 'left',
+          activeBaseRegex: '/docs/introduction(/|$)',
+          className: 'navbar-introduction',
         },
         {
           type: 'custom-navbarMegaMenu',

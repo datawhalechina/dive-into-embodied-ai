@@ -2,7 +2,7 @@ import {translate} from '@docusaurus/Translate';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {RoundedBoxGeometry} from 'three/addons/geometries/RoundedBoxGeometry.js';
-import type {Skill} from '../../skills/types';
+import type {Skill} from './types';
 import {skillDemos} from './content';
 import {drawerPose, graspPose, navigationPose, navObstacles, routePoint, walkPose} from './motion';
 import type {Point} from './motion';

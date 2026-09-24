@@ -1,5 +1,5 @@
 import {translate} from '@docusaurus/Translate';
-import type {Skill} from '../../skills/types';
+import type {Skill} from './types';
 
 export const skillDemos = {
   grasping: {

@@ -2,8 +2,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import {translate} from '@docusaurus/Translate';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import {ArrowUpRight, Play, Square} from 'lucide-react';
-import {embodiedCarriers} from '../../carriers/content';
-import type {EmbodiedCarrier} from '../../carriers/content';
+import {embodiedCarriers} from './content';
+import type {EmbodiedCarrier} from './content';
 import styles from './styles.module.css';
 
 type DemoMode = 'official' | 'illustration';

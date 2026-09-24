@@ -185,12 +185,6 @@
   "AMD 实践专区": {
     "message": "AMD projects"
   },
-  "论文与研究": {
-    "message": "Papers and research"
-  },
-  "具身数据集": {
-    "message": "Embodied AI datasets"
-  },
   "学习与探索": {
     "message": "Learn and explore"
   },
@@ -482,24 +476,6 @@
   "查看项目实战": {
     "message": "View projects"
   },
-  "按研究主题收集原论文、项目主页和站内解读。": {
-    "message": "Find original papers, project pages, and our explanations by research topic."
-  },
-  "整理机器人示教数据、任务类型与评测基准。": {
-    "message": "Browse robot demonstrations, task types, and evaluation benchmarks."
-  },
-  "开源项目": {
-    "message": "Open source projects"
-  },
-  "查找模型代码、训练框架和相关实战入口。": {
-    "message": "Find model code, training frameworks, and related projects."
-  },
-  "仿真与工具": {
-    "message": "Simulation and tools"
-  },
-  "收集仿真引擎、学习环境与官方文档。": {
-    "message": "Explore simulation engines, learning environments, and official documentation."
-  },
   "具身智能学习地图": {
     "message": "Embodied AI learning map"
   },
@@ -532,9 +508,6 @@
   },
   "与真实物理世界进行动态交互。": {
     "message": " to interact dynamically with the real world."
-  },
-  "例如，让机器人踢足球，需要看清球和球门、判断防守位置、选择射门方向，再控制身体保持平衡并踢球。踢出后，它还要观察球的运动，判断结果并调整下一步。这就形成了“感知 → 决策 → 行动 → 反馈”的闭环。": {
-    "message": "To play soccer, a robot must locate the ball and goal, observe the defense, choose a shooting direction, then balance its body and kick. Afterward, it observes the ball, evaluates the result, and adjusts its next move. This forms a loop: perception → decision → action → feedback."
   },
   "入门路线": {
     "message": "Getting started"
@@ -578,12 +551,6 @@
   "NVIDIA：什么是具身智能？": {
     "message": "NVIDIA: What is embodied AI?"
   },
-  "Modern Robotics：抓取与操作": {
-    "message": "Modern Robotics: Grasping and manipulation"
-  },
-  "Modern Robotics：轮式机器人与移动操作": {
-    "message": "Modern Robotics: Wheeled robots and mobile manipulation"
-  },
   "本页目录": {
     "message": "On this page"
   },
@@ -592,9 +559,6 @@
   },
   "认识具身智能": {
     "message": "Understand embodied AI"
-  },
-  "机器人的技能": {
-    "message": "Robot skills"
   },
   "知识全景": {
     "message": "Knowledge map"
@@ -929,63 +893,6 @@
   "模仿学习（IL）从示范中学动作，强化学习（RL）用奖励改进策略；VLA 把视觉与语言连接到动作，世界模型预测动作的后果。控制和规划同样可以独立解决任务，也可以与学习方法组合。": {
     "message": "Imitation learning (IL) learns actions from demonstrations; reinforcement learning (RL) improves policies using rewards. VLA connects vision and language to actions, while world models predict their consequences. Control and planning can solve tasks on their own or combine with learning methods."
   },
-  "抓取": {
-    "message": "Grasping"
-  },
-  "怎样把一个物体拿稳？": {
-    "message": "How do you hold an object securely?"
-  },
-  "抓取（Grasping）": {
-    "message": "Grasping"
-  },
-  "是末端执行器与物体建立一组接触，使物体的运动受到约束、能够随末端一起运动，并在预期扰动下不滑脱的过程及其结果。": {
-    "message": " is the process and result of establishing contacts between an end effector and an object so that the object’s motion is constrained, it can move with the end effector, and it does not slip under expected disturbances."
-  },
-  "通俗来讲，就是让机器人用夹爪、灵巧手或吸盘把物体拿稳，为后续移动和操作做好准备。例如，把桌面上的小方块放进指定盒子时，需要先夹住并提起它；其中，建立并保持稳定夹持是抓取，后续还要完成搬运、放置和松开，才构成完整的拾取与放置操作。": {
-    "message": "In everyday terms, a robot uses a gripper, dexterous hand, or suction cup to hold an object securely before moving or manipulating it. To put a small block into a box, it first grips and lifts the block. Establishing and maintaining that hold is grasping; transporting, placing, and releasing it complete the pick-and-place task."
-  },
-  "操作": {
-    "message": "Manipulation"
-  },
-  "怎样通过接触改变物体状态？": {
-    "message": "How can contact change an object’s state?"
-  },
-  "操作（Manipulation）": {
-    "message": "Manipulation"
-  },
-  "是机器人通过施加力或运动，有目的地改变物体的位置、姿态、形状或其他任务相关状态的过程。": {
-    "message": " is the purposeful application of forces or motion to change an object’s position, orientation, shape, or other task-relevant state."
-  },
-  "通俗来讲，就是让机器人通过推、拉、搬、转等动作，把物体变成任务要求的状态。例如，机器人先抓住抽屉把手，再沿导轨向外拉，直到抽屉打开到指定位置。": {
-    "message": "In everyday terms, a robot pushes, pulls, carries, or rotates something into the desired state. For example, it grasps a drawer handle and pulls along the rails until the drawer reaches a target opening."
-  },
-  "运动": {
-    "message": "Locomotion"
-  },
-  "怎样让身体稳定地移动？": {
-    "message": "How can the body move stably?"
-  },
-  "运动（Locomotion）": {
-    "message": "Locomotion"
-  },
-  "是机器人通过腿、轮等机构与环境的相互作用，实现自身移动，并协调身体姿态与运动稳定性的过程。": {
-    "message": " is the process by which a robot moves itself through interaction between mechanisms such as legs or wheels and the environment, while coordinating body posture and motion stability."
-  },
-  "通俗来讲，就是解决机器人“身体怎么动起来、怎样动得稳”。例如，四足机器人迈上台阶时，需要协调抬腿、落脚和重心转移，避免绊倒或失去平衡。": {
-    "message": "In everyday terms, it is about getting the robot’s body moving and keeping it stable. A quadruped climbing a step must coordinate leg lifts, foot placement, and weight shifts to avoid tripping or losing balance."
-  },
-  "导航": {
-    "message": "Navigation"
-  },
-  "去哪里、走哪条路、何时停下？": {
-    "message": "Where to go, which route to take, and when to stop?"
-  },
-  "导航（Navigation）": {
-    "message": "Navigation"
-  },
-  "是机器人依据目标、环境观测和自身状态，决定并调整移动方向或路径，避开障碍并到达目标位置或区域的过程。": {
-    "message": " is the process of choosing and adjusting a robot’s direction or path using its goal, environmental observations, and estimated state, while avoiding obstacles and reaching a target location or area."
-  },
   "通俗来讲，就是解决“我在哪里、要去哪里、应该怎么走”。例如，机器人从房间一端出发，绕过地上的障碍物，到达门口的指定区域；导航选择路线，运动能力负责把行进与转向指令执行出来。": {
     "message": "In everyday terms, it answers: where am I, where should I go, and how do I get there? A robot might cross a room, avoid obstacles on the floor, and reach a designated area at the doorway. Navigation chooses the route; locomotion executes the movement and turning commands."
   },
@@ -1009,27 +916,6 @@
   },
   "让机器人从当前位置到达目标，涉及定位、建图、路径规划与避障。经典系统通常组合定位 / SLAM、全局规划（如 A*）与局部规划或控制（如 DWA、MPC）；已知地图与受控环境中已有成熟的工程方案。": {
     "message": "Navigation moves a robot from its current location to a goal through localization, mapping, path planning, and obstacle avoidance. Classical systems often combine localization / SLAM, global planning such as A*, and local planning or control such as DWA or MPC. Mature engineering solutions exist for known maps and controlled environments."
-  },
-  "先定义任务，再认识技能": {
-    "message": "Define the task, then understand the skills"
-  },
-  "想要学习并研究具身智能，需要先把任务定义清楚。": {
-    "message": "To study embodied AI, start by defining the task. "
-  },
-  "如何合理地建模任务、确定目标与评价指标，往往比模型选择与优化更为关键。": {
-    "message": "Modeling the task well and choosing appropriate goals and evaluation metrics are often more important than model selection and optimization."
-  },
-  "对机器人技能的研究，可以先从四类常见任务入手：": {
-    "message": "A useful starting point is four common skill categories: "
-  },
-  "抓取（Grasping）、操作（Manipulation）、运动（Locomotion）和导航（Navigation）": {
-    "message": "grasping, manipulation, locomotion, and navigation"
-  },
-  "。抓取与操作关注改变物体的状态，运动与导航关注移动机器人自身。": {
-    "message": ". Grasping and manipulation change object states; locomotion and navigation move the robot itself."
-  },
-  "窄屏可左右滚动查看完整表格。": {
-    "message": "On narrow screens, scroll horizontally to view the full table."
   },
   "改变物体": {
     "message": "Change objects"
@@ -1352,101 +1238,23 @@
   "{scene}拖动或用方向键旋转，Home 键复位视角。": {
     "message": "{scene} Drag or use arrow keys to rotate. Press Home to reset the view."
   },
-  "具身智能的载体": {
-    "message": "Embodied AI platforms"
-  },
-  "认识具身载体": {
-    "message": "Explore embodied platforms"
-  },
   "人形机器人": {
     "message": "Humanoid robots"
-  },
-  "双足、躯干与双臂": {
-    "message": "Two legs, a torso, and two arms"
-  },
-  "抓取、操作、运动、导航": {
-    "message": "Grasping, manipulation, locomotion, navigation"
-  },
-  "可组合研究，依具体配置而定": {
-    "message": "Can be studied together, depending on the configuration"
   },
   "固定基座机械臂": {
     "message": "Fixed-base robot arms"
   },
-  "单臂或双臂，基座固定": {
-    "message": "One or two arms on a fixed base"
-  },
-  "抓取、操作": {
-    "message": "Grasping, manipulation"
-  },
   "轮式移动机器人": {
     "message": "Wheeled mobile robots"
-  },
-  "依靠轮式底盘移动": {
-    "message": "Move using a wheeled base"
-  },
-  "运动、导航": {
-    "message": "Locomotion, navigation"
   },
   "四足机器人": {
     "message": "Quadruped robots"
   },
-  "用四条腿支撑与移动": {
-    "message": "Use four legs for support and movement"
-  },
-  "加装机械臂后可扩展操作技能": {
-    "message": "Adding an arm enables manipulation skills"
-  },
   "移动操作平台": {
     "message": "Mobile manipulation platforms"
   },
-  "移动底座与操作机构组合": {
-    "message": "A mobile base combined with a manipulator"
-  },
-  "强调移动与操作的配合": {
-    "message": "Emphasize coordination of mobility and manipulation"
-  },
   "仿真载体": {
     "message": "Simulated bodies"
-  },
-  "由模型定义身体与传感器": {
-    "message": "Models define the body and sensors"
-  },
-  "取决于模拟的身体与任务": {
-    "message": "Depend on the simulated body and task"
-  },
-  "从技能到身体": {
-    "message": "From skills to bodies"
-  },
-  "具身智能的载体，是智能体用来感知环境、执行动作并与环境交互的“身体”。对物理机器人而言，这个身体包含机械结构、传感器和执行器。不同的身体，决定了机器人能看到什么、能做出什么动作，以及在哪些环境中工作。": {
-    "message": "An embodied AI platform is the body an agent uses to perceive, act, and interact with its environment. For a physical robot, this includes mechanical structures, sensors, and actuators. Different bodies determine what a robot can observe, which actions it can perform, and where it can operate."
-  },
-  "围绕前面的四类技能，可以先认识以下五类常见物理载体，再了解用于研究的仿真载体。": {
-    "message": "With the four skills in mind, explore these five common types of physical platform, followed by simulated bodies used in research."
-  },
-  "载体": {
-    "message": "Body type"
-  },
-  "代表平台 / 工具": {
-    "message": "Example platforms / Tools"
-  },
-  "关联技能": {
-    "message": "Related skills"
-  },
-  "这些分类有交叉：人形机器人、带臂四足机器人也可以是移动操作平台。": {
-    "message": "These categories overlap: humanoids and quadrupeds with arms can also be mobile manipulation platforms. "
-  },
-  "身体形态提供了实现技能的条件，实际能力仍需要在具体任务中验证。": {
-    "message": "The body enables skills; actual capabilities still require validation in specific tasks."
-  },
-  "要让它进一步自主选择路线并到达门口，还需要与": {
-    "message": " To choose its own route and reach a doorway, it must also coordinate with "
-  },
-  "配合。": {
-    "message": "."
-  },
-  "通俗来讲，就是解决“我在哪里、要去哪里、应该怎么走”。例如，机器人从房间一端出发，绕过地上的障碍物，到达门口的指定区域。": {
-    "message": "In everyday terms, navigation answers: where am I, where should I go, and how do I get there? A robot might cross a room, avoid obstacles on the floor, and reach a designated area at the doorway."
   },
   "theme.DocItem.mobileDirectory.defaultLabel": {
     "message": "Contents"
@@ -1556,73 +1364,10 @@
   "先看全局，再补理论、跟课程、做项目。": {
     "message": "Start with the big picture, then study the foundations, follow a course, or build a project."
   },
-  "定义、感知—决策—行动闭环，以及身体为什么重要。": {
-    "message": "The definition, the perception–decision–action loop, and why the body matters."
-  },
-  "发展脉络": {
-    "message": "A brief history"
-  },
-  "从 Shakey 与行为主义，到深度学习、VLA 与世界模型。": {
-    "message": "From Shakey and behavior-based robots to deep learning, VLA, and world models."
-  },
-  "任务与技能": {
-    "message": "Tasks and skills"
-  },
-  "定义任务，认识抓取、操作、运动与导航。": {
-    "message": "Define tasks, then explore grasping, manipulation, locomotion, and navigation."
-  },
-  "系统与挑战": {
-    "message": "Systems and challenges"
-  },
-  "具身载体": {
-    "message": "Embodied platforms"
-  },
-  "人形、机械臂、轮式、四足、移动操作与仿真载体。": {
-    "message": "Humanoids, arms, wheeled and quadruped robots, mobile manipulators, and simulated bodies."
-  },
-  "系统范式与方法": {
-    "message": "System paradigms and methods"
-  },
-  "模块化与端到端、分层协作，以及主要方法路线。": {
-    "message": "Modular and end-to-end systems, layered control, and the main method families."
-  },
-  "核心挑战": {
-    "message": "Key challenges"
-  },
-  "数据、仿真到真实、泛化、实时性、安全与评测。": {
-    "message": "Data, sim-to-real transfer, generalization, real-time execution, safety, and evaluation."
-  },
-  "领域资源": {
-    "message": "Resources"
-  },
-  "先建立全局认识，再进入理论基础与教程。": {
-    "message": "See the big picture, then move on to the foundations and tutorials."
-  },
-  "查看具身导论": {
-    "message": "View the introduction"
-  },
-  "具身智能常见载体的代表平台与关联技能": {
-    "message": "Representative embodied platforms and related skills"
-  },
-  "深入了解具身载体": {
-    "message": "Learn more about embodied platforms"
-  },
-  "深入了解具身智能": {
-    "message": "Learn more about embodied AI"
-  },
-  "深入了解抓取": {
-    "message": "Learn more about grasping"
-  },
-  "深入了解操作": {
-    "message": "Learn more about manipulation"
-  },
-  "深入了解运动": {
-    "message": "Learn more about locomotion"
-  },
-  "深入了解导航": {
-    "message": "Learn more about navigation"
-  },
   "Datawhale 开源具身智能学习站：具身导论、理论基础、系列教程与项目实战，连接机器人学习、论文、数据集和开源工具。": {
     "message": "Datawhale’s open embodied AI course: introduction, foundations, tutorials, and projects connecting robot learning with papers, datasets, and open source tools."
+  },
+  "零基础可以先读具身导论。它从机器人踢足球讲起，介绍具身智能的发展、机器人要掌握的技能、常见的机器人身体和尚未解决的难题，并配有可以交互的 3D 演示。": {
+    "message": "If you are new to the field, start with the introduction. It begins with a robot playing soccer and covers the history of embodied AI, the skills robots need, common robot bodies, and open problems, with interactive 3D demos."
   }
 }

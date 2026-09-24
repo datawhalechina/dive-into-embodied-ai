@@ -1,6 +1,5 @@
 import {translate} from '@docusaurus/Translate';
 import {BrainCircuit, Database, Eye, FlaskConical, Move3D, Settings2} from 'lucide-react';
-import {robotSkills} from './skills/content';
 
 type Chapter = {
   id: string;
@@ -11,16 +10,21 @@ type Chapter = {
 
 export const chapters: Chapter[] = [
   {id: 'what-is-embodied-ai', label: translate({message: "什么是具身智能"}), quickLabel: translate({message: "认识具身智能"})},
-  {
-    id: 'robot-interaction', label: translate({message: "机器人的技能"}), quickLabel: translate({message: "机器人的技能"}),
-    children: robotSkills.map(({id, name}) => ({id, label: name})),
-  },
-  {id: 'embodied-platforms', label: translate({message: '具身智能的载体'}), quickLabel: translate({message: '认识具身载体'})},
   {id: 'knowledge-map', label: translate({message: "知识全景"}), quickLabel: translate({message: "看知识全景"})},
   {id: 'first-steps', label: translate({message: "入门路线"}), quickLabel: translate({message: "从零开始学"})},
   {id: 'directions', label: translate({message: "实践方向"}), quickLabel: translate({message: "选择实践方向"})},
   {id: 'references', label: translate({message: "参考"}), quickLabel: translate({message: "参考"})},
 ];
+
+// The skill and platform sections moved to the introduction; old links to them are forwarded there.
+export const movedSections: Record<string, string> = {
+  'robot-interaction': '/docs/introduction/tasks-and-skills#skills',
+  'ability-grasping': '/docs/introduction/tasks-and-skills#grasping',
+  'ability-manipulation': '/docs/introduction/tasks-and-skills#manipulation',
+  'ability-locomotion': '/docs/introduction/tasks-and-skills#locomotion',
+  'ability-navigation': '/docs/introduction/tasks-and-skills#navigation',
+  'embodied-platforms': '/docs/introduction/embodiments#common-embodiments',
+};
 
 export const scenarios = [
   {
@@ -117,7 +121,7 @@ export const firstSteps = [
     title: translate({message: "建立系统概念"}), preparation: translate({message: "从这里开始 · 无需设备"}),
     description: translate({message: "用一个机器人任务，分清观测、动作、目标和反馈。"}),
     outcome: translate({message: "能说明一个动作背后有哪些模块在协作。"}),
-    link: {label: translate({message: "阅读具身导论"}), to: '/docs/introduction/what-is-embodied-ai'},
+    link: {label: translate({message: "阅读具身导论"}), to: '/docs/introduction/intro'},
   },
   {
     title: translate({message: "亲手体验一个原理"}), preparation: translate({message: "浏览器即可"}),
