@@ -8,6 +8,7 @@ import {ArrowDown, ArrowRight, ArrowUpRight, Check} from 'lucide-react';
 import ChapterNavigation from './ChapterNavigation';
 import KnowledgeMap from './KnowledgeMap';
 import RobotSkills from './skills';
+import EmbodiedCarriers from './carriers';
 import FootballDemo from './demos/football';
 import {chapters, directions, firstSteps} from './content';
 import {robotSkillAnchors} from './skills/content';
@@ -48,6 +49,7 @@ export default function LearningMap(): React.JSX.Element {
               <FootballDemo />
             </section>
             <RobotSkills className={styles.section} />
+            <EmbodiedCarriers className={styles.section} />
             <KnowledgeMap />
             <section id="first-steps" className={styles.section} aria-labelledby="steps-title">
               <div className={styles.sectionHeading}>

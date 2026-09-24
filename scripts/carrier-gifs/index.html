@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-Hans">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>载体 GIF 渲染工具</title>
+<style>
+  body {margin:32px;background:#f5f5f7;color:#1d1d1f;font:16px system-ui,sans-serif}
+  main {max-width:960px;margin:auto} h1 {font-size:24px}
+  canvas {display:block;width:640px;height:400px;max-width:100%;border-radius:12px}
+  select,button,input {font:inherit;margin:8px 8px 16px 0;padding:10px}
+  button {cursor:pointer} output {display:block;padding:16px 0}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/":"/vendor/addons/"}}</script>
+<main>
+  <h1>载体 GIF 渲染工具</h1>
+  <label>载体 <select id="kind"></select></label>
+  <button id="play">停止预览</button>
+  <button id="export">生成全部 GIF 帧</button>
+  <div id="stage"></div>
+  <label>进度 <input id="progress" type="range" min="0" max="100" value="0"></label>
+  <output id="status" role="status">准备预览</output>
+</main>
+<script type="module" src="/render.mjs"></script>
+</html>

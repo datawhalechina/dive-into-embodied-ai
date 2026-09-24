@@ -11,10 +11,15 @@
 | 四类技能的介绍与对比数据 | `skills/content.tsx` |
 | 技能章节的排版与组合关系 | `skills/index.tsx` |
 | 技能类型 | `skills/types.ts` |
+| 具身智能载体的分类、平台与研究问题 | `carriers/content.ts` |
+| 载体章节的排版与对照表 | `carriers/index.tsx` |
 | 足球演示 | `demos/football/` |
 | 四类技能的演示 | `demos/skills/` |
+| 载体演示的素材切换、播放与静态回退 | `demos/carriers/` |
 
 动画目录中的 `index.tsx` 管理播放与控件，`scene.ts` 管理 3D 场景。技能动画的阶段文案在 `content.ts`，动作轨迹在 `motion.ts`。场景仍通过动态导入按需加载。
+
+载体演示默认使用 `static/img/learning-map/carriers/official/` 中的官方片段 MP4 与 WebP 封面，可以切换到上一级目录中的 3D 示意 GIF 与 WebP 封面。两种演示按可见区域与动态效果偏好播放。官方素材来源、截取时间与校验值见 `scripts/carrier-gifs/official-sources.json`，两套素材的生成步骤见该目录的 `README.md`；网页无需为载体演示创建 WebGL 场景。
 
 页面与目录共享 `content.ts` 中的章节配置。技能内容通过显式的 `skill` 字段关联动画，避免从锚点字符串推断类型。
 

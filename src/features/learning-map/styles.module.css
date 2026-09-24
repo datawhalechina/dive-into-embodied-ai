@@ -8,6 +8,9 @@
 .chapterLinks a {display: flex; align-items: center; min-height: 44px; padding: .65rem 1rem; margin-inline-start: -1px; border-inline-start: 2px solid transparent; color: var(--site-muted); font-size: .9375rem; line-height: 1.5; text-decoration: none;}
 .chapterLinks a:hover {color: var(--site-blue); background: var(--ifm-menu-color-background-active);}
 .chapterLinks a[aria-current='location'] {border-inline-start-color: var(--site-blue); color: var(--site-blue); font-weight: 600;}
+.chapterLinks .chapterAncestor {color: var(--site-ink); font-weight: 550;}
+.chapterChildren {list-style: none; margin: 0; padding: 0;}
+.chapterChildren a {padding-inline-start: 2rem; font-size: .875rem;}
 .hero {padding: 4rem 0 2.75rem;}
 .kicker {margin: 0 0 .6rem; font-size: .875rem; font-weight: 600; color: var(--site-muted);}
 .hero h1 {margin: 0 0 .8rem; font-size: clamp(2rem, 3.5vw, 2.75rem); line-height: 1.3; letter-spacing: -.04em;}
@@ -19,7 +22,7 @@
 .sectionHeading {display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 1.5rem;}
 .sectionHeading h2 {font-size: clamp(1.5rem, 2.5vw, 1.875rem); line-height: 1.4; letter-spacing: -.025em; margin: 0;}
 .sectionHeading > p {color: var(--site-muted); font-size: .9375rem; margin: 0;}
-.definition {max-width: 52rem; line-height: 1.85;}
+.definition {line-height: 1.85;}
 .definition p {margin: 0 0 .9rem;}
 .definition strong {font-weight: 600;}
 .definition p:last-child {margin-bottom: 0;}

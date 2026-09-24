@@ -2,7 +2,6 @@ import {translate} from '@docusaurus/Translate';
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Link from '@docusaurus/Link';
-import {ArrowRight} from 'lucide-react';
 import SkillDemo from '../demos/skills';
 import {robotSkills} from './content';
 import styles from './styles.module.css';
@@ -22,28 +21,6 @@ export default function RobotSkills({className}: {className?: string}) {
         <p>{translate({message: "同样需要审视任务设定是否合理，以及能否通过调整设定改善问题。例如，当顶部相机对环境的观测不够充分时，可以考虑加装腕部相机，补充近距离视角。传感器配置的改变也意味着观测条件发生了变化，实验中应明确记录，并在一致的设定下比较方法。"})}</p>
         <p>{translate({message: "对机器人技能的研究，可以先从四类常见任务入手："})}<strong>{translate({message: "抓取（Grasping）、操作（Manipulation）、运动（Locomotion）和导航（Navigation）"})}</strong>{translate({message: "。抓取与操作关注改变物体的状态，运动与导航关注移动机器人自身。"})}</p>
       </div>
-
-      <div className={styles.groups}>
-        <div className={styles.group}>
-          <h3>{translate({message: "改变物体"})}</h3>
-          <div className={styles.relationship}>
-            <a href="#ability-grasping"><strong>Grasping</strong>{!isEnglish && <span>{translate({message: "抓取"})}</span>}</a>
-            <span className={styles.connector}>{translate({message: "属于"})}<ArrowRight size={18} aria-hidden="true" /></span>
-            <a href="#ability-manipulation"><strong>Manipulation</strong>{!isEnglish && <span>{translate({message: "操作"})}</span>}</a>
-          </div>
-          <p>{translate({message: "把杯子拿稳是抓取；搬运、推移或倾倒杯子，都属于操作。"})}</p>
-        </div>
-        <div className={styles.group}>
-          <h3>{translate({message: "移动自身"})}</h3>
-          <div className={styles.relationship}>
-            <a href="#ability-navigation"><strong>Navigation</strong>{!isEnglish && <span>{translate({message: "导航"})}</span>}</a>
-            <span className={styles.connector}>{translate({message: "调用"})}<ArrowRight size={18} aria-hidden="true" /></span>
-            <a href="#ability-locomotion"><strong>Locomotion</strong>{!isEnglish && <span>{translate({message: "运动"})}</span>}</a>
-          </div>
-          <p>{translate({message: "导航决定去哪里、走哪条路；运动负责把这一步走出来。"})}</p>
-        </div>
-      </div>
-      <p className={styles.bodyNote}>{translate({message: "可以借助“手和臂操作、腿或轮带动身体”建立直觉。分类依据是任务：脚也能踢球或推物体，轮式平台也能搭载机械臂完成操作。"})}</p>
 
       <div className={styles.abilities}>
         {robotSkills.map(({skill, id, name, english, question, paragraphs}) => (

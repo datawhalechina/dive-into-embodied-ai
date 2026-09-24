@@ -1793,13 +1793,55 @@
   "停止": {
     "message": "Stop"
   },
-  "下载 GIF": {
-    "message": "Download GIF"
-  },
   "动画暂时无法加载，已显示静态示意。": {
     "message": "The animation could not load. A static illustration is shown instead."
   },
-  "3D 结构与动作示意，不对应特定产品。可停止动画或下载 GIF 查看。": {
-    "message": "A 3D illustration of structure and motion, not a specific product. You can stop the animation or download the GIF."
+  "3D 结构与动作示意，不对应特定产品。": {
+    "message": "A 3D illustration of structure and motion, not a specific product."
+  },
+  "双足交替迈步，躯干与手臂协调完成行走。": {
+    "message": "Alternating footsteps coordinate with the torso and arms to produce bipedal walking."
+  },
+  "双臂在桌面上抓取并转移物体。遥操作演示，原片为 4× 速度。": {
+    "message": "Two arms pick up and transfer tabletop objects. Teleoperated demonstration; the original footage runs at 4× speed."
+  },
+  "车轮驱动底盘，在户外地面行进并通过起伏地形。": {
+    "message": "Wheels drive the base across outdoor surfaces and uneven terrain."
+  },
+  "跟随行走时，四条腿交替支撑并配合身体转向。": {
+    "message": "Four legs alternate support and coordinate turns while following a person."
+  },
+  "移动底座靠近橱柜，机械臂伸出并打开柜门。": {
+    "message": "The mobile base approaches a cabinet, then an arm reaches out and opens its door."
+  },
+  "虚拟双臂抓取并传递工具。来自 ALOHA 2 的 MuJoCo 遥操作仿真。": {
+    "message": "Virtual arms grasp and transfer a tool in the official ALOHA 2 MuJoCo teleoperation simulation."
+  },
+  "通用结构示意": {
+    "message": "Illustrative body model"
+  },
+  "来源：{name}": {
+    "message": "Source: {name}"
+  },
+  "动画暂时无法加载，已显示静态封面。": {
+    "message": "The animation could not load. A still preview is shown instead."
+  },
+  "载体演示类型": {
+    "message": "Embodiment demonstration type"
+  },
+  "官方演示": {
+    "message": "Official footage"
+  },
+  "3D 示意": {
+    "message": "3D illustration"
+  },
+  "观看真实机器人动作，仿真载体对应官方仿真片段。": {
+    "message": "Watch real robots in action, with official simulation footage for virtual embodiments."
+  },
+  "通过通用模型看清身体结构与动作方式。": {
+    "message": "Explore body structures and movement through illustrative models."
+  },
+  "官方演示为原片节选，保留原有速度与画面标注；完整演示见来源链接。": {
+    "message": "Official clips preserve the original playback speed and visual labels. Follow the source links for the full demonstrations."
   }
 }

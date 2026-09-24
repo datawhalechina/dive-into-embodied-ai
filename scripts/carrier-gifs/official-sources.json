@@ -1,0 +1,74 @@
+[
+  {
+    "id": "humanoid",
+    "model": "Unitree G1",
+    "publisher": "Unitree Robotics",
+    "page": "https://www.unitree.com/g1/",
+    "url": "https://www.unitree.com/images/7504897529034b05890225e149d3af28.mp4",
+    "sourceFile": "humanoid-flex.mp4",
+    "sha256": "955aba0d58d3711f336c9786728fcc7a631de60e05e8cef7f601dffeb48ae0f4",
+    "start": 0.2,
+    "duration": 4.8,
+    "description": "Outdoor bipedal walking, excerpt from the G1 product page."
+  },
+  {
+    "id": "arm",
+    "model": "ALOHA 2",
+    "publisher": "ALOHA 2 Team",
+    "page": "https://aloha-2.github.io/",
+    "url": "https://aloha-2.github.io/assets/aloha2_video.mp4",
+    "sourceFile": "arm.mp4",
+    "sha256": "c89327cb0e6ba703180dc46263ced61b0cf57957b80092af7a231680493ffdb0",
+    "start": 4,
+    "duration": 4.5,
+    "description": "Tabletop object transfer. The source labels this teleoperated footage at 4x speed; preserve both labels."
+  },
+  {
+    "id": "wheeled",
+    "model": "Husky A300",
+    "publisher": "Clearpath Robotics",
+    "page": "https://clearpathrobotics.com/husky-a300-unmanned-ground-vehicle-robot/",
+    "url": "https://s3.amazonaws.com/assets.clearpathrobotics.com/wp-content/uploads/2026/06/18133031/Husky-Bannerv5.mp4",
+    "sourceFile": "wheeled-husky.mp4",
+    "sha256": "cafa9efdbef473aed158755d5d7e68b818087bfeb934662de0e15211573367b5",
+    "start": 5.5,
+    "duration": 5.5,
+    "description": "Outdoor wheeled movement from the official Husky A300 product banner."
+  },
+  {
+    "id": "quadruped",
+    "model": "Unitree Go2",
+    "publisher": "Unitree Robotics",
+    "page": "https://www.unitree.com/go2/",
+    "url": "https://oss-global-cdn.unitree.com/static/1cededa1817a478381e62863e0a4bb3a.mp4",
+    "sourceFile": "quadruped-walk.mp4",
+    "sha256": "2eb577b8f225137687fb48d4d59042988c28078af0788126f4bb5f258a63ba0d",
+    "start": 0,
+    "duration": 6,
+    "description": "Following and turning. Colored perception overlays are present in the official source."
+  },
+  {
+    "id": "mobile-manipulator",
+    "model": "Mobile ALOHA",
+    "publisher": "Mobile ALOHA project team",
+    "page": "https://mobile-aloha.github.io/",
+    "url": "https://mobile-aloha.github.io/resources/skills/use_cabinets.mp4",
+    "sourceFile": "mobile-manipulator.mp4",
+    "sha256": "a299a89098560f5ec52acca876b61a6736d1aeefab35a720cd44eca2fdb3a463",
+    "start": 0,
+    "duration": 7.8,
+    "description": "Approaching and opening a cabinet, from the project's Autonomous Skills section. Preserve the source's Real-time and autonomous labels."
+  },
+  {
+    "id": "simulation",
+    "model": "MuJoCo / ALOHA 2",
+    "publisher": "ALOHA 2 Team",
+    "page": "https://aloha-2.github.io/",
+    "url": "https://aloha-2.github.io/assets/hammer_env.mp4",
+    "sourceFile": "simulation.mp4",
+    "sha256": "e52dfebfa16c3e308cafa7ed66b8da77821a3ab75e24b93ab6c4bee244301b12",
+    "start": 0,
+    "duration": 6.8,
+    "description": "Official MuJoCo teleoperation simulation at 1x speed, as described in the project's Simulation section. This is simulated footage, not hardware."
+  }
+]

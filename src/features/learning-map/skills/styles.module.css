@@ -1,27 +1,15 @@
 .heading {margin-bottom: 1.5rem;}
 .kicker {margin: 0 0 .6rem; color: var(--site-muted); font-size: .875rem; font-weight: 600;}
 .heading h2 {margin: 0 0 .75rem; font-size: clamp(1.5rem, 2.5vw, 1.875rem); line-height: 1.4; letter-spacing: -.025em;}
-.introduction {max-width: 52rem; margin-bottom: 1.5rem; line-height: 1.85;}
+.introduction {margin-bottom: 1.5rem; line-height: 1.85;}
 .introduction p {margin: 0 0 .9rem;}
 .introduction p:last-child {margin-bottom: 0;}
 .introduction strong {font-weight: 600;}
-.groups {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; padding: 1.5rem 0; border-block: 1px solid var(--site-border);}
-.group {min-width: 0;}
-.group + .group {border-inline-start: 1px solid var(--site-border); padding-inline-start: 2rem;}
-.group h3 {margin: 0 0 1rem; font-size: 1.125rem;}
-.relationship {display: flex; align-items: center; gap: 1rem;}
-.relationship a {display: flex; flex-direction: column; justify-content: center; min-height: 64px; text-decoration: none;}
-.relationship strong {font-size: 1.0625rem; font-weight: 600;}
-.relationship a > span {font-size: .875rem; color: var(--site-muted);}
-.relationship a:hover strong {text-decoration: underline;}
-.connector {display: flex; flex-direction: column; align-items: center; gap: .25rem; color: var(--site-muted); font-size: .75rem;}
-.group > p {margin: .75rem 0 0; color: var(--site-muted); font-size: .9375rem; line-height: 1.8;}
-.bodyNote {margin: 1.25rem 0 2rem; color: var(--site-muted); font-size: .9375rem; line-height: 1.85;}
-.ability {display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 2rem; padding: 1.75rem 0; border-bottom: 1px solid var(--site-border); scroll-margin-top: 6rem;}
+.ability {display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; padding: 1.75rem 0; border-bottom: 1px solid var(--site-border); scroll-margin-top: 6rem;}
 .ability:first-child {padding-top: 0;}
 .abilityHeading > p {margin: 0 0 .3rem; font-size: .875rem; color: var(--site-muted);}
 .abilityHeading h3 {margin: 0 0 .6rem; font-size: 1.25rem; line-height: 1.5;}
-.abilityHeading > span {display: block; max-width: 10rem; font-size: .875rem; color: var(--site-muted); line-height: 1.8;}
+.abilityHeading > span {display: block; font-size: .875rem; color: var(--site-muted); line-height: 1.8;}
 .explanation {min-width: 0;}
 .explanation p {margin: 0 0 .85rem; font-size: .9375rem; line-height: 1.9;}
 .explanation p:last-child {margin-bottom: 0;}
@@ -63,11 +51,7 @@
 }
 
 @media (max-width: 760px) {
-  .groups {grid-template-columns: 1fr; gap: 1.5rem;}
-  .group + .group {border-inline-start: 0; border-top: 1px solid var(--site-border); padding-inline-start: 0; padding-top: 1.5rem;}
-  .relationship {gap: 1.25rem;}
-  .ability {grid-template-columns: 1fr; gap: 1rem;}
-  .abilityHeading > span {max-width: none;}
+  .ability {gap: 1rem;}
   .abilityHeading h3 {margin-bottom: .3rem;}
   .combinations dl > div {grid-template-columns: 1fr; gap: .6rem;}
   .controlLayers {grid-template-columns: 1fr; gap: 2.25rem;}

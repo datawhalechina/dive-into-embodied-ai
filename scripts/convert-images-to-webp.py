@@ -24,7 +24,8 @@ TEXT_EXTS = {
     ".yml",
     ".yaml",
 }
-SKIP_DIRS = {".git", "node_modules", "build", ".docusaurus", ".venv", "portfolio", "tb", "tmp", "__pycache__"}
+# Private agent tooling and intermediate renders are not published site assets.
+SKIP_DIRS = {".git", ".agents", "node_modules", "build", ".docusaurus", ".venv", "portfolio", "tb", "tmp", "__pycache__"}
 MAX_BYTES = 512_000
 QUALITIES = [85, 78, 70, 62, 55, 48, 42, 36, 30, 24, 18, 12]
 

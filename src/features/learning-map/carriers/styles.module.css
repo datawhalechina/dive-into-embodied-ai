@@ -1,0 +1,30 @@
+.heading {margin-bottom: 1.5rem;}
+.kicker {margin: 0 0 .6rem; color: var(--site-muted); font-size: .875rem; font-weight: 600;}
+.heading h2 {margin: 0; font-size: clamp(1.5rem, 2.5vw, 1.875rem); line-height: 1.4; letter-spacing: -.025em;}
+.introduction {margin-bottom: 1.5rem; line-height: 1.85;}
+.introduction p, .context p {margin: 0 0 .9rem;}
+.introduction p:last-child, .context p:last-child {margin-bottom: 0;}
+.tableScroll {max-width: 100%; overflow-x: auto; border: 1px solid var(--site-border); border-radius: 12px; background: var(--site-panel);}
+.tableScroll:focus-visible {outline: 3px solid var(--site-blue); outline-offset: 4px;}
+.table {display: table; width: 100%; min-width: 900px; margin: 0; table-layout: fixed; border-collapse: separate; border-spacing: 0; font-size: .875rem; line-height: 1.8;}
+.table th, .table td {padding: 1.1rem 1rem; border: 0; border-bottom: 1px solid var(--site-border); text-align: start; vertical-align: top; overflow-wrap: anywhere;}
+.table tr {background: var(--site-panel); border: 0;}
+.table thead th {background: var(--site-canvas); font-weight: 600;}
+.table th:first-child {position: sticky; left: 0; width: 17%; background: var(--site-panel); border-right: 1px solid var(--site-border);}
+.table thead th:first-child {background: var(--site-canvas);}
+.table thead th:nth-child(2) {width: 23%;}
+.table thead th:nth-child(3) {width: 23%;}
+.table tbody th {font-weight: 600;}
+.table tbody tr:last-child > * {border-bottom: 0;}
+.note {display: block; margin-top: .35rem; color: var(--site-muted); font-size: .8125rem; font-weight: 400;}
+.platforms {list-style: none; padding: 0; margin: 0;}
+.platforms li + li {margin-top: .35rem;}
+.platforms a {text-decoration: underline; text-decoration-thickness: .06em; text-underline-offset: .15em;}
+.tableHint {display: none; margin: .65rem 0 0; color: var(--site-muted); font-size: .8125rem;}
+.context {margin-top: 1.5rem; font-size: .9375rem; line-height: 1.85;}
+.context strong {font-weight: 600;}
+.srOnly {position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;}
+
+@media (max-width: 1023px) {
+  .tableHint {display: block;}
+}

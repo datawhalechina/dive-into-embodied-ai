@@ -1,9 +1,21 @@
 import {translate} from '@docusaurus/Translate';
 import {BrainCircuit, Database, Eye, FlaskConical, Move3D, Settings2} from 'lucide-react';
+import {robotSkills} from './skills/content';
 
-export const chapters = [
+type Chapter = {
+  id: string;
+  label: string;
+  quickLabel: string;
+  children?: {id: string; label: string}[];
+};
+
+export const chapters: Chapter[] = [
   {id: 'what-is-embodied-ai', label: translate({message: "什么是具身智能"}), quickLabel: translate({message: "认识具身智能"})},
-  {id: 'robot-interaction', label: translate({message: "机器人的技能"}), quickLabel: translate({message: "机器人的技能"})},
+  {
+    id: 'robot-interaction', label: translate({message: "机器人的技能"}), quickLabel: translate({message: "机器人的技能"}),
+    children: robotSkills.map(({id, name}) => ({id, label: name})),
+  },
+  {id: 'embodied-platforms', label: translate({message: '具身智能的载体'}), quickLabel: translate({message: '认识具身载体'})},
   {id: 'knowledge-map', label: translate({message: "知识全景"}), quickLabel: translate({message: "看知识全景"})},
   {id: 'first-steps', label: translate({message: "入门路线"}), quickLabel: translate({message: "从零开始学"})},
   {id: 'directions', label: translate({message: "实践方向"}), quickLabel: translate({message: "选择实践方向"})},
