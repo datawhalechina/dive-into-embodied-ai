@@ -1,9 +1,9 @@
 <div align="center">
-    <img src="static/img/career.webp" width="100%" alt="Dive into Embodied AI 横幅" />
+    <img src="static/img/embodied-ai-learning.webp" width="100%" alt="机器人学习工作台：仿真、机械臂、四足和人形机器人" />
 </div>
 
 <h1 align="center">Dive into Embodied AI</h1>
-<p align="center"><b>具身智能入门与求职开源教程</b></p>
+<p align="center"><b>具身智能入门与实践开源教程</b></p>
 
 <p align="center"><b>中文</b> · <a href="README.en.md" lang="en">English</a></p>
 

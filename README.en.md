@@ -1,9 +1,9 @@
 <div align="center">
-    <img src="static/img/career.webp" width="100%" alt="Dive into Embodied AI banner" />
+    <img src="static/img/embodied-ai-learning.webp" width="100%" alt="Embodied AI workbench with a simulation, robot arm, quadruped, and humanoid" />
 </div>
 
 <h1 align="center">Dive into Embodied AI</h1>
-<p align="center"><b>An open course for getting started and building a career in embodied AI</b></p>
+<p align="center"><b>An open course for learning embodied AI through hands-on projects</b></p>
 <p align="center"><a href="README.md" lang="zh-Hans">中文</a> · <b>English</b></p>
 
 > [!TIP]
