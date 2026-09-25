@@ -44,7 +44,6 @@ assert.throws(() => pageToMarkdown(parse('<button>Only chrome</button>'), url));
 // Exercise the actual generated HTML, including MDX tables and MathJax output.
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pages = [
-  'build/index.html', 'build/en/index.html',
   'build/docs/introduction/intro.html', 'build/en/docs/introduction/intro.html',
   'build/en/docs/foundations/controllers/intro.html',
 ];
@@ -56,6 +55,5 @@ for (const file of pages) {
   assert(result.includes('# '), `${file}: missing heading`);
   assert(!result.includes('Markdown 选项') && !result.includes('Markdown options'), `${file}: included copy controls`);
   if (file.includes('controllers')) assert(result.includes('This page is currently available in Chinese.'));
-  if (file === 'build/en/index.html') assert(!/\p{Script=Han}/u.test(result));
 }
 console.log('Markdown export checks passed (formatting, code, math, links, page chrome, locales, and live DOM preservation).');

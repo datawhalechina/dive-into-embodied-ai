@@ -8,7 +8,6 @@
 .heroVeil {position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, #f0f0eef5 0%, #f0f0eed4 23%, #f0f0ee70 42%, #f0f0ee00 64%), linear-gradient(0deg, #f0f0ee 0%, #f0f0ee00 20%);}
 .heroContent {position: relative; z-index: 1; width: min(1180px, calc(100% - 7rem)); min-height: inherit; margin: auto; display: flex; align-items: flex-end; padding: 10rem 0 8.5rem; pointer-events: none;}
 .heroCopy {max-width: 580px; pointer-events: auto;}
-.heroMarkdown {position: absolute; top: 6rem; right: max(3.5rem, calc((100% - 1180px) / 2)); z-index: 3;}
 .eyebrow {display: inline-flex; align-items: center; gap: .65rem; font-size: .75rem; font-weight: 600; color: #0066cc; letter-spacing: .065em; margin: 0 0 1.6rem;}
 .eyebrow:hover {color: #0054a8; text-decoration: none;}
 .statusDot {width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px #0066cc0d;}
@@ -70,8 +69,7 @@
   .heroCopy h1 {font-size: clamp(2.5rem, 9.5vw, 3.5rem);}
   .heroVideo {height: 62%; object-position: 64% center;}
   .heroVeil {background: linear-gradient(0deg, #f0f0ee 0%, #f0f0ee 35%, #f0f0eeeb 44%, #f0f0ee00 68%);}
-  .sceneLabel {top: 10rem; right: 1.5rem; font-size: .5rem;}
-  .heroMarkdown {right: 1.5rem;}
+  .sceneLabel {top: 7rem; right: 1.5rem; font-size: .5rem;}
   .sceneLabel span:last-child {font-size: .625rem;}
   .eyebrow {margin-bottom: 1rem; font-size: .6875rem;}
   .intro {font-size: .875rem;}
