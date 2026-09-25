@@ -10,13 +10,15 @@ const mathjaxConfig = {
   },
 };
 
+const baseUrl = '/dive-into-embodied-ai/';
+
 const config: Config = {
   title: 'Dive into Embodied AI',
   tagline: '动手学具身智能',
   favicon: 'img/favicon.svg',
 
   url: 'https://datawhalechina.github.io',
-  baseUrl: '/dive-into-embodied-ai/',
+  baseUrl,
   trailingSlash: false,
 
   organizationName: 'datawhalechina',
@@ -33,8 +35,10 @@ const config: Config = {
     defaultLocale: 'zh-Hans',
     locales: ['zh-Hans', 'en'],
     localeConfigs: {
-      'zh-Hans': {label: '中文', htmlLang: 'zh-Hans'},
-      en: {label: 'English', htmlLang: 'en'},
+      // Keep single-locale builds at their own paths so --locale en cannot
+      // overwrite the Chinese homepage or collapse both language links to it.
+      'zh-Hans': {label: '中文', htmlLang: 'zh-Hans', baseUrl},
+      en: {label: 'English', htmlLang: 'en', baseUrl: `${baseUrl}en/`},
     },
   },
 
