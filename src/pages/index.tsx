@@ -7,6 +7,7 @@ import {ArrowRight, ArrowUpRight, BookOpen, Code2, GitFork, SlidersHorizontal, M
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import HomepageProjects from '@site/src/components/HomepageProjects';
 import TranslationNotice from '@site/src/components/TranslationNotice';
+import PageMarkdown from '@site/src/components/PageMarkdown';
 import styles from './index.module.css';
 
 const heroVideo = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4';
@@ -56,6 +57,7 @@ function HomepageHeader() {
 
   return (
     <header ref={stageRef} className={styles.hero} onPointerMove={movePerspective} onPointerLeave={resetPerspective}>
+      <PageMarkdown className={styles.heroMarkdown} />
       <div className={styles.sceneFallback} style={{visibility: ready && !failed && motionAllowed ? 'hidden' : 'visible'}} aria-hidden="true">
         <div className={styles.orbit} /><div className={styles.orbitInner} />
         <div className={styles.core}><div /><div /><div /><div /><div /><div /></div>
@@ -145,7 +147,7 @@ function Community() {
 export default function Home(): React.JSX.Element {
   return (
     <Layout wrapperClassName={styles.homeLayout} title={translate({message: "动手学具身智能"})} description={translate({message: "Datawhale 开源具身智能学习站：具身导论、理论基础与项目实战，连接机器人学习、论文、数据集和开源工具。"})}>
-      <main className={styles.home}>
+      <main className={styles.home} data-markdown-content>
         <HomepageHeader />
         <div id="learning-paths" className={styles.learningPaths}>
           <div className="home-container"><TranslationNotice translated /></div>

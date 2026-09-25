@@ -1,0 +1,3 @@
+.toolbar {display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem 1rem; margin-bottom: 1.25rem;}
+.toolbar > nav {min-width: 0; margin-bottom: 0;}
+.toolbar > :last-child {margin-inline-start: auto;}

@@ -97,6 +97,7 @@ a {text-underline-offset: .2em;}
 
 .translation-notice {margin-block: 1.25rem; padding: 1rem 1.25rem; border: 1px solid var(--site-border); border-radius: .75rem; background: var(--site-panel); color: var(--site-muted); font-size: .875rem; line-height: 1.7;}
 .translation-notice a {text-decoration: underline; text-underline-offset: .15em;}
+.page-markdown-toolbar {display: flex; justify-content: flex-end; padding: .75rem 1rem; background: var(--site-panel);}
 
 /* Keep the language menu and longer English labels from overlapping. */
 @media (min-width: 997px) and (max-width: 1399px) {

@@ -11,11 +11,13 @@ export default function PdPlaygroundPage() {
       description="无人机悬停 PID 交互 playground。拖动 Kp/Ki/Kd 滑块或点击画布改目标,实时看闭环如何追上目标。"
       noFooter
     >
-      <TranslationNotice />
-      <div lang="zh-Hans">
-        <PlaygroundHeader currentKey="pd" />
-        <div className="playground-shell">
-          <PdPlayground />
+      <div data-markdown-content>
+        <TranslationNotice />
+        <div lang="zh-Hans">
+          <PlaygroundHeader currentKey="pd" />
+          <div className="playground-shell">
+            <PdPlayground />
+          </div>
         </div>
       </div>
     </Layout>

@@ -11,11 +11,12 @@ export default function LocalizedDocItemContent(props: Props) {
   // Docusaurus falls back to docs/ when a translated Markdown file is absent.
   const isChineseFallback = i18n.currentLocale === 'en' && metadata.source.startsWith('@site/docs/');
 
-  if (!isChineseFallback) return <DocItemContent {...props} />;
   return (
-    <>
-      <TranslationNotice />
-      <div lang="zh-Hans"><DocItemContent {...props} /></div>
-    </>
+    <div data-markdown-content>
+      {isChineseFallback && <TranslationNotice />}
+      {isChineseFallback ? (
+        <div lang="zh-Hans"><DocItemContent {...props} /></div>
+      ) : <DocItemContent {...props} />}
+    </div>
   );
 }

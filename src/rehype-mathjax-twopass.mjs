@@ -105,6 +105,8 @@ export default function rehypeMathjaxTwoPass(options = {}) {
     function renderNode(node) {
       const liteElement = document.convert(node.text, {display: node.display});
       const rendered = fromLiteElement(liteElement);
+      // Preserve the source for the page's Markdown export, alongside the SVG.
+      rendered.properties['data-markdown-math'] = node.text;
       const result = [];
 
       if (node.display) {

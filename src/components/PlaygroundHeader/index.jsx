@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Link from '@docusaurus/Link';
+import PageMarkdown from '@site/src/components/PageMarkdown';
 import { ArrowLeft, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 /**
@@ -64,11 +65,13 @@ const returnBtnStyle = {
 const pagerGroupStyle = {
   display: 'inline-flex',
   alignItems: 'center',
+  justifyContent: 'center',
+  flexWrap: 'wrap',
   gap: 8,
 };
 
 const sideSlotStyle = {
-  flex: '1 1 0',
+  flex: '1 0 auto',
   display: 'flex',
   alignItems: 'center',
   minWidth: 0,
@@ -201,7 +204,7 @@ export default function PlaygroundHeader({ currentKey }) {
   if (!current) return null;
 
   return (
-    <div style={barStyle}>
+    <div style={barStyle} data-markdown-exclude>
       <div style={{ ...sideSlotStyle, justifyContent: 'flex-start' }}>
         <Link to={current.readingHref} style={returnBtnStyle}>
           <ArrowLeft size={14} />
@@ -285,7 +288,9 @@ export default function PlaygroundHeader({ currentKey }) {
         <NavArrow target={next} direction="next" />
       </div>
 
-      <div style={{ ...sideSlotStyle, justifyContent: 'flex-end' }} aria-hidden="true" />
+      <div style={{ ...sideSlotStyle, flex: '1 0 auto', justifyContent: 'flex-end' }}>
+        <PageMarkdown />
+      </div>
     </div>
   );
 }

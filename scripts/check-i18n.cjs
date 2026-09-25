@@ -16,6 +16,7 @@ const sources = [
   'src/components/HomepageFeatures/index.tsx',
   'src/components/HomepageProjects/index.tsx',
   'src/components/NavbarMegaMenu/data.ts',
+  'src/components/PageMarkdown/index.tsx',
   ...walk('src/theme/DocItem/TOC').filter(file => /\.tsx?$/.test(file)),
   ...walk('src/components/docs/introduction').filter(file => /\.tsx?$/.test(file)),
 ];

@@ -1075,5 +1075,35 @@
   },
   "Datawhale 开源具身智能学习站：具身导论、理论基础与项目实战，连接机器人学习、论文、数据集和开源工具。": {
     "message": "Datawhale’s open embodied AI course: introduction, foundations, and projects connecting robot learning with papers, datasets, and open source tools."
+  },
+  "pageMarkdown.copy": {
+    "message": "Copy as Markdown"
+  },
+  "pageMarkdown.view": {
+    "message": "View as Markdown"
+  },
+  "pageMarkdown.copied": {
+    "message": "Copied!"
+  },
+  "pageMarkdown.copying": {
+    "message": "Copying…"
+  },
+  "pageMarkdown.copyError": {
+    "message": "Automatic copying is unavailable. Select and copy the text below."
+  },
+  "pageMarkdown.readError": {
+    "message": "Unable to read the page content. Refresh the page and try again."
+  },
+  "pageMarkdown.options": {
+    "message": "Markdown options"
+  },
+  "pageMarkdown.close": {
+    "message": "Close preview"
+  },
+  "pageMarkdown.hint": {
+    "message": "Page content converted to Markdown. Use the original page link at the end to explore interactive graphics."
+  },
+  "pageMarkdown.content": {
+    "message": "Markdown content"
   }
 }

@@ -44,6 +44,9 @@ jobs:
       - name: Check bilingual routes and translations
         run: npm run check:i18n
 
+      - name: Check page Markdown export
+        run: npm run check:page-markdown
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

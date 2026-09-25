@@ -10,6 +10,7 @@
     "clear": "docusaurus clear",
     "typecheck": "tsc",
     "check:i18n": "node scripts/check-i18n.cjs",
+    "check:page-markdown": "node scripts/check-page-markdown.mjs",
     "check:doc-assets": "node scripts/check-doc-assets.cjs",
     "check:math-refs": "node scripts/check-math-refs.cjs",
     "check:doc-sidebars": "node scripts/check-doc-sidebars.cjs",
@@ -38,12 +39,15 @@
     "react-dom": "^19.0.0",
     "remark-math": "^6.0.0",
     "three": "^0.186.0",
+    "turndown": "^7.2.4",
+    "turndown-plugin-gfm": "^1.0.2",
     "unist-util-visit-parents": "^6.0.2"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.10.1",
     "@docusaurus/tsconfig": "^3.10.1",
     "@docusaurus/types": "^3.10.1",
+    "@mixmark-io/domino": "^2.2.0",
     "@types/three": "^0.186.0",
     "autoprefixer": "^10.4.27",
     "husky": "^9.0.0",

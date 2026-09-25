@@ -11,6 +11,8 @@
 >
 > The website offers full-text search, chapter navigation, and interactive demos. **[Get started with the introduction →](https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/introduction/intro)**.
 >
+> Use **Copy as Markdown** at the top of each page to copy its content, or open the dropdown to preview it. Code, tables, and LaTeX equations are preserved, with a link to the original page for interactive demos.
+>
 > The README, homepage navigation, and introduction are available in English. Other tutorial chapters and standalone playgrounds are currently in Chinese. Use the language menu to switch between 中文 and English on the same page.
 
 <p align="center">

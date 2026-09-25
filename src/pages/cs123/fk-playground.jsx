@@ -11,11 +11,13 @@ export default function FkPlaygroundPage() {
       description="3-DoF 平面臂 FK 交互 playground。拖动关节角,观察末端位置随关节角变化。"
       noFooter
     >
-      <TranslationNotice />
-      <div lang="zh-Hans">
-        <PlaygroundHeader currentKey="fk" />
-        <div className="playground-shell">
-          <FkPlayground />
+      <div data-markdown-content>
+        <TranslationNotice />
+        <div lang="zh-Hans">
+          <PlaygroundHeader currentKey="fk" />
+          <div className="playground-shell">
+            <FkPlayground />
+          </div>
         </div>
       </div>
     </Layout>

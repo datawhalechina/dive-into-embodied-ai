@@ -11,11 +11,13 @@ export default function IkPlaygroundPage() {
       description="3-DoF 平面臂 IK 交互 playground。拖动目标点,求解器会反解关节角并把臂拉过去。"
       noFooter
     >
-      <TranslationNotice />
-      <div lang="zh-Hans">
-        <PlaygroundHeader currentKey="ik" />
-        <div className="playground-shell">
-          <IkPlayground />
+      <div data-markdown-content>
+        <TranslationNotice />
+        <div lang="zh-Hans">
+          <PlaygroundHeader currentKey="ik" />
+          <div className="playground-shell">
+            <IkPlayground />
+          </div>
         </div>
       </div>
     </Layout>
