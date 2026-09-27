@@ -581,17 +581,21 @@ GIF 依次执行站立、`vx=0.5` 前进、`wz=0.5` 转向、`vx=-0.3` 后退和
 
 <Figure
   id="fig-amd-pupper-rocm-training"
-  src={require('./figs/rocm-training-curves.webp').default}
   caption="v3 precision 的 1000 万追加步训练曲线：回报继续上升，回合长度稳定在 1000 步，KL 保持在目标线以下。"
-  width={1100}
-/>
+  width={1100}>
+
+![v3 precision 的 1000 万追加步训练曲线：回报继续上升，回合长度稳定在 1000 步，KL 保持在目标线以下。](./figs/rocm-training-curves.webp)
+
+</Figure>
 
 <Figure
   id="fig-amd-pupper-rocm-benchmark"
-  src={require('./figs/rocm-benchmark-progress.webp').default}
   caption="v3 在 500 万与 1000 万追加步的固定基准：存活率保持 100%，综合分数提高，平移和偏航 RMSE 均下降。"
-  width={1100}
-/>
+  width={1100}>
+
+![v3 在 500 万与 1000 万追加步的固定基准：存活率保持 100%，综合分数提高，平移和偏航 RMSE 均下降。](./figs/rocm-benchmark-progress.webp)
+
+</Figure>
 
 ### 8.2 最终固定基准
 
@@ -619,10 +623,12 @@ v3 用少量偏航精度和姿态平稳度换来了明显更好的平移跟踪�
 
 <Figure
   id="fig-amd-pupper-rocm-velocity"
-  src={require('./figs/rocm-velocity-tracking.webp').default}
   caption="最终策略的三档前向速度跟踪：0.4 和 0.6 m/s 能稳定跟踪，0.2 m/s 仍倾向原地站立。"
-  width={1100}
-/>
+  width={1100}>
+
+![最终策略的三档前向速度跟踪：0\.4 和 0\.6 m/s 能稳定跟踪，0\.2 m/s 仍倾向原地站立。](./figs/rocm-velocity-tracking.webp)
+
+</Figure>
 
 `vx=0.2 m/s` 的失败很有信息量：继续无差别增加训练步数未必能解决离散的“站立或行走”
 行为。下一轮更合理的实验是增加低速命令采样密度，或单独设计低速启动与维持奖励，并
@@ -633,10 +639,12 @@ v3 用少量偏航精度和姿态平稳度换来了明显更好的平移跟踪�
 
 <Figure
   id="fig-amd-pupper-rocm-demo"
-  src={require('./figs/rocm-command-demo.gif').default}
   caption="最终 v3 precision checkpoint 的命令切换演示。"
-  width={640}
-/>
+  width={640}>
+
+![最终 v3 precision checkpoint 的命令切换演示。](./figs/rocm-command-demo.gif)
+
+</Figure>
 
 完整参数、逐场景数据、checkpoint 哈希和复现记录见
 [`TRAINING_REPORT.md`](https://github.com/datawhalechina/dive-into-embodied-ai/blob/master/codes/practices/amd/cs123/6.rl_pupper/TRAINING_REPORT.md)。

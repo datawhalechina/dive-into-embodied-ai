@@ -1,17 +1,16 @@
 import React from 'react';
 import useBrokenLinks from '@docusaurus/useBrokenLinks';
 
-type SvgComponent = React.ComponentType<React.SVGProps<SVGSVGElement>>;
-
 interface FigureProps {
-  src: string | SvgComponent;
+  children: React.ReactNode;
   caption: string;
   width?: number | string;
-  alt?: string;
   id?: string;
 }
 
-export default function Figure({src, caption, width = 560, alt, id}: FigureProps) {
+// Put a standard Markdown image between blank lines inside Figure. GitHub can
+// render that image even though it strips this MDX wrapper from its preview.
+export default function Figure({children, caption, width = 560, id}: FigureProps) {
   useBrokenLinks().collectAnchor(id);
 
   const imageStyle =
@@ -19,20 +18,11 @@ export default function Figure({src, caption, width = 560, alt, id}: FigureProps
       ? {width: '100%', maxWidth: `${width}px`}
       : {width: '100%', maxWidth: width};
 
-  const label = alt ?? caption;
-  const isSvgComponent = typeof src === 'function';
-
   return (
     <figure className="doc-figure" id={id}>
-      {isSvgComponent ? (
-        React.createElement(src, {
-          role: 'img',
-          'aria-label': label,
-          style: imageStyle,
-        })
-      ) : (
-        <img src={src} alt={label} style={imageStyle} />
-      )}
+      <div className="doc-figure-content" style={imageStyle}>
+        {children}
+      </div>
       <figcaption>{caption}</figcaption>
     </figure>
   );

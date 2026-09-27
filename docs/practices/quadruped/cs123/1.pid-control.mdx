@@ -37,10 +37,12 @@ import DocTable from '@site/src/components/DocTable';
 4. **反馈回路**：现代执行器几乎都内嵌编码器、电流传感器或力矩传感器，把实际状态回传给控制器，便于构成反馈回路。
 
 <Figure
-  src={require('./figs/actuator-workflow.webp').default}
   caption="执行器工作流程：输入信号 → 能量转换 → 产生动作 → 反馈回路"
-  width={800}
-/>
+  width={800}>
+
+![执行器工作流程：输入信号 → 能量转换 → 产生动作 → 反馈回路](./figs/actuator-workflow.webp)
+
+</Figure>
 
 ### 1.1.2 执行器分类
 
@@ -66,10 +68,12 @@ import DocTable from '@site/src/components/DocTable';
 
 <Figure
   id="fig-electric-actuators"
-  src={require('./figs/electric-actuators.webp').default}
   caption="常见电动执行器示意图"
-  width={800}
-/>
+  width={800}>
+
+![常见电动执行器示意图](./figs/electric-actuators.webp)
+
+</Figure>
 
 ### 1.1.3 齿轮箱
 
@@ -86,10 +90,12 @@ $$
 $$
 
 <Figure
-  src={require('./figs/gear-ratio-demo.gif').default}
   caption="齿轮传动动画：主动轮与从动轮按固定传动比反向旋转，输出端转得更慢但更有力"
-  width={640}
-/>
+  width={640}>
+
+![齿轮传动动画：主动轮与从动轮按固定传动比反向旋转，输出端转得更慢但更有力](./figs/gear-ratio-demo.gif)
+
+</Figure>
 
 其中各符号含义如下：
 
@@ -120,10 +126,12 @@ $$
 家用洗衣机、微波炉、按预设脉冲数旋转的步进电机都是典型代表——指令序列在程序里写死，执行端实际走到哪里不会反过来影响后续动作。
 
 <Figure
-  src={require('./figs/open-loop-control.webp').default}
   caption="开环控制：指令单向下发，执行端状态不回传"
-  width={800}
-/>
+  width={800}>
+
+![开环控制：指令单向下发，执行端状态不回传](./figs/open-loop-control.webp)
+
+</Figure>
 
 开环控制的优点是**简单**，不需要传感器建立反馈通路。但缺点是**无法适应任何外界扰动**，例如机械臂收到"转到 90°"的开环指令，一旦碰到摩擦、负载或障碍物，就会停在偏离 90° 的位置，并且不会自我修正。
 
@@ -140,10 +148,12 @@ $$
 每个采样周期，传感器测出当前 $q$，控制器算出 $e$ 并输出 $u$，执行器把 $u$ 作用到被控对象上，下一拍传感器再测一次状态——**控制器 → 执行器 → 被控对象 → 传感器 → 控制器** 由此闭合成回路。
 
 <Figure
-  src={require('./figs/closed-loop-control.webp').default}
   caption="闭环控制：传感器把实测状态回传，控制器据此修正"
-  width={800}
-/>
+  width={800}>
+
+![闭环控制：传感器把实测状态回传，控制器据此修正](./figs/closed-loop-control.webp)
+
+</Figure>
 
 闭环的关键能力是**自我纠错**：扰动来自哪里并不重要——多挂了 1 kg 负载、电池电压跌了、桌面把关节顶了一下，只要它表现为偏离目标的 $e \ne 0$，控制器在下一拍就能感知并修正。
 
@@ -160,10 +170,12 @@ $$
 $$
 
 <Figure
-  src={require('./figs/bang-bang-control.webp').default}
   caption="Bang-Bang 控制：仅按误差符号在 ±τ_max 间切换，关节穿过目标点形成极限环"
-  width={800}
-/>
+  width={800}>
+
+![Bang-Bang 控制：仅按误差符号在 ±τ\_max 间切换，关节穿过目标点形成极限环](./figs/bang-bang-control.webp)
+
+</Figure>
 
 Bang-Bang 的逻辑是：只看误差 $e$ 的符号，完全不管它的大小——如果关节在目标左侧($e > 0$)，就全力右拉 $\tau = +\tau_{max}$;如果在目标右侧($e < 0$)，就全力左拉 $\tau = -\tau_{max}$;如果正好在目标点($e = 0$)，就不出力 $\tau = 0$。
 
@@ -176,10 +188,12 @@ Bang-Bang 的逻辑是：只看误差 $e$ 的符号，完全不管它的大小�
 然而，在机器人控制场景中，一个轻量化关节的机械时间常数往往只有几十毫秒，电机扭矩切换却几乎是瞬间，两个时间尺度倒了过来。此时，Bang-Bang 就会在目标附近形成一个**极限环**(Limit Cycle)，关节永远停不下来，电流也在 $\pm\tau_{max}$ 之间反复切换，对机械结构的磨损和能量效率都是灾难性的。
 
 <Figure
-  src={require('./figs/bang-bang-limit-cycle.webp').default}
   caption="极限环时域图：关节在 q_d 两侧以幅度 Δq 周期摆动"
-  width={800}
-/>
+  width={800}>
+
+![极限环时域图：关节在 q\_d 两侧以幅度 Δq 周期摆动](./figs/bang-bang-limit-cycle.webp)
+
+</Figure>
 
 ## 1.4 PID 控制
 
@@ -212,10 +226,12 @@ $$
 - **缺点**：对噪声非常敏感。如果传感器数据跳变厉害，微分项会产生剧烈的波动。
 
 <Figure
-  src={require('./figs/pid-three-terms.webp').default}
   caption="PID 三项分解：现在(P)、过去(I)、未来(D) 对阶跃响应的影响"
-  width={800}
-/>
+  width={800}>
+
+![PID 三项分解：现在\(P\)、过去\(I\)、未来\(D\) 对阶跃响应的影响](./figs/pid-three-terms.webp)
+
+</Figure>
 
 ## 1.5 PD 控制
 
@@ -231,10 +247,12 @@ $$
 - 使用 **PID** 时，只要误差一直存在，积分项就会持续累加，电机收到越来越大的力矩指令，直到硬件上限。一旦障碍物突然移开，累积的积分项瞬间释放，关节会以非常剧烈的姿态甩出去——既容易损坏机器人，也带来明显的人身安全风险。
 
 <Figure
-  src={require('./figs/integral-windup.webp').default}
   caption="积分饱和：障碍解除瞬间累积的 I 项集中释放，关节剧烈过冲"
-  width={800}
-/>
+  width={800}>
+
+![积分饱和：障碍解除瞬间累积的 I 项集中释放，关节剧烈过冲](./figs/integral-windup.webp)
+
+</Figure>
 
 ### 1.5.2 弹簧-阻尼器
 
@@ -250,10 +268,12 @@ $$
 - $K_d$ 对应阻尼器的**阻尼系数**(damping)，越大运动中的阻力越大、越不容易振荡。
 
 <Figure
-  src={require('./figs/pd-spring-damper.webp').default}
   caption="PD 等效弹簧-阻尼器：K_p 决定回拉刚度，K_d 决定阻尼，二者共同塑造阶跃响应"
-  width={800}
-/>
+  width={800}>
+
+![PD 等效弹簧-阻尼器：K\_p 决定回拉刚度，K\_d 决定阻尼，二者共同塑造阶跃响应](./figs/pd-spring-damper.webp)
+
+</Figure>
 
 这种物理直觉让 PD 天然契合**阻抗控制**(Impedance Control)——希望机器人像人手一样柔软地抓取物体时，只需调低 $K_p, K_d$，系统就自动表现出弹簧般的柔顺。而一旦引入积分项，这层纯粹的弹簧-阻尼等效性就会被破坏。
 
@@ -552,10 +572,12 @@ python pd_experiments.py
 （按 $I \approx m L^2/3 \approx 0.083$ 估算 $\zeta$，需要更准就用 MuJoCo 的 `mj_fullM` 读真实惯量。）
 
 <Figure
-  src={require('./figs/pd-kd-sweep.webp').default}
   caption="实验 1：固定 Kp=40，只改变 Kd 时的单摆响应曲线"
-  width={800}
-/>
+  width={800}>
+
+![实验 1：固定 Kp=40，只改变 Kd 时的单摆响应曲线](./figs/pd-kd-sweep.webp)
+
+</Figure>
 
 把三条曲线放在一起看，会更容易看出几个现象：
 
@@ -572,10 +594,12 @@ data.qfrc_applied[0] = 2.0 if disturbance and data.time > 3.0 else 0.0
 ```
 
 <Figure
-  src={require('./figs/pd-disturbance-error.webp').default}
   caption="实验 2：3 秒后加入恒定外扰，P 和 PD 都会留下稳态误差"
-  width={800}
-/>
+  width={800}>
+
+![实验 2：3 秒后加入恒定外扰，P 和 PD 都会留下稳态误差](./figs/pd-disturbance-error.webp)
+
+</Figure>
 
 我们会看到两种明显不同的行为：
 

@@ -75,7 +75,11 @@ $$
 
 如图所示，不同于 $\text{Q-learning}$ 算法每次用最新的样本直接喂入神经网络去更新网络模型，$\text{DQN}$ 算法会把每次与环境交互得到的样本都存储在一个经验回放中，然后每次从经验池中随机抽取一批样本来训练网络。
 
-<Figure src={require('./figs/replay.webp').default} caption="经验回放示例" width={500} />
+<Figure caption="经验回放示例" width={500}>
+
+![经验回放示例](./figs/replay.webp)
+
+</Figure>
 
 ## 6.3 目标网络
 
@@ -95,7 +99,11 @@ $$
 
 其中 $C$ 是一个超参数，表示每隔多少步更新一次目标网络的参数。这样一来，目标网络的参数在会在一定时间内保持不变，从而使得目标 $Q$ 值相对稳定，避免了追逐不断移动的目标的问题，提高了训练的稳定性和收敛性，如图所示。
 
-<Figure src={require('./figs/target_q.webp').default} caption="目标网络示例" width={500} />
+<Figure caption="目标网络示例" width={500}>
+
+![目标网络示例](./figs/target_q.webp)
+
+</Figure>
 
 另外，上面的更新方式被称为硬更新（ $\text{Hard Update}$ ），即每隔 $C$ 步直接将当前网络的参数复制给目标网络。除此之外，还有一种软更新（ $\text{Soft Update}$ ）的方式，即每次更新时将目标网络的参数向当前网络的参数靠近一点：
 
@@ -118,7 +126,11 @@ $$
 
 $\text{DQN}$ 算法的完整流程如图所示，包括初始化网络和经验回放池、与环境交互采样、存储样本到经验回放池、从经验回放池中随机采样小批量样本、计算目标 $Q$ 值和损失函数、更新网络参数以及定期更新目标网络参数等步骤。
 
-<Figure src={require('./figs/dqn_pseu.webp').default} caption="DQN 算法流程" width={600} />
+<Figure caption="DQN 算法流程" width={600}>
+
+![DQN 算法流程](./figs/dqn_pseu.webp)
+
+</Figure>
 
 ## 6.6 交互式演示
 

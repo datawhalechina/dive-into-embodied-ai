@@ -9,10 +9,12 @@ import Figure from '@site/src/components/Figure';
 # 🤗 Robotics Course 中文学习讲义
 
 <Figure
-  src={require('./figs/banner.webp').default}
   caption="Robotics Course 中文学习讲义封面"
-  width={760}
-/>
+  width={760}>
+
+![Robotics Course 中文学习讲义封面](./figs/banner.webp)
+
+</Figure>
 
 这是一份把 Hugging Face 官方 `robotics-course` 当前已发布内容重新整理后的单文件中文学习文档。它不是把 11 篇教程简单首尾拼接，而是按学习路径重新编排，尽量去掉重复铺垫、补上章节过渡，并把核心概念、代码示例和方法脉络串成一条更顺的主线。
 
@@ -138,10 +140,12 @@ import Figure from '@site/src/components/Figure';
 课程里贯穿始终的答案是 **LeRobot**。
 
 <Figure
-  src={require('./figs/ch1-lerobot-figure1.webp').default}
   caption="LeRobot 不是单点工具，而是把机器人接入、数据、训练和部署连成一条统一链路。"
-  width={720}
-/>
+  width={720}>
+
+![LeRobot 不是单点工具，而是把机器人接入、数据、训练和部署连成一条统一链路。](./figs/ch1-lerobot-figure1.webp)
+
+</Figure>
 
 LeRobot 是 Hugging Face 推出的开源机器人学习库。你可以把它看成一个纵向打通的工具链：
 
@@ -202,10 +206,12 @@ pip install lerobot
 所以，机器人数据不能简单拿传统图像数据格式硬套。
 
 <Figure
-  src={require('./figs/item-from-dataset.webp').default}
   caption="一条机器人数据样本里往往同时包含图像、状态、动作和任务信息，这也是它比普通机器学习数据复杂得多的原因。"
-  width={720}
-/>
+  width={720}>
+
+![一条机器人数据样本里往往同时包含图像、状态、动作和任务信息，这也是它比普通机器学习数据复杂得多的原因。](./figs/item-from-dataset.webp)
+
+</Figure>
 
 ### LeRobotDataset 到底解决了什么
 
@@ -290,10 +296,12 @@ sample = dataset[100]
 - 行为克隆中的动作分块预测
 
 <Figure
-  src={require('./figs/streaming-multiple-frames.webp').default}
   caption="时间窗口会把同一时刻附近的多帧观测和动作一起取出，这对机器人策略学习尤其重要。"
-  width={640}
-/>
+  width={640}>
+
+![时间窗口会把同一时刻附近的多帧观测和动作一起取出，这对机器人策略学习尤其重要。](./figs/streaming-multiple-frames.webp)
+
+</Figure>
 
 ### 三种典型用法
 
@@ -441,10 +449,12 @@ for batch in dataloader:
 - **混合方法**
 
 <Figure
-  src={require('./figs/ch2-approaches.webp').default}
   caption="机器人运动生成方法可以粗略看成从显式模型到隐式学习的一条谱系，中间还存在大量混合路线。"
-  width={720}
-/>
+  width={720}>
+
+![机器人运动生成方法可以粗略看成从显式模型到隐式学习的一条谱系，中间还存在大量混合路线。](./figs/ch2-approaches.webp)
+
+</Figure>
 
 ### 显式方法
 
@@ -482,10 +492,12 @@ for batch in dataloader:
 从任务角度看，大多数机器人问题都可以先归到三类之一：
 
 <Figure
-  src={require('./figs/ch2-platforms.webp').default}
   caption="从桌面机械臂到四足、轮式和类人机器人，不同平台天然适合不同类型的运动任务。"
-  width={720}
-/>
+  width={720}>
+
+![从桌面机械臂到四足、轮式和类人机器人，不同平台天然适合不同类型的运动任务。](./figs/ch2-platforms.webp)
+
+</Figure>
 
 ### 1. Manipulation（操作）
 
@@ -527,10 +539,12 @@ for batch in dataloader:
 - 你该如何评估策略
 
 <Figure
-  src={require('./figs/ch2-cost-accessibility.webp').default}
   caption="像 SO-100 这样的低成本平台正在降低机器人学习的进入门槛，使更多人能实际动手。"
-  width={420}
-/>
+  width={420}>
+
+![像 SO-100 这样的低成本平台正在降低机器人学习的进入门槛，使更多人能实际动手。](./figs/ch2-cost-accessibility.webp)
+
+</Figure>
 
 ## 从平面机械臂理解运动学
 
@@ -539,10 +553,12 @@ for batch in dataloader:
 为了避免一上来就陷入复杂机械结构，我们用 SO-100 的简化版做例子，把它压缩成一个二维平面上的 2 自由度机械臂。
 
 <Figure
-  src={require('./figs/ch2-so100-to-planar-manipulator.webp').default}
   caption="把真实机械臂简化成二维平面模型，是理解运动学最常见也最有效的入门方法。"
-  width={640}
-/>
+  width={640}>
+
+![把真实机械臂简化成二维平面模型，是理解运动学最常见也最有效的入门方法。](./figs/ch2-so100-to-planar-manipulator.webp)
+
+</Figure>
 
 设这个简化机器人有：
 
@@ -596,9 +612,13 @@ $$\min_{q \in \mathcal{Q}} \|p(q) - p^*\|_2^2$$
 
 <figure className="doc-figure">
   <div className="doc-figure-grid doc-figure-grid--3">
-    <img src={require('./figs/ch2-planar-manipulator-free.webp').default} alt="自由运动的平面机械臂" />
-    <img src={require('./figs/ch2-planar-manipulator-floor.webp').default} alt="带地面约束的平面机械臂" />
-    <img src={require('./figs/ch2-planar-manipulator-floor-shelf.webp').default} alt="带障碍物约束的平面机械臂" />
+
+![自由运动的平面机械臂](./figs/ch2-planar-manipulator-free.webp)
+
+![带地面约束的平面机械臂](./figs/ch2-planar-manipulator-floor.webp)
+
+![带障碍物约束的平面机械臂](./figs/ch2-planar-manipulator-floor-shelf.webp)
+
   </div>
   <figcaption>同一个机械臂，一旦加入地面、障碍物和关节约束，IK 的可行解空间就会迅速变复杂。</figcaption>
 </figure>
@@ -655,10 +675,12 @@ $$\dot{q} = J(q)^+(\dot{p}^* + k_p \Delta p)$$
 也就是说，控制器会一边沿着目标方向走，一边根据当前误差不断修正。
 
 <Figure
-  src={require('./figs/ch2-planar-manipulator-floor-box.webp').default}
   caption="一旦环境里出现动态障碍物，单纯开环控制就不够了，必须依赖反馈持续修正。"
-  width={720}
-/>
+  width={720}>
+
+![一旦环境里出现动态障碍物，单纯开环控制就不够了，必须依赖反馈持续修正。](./figs/ch2-planar-manipulator-floor-box.webp)
+
+</Figure>
 
 ### 这类方法为什么在工程上有效
 
@@ -677,10 +699,12 @@ $$\dot{q} = J(q)^+(\dot{p}^* + k_p \Delta p)$$
 因为一旦任务进入真实、复杂、开放环境，经典方法会逐步暴露四类根本瓶颈。
 
 <Figure
-  src={require('./figs/ch2-classical-limitations.webp').default}
   caption="集成、扩展性、建模和数据利用，是经典机器人方法在真实世界中最容易卡住的四个方向。"
-  width={720}
-/>
+  width={720}>
+
+![集成、扩展性、建模和数据利用，是经典机器人方法在真实世界中最容易卡住的四个方向。](./figs/ch2-classical-limitations.webp)
+
+</Figure>
 
 ### 1. 集成挑战
 
@@ -735,10 +759,12 @@ $$\dot{q} = J(q)^+(\dot{p}^* + k_p \Delta p)$$
 当你把前面这些瓶颈连在一起看，基于学习的方法就不是“时髦替代品”，而更像是一种结构上更自然的回应。
 
 <Figure
-  src={require('./figs/classical-vs-robot-learning.webp').default}
   caption="传统模块化管线和学习式感知到动作路径之间的差别，正是这场范式变化的核心。"
-  width={720}
-/>
+  width={720}>
+
+![传统模块化管线和学习式感知到动作路径之间的差别，正是这场范式变化的核心。](./figs/classical-vs-robot-learning.webp)
+
+</Figure>
 
 ### 学习方法带来的直接优势
 

@@ -279,6 +279,19 @@ a {text-underline-offset: .2em;}
   border-radius: 0.5rem;
 }
 
+.doc-figure-content {
+  margin: 0 auto;
+}
+
+.doc-figure-content > p,
+.doc-figure-grid > p {
+  margin: 0;
+}
+
+.doc-figure-content img {
+  width: 100%;
+}
+
 .doc-figure figcaption {
   font-size: 0.875rem;
   color: var(--ifm-color-emphasis-600);

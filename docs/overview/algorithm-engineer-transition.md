@@ -17,10 +17,12 @@ import Figure from '@site/src/components/Figure';
 相反，如果你只是把具身理解成“换个更热的数据集继续训模型”，那转起来大概率会比想象中更痛苦。因为它最终不是停在 loss 曲线上，而是要落到动作、时序、物理世界和系统联调上。
 
 <Figure
-  src={require('./figs/learning-path/algorithm-fit-signals.svg').default}
   caption="判断自己适不适合转具身，关键不只是会不会 PyTorch，而是你的经验是否接近多模态、时序决策、数据闭环和系统落地。"
-  width={760}
-/>
+  width={760}>
+
+![判断自己适不适合转具身，关键不只是会不会 PyTorch，而是你的经验是否接近多模态、时序决策、数据闭环和系统落地。](./figs/learning-path/algorithm-fit-signals.svg)
+
+</Figure>
 
 ## 先说结论：最适合转的，不一定是最懂机器人学的人
 
@@ -33,10 +35,12 @@ import Figure from '@site/src/components/Figure';
 所以，今天更适合切进具身的，往往不是“机器人课上得最多”的人，而是**做过复杂模型迭代，又愿意补机器人最小认知的人**。
 
 <Figure
-  src={require('./figs/learning-path/algorithm-transition-window.svg').default}
   caption="现在更容易切入具身，不是因为门槛消失了，而是工具、数据和岗位结构已经更适合算法工程师进入。"
-  width={720}
-/>
+  width={720}>
+
+![现在更容易切入具身，不是因为门槛消失了，而是工具、数据和岗位结构已经更适合算法工程师进入。](./figs/learning-path/algorithm-transition-window.svg)
+
+</Figure>
 
 ## 为什么偏偏是现在
 
@@ -69,10 +73,12 @@ import Figure from '@site/src/components/Figure';
 还有一类人经常被低估，就是做数据 pipeline、训练平台、实验系统和评估平台的人。具身算法非常依赖数据闭环：采什么数据、怎么清洗、如何切片、怎样重采样、success rate 怎么定义、线上线下口径是否一致，这些都会直接决定模型上限。能把这套工程体系搭稳的人，在具身团队里往往很值钱。
 
 <Figure
-  src={require('./figs/learning-path/algorithm-transfer-advantages.svg').default}
   caption="很多算法经验不是“勉强能用”，而是能直接落到 VLA 训练、动作生成、数据闭环和部署优化这些核心工作里。"
-  width={760}
-/>
+  width={760}>
+
+![很多算法经验不是“勉强能用”，而是能直接落到 VLA 训练、动作生成、数据闭环和部署优化这些核心工作里。](./figs/learning-path/algorithm-transfer-advantages.svg)
+
+</Figure>
 
 ## 但有些人，别因为热度就急着转
 
@@ -107,10 +113,12 @@ import Figure from '@site/src/components/Figure';
 真正不建议的方式，是一上来就去碰最底层的真机控制或者复杂硬件联调。对大多数算法工程师来说，更现实的路径是先建立最低限度的机器人语境，再从开源项目和仿真项目切进去，尽快做出第一批可展示成果。
 
 <Figure
-  src={require('./figs/learning-path/algorithm-transition-route.svg').default}
   caption="先补最小机器人认知，再从开源项目和仿真项目切入，最后再往具身大模型、动作生成和部署方向深入，会更稳。"
-  width={720}
-/>
+  width={720}>
+
+![先补最小机器人认知，再从开源项目和仿真项目切入，最后再往具身大模型、动作生成和部署方向深入，会更稳。](./figs/learning-path/algorithm-transition-route.svg)
+
+</Figure>
 
 比较稳的一条路，通常是这样的：
 
