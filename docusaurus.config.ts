@@ -27,18 +27,22 @@ const config: Config = {
   onBrokenLinks: 'throw',
 
   future: {
-    faster: true,
+    // v4 enables the faster pipeline. Keep inline MathJax CSS identical on the
+    // server and client: SWC HTML minification rewrites it and breaks hydration.
+    faster: {swcHtmlMinimizer: false},
     v4: true,
   },
 
   i18n: {
     defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans', 'en'],
+    locales: ['zh-Hans', 'en', 'es', 'it'],
     localeConfigs: {
-      // Keep single-locale builds at their own paths so --locale en cannot
-      // overwrite the Chinese homepage or collapse both language links to it.
+      // Keep single-locale builds at their own paths so they cannot overwrite
+      // the Chinese homepage or collapse alternate-language links to it.
       'zh-Hans': {label: '中文', htmlLang: 'zh-Hans', baseUrl},
       en: {label: 'English', htmlLang: 'en', baseUrl: `${baseUrl}en/`},
+      es: {label: 'Español', htmlLang: 'es', baseUrl: `${baseUrl}es/`},
+      it: {label: 'Italiano', htmlLang: 'it', baseUrl: `${baseUrl}it/`},
     },
   },
 
@@ -92,7 +96,7 @@ const config: Config = {
         indexDocs: true,
         indexBlog: false,
         indexPages: true,
-        language: ['zh', 'en'],
+        language: ['zh', 'en', 'es', 'it'],
         hashed: true,
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,

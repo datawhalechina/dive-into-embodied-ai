@@ -1,0 +1,1175 @@
+{
+  "theme.DocItem.tocTitle": {
+    "message": "In questa pagina"
+  },
+  "theme.DocItem.interactiveMode": {
+    "message": "Modalità interattiva"
+  },
+  "调好第一个控制器": {
+    "message": "Regola il tuo primo controllore"
+  },
+  "PD 控制": {
+    "message": "Controllo PD"
+  },
+  "调整增益，观察响应、超调与稳定性的变化。": {
+    "message": "Regola i guadagni e osserva come cambiano risposta, sovraelongazione e stabilità."
+  },
+  "看懂关节如何运动": {
+    "message": "Scopri come si muovono le articolazioni"
+  },
+  "正运动学": {
+    "message": "Cinematica diretta"
+  },
+  "转动关节，观察足端位置与坐标系的关系。": {
+    "message": "Ruota le articolazioni ed esplora il rapporto tra posizione del piede e sistemi di riferimento."
+  },
+  "让足端走到目标点": {
+    "message": "Porta il piede al punto desiderato"
+  },
+  "逆运动学": {
+    "message": "Cinematica inversa"
+  },
+  "移动目标点，探索机器人腿的可达空间。": {
+    "message": "Sposta l'obiettivo per esplorare lo spazio raggiungibile da una gamba robotica."
+  },
+  "ROBOT LEARNING / 具身智能": {
+    "message": "APPRENDIMENTO ROBOTICO / IA INCARNATA"
+  },
+  "感知 → 决策 → 控制": {
+    "message": "Percezione → Decisione → Controllo"
+  },
+  "DATAWHALE · 开源具身智能教程": {
+    "message": "DATAWHALE · CORSO APERTO DI IA INCARNATA"
+  },
+  "让机器人，": {
+    "message": "Insegna ai robot a"
+  },
+  "感知并行动。": {
+    "message": "percepire e agire."
+  },
+  "从理解一个算法，到迈出机器人的第一步。": {
+    "message": "Dalla comprensione di un algoritmo al primo passo di un robot."
+  },
+  "动手连接感知、学习与控制，在仿真中走向真实。": {
+    "message": "Collega percezione, apprendimento e controllo, dalla simulazione al mondo reale."
+  },
+  "新手入门": {
+    "message": "Inizia qui"
+  },
+  "探索实战": {
+    "message": "Esplora i progetti"
+  },
+  "课程特色": {
+    "message": "Caratteristiche del corso"
+  },
+  "中文教程": {
+    "message": "Tutorial in cinese"
+  },
+  "可运行代码": {
+    "message": "Codice eseguibile"
+  },
+  "社区共建": {
+    "message": "Creato dalla comunità"
+  },
+  "MicroDuck 双足机器人仿真": {
+    "message": "Simulazione del bipede MicroDuck"
+  },
+  "从这里开始一次机器人实验": {
+    "message": "Inizia qui un esperimento di robotica"
+  },
+  "让 MicroDuck 学会行走": {
+    "message": "Insegna a MicroDuck a camminare"
+  },
+  "MuJoCo 仿真 · 强化学习": {
+    "message": "Simulazione MuJoCo · Apprendimento per rinforzo"
+  },
+  "向下探索学习路线": {
+    "message": "Esplora i percorsi di apprendimento"
+  },
+  "从数字仿真，到物理世界": {
+    "message": "Dalla simulazione al mondo fisico"
+  },
+  "暂停背景动画": {
+    "message": "Metti in pausa l'animazione di sfondo"
+  },
+  "播放背景动画": {
+    "message": "Riproduci l'animazione di sfondo"
+  },
+  "交互实验": {
+    "message": "Esperimenti interattivi"
+  },
+  "动一下，原理就清楚了。": {
+    "message": "Prova e scopri come funziona."
+  },
+  "无需安装环境，在浏览器里试试控制与运动学。": {
+    "message": "Esplora controllo e cinematica nel browser, senza installare nulla."
+  },
+  "打开实验": {
+    "message": "Apri l'esperimento"
+  },
+  "与 DATAWHALE 一起学习": {
+    "message": "IMPARA CON DATAWHALE"
+  },
+  "每一次复现，都让开源更进一步。": {
+    "message": "Ogni riproduzione fa progredire l'open source."
+  },
+  "分享实验结果，修正一处笔误，或提出一个好问题。": {
+    "message": "Condividi un risultato, correggi un refuso o poni una buona domanda."
+  },
+  "你的学习经验，也可以成为下一个人的起点。": {
+    "message": "La tua esperienza di apprendimento può essere il punto di partenza di qualcun altro."
+  },
+  "在 GitHub 参与共建": {
+    "message": "Contribuisci su GitHub"
+  },
+  "反馈问题": {
+    "message": "Segnala un problema"
+  },
+  "参与讨论": {
+    "message": "Partecipa alla discussione"
+  },
+  "动手学具身智能": {
+    "message": "Impara l'IA incarnata con la pratica"
+  },
+  "理论基础": {
+    "message": "Fondamenti"
+  },
+  "先理解，机器人如何思考。": {
+    "message": "Comprendi come pensano i robot."
+  },
+  "从智能决策、运动控制与感知，建立具身智能的知识框架。": {
+    "message": "Costruisci le basi dell'IA incarnata con decisioni, controllo del movimento e percezione."
+  },
+  "查看学习路线": {
+    "message": "Vedi i percorsi di apprendimento"
+  },
+  "机器人学与 ROS2": {
+    "message": "Robotica e ROS2"
+  },
+  "强化学习": {
+    "message": "Apprendimento per rinforzo"
+  },
+  "视觉语言动作模型": {
+    "message": "Modelli visione-linguaggio-azione"
+  },
+  "从零到一搭建四足机器人": {
+    "message": "Costruisci un quadrupede da zero"
+  },
+  "LeRobot 中文课程": {
+    "message": "Corso LeRobot in cinese"
+  },
+  "项目实战": {
+    "message": "Progetti"
+  },
+  "动手实验，让算法跑起来。": {
+    "message": "Sperimenta e metti in azione gli algoritmi."
+  },
+  "选择实践项目": {
+    "message": "Scegli un progetto"
+  },
+  "MicroDuck 小黄鸭": {
+    "message": "MicroDuck"
+  },
+  "ACT 双臂操作": {
+    "message": "Manipolazione bimanuale con ACT"
+  },
+  "AMD 实践专区": {
+    "message": "Progetti AMD"
+  },
+  "学习与探索": {
+    "message": "Impara ed esplora"
+  },
+  "从理解原理，到动手探索。": {
+    "message": "Dalla comprensione alla sperimentazione."
+  },
+  "MicroDuck 双足机器人": {
+    "message": "Bipede MicroDuck"
+  },
+  "双足行走 / 强化学习": {
+    "message": "Locomozione bipede / Apprendimento per rinforzo"
+  },
+  "从 PPO 训练到动作回放，探索行走、起身与轮式动作。": {
+    "message": "Esplora camminata, rialzata e movimento su ruote, dall'addestramento PPO alla riproduzione delle azioni."
+  },
+  "MicroDuck 双足机器人在 MuJoCo 仿真中行走": {
+    "message": "Bipede MicroDuck che cammina in una simulazione MuJoCo"
+  },
+  "玩转 Pupper 四足机器人": {
+    "message": "Esplora il quadrupede Pupper"
+  },
+  "AMD 实践 / 四足控制": {
+    "message": "Progetti AMD / Controllo dei quadrupedi"
+  },
+  "在 AMD 平台上探索 Pupper 的强化学习运动策略与 VLA 实验。": {
+    "message": "Esplora l'apprendimento per rinforzo per la locomozione di Pupper e gli esperimenti VLA su hardware AMD."
+  },
+  "Pupper 四足机器人前进步态仿真": {
+    "message": "Quadrupede Pupper che avanza in simulazione"
+  },
+  "运动控制": {
+    "message": "Controllo del movimento"
+  },
+  "ACT 双臂操作训练": {
+    "message": "Addestramento bimanuale con ACT"
+  },
+  "双臂协作 / 模仿学习": {
+    "message": "Coordinazione bimanuale / Apprendimento per imitazione"
+  },
+  "使用 ALOHA 仿真数据训练策略，在评测中验证双臂操作能力。": {
+    "message": "Addestra politiche con dati di simulazione ALOHA e valuta la manipolazione bimanuale."
+  },
+  "ALOHA 双臂机器人操作任务仿真": {
+    "message": "Manipolazione bimanuale con ALOHA in simulazione"
+  },
+  "MuJoCo 机械臂与 DDPG": {
+    "message": "Bracci robotici con MuJoCo e DDPG"
+  },
+  "探索机械臂的连续控制任务": {
+    "message": "Esplora il controllo continuo dei bracci robotici"
+  },
+  "机械臂": {
+    "message": "Bracci robotici"
+  },
+  "SO-101 + LeRobot 真机实践": {
+    "message": "SO-101 + LeRobot su hardware reale"
+  },
+  "硬件连通、基础测试与动作回放": {
+    "message": "Collega l'hardware, esegui test di base e riproduci le azioni"
+  },
+  "真机": {
+    "message": "Robot reali"
+  },
+  "精选实战": {
+    "message": "Progetti in evidenza"
+  },
+  "让知识，真的动起来。": {
+    "message": "Metti in movimento le tue conoscenze."
+  },
+  "查看全部项目": {
+    "message": "Vedi tutti i progetti"
+  },
+  "大脑：智能决策": {
+    "message": "Decisioni intelligenti"
+  },
+  "强化学习决策": {
+    "message": "Decisioni con apprendimento per rinforzo"
+  },
+  "从 MDP 到 PPO/SAC，建立序列决策直觉。": {
+    "message": "Sviluppa l'intuizione per le decisioni sequenziali, dagli MDP a PPO e SAC."
+  },
+  "视觉-语言-动作大模型(VLA)": {
+    "message": "Modelli visione-linguaggio-azione (VLA)"
+  },
+  "RT、OpenVLA、ACT、Diffusion Policy 与 π 系列。": {
+    "message": "RT, OpenVLA, ACT, Diffusion Policy e la famiglia π."
+  },
+  "世界模型在具身场景下的落地路径。": {
+    "message": "Esplora come applicare i modelli del mondo ai compiti di IA incarnata."
+  },
+  "小脑：运动控制": {
+    "message": "Controllo del movimento"
+  },
+  "强化学习控制": {
+    "message": "Controllo con apprendimento per rinforzo"
+  },
+  "把策略学习接到连续控制和机器人任务上。": {
+    "message": "Collega l'apprendimento delle politiche al controllo continuo e ai compiti robotici."
+  },
+  "控制": {
+    "message": "Controllo"
+  },
+  "策略训练": {
+    "message": "Addestramento delle politiche"
+  },
+  "控制器": {
+    "message": "Controllori"
+  },
+  "从 PID、LQR 到 MPC 与阻抗控制的连续教程。": {
+    "message": "Un corso strutturato da PID e LQR a MPC e controllo di impedenza."
+  },
+  "运动规划": {
+    "message": "Pianificazione del movimento"
+  },
+  "从模型、坐标树到 MoveIt 2 规划闭环。": {
+    "message": "Dai modelli e alberi di riferimento alla pianificazione ad anello chiuso con MoveIt 2."
+  },
+  "感知系统": {
+    "message": "Percezione"
+  },
+  "视觉感知与 VLM": {
+    "message": "Percezione visiva e VLM"
+  },
+  "Transformer、ViT、视觉编码器与多模态融合。": {
+    "message": "Transformer, ViT, codificatori visivi e fusione multimodale."
+  },
+  "视觉": {
+    "message": "Visione"
+  },
+  "定位与触觉感知": {
+    "message": "Localizzazione e percezione tattile"
+  },
+  "SLAM、足端接触、触觉传感和多传感器融合。": {
+    "message": "SLAM, contatto dei piedi, percezione tattile e fusione multisensore."
+  },
+  "触觉": {
+    "message": "Tatto"
+  },
+  "工程底座": {
+    "message": "Basi ingegneristiche"
+  },
+  "仿真工具": {
+    "message": "Strumenti di simulazione"
+  },
+  "MuJoCo / Isaac Sim / Gymnasium / PyBullet 快速上手。": {
+    "message": "Primi passi con MuJoCo, Isaac Sim, Gymnasium e PyBullet."
+  },
+  "仿真": {
+    "message": "Simulazione"
+  },
+  "坐标变换、FK/IK、tf2、URDF 与 MoveIt 2。": {
+    "message": "Trasformazioni di coordinate, FK/IK, tf2, URDF e MoveIt 2."
+  },
+  "CAN 与 MCU 通信": {
+    "message": "Comunicazione CAN e MCU"
+  },
+  "底层通信、执行器协议和上下位机链路。": {
+    "message": "Comunicazione di basso livello, protocolli degli attuatori e collegamenti tra host e controllore."
+  },
+  "机械结构": {
+    "message": "Struttura meccanica"
+  },
+  "连杆、关节、电机、减速器和末端执行器。": {
+    "message": "Link, articolazioni, motori, riduttori ed effettori finali."
+  },
+  "硬件": {
+    "message": "Hardware"
+  },
+  "本体": {
+    "message": "Corpo del robot"
+  },
+  "数据工程与模仿学习": {
+    "message": "Ingegneria dei dati e imitazione"
+  },
+  "从遥操作数据到模仿学习和策略训练。": {
+    "message": "Dai dati di teleoperazione all'apprendimento per imitazione e all'addestramento delle politiche."
+  },
+  "数据": {
+    "message": "Dati"
+  },
+  "先用理论技能树定位缺口，再进入对应专题。": {
+    "message": "Usa la mappa delle conoscenze per individuare le lacune, poi esplora un argomento."
+  },
+  "查看理论技能树": {
+    "message": "Esplora i fondamenti"
+  },
+  "沿着 8 章主线，从 PD 控制与运动学走到策略训练和感知。": {
+    "message": "Segui otto capitoli, dal controllo PD e dalla cinematica all'addestramento delle politiche e alla percezione."
+  },
+  "8 章": {
+    "message": "8 capitoli"
+  },
+  "LeRobot 中文课程讲义": {
+    "message": "Dispense del corso LeRobot in cinese"
+  },
+  "中文讲义": {
+    "message": "Dispense in cinese"
+  },
+  "两轮足 Flamingo · 课程预告": {
+    "message": "Bipede su ruote Flamingo · Anteprima"
+  },
+  "了解 Isaac Lab 训练与跨仿真验证课程的规划。": {
+    "message": "Scopri il corso previsto su addestramento in Isaac Lab e validazione tra simulatori."
+  },
+  "预告": {
+    "message": "Anteprima"
+  },
+  "AMD 专区": {
+    "message": "Progetti AMD"
+  },
+  "AUP Learning Cloud 云算力": {
+    "message": "AUP Learning Cloud"
+  },
+  "浏览器直连 Ryzen AI APU，体验 ROCm、JupyterHub 与 Code Server。": {
+    "message": "Accedi alle APU Ryzen AI dal browser con ROCm, JupyterHub e Code Server."
+  },
+  "云算力": {
+    "message": "Calcolo nel cloud"
+  },
+  "Radeon GPU 上的 ACT BF16 训练、闭环评测与成功视频。": {
+    "message": "Addestramento ACT BF16 su GPU Radeon, valutazione ad anello chiuso e video delle esecuzioni riuscite."
+  },
+  "AMD 旗舰项目：强化学习运动策略与 VLA 具身智能。": {
+    "message": "Progetto di punta AMD: apprendimento per rinforzo per la locomozione ed esperimenti VLA."
+  },
+  "仿真实战": {
+    "message": "Progetti di simulazione"
+  },
+  "MicroDuck RL 小黄鸭双足机器人": {
+    "message": "Bipede MicroDuck RL"
+  },
+  "mjlab + MuJoCo Warp GPU 并行 PPO 与稳定步态训练。": {
+    "message": "Addestramento PPO parallelo su GPU e andature stabili con mjlab e MuJoCo Warp."
+  },
+  "从环境搭建到 InvertedPendulum、Reacher 与 Pusher 连续控制。": {
+    "message": "Dalla configurazione dell'ambiente al controllo continuo con InvertedPendulum, Reacher e Pusher."
+  },
+  "用 ALOHA 仿真数据训练 ACT，并完成多回合评估。": {
+    "message": "Addestra ACT con dati di simulazione ALOHA e valutalo su più episodi."
+  },
+  "模仿学习": {
+    "message": "Apprendimento per imitazione"
+  },
+  "真机实战": {
+    "message": "Progetti con robot reali"
+  },
+  "SO-101 + LeRobot 真机教程": {
+    "message": "Tutorial hardware SO-101 + LeRobot"
+  },
+  "从硬件连通、安全测试到真机动作回放。": {
+    "message": "Dal collegamento dell'hardware e dai test di sicurezza alla riproduzione delle azioni su un robot reale."
+  },
+  "Sim2Real 指南": {
+    "message": "Guida Sim2Real"
+  },
+  "从仿真策略走向真机部署的验证入口。": {
+    "message": "Valida una politica di simulazione prima di distribuirla su un robot reale."
+  },
+  "部署": {
+    "message": "Distribuzione"
+  },
+  "验证": {
+    "message": "Validazione"
+  },
+  "按平台专区、仿真验证与真机部署选择项目。": {
+    "message": "Scegli i progetti per piattaforma, esperimenti di simulazione o distribuzione su robot reali."
+  },
+  "查看项目实战": {
+    "message": "Vedi i progetti"
+  },
+  "什么是具身智能": {
+    "message": "Che cos'è l'IA incarnata"
+  },
+  "。": {
+    "message": ". "
+  },
+  "完成标准：": {
+    "message": " Criteri di successo: "
+  },
+  "通俗来讲，就是解决“我在哪里、要去哪里、应该怎么走”。例如，机器人从房间一端出发，绕过地上的障碍物，到达门口的指定区域；导航选择路线，运动能力负责把行进与转向指令执行出来。": {
+    "message": "In termini semplici risponde a tre domande: dove sono, dove devo andare e come ci arrivo? Un robot può attraversare una stanza, evitare ostacoli e raggiungere un'area presso la porta. La navigazione sceglie il percorso; la locomozione esegue movimenti e svolte."
+  },
+  "导航涉及定位、建图、路径规划与避障。经典系统通常组合定位 / SLAM、全局规划（如 A*）与局部规划或控制（如 DWA、MPC）；已知地图与受控环境中已有成熟的工程方案。": {
+    "message": "La navigazione comprende localizzazione, mappatura, pianificazione dei percorsi ed evitamento degli ostacoli. I sistemi classici combinano spesso localizzazione o SLAM, un pianificatore globale come A* e pianificazione o controllo locale come DWA o MPC. Esistono soluzioni ingegneristiche mature per mappe note e ambienti controllati."
+  },
+  "导航常把移动能力作为执行基础：先决定目标或路径，再由运动控制把指令落到身体上。部分仿真基准简化了底层移动；真实部署还要处理定位误差、打滑、动态障碍和执行失败。比较结果时要同时看任务定义、传感器、成功条件与路径效率，不能把某个 PointNav 基准的高成功率推广到所有导航任务。": {
+    "message": "La navigazione si affida spesso alla locomozione: prima sceglie un obiettivo o un percorso, poi il controllo del movimento lo esegue. Alcuni benchmark di simulazione semplificano il movimento di basso livello. Nel mondo reale occorre gestire anche errori di localizzazione, slittamenti, ostacoli dinamici e guasti nell'esecuzione. Confronta definizione del compito, sensori, condizioni di successo ed efficienza del percorso: un alto tasso di successo in un benchmark PointNav non vale per ogni compito di navigazione."
+  },
+  "用夹爪、灵巧手或吸盘等末端执行器，建立并维持对物体的稳定约束。典型的抓取检测（grasp detection）以点云或 RGB-D 图像为输入，为平行夹爪预测抓取位姿：三维位置、三维朝向（6-DoF）与夹爪开度，再结合可达性和碰撞检查执行。": {
+    "message": "Usare una pinza, una mano robotica con dita articolate, una ventosa o un altro effettore finale per stabilire e mantenere un vincolo stabile su un oggetto. Il rilevamento delle prese usa in genere nuvole di punti o immagini RGB-D per prevedere la posa di presa di una pinza parallela: posizione 3D, orientamento 3D (6-DoF) e apertura. L'esecuzione richiede anche verifiche di raggiungibilità e collisione."
+  },
+  "操作的范围包括抓取、搬运、推、拨、翻转、手内操作（in-hand manipulation），也包括叠衣服、整理绳索、开门和抽屉、使用工具、双臂协作与长时序任务。抓取是其中一个子问题；推物体或踢足球属于不需要先抓住物体的非抓取式操作。": {
+    "message": "La manipolazione comprende afferrare, trasportare, spingere, spostare, capovolgere e manipolare nella mano, oltre a piegare vestiti, sistemare corde, aprire porte e cassetti, usare utensili, coordinare due bracci e svolgere compiti di lunga durata. La presa è un sottoproblema; spingere un oggetto o calciare un pallone sono manipolazioni non prensili che non richiedono di afferrarlo prima."
+  },
+  "运动 / 行走": {
+    "message": "Locomozione / Camminata"
+  },
+  "关注机器人自身的移动能力。足式机器人需要处理步态、平衡、台阶、斜坡和跌倒恢复；轮式机器人也属于这一范畴，需要应对转向约束、打滑和不平地形。全身协调控制还可以把移动与操作连接起来。": {
+    "message": "La locomozione riguarda la mobilità del robot. I robot con zampe devono gestire andature, equilibrio, gradini, pendenze e recupero dalle cadute. Anche i robot su ruote rientrano in questa categoria, con vincoli di sterzata, slittamenti e terreni irregolari. Il controllo dell'intero corpo può collegare mobilità e manipolazione."
+  },
+  "让机器人从当前位置到达目标，涉及定位、建图、路径规划与避障。经典系统通常组合定位 / SLAM、全局规划（如 A*）与局部规划或控制（如 DWA、MPC）；已知地图与受控环境中已有成熟的工程方案。": {
+    "message": "La navigazione porta il robot dalla posizione attuale a un obiettivo attraverso localizzazione, mappatura, pianificazione dei percorsi ed evitamento degli ostacoli. I sistemi classici combinano spesso localizzazione o SLAM, pianificazione globale come A* e pianificazione o controllo locale come DWA o MPC. Esistono soluzioni mature per mappe note e ambienti controllati."
+  },
+  "改变物体": {
+    "message": "Modificare gli oggetti"
+  },
+  "属于": {
+    "message": "fa parte di"
+  },
+  "把杯子拿稳是抓取；搬运、推移或倾倒杯子，都属于操作。": {
+    "message": "Tenere saldamente una tazza è una presa; trasportarla, spingerla o versarne il contenuto sono forme di manipolazione."
+  },
+  "移动自身": {
+    "message": "Muovere il robot"
+  },
+  "调用": {
+    "message": "usa"
+  },
+  "导航决定去哪里、走哪条路；运动负责把这一步走出来。": {
+    "message": "La navigazione sceglie destinazione e percorso; la locomozione compie il passo successivo."
+  },
+  "可以借助“手和臂操作、腿或轮带动身体”建立直觉。分类依据是任务：脚也能踢球或推物体，轮式平台也能搭载机械臂完成操作。": {
+    "message": "Pensare a mani e bracci che manipolano e a zampe o ruote che muovono il corpo aiuta a capire. La classificazione dipende dal compito: un piede può calciare o spingere e una piattaforma su ruote può trasportare un braccio per manipolare."
+  },
+  "感知": {
+    "message": "Percezione"
+  },
+  "看见足球、球门和守门员": {
+    "message": "Vedere pallone, porta e portiere"
+  },
+  "决策": {
+    "message": "Decisione"
+  },
+  "找到空当，选择射门方向": {
+    "message": "Trovare un varco e scegliere il tiro"
+  },
+  "行动": {
+    "message": "Azione"
+  },
+  "调整站位，驱动关节踢球": {
+    "message": "Posizionarsi e azionare le articolazioni per calciare"
+  },
+  "反馈": {
+    "message": "Retroazione"
+  },
+  "跟踪足球，检查射门结果": {
+    "message": "Seguire il pallone e verificare il risultato"
+  },
+  "守门员换了位置，机器人重新观察足球和防守区域。": {
+    "message": "Il portiere si è spostato. Il robot osserva di nuovo il pallone e la difesa."
+  },
+  "摄像头捕捉场上信息，识别足球、球门和守门员的位置。": {
+    "message": "La telecamera riprende il campo e identifica pallone, porta e portiere."
+  },
+  "根据射门方向调整站位，控制身体平衡，再驱动腿部关节踢球。": {
+    "message": "Adeguare la postura al tiro scelto, equilibrare il corpo e azionare le articolazioni della gamba per calciare."
+  },
+  "球进入球门。新的视觉观测帮助机器人判断结果，并决定下一步行动。": {
+    "message": "Il pallone entra in porta. Le nuove osservazioni visive aiutano il robot a valutare il risultato e scegliere l'azione successiva."
+  },
+  "机器人足球 · 3D 闭环演示": {
+    "message": "Calcio robotico · Un anello chiuso in 3D"
+  },
+  "让机器人把球踢进球门": {
+    "message": "Insegna a un robot a segnare un gol"
+  },
+  "下一阶段": {
+    "message": "Fase successiva"
+  },
+  "暂停演示": {
+    "message": "Metti in pausa la demo"
+  },
+  "重播射门": {
+    "message": "Ripeti il tiro"
+  },
+  "播放射门": {
+    "message": "Riproduci il tiro"
+  },
+  "移动守门员": {
+    "message": "Sposta il portiere"
+  },
+  "播放速度": {
+    "message": "Velocità di riproduzione"
+  },
+  "逐步查看具身智能闭环": {
+    "message": "Esplora passo dopo passo il ciclo dell'IA incarnata"
+  },
+  "新的观测，再次进入感知": {
+    "message": "Le nuove osservazioni tornano alla percezione"
+  },
+  "已按减少动态效果的偏好改为逐步查看。": {
+    "message": "La modalità passo passo rispetta la tua preferenza di riduzione del movimento. "
+  },
+  "可播放或点击阶段逐步查看。": {
+    "message": "Riproduci la demo o seleziona una fase per esplorarla passo dopo passo. "
+  },
+  "移动守门员会重新开始演示，观察射门方向如何变化。动作已简化，用来理解闭环。": {
+    "message": "Spostare il portiere riavvia la demo. Osserva come cambia la direzione del tiro. Il movimento è semplificato per illustrare l'anello chiuso."
+  },
+  "射门机器人": {
+    "message": "Robot che tira"
+  },
+  "守门员": {
+    "message": "Portiere"
+  },
+  "正在准备 3D 球场…": {
+    "message": "Preparazione del campo 3D…"
+  },
+  "当前浏览器未能显示 3D 场景，仍可使用下方阶段说明。": {
+    "message": "Il browser non ha potuto mostrare la scena 3D. Puoi comunque esplorare le fasi qui sotto."
+  },
+  "拖动旋转 · 方向键调整视角": {
+    "message": "Trascina per ruotare · Frecce per regolare la vista"
+  },
+  "复位视角": {
+    "message": "Ripristina la vista"
+  },
+  "可旋转的三维机器人足球场。拖动或使用方向键旋转视角，Home 键复位。": {
+    "message": "Campo da calcio robotico 3D interattivo. Trascina o usa le frecce per ruotare la vista. Premi Home per ripristinarla."
+  },
+  "拿稳，再提起": {
+    "message": "Afferra saldamente, poi solleva"
+  },
+  "机械臂用平行夹爪对准橙色方块，闭合夹爪，再将方块提离桌面。": {
+    "message": "Un braccio allinea la pinza parallela a un blocco arancione, chiude le dita e solleva il blocco dal tavolo."
+  },
+  "看夹爪与物体之间的关系：从尚未接触，到稳定夹持。": {
+    "message": "Osserva il rapporto tra pinza e oggetto: dall'assenza di contatto a una presa stabile."
+  },
+  "观察物体": {
+    "message": "Osserva l'oggetto"
+  },
+  "确定方块的位置与朝向，选择两侧的夹持区域。": {
+    "message": "Individua posizione e orientamento del blocco e scegli zone di contatto sui lati opposti."
+  },
+  "对准夹爪": {
+    "message": "Allinea la pinza"
+  },
+  "张开夹爪，移动到方块两侧，保持接近方向。": {
+    "message": "Apri la pinza e avvicinala ai lati del blocco mantenendo la direzione di approccio."
+  },
+  "闭合夹持": {
+    "message": "Chiudi e afferra"
+  },
+  "两侧指爪闭合，与物体接触并建立稳定夹持。": {
+    "message": "Chiudi entrambe le dita per stabilire il contatto e una presa stabile."
+  },
+  "提起确认": {
+    "message": "Solleva e conferma"
+  },
+  "保持夹持并向上提起；物体随夹爪移动，完成抓取。": {
+    "message": "Mantieni la presa e solleva. Il blocco si muove con la pinza, completando la presa."
+  },
+  "抓住把手，把抽屉拉开": {
+    "message": "Afferra la maniglia e apri il cassetto"
+  },
+  "机械臂夹住抽屉把手，持续保持接触，沿滑轨方向拉开抽屉。": {
+    "message": "Il braccio afferra la maniglia, mantiene il contatto e tira il cassetto lungo le guide."
+  },
+  "抓住只是开始。操作还要持续改变抽屉的状态。": {
+    "message": "Afferrare è solo l'inizio. La manipolazione continua a cambiare lo stato del cassetto."
+  },
+  "靠近把手": {
+    "message": "Avvicinati alla maniglia"
+  },
+  "观察把手与滑轨方向，将夹爪移动到把手附近。": {
+    "message": "Osserva la maniglia e la direzione delle guide, poi avvicina la pinza alla maniglia."
+  },
+  "建立接触": {
+    "message": "Stabilisci il contatto"
+  },
+  "夹住把手，为后续拉动建立稳定接触。": {
+    "message": "Afferra la maniglia per stabilire un contatto stabile prima di tirare."
+  },
+  "沿轨拉动": {
+    "message": "Tira lungo le guide"
+  },
+  "保持接触并沿滑轨移动；真实系统还需要根据视觉与力反馈修正动作。": {
+    "message": "Mantieni il contatto durante il movimento lungo le guide. Un sistema reale corregge anche le azioni con retroazione visiva e di forza."
+  },
+  "检查状态": {
+    "message": "Verifica il risultato"
+  },
+  "抽屉到达目标开度，机械臂停止拉动并保持位置。": {
+    "message": "Quando il cassetto raggiunge l'apertura desiderata, smetti di tirare e mantieni la posizione."
+  },
+  "保持平衡，迈上台阶": {
+    "message": "Mantieni l'equilibrio e sali i gradini"
+  },
+  "四足机器人交替抬腿、落脚和支撑，逐步登上三级台阶。": {
+    "message": "Un quadrupede alterna sollevamento, appoggio e sostegno delle zampe per salire tre gradini."
+  },
+  "看身体怎么移动：协调落脚位置、关节与重心。": {
+    "message": "Osserva come si muove il corpo coordinando appoggi, articolazioni e centro di massa."
+  },
+  "准备支撑": {
+    "message": "Prepara il sostegno"
+  },
+  "四足落地支撑身体，准备向前移动。": {
+    "message": "Le quattro zampe sostengono il corpo mentre il robot si prepara ad avanzare."
+  },
+  "交替迈步": {
+    "message": "Alterna i passi"
+  },
+  "支撑腿承重，摆动腿向前迈出，为下一步落脚做准备。": {
+    "message": "Le zampe di sostegno reggono il peso mentre quelle in oscillazione avanzano verso gli appoggi successivi."
+  },
+  "抬腿越阶": {
+    "message": "Sali il gradino"
+  },
+  "提高摆腿轨迹，把脚落在台阶上，逐步抬高身体。": {
+    "message": "Alza la traiettoria di oscillazione, appoggia i piedi sui gradini e solleva gradualmente il corpo."
+  },
+  "站稳收步": {
+    "message": "Stabilizza la postura"
+  },
+  "到达平台后收步，四足重新建立稳定支撑。": {
+    "message": "Raggiunta la piattaforma, termina i passi e ristabilisci un sostegno stabile su tutte e quattro le zampe."
+  },
+  "绕开障碍，到达目标": {
+    "message": "Evita gli ostacoli e raggiungi l'obiettivo"
+  },
+  "轮式机器人从起点出发，沿规划路径绕过两个障碍物，到达终点后停下。": {
+    "message": "Un robot su ruote segue un percorso pianificato attorno a due ostacoli e si ferma all'obiettivo."
+  },
+  "看目标与路线：决定去哪里、如何绕行、何时停止。": {
+    "message": "Osserva obiettivo e percorso: dove andare, come evitare gli ostacoli e quando fermarsi."
+  },
+  "定位与目标": {
+    "message": "Localizza robot e obiettivo"
+  },
+  "确定当前位置、目标位置，以及场地中障碍物的位置。": {
+    "message": "Individua posizione attuale, obiettivo e posizione degli ostacoli."
+  },
+  "规划绕行": {
+    "message": "Pianifica un percorso"
+  },
+  "规划绕开障碍的路线，同时为机器人身体留出通行空间。": {
+    "message": "Pianifica un percorso attorno agli ostacoli lasciando spazio sufficiente al corpo del robot."
+  },
+  "跟踪路径": {
+    "message": "Segui il percorso"
+  },
+  "根据路径输出移动与转向指令，由底盘控制执行。": {
+    "message": "Converti il percorso in comandi di movimento e sterzata per il controllore della base."
+  },
+  "到达停止": {
+    "message": "Arriva e fermati"
+  },
+  "进入目标区域后停止移动，并确认到达。": {
+    "message": "Fermati nell'area obiettivo e conferma l'arrivo."
+  },
+  "3D 技能示意": {
+    "message": "Dimostrazione di abilità in 3D"
+  },
+  "暂停": {
+    "message": "Pausa"
+  },
+  "重播": {
+    "message": "Ripeti"
+  },
+  "播放": {
+    "message": "Riproduci"
+  },
+  "正在准备 3D 场景…": {
+    "message": "Preparazione della scena 3D…"
+  },
+  "暂时无法显示 3D 场景": {
+    "message": "La scena 3D non è disponibile"
+  },
+  "可以使用下方阶段按钮继续查看动作说明。": {
+    "message": "Usa i pulsanti delle fasi qui sotto per continuare a esplorare il movimento."
+  },
+  "演示进度": {
+    "message": " avanzamento della demo"
+  },
+  "可拖动进度条或点击阶段逐步查看。": {
+    "message": "Trascina la barra di avanzamento o seleziona una fase per esplorare passo dopo passo. "
+  },
+  "动作已简化，用于理解技能。": {
+    "message": "Il movimento è semplificato per illustrare l'abilità."
+  },
+  "目标物体": {
+    "message": "Oggetto da raggiungere"
+  },
+  "平行夹爪": {
+    "message": "Pinza parallela"
+  },
+  "沿滑轨拉开": {
+    "message": "Tira lungo le guide"
+  },
+  "落脚与支撑": {
+    "message": "Appoggi e sostegno"
+  },
+  "逐级抬高身体": {
+    "message": "Solleva il corpo gradualmente"
+  },
+  "起点": {
+    "message": "Partenza"
+  },
+  "目标": {
+    "message": "Obiettivo"
+  },
+  "守门员挡住近侧，选择远侧空当作为射门目标。": {
+    "message": "Il portiere copre il lato vicino. Mira al varco sul lato lontano."
+  },
+  "守门员挡住远侧，选择近侧空当作为射门目标。": {
+    "message": "Il portiere copre il lato lontano. Mira al varco sul lato vicino."
+  },
+  "{rate} 倍速": {
+    "message": "Velocità {rate}×"
+  },
+  "{title}播放速度": {
+    "message": "Velocità di riproduzione: {title}"
+  },
+  "{title}动作阶段": {
+    "message": "Fasi dell'azione: {title}"
+  },
+  "{progress}%，{stage}": {
+    "message": "{progress}%, {stage}"
+  },
+  "{scene}拖动或用方向键旋转，Home 键复位视角。": {
+    "message": "{scene} Trascina o usa le frecce per ruotare. Premi Home per ripristinare la vista."
+  },
+  "人形机器人": {
+    "message": "Robot umanoidi"
+  },
+  "固定基座机械臂": {
+    "message": "Bracci robotici a base fissa"
+  },
+  "轮式移动机器人": {
+    "message": "Robot mobili su ruote"
+  },
+  "四足机器人": {
+    "message": "Robot quadrupedi"
+  },
+  "移动操作平台": {
+    "message": "Piattaforme di manipolazione mobile"
+  },
+  "仿真载体": {
+    "message": "Corpi simulati"
+  },
+  "theme.DocItem.mobileDirectory.defaultLabel": {
+    "message": "Capitoli"
+  },
+  "双足交替迈步，手臂与身体协调运动。": {
+    "message": "Le gambe alternano i passi mentre braccia e corpo si muovono insieme."
+  },
+  "基座保持固定，机械臂夹取并移动物体。": {
+    "message": "La base resta fissa mentre il braccio afferra e sposta un oggetto."
+  },
+  "车轮驱动底盘，沿路径行进并转向。": {
+    "message": "Le ruote muovono la base lungo un percorso e nelle svolte."
+  },
+  "四条腿交替支撑，协调落脚与身体平衡。": {
+    "message": "Le quattro zampe alternano il sostegno, coordinando appoggi ed equilibrio."
+  },
+  "底盘靠近工作台，机械臂伸出并取回物体。": {
+    "message": "La base si avvicina a un banco, poi il braccio si allunga e recupera un oggetto."
+  },
+  "在虚拟环境中设置机器人、传感器与动作。": {
+    "message": "Definisci robot, sensori e azioni in un ambiente virtuale."
+  },
+  "{name}：{motion}": {
+    "message": "{name}: {motion}"
+  },
+  "停止{name}动画": {
+    "message": "Ferma l'animazione di {name}"
+  },
+  "播放{name}动画": {
+    "message": "Riproduci l'animazione di {name}"
+  },
+  "停止": {
+    "message": "Ferma"
+  },
+  "动画暂时无法加载，已显示静态示意。": {
+    "message": "Impossibile caricare l'animazione. Viene mostrata un'illustrazione statica."
+  },
+  "3D 结构与动作示意，不对应特定产品。": {
+    "message": "Illustrazione 3D di struttura e movimento, senza rappresentare un prodotto specifico."
+  },
+  "双足交替迈步，躯干与手臂协调完成行走。": {
+    "message": "I passi alternati si coordinano con busto e braccia per produrre la camminata bipede."
+  },
+  "双臂在桌面上抓取并转移物体。遥操作演示，原片为 4× 速度。": {
+    "message": "Due bracci afferrano e trasferiscono oggetti su un tavolo. Dimostrazione teleoperata; il filmato originale è a velocità 4×."
+  },
+  "车轮驱动底盘，在户外地面行进并通过起伏地形。": {
+    "message": "Le ruote muovono la base su superfici esterne e terreni irregolari."
+  },
+  "跟随行走时，四条腿交替支撑并配合身体转向。": {
+    "message": "Le quattro zampe alternano il sostegno e coordinano le svolte seguendo una persona."
+  },
+  "移动底座靠近橱柜，机械臂伸出并打开柜门。": {
+    "message": "La base mobile si avvicina a un armadio, poi un braccio si allunga e apre l'anta."
+  },
+  "虚拟双臂抓取并传递工具。来自 ALOHA 2 的 MuJoCo 遥操作仿真。": {
+    "message": "Due bracci virtuali afferrano e trasferiscono un utensile nella simulazione ufficiale di teleoperazione ALOHA 2 con MuJoCo."
+  },
+  "通用结构示意": {
+    "message": "Modello illustrativo del corpo"
+  },
+  "来源：{name}": {
+    "message": "Fonte: {name}"
+  },
+  "动画暂时无法加载，已显示静态封面。": {
+    "message": "Impossibile caricare l'animazione. Viene mostrata un'anteprima statica."
+  },
+  "载体演示类型": {
+    "message": "Tipo di dimostrazione della piattaforma"
+  },
+  "官方演示": {
+    "message": "Filmati ufficiali"
+  },
+  "3D 示意": {
+    "message": "Illustrazione 3D"
+  },
+  "观看真实机器人动作，仿真载体对应官方仿真片段。": {
+    "message": "Osserva robot reali in azione e filmati ufficiali di simulazione per le piattaforme virtuali."
+  },
+  "通过通用模型看清身体结构与动作方式。": {
+    "message": "Esplora strutture e movimenti dei corpi attraverso modelli illustrativi."
+  },
+  "官方演示为原片节选，保留原有速度与画面标注；完整演示见来源链接。": {
+    "message": "Le clip ufficiali conservano velocità e annotazioni originali. Segui i link alle fonti per le dimostrazioni complete."
+  },
+  "具身导论": {
+    "message": "Introduzione"
+  },
+  "看清全局，认识具身智能。": {
+    "message": "Scopri l'IA incarnata nel suo insieme."
+  },
+  "了解具身智能的概念、发展、任务与载体，查找论文、数据集与开源工具。": {
+    "message": "Scopri concetti, storia, compiti e piattaforme dell'IA incarnata e trova articoli, dataset e strumenti open source."
+  },
+  "阅读具身导论": {
+    "message": "Leggi l'introduzione"
+  },
+  "任务与载体": {
+    "message": "Compiti e piattaforme"
+  },
+  "论文与数据集": {
+    "message": "Articoli e dataset"
+  },
+  "感知与理解": {
+    "message": "Percezione e comprensione"
+  },
+  "相机 · 本体传感器": {
+    "message": "Telecamere · Sensori del corpo"
+  },
+  "观测 → 状态": {
+    "message": "Osservazioni → Stato"
+  },
+  "世界和自己，现在是什么状态？": {
+    "message": "Qual è lo stato del mondo e del robot?"
+  },
+  "相机图像、关节角度与身体姿态。": {
+    "message": "Immagini della telecamera, angoli articolari e postura del corpo."
+  },
+  "识别足球、球门和守门员，估计它们相对机器人的位置。": {
+    "message": "Rileva pallone, porta e portiere e stimane la posizione rispetto al robot."
+  },
+  "场景与身体的状态估计。": {
+    "message": "Una stima dello stato della scena e del robot."
+  },
+  "看见足球在前方，守门员挡住了球门右侧。": {
+    "message": "Vedere il pallone davanti e il portiere che copre il lato destro della porta."
+  },
+  "学习与决策": {
+    "message": "Apprendimento e decisioni"
+  },
+  "策略 · 规划": {
+    "message": "Politica · Pianificazione"
+  },
+  "状态 → 目标": {
+    "message": "Stato → Obiettivi"
+  },
+  "为了完成任务，下一步做什么？": {
+    "message": "Cosa deve fare il robot per raggiungere l'obiettivo?"
+  },
+  "场景状态、身体状态与进球目标。": {
+    "message": "Lo stato della scena e del robot, e l'obiettivo di segnare."
+  },
+  "比较可用的射门空当，选择靠近路线与射门方向。": {
+    "message": "Confronta i varchi nella porta e scegli un avvicinamento e una direzione di tiro."
+  },
+  "目标站位、射门方向与期望运动。": {
+    "message": "Una posizione obiettivo, una direzione di tiro e un movimento desiderato."
+  },
+  "选择球门左侧空当，规划站位与踢球动作。": {
+    "message": "Mira al varco a sinistra e pianifica postura e calcio."
+  },
+  "运动与控制": {
+    "message": "Movimento e controllo"
+  },
+  "控制器 · 执行器": {
+    "message": "Controllori · Attuatori"
+  },
+  "目标 → 动作": {
+    "message": "Obiettivi → Azioni"
+  },
+  "怎样把动作准确、稳定地做出来？": {
+    "message": "Come può il robot agire con precisione e stabilità?"
+  },
+  "期望运动与实时关节反馈。": {
+    "message": "Movimento desiderato e retroazione articolare in tempo reale."
+  },
+  "调整站位和重心，协调关节，跟踪目标动作。": {
+    "message": "Regola postura e centro di massa, coordina le articolazioni e segui il movimento desiderato."
+  },
+  "关节力矩与身体运动。": {
+    "message": "Coppie articolari e movimento del corpo."
+  },
+  "支撑腿保持平衡，摆动腿触球，把球踢向左侧。": {
+    "message": "Mantieni l'equilibrio sulla gamba di sostegno e muovi l'altra per calciare a sinistra."
+  },
+  "环境与结果": {
+    "message": "Ambiente e risultati"
+  },
+  "足球 · 球门 · 守门员": {
+    "message": "Pallone · Porta · Portiere"
+  },
+  "动作 → 新观测": {
+    "message": "Azioni → Osservazioni"
+  },
+  "行动之后发生了什么？": {
+    "message": "Cosa è successo dopo l'azione?"
+  },
+  "机器人与足球、地面的物理交互。": {
+    "message": "Interazione fisica tra robot, pallone e terreno."
+  },
+  "足球运动，守门员与环境继续变化，传感器获得新的观测。": {
+    "message": "Il pallone si muove, portiere e ambiente continuano a cambiare e i sensori raccolgono nuove osservazioni."
+  },
+  "更新后的场景观测与身体反馈。": {
+    "message": "Osservazioni aggiornate della scena e retroazione dal corpo."
+  },
+  "观察球是否进门；如果踢偏，就根据球的新位置重新调整。": {
+    "message": "Verifica se il pallone è entrato. In caso contrario, correggi l'azione in base alla nuova posizione del pallone."
+  },
+  "具身智能 · 信息与动作的闭环": {
+    "message": "IA incarnata · Informazione e azione"
+  },
+  "从观察世界，到改变世界": {
+    "message": "Dall'osservare il mondo al cambiarlo"
+  },
+  "点选一个环节，查看它的输入、处理与输出。": {
+    "message": "Seleziona una fase per esplorarne ingressi, elaborazione e uscite."
+  },
+  "持续循环": {
+    "message": "Ciclo continuo"
+  },
+  "选择闭环环节": {
+    "message": "Seleziona una fase del ciclo dell'IA incarnata"
+  },
+  "机器人内部": {
+    "message": "Dentro il robot"
+  },
+  "外部环境": {
+    "message": "Mondo esterno"
+  },
+  "新的观测与反馈": {
+    "message": "Nuove osservazioni e retroazione"
+  },
+  "再次感知，修正下一次行动": {
+    "message": "Osserva di nuovo e correggi l'azione successiva"
+  },
+  "回到感知": {
+    "message": "Torna alla percezione"
+  },
+  "下一环节": {
+    "message": "Fase successiva"
+  },
+  "输入": {
+    "message": "Ingresso"
+  },
+  "处理": {
+    "message": "Elaborazione"
+  },
+  "输出": {
+    "message": "Uscita"
+  },
+  "在足球场上": {
+    "message": "Sul campo da calcio"
+  },
+  "按信息流理解系统；真实机器人中的各环节以不同频率持续运行。": {
+    "message": "Una vista del flusso di informazioni: in un robot reale queste fasi funzionano continuamente a frequenze diverse."
+  },
+  "跟随完整项目逐章实践，或选择一个 Demo，在仿真和真机中验证方法。": {
+    "message": "Segui un progetto completo capitolo per capitolo o scegli una demo per provare i metodi in simulazione e su robot reali."
+  },
+  "先看全局，再理解原理、动手做项目。": {
+    "message": "Parti dalla visione d'insieme, comprendi i principi e poi realizza un progetto."
+  },
+  "从数据集、工具链与经典机器人学，为真机学习做好准备。": {
+    "message": "Preparati all'apprendimento robotico con dataset, strumenti e robotica classica."
+  },
+  "Datawhale 开源具身智能学习站：具身导论、理论基础与项目实战，连接机器人学习、论文、数据集和开源工具。": {
+    "message": "Corso aperto di IA incarnata di Datawhale: introduzione, fondamenti e progetti che collegano l'apprendimento robotico ad articoli, dataset e strumenti open source."
+  },
+  "pageMarkdown.copy": {
+    "message": "Copia come Markdown"
+  },
+  "pageMarkdown.view": {
+    "message": "Visualizza come Markdown"
+  },
+  "pageMarkdown.copied": {
+    "message": "Copiato!"
+  },
+  "pageMarkdown.copying": {
+    "message": "Copia in corso…"
+  },
+  "pageMarkdown.copyError": {
+    "message": "La copia automatica non è disponibile. Seleziona e copia il testo qui sotto."
+  },
+  "pageMarkdown.readError": {
+    "message": "Impossibile leggere il contenuto. Ricarica la pagina e riprova."
+  },
+  "pageMarkdown.options": {
+    "message": "Opzioni Markdown"
+  },
+  "pageMarkdown.close": {
+    "message": "Chiudi l'anteprima"
+  },
+  "pageMarkdown.hint": {
+    "message": "Contenuto convertito in Markdown. Usa il link alla pagina originale in fondo per esplorare i grafici interattivi."
+  },
+  "pageMarkdown.content": {
+    "message": "Contenuto Markdown"
+  },
+  "translationNotice.label": {
+    "message": "Stato della traduzione"
+  },
+  "translationNotice.introduction": {
+    "message": "introduzione"
+  },
+  "translationNotice.projects": {
+    "message": "panoramica dei progetti"
+  },
+  "translationNotice.roadmap": {
+    "message": "mappa di apprendimento"
+  },
+  "translationNotice.original": {
+    "message": "leggere la versione cinese"
+  },
+  "translationNotice.overview": {
+    "message": "Il {readme}, l’{introduction}, la {projects} e la {roadmap} sono disponibili in italiano. Gli altri capitoli e gli esperimenti autonomi sono attualmente in cinese."
+  },
+  "translationNotice.fallback": {
+    "message": "Questa pagina è attualmente disponibile in cinese. Puoi consultare l’{introduction} in italiano o {original}."
+  },
+  "theme.SearchBar.label": {
+    "message": "Cerca"
+  },
+  "theme.SearchBar.seeAll": {
+    "message": "Vedi tutti i risultati"
+  },
+  "theme.SearchBar.noResultsText": {
+    "message": "Nessun risultato"
+  },
+  "theme.SearchBar.searchInContext": {
+    "message": "Vedi tutti i risultati in «{context}»"
+  },
+  "theme.SearchBar.seeAllOutsideContext": {
+    "message": "Vedi tutti i risultati al di fuori di «{context}»"
+  },
+  "theme.SearchPage.existingResultsTitle": {
+    "message": "Risultati per «{query}»"
+  },
+  "theme.SearchPage.emptyResultsTitle": {
+    "message": "Cerca nella documentazione"
+  },
+  "theme.SearchPage.documentsFound.plurals": {
+    "message": "1 documento trovato|{count} documenti trovati"
+  },
+  "theme.SearchPage.noResultsText": {
+    "message": "Nessun documento trovato"
+  },
+  "theme.SearchPage.searchContext.everywhere": {
+    "message": "Ovunque"
+  },
+  "theme.DocSidebarItem.collapseCategoryAriaLabel": {
+    "message": "Comprimi la categoria '{label}'"
+  },
+  "theme.DocSidebarItem.expandCategoryAriaLabel": {
+    "message": "Espandi la categoria '{label}'"
+  },
+  "theme.IconExternalLink.ariaLabel": {
+    "message": "(si apre in una nuova scheda)"
+  },
+  "theme.colorToggle.ariaLabel": {
+    "message": "Passa dalla modalità scura a quella chiara (attualmente {mode})"
+  },
+  "theme.colorToggle.ariaLabel.mode.system": {
+    "message": "modalità di sistema"
+  }
+}

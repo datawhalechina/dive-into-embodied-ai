@@ -10,7 +10,7 @@ export default function Layout(props: Props) {
   const location = useLocation();
 
   useEffect(() => {
-    // The preview server strips /en/'s trailing slash. Restore the locale root
+    // The preview server strips locale roots' trailing slashes. Restore the root
     // in the router so Docusaurus can generate valid alternate-language URLs.
     if (location.pathname === baseUrl.replace(/\/$/, '')) {
       history.replace({...location, pathname: baseUrl});

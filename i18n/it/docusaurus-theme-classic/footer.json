@@ -1,0 +1,20 @@
+{
+  "link.title.内容": {
+    "message": "Esplora"
+  },
+  "link.title.社区": {
+    "message": "Comunità"
+  },
+  "link.title.更多": {
+    "message": "Altro"
+  },
+  "link.item.label.具身导论": {
+    "message": "Introduzione"
+  },
+  "link.item.label.理论基础": {
+    "message": "Fondamenti"
+  },
+  "link.item.label.项目实战": {
+    "message": "Progetti"
+  }
+}

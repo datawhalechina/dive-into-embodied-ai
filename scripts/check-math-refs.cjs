@@ -1,5 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const domino = require('@mixmark-io/domino');
 
 const rootDir = path.resolve(__dirname, '..');
 const buildDir = path.join(rootDir, 'build');
@@ -22,7 +23,8 @@ if (!fs.existsSync(buildDir)) {
 const failures = [];
 for (const filePath of listHtmlFiles(buildDir)) {
   const html = fs.readFileSync(filePath, 'utf8');
-  const brokenRefs = html.match(/<a href=# class=""><g data-mml-node=mrow class=MathJax_ref/g) ?? [];
+  const document = domino.createDocument(html);
+  const brokenRefs = document.querySelectorAll('a[href="#"] .MathJax_ref');
   if (brokenRefs.length > 0) {
     failures.push({
       file: path.relative(rootDir, filePath),

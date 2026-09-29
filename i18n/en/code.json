@@ -1105,5 +1105,26 @@
   },
   "pageMarkdown.content": {
     "message": "Markdown content"
+  },
+  "translationNotice.label": {
+    "message": "Translation status"
+  },
+  "translationNotice.introduction": {
+    "message": "introduction"
+  },
+  "translationNotice.projects": {
+    "message": "project overview"
+  },
+  "translationNotice.roadmap": {
+    "message": "learning map"
+  },
+  "translationNotice.original": {
+    "message": "read the Chinese version"
+  },
+  "translationNotice.overview": {
+    "message": "The {readme}, {introduction}, {projects}, and {roadmap} are available in English. Other tutorial chapters and standalone playgrounds are currently in Chinese."
+  },
+  "translationNotice.fallback": {
+    "message": "This page is currently available in Chinese. Explore the English {introduction}, or {original}."
   }
 }

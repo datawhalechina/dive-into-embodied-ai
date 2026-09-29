@@ -4,7 +4,7 @@
 
 <h1 align="center">Dive into Embodied AI</h1>
 <p align="center"><b>An open course for learning embodied AI through hands-on projects</b></p>
-<p align="center"><a href="README.md" lang="zh-Hans">中文</a> · <b>English</b></p>
+<p align="center"><a href="README.md" lang="zh-Hans">中文</a> · <b>English</b> · <a href="README.es.md" lang="es">Español</a> · <a href="README.it.md" lang="it">Italiano</a></p>
 
 > [!TIP]
 > **📖 Read online: [Open the course →](https://datawhalechina.github.io/dive-into-embodied-ai/en/)**
@@ -13,7 +13,7 @@
 >
 > Use **Copy as Markdown** at the top of tutorial and playground pages to copy their content, or open the dropdown to preview it. Code, tables, and LaTeX equations are preserved, with a link to the original page for interactive demos.
 >
-> The README, homepage navigation, and introduction are available in English. Other tutorial chapters and standalone playgrounds are currently in Chinese. Use the language menu to switch between 中文 and English on the same page.
+> The README, homepage and navigation, introduction (including interactive demos and resources), learning map, and project overview are available in English, Spanish, and Italian. Other tutorial chapters and standalone playgrounds are currently in Chinese, with notices explaining the translation scope. Use the language menu to switch between 中文, English, Español, and Italiano on the same page.
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="License" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
@@ -181,18 +181,22 @@ npm run dev
 
 # Start the English site instead
 npm run start -- --locale en
+# Or Spanish or Italian
+npm run start -- --locale es
+npm run start -- --locale it
 ```
 
-The development server runs one language at a time. To test switching between both languages, build and serve the full site:
+The development server runs one language at a time. To test switching between all four languages, build, check, and serve the full site:
 
 ```bash
 npm run build
+npm run check:i18n
 npm run serve
 ```
 
-Chinese remains at `/dive-into-embodied-ai/`; English is at `/dive-into-embodied-ai/en/`. UI translations live in `i18n/en/code.json`, and navigation/footer translations live in `i18n/en/docusaurus-theme-classic/`.
+Chinese remains at `/dive-into-embodied-ai/`; English, Spanish, and Italian use the `/en/`, `/es/`, and `/it/` subpaths. UI translations live in `i18n/<locale>/code.json`, and navigation/footer translations live in `i18n/<locale>/docusaurus-theme-classic/`, where `<locale>` is `en`, `es`, or `it`.
 
-To translate a chapter later, add its English Markdown under `i18n/en/docusaurus-plugin-content-docs/current/`, keeping the source directory structure, document ID, and slug. Docusaurus displays the Chinese source with a translation notice when no English version exists.
+To translate a chapter later, add its Markdown under `i18n/<locale>/docusaurus-plugin-content-docs/current/`, keeping the source directory structure, document ID, slug, and explicit section anchors. Docusaurus displays the Chinese source with a localized notice and a link to the Chinese version when no translation exists. Run `npm run check:i18n` to check translations, placeholders, routes, and shared anchors.
 
 ## ⭐ Star history
 

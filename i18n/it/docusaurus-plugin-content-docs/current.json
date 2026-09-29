@@ -1,0 +1,68 @@
+{
+  "sidebar.introductionSidebar.category.领域资源": {
+    "message": "Risorse"
+  },
+  "sidebar.practicesOverviewSidebar.category.AMD 专区": {
+    "message": "Progetti AMD"
+  },
+  "sidebar.practicesOverviewSidebar.category.仿真实战": {
+    "message": "Progetti di simulazione"
+  },
+  "sidebar.practicesOverviewSidebar.category.真机实战": {
+    "message": "Progetti con robot reali"
+  },
+  "sidebar.practicesOverviewSidebar.link.AUP Learning Cloud 云算力": {
+    "message": "AUP Learning Cloud"
+  },
+  "sidebar.practicesOverviewSidebar.link.MicroDuck RL｜AMD ROCm": {
+    "message": "MicroDuck RL · AMD ROCm"
+  },
+  "sidebar.practicesOverviewSidebar.link.ACT 双臂操作训练｜AMD ROCm": {
+    "message": "Addestramento bimanuale con ACT · AMD ROCm"
+  },
+  "sidebar.practicesOverviewSidebar.link.玩转 Pupper 四足机器人": {
+    "message": "Esplora il quadrupede Pupper"
+  },
+  "sidebar.practicesOverviewSidebar.link.从零到一搭建四足机器人": {
+    "message": "Costruisci un quadrupede da zero"
+  },
+  "sidebar.practicesOverviewSidebar.link.MicroDuck RL：走路、起身和翻滚": {
+    "message": "MicroDuck RL: camminare, rialzarsi e rotolare"
+  },
+  "sidebar.practicesOverviewSidebar.link.MuJoCo 仿真入门": {
+    "message": "Primi passi con MuJoCo"
+  },
+  "sidebar.practicesOverviewSidebar.link.ACT 双臂操作训练": {
+    "message": "Addestramento bimanuale con ACT"
+  },
+  "sidebar.practicesOverviewSidebar.link.π₀.₅ + RECAP：LIBERO 复现": {
+    "message": "π₀.₅ + RECAP: riproduzione in LIBERO"
+  },
+  "sidebar.practicesOverviewSidebar.link.Sim2Sim 验证": {
+    "message": "Validazione Sim2Sim"
+  },
+  "sidebar.practicesOverviewSidebar.link.Flamingo 轮足课程 · 预告": {
+    "message": "Bipede su ruote Flamingo · Anteprima"
+  },
+  "sidebar.practicesOverviewSidebar.link.LeRobot 中文课程讲义": {
+    "message": "Dispense del corso LeRobot in cinese"
+  },
+  "sidebar.practicesOverviewSidebar.link.SO-101 + LeRobot 真机教程": {
+    "message": "Tutorial hardware SO-101 + LeRobot"
+  },
+  "sidebar.practicesOverviewSidebar.link.ROS2 机械臂控制": {
+    "message": "Controllo dei bracci con ROS2"
+  },
+  "sidebar.practicesOverviewSidebar.link.Sim2Real 指南": {
+    "message": "Guida Sim2Real"
+  },
+  "sidebar.practicesCs123CourseSidebar.link.← 项目实战": {
+    "message": "← Progetti"
+  },
+  "sidebar.practicesLerobotCourseSidebar.link.← 项目实战": {
+    "message": "← Progetti"
+  },
+  "sidebar.practicesFlamingoCourseSidebar.link.← 项目实战": {
+    "message": "← Progetti"
+  }
+}

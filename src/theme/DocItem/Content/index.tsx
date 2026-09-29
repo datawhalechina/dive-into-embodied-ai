@@ -9,7 +9,7 @@ export default function LocalizedDocItemContent(props: Props) {
   const {i18n} = useDocusaurusContext();
   const {metadata} = useDoc();
   // Docusaurus falls back to docs/ when a translated Markdown file is absent.
-  const isChineseFallback = i18n.currentLocale === 'en' && metadata.source.startsWith('@site/docs/');
+  const isChineseFallback = i18n.currentLocale !== i18n.defaultLocale && metadata.source.startsWith('@site/docs/');
 
   return (
     <div data-markdown-content>
