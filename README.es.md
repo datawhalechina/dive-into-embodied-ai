@@ -161,6 +161,8 @@ Datawhale organiza grupos alrededor del curso. Los planes se recopilarán en `do
 
 ## 💻 Vista previa local
 
+El desarrollo local y CI usan **Node.js 26.11.1**, fijado en `.nvmrc`, con su npm incluido; los requisitos están en `package.json`. Con [nvm](https://github.com/nvm-sh/nvm#installing-and-updating), ejecuta `nvm install` y `nvm use` en el repositorio; otros métodos deben instalar la misma versión. `.npmrc` comprueba las versiones al instalar y desactiva Web Storage experimental de Node en los scripts npm para evitar avisos de `localStorage` durante la compilación estática. El almacenamiento del navegador no cambia.
+
 Los vídeos y GIF usan **Git LFS**. Instala `git-lfs` y ejecuta `git lfs pull` tras clonar; de lo contrario solo tendrás punteros de texto. Consulta [CONTRIBUTING.md](CONTRIBUTING.md#首次克隆必读), en chino.
 
 ```bash
@@ -168,7 +170,10 @@ Los vídeos y GIF usan **Git LFS**. Instala `git-lfs` y ejecuta `git lfs pull` t
 # Ubuntu/Debian: sudo apt install git-lfs; Windows: choco install git-lfs
 git lfs install
 git lfs pull
-npm install
+# Selecciona la versión de .nvmrc (requiere nvm)
+nvm install
+nvm use
+npm ci
 # Sitio chino por defecto
 npm run dev
 # Un idioma por servidor de desarrollo

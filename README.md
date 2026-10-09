@@ -176,6 +176,8 @@ Datawhale 会围绕本教程组织组队学习。历史与在筹备中的组队�
 
 ## 💻 本地预览
 
+本地开发和 CI 统一使用 `.nvmrc` 指定的 **Node.js 26.11.1** 及其自带的 npm，版本要求见 `package.json`。使用 [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) 时，在仓库目录运行 `nvm install` 和 `nvm use`；其他安装方式请选同一版本。`.npmrc` 会检查安装时的版本，并为 npm 脚本关闭 Node 的实验性 Web Storage，避免静态构建触发 `localStorage` 警告；浏览器中的存储功能不受影响。
+
 仓库使用 **Git LFS** 存放视频和 GIF。clone 之后必须先装 `git-lfs` 再 `git lfs pull`,否则本地看到的图/视频是 pointer 文本而不是真内容。完整步骤见 [CONTRIBUTING.md](CONTRIBUTING.md#首次克隆必读)。
 
 ```bash
@@ -188,8 +190,12 @@ Datawhale 会围绕本教程组织组队学习。历史与在筹备中的组队�
 git lfs install
 git lfs pull
 
-# 3. 装依赖、起本地预览
-npm install
+# 3. 切换到 .nvmrc 指定版本（已安装 nvm 时）
+nvm install
+nvm use
+
+# 4. 按锁文件装依赖、起本地预览
+npm ci
 npm run dev
 ```
 

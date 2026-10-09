@@ -22,8 +22,12 @@ ls -lh docs/foundations/simulation/figs/isaac-sim-cube-demo.mp4
 
 ## 本地预览
 
+本地和 CI 使用 `.nvmrc` 中的 Node.js 26.11.1 及其自带的 npm，具体版本由 `package.json` 和 `.npmrc` 检查。以下命令假定已安装 [nvm](https://github.com/nvm-sh/nvm#installing-and-updating)；也可通过其他方式安装同一版本。`.npmrc` 已为 npm 脚本关闭 Node 实验性 Web Storage，无需为构建额外设置 `NODE_OPTIONS`。
+
 ```bash
-npm install
+nvm install
+nvm use
+npm ci
 npm run dev          # 日常预览，不会动 LFS
 PULL_LFS=1 npm run dev   # 想顺带刷新 LFS 文件再用这个
 ```

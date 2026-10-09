@@ -163,6 +163,8 @@ Datawhale organizes study groups around this course. Past and upcoming study pla
 
 ## 💻 Local preview
 
+Local development and CI use **Node.js 26.11.1**, pinned in `.nvmrc`, with its bundled npm; see `package.json` for the required versions. With [nvm](https://github.com/nvm-sh/nvm#installing-and-updating), run `nvm install` and `nvm use` in the repository; other installation methods should select the same version. `.npmrc` checks versions during installation and disables Node's experimental Web Storage for npm scripts to prevent `localStorage` warnings during static builds. Browser storage is unaffected.
+
 This repository uses **Git LFS** for videos and GIFs. Install `git-lfs` and run `git lfs pull` after cloning; otherwise, media files will contain pointer text instead of the actual content. See [CONTRIBUTING.md](CONTRIBUTING.md#首次克隆必读) for the full setup guide in Chinese.
 
 ```bash
@@ -175,8 +177,12 @@ This repository uses **Git LFS** for videos and GIFs. Install `git-lfs` and run 
 git lfs install
 git lfs pull
 
-# 3. Install dependencies and start the default Chinese site
-npm install
+# 3. Select the version in .nvmrc (requires nvm)
+nvm install
+nvm use
+
+# 4. Install locked dependencies and start the default Chinese site
+npm ci
 npm run dev
 
 # Start the English site instead
