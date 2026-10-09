@@ -2,7 +2,7 @@
 
 <h1 align="center">Dive into Embodied AI</h1>
 <p align="center"><b>Un corso aperto per imparare l'IA incarnata con progetti pratici</b></p>
-<p align="center"><a href="README.md" lang="zh-Hans">中文</a> · <a href="README.en.md" lang="en">English</a> · <a href="README.es.md" lang="es">Español</a> · <b>Italiano</b></p>
+<p align="center"><a href="README.md" lang="zh-Hans">中文</a> · <a href="README.en.md" lang="en">English</a> · <b>Italiano</b></p>
 
 > [!TIP]
 > **📖 [Apri il corso in italiano →](https://datawhalechina.github.io/dive-into-embodied-ai/it/)**
@@ -11,7 +11,7 @@
 >
 > Usa **Copia come Markdown** all'inizio di tutorial ed esperimenti o apri l'anteprima. Conserva codice, tabelle ed equazioni LaTeX, con un link all'originale per le demo interattive.
 >
-> README, home e navigazione, introduzione con demo e risorse, mappa di apprendimento e panoramica dei progetti sono disponibili in inglese, spagnolo e italiano. Gli altri capitoli ed esperimenti autonomi restano in cinese, con avvisi sulla traduzione. Il menu permette di passare tra 中文, English, Español e Italiano sulla stessa pagina.
+> README, home e navigazione, introduzione con demo e risorse, mappa di apprendimento e panoramica dei progetti sono disponibili in inglese e italiano. Gli altri capitoli ed esperimenti autonomi restano in cinese, con avvisi sulla traduzione. Il menu permette di passare tra 中文, English e Italiano sulla stessa pagina.
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licenza" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
@@ -179,14 +179,13 @@ npm run dev
 # Una lingua per server di sviluppo
 npm run start -- --locale it
 npm run start -- --locale en
-npm run start -- --locale es
-# Compila le quattro lingue e verifica il passaggio tra loro
+# Compila le tre lingue e verifica il passaggio tra loro
 npm run build
 npm run check:i18n
 npm run serve
 ```
 
-Il cinese è in `/dive-into-embodied-ai/`; le altre lingue usano `/en/`, `/es/` e `/it/`. Le traduzioni dell'interfaccia sono in `i18n/<locale>/code.json`, navigazione e piè di pagina in `i18n/<locale>/docusaurus-theme-classic/`, con `<locale>` uguale a `en`, `es` o `it`.
+Il cinese è in `/dive-into-embodied-ai/`; l'inglese e l'italiano usano `/en/` e `/it/`. Le traduzioni dell'interfaccia sono in `i18n/<locale>/code.json`, navigazione e piè di pagina in `i18n/<locale>/docusaurus-theme-classic/`, con `<locale>` uguale a `en` o `it`.
 
 Aggiungi i capitoli tradotti in `i18n/<locale>/docusaurus-plugin-content-docs/current/`, mantenendo struttura, ID, slug e ancore esplicite. Senza traduzione, Docusaurus mostra il cinese con avviso localizzato e link all'originale. `npm run check:i18n` verifica testi, variabili, percorsi e ancore condivise.
 

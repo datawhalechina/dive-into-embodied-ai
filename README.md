@@ -5,7 +5,7 @@
 <h1 align="center">Dive into Embodied AI</h1>
 <p align="center"><b>具身智能入门与实践开源教程</b></p>
 
-<p align="center"><b>中文</b> · <a href="README.en.md" lang="en">English</a> · <a href="README.es.md" lang="es">Español</a> · <a href="README.it.md" lang="it">Italiano</a></p>
+<p align="center"><b>中文</b> · <a href="README.en.md" lang="en">English</a> · <a href="README.it.md" lang="it">Italiano</a></p>
 
 > [!TIP]
 > **📖 在线阅读：[点击进入完整教程 →](https://datawhalechina.github.io/dive-into-embodied-ai/)**
@@ -199,22 +199,21 @@ npm ci
 npm run dev
 ```
 
-网站默认中文，可通过导航栏的语言菜单切换为 [English](https://datawhalechina.github.io/dive-into-embodied-ai/en/)、[Español](https://datawhalechina.github.io/dive-into-embodied-ai/es/) 或 [Italiano](https://datawhalechina.github.io/dive-into-embodied-ai/it/)。三种译文均覆盖 README、首页与导航、具身导论（含交互演示与资源页）、学习地图和项目总览。其他教程正文与独立实验页暂时显示中文，并用当前语言标注翻译范围。
+网站默认中文，可通过导航栏的语言菜单切换为 [English](https://datawhalechina.github.io/dive-into-embodied-ai/en/) 或 [Italiano](https://datawhalechina.github.io/dive-into-embodied-ai/it/)。英文和意大利语版本均覆盖 README、首页与导航、具身导论（含交互演示与资源页）、学习地图和项目总览。其他教程正文与独立实验页暂时显示中文，并用当前语言标注翻译范围。
 
 ```bash
 # 单独启动英文开发环境（开发服务器一次只运行一种语言）
 npm run start -- --locale en
-# 西班牙语或意大利语
-npm run start -- --locale es
+# 意大利语
 npm run start -- --locale it
 
-# 构建并检查四种语言，再预览跨语言切换
+# 构建并检查三种语言，再预览跨语言切换
 npm run build
 npm run check:i18n
 npm run serve
 ```
 
-中文路径为 `/dive-into-embodied-ai/`，其他语言分别位于 `/en/`、`/es/`、`/it/` 子路径。界面译文保存在 `i18n/<locale>/code.json`，导航和页脚译文位于 `i18n/<locale>/docusaurus-theme-classic/`，其中 `<locale>` 为 `en`、`es` 或 `it`。
+中文路径为 `/dive-into-embodied-ai/`，英文和意大利语分别位于 `/en/`、`/it/` 子路径。界面译文保存在 `i18n/<locale>/code.json`，导航和页脚译文位于 `i18n/<locale>/docusaurus-theme-classic/`，其中 `<locale>` 为 `en` 或 `it`。
 
 后续章节的译文 Markdown 可按原目录结构放入 `i18n/<locale>/docusaurus-plugin-content-docs/current/`，保留原文的文档 ID、slug 和显式章节锚点。缺少译稿时，Docusaurus 会显示中文原文，并提供当前语言的提示及中文版本链接。运行 `npm run check:i18n` 可检查译文、占位符、路由和跨语言锚点。
 

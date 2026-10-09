@@ -33,7 +33,7 @@ function readConfig(node) {
 }
 readConfig(config);
 assert.equal(defaultLocale, 'zh-Hans');
-assert.deepEqual(locales, ['zh-Hans', 'en', 'es', 'it']);
+assert.deepEqual(locales, ['zh-Hans', 'en', 'it']);
 const translatedLocales = locales.filter(locale => locale !== defaultLocale);
 const catalogs = Object.fromEntries(translatedLocales.map(locale => [locale, JSON.parse(read(`i18n/${locale}/code.json`))]));
 
@@ -90,9 +90,9 @@ for (const relative of ['code.json', 'docusaurus-theme-classic/navbar.json', 'do
     }
   }
 }
-// Local search has no bundled Spanish or Italian catalog.
+// Local search has no bundled Italian catalog.
 const searchKeys = Object.keys(JSON.parse(read('node_modules/@easyops-cn/docusaurus-search-local/dist/locales/zh-Hans.json')));
-for (const locale of ['es', 'it']) {
+for (const locale of ['it']) {
   for (const key of searchKeys) assert(catalogs[locale][key]?.message, `${locale}: missing search translation ${key}`);
 }
 

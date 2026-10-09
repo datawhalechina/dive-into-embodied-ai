@@ -35,13 +35,12 @@ const config: Config = {
 
   i18n: {
     defaultLocale: 'zh-Hans',
-    locales: ['zh-Hans', 'en', 'es', 'it'],
+    locales: ['zh-Hans', 'en', 'it'],
     localeConfigs: {
       // Keep single-locale builds at their own paths so they cannot overwrite
       // the Chinese homepage or collapse alternate-language links to it.
       'zh-Hans': {label: '中文', htmlLang: 'zh-Hans', baseUrl},
       en: {label: 'English', htmlLang: 'en', baseUrl: `${baseUrl}en/`},
-      es: {label: 'Español', htmlLang: 'es', baseUrl: `${baseUrl}es/`},
       it: {label: 'Italiano', htmlLang: 'it', baseUrl: `${baseUrl}it/`},
     },
   },
@@ -96,7 +95,7 @@ const config: Config = {
         indexDocs: true,
         indexBlog: false,
         indexPages: true,
-        language: ['zh', 'en', 'es', 'it'],
+        language: ['zh', 'en', 'it'],
         hashed: true,
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
