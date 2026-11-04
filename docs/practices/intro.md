@@ -30,6 +30,7 @@ displayed_sidebar: practicesOverviewSidebar
 ## 已上线项目 \{#available-projects}
 
 - [MicroDuck RL：让小黄鸭学会走路、起身和翻滚](./humanoid/microduck-rl/)：从 MJCF、BAM 执行器和 mjlab 任务注册开始，在 MuJoCo Warp 中训练 18 个动作模式，并用 GIF / MP4 展示离屏评估结果。
+- [MicroDuck 跳墙课程](./humanoid/microduck-rl/wall-curriculum)：在基础教程之上，用 12 步课程把跑步、跳跃、越墙、前滚翻、起身串成全链，含每步配置、GIF 验收标准与课程心法。
 
 ## AMD 专区 \{#amd}
 
@@ -45,6 +46,7 @@ displayed_sidebar: practicesOverviewSidebar
 | [从零到一搭建四足机器人](./quadruped/cs123/intro) | MuJoCo、PD 控制、运动学、步态、策略训练与感知 | 总览与 8 章可读 |
 | [Petoi Quaddle 四舵机步行仿真](./quadruped/quaddle-mujoco/) | 官方 URDF 适配、周期控制、接触验证与长距离地面显示 | 可用 |
 | [MicroDuck RL：走路、起身和翻滚](./humanoid/microduck-rl/) | mjlab、MuJoCo Warp、CUDA 并行 PPO、18 个动作模式 | 可用 |
+| [MicroDuck 跳墙课程](./humanoid/microduck-rl/wall-curriculum) | 12 步课程学习、跑跳滚翻全链、奖励防套利、GIF 验收 | 可用 |
 | [MuJoCo 仿真入门](./robot-arm/mujoco-arm-pick-place) | MJCF、物理仿真、Python 控制 | 可用 |
 | [DDPG InvertedPendulum](./robot-arm/ddpg-mujoco/invertedpendulum-v5) | 连续控制基础与 DDPG baseline | 可用 |
 | [DDPG Reacher](./robot-arm/ddpg-mujoco/reacher-v5) | 二维机械臂目标追踪 | 可用 |
