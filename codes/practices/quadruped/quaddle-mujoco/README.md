@@ -168,6 +168,28 @@ MUJOCO_GL=egl .venv/bin/python render_demo.py --seconds 10 --slope-deg 3 --outpu
 
 先另存输出再跑下一组。旧基线配置不包含启动支撑参数，控制器保持其原有零位启动行为。`render_demo.py --config` 可用相同配置生成完整前后录像，画面标注坡度和相对坡面的俯仰。
 
+## 多场景实验入口
+
+`scenarios.py` 定义平地、3°/5°上坡、3°下坡、4mm×3级上下台阶、±3mm坑洼、已知地图绕障和8mm浅水近似。`scenario_matrix.py` 对行走/跑步候选分别进行实步动力学校验，生成可筛选的视频总览、每组JSON指标与CSV轨迹：
+
+```bash
+.venv/bin/python check_scenarios.py
+.venv/bin/python scenario_matrix.py --scene stairs_up --mode walk --seconds 20
+MUJOCO_GL=egl .venv/bin/python scenario_matrix.py --scene all --mode both --seconds 20 --video --workers 2
+.venv/bin/python -m http.server 8012 --bind 127.0.0.1 --directory outputs/scenario_matrix
+```
+
+浏览器打开 `http://127.0.0.1:8012`。失败任务也会保存，主命令不把物理失败当成程序崩溃；逐项检查`summary.json`中的`passed`与`checks`。录像与无录像共用5ms更新时刻，录像不额外调用动力学求解器，避免改变warm-start状态。6秒平地和绕障的有/无录像结果已做1e-12绝对容差对照。
+
+运行约束与解释：
+
+- 台阶尺寸仅为探索档位；坑洼底面实际降低6mm，凹坑不是被原平面填平的视觉效果。
+- 下台阶初始机身抬高12mm，使它真实站在起始平台。运行中不写机身位姿、不施加推进力。
+- 绕障由已知地图A*与仿真真值定位闭环完成；导航单独使用5rad/s目标变化率与0.45转向限幅，保留原10rad/s实际关节速度门槛。它尚未包含感知/建图。
+- `run_attempt`读取`reference/run-candidate.json`，仅是周期候选，尚未实现合格跑步。验收要求至少3个持续10ms的完整无地形接触区间、均速≥0.1m/s和全部其他检查。
+- 浅水显式施加局部浸没球冠浮力与二次阻力，并单独记录力与耗散。地面接触优先级设为1，使实际接触滑动摩擦采用0.55，避免被机器人几何体的0.8/1.0覆盖；测试直接检查求解器接触系数。假设体积/阻力/湿地摩擦未标定，无CFD或防水验证；水面视觉几何不碰撞。
+- 每条件只跑单一初态；源代码哈希和所有参数保存在报告中，不作为多seed稳健性结论。
+
 ## 官方模型及必要补充
 
 来源：https://huggingface.co/petoi/quaddle

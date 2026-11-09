@@ -55,7 +55,11 @@ class JointController:
                 yaw = math.atan2(rot[1, 0], rot[0, 0])
                 # Read simulated heading and lateral position. Correct direction
                 # solely by changing left/right stride amplitude.
-                error = yaw + config["lateral_kp"] * (data.qpos[0] - self._start_x)
+                heading_error = yaw
+                if "heading_target_rad" in config:
+                    delta = yaw - config["heading_target_rad"]
+                    heading_error = math.atan2(math.sin(delta), math.cos(delta))
+                error = heading_error + config["lateral_kp"] * (data.qpos[0] - self._start_x)
                 steer = np.clip(config["heading_kp"] * error + config["heading_kd"] * data.qvel[5],
                                 -config["steering_limit"], config["steering_limit"])
                 phase = 2 * np.pi * config["frequency_hz"] * t + self.phases

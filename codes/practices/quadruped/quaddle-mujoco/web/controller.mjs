@@ -34,7 +34,8 @@ export class JointController {
         const ramp = Math.min(1, t / c.ramp_seconds);
         const r = this.bodyId * 9;
         const yaw = Math.atan2(data.xmat[r + 3], data.xmat[r]);
-        const error = yaw + c.lateral_kp * (data.qpos[0] - this.startX);
+        const headingError = c.heading_target_rad === undefined ? yaw : Math.atan2(Math.sin(yaw - c.heading_target_rad), Math.cos(yaw - c.heading_target_rad));
+        const error = headingError + c.lateral_kp * (data.qpos[0] - this.startX);
         const steer = clip(c.heading_kp * error + c.heading_kd * data.qvel[5], -c.steering_limit, c.steering_limit);
         const startupRamp = Math.min(1, elapsed / this.startupRamp);
         const startupBlend = startupRamp * startupRamp * (3 - 2 * startupRamp);
