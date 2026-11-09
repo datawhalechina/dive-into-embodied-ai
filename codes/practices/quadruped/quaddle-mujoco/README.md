@@ -135,6 +135,25 @@ macOS 的被动查看器需要 `mjpython`。`launch.py` 为 uv Python 的动态�
 .venv/bin/python search_natural.py --pattern crawl --generations 25
 ```
 
+## 坡面与地面适应检查
+
+先复现平地，再只改变地面条件。以下坡度为探索档位，不代表机器人已具备爬坡能力：
+
+```bash
+.venv/bin/python check_terrain.py
+.venv/bin/python validate_walk.py --seconds 60 --sensitivity
+.venv/bin/python validate_walk.py --seconds 20 --slope-deg 3
+.venv/bin/python validate_walk.py --seconds 20 --slope-deg 5
+# Linux 无窗口录像；需要可用的 EGL 实现
+MUJOCO_GL=egl .venv/bin/python render_demo.py --seconds 10 --slope-deg 3 --output uphill3
+```
+
+正坡度沿机器人初始前方（世界 -Y）上升。`terrain.py` 同时旋转地面与初始机身，保持初始离地距离；修改地面姿态后调用 `mj_setConst` 更新编译时的坐标系快捷标记，否则地面可能仍按水平姿态参与计算。前进距离、离地高度和姿态倾斜均在坡面坐标系测量，避免把沿坡上升算作额外离地高度。航向控制器仍读取世界坐标真值，尚未改成坡面反馈或实机状态估计。
+
+`reports/ground_readiness_2026-11-09.json` 是 Linux / Python 3.12.13 / MuJoCo 3.16.0 的单次确定性复跑：平地60秒与停止检查通过；统一摩擦0.6/1.0均未通过；3°与5°上坡均出现机身触地和姿态超限。不同用例时长不同，不用于直接比较速度排名。默认场景使用混合摩擦参数，统一摩擦覆盖所有碰撞几何体，二者不是同一条件。
+
+测试仅验证当前模型和固定初始状态，不是多seed鲁棒性结论，也未进行真机验证。下一步应先做单变量控制对照，再引入初始姿态、接触和舵机响应扰动。
+
 ## 官方模型及必要补充
 
 来源：https://huggingface.co/petoi/quaddle

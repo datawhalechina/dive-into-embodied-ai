@@ -10,10 +10,18 @@ import numpy as np
 
 from gait_controller import JointController, CONFIG
 from run_sim import ROOT, SIDES, load, closure_error
+from terrain import configure_ground
 
 
-def validate(seconds=60, friction=None, stop=False):
+def validate(seconds=60, friction=None, stop=False, slope_deg=0.):
+    if not math.isfinite(seconds) or seconds <= 4:
+        raise ValueError("seconds must be finite and greater than 4 for footfall statistics")
+    if friction is not None and (not math.isfinite(friction) or friction <= 0):
+        raise ValueError("friction must be finite and positive")
     m, d = load()
+    ground_rotation = configure_ground(m, d, slope_deg)
+    forward_axis = ground_rotation @ np.array([0., -1., 0.])
+    ground_normal = ground_rotation[:, 2]
     if friction is not None:
         m.geom_friction[:, 0] = friction
     controller = JointController("walk")
@@ -65,7 +73,7 @@ def validate(seconds=60, friction=None, stop=False):
         leg_ground_steps += int(bool(shin_geoms & ground_ids))
         for j, ids in enumerate(foot_geoms):
             active[j] = bool(ids & ground_ids)
-            max_tip_height[j] = max(max_tip_height[j], d.body(SIDES[j]+'_wheel_tip').xpos[2])
+            max_tip_height[j] = max(max_tip_height[j], float(d.body(SIDES[j]+'_wheel_tip').xpos @ ground_normal))
         if d.time >= 4 and start_stop is None:
             # Require 20 ms in a new contact state so solver chatter is not
             # counted as repeated steps within one footfall.
@@ -76,15 +84,16 @@ def validate(seconds=60, friction=None, stop=False):
             contact_samples += active
             samples += 1
         previous_contact = active
-        rot = d.body('body').xmat.reshape(3, 3)
+        rot = ground_rotation.T @ d.body('body').xmat.reshape(3, 3)
         max_yaw = max(max_yaw, abs(math.atan2(rot[1,0], rot[0,0])))
         min_up = min(min_up, rot[2,2])
-        min_z, max_z = min(min_z, d.qpos[2]), max(max_z, d.qpos[2])
+        height = float(d.qpos[:3] @ ground_normal)
+        min_z, max_z = min(min_z, height), max(max_z, height)
         max_side = max(max_side, abs(d.qpos[0] - start[0]))
         if step % 1000 == 0:
-            records.append(dict(t_s=round(d.time, 3), forward_m=float(start[1] - d.qpos[1]), lateral_m=float(d.qpos[0]-start[0]), height_m=float(d.qpos[2])))
+            records.append(dict(t_s=round(d.time, 3), forward_m=float((d.qpos[:3] - start) @ forward_axis), lateral_m=float(d.qpos[0]-start[0]), height_m=height))
     end = start_stop if start_stop is not None else d.qpos[:3]
-    forward = float(start[1]-end[1])
+    forward = float((end - start) @ forward_axis)
     step_progress = np.diff([r['forward_m'] for r in records if 4 <= r['t_s'] < CONFIG['settle_seconds']+seconds])
     checks = dict(finite=bool(finite), monotonic_time=bool(monotonic),
                   no_warnings=bool(d.warning.number.sum() == 0), no_external_forces=external_force_steps == 0,
@@ -113,19 +122,23 @@ def validate(seconds=60, friction=None, stop=False):
                 model_sha256=hashlib.sha256((ROOT/'models/scene.xml').read_bytes()).hexdigest(),
                 gait_sha256=hashlib.sha256((ROOT/'gait.json').read_bytes()).hexdigest(),
                 controller_sha256=hashlib.sha256((ROOT/'gait_controller.py').read_bytes()).hexdigest(),
-                wall_seconds=time.perf_counter()-clock, trajectory=records)
+                wall_seconds=time.perf_counter()-clock, trajectory=records,
+                slope_deg=slope_deg, measurement_frame="ground",
+                ground_normal_world=ground_normal.tolist(),
+                controller_feedback="simulated world pose and angular velocity; not a hardware estimator")
 
 
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--seconds',type=float,default=60)
     parser.add_argument('--sensitivity',action='store_true')
+    parser.add_argument('--slope-deg',type=float,default=0.,help='Positive: uphill along initial forward (-Y)')
     args=parser.parse_args()
     (ROOT/'outputs').mkdir(exist_ok=True)
-    result={'nominal':validate(args.seconds), 'stop':validate(8,stop=True)}
+    result={'nominal':validate(args.seconds,slope_deg=args.slope_deg), 'stop':validate(8,stop=True,slope_deg=args.slope_deg)}
     if args.sensitivity:
-        result['friction_0.6']=validate(12,friction=.6)
-        result['friction_1.0']=validate(12,friction=1.)
+        result['friction_0.6']=validate(12,friction=.6,slope_deg=args.slope_deg)
+        result['friction_1.0']=validate(12,friction=1.,slope_deg=args.slope_deg)
     (ROOT/'outputs'/'walk_validation.json').write_text(json.dumps({k:result[k] for k in ('nominal','stop')},indent=2)+'\n')
     if args.sensitivity:
         (ROOT/'outputs'/'walk_sensitivity.json').write_text(json.dumps({k:v for k,v in result.items() if k.startswith('friction_')},indent=2)+'\n')
