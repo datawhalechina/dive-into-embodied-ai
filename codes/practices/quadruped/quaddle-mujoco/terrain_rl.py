@@ -54,12 +54,13 @@ class ResidualController:
 
 class TerrainEnv(gym.Env):
     metadata = {'render_modes': []}
-    def __init__(self, scene='stairs_up', seconds=20., seed_noise=False):
+    controller_class = ResidualController
+    def __init__(self, scene='stairs_up', seconds=20., seed_noise=False, scene_definition=None):
         if scene not in ('flat', 'uphill3', 'uphill5', 'downhill3', 'stairs_up', 'stairs_down', 'rough'):
             raise ValueError('Terrain PPO currently supports dry locomotion scenes only')
         if not math.isfinite(seconds) or seconds <= 0:
             raise ValueError('seconds must be finite and positive')
-        self.scene = make_scene(scene)
+        self.scene = scene_definition if scene_definition is not None else make_scene(scene)
         self.model, self.data, self.rotation = load_scene(self.scene)
         if not math.isclose(self.model.opt.timestep, .001):
             raise ValueError('This rollout interface requires a 1 ms physics step')
@@ -85,7 +86,7 @@ class TerrainEnv(gym.Env):
         if self.seed_noise:
             self.data.qpos[0] += self.np_random.uniform(-.005,.005)
         mujoco.mj_forward(self.model,self.data)
-        self.controller=ResidualController(self.model,self.scene,self.rotation,self.config)
+        self.controller=self.controller_class(self.model,self.scene,self.rotation,self.config)
         self.physics_steps=0
         for _ in range(2000): self.physics()
         self.start=self.data.qpos[:3].copy()

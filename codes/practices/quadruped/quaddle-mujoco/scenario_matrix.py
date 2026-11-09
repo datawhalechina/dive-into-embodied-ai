@@ -89,10 +89,10 @@ class Recorder:
         self.renderer.close()
 
 
-def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None, config_override=None, initial_x_offset=0.):
+def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None, config_override=None, initial_x_offset=0., scene_definition=None):
     if not math.isfinite(seconds) or seconds < 6:
         raise ValueError('seconds must be finite and at least 6')
-    scene = make_scene(name)
+    scene = scene_definition if scene_definition is not None else make_scene(name)
     model, data, rotation = load_scene(scene)
     if not math.isfinite(initial_x_offset) or abs(initial_x_offset) > .02:
         raise ValueError('initial_x_offset must be within +/-2 cm')
@@ -110,6 +110,9 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
     controller = JointController('walk', config=config)
     if policy_path:
         from terrain_rl import PolicyController
+        policy_meta = json.loads((Path(policy_path)/'metadata.json').read_text())
+        if policy_meta.get('environment_version') == 2:
+            from curriculum_rl import CurriculumPolicyController as PolicyController
         controller = PolicyController(model, scene, rotation, config, policy_path)
     fluid = ShallowWater(model, scene) if scene.water_depth_m else None
     output = Path(output or ROOT/'outputs/scenario_matrix')/mode/name

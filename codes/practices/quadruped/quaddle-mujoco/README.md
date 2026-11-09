@@ -291,3 +291,29 @@ MUJOCO_GL=egl .venv/bin/python scenario_matrix.py --scene downhill3 --mode walk 
 本轮未修改默认 `gait.json`，每个通过的场景使用显式配置或 checkpoint；不存在一个已经验证能解决所有地形的统一策略。跑步还要通过原来的速度、至少三段完整腾空等检查，奖励提高或步频提高都不等于任务完成。
 
 2026-11-09实跑结果见 [`reports/terrain_iteration_2026-11-09.json`](reports/terrain_iteration_2026-11-09.json)：76组参数试验中，`reference/terrain-downhill3.json`、`terrain-stairs_down.json`、`terrain-uphill5.json` 在原场景通过，±5mm初始横向偏移也分别通过。上楼梯与坑洼各完成两轮、累计98,304步PPO，尚未通过；坑洼第二轮虽走得更远，但触地/超速退步，保留第一轮作为稳定候选。`reference/run-bound-candidate.json` 有完整腾空，但速度与关节限制仍不合格。未将这些场景配置或策略设为默认，也未发布“已会跑”的结论。模型与视频保存在本次实验本地归档中，未作为教程仓库二进制文件提交。
+
+## 地形课程与独立选模（实验版）
+
+`curriculum_rl.py` 在相同物理模型上提供 60 维观测：随机身朝向旋转的左右地形网格、足端接触、上一时刻关节状态与目标剩余距离。仍使用仿真真值。残差范围保持 ±0.25 rad；新增一次性进度奖励、终点奖励和实际关节超速代价。旧 36 维策略仍由原控制器加载，两种策略不能混用归一化文件。
+
+坑洼课程为 ±1、±2、±3 mm；楼梯课程为 1、2、4 mm。第三级与原场景的地形完全相同，低级通过不能记作原任务通过。每 16,384 步保存完整模型及归一化统计，并进行四次完整回放；四次全通过后，在 20 个独立条件下至少通过 16 次才升级。坑洼门槛使用未参与训练的地图种子 100–119。`best_checkpoint` 仅表示当前课程评分最好，仍须单独检查原始目标地形。
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python check_curriculum.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python train_curriculum.py \
+  --scene rough --gamma .999 --chunks-per-level 2 --output outputs/curriculum/rough_g999
+# --mixed 在地图种子 7、11、13、17 之间采样，并在高等级保留 20% 较容易的回合。
+# 可用 --resume <version-2-checkpoint> 续训；gamma 必须匹配。
+OPENBLAS_NUM_THREADS=1 .venv/bin/python check_curriculum_policy.py \
+  outputs/curriculum/rough_g999/level1_steps16384
+OPENBLAS_NUM_THREADS=1 .venv/bin/python evaluate_curriculum_target.py --arms rough_g999
+OPENBLAS_NUM_THREADS=1 .venv/bin/python check_single_step.py
+OPENBLAS_NUM_THREADS=1 .venv/bin/python search_step_phases.py
+MUJOCO_GL=egl OPENBLAS_NUM_THREADS=1 .venv/bin/python render_curriculum.py
+```
+
+输出位于 `outputs/curriculum/`。`progress.json` 保存选模历史，`evaluation.json` / `gate.json` 保存完整判定，`target_screen.json` 检查原始 ±3 mm 坑洼。目标筛查脚本等待指定训练结束；请在训练已启动后运行。`source/` 保存启动时的源码快照；checkpoint 的 `metadata.json` 记录其哈希。渲染脚本选择早期 checkpoint，展示同一策略在轻微坑洼和原始坑洼上的区别，以及 1/4 mm 单台阶，不会自动挑选最远位移掩盖失败。
+
+这是有预算上限的可行性实验。单台阶搜索失败不能证明机构无法跨越；一次训练种子也不能支持多种子鲁棒性结论。所有检查继续使用原关节、触地、姿态和进度阈值，不修改默认步态。
+
+本轮有界实跑结果见 [`reports/curriculum_iteration_2026-11-09.json`](reports/curriculum_iteration_2026-11-09.json)：两组折扣系数各 98,304 步，混合地图新增续训 32,768 步，共新增 229,376 步。14 个 checkpoint 在原始坑洼均未通过，也未达到课程升级门槛。1 mm 单台阶有通过，2/4 mm 搜索仍失败。课程机制已验证，不代表原任务已经解决；暂不扩大为多训练种子长跑。
