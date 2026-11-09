@@ -317,3 +317,20 @@ MUJOCO_GL=egl OPENBLAS_NUM_THREADS=1 .venv/bin/python render_curriculum.py
 这是有预算上限的可行性实验。单台阶搜索失败不能证明机构无法跨越；一次训练种子也不能支持多种子鲁棒性结论。所有检查继续使用原关节、触地、姿态和进度阈值，不修改默认步态。
 
 本轮有界实跑结果见 [`reports/curriculum_iteration_2026-11-09.json`](reports/curriculum_iteration_2026-11-09.json)：两组折扣系数各 98,304 步，混合地图新增续训 32,768 步，共新增 229,376 步。14 个 checkpoint 在原始坑洼均未通过，也未达到课程升级门槛。1 mm 单台阶有通过，2/4 mm 搜索仍失败。课程机制已验证，不代表原任务已经解决；暂不扩大为多训练种子长跑。
+
+其他任务的有界复测入口（输出均独立保存）：
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python train_curriculum.py \
+  --scene stairs_up --gamma .999 --chunks-per-level 2 --output outputs/other_tasks/stairs_curriculum
+OPENBLAS_NUM_THREADS=1 .venv/bin/python evaluate_curriculum_target.py \
+  --root outputs/other_tasks --scene stairs_up --arms stairs_curriculum --report stairs_target.json
+OPENBLAS_NUM_THREADS=1 .venv/bin/python search_running_refinement.py
+OPENBLAS_NUM_THREADS=1 .venv/bin/python evaluate_other_tasks.py
+# 训练和参数搜索结束后，再录制选中模型/配置的完整回放。
+MUJOCO_GL=egl OPENBLAS_NUM_THREADS=1 .venv/bin/python render_other_tasks.py
+```
+
+跑步搜索围绕腾跃候选，在固定边界内调整步频、占空比、幅度、偏置、相位、航向增益和目标变化速度，最多24组；这是参数优化，不是PPO。原有跑步判据不变：速度至少0.1 m/s、至少三段完整腾空，并同时满足姿态、触地与实际关节速度等检查。`evaluate_other_tasks.py` 对其余七个已通过行走场景各做±5 mm横向起点复测；通过也不代表未知地图或真机可靠。
+
+本次扩展实跑见 [`reports/other_tasks_2026-11-09.json`](reports/other_tasks_2026-11-09.json)：上楼梯新增32,768步PPO，1mm三阶两轮均3/4通过，受实际关节超速限制未升级；原4mm三阶未通过。跑步24组参数搜索仍无合格配置，选中候选14段腾空但速度0.0456m/s、实际关节峰值10.3575rad/s。七个其余行走场景的起点复测14/14通过。零偏移1mm三阶原周期控制器也能通过，不能把低难度通过全部归因于PPO。
