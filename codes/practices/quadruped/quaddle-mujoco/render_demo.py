@@ -1,6 +1,7 @@
 """Record actual stepped dynamics using MuJoCo's offscreen renderer."""
 import argparse
 import json
+import math
 from pathlib import Path
 
 import imageio.v2 as imageio
@@ -76,10 +77,14 @@ def main():
                      "coordinated_crawl": "Four-phase alternating gait"}.get(config.get("name"), "Walking + heading feedback")
             subtitle = f"{label} | {config['frequency_hz']:.2f} Hz | Ground markers: 10 cm" if args.mode == "walk" else "Official CAD + local dynamics adapter | 4 actuators | 4 loop constraints"
             draw.text((24, 50), subtitle, font=small, fill=(170, 193, 211))
-            draw.rectangle((0, 668, 960, 720), fill=(14, 21, 33))
+            draw.rectangle((0, 660, 960, 720), fill=(14, 21, 33))
             progress = (d.qpos[:3] - origin) @ forward_axis if origin is not None else 0.
-            caption = f"t={d.time:05.2f}s | Forward={progress:.2f}m | Slope={args.slope_deg:+.1f}deg | Uncalibrated simulation"
-            draw.text((24, 678), caption, font=small, fill=(227, 190, 120))
+            rot = ground_rotation.T @ d.body('body').xmat.reshape(3, 3)
+            pitch = math.degrees(math.atan2(-rot[2, 1], np.linalg.norm(rot[:2, 1])))
+            caption = f"t={d.time:05.2f}s | Forward={progress:.2f}m | Ground={args.slope_deg:+.1f}deg | Pitch/ground={pitch:+.1f}deg"
+            draw.text((24, 670), caption, font=small, fill=(227, 190, 120))
+            stage = "Support pose" if d.time < config['settle_seconds'] else ("Transition" if d.time < config['settle_seconds'] + config['ramp_seconds'] else "Walking")
+            draw.text((24, 695), f"{stage if args.mode == 'walk' else args.mode} | Uncalibrated simulation | Periodic controller", font=small, fill=(170, 193, 211))
             writer.append_data(np.asarray(frame))
             if i == 100:
                 frame.save(out / (f"{args.output}-preview.webp" if args.output else ("walking-preview.webp" if args.mode == "walk" else "preview.webp")), quality=85)
