@@ -1,0 +1,441 @@
+{
+  "date": "2026-11-09",
+  "hardware_tested": false,
+  "acceptance_thresholds_changed": false,
+  "universal_policy": false,
+  "cpu": "Intel Core i9-13900H",
+  "ppo_total_steps_per_scene": 98304,
+  "parameter_search_trials": 76,
+  "results": [
+    {
+      "scene": "downhill3",
+      "mode": "walk",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.9567175930602755,
+      "average_forward_speed_m_s": 0.04783587965301377,
+      "min_upright_cosine": 0.9654726552335043,
+      "body_contact_samples": 0,
+      "max_heading_deviation_deg": 8.900168716233123,
+      "max_driven_joint_speed_rad_s": 9.059408911833296,
+      "completed_flight_intervals_s": [],
+      "artifact": "gait/walk/downhill3",
+      "policy_sha256": null
+    },
+    {
+      "scene": "stairs_down",
+      "mode": "walk",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.76312814071438,
+      "average_forward_speed_m_s": 0.038156407035719,
+      "min_upright_cosine": 0.9429716255699288,
+      "body_contact_samples": 0,
+      "max_heading_deviation_deg": 8.519492216241753,
+      "max_driven_joint_speed_rad_s": 8.922956107320433,
+      "completed_flight_intervals_s": [],
+      "artifact": "gait/walk/stairs_down",
+      "policy_sha256": null
+    },
+    {
+      "scene": "uphill5",
+      "mode": "walk",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 1.0748865554153069,
+      "average_forward_speed_m_s": 0.05374432777076534,
+      "min_upright_cosine": 0.9654513702902188,
+      "body_contact_samples": 0,
+      "max_heading_deviation_deg": 11.810287850656557,
+      "max_driven_joint_speed_rad_s": 8.191595697160656,
+      "completed_flight_intervals_s": [],
+      "artifact": "gait/walk/uphill5",
+      "policy_sha256": null
+    },
+    {
+      "scene": "rough",
+      "mode": "walk",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.29693361184569367,
+      "average_forward_speed_m_s": 0.014846680592284684,
+      "min_upright_cosine": 0.9197693734209654,
+      "body_contact_samples": 0,
+      "max_heading_deviation_deg": 18.194911047960932,
+      "max_driven_joint_speed_rad_s": 9.797677439154647,
+      "completed_flight_intervals_s": [],
+      "artifact": "ppo/r1/walk/rough",
+      "policy_sha256": {
+        "policy.zip": "14384c20877963fb7526e8aea7fee97fb1667337c4d0c3d803765260e93777c3",
+        "obs_stats.npz": "f8cc631b10489c68009cede5266ff60bed69af9c487d8d88b430ddb09f21d5a6",
+        "metadata.json": "44dd1df17b478c3af8867fcb8fe1708b1cf7cb0fad5195e04c06bdb977a12f6e"
+      }
+    },
+    {
+      "scene": "stairs_up",
+      "mode": "walk",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": false,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.18784197995239604,
+      "average_forward_speed_m_s": 0.009392098997619803,
+      "min_upright_cosine": 0.8688959350638913,
+      "body_contact_samples": 0,
+      "max_heading_deviation_deg": 96.55365807441781,
+      "max_driven_joint_speed_rad_s": 11.435947502947412,
+      "completed_flight_intervals_s": [],
+      "artifact": "ppo/r1/walk/stairs_up",
+      "policy_sha256": {
+        "policy.zip": "cb422cb99e0aec37ed2639d05789dd465db11b4ed22bd0460e7b2aff13f82bba",
+        "obs_stats.npz": "07eaec0ad82de72a9e68a09b4e79c8c98a62941d0ee6dd82d4d1c39dcc7e453d",
+        "metadata.json": "8ae07835d986e8c021c97e0df713f4d0e21cb47a189280befea053c1b1d18554"
+      }
+    },
+    {
+      "scene": "rough",
+      "mode": "walk",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": false,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.5230261419877814,
+      "average_forward_speed_m_s": 0.026151307099389072,
+      "min_upright_cosine": 0.7365356978535297,
+      "body_contact_samples": 37,
+      "max_heading_deviation_deg": 58.53182396270108,
+      "max_driven_joint_speed_rad_s": 11.346042413470617,
+      "completed_flight_intervals_s": [],
+      "artifact": "ppo/r2/walk/rough",
+      "policy_sha256": {
+        "policy.zip": "1420261df968fa905cb421e4eba7411a8ab3a9075b5617815a2ac10b0c5dc2f3",
+        "obs_stats.npz": "31c815415ce402597c442d2dfbc6abcabeda1ccacee42c775a5fe58aa6636d41",
+        "metadata.json": "cac838e11cbfc0d97ce91af9861f9f1b0c579c3c349c0866f70b049c946aba58"
+      }
+    },
+    {
+      "scene": "stairs_up",
+      "mode": "walk",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.18237136081976948,
+      "average_forward_speed_m_s": 0.009118568040988474,
+      "min_upright_cosine": 0.913078411306858,
+      "body_contact_samples": 0,
+      "max_heading_deviation_deg": 28.190313852765307,
+      "max_driven_joint_speed_rad_s": 8.9288889728656,
+      "completed_flight_intervals_s": [],
+      "artifact": "ppo/r2/walk/stairs_up",
+      "policy_sha256": {
+        "policy.zip": "bbc2abd8fe7e116ca1a67c501e80ba1490cb3b1510aeb9380095c039850be0df",
+        "obs_stats.npz": "142cc93666fd454ed03d1977598b772fed46135787327554e0f2b26e27cef5e8",
+        "metadata.json": "84ae6b769dfdd40b207e27732aeb6076daa39c7f87d9b502ea48a7e4a5d1519f"
+      }
+    },
+    {
+      "scene": "flat",
+      "mode": "run_attempt",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": false,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true,
+        "running_speed": false,
+        "repeated_flight": true
+      },
+      "forward_m": 1.358467704434162,
+      "average_forward_speed_m_s": 0.0679233852217081,
+      "min_upright_cosine": 0.919163939576325,
+      "body_contact_samples": 0,
+      "max_heading_deviation_deg": 12.851818757499672,
+      "max_driven_joint_speed_rad_s": 10.842696777616736,
+      "completed_flight_intervals_s": [
+        0.012000000000000004,
+        0.013000000000000005,
+        0.010000000000000002,
+        0.014000000000000005,
+        0.010000000000000002
+      ],
+      "artifact": "running/run_attempt/flat",
+      "policy_sha256": null
+    }
+  ],
+  "training": [
+    {
+      "scene": "rough",
+      "seed": 42,
+      "requested_stage_steps": 32768,
+      "total_steps": 32768,
+      "wall_seconds": 260.72871804237366,
+      "device": "cpu",
+      "residual_scale_rad": 0.25,
+      "observation_dim": 36,
+      "resume": null,
+      "randomization": "initial lateral position +/-5mm only; fixed terrain",
+      "source_sha256": {
+        "terrain_rl.py": "dd8f07342c2f2ded9d1d85c81d4f1178ee8d00509fc59b284f6516d27ab45c64",
+        "train_terrain_ppo.py": "51fb30c3cbcb681c47fcc4c7f7f12f5af3b75cd746bffbbf4e99b42d8ea3d01d",
+        "gait_controller.py": "560030737963731ccefa5f8b171ad0d280d96c4a27c7cbe8151e848b1c420f7e",
+        "gait.json": "409afe24c7a058242bfe972ff3c375db4ebaee98ec5eafdef52f7fc203244f01",
+        "scenarios.py": "02c953047219c631f1a665c6879f76d64954e2cfec9511f9f56619d0c09b3e14",
+        "scenario_matrix.py": "c8eaee1e0c8471781e6c968d069ca89031a9fc4fcb0b464d7bca4fc6b4da6686",
+        "models/scene.xml": "10d1990f12c2dc79b739b67203422ff8a0090a01e424dacf780b9a03d6015b83"
+      },
+      "versions": {
+        "torch": "2.15.0+cpu",
+        "stable-baselines3": "2.9.2",
+        "gymnasium": "1.4.0",
+        "mujoco": "3.16.0",
+        "numpy": "2.5.4"
+      }
+    },
+    {
+      "scene": "rough",
+      "seed": 42,
+      "requested_stage_steps": 65536,
+      "total_steps": 98304,
+      "wall_seconds": 591.4039394855499,
+      "device": "cpu",
+      "residual_scale_rad": 0.25,
+      "observation_dim": 36,
+      "resume": "outputs/terrain_ppo/rough/r1",
+      "randomization": "initial lateral position +/-5mm only; fixed terrain",
+      "source_sha256": {
+        "terrain_rl.py": "5d0f22036d3c7c1202b42aa6a2c339bffc5988af23b71a3c8933d59bfebd950e",
+        "train_terrain_ppo.py": "85997734a3a8e6f4a33b6e178933f1667fa65dada6f43020479d254472d12951",
+        "gait_controller.py": "560030737963731ccefa5f8b171ad0d280d96c4a27c7cbe8151e848b1c420f7e",
+        "gait.json": "409afe24c7a058242bfe972ff3c375db4ebaee98ec5eafdef52f7fc203244f01",
+        "scenarios.py": "02c953047219c631f1a665c6879f76d64954e2cfec9511f9f56619d0c09b3e14",
+        "scenario_matrix.py": "e2bca0d44f8f647d16d5560d6bc1d6994d17024888e76ce014157c21024f21c6",
+        "models/scene.xml": "10d1990f12c2dc79b739b67203422ff8a0090a01e424dacf780b9a03d6015b83"
+      },
+      "versions": {
+        "torch": "2.15.0+cpu",
+        "stable-baselines3": "2.9.2",
+        "gymnasium": "1.4.0",
+        "mujoco": "3.16.0",
+        "numpy": "2.5.4"
+      }
+    },
+    {
+      "scene": "stairs_up",
+      "seed": 42,
+      "requested_stage_steps": 32768,
+      "total_steps": 32768,
+      "wall_seconds": 248.681391954422,
+      "device": "cpu",
+      "residual_scale_rad": 0.25,
+      "observation_dim": 36,
+      "resume": null,
+      "randomization": "initial lateral position +/-5mm only; fixed terrain",
+      "source_sha256": {
+        "terrain_rl.py": "dd8f07342c2f2ded9d1d85c81d4f1178ee8d00509fc59b284f6516d27ab45c64",
+        "train_terrain_ppo.py": "51fb30c3cbcb681c47fcc4c7f7f12f5af3b75cd746bffbbf4e99b42d8ea3d01d",
+        "gait_controller.py": "560030737963731ccefa5f8b171ad0d280d96c4a27c7cbe8151e848b1c420f7e",
+        "gait.json": "409afe24c7a058242bfe972ff3c375db4ebaee98ec5eafdef52f7fc203244f01",
+        "scenarios.py": "02c953047219c631f1a665c6879f76d64954e2cfec9511f9f56619d0c09b3e14",
+        "scenario_matrix.py": "c8eaee1e0c8471781e6c968d069ca89031a9fc4fcb0b464d7bca4fc6b4da6686",
+        "models/scene.xml": "10d1990f12c2dc79b739b67203422ff8a0090a01e424dacf780b9a03d6015b83"
+      },
+      "versions": {
+        "torch": "2.15.0+cpu",
+        "stable-baselines3": "2.9.2",
+        "gymnasium": "1.4.0",
+        "mujoco": "3.16.0",
+        "numpy": "2.5.4"
+      }
+    },
+    {
+      "scene": "stairs_up",
+      "seed": 42,
+      "requested_stage_steps": 65536,
+      "total_steps": 98304,
+      "wall_seconds": 565.6455903053284,
+      "device": "cpu",
+      "residual_scale_rad": 0.25,
+      "observation_dim": 36,
+      "resume": "outputs/terrain_ppo/stairs_up/r1",
+      "randomization": "initial lateral position +/-5mm only; fixed terrain",
+      "source_sha256": {
+        "terrain_rl.py": "5d0f22036d3c7c1202b42aa6a2c339bffc5988af23b71a3c8933d59bfebd950e",
+        "train_terrain_ppo.py": "85997734a3a8e6f4a33b6e178933f1667fa65dada6f43020479d254472d12951",
+        "gait_controller.py": "560030737963731ccefa5f8b171ad0d280d96c4a27c7cbe8151e848b1c420f7e",
+        "gait.json": "409afe24c7a058242bfe972ff3c375db4ebaee98ec5eafdef52f7fc203244f01",
+        "scenarios.py": "02c953047219c631f1a665c6879f76d64954e2cfec9511f9f56619d0c09b3e14",
+        "scenario_matrix.py": "e2bca0d44f8f647d16d5560d6bc1d6994d17024888e76ce014157c21024f21c6",
+        "models/scene.xml": "10d1990f12c2dc79b739b67203422ff8a0090a01e424dacf780b9a03d6015b83"
+      },
+      "versions": {
+        "torch": "2.15.0+cpu",
+        "stable-baselines3": "2.9.2",
+        "gymnasium": "1.4.0",
+        "mujoco": "3.16.0",
+        "numpy": "2.5.4"
+      }
+    }
+  ],
+  "offset_checks": [
+    {
+      "scene": "downhill3",
+      "initial_x_offset_m": -0.005,
+      "passed": true,
+      "forward_m": 0.9593920192601225
+    },
+    {
+      "scene": "downhill3",
+      "initial_x_offset_m": 0.005,
+      "passed": true,
+      "forward_m": 0.9640142793811483
+    },
+    {
+      "scene": "stairs_down",
+      "initial_x_offset_m": -0.005,
+      "passed": true,
+      "forward_m": 0.7573426236888048
+    },
+    {
+      "scene": "stairs_down",
+      "initial_x_offset_m": 0.005,
+      "passed": true,
+      "forward_m": 0.7781256888998039
+    },
+    {
+      "scene": "uphill5",
+      "initial_x_offset_m": -0.005,
+      "passed": true,
+      "forward_m": 1.0728990989733511
+    },
+    {
+      "scene": "uphill5",
+      "initial_x_offset_m": 0.005,
+      "passed": true,
+      "forward_m": 1.0751235863674113
+    }
+  ],
+  "selection": {
+    "stairs_up": "r2 improves stability, still fails goal and heading",
+    "rough": "r1 retained as stable candidate; r2 regresses contact/speed safety; neither passes",
+    "running": "bound candidate has flight but fails speed and joint-speed checks"
+  },
+  "source_hash_note": "Initial jobs collected file hashes at completion. Validation/inference-only edits occurred during jobs; active training dynamics/reward were unchanged. Future runner captures hashes before learn. Core original source snapshots retained with local artifacts."
+}

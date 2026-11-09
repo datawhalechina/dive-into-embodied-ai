@@ -39,6 +39,7 @@ class Recorder:
         self.opt.geomgroup[4] = 1  # Physical obstacles, hidden by MuJoCo's default.
         self.opt.geomgroup[5] = 1  # Non-colliding water surface.
         self.cam.distance = .46
+        self.controller_label = "Periodic controller"
         self.scene, self.mode, self.output, self.route = scene, mode, output, route
         font = Path('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf')
         self.font = ImageFont.truetype(str(font), 20) if font.exists() else ImageFont.load_default(size=20)
@@ -52,7 +53,7 @@ class Recorder:
         draw = ImageDraw.Draw(image)
         draw.rectangle((0, 0, 960, 82), fill=(14, 21, 33))
         draw.text((20, 12), f'QUADDLE / {self.scene.label}', font=self.font, fill='white')
-        draw.text((20, 45), f'{self.mode} | Periodic controller | Uncalibrated simulation', font=self.small, fill=(180, 200, 220))
+        draw.text((20, 45), f'{self.mode} | {self.controller_label} | Uncalibrated simulation', font=self.small, fill=(180, 200, 220))
         rot = rotation.T @ data.body('body').xmat.reshape(3, 3)
         pitch = math.degrees(math.atan2(-rot[2, 1], np.linalg.norm(rot[:2, 1])))
         draw.rectangle((0, 660, 960, 720), fill=(14, 21, 33))
@@ -88,22 +89,34 @@ class Recorder:
         self.renderer.close()
 
 
-def run_case(name, mode, seconds=20., output=None, video=False):
+def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None, config_override=None, initial_x_offset=0.):
     if not math.isfinite(seconds) or seconds < 6:
         raise ValueError('seconds must be finite and at least 6')
     scene = make_scene(name)
     model, data, rotation = load_scene(scene)
+    if not math.isfinite(initial_x_offset) or abs(initial_x_offset) > .02:
+        raise ValueError('initial_x_offset must be within +/-2 cm')
+    if initial_x_offset:
+        data.qpos[0] += initial_x_offset
+        mujoco.mj_forward(model, data)
     config = profile(mode)
+    if config_override:
+        config.update(config_override)
     route = plan_path(scene) if name == 'avoid' else []
     waypoint = 1
     if route:
         config.update(heading_target_rad=0., lateral_kp=0., heading_kp=.8,
                       steering_limit=.45, max_target_speed_rad_s=5.)
     controller = JointController('walk', config=config)
+    if policy_path:
+        from terrain_rl import PolicyController
+        controller = PolicyController(model, scene, rotation, config, policy_path)
     fluid = ShallowWater(model, scene) if scene.water_depth_m else None
     output = Path(output or ROOT/'outputs/scenario_matrix')/mode/name
     output.mkdir(parents=True, exist_ok=True)
     recorder = Recorder(model, data, scene, mode, output, route) if video else None
+    if recorder and policy_path:
+        recorder.controller_label = 'Residual PPO'
     support_geoms = {i for i in range(model.ngeom) if model.geom_bodyid[i]==0 and model.geom_contype[i]!=0}
     obstacle_geoms = {i for i in support_geoms if model.geom_group[i]==4}
     body_geom = model.geom('body_contact').id
@@ -202,7 +215,10 @@ def run_case(name, mode, seconds=20., output=None, video=False):
         # This project uses a conservative aerial-running criterion, not a universal gait definition.
         checks['running_speed'] = speed >= .1
         checks['repeated_flight'] = len(flight_durations) >= 3
-    result = dict(scene=scene.metadata(), mode=mode, passed=all(checks.values()), checks=checks,
+    result = dict(scene=scene.metadata(), mode=mode, policy_path=str(policy_path) if policy_path else None,
+        initial_x_offset_m=initial_x_offset,
+        policy_sha256={name:hashlib.sha256((Path(policy_path)/name).read_bytes()).hexdigest() for name in
+                       ['policy.zip', 'obs_stats.npz', 'metadata.json']} if policy_path else None, passed=all(checks.values()), checks=checks,
         simulation_seconds=float(data.time), commanded_seconds=seconds, forward_m=distance,
         average_forward_speed_m_s=speed, final_position_m=data.qpos[:3].tolist(), goal_distance_xy_m=goal_distance,
         startup_max_abs_pitch_deg=maximum_pitch, min_upright_cosine=min_up, min_root_clearance_m=min_clearance,
@@ -243,7 +259,7 @@ def write_gallery(output, report):
 <title>Quaddle 多场景仿真实验</title><style>
 body{margin:auto;max-width:1400px;padding:24px;background:#101923;color:#e4ecf5;font:16px/1.65 system-ui,sans-serif}h1{font-size:30px}h2{font-size:20px;margin:0}a{color:#8cceff}.note{max-width:1000px;color:#c1cfdd}nav{display:flex;gap:12px;margin:24px 0}button{padding:10px 18px;border:1px solid #607080;border-radius:7px;background:#23374a;color:white;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:24px}article{background:#1b2a3a;padding:18px;border-radius:12px;min-width:0}video{width:100%;border-radius:6px}.pass{color:#8ce3ae}.fail{color:#ffd092}details{overflow-wrap:anywhere}article[hidden]{display:none}
 </style><h1>Quaddle：同一模型，换个环境会怎样？</h1>
-<p class="note">周期控制器的真实MuJoCo回放，完整保留启动。上下台阶均为4毫米高、12厘米深，共3级；坑洼起伏为±3毫米。绕障使用已知地图A*规划和仿真真值定位。浅水使用未标定的等效球浮力、阻力与湿地摩擦近似，无流体求解器。</p>
+<p class="note">真实MuJoCo回放，完整保留启动；控制方式见视频标签和指标JSON。上下台阶均为4毫米高、12厘米深，共3级；坑洼起伏为±3毫米。绕障使用已知地图A*规划和仿真真值定位。浅水使用未标定的等效球浮力、阻力与湿地摩擦近似，无流体求解器。</p>
 <p class="note">跑步候选额外要求：至少3个持续10毫秒的完整腾空段、均速≥0.1米/秒，并通过其他任务检查。提高频率本身不计为会跑。每条件只有一次确定性运行，尚无真机验证。</p>'''
     page += f'<p>{len(report["results"])}组任务中，{passed}组通过当前检查。失败条件与完整数据均保留。</p>'
     page += '<nav><button data-filter="all">全部</button><button data-filter="walk">行走</button><button data-filter="run_attempt">跑步候选</button></nav><main class="grid">'
@@ -260,6 +276,8 @@ def main():
     parser.add_argument('--mode', choices=['both', 'walk', 'run_attempt'], default='both')
     parser.add_argument('--seconds', type=float, default=20.)
     parser.add_argument('--output', type=Path, default=ROOT/'outputs/scenario_matrix')
+    parser.add_argument('--policy', type=Path, help='Terrain PPO directory with policy and matching normalization')
+    parser.add_argument('--config', type=Path, help='Explicit gait JSON; keeps task thresholds unchanged')
     parser.add_argument('--video', action='store_true', help='Linux headless: set MUJOCO_GL=egl before launch')
     parser.add_argument('--workers', type=int, default=2)
     args = parser.parse_args()
@@ -268,8 +286,9 @@ def main():
     names = SCENES if args.scene=='all' else [args.scene]
     modes = ['walk', 'run_attempt'] if args.mode=='both' else [args.mode]
     results = []
+    config_override = json.loads(args.config.read_text()) if args.config else None
     with ProcessPoolExecutor(args.workers) as pool:
-        futures = [pool.submit(run_case, name, mode, args.seconds, args.output, args.video) for mode in modes for name in names]
+        futures = [pool.submit(run_case, name, mode, args.seconds, args.output, args.video, args.policy, config_override) for mode in modes for name in names]
         for future in as_completed(futures):
             result = future.result(); results.append(result)
             print(result['mode'], result['scene']['name'], 'PASS' if result['passed'] else 'FAIL',
@@ -278,7 +297,7 @@ def main():
     hashes = {name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in
               ['models/scene.xml', 'gait.json', 'reference/run-candidate.json', 'gait_controller.py', 'scenarios.py', 'scenario_matrix.py']}
     report = dict(python=platform.python_version(), mujoco=mujoco.__version__, hardware_tested=False,
-        learned_policy=False, trials_per_condition=1, running_definition='>=3 completed no-terrain-contact intervals of >=10ms, speed>=0.1m/s, plus all task checks',
+        learned_policy=bool(args.policy), trials_per_condition=1, running_definition='>=3 completed no-terrain-contact intervals of >=10ms, speed>=0.1m/s, plus all task checks',
         source_sha256=hashes, results=results)
     args.output.mkdir(parents=True, exist_ok=True)
     (args.output/'summary.json').write_text(json.dumps(report, indent=2)+'\n')

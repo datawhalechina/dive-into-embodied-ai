@@ -250,3 +250,44 @@ uv pip sync --python .venv/bin/python requirements.lock
 ```
 
 参考：[Petoi 官方模型](https://huggingface.co/petoi/quaddle)、[MuJoCo 模型说明](https://mujoco.readthedocs.io/en/stable/modeling.html)、[macOS 查看器说明](https://mujoco.readthedocs.io/en/stable/python.html#passive-viewer)。
+
+## 失败定位与分场景训练
+
+`diagnose_terrain.py` 记录原步态首次倾斜、触地、偏航和关节超速的时刻。先看失效顺序，再决定是改步态参数还是训练状态反馈。`search_terrain_gait.py` 用有边界的 CEM 搜索频率、幅度、偏置和方向反馈；它是步态参数优化，不能称作 PPO。
+
+楼梯、坑洼使用新增的 `terrain_rl.py` 和 `train_terrain_ppo.py`。旧 `rl_env.py` 是独立的平地示例，启动方式与本轮多场景评测不同，不能直接混用其 checkpoint。
+
+新环境保持 1 ms 物理步进、100 Hz 动作、原支撑启动姿态与关节限制。PPO 输出四个 ±0.25 rad 残差，叠加到周期目标后，再限制目标变化速率为 8 rad/s；这不是对实际关节速度的硬钳位，实际峰值仍按原 10 rad/s 阈值独立验收。训练目标包含前进、速度跟踪、偏航、实际关节超速和动作平滑代价，机身触地或倾倒会结束训练回合。独立评测仍运行完整 22 秒，保留失败后续状态。
+
+36 维观测包含姿态、速度、关节状态、上一动作、周期目标、相位与前方五个地形高度。高度和速度来自仿真真值；目前没有实现真机地形感知。训练只随机化初始横向位置 ±5 mm，不能据此宣称对未知地形、摩擦或模型误差鲁棒。
+
+本轮 CPU 环境使用 Python 3.12、MuJoCo 3.16.0、PyTorch 2.15.0+cpu、SB3 2.9.2、Gymnasium 1.4.0。在已有基础依赖环境中安装：
+
+```bash
+uv pip install --python .venv/bin/python torch==2.15.0+cpu --index-url https://download.pytorch.org/whl/cpu
+uv pip install --python .venv/bin/python stable-baselines3==2.9.2 gymnasium==1.4.0
+OPENBLAS_NUM_THREADS=1 .venv/bin/python check_terrain_rl.py
+OPENBLAS_NUM_THREADS=1 .venv/bin/python train_terrain_ppo.py \
+  --scene stairs_up --steps 32768 --envs 4 --seed 42 --output outputs/terrain_ppo/stairs_up/r1
+OPENBLAS_NUM_THREADS=1 .venv/bin/python train_terrain_ppo.py \
+  --scene stairs_up --steps 65536 --envs 4 --seed 42 \
+  --resume outputs/terrain_ppo/stairs_up/r1 --output outputs/terrain_ppo/stairs_up/r2
+MUJOCO_GL=egl OPENBLAS_NUM_THREADS=1 .venv/bin/python evaluate_terrain_stages.py \
+  --scene stairs_up --policy outputs/terrain_ppo/stairs_up/r2 \
+  --output outputs/terrain_ppo/stairs_up/r2/evaluation --video
+```
+
+每轮同时保存 `policy.zip`、`vecnormalize.pkl`、推理用的 `obs_stats.npz` 和记录训练步数、耗时、依赖版本、源码哈希的 `metadata.json`。这些文件必须成套使用。续训保留优化器和归一化统计；推理使用冻结统计。
+
+参数搜索与回放示例：
+
+```bash
+OPENBLAS_NUM_THREADS=1 .venv/bin/python search_terrain_gait.py \
+  --scene downhill3 --output outputs/terrain_ppo/search/downhill3
+MUJOCO_GL=egl .venv/bin/python scenario_matrix.py --scene downhill3 --mode walk \
+  --config outputs/terrain_ppo/search/downhill3/selected.json --video
+```
+
+本轮未修改默认 `gait.json`，每个通过的场景使用显式配置或 checkpoint；不存在一个已经验证能解决所有地形的统一策略。跑步还要通过原来的速度、至少三段完整腾空等检查，奖励提高或步频提高都不等于任务完成。
+
+2026-11-09实跑结果见 [`reports/terrain_iteration_2026-11-09.json`](reports/terrain_iteration_2026-11-09.json)：76组参数试验中，`reference/terrain-downhill3.json`、`terrain-stairs_down.json`、`terrain-uphill5.json` 在原场景通过，±5mm初始横向偏移也分别通过。上楼梯与坑洼各完成两轮、累计98,304步PPO，尚未通过；坑洼第二轮虽走得更远，但触地/超速退步，保留第一轮作为稳定候选。`reference/run-bound-candidate.json` 有完整腾空，但速度与关节限制仍不合格。未将这些场景配置或策略设为默认，也未发布“已会跑”的结论。模型与视频保存在本次实验本地归档中，未作为教程仓库二进制文件提交。
