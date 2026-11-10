@@ -391,3 +391,25 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python search_coupled_support
 搜索读取上一轮 `outputs/contact_phase_20261110/refinement/selected.json`，需要先跑上一节试验。输出在 `outputs/support_coordination_20261110/`，包含各轮源码快照、完整事件与指标。每轮按相同原检查排序选候选，并补测起点±5mm、平地、单个4mm台阶和2mm三阶。新试验共28组参数＋1组旧候选对照＋15组复测，报告见 [支撑协调结果](reports/support_coordination_2026-11-10.json)。
 
 逐腿等待候选在原地形只前进0.079m，且平地也失败；加入回撤仍未改善。共同相位时钟恢复平地通过，但原4mm三阶前进0.214m、偏航113.70°且机身触地。2mm三阶前进0.816m，仅关节超速失败。原任务仍无全项通过，默认步态保持不变，未新增PPO。关节相位调度不等于足端轨迹规划，不能据此推断机构极限。
+
+## 足端轨迹与脱离接触后超速（2026-11-10）
+
+`diagnose_foot_trajectory.py` 通过矩阵评测的可选只读 `observer`，按1kHz定位关节速度峰值，并利用已有200Hz forward保存各脚接触法向力、侧壁/支撑接触、关节角/目标角、机身姿态和足部碰撞网格最低顶点。无额外求解器调用；插桩前后验收指标完全一致。最低顶点会切换，不能当作固定足端点或可达空间。非刷新时刻的峰值几何可能滞后积分状态一个1ms物理步。
+
+```bash
+# 使用已配置的RL实验环境和上一节 coupled/selected.json
+uv pip install --python .venv/bin/python matplotlib==3.11.2
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python diagnose_foot_trajectory.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python plot_foot_trajectory.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python check_tracking_release.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python search_tracking_release.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python validate_tracking_short.py
+```
+
+输出为 `outputs/foot_trajectory_20261110/` 下的CSV、峰值JSON、PNG/SVG、搜索与扰动复测。完整参数和逐项结果见 [本轮报告](reports/foot_trajectory_2026-11-10.json)。
+
+原2mm台阶峰值出现在7.892s左后腿：10.177rad/s，当时无足地接触，前一阶段存在侧壁受阻及目标角落后。这支持“接触解除后的快速追赶”解释。新增 `riser_tracking_limit_rad`、`tracking_release_s`、`tracking_scope` 控制碰壁时和脱离后的期望角超前量，再执行原目标变化率限制；不直接限制实际关节速度，不改物理或验收阈值。
+
+四腿启用、0.35rad、40ms配置使2mm三阶前进0.910m，关节峰值8.919rad/s、偏航24.32°，全部通过。120ms配置也标称通过。两者均通过横向±5mm、朝向−3°、摩擦0.9复测，朝向+3°仍失败。40ms配置平地通过；原40s测试在走到1.8m平台边缘后偏航失败，单独延长末级平台至4m的40s诊断通过（前进2.102m）。后者是额外场景，不能覆盖原失败。
+
+原4mm单阶/三阶仍失败；轨迹中出现约39°机身上仰，前脚世界高度不能直接视为有效抬脚高度。未新增PPO，未替换默认步态，未验证真机或机构极限。

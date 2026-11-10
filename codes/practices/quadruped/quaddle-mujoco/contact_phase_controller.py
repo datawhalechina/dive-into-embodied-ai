@@ -19,6 +19,9 @@ class ContactPhaseController:
         self.previous_contact=np.zeros(4,dtype=bool);self.contact_count=np.zeros(4,dtype=int)
         self.landing_until=np.zeros(4);self.riser_until=np.zeros(4);self.cooldown=np.zeros(4)
         self.events=[];self.maximum_slew=0.;self.maximum_shift=0.;self.start_x=None
+        self.tracking_until=np.zeros(4);self.tracking_clamp_ticks=0
+        self.qids=[model.jnt_qposadr[model.joint(s+'_thigh').id] for s in SIDES]
+        self.vids=[model.jnt_dofadr[model.joint(s+'_thigh').id] for s in SIDES]
         self.coordinator=None
         if config.get('support_coordination'):
             from support_coordinator import SupportCoordinator,CoupledSupportCoordinator
@@ -82,6 +85,15 @@ class ContactPhaseController:
         angle=np.array(c['bias_rad'])+np.array(c['amplitude_rad'])*(1+steer*self.signs)*wave+self.boost
         ramp=min(1.,t/c['ramp_seconds']);startup=np.array(c['startup_bias_rad'])
         desired=np.clip(self.signs*((1-ramp)*startup+ramp*angle),-1.2,1.2)
+        if c.get('riser_tracking_limit_rad',0)>0 and t>=c['ramp_seconds']:
+            hit=riser.copy()
+            if c.get('tracking_scope','all')=='rear':hit[:2]=False
+            self.tracking_until=np.where(hit,t+c.get('tracking_release_s',.08),self.tracking_until)
+            active=t<self.tracking_until
+            q=data.qpos[self.qids];limit=c['riser_tracking_limit_rad']
+            bounded=np.clip(desired,q-limit,q+limit)
+            self.tracking_clamp_ticks+=int(np.any(active & (np.abs(bounded-desired)>1e-12)))
+            desired=np.where(active,bounded,desired)
         slew=np.where(landing,c.get('landing_slew_rad_s',3.),c['max_target_speed_rad_s'])
         delta=np.clip(desired-self.target,-slew*dt,slew*dt)
         self.maximum_slew=max(self.maximum_slew,float(np.max(np.abs(delta)))/dt)
@@ -90,4 +102,5 @@ class ContactPhaseController:
     def diagnostics(self):
         return dict(controller='contact_phase_v1',events=self.events,max_target_slew_rad_s=self.maximum_slew,
             max_phase_shift_cycles=self.maximum_shift,contact_estimation='simulator contact normals',
-            support_coordination=self.coordinator.diagnostics() if self.coordinator is not None else None)
+            support_coordination=self.coordinator.diagnostics() if self.coordinator is not None else None,
+            tracking_clamp_ticks=self.tracking_clamp_ticks)

@@ -93,7 +93,7 @@ class Recorder:
         self.renderer.close()
 
 
-def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None, config_override=None, initial_x_offset=0., scene_definition=None, initial_yaw_deg=0., friction_scale=1.):
+def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None, config_override=None, initial_x_offset=0., scene_definition=None, initial_yaw_deg=0., friction_scale=1., observer=None):
     if not math.isfinite(seconds) or seconds < 6:
         raise ValueError('seconds must be finite and at least 6')
     scene = scene_definition if scene_definition is not None else make_scene(name)
@@ -229,6 +229,8 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
                 # video can change warm-start state and alter the experiment.
                 phase = 'support' if data.time<2 else ('transition' if data.time<3.5 else 'locomotion')
                 recorder.frame(data, rotation, forward, phase, (max_joint_speed,max_yaw))
+            if observer is not None:
+                observer(model, data, controller, step)
     finally:
         if recorder:
             recorder.close()
