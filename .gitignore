@@ -27,4 +27,10 @@ codes/practices/quadruped/cs123/exercises/lab_6_rl_pupper/scripts/
 # Lab 4 gain_sweep_quick.py 生成的产物（CSV / PNG / GIF）
 codes/practices/quadruped/cs123/4.quadruped-mjcf/outputs/
 
+# Quaddle VLA 产物（数据集 / 检查点 / RL 训练输出，仅本地保留，约 18GB）
+codes/practices/quadruped/cs123/MUJOCO_LOG.TXT
+codes/practices/quadruped/cs123/7.quaddle-mjcf/outputs/
+codes/practices/quadruped/cs123/8.rl_quaddle/outputs/
+codes/practices/vla/quaddle-data/outputs/
+
 specs

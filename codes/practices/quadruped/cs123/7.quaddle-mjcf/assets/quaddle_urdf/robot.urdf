@@ -1,0 +1,1180 @@
+<?xml version="1.0" ?>
+<robot name="quaddle">
+  <!-- Link body -->
+  <link name="body">
+    <inertial>
+      <origin xyz="-0.00527469 -0.00665217 -0.00016366" rpy="0 0 0"/>
+      <mass value="0.161638"/>
+      <inertia ixx="0.000138691" ixy="4.1927e-08" ixz="-9.874e-09" iyy="4.1084e-05" iyz="-3.77189e-06" izz="0.000164163"/>
+    </inertial>
+    <!-- Part lego_top_cap -->
+    <visual>
+      <origin xyz="-0.00526647 -0.000744244 -0.00249846" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/lego_top_cap.stl"/>
+      </geometry>
+      <material name="lego_top_cap_material">
+        <color rgba="0.419608 0.419608 0.419608 1"/>
+      </material>
+    </visual>
+    <!-- Part power_cap -->
+    <visual>
+      <origin xyz="-0.00526647 -0.000744244 -0.00247543" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/power_cap.stl"/>
+      </geometry>
+      <material name="power_cap_material">
+        <color rgba="0.419608 0.419608 0.419608 1"/>
+      </material>
+    </visual>
+    <!-- Part batterie_model_bl_5c -->
+    <visual>
+      <origin xyz="0.0237376 -0.0405934 0.0108496" rpy="-1.5708 0 -1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/batterie_model_bl_5c.stl"/>
+      </geometry>
+      <material name="batterie_model_bl_5c_material">
+        <color rgba="0.627451 0.627451 0.627451 1"/>
+      </material>
+    </visual>
+    <!-- Part body_bar -->
+    <visual>
+      <origin xyz="-0.00526646 0.0636993 -0.00249846" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_bar.stl"/>
+      </geometry>
+      <material name="body_bar_material">
+        <color rgba="0.627451 0.627451 0.627451 1"/>
+      </material>
+    </visual>
+    <!-- Part gear -->
+    <visual>
+      <origin xyz="-0.0378665 -0.0392007 0.00390154" rpy="-1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+      <material name="gear_material">
+        <color rgba="0.905882 0.905882 0.886275 1"/>
+      </material>
+    </visual>
+    <!-- Part body -->
+    <visual>
+      <origin xyz="-0.00526647 -0.000744244 -0.00249846" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body.stl"/>
+      </geometry>
+      <material name="body_material">
+        <color rgba="0.909804 0.678431 0.137255 1"/>
+      </material>
+    </visual>
+    <!-- Part gear_2 -->
+    <visual>
+      <origin xyz="-0.0378665 0.0252993 0.00390154" rpy="-1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+      <material name="gear_2_material">
+        <color rgba="0.905882 0.905882 0.886275 1"/>
+      </material>
+    </visual>
+    <!-- Part gear_3 -->
+    <visual>
+      <origin xyz="0.0273335 0.0252993 0.00390154" rpy="1.5708 -0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+      <material name="gear_3_material">
+        <color rgba="0.905882 0.905882 0.886275 1"/>
+      </material>
+    </visual>
+    <!-- Part body_bar_2 -->
+    <visual>
+      <origin xyz="-0.00526646 -0.000800725 -0.00249846" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/body_bar.stl"/>
+      </geometry>
+      <material name="body_bar_2_material">
+        <color rgba="0.627451 0.627451 0.627451 1"/>
+      </material>
+    </visual>
+    <!-- Part gear_4 -->
+    <visual>
+      <origin xyz="0.0273335 -0.0392007 0.00390154" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://assets/gear.stl"/>
+      </geometry>
+      <material name="gear_4_material">
+        <color rgba="0.905882 0.905882 0.886275 1"/>
+      </material>
+    </visual>
+    <!-- Part battery_cap_thin -->
+    <visual>
+      <origin xyz="-0.00526647 -0.000744244 -0.00247543" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/battery_cap_thin.stl"/>
+      </geometry>
+      <material name="battery_cap_thin_material">
+        <color rgba="0.462745 0.627451 0.980392 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame body_collision (dummy link + fixed joint) -->
+  <link name="body_collision">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="body_collision_frame" type="fixed">
+    <origin xyz="-0.00526647 -0.000744244 0.0125015" rpy="0 -0 0"/>
+    <parent link="body"/>
+    <child link="body_collision"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link left_front_thigh -->
+  <link name="left_front_thigh">
+    <inertial>
+      <origin xyz="0.000643255 0.0150873 -0.00185171" rpy="0 0 0"/>
+      <mass value="0.0026692"/>
+      <inertia ixx="3.79523e-07" ixy="3.854e-09" ixz="-9.49e-10" iyy="4.8206e-08" iyz="3.316e-09" izz="4.13338e-07"/>
+    </inertial>
+    <!-- Part thigh -->
+    <visual>
+      <origin xyz="0 0 -0.0034" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/thigh.stl"/>
+      </geometry>
+      <material name="thigh_material">
+        <color rgba="0.909804 0.678431 0.137255 1"/>
+      </material>
+    </visual>
+    <!-- Part bearing -->
+    <visual>
+      <origin xyz="0 0 -0.0033" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/bearing.stl"/>
+      </geometry>
+      <material name="bearing_material">
+        <color rgba="0.627451 0.627451 0.627451 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame closing_left_front_leg_2 (dummy link + fixed joint) -->
+  <link name="closing_left_front_leg_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_left_front_leg_2_frame" type="fixed">
+    <origin xyz="0 0.03 -0.0029" rpy="-3.14159 0 0"/>
+    <parent link="left_front_thigh"/>
+    <child link="closing_left_front_leg_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from body to left_front_thigh -->
+  <joint name="left_front_thigh" type="revolute">
+    <origin xyz="0.0239335 -0.0392007 0.00390154" rpy="-1.5708 -0 1.5708"/>
+    <parent link="body"/>
+    <child link="left_front_thigh"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Link left_front_motor_arm -->
+  <link name="left_front_motor_arm">
+    <inertial>
+      <origin xyz="0.00277955 1.39931e-05 -0.000412926" rpy="0 0 0"/>
+      <mass value="0.000598556"/>
+      <inertia ixx="4.383e-09" ixy="2.3e-11" ixz="4.59e-10" iyy="1.5672e-08" iyz="-1.1e-11" izz="1.6958e-08"/>
+    </inertial>
+    <!-- Part motor_arm -->
+    <visual>
+      <origin xyz="0 0 0.0002" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/motor_arm.stl"/>
+      </geometry>
+      <material name="motor_arm_material">
+        <color rgba="0.988235 0.988235 0.941176 1"/>
+      </material>
+    </visual>
+    <!-- Part screw_servo -->
+    <visual>
+      <origin xyz="0.000110692 4.58291e-05 -0.00155" rpy="0 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/screw_servo.stl"/>
+      </geometry>
+      <material name="screw_servo_material">
+        <color rgba="1 0.364706 0.364706 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link left_front_spring -->
+  <link name="left_front_spring">
+    <inertial>
+      <origin xyz="-0.000512017 -0.0161518 -0.000633026" rpy="0 0 0"/>
+      <mass value="0.00115717"/>
+      <inertia ixx="8.6534e-08" ixy="-2.831e-09" ixz="-1.3e-11" iyy="4.703e-09" iyz="-4.37e-10" izz="8.6725e-08"/>
+    </inertial>
+    <!-- Part long_spring -->
+    <visual>
+      <origin xyz="-0.012 0 0.0014" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/long_spring.stl"/>
+      </geometry>
+      <material name="long_spring_material">
+        <color rgba="0.627451 0.627451 0.627451 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link left_front_leg -->
+  <link name="left_front_leg">
+    <inertial>
+      <origin xyz="-0.015706 -0.00583261 -0.00141061" rpy="0 0 0"/>
+      <mass value="0.000994691"/>
+      <inertia ixx="6.7715e-08" ixy="-5.6269e-08" ixz="-8.43e-10" iyy="7.147e-08" iyz="-7.3e-10" izz="1.34417e-07"/>
+    </inertial>
+    <!-- Part leg -->
+    <visual>
+      <origin xyz="-0.0108657 0.0319159 0.0024" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg.stl"/>
+      </geometry>
+      <material name="leg_material">
+        <color rgba="0.172549 0.172549 0.168627 1"/>
+      </material>
+    </visual>
+    <!-- Part tip -->
+    <visual>
+      <origin xyz="-0.0107247 0.0318646 0.0024" rpy="0 -0 -1e-11"/>
+      <geometry>
+        <mesh filename="package://assets/tip.stl"/>
+      </geometry>
+      <material name="tip_material">
+        <color rgba="0.964706 0.964706 0.952941 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame closing_left_front_leg_1 (dummy link + fixed joint) -->
+  <link name="closing_left_front_leg_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_left_front_leg_1_frame" type="fixed">
+    <origin xyz="-0.0108657 0.00191591 0.0038" rpy="0 -0 0"/>
+    <parent link="left_front_leg"/>
+    <child link="closing_left_front_leg_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame left_front_foot (dummy link + fixed joint) -->
+  <link name="left_front_foot">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_front_foot_frame" type="fixed">
+    <origin xyz="-0.0261547 -0.0195792 -0.00155" rpy="0 -0 -1e-11"/>
+    <parent link="left_front_leg"/>
+    <child link="left_front_foot"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame left_front_knee (dummy link + fixed joint) -->
+  <link name="left_front_knee">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_front_knee_frame" type="fixed">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <parent link="left_front_leg"/>
+    <child link="left_front_knee"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link left_front_wheel -->
+  <link name="left_front_wheel">
+    <inertial>
+      <origin xyz="-0.00274895 -0.00106876 1.1992e-08" rpy="0 0 0"/>
+      <mass value="0.00023416"/>
+      <inertia ixx="2.96e-09" ixy="1.62e-09" ixz="0" iyy="5.734e-09" iyz="-0" izz="6.027e-09"/>
+    </inertial>
+    <!-- Part lower4wheel -->
+    <visual>
+      <origin xyz="0.0138219 -0.0472146 -0.00395" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/lower4wheel.stl"/>
+      </geometry>
+      <material name="lower4wheel_material">
+        <color rgba="0.65098 0.65098 0.65098 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link left_front_wheel_tip -->
+  <link name="left_front_wheel_tip">
+    <inertial>
+      <origin xyz="-0 -0 -0" rpy="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1.583e-09" ixy="-0" ixz="-0" iyy="1.583e-09" iyz="0" izz="2.5e-09"/>
+    </inertial>
+    <!-- Part tip_wheel -->
+    <visual>
+      <origin xyz="0.0229139 0.0509071 0.00395" rpy="-0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/tip_wheel.stl"/>
+      </geometry>
+      <material name="tip_wheel_material">
+        <color rgba="0.952941 0.796078 0.486275 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame left_front_wheel_tip_collision (dummy link + fixed joint) -->
+  <link name="left_front_wheel_tip_collision">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_front_wheel_tip_collision_frame" type="fixed">
+    <origin xyz="-0 0 0" rpy="-0 0 -0"/>
+    <parent link="left_front_wheel_tip"/>
+    <child link="left_front_wheel_tip_collision"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from left_front_wheel to left_front_wheel_tip -->
+  <joint name="left_front_wheel_tip" type="continuous">
+    <origin xyz="-0.00909195 0.00369246 0" rpy="-3.14159 0 1.5708"/>
+    <parent link="left_front_wheel"/>
+    <child link="left_front_wheel_tip"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <!-- Joint from left_front_leg to left_front_wheel -->
+  <joint name="left_front_wheel" type="continuous">
+    <origin xyz="-0.0245472 -0.0151626 -0.00155" rpy="3.14159 0 0"/>
+    <parent link="left_front_leg"/>
+    <child link="left_front_wheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <!-- Joint from left_front_spring to left_front_leg -->
+  <joint name="left_front_leg" type="revolute">
+    <origin xyz="-0.00113431 -0.0319159 -0.00121" rpy="0 -0 -0"/>
+    <parent link="left_front_spring"/>
+    <child link="left_front_leg"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from left_front_motor_arm to left_front_spring -->
+  <joint name="left_front_spring" type="revolute">
+    <origin xyz="0.012 0 0.0014" rpy="3.14159 -0 -0"/>
+    <parent link="left_front_motor_arm"/>
+    <child link="left_front_spring"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from body to left_front_motor_arm -->
+  <joint name="left_front_motor_arm" type="revolute">
+    <origin xyz="0.0275335 -0.0392007 0.00390154" rpy="-1.5708 0 1.5708"/>
+    <parent link="body"/>
+    <child link="left_front_motor_arm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Link right_front_thigh -->
+  <link name="right_front_thigh">
+    <inertial>
+      <origin xyz="0.000643242 -0.0150871 -0.00185172" rpy="0 0 0"/>
+      <mass value="0.00266922"/>
+      <inertia ixx="3.79534e-07" ixy="-3.856e-09" ixz="-9.49e-10" iyy="4.8206e-08" iyz="-3.315e-09" izz="4.13348e-07"/>
+    </inertial>
+    <!-- Part thigh_right -->
+    <visual>
+      <origin xyz="-0 -0 -0.0034" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/thigh_right.stl"/>
+      </geometry>
+      <material name="thigh_right_material">
+        <color rgba="0.909804 0.678431 0.137255 1"/>
+      </material>
+    </visual>
+    <!-- Part bearing_2 -->
+    <visual>
+      <origin xyz="0 -0.06 -0.0033" rpy="-3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/bearing.stl"/>
+      </geometry>
+      <material name="bearing_2_material">
+        <color rgba="0.627451 0.627451 0.627451 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame closing_right_front_leg_2 (dummy link + fixed joint) -->
+  <link name="closing_right_front_leg_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_right_front_leg_2_frame" type="fixed">
+    <origin xyz="-0 -0.03 -0.0029" rpy="-3.14159 -0 -0"/>
+    <parent link="right_front_thigh"/>
+    <child link="closing_right_front_leg_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from body to right_front_thigh -->
+  <joint name="right_front_thigh" type="revolute">
+    <origin xyz="-0.0344665 -0.0392007 0.00390154" rpy="1.5708 -0 1.5708"/>
+    <parent link="body"/>
+    <child link="right_front_thigh"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Link right_front_motor_arm -->
+  <link name="right_front_motor_arm">
+    <inertial>
+      <origin xyz="0.00277955 1.39931e-05 -0.000412926" rpy="0 0 0"/>
+      <mass value="0.000598556"/>
+      <inertia ixx="4.383e-09" ixy="2.3e-11" ixz="4.59e-10" iyy="1.5672e-08" iyz="-1.1e-11" izz="1.6958e-08"/>
+    </inertial>
+    <!-- Part motor_arm_2 -->
+    <visual>
+      <origin xyz="0 0 0.0002" rpy="-3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/motor_arm.stl"/>
+      </geometry>
+      <material name="motor_arm_2_material">
+        <color rgba="0.988235 0.988235 0.941176 1"/>
+      </material>
+    </visual>
+    <!-- Part screw_servo_2 -->
+    <visual>
+      <origin xyz="0.000110692 4.58291e-05 -0.00155" rpy="-0 -0 -3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/screw_servo.stl"/>
+      </geometry>
+      <material name="screw_servo_2_material">
+        <color rgba="1 0.364706 0.364706 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link right_front_spring -->
+  <link name="right_front_spring">
+    <inertial>
+      <origin xyz="-0.000511981 0.0161518 -0.000633075" rpy="0 0 0"/>
+      <mass value="0.00115717"/>
+      <inertia ixx="8.6534e-08" ixy="2.831e-09" ixz="-1.3e-11" iyy="4.703e-09" iyz="4.36e-10" izz="8.6725e-08"/>
+    </inertial>
+    <!-- Part long_spring_right -->
+    <visual>
+      <origin xyz="-0.012 0 0.0014" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/long_spring_right.stl"/>
+      </geometry>
+      <material name="long_spring_right_material">
+        <color rgba="0.627451 0.627451 0.627451 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link right_front_leg -->
+  <link name="right_front_leg">
+    <inertial>
+      <origin xyz="-0.0157059 -0.00583263 0.00141061" rpy="0 0 0"/>
+      <mass value="0.000994691"/>
+      <inertia ixx="6.7716e-08" ixy="-5.6268e-08" ixz="8.43e-10" iyy="7.1468e-08" iyz="7.3e-10" izz="1.34416e-07"/>
+    </inertial>
+    <!-- Part tip_2 -->
+    <visual>
+      <origin xyz="-0.00490733 0.0297472 -0.0024" rpy="3.14159 -0 2.44346"/>
+      <geometry>
+        <mesh filename="package://assets/tip.stl"/>
+      </geometry>
+      <material name="tip_2_material">
+        <color rgba="0.964706 0.964706 0.952941 1"/>
+      </material>
+    </visual>
+    <!-- Part leg_right -->
+    <visual>
+      <origin xyz="-0.0108657 0.0319159 -0.0024" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_right.stl"/>
+      </geometry>
+      <material name="leg_right_material">
+        <color rgba="0.172549 0.172549 0.168627 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame closing_right_front_leg_1 (dummy link + fixed joint) -->
+  <link name="closing_right_front_leg_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_right_front_leg_1_frame" type="fixed">
+    <origin xyz="-0.0108657 0.00191591 -0.0038" rpy="3.14159 -0 0"/>
+    <parent link="right_front_leg"/>
+    <child link="closing_right_front_leg_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame right_front_foot (dummy link + fixed joint) -->
+  <link name="right_front_foot">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_front_foot_frame" type="fixed">
+    <origin xyz="-0.0261547 -0.0195792 0.00155" rpy="3.14159 -0 2.44346"/>
+    <parent link="right_front_leg"/>
+    <child link="right_front_foot"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame right_front_knee (dummy link + fixed joint) -->
+  <link name="right_front_knee">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_front_knee_frame" type="fixed">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <parent link="right_front_leg"/>
+    <child link="right_front_knee"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link right_front_wheel -->
+  <link name="right_front_wheel">
+    <inertial>
+      <origin xyz="-0.00303071 -0.00109341 1.1992e-08" rpy="0 0 0"/>
+      <mass value="0.00023416"/>
+      <inertia ixx="2.96e-09" ixy="1.62e-09" ixz="0" iyy="5.734e-09" iyz="-0" izz="6.027e-09"/>
+    </inertial>
+    <!-- Part lower4wheel_2 -->
+    <visual>
+      <origin xyz="0.0135402 -0.0472392 -0.00395" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/lower4wheel.stl"/>
+      </geometry>
+      <material name="lower4wheel_2_material">
+        <color rgba="0.65098 0.65098 0.65098 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link right_front_wheel_tip -->
+  <link name="right_front_wheel_tip">
+    <inertial>
+      <origin xyz="0 -0 -0" rpy="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1.583e-09" ixy="-0" ixz="-0" iyy="1.583e-09" iyz="0" izz="2.5e-09"/>
+    </inertial>
+    <!-- Part tip_wheel_2 -->
+    <visual>
+      <origin xyz="0.0229139 0.0509071 0.00395" rpy="-0 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/tip_wheel.stl"/>
+      </geometry>
+      <material name="tip_wheel_2_material">
+        <color rgba="0.952941 0.796078 0.486275 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame right_front_wheel_tip_collision (dummy link + fixed joint) -->
+  <link name="right_front_wheel_tip_collision">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_front_wheel_tip_collision_frame" type="fixed">
+    <origin xyz="0 0 0" rpy="0 -0 -0"/>
+    <parent link="right_front_wheel_tip"/>
+    <child link="right_front_wheel_tip_collision"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from right_front_wheel to right_front_wheel_tip -->
+  <joint name="right_front_wheel_tip" type="continuous">
+    <origin xyz="-0.00937372 0.00366781 -0" rpy="-0 -0 -1.5708"/>
+    <parent link="right_front_wheel"/>
+    <child link="right_front_wheel_tip"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <!-- Joint from right_front_leg to right_front_wheel -->
+  <joint name="right_front_wheel" type="continuous">
+    <origin xyz="-0.0245472 -0.0151626 0.00155" rpy="3.14159 -0 0"/>
+    <parent link="right_front_leg"/>
+    <child link="right_front_wheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <!-- Joint from right_front_spring to right_front_leg -->
+  <joint name="right_front_leg" type="revolute">
+    <origin xyz="-0.00113431 0.0319159 -0.00121" rpy="-3.14159 -0 -0"/>
+    <parent link="right_front_spring"/>
+    <child link="right_front_leg"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from right_front_motor_arm to right_front_spring -->
+  <joint name="right_front_spring" type="revolute">
+    <origin xyz="0.012 -0 0.0014" rpy="-3.14159 0 0"/>
+    <parent link="right_front_motor_arm"/>
+    <child link="right_front_spring"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from body to right_front_motor_arm -->
+  <joint name="right_front_motor_arm" type="revolute">
+    <origin xyz="-0.0380665 -0.0392007 0.00390154" rpy="1.5708 -0 1.5708"/>
+    <parent link="body"/>
+    <child link="right_front_motor_arm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Link right_back_thigh -->
+  <link name="right_back_thigh">
+    <inertial>
+      <origin xyz="0.000643242 -0.0150871 -0.00185172" rpy="0 0 0"/>
+      <mass value="0.00266922"/>
+      <inertia ixx="3.79534e-07" ixy="-3.856e-09" ixz="-9.49e-10" iyy="4.8206e-08" iyz="-3.315e-09" izz="4.13348e-07"/>
+    </inertial>
+    <!-- Part thigh_right_2 -->
+    <visual>
+      <origin xyz="0 0 -0.0034" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/thigh_right.stl"/>
+      </geometry>
+      <material name="thigh_right_2_material">
+        <color rgba="0.909804 0.678431 0.137255 1"/>
+      </material>
+    </visual>
+    <!-- Part bearing_3 -->
+    <visual>
+      <origin xyz="0 -0.06 -0.0033" rpy="3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/bearing.stl"/>
+      </geometry>
+      <material name="bearing_3_material">
+        <color rgba="0.627451 0.627451 0.627451 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame closing_right_back_leg_2 (dummy link + fixed joint) -->
+  <link name="closing_right_back_leg_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_right_back_leg_2_frame" type="fixed">
+    <origin xyz="0 -0.03 -0.0029" rpy="3.14159 -0 0"/>
+    <parent link="right_back_thigh"/>
+    <child link="closing_right_back_leg_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from body to right_back_thigh -->
+  <joint name="right_back_thigh" type="revolute">
+    <origin xyz="-0.0344665 0.0252993 0.00390154" rpy="1.5708 0 1.5708"/>
+    <parent link="body"/>
+    <child link="right_back_thigh"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Link right_back_motor_arm -->
+  <link name="right_back_motor_arm">
+    <inertial>
+      <origin xyz="0.00277955 1.39931e-05 -0.000412926" rpy="0 0 0"/>
+      <mass value="0.000598556"/>
+      <inertia ixx="4.383e-09" ixy="2.3e-11" ixz="4.59e-10" iyy="1.5672e-08" iyz="-1.1e-11" izz="1.6958e-08"/>
+    </inertial>
+    <!-- Part motor_arm_3 -->
+    <visual>
+      <origin xyz="-0 0 0.0002" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/motor_arm.stl"/>
+      </geometry>
+      <material name="motor_arm_3_material">
+        <color rgba="0.988235 0.988235 0.941176 1"/>
+      </material>
+    </visual>
+    <!-- Part screw_servo_3 -->
+    <visual>
+      <origin xyz="0.000110692 4.58291e-05 -0.00155" rpy="0 -0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/screw_servo.stl"/>
+      </geometry>
+      <material name="screw_servo_3_material">
+        <color rgba="1 0.364706 0.364706 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link right_back_spring -->
+  <link name="right_back_spring">
+    <inertial>
+      <origin xyz="-0.000511981 0.0161518 -0.000633075" rpy="0 0 0"/>
+      <mass value="0.00115717"/>
+      <inertia ixx="8.6534e-08" ixy="2.831e-09" ixz="-1.3e-11" iyy="4.703e-09" iyz="4.36e-10" izz="8.6725e-08"/>
+    </inertial>
+    <!-- Part long_spring_right_2 -->
+    <visual>
+      <origin xyz="-0.012 0 0.0014" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/long_spring_right.stl"/>
+      </geometry>
+      <material name="long_spring_right_2_material">
+        <color rgba="0.627451 0.627451 0.627451 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link right_back_leg -->
+  <link name="right_back_leg">
+    <inertial>
+      <origin xyz="-0.0157059 -0.00583263 0.00141061" rpy="0 0 0"/>
+      <mass value="0.000994691"/>
+      <inertia ixx="6.7716e-08" ixy="-5.6268e-08" ixz="8.43e-10" iyy="7.1468e-08" iyz="7.3e-10" izz="1.34416e-07"/>
+    </inertial>
+    <!-- Part tip_3 -->
+    <visual>
+      <origin xyz="-0.00490733 0.0297472 -0.0024" rpy="3.14159 -0 2.44346"/>
+      <geometry>
+        <mesh filename="package://assets/tip.stl"/>
+      </geometry>
+      <material name="tip_3_material">
+        <color rgba="0.964706 0.964706 0.952941 1"/>
+      </material>
+    </visual>
+    <!-- Part leg_right_2 -->
+    <visual>
+      <origin xyz="-0.0108657 0.0319159 -0.0024" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg_right.stl"/>
+      </geometry>
+      <material name="leg_right_2_material">
+        <color rgba="0.172549 0.172549 0.168627 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame closing_right_back_leg_1 (dummy link + fixed joint) -->
+  <link name="closing_right_back_leg_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_right_back_leg_1_frame" type="fixed">
+    <origin xyz="-0.0108657 0.00191591 -0.0038" rpy="-3.14159 -0 0"/>
+    <parent link="right_back_leg"/>
+    <child link="closing_right_back_leg_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame right_back_foot (dummy link + fixed joint) -->
+  <link name="right_back_foot">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_back_foot_frame" type="fixed">
+    <origin xyz="-0.0261547 -0.0195792 0.00155" rpy="3.14159 -0 2.44346"/>
+    <parent link="right_back_leg"/>
+    <child link="right_back_foot"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame right_back_knee (dummy link + fixed joint) -->
+  <link name="right_back_knee">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_back_knee_frame" type="fixed">
+    <origin xyz="0 -0 0" rpy="0 -0 0"/>
+    <parent link="right_back_leg"/>
+    <child link="right_back_knee"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link right_back_wheel -->
+  <link name="right_back_wheel">
+    <inertial>
+      <origin xyz="-0.00303071 -0.00109341 1.1992e-08" rpy="0 0 0"/>
+      <mass value="0.00023416"/>
+      <inertia ixx="2.96e-09" ixy="1.62e-09" ixz="0" iyy="5.734e-09" iyz="-0" izz="6.027e-09"/>
+    </inertial>
+    <!-- Part lower4wheel_3 -->
+    <visual>
+      <origin xyz="0.0135402 -0.0472392 -0.00395" rpy="3.14159 0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/lower4wheel.stl"/>
+      </geometry>
+      <material name="lower4wheel_3_material">
+        <color rgba="0.65098 0.65098 0.65098 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link right_back_wheel_tip -->
+  <link name="right_back_wheel_tip">
+    <inertial>
+      <origin xyz="-0 -0 0" rpy="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1.583e-09" ixy="-0" ixz="-0" iyy="1.583e-09" iyz="0" izz="2.5e-09"/>
+    </inertial>
+    <!-- Part tip_wheel_3 -->
+    <visual>
+      <origin xyz="0.0229139 0.0509071 0.00395" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/tip_wheel.stl"/>
+      </geometry>
+      <material name="tip_wheel_3_material">
+        <color rgba="0.952941 0.796078 0.486275 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame right_back_wheel_tip_collision (dummy link + fixed joint) -->
+  <link name="right_back_wheel_tip_collision">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="right_back_wheel_tip_collision_frame" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="right_back_wheel_tip"/>
+    <child link="right_back_wheel_tip_collision"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from right_back_wheel to right_back_wheel_tip -->
+  <joint name="right_back_wheel_tip" type="continuous">
+    <origin xyz="-0.00937372 0.00366781 -0" rpy="-3.14159 -0 1.5708"/>
+    <parent link="right_back_wheel"/>
+    <child link="right_back_wheel_tip"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <!-- Joint from right_back_leg to right_back_wheel -->
+  <joint name="right_back_wheel" type="continuous">
+    <origin xyz="-0.0245472 -0.0151626 0.00155" rpy="3.14159 0 -0"/>
+    <parent link="right_back_leg"/>
+    <child link="right_back_wheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <!-- Joint from right_back_spring to right_back_leg -->
+  <joint name="right_back_leg" type="revolute">
+    <origin xyz="-0.00113431 0.0319159 -0.00121" rpy="-3.14159 0 -0"/>
+    <parent link="right_back_spring"/>
+    <child link="right_back_leg"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from right_back_motor_arm to right_back_spring -->
+  <joint name="right_back_spring" type="revolute">
+    <origin xyz="0.012 0 0.0014" rpy="3.14159 0 0"/>
+    <parent link="right_back_motor_arm"/>
+    <child link="right_back_spring"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from body to right_back_motor_arm -->
+  <joint name="right_back_motor_arm" type="revolute">
+    <origin xyz="-0.0380665 0.0252993 0.00390154" rpy="1.5708 -0 1.5708"/>
+    <parent link="body"/>
+    <child link="right_back_motor_arm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Link left_back_thigh -->
+  <link name="left_back_thigh">
+    <inertial>
+      <origin xyz="0.000643255 0.0150873 -0.00185171" rpy="0 0 0"/>
+      <mass value="0.0026692"/>
+      <inertia ixx="3.79523e-07" ixy="3.854e-09" ixz="-9.49e-10" iyy="4.8206e-08" iyz="3.316e-09" izz="4.13338e-07"/>
+    </inertial>
+    <!-- Part thigh_2 -->
+    <visual>
+      <origin xyz="0 0 -0.0034" rpy="-3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/thigh.stl"/>
+      </geometry>
+      <material name="thigh_2_material">
+        <color rgba="0.909804 0.678431 0.137255 1"/>
+      </material>
+    </visual>
+    <!-- Part bearing_4 -->
+    <visual>
+      <origin xyz="-0 -0 -0.0033" rpy="-3.14159 -0 -0"/>
+      <geometry>
+        <mesh filename="package://assets/bearing.stl"/>
+      </geometry>
+      <material name="bearing_4_material">
+        <color rgba="0.627451 0.627451 0.627451 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame closing_left_back_leg_2 (dummy link + fixed joint) -->
+  <link name="closing_left_back_leg_2">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_left_back_leg_2_frame" type="fixed">
+    <origin xyz="0 0.03 -0.0029" rpy="-3.14159 -0 0"/>
+    <parent link="left_back_thigh"/>
+    <child link="closing_left_back_leg_2"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from body to left_back_thigh -->
+  <joint name="left_back_thigh" type="revolute">
+    <origin xyz="0.0239335 0.0252993 0.00390154" rpy="-1.5708 -0 1.5708"/>
+    <parent link="body"/>
+    <child link="left_back_thigh"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Link left_back_motor_arm -->
+  <link name="left_back_motor_arm">
+    <inertial>
+      <origin xyz="0.00277955 1.39931e-05 -0.000412926" rpy="0 0 0"/>
+      <mass value="0.000598556"/>
+      <inertia ixx="4.383e-09" ixy="2.3e-11" ixz="4.59e-10" iyy="1.5672e-08" iyz="-1.1e-11" izz="1.6958e-08"/>
+    </inertial>
+    <!-- Part motor_arm_4 -->
+    <visual>
+      <origin xyz="-0 0 0.0002" rpy="3.14159 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/motor_arm.stl"/>
+      </geometry>
+      <material name="motor_arm_4_material">
+        <color rgba="0.988235 0.988235 0.941176 1"/>
+      </material>
+    </visual>
+    <!-- Part screw_servo_4 -->
+    <visual>
+      <origin xyz="0.000110692 4.58291e-05 -0.00155" rpy="0 0 3.14159"/>
+      <geometry>
+        <mesh filename="package://assets/screw_servo.stl"/>
+      </geometry>
+      <material name="screw_servo_4_material">
+        <color rgba="1 0.364706 0.364706 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link left_back_spring -->
+  <link name="left_back_spring">
+    <inertial>
+      <origin xyz="-0.000512017 -0.0161518 -0.000633026" rpy="0 0 0"/>
+      <mass value="0.00115717"/>
+      <inertia ixx="8.6534e-08" ixy="-2.831e-09" ixz="-1.3e-11" iyy="4.703e-09" iyz="-4.37e-10" izz="8.6725e-08"/>
+    </inertial>
+    <!-- Part long_spring_2 -->
+    <visual>
+      <origin xyz="-0.012 0 0.0014" rpy="0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/long_spring.stl"/>
+      </geometry>
+      <material name="long_spring_2_material">
+        <color rgba="0.627451 0.627451 0.627451 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link left_back_leg -->
+  <link name="left_back_leg">
+    <inertial>
+      <origin xyz="-0.015706 -0.00583261 -0.00141061" rpy="0 0 0"/>
+      <mass value="0.000994691"/>
+      <inertia ixx="6.7715e-08" ixy="-5.6269e-08" ixz="-8.43e-10" iyy="7.147e-08" iyz="-7.3e-10" izz="1.34417e-07"/>
+    </inertial>
+    <!-- Part leg_2 -->
+    <visual>
+      <origin xyz="-0.0108657 0.0319159 0.0024" rpy="-0 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/leg.stl"/>
+      </geometry>
+      <material name="leg_2_material">
+        <color rgba="0.172549 0.172549 0.168627 1"/>
+      </material>
+    </visual>
+    <!-- Part tip_4 -->
+    <visual>
+      <origin xyz="-0.0107247 0.0318646 0.0024" rpy="-0 0 -1e-11"/>
+      <geometry>
+        <mesh filename="package://assets/tip.stl"/>
+      </geometry>
+      <material name="tip_4_material">
+        <color rgba="0.964706 0.964706 0.952941 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame closing_left_back_leg_1 (dummy link + fixed joint) -->
+  <link name="closing_left_back_leg_1">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="closing_left_back_leg_1_frame" type="fixed">
+    <origin xyz="-0.0108657 0.00191591 0.0038" rpy="-0 0 0"/>
+    <parent link="left_back_leg"/>
+    <child link="closing_left_back_leg_1"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame left_back_foot (dummy link + fixed joint) -->
+  <link name="left_back_foot">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_back_foot_frame" type="fixed">
+    <origin xyz="-0.0261547 -0.0195792 -0.00155" rpy="-0 0 -1e-11"/>
+    <parent link="left_back_leg"/>
+    <child link="left_back_foot"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Frame left_back_knee (dummy link + fixed joint) -->
+  <link name="left_back_knee">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_back_knee_frame" type="fixed">
+    <origin xyz="0 0 0" rpy="-0 0 0"/>
+    <parent link="left_back_leg"/>
+    <child link="left_back_knee"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Link left_back_wheel -->
+  <link name="left_back_wheel">
+    <inertial>
+      <origin xyz="-0.00303071 -0.00109341 1.1992e-08" rpy="0 0 0"/>
+      <mass value="0.00023416"/>
+      <inertia ixx="2.96e-09" ixy="1.62e-09" ixz="0" iyy="5.734e-09" iyz="-0" izz="6.027e-09"/>
+    </inertial>
+    <!-- Part lower4wheel_4 -->
+    <visual>
+      <origin xyz="0.0135402 -0.0472392 -0.00395" rpy="3.14159 0 0"/>
+      <geometry>
+        <mesh filename="package://assets/lower4wheel.stl"/>
+      </geometry>
+      <material name="lower4wheel_4_material">
+        <color rgba="0.65098 0.65098 0.65098 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Link left_back_wheel_tip -->
+  <link name="left_back_wheel_tip">
+    <inertial>
+      <origin xyz="0 -0 0" rpy="0 0 0"/>
+      <mass value="0.001"/>
+      <inertia ixx="1.583e-09" ixy="-0" ixz="-0" iyy="1.583e-09" iyz="0" izz="2.5e-09"/>
+    </inertial>
+    <!-- Part tip_wheel_4 -->
+    <visual>
+      <origin xyz="0.0229139 0.0509071 0.00395" rpy="-0 -0 0"/>
+      <geometry>
+        <mesh filename="package://assets/tip_wheel.stl"/>
+      </geometry>
+      <material name="tip_wheel_4_material">
+        <color rgba="0.952941 0.796078 0.486275 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Frame left_back_wheel_tip_collision (dummy link + fixed joint) -->
+  <link name="left_back_wheel_tip_collision">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1e-9"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="left_back_wheel_tip_collision_frame" type="fixed">
+    <origin xyz="0 0 0" rpy="0 -0 0"/>
+    <parent link="left_back_wheel_tip"/>
+    <child link="left_back_wheel_tip_collision"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+  <!-- Joint from left_back_wheel to left_back_wheel_tip -->
+  <joint name="left_back_wheel_tip" type="continuous">
+    <origin xyz="-0.00937372 0.00366781 -0" rpy="-3.14159 -0 1.5708"/>
+    <parent link="left_back_wheel"/>
+    <child link="left_back_wheel_tip"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <!-- Joint from left_back_leg to left_back_wheel -->
+  <joint name="left_back_wheel" type="continuous">
+    <origin xyz="-0.0245472 -0.0151626 -0.00155" rpy="3.14159 -0 -0"/>
+    <parent link="left_back_leg"/>
+    <child link="left_back_wheel"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10"/>
+  </joint>
+  <!-- Joint from left_back_spring to left_back_leg -->
+  <joint name="left_back_leg" type="revolute">
+    <origin xyz="-0.00113431 -0.0319159 -0.00121" rpy="0 0 0"/>
+    <parent link="left_back_spring"/>
+    <child link="left_back_leg"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from left_back_motor_arm to left_back_spring -->
+  <joint name="left_back_spring" type="revolute">
+    <origin xyz="0.012 0 0.0014" rpy="3.14159 0 0"/>
+    <parent link="left_back_motor_arm"/>
+    <child link="left_back_spring"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+  <!-- Joint from body to left_back_motor_arm -->
+  <joint name="left_back_motor_arm" type="revolute">
+    <origin xyz="0.0275335 0.0252993 0.00390154" rpy="-1.5708 0 1.5708"/>
+    <parent link="body"/>
+    <child link="left_back_motor_arm"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793"/>
+  </joint>
+</robot>
