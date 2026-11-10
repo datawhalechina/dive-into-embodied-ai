@@ -334,3 +334,28 @@ MUJOCO_GL=egl OPENBLAS_NUM_THREADS=1 .venv/bin/python render_other_tasks.py
 跑步搜索围绕腾跃候选，在固定边界内调整步频、占空比、幅度、偏置、相位、航向增益和目标变化速度，最多24组；这是参数优化，不是PPO。原有跑步判据不变：速度至少0.1 m/s、至少三段完整腾空，并同时满足姿态、触地与实际关节速度等检查。`evaluate_other_tasks.py` 对其余七个已通过行走场景各做±5 mm横向起点复测；通过也不代表未知地图或真机可靠。
 
 本次扩展实跑见 [`reports/other_tasks_2026-11-09.json`](reports/other_tasks_2026-11-09.json)：上楼梯新增32,768步PPO，1mm三阶两轮均3/4通过，受实际关节超速限制未升级；原4mm三阶未通过。跑步24组参数搜索仍无合格配置，选中候选14段腾空但速度0.0456m/s、实际关节峰值10.3575rad/s。七个其余行走场景的起点复测14/14通过。零偏移1mm三阶原周期控制器也能通过，不能把低难度通过全部归因于PPO。
+
+## 混合难度续训与工作范围评测
+
+`practice_rl.py` 将地形缩放至原始高度的0.25/0.375/0.5/1.0倍，按30%/30%/30%/10%采样，并在复位时随机化±3°初始航向与0.9–1.1倍滑动摩擦。坑洼使用四个训练地图种子。参数是仿真扰动范围，不代表已测定的硬件分布；地形和摩擦在回合中保持不变。原难度体验是混合采样，不表示已经通过课程升级门槛。
+
+新的可选速度反馈在100Hz下，根据超过8rad/s的实际关节速度，沿反方向修正位置目标，增益0.02。仍只有原四个执行器，不能保证实际关节峰值低于10rad/s。默认增益为0，旧控制器保持不变。训练另对首次超过10rad/s、首次偏航达到25°各扣2分，避免少量违规被平均进度奖励掩盖。检查阈值不变。
+
+```bash
+OPENBLAS_NUM_THREADS=1 .venv/bin/python check_practice_rl.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python train_practice.py \
+  --scene stairs_up --resume outputs/other_tasks/stairs_curriculum/level1_steps32768 \
+  --output outputs/practice_20261110/stairs_up
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python train_practice.py \
+  --scene rough --resume outputs/curriculum/rough_g999/level1_steps16384 \
+  --output outputs/practice_20261110/rough
+OPENBLAS_NUM_THREADS=1 .venv/bin/python evaluate_operating_range.py
+```
+
+每项续训预算32,768步，使用seed43和学习率1e-4，继承各自策略与归一化统计。输出先保存`prior_policy`和`feedback_only`对照，再保存两轮续训模型；不能把控制器带来的收益归功于训练。`summary.json`记录原始难度的0/±5mm起点和中间难度评测。未通过时，不更新默认策略。
+
+`scenario_matrix.run_case`新增显式`initial_yaw_deg`、`friction_scale`参数和`first_failure`事件记录。默认0°、摩擦倍率1保持旧场景；关节超速按1ms记录，姿态/触地/偏航按5ms检查。`evaluate_operating_range.py`对七个已通过场景各做两个摩擦/朝向联合变化，另对平地、5°上坡、下楼梯做40秒运动（加2秒支撑）的检查。联合变化失败不能直接归因于某个单一因素。
+
+2026-11-10实跑见[`reports/practice_iteration_2026-11-10.json`](reports/practice_iteration_2026-11-10.json)：上楼梯和坑洼各新增32,768步，四个中间模型在原始难度三个起点的12次检查均未通过。仅加速度反馈也可能破坏稳定性，未设为默认；中间难度的通过不能归结为原任务完成。联合朝向/摩擦测试12/14通过，三项40秒运动均通过。单因素补测显示下楼梯的失败来自本次组合条件，浅水单独降低摩擦就会偏航。四段22秒视频含速度/偏航峰值，保留旧模型与本轮候选的完整失败过程。
+
+运行`isolate_operating_failure.py`可针对已完成的工作范围测试拆分朝向与摩擦影响；运行`render_practice.py`可生成原始地形前后对照。`selection.json`仅标记本轮两个新模型中相对较好的一个，不表示超过旧模型或通过任务。训练日志、源码快照及模型成套归档，未提交生成的二进制文件。

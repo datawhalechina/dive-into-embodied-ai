@@ -47,7 +47,11 @@ class ResidualController:
         tick = round(data.time/.01)
         if abs(data.time-tick*.01)<1e-7 and tick != self.tick:
             self.tick = tick
-            desired = np.clip(self.reference+self.scale*self.action, -1.2, 1.2)
+            velocity = data.qvel[self.vids]
+            gain = self.config.get('speed_feedback_gain', 0.)
+            excess = np.maximum(0., np.abs(velocity)-self.config.get('speed_feedback_threshold', 8.))
+            braking = gain*np.sign(velocity)*excess
+            desired = np.clip(self.reference+self.scale*self.action-braking, -1.2, 1.2)
             self.target += np.clip(desired-self.target, -.08, .08)
         data.ctrl[:] = self.target
 

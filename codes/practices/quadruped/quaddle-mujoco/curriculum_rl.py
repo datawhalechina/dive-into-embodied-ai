@@ -114,9 +114,10 @@ class CurriculumPolicyController(GridController):
         from stable_baselines3 import PPO
         import torch
         torch.set_num_threads(1)
-        super().__init__(model,scene,rotation,config)
         directory=Path(directory)
         meta=json.loads((directory/'metadata.json').read_text())
+        config={**meta.get('controller_config', {}), **config}
+        super().__init__(model,scene,rotation,config)
         if meta['environment_version']!=2 or meta['observation_dim']!=60:
             raise ValueError('Incompatible policy observation version')
         self.policy=PPO.load(directory/'policy.zip',device='cpu')

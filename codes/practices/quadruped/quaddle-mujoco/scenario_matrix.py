@@ -45,7 +45,7 @@ class Recorder:
         self.font = ImageFont.truetype(str(font), 20) if font.exists() else ImageFont.load_default(size=20)
         self.small = ImageFont.truetype(str(font), 15) if font.exists() else ImageFont.load_default(size=15)
 
-    def frame(self, data, rotation, forward, phase):
+    def frame(self, data, rotation, forward, phase, diagnostics=None):
         from PIL import Image, ImageDraw
         self.cam.lookat[:] = data.body('body').xpos
         self.renderer.update_scene(data, camera=self.cam, scene_option=self.opt)
@@ -54,6 +54,10 @@ class Recorder:
         draw.rectangle((0, 0, 960, 82), fill=(14, 21, 33))
         draw.text((20, 12), f'QUADDLE / {self.scene.label}', font=self.font, fill='white')
         draw.text((20, 45), f'{self.mode} | {self.controller_label} | Uncalibrated simulation', font=self.small, fill=(180, 200, 220))
+        if diagnostics:
+            speed_peak,yaw_peak=diagnostics
+            colour=(255,160,125) if speed_peak>10. or yaw_peak>=25. else (160,220,180)
+            draw.text((20,64), f'Joint peak {speed_peak:.2f}/10 rad/s | Yaw peak {yaw_peak:.1f}/25 deg',font=self.small,fill=colour)
         rot = rotation.T @ data.body('body').xmat.reshape(3, 3)
         pitch = math.degrees(math.atan2(-rot[2, 1], np.linalg.norm(rot[:2, 1])))
         draw.rectangle((0, 660, 960, 720), fill=(14, 21, 33))
@@ -89,15 +93,27 @@ class Recorder:
         self.renderer.close()
 
 
-def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None, config_override=None, initial_x_offset=0., scene_definition=None):
+def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None, config_override=None, initial_x_offset=0., scene_definition=None, initial_yaw_deg=0., friction_scale=1.):
     if not math.isfinite(seconds) or seconds < 6:
         raise ValueError('seconds must be finite and at least 6')
     scene = scene_definition if scene_definition is not None else make_scene(name)
     model, data, rotation = load_scene(scene)
     if not math.isfinite(initial_x_offset) or abs(initial_x_offset) > .02:
         raise ValueError('initial_x_offset must be within +/-2 cm')
+    if not math.isfinite(initial_yaw_deg) or abs(initial_yaw_deg)>10.:
+        raise ValueError('initial yaw must be within +/-10 degrees')
+    if not math.isfinite(friction_scale) or not .5<=friction_scale<=1.5:
+        raise ValueError('friction scale must be within [.5,1.5]')
+    if friction_scale != 1.:
+        model.geom_friction[:,0] *= friction_scale
     if initial_x_offset:
         data.qpos[0] += initial_x_offset
+    if initial_yaw_deg:
+        angle=math.radians(initial_yaw_deg)/2
+        quat=np.empty(4)
+        mujoco.mju_mulQuat(quat,np.array([math.cos(angle),0.,0.,math.sin(angle)]),data.qpos[3:7].copy())
+        data.qpos[3:7]=quat
+    if initial_x_offset or initial_yaw_deg or friction_scale != 1.:
         mujoco.mj_forward(model, data)
     config = profile(mode)
     if config_override:
@@ -111,6 +127,9 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
     if policy_path:
         from terrain_rl import PolicyController
         policy_meta = json.loads((Path(policy_path)/'metadata.json').read_text())
+        config.update(policy_meta.get('controller_config', {}))
+        if config_override:
+            config.update(config_override)
         if policy_meta.get('environment_version') == 2:
             from curriculum_rl import CurriculumPolicyController as PolicyController
         controller = PolicyController(model, scene, rotation, config, policy_path)
@@ -133,6 +152,7 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
     foot_counts = np.zeros(4, dtype=int); contact_samples = 0
     flight_duration = 0.; flight_durations = []; longest_flight = 0.
     finite = True; records = []; complete = True
+    first_failure = {}
     clock = time.perf_counter()
     try:
         for step in range(round((config['settle_seconds']+seconds)/model.opt.timestep)):
@@ -155,6 +175,8 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
                 break
             max_torque = max(max_torque, float(np.max(np.abs(data.actuator_force))))
             max_joint_speed = max(max_joint_speed, float(np.max(np.abs(data.qvel[driven]))))
+            if max_joint_speed > 10. and 'joint_speed' not in first_failure:
+                first_failure['joint_speed'] = dict(time_s=float(data.time), peak_rad_s=max_joint_speed, position_m=data.qpos[:3].tolist())
             contacts = [(c.geom1, c.geom2) for c in data.contact if (c.geom1 in support_geoms) != (c.geom2 in support_geoms)]
             # Count flight only after settling/ramp, and include shin/body contacts.
             if data.time >= config['settle_seconds']+config['ramp_seconds']+.5:
@@ -172,6 +194,9 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
                 min_up = min(min_up, float(rot[2, 2]))
                 body_contacts += int(any(body_geom in pair for pair in contacts))
                 obstacle_contacts += int(any(set(pair)&obstacle_geoms for pair in contacts))
+                for issue, bad in [('upright', min_up <= .8), ('body_contact', body_contacts > 0)]:
+                    if bad and issue not in first_failure:
+                        first_failure[issue] = dict(time_s=float(data.time), position_m=data.qpos[:3].tolist())
                 if fluid and -.22 <= data.geom_xpos[body_geom, 0] <= .22 and .15 <= -data.geom_xpos[body_geom, 1] <= 1.05:
                     body_rotation = data.geom_xmat[body_geom].reshape(3, 3)
                     bottom = data.geom_xpos[body_geom, 2]-np.abs(body_rotation[2])@model.geom_size[body_geom]
@@ -183,6 +208,9 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
                         start = data.qpos[:3].copy()
                     min_clearance = min(min_clearance, float(data.qpos[2]-scene.surface_height(data.qpos[0], data.qpos[1])))
                     max_yaw = max(max_yaw, abs(math.degrees(math.atan2(rot[1, 0], rot[0, 0]))))
+                    for issue, bad in [('heading', max_yaw >= 25.)]:
+                        if bad and issue not in first_failure:
+                            first_failure[issue] = dict(time_s=float(data.time), position_m=data.qpos[:3].tolist())
                     contact_samples += 1
                     foot_counts += [any(set(pair)&ids for pair in contacts) for ids in foot_geoms]
             forward = float((data.qpos[:3]-(start if start is not None else initial))@axis)
@@ -194,7 +222,7 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
                 # Share the existing 5 ms forward pass; extra solver calls for
                 # video can change warm-start state and alter the experiment.
                 phase = 'support' if data.time<2 else ('transition' if data.time<3.5 else 'locomotion')
-                recorder.frame(data, rotation, forward, phase)
+                recorder.frame(data, rotation, forward, phase, (max_joint_speed,max_yaw))
     finally:
         if recorder:
             recorder.close()
@@ -219,7 +247,7 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
         checks['running_speed'] = speed >= .1
         checks['repeated_flight'] = len(flight_durations) >= 3
     result = dict(scene=scene.metadata(), mode=mode, policy_path=str(policy_path) if policy_path else None,
-        initial_x_offset_m=initial_x_offset,
+        initial_x_offset_m=initial_x_offset, initial_yaw_deg=initial_yaw_deg, friction_scale=friction_scale, first_failure=first_failure,
         policy_sha256={name:hashlib.sha256((Path(policy_path)/name).read_bytes()).hexdigest() for name in
                        ['policy.zip', 'obs_stats.npz', 'metadata.json']} if policy_path else None, passed=all(checks.values()), checks=checks,
         simulation_seconds=float(data.time), commanded_seconds=seconds, forward_m=distance,
