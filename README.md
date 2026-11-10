@@ -218,6 +218,8 @@ npm run serve
 
 中文路径为 `/dive-into-embodied-ai/`，英文和意大利语分别位于 `/en/`、`/it/` 子路径。界面译文保存在 `i18n/<locale>/code.json`，导航和页脚译文位于 `i18n/<locale>/docusaurus-theme-classic/`，其中 `<locale>` 为 `en` 或 `it`。
 
+请通过 `npm run build`（或调用它的 `sh local-build.sh`、`npm run preview`）构建。同一工作目录一次只允许一个构建或 `npm run install:locked` 依赖安装进程；重复启动会提示等待，避免互相清空构建产物。`local-build.sh` 自动安装依赖时也使用这一保护。进程结束或被中断后锁自动释放，无需删除锁文件。直接运行 `npx docusaurus build` 或 `npm ci` 会绕过保护；需要在其他构建可能运行时重装依赖，请用 `npm run install:locked`。
+
 后续章节的译文 Markdown 可按原目录结构放入 `i18n/<locale>/docusaurus-plugin-content-docs/current/`，保留原文的文档 ID、slug 和显式章节锚点。缺少译稿时，Docusaurus 会显示中文原文，并提供当前语言的提示及中文版本链接。运行 `npm run check:i18n` 可检查译文、占位符、路由和跨语言锚点。
 
 <a id="star-history"></a>

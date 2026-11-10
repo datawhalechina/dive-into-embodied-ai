@@ -5,7 +5,9 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "node scripts/with-build-lock.mjs node_modules/@docusaurus/core/bin/docusaurus.mjs build",
+    "install:locked": "node scripts/with-build-lock.mjs --npm-ci",
+    "check:build-lock": "node --test scripts/with-build-lock.test.mjs",
     "serve": "docusaurus serve",
     "clear": "docusaurus clear",
     "typecheck": "tsc",

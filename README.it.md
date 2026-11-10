@@ -189,6 +189,8 @@ npm run serve
 
 Il cinese è in `/dive-into-embodied-ai/`; l'inglese e l'italiano usano `/en/` e `/it/`. Le traduzioni dell'interfaccia sono in `i18n/<locale>/code.json`, navigazione e piè di pagina in `i18n/<locale>/docusaurus-theme-classic/`, con `<locale>` uguale a `en` o `it`.
 
+Compila con `npm run build`, oppure con `sh local-build.sh` / `npm run preview`, che lo richiamano. Ogni copia di lavoro consente una sola compilazione o installazione delle dipendenze tramite `npm run install:locked` alla volta; un secondo avvio invita ad attendere, evitando che un processo cancelli i risultati dell'altro. Anche l'installazione automatica in `local-build.sh` usa questa protezione. Il blocco si libera quando il processo termina o viene interrotto; non eliminare il file di blocco. I comandi diretti `npx docusaurus build` e `npm ci` aggirano la protezione. Usa `npm run install:locked` per reinstallare le dipendenze quando potrebbe essere in corso una compilazione.
+
 Aggiungi i capitoli tradotti in `i18n/<locale>/docusaurus-plugin-content-docs/current/`, mantenendo struttura, ID, slug e ancore esplicite. Senza traduzione, Docusaurus mostra il cinese con avviso localizzato e link all'originale. `npm run check:i18n` verifica testi, variabili, percorsi e ancore condivise.
 
 ## ⭐ Storico delle stelle

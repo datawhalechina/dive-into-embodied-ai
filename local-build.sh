@@ -69,7 +69,7 @@ if [ ! -f node_modules/.package-lock.json ] ||
    [ package.json -nt node_modules/.package-lock.json ] ||
    ! npm ls --depth=0 >/dev/null 2>&1; then
   echo "==> Installing locked dependencies..."
-  npm ci
+  npm run install:locked
 fi
 
 # 本地预览不需要真实职位数据,默认走 fixture,避免 prebuild 因缺 JOBS_API_TOKEN 报错

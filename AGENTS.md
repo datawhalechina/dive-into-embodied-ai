@@ -37,12 +37,15 @@ sh local-build.sh                    # Build all locales and serve locally
 npm run build                        # Production build for all configured locales
 npm run serve                        # Serve an existing build
 npm run typecheck                    # TypeScript checks
+npm run check:build-lock              # Concurrent builds and interrupted-process recovery
 npm run assets:webp:check             # Raster asset policy
 npm run check:i18n                    # After building: translations, routes, anchors
 npm run check:page-markdown           # After building: page Markdown export
 ```
 
 Before committing, run `npm run assets:webp:check` and `npm run build`, as required by `CONTRIBUTING.md`. Run `npm run typecheck` for TypeScript changes. The deployment workflow also runs `check:i18n` and `check:page-markdown` after building.
+
+Use `npm run build` for builds and `npm run install:locked` for dependency reinstalls while working in a shared checkout. These commands share a process lock and reject overlapping work. Direct Docusaurus build and `npm ci` invocations bypass the lock. Do not delete `.docusaurus-build-lock.sqlite`; the OS releases the lock when the owning process exits.
 
 Use the additional checks relevant to the changed area:
 

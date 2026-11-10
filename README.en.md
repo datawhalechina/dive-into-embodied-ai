@@ -203,6 +203,8 @@ npm run serve
 
 Chinese remains at `/dive-into-embodied-ai/`; English and Italian use the `/en/` and `/it/` subpaths. UI translations live in `i18n/<locale>/code.json`, and navigation/footer translations live in `i18n/<locale>/docusaurus-theme-classic/`, where `<locale>` is `en` or `it`.
 
+Build through `npm run build`, or through `sh local-build.sh` / `npm run preview`, which call it. Each checkout allows only one build or `npm run install:locked` dependency installation at a time; a second invocation asks you to wait, preventing one process from deleting another's output. Automatic dependency installation in `local-build.sh` uses the same protection. The lock releases when the process exits or is interrupted; do not delete the lock file. Direct `npx docusaurus build` and `npm ci` commands bypass this protection. Use `npm run install:locked` to reinstall dependencies when another build may be running.
+
 To translate a chapter later, add its Markdown under `i18n/<locale>/docusaurus-plugin-content-docs/current/`, keeping the source directory structure, document ID, slug, and explicit section anchors. Docusaurus displays the Chinese source with a localized notice and a link to the Chinese version when no translation exists. Run `npm run check:i18n` to check translations, placeholders, routes, and shared anchors.
 
 ## ⭐ Star history

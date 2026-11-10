@@ -2,6 +2,8 @@ node_modules/
 build/
 .docusaurus/
 .cache-loader/
+# Persistent lock file; the OS releases its lock when the build exits.
+.docusaurus-build-lock.sqlite*
 # Generated from the pinned npm package and canonical Quaddle model at build time.
 static/quaddle/
 .DS_Store
