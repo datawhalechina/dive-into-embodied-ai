@@ -65,6 +65,7 @@ class Recorder:
         note = 'RUN CANDIDATE: speed alone does not establish running' if self.mode=='run_attempt' else 'Full startup retained | Green line = task goal'
         if self.scene.water_depth_m:
             note = 'WATER APPROXIMATION: buoyancy + drag on assumed spheres; no CFD or waterproofing'
+        note = getattr(self, 'note_override', None) or note
         draw.text((20, 694), note, font=self.small, fill=(180, 200, 220))
         # A map inset exposes actual obstacle locations, terrain extent and progress.
         draw.rectangle((715, 90, 950, 330), fill=(20, 30, 42))
@@ -79,7 +80,8 @@ class Recorder:
             draw.rectangle((*point(-.22, -1.05), *point(.22, -.15)), fill=(25, 85, 140))
         if self.route:
             draw.line([point(x, y) for x, y in self.route], fill=(250, 205, 80), width=2)
-        draw.line([point(-.27, -self.scene.goal_m), point(.27, -self.scene.goal_m)], fill=(60, 210, 130), width=3)
+        if getattr(self, 'show_goal', True):
+            draw.line([point(-.27, -self.scene.goal_m), point(.27, -self.scene.goal_m)], fill=(60, 210, 130), width=3)
         x, y = point(data.qpos[0], data.qpos[1])
         x, y = float(np.clip(x, 720, 945)), float(np.clip(y, 123, 325))
         draw.ellipse((x-4, y-4, x+4, y+4), fill='white')
@@ -93,7 +95,7 @@ class Recorder:
         self.renderer.close()
 
 
-def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None, config_override=None, initial_x_offset=0., scene_definition=None, initial_yaw_deg=0., friction_scale=1., observer=None):
+def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None, config_override=None, initial_x_offset=0., scene_definition=None, initial_yaw_deg=0., friction_scale=1., observer=None, controller_factory=None):
     if not math.isfinite(seconds) or seconds < 6:
         raise ValueError('seconds must be finite and at least 6')
     scene = scene_definition if scene_definition is not None else make_scene(name)
@@ -137,6 +139,10 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
         if policy_meta.get('environment_version') == 2:
             from curriculum_rl import CurriculumPolicyController as PolicyController
         controller = PolicyController(model, scene, rotation, config, policy_path)
+    if controller_factory is not None:
+        if policy_path or config.get('contact_phase_controller'):
+            raise ValueError('Custom controller cannot replace a policy/contact controller implicitly')
+        controller = controller_factory(model, config)
     fluid = ShallowWater(model, scene) if scene.water_depth_m else None
     output = Path(output or ROOT/'outputs/scenario_matrix')/mode/name
     output.mkdir(parents=True, exist_ok=True)
@@ -145,6 +151,10 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
         recorder.controller_label = 'Residual PPO'
     elif recorder and config.get('contact_phase_controller'):
         recorder.controller_label = 'Contact-phase experiment'
+    if recorder and controller_factory:
+        recorder.controller_label = 'Support-stop / bounded heading PI'
+        recorder.note_override = 'Joint targets only | Walking arcs | Target heading changes at a limited rate'
+        recorder.show_goal = False
     support_geoms = {i for i in range(model.ngeom) if model.geom_bodyid[i]==0 and model.geom_contype[i]!=0}
     obstacle_geoms = {i for i in support_geoms if model.geom_group[i]==4}
     body_geom = model.geom('body_contact').id
@@ -228,7 +238,10 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
                 # Share the existing 5 ms forward pass; extra solver calls for
                 # video can change warm-start state and alter the experiment.
                 phase = 'support' if data.time<2 else ('transition' if data.time<3.5 else 'locomotion')
-                recorder.frame(data, rotation, forward, phase, (max_joint_speed,max_yaw))
+                if hasattr(controller, 'status'):
+                    phase = controller.status(data)
+                recorder.frame(data, rotation, forward, phase,
+                               None if controller_factory else (max_joint_speed,max_yaw))
             if observer is not None:
                 observer(model, data, controller, step)
     finally:

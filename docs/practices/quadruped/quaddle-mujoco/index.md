@@ -27,6 +27,28 @@ import QuaddleSimulator from '@site/src/components/QuaddleSimulator';
 
 源码位于仓库的 `codes/practices/quadruped/quaddle-mujoco/`。已在 Apple Silicon macOS、Python 3.12.13、MuJoCo 3.16.0 上验证。
 
+## 新增：停走、转向与分场景基础版
+
+2026-11-10 的 Python 基础版补上了支撑姿态停止、再次起步，以及 ±20° 范围内的行走转向。先试“走—停—再走—转弯—停”，再交换两个转弯的顺序：相同指令、不同动作历史，也可能暴露接触控制问题。
+
+这次曾遇到两个具体失败：停止时关节归零，导致再次起步上仰；目标航向突然跨越 40°，导致反向转弯偏航。改为支撑姿态停止、有界积分补偿和每秒 10° 的目标航向过渡后，固定参数的十组复测通过。它们是指定条件的仿真检查，尚无真机结果；网页上方仍运行原控制器。
+
+![停走与转向的指令和实际航向](./figs/quaddle-command-heading.png)
+
+在源码目录安装依赖后，可运行：
+
+```bash
+.venv/bin/python baseline.py --verify-only
+.venv/bin/python baseline.py --case interaction
+.venv/bin/python command_interaction.py --interactive
+```
+
+键盘 `W` 行走、`S` 停止、`A/D` 调整目标航向、`Q` 退出；这是行走转弯，不是原地旋转。无显示器时使用第一种回放方式；加 `--video` 并设置 `MUJOCO_GL=egl` 可以录制实际仿真。
+
+基础版另包含平地、3°/5° 上坡、3° 下坡、4 mm 三阶下台阶，以及相邻格高差受限的平缓坑洼，使用各自的配置。**2 mm 三阶上台阶仍是实验项**：标称通过，但本轮没有找到同时适用于正常与 +3° 起步的新配置，六个新增条件也都未通过。因此它不在 `baseline.py --case all` 的通过清单里。
+
+完整范围、验收方式和复跑命令见源码目录中的 `BASELINE.md`；`reference/baseline-v0.1.json` 固定了代码、模型、控制参数与旧 PPO 权重的哈希。本轮没有新增 PPO 训练。
+
 ## 安装和运行
 
 在仓库根目录执行：

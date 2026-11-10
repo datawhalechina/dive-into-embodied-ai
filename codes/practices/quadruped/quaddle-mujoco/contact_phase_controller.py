@@ -22,6 +22,8 @@ class ContactPhaseController:
         self.tracking_until=np.zeros(4);self.tracking_clamp_ticks=0
         self.qids=[model.jnt_qposadr[model.joint(s+'_thigh').id] for s in SIDES]
         self.vids=[model.jnt_dofadr[model.joint(s+'_thigh').id] for s in SIDES]
+        self.filtered_steer=0.
+        self.heading_integral=0.
         self.coordinator=None
         if config.get('support_coordination'):
             from support_coordinator import SupportCoordinator,CoupledSupportCoordinator
@@ -81,7 +83,13 @@ class ContactPhaseController:
         rot=data.body('body').xmat.reshape(3,3);yaw=math.atan2(rot[1,0],rot[0,0])
         delta_yaw=yaw-c.get('heading_target_rad',0.)
         error=math.atan2(math.sin(delta_yaw),math.cos(delta_yaw))+c['lateral_kp']*(data.qpos[0]-self.start_x)
-        steer=np.clip(c['heading_kp']*error+c['heading_kd']*data.qvel[5],-c['steering_limit'],c['steering_limit'])
+        if c.get('heading_ki',0.) and t>=c['ramp_seconds']:
+            limit=c.get('heading_integral_limit',.15)
+            self.heading_integral=float(np.clip(self.heading_integral+c['heading_ki']*error*dt,-limit,limit))
+        steer=np.clip(c['heading_kp']*error+c['heading_kd']*data.qvel[5]+self.heading_integral,-c['steering_limit'],c['steering_limit'])
+        if c.get('heading_filter_s',0.)>0.:
+            self.filtered_steer+=dt/(c['heading_filter_s']+dt)*(steer-self.filtered_steer)
+            steer=self.filtered_steer
         angle=np.array(c['bias_rad'])+np.array(c['amplitude_rad'])*(1+steer*self.signs)*wave+self.boost
         ramp=min(1.,t/c['ramp_seconds']);startup=np.array(c['startup_bias_rad'])
         desired=np.clip(self.signs*((1-ramp)*startup+ramp*angle),-1.2,1.2)
@@ -103,4 +111,4 @@ class ContactPhaseController:
         return dict(controller='contact_phase_v1',events=self.events,max_target_slew_rad_s=self.maximum_slew,
             max_phase_shift_cycles=self.maximum_shift,contact_estimation='simulator contact normals',
             support_coordination=self.coordinator.diagnostics() if self.coordinator is not None else None,
-            tracking_clamp_ticks=self.tracking_clamp_ticks)
+            tracking_clamp_ticks=self.tracking_clamp_ticks,heading_integral=self.heading_integral)
