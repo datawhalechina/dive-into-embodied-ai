@@ -404,6 +404,12 @@
   "仿真实战": {
     "message": "Simulation projects"
   },
+  "四足系列": {
+    "message": "Quadruped series"
+  },
+  "从零到一搭建四足机器人与 Petoi Quaddle 四足步行仿真。": {
+    "message": "Build a quadruped robot from scratch and run the Petoi Quaddle walking simulation."
+  },
   "Petoi Quaddle 四足步行仿真": {
     "message": "Petoi Quaddle walking simulation"
   },
