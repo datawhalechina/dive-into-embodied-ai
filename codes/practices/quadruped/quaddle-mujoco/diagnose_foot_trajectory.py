@@ -36,7 +36,8 @@ class FootTrace:
                 vertex=vertices[np.argmin(vertices@rot[2])]
                 points.append(d.geom_xpos[j]+rot@vertex)
             pos=min(points,key=lambda x:x[2])
-            phase=float(c.coordinator.phase[i]) if c.coordinator and c.coordinator.phase is not None else None
+            coordinator=getattr(c,'coordinator',None)
+            phase=float(coordinator.phase[i]) if coordinator is not None and coordinator.phase is not None else None
             r=dict(time_s=float(d.time),leg=side,q=float(d.qpos[self.qids[i]]),dq=float(d.qvel[self.ids[i]]),target=float(d.ctrl[i]),torque_Nm=float(d.actuator_force[i]),normal_force_N=force,support=int(support),riser=int(riser),phase=phase,foot_x_m=float(pos[0]),foot_forward_m=-float(pos[1]),foot_bottom_z_m=float(pos[2]),body_forward_m=-float(d.qpos[1]),upright=float(d.body('body').xmat[8]),yaw_deg=float(np.degrees(np.arctan2(d.body('body').xmat[3],d.body('body').xmat[0]))),pitch_deg=float(np.degrees(np.arctan2(-d.body('body').xmat[7],np.linalg.norm(d.body('body').xmat.reshape(3,3)[:2,1])))),geometry_refreshed=step%5==0)
             rows.append(r)
         if new_peak:

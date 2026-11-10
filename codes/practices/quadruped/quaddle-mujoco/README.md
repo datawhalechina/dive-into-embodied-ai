@@ -413,3 +413,28 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python validate_tracking_shor
 四腿启用、0.35rad、40ms配置使2mm三阶前进0.910m，关节峰值8.919rad/s、偏航24.32°，全部通过。120ms配置也标称通过。两者均通过横向±5mm、朝向−3°、摩擦0.9复测，朝向+3°仍失败。40ms配置平地通过；原40s测试在走到1.8m平台边缘后偏航失败，单独延长末级平台至4m的40s诊断通过（前进2.102m）。后者是额外场景，不能覆盖原失败。
 
 原4mm单阶/三阶仍失败；轨迹中出现约39°机身上仰，前脚世界高度不能直接视为有效抬脚高度。未新增PPO，未替换默认步态，未验证真机或机构极限。
+
+## 下台阶推进余量与平缓坑洼诊断（2026-11-10）
+
+上台阶按用户确认以2mm三阶为阶段目标。下台阶仍用原4mm三阶；新增 `reference/terrain-stairs_down-margin.json` 作为可选配置，原配置不覆盖。频率增加6%至1.63509Hz，heading_kp设为0.3。原−3°朝向/摩擦0.9条件从0.705m提升至0.738m，标称0.827m；六个选择条件、十次复测均通过（其中四项为重复确认），40s前进1.696m。不能把这批指定条件视为独立随机鲁棒成功率。
+
+原±3mm坑洼的内部相邻最大高差为5.759mm，旧PPO仍只有0.296m；接触控制迁移的12组搜索和7组扰动也未过原任务，未替换旧PPO。新增 `graded_rough.py` 作为独立、较容易的诊断场景：空间平滑随机高度，并限制内部相邻格与进出口高度跳变≤2mm，目标距离仍1.04m。侧向外边界不包含在该跳变保证内。seed7内部最大跳变1.399mm，进出口2mm；它仍是分块地形，不是连续高度场。
+
+同一旧PPO在平缓场景标称前进1.449m，连同两个新地形种子、起点/朝向/摩擦补测共8个指定条件通过，未重新训练。这是地形变化后的结果，不能替代原坑洼验收；平滑也改变了高度分布，不能据此单独量化高差的因果影响。
+
+```bash
+# 使用前文已有RL环境、prior_policy与2mm候选输出
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python optimize_rough_descent.py --stage diagnose
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python optimize_rough_descent.py --stage search
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python validate_rough_descent.py --scene stairs_down
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python validate_rough_descent.py --scene rough
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python refine_descent_margin.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python finalize_descent_candidate.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python select_descent_stress.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python probe_graded_rough.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python validate_graded_policy.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python check_rough_descent.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python plot_rough_descent.py
+```
+
+脚本读取上一节2mm候选以及 `outputs/practice_20261110/rough/prior_policy`；复现前需已有这些实验产物，权重不包含在源码仓库中。输出在 `outputs/rough_descent_20261110/`；[完整报告](reports/rough_descent_2026-11-10.json)保留参数、条件、原任务失败、地形差异与PPO哈希。新增训练步数为0，默认步态未改，无真机结果。
