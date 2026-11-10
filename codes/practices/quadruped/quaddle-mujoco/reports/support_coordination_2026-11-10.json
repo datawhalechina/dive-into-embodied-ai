@@ -1,0 +1,5235 @@
+{
+  "date": "2026-11-10",
+  "new_parameter_trials": 28,
+  "previous_controller_comparisons": 1,
+  "validation_cases": 15,
+  "original_task_passes": 0,
+  "new_ppo_steps": 0,
+  "default_changed": false,
+  "source_sha256": {
+    "first": {
+      "support_coordinator.py": "7cc6614b04eec68e5920175e70c02191790dd8f9c25b573cc7b9f949d53f4ca6",
+      "contact_phase_controller.py": "7f9d04abf38ece4ab2ccf224dd623073c801e26962874805b40f392b9f77e6e6",
+      "search_support_coordination.py": "11f59a590dd14833c2ab2b9f33a58fbc7dd94b77eb07264e15aa2493915d022e",
+      "scenario_matrix.py": "ad93e0e7033f79804c00f371ad6585bdc4b33bd12bd31e10231777651ab3ffdc",
+      "gait_controller.py": "560030737963731ccefa5f8b171ad0d280d96c4a27c7cbe8151e848b1c420f7e",
+      "gait.json": "409afe24c7a058242bfe972ff3c375db4ebaee98ec5eafdef52f7fc203244f01",
+      "scenarios.py": "02c953047219c631f1a665c6879f76d64954e2cfec9511f9f56619d0c09b3e14"
+    },
+    "recovery": {
+      "support_coordinator.py": "4363a8921aa23ee18f8dad0d7ba9a3250f5a77a728649ae574d606925c0b84d8",
+      "contact_phase_controller.py": "8abcbf24a8f39369c7752bed933eb48a32cdf776182d0d3c6ff3723d65d9e177",
+      "refine_support_coordination.py": "9260ab9b485961bcd23c7e182086329f197477111a98346a7c48074a9706abe4",
+      "scenario_matrix.py": "ad93e0e7033f79804c00f371ad6585bdc4b33bd12bd31e10231777651ab3ffdc",
+      "gait_controller.py": "560030737963731ccefa5f8b171ad0d280d96c4a27c7cbe8151e848b1c420f7e",
+      "gait.json": "409afe24c7a058242bfe972ff3c375db4ebaee98ec5eafdef52f7fc203244f01",
+      "scenarios.py": "02c953047219c631f1a665c6879f76d64954e2cfec9511f9f56619d0c09b3e14"
+    },
+    "coupled": {
+      "support_coordinator.py": "cf3e43c9628a5ea3b470298e9651bc050b1d3ef57253da5d36afeb25d10202f0",
+      "contact_phase_controller.py": "9958840f596f50f2f2954d44c067dade7bc0a2b4e7475ea72e2ad7d84bc563b7",
+      "search_coupled_support.py": "777624bd29acd518ed1167efda59933c986374f0cc1548cd1026c79f722f2838",
+      "scenario_matrix.py": "ad93e0e7033f79804c00f371ad6585bdc4b33bd12bd31e10231777651ab3ffdc",
+      "gait_controller.py": "560030737963731ccefa5f8b171ad0d280d96c4a27c7cbe8151e848b1c420f7e",
+      "gait.json": "409afe24c7a058242bfe972ff3c375db4ebaee98ec5eafdef52f7fc203244f01",
+      "scenarios.py": "02c953047219c631f1a665c6879f76d64954e2cfec9511f9f56619d0c09b3e14"
+    }
+  },
+  "results": [
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "previous_contact",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.1805872224060542,
+      "max_heading_deviation_deg": 55.95611328547711,
+      "max_driven_joint_speed_rad_s": 9.548296128861734,
+      "body_contact_samples": 0,
+      "min_upright_cosine": 0.9072299021254169,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": true,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08
+      },
+      "initial_x_offset_m": 0.0
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.65_feet1_rate0.5",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.13686942778392092,
+      "max_heading_deviation_deg": 106.76373711418562,
+      "max_driven_joint_speed_rad_s": 7.934522528597247,
+      "body_contact_samples": 2965,
+      "min_upright_cosine": 0.5471192186708599,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.65,
+        "minimum_support_feet": 1,
+        "support_phase_rate": 0.5,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 56,
+          "support_confirmed": 45,
+          "swing_granted": 54,
+          "landing_timeout": 10
+        },
+        "waiting_seconds": {
+          "left_front": 2.6399999999999877,
+          "right_front": 17.099999999999874,
+          "right_back": 0.5900000000000003,
+          "left_back": 2.209999999999997
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "landing",
+          "stance"
+        ],
+        "final_phase": [
+          0.4890000000000003,
+          0.64999999,
+          0.12,
+          0.64999999
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.65_feet1_rate1.0",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.11352184943694599,
+      "max_heading_deviation_deg": 132.60481593663178,
+      "max_driven_joint_speed_rad_s": 7.637307330741963,
+      "body_contact_samples": 3046,
+      "min_upright_cosine": 0.6088385636346367,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.65,
+        "minimum_support_feet": 1,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 52,
+          "support_confirmed": 48,
+          "swing_granted": 51,
+          "landing_timeout": 4
+        },
+        "waiting_seconds": {
+          "left_front": 6.529999999999905,
+          "right_front": 17.629999999999956,
+          "right_back": 7.289999999999889,
+          "left_back": 8.299999999999867
+        },
+        "final_states": [
+          "swing",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.8119999900000001,
+          0.64999999,
+          0.64999999,
+          0.28200000000000014
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.65_feet2_rate0.5",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": false,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.040308737176784,
+      "max_heading_deviation_deg": 176.47731982853222,
+      "max_driven_joint_speed_rad_s": 7.934522528597247,
+      "body_contact_samples": 3217,
+      "min_upright_cosine": -0.9999999999391616,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.65,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 0.5,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 24,
+          "support_confirmed": 17,
+          "swing_granted": 22,
+          "landing_timeout": 7
+        },
+        "waiting_seconds": {
+          "left_front": 12.259999999999783,
+          "right_front": 16.04999999999971,
+          "right_back": 10.54999999999982,
+          "left_back": 11.989999999999789
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.64999999,
+          0.64999999,
+          0.64999999,
+          0.64999999
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.65_feet2_rate1.0",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.10923645057420545,
+      "max_heading_deviation_deg": 105.29682483271135,
+      "max_driven_joint_speed_rad_s": 7.637307330741963,
+      "body_contact_samples": 3046,
+      "min_upright_cosine": 0.6079380097994497,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.65,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 51,
+          "support_confirmed": 42,
+          "swing_granted": 50,
+          "landing_timeout": 9
+        },
+        "waiting_seconds": {
+          "left_front": 8.989999999999853,
+          "right_front": 16.10999999999972,
+          "right_back": 7.009999999999895,
+          "left_back": 8.309999999999867
+        },
+        "final_states": [
+          "swing",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.70399999,
+          0.64999999,
+          0.64999999,
+          0.17400000000000004
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.75_feet1_rate0.5",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.18063356660885105,
+      "max_heading_deviation_deg": 109.0805466247984,
+      "max_driven_joint_speed_rad_s": 8.934137955885271,
+      "body_contact_samples": 1916,
+      "min_upright_cosine": 0.4304011136078642,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 1,
+        "support_phase_rate": 0.5,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 54,
+          "support_confirmed": 38,
+          "swing_granted": 54,
+          "landing_timeout": 16
+        },
+        "waiting_seconds": {
+          "left_front": 4.989999999999938,
+          "right_front": 11.149999999999807,
+          "right_back": 0.7100000000000004,
+          "left_back": 2.149999999999998
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "stance",
+          "swing"
+        ],
+        "final_phase": [
+          0.74999999,
+          0.5430000000000004,
+          0.14700000000000002,
+          0.81299999
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.75_feet1_rate1.0",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.07865996139815894,
+      "max_heading_deviation_deg": 179.78963092463565,
+      "max_driven_joint_speed_rad_s": 8.939523389822016,
+      "body_contact_samples": 0,
+      "min_upright_cosine": 0.9713208502525172,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 1,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 70,
+          "support_confirmed": 69,
+          "swing_granted": 70,
+          "landing_timeout": 1
+        },
+        "waiting_seconds": {
+          "left_front": 8.269999999999868,
+          "right_front": 7.849999999999877,
+          "right_back": 7.089999999999893,
+          "left_back": 7.669999999999881
+        },
+        "final_states": [
+          "swing",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.05599999000000007,
+          0.74999999,
+          0.74999999,
+          0.42600000000000027
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.75_feet2_rate0.5",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.09787803823342643,
+      "max_heading_deviation_deg": 179.53217942158454,
+      "max_driven_joint_speed_rad_s": 9.136606993510105,
+      "body_contact_samples": 561,
+      "min_upright_cosine": 0.6838582578804666,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 0.5,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 62,
+          "support_confirmed": 55,
+          "swing_granted": 61,
+          "landing_timeout": 6
+        },
+        "waiting_seconds": {
+          "left_front": 4.989999999999938,
+          "right_front": 4.549999999999947,
+          "right_back": 1.260000000000001,
+          "left_back": 2.299999999999995
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "stance",
+          "landing"
+        ],
+        "final_phase": [
+          0.74999999,
+          0.74999999,
+          0.6510000000000005,
+          0.12
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.75_feet2_rate1.0",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": -0.04217354976624483,
+      "max_heading_deviation_deg": 179.95633692674713,
+      "max_driven_joint_speed_rad_s": 9.215259146414741,
+      "body_contact_samples": 0,
+      "min_upright_cosine": 0.9713208502525172,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 68,
+          "support_confirmed": 66,
+          "swing_granted": 68,
+          "landing_timeout": 2
+        },
+        "waiting_seconds": {
+          "left_front": 13.749999999999751,
+          "right_front": 5.879999999999919,
+          "right_back": 5.479999999999928,
+          "left_back": 6.459999999999907
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "swing",
+          "stance"
+        ],
+        "final_phase": [
+          0.74999999,
+          0.4620000000000003,
+          0.10999999000000008,
+          0.74999999
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.85_feet1_rate0.5",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.15571731490495302,
+      "max_heading_deviation_deg": 70.01436754105953,
+      "max_driven_joint_speed_rad_s": 7.637307330741963,
+      "body_contact_samples": 2180,
+      "min_upright_cosine": 0.028172623372884356,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.85,
+        "minimum_support_feet": 1,
+        "support_phase_rate": 0.5,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 46,
+          "support_confirmed": 23,
+          "swing_granted": 46,
+          "landing_timeout": 23
+        },
+        "waiting_seconds": {
+          "left_front": 10.789999999999814,
+          "right_front": 10.389999999999823,
+          "right_back": 0.24000000000000007,
+          "left_back": 1.260000000000001
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "stance",
+          "swing"
+        ],
+        "final_phase": [
+          0.8499999899999999,
+          0.8499999899999999,
+          0.27300000000000013,
+          0.8760000000000007
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.85_feet1_rate1.0",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.02382049933564176,
+      "max_heading_deviation_deg": 179.9789901682414,
+      "max_driven_joint_speed_rad_s": 8.054131900417266,
+      "body_contact_samples": 100,
+      "min_upright_cosine": 0.5843065224864494,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.85,
+        "minimum_support_feet": 1,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 72,
+          "support_confirmed": 61,
+          "swing_granted": 72,
+          "landing_timeout": 11
+        },
+        "waiting_seconds": {
+          "left_front": 5.039999999999937,
+          "right_front": 7.289999999999889,
+          "right_back": 5.239999999999933,
+          "left_back": 8.509999999999863
+        },
+        "final_states": [
+          "swing",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.90399999,
+          0.8499999899999999,
+          0.5340000000000004,
+          0.19200000000000006
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.85_feet2_rate0.5",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.14972859574847588,
+      "max_heading_deviation_deg": 70.92338259515334,
+      "max_driven_joint_speed_rad_s": 7.637307330741963,
+      "body_contact_samples": 2593,
+      "min_upright_cosine": -0.04340020330500175,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.85,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 0.5,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 22,
+          "support_confirmed": 16,
+          "swing_granted": 21,
+          "landing_timeout": 6
+        },
+        "waiting_seconds": {
+          "left_front": 12.90999999999977,
+          "right_front": 12.479999999999778,
+          "right_back": 10.99999999999981,
+          "left_back": 12.83999999999977
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.8499999899999999,
+          0.8499999899999999,
+          0.8499999899999999,
+          0.8499999899999999
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "search",
+      "label": "gate0.85_feet2_rate1.0",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": -0.003946164817916947,
+      "max_heading_deviation_deg": 135.85901928696896,
+      "max_driven_joint_speed_rad_s": 8.519695106486616,
+      "body_contact_samples": 73,
+      "min_upright_cosine": 0.5890073975032274,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.85,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 65,
+          "support_confirmed": 39,
+          "swing_granted": 64,
+          "landing_timeout": 25
+        },
+        "waiting_seconds": {
+          "left_front": 3.4399999999999706,
+          "right_front": 3.4399999999999706,
+          "right_back": 9.859999999999834,
+          "left_back": 13.549999999999756
+        },
+        "final_states": [
+          "landing",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.12,
+          0.42600000000000027,
+          0.8499999899999999,
+          0.8499999899999999
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "validation",
+      "label": "offset_minus",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.05573828438333172,
+      "max_heading_deviation_deg": 179.79009971497223,
+      "max_driven_joint_speed_rad_s": 8.743597946049908,
+      "body_contact_samples": 0,
+      "min_upright_cosine": 0.9690186568012411,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 1,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": -0.005,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 70,
+          "support_confirmed": 69,
+          "swing_granted": 70,
+          "landing_timeout": 1
+        },
+        "waiting_seconds": {
+          "left_front": 7.849999999999877,
+          "right_front": 8.779999999999857,
+          "right_back": 6.719999999999901,
+          "left_back": 7.519999999999884
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "swing",
+          "stance"
+        ],
+        "final_phase": [
+          0.74999999,
+          0.42600000000000027,
+          0.07399999000000007,
+          0.74999999
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "validation",
+      "label": "offset_plus",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.04981984330917495,
+      "max_heading_deviation_deg": 179.88909148059238,
+      "max_driven_joint_speed_rad_s": 9.086455195716626,
+      "body_contact_samples": 0,
+      "min_upright_cosine": 0.9713208502525502,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 1,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.005,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 70,
+          "support_confirmed": 68,
+          "swing_granted": 70,
+          "landing_timeout": 2
+        },
+        "waiting_seconds": {
+          "left_front": 7.849999999999877,
+          "right_front": 8.069999999999872,
+          "right_back": 6.849999999999898,
+          "left_back": 8.079999999999872
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "swing",
+          "stance"
+        ],
+        "final_phase": [
+          0.74999999,
+          0.40800000000000025,
+          0.05599999000000007,
+          0.74999999
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "validation",
+      "label": "flat",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.07865996139815894,
+      "max_heading_deviation_deg": 179.78963092463565,
+      "max_driven_joint_speed_rad_s": 8.939523389822016,
+      "body_contact_samples": 0,
+      "min_upright_cosine": 0.9713208502525172,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 1,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 70,
+          "support_confirmed": 69,
+          "swing_granted": 70,
+          "landing_timeout": 1
+        },
+        "waiting_seconds": {
+          "left_front": 8.269999999999868,
+          "right_front": 7.849999999999877,
+          "right_back": 7.089999999999893,
+          "left_back": 7.669999999999881
+        },
+        "final_states": [
+          "swing",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.05599999000000007,
+          0.74999999,
+          0.74999999,
+          0.42600000000000027
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "validation",
+      "label": "single_4mm",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.07865996139815894,
+      "max_heading_deviation_deg": 179.78963092463565,
+      "max_driven_joint_speed_rad_s": 8.939523389822016,
+      "body_contact_samples": 0,
+      "min_upright_cosine": 0.9713208502525172,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 1,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 70,
+          "support_confirmed": 69,
+          "swing_granted": 70,
+          "landing_timeout": 1
+        },
+        "waiting_seconds": {
+          "left_front": 8.269999999999868,
+          "right_front": 7.849999999999877,
+          "right_back": 7.089999999999893,
+          "left_back": 7.669999999999881
+        },
+        "final_states": [
+          "swing",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.05599999000000007,
+          0.74999999,
+          0.74999999,
+          0.42600000000000027
+        ]
+      }
+    },
+    {
+      "group": "\u9010\u817f\u7b49\u5f85",
+      "kind": "validation",
+      "label": "stairs_2mm",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.07865996139815894,
+      "max_heading_deviation_deg": 179.78963092463565,
+      "max_driven_joint_speed_rad_s": 8.939523389822016,
+      "body_contact_samples": 0,
+      "min_upright_cosine": 0.9713208502525172,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 1,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 70,
+          "support_confirmed": 69,
+          "swing_granted": 70,
+          "landing_timeout": 1
+        },
+        "waiting_seconds": {
+          "left_front": 8.269999999999868,
+          "right_front": 7.849999999999877,
+          "right_back": 7.089999999999893,
+          "left_back": 7.669999999999881
+        },
+        "final_states": [
+          "swing",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.05599999000000007,
+          0.74999999,
+          0.74999999,
+          0.42600000000000027
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "search",
+      "label": "gate0.65_swing1_back0.35",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": -0.017665361759788945,
+      "max_heading_deviation_deg": 64.28457415059154,
+      "max_driven_joint_speed_rad_s": 8.966259656479323,
+      "body_contact_samples": 3012,
+      "min_upright_cosine": -0.037492176460287546,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.65,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1,
+        "recovery_phase": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 22,
+          "support_recovery": 94,
+          "support_confirmed": 18,
+          "swing_granted": 20,
+          "recovery_finished": 92,
+          "landing_timeout": 4
+        },
+        "waiting_seconds": {
+          "left_front": 3.2099999999999755,
+          "right_front": 3.3099999999999734,
+          "right_back": 3.0799999999999783,
+          "left_back": 3.3499999999999726
+        },
+        "final_states": [
+          "stance",
+          "recover",
+          "recover",
+          "stance"
+        ],
+        "final_phase": [
+          0.64999999,
+          0.3709999899999997,
+          0.64099999,
+          0.386
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "search",
+      "label": "gate0.65_swing1_back0.5",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": false,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.11518681478489093,
+      "max_heading_deviation_deg": 121.54023395323249,
+      "max_driven_joint_speed_rad_s": 8.0716958604442,
+      "body_contact_samples": 3338,
+      "min_upright_cosine": -0.999999999985309,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.65,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1,
+        "recovery_phase": 0.5
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 7,
+          "support_recovery": 183,
+          "support_confirmed": 6,
+          "swing_granted": 5,
+          "recovery_finished": 180,
+          "landing_timeout": 1
+        },
+        "waiting_seconds": {
+          "left_front": 6.019999999999916,
+          "right_front": 5.8599999999999195,
+          "right_back": 5.979999999999917,
+          "left_back": 6.149999999999913
+        },
+        "final_states": [
+          "recover",
+          "stance",
+          "recover",
+          "recover"
+        ],
+        "final_phase": [
+          0.6049999899999999,
+          0.64999999,
+          0.5959999899999999,
+          0.64999999
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "search",
+      "label": "gate0.65_swing2_back0.35",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": false,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": false,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.03464017352264996,
+      "max_heading_deviation_deg": 90.42716735190476,
+      "max_driven_joint_speed_rad_s": 10.319295838519897,
+      "body_contact_samples": 2721,
+      "min_upright_cosine": -0.9999999999657577,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.65,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 2,
+        "recovery_phase": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 25,
+          "support_recovery": 90,
+          "support_confirmed": 15,
+          "swing_granted": 23,
+          "recovery_finished": 86,
+          "landing_timeout": 10
+        },
+        "waiting_seconds": {
+          "left_front": 3.0699999999999785,
+          "right_front": 2.8899999999999824,
+          "right_back": 3.179999999999976,
+          "left_back": 3.3499999999999726
+        },
+        "final_states": [
+          "recover",
+          "recover",
+          "recover",
+          "recover"
+        ],
+        "final_phase": [
+          0.40699998999999976,
+          0.40699998999999976,
+          0.5149999899999999,
+          0.49699998999999984
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "search",
+      "label": "gate0.65_swing2_back0.5",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": false,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.08889253841513374,
+      "max_heading_deviation_deg": 130.84771245539426,
+      "max_driven_joint_speed_rad_s": 7.982012893121424,
+      "body_contact_samples": 3063,
+      "min_upright_cosine": -0.9999999998998857,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.65,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 2,
+        "recovery_phase": 0.5
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 15,
+          "support_recovery": 166,
+          "support_confirmed": 10,
+          "swing_granted": 13,
+          "recovery_finished": 166,
+          "landing_timeout": 5
+        },
+        "waiting_seconds": {
+          "left_front": 5.6699999999999235,
+          "right_front": 5.34999999999993,
+          "right_back": 5.489999999999927,
+          "left_back": 5.689999999999923
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.64999999,
+          0.64999999,
+          0.5720000000000001,
+          0.64999999
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "search",
+      "label": "gate0.75_swing1_back0.35",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": false,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.06356215548555827,
+      "max_heading_deviation_deg": 152.38581947314907,
+      "max_driven_joint_speed_rad_s": 7.637307330741963,
+      "body_contact_samples": 3505,
+      "min_upright_cosine": -0.9999999999651855,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1,
+        "recovery_phase": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 12,
+          "support_recovery": 82,
+          "support_confirmed": 5,
+          "swing_granted": 11,
+          "recovery_finished": 81,
+          "landing_timeout": 7
+        },
+        "waiting_seconds": {
+          "left_front": 3.0599999999999787,
+          "right_front": 2.7299999999999858,
+          "right_back": 2.439999999999992,
+          "left_back": 2.7499999999999853
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "stance",
+          "recover"
+        ],
+        "final_phase": [
+          0.74999999,
+          0.5480000000000002,
+          0.74999999,
+          0.5879999899999998
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "search",
+      "label": "gate0.75_swing1_back0.5",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": false,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.06398835090981006,
+      "max_heading_deviation_deg": 152.63823627417062,
+      "max_driven_joint_speed_rad_s": 7.637307330741963,
+      "body_contact_samples": 3562,
+      "min_upright_cosine": -0.9999999999796985,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 1,
+        "recovery_phase": 0.5
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "landing_wait": 7,
+          "support_recovery": 128,
+          "support_confirmed": 5,
+          "swing_granted": 6,
+          "recovery_finished": 126,
+          "landing_timeout": 2
+        },
+        "waiting_seconds": {
+          "left_front": 4.529999999999948,
+          "right_front": 4.299999999999953,
+          "right_back": 4.089999999999957,
+          "left_back": 4.099999999999957
+        },
+        "final_states": [
+          "stance",
+          "recover",
+          "recover",
+          "stance"
+        ],
+        "final_phase": [
+          0.74999999,
+          0.7319999899999999,
+          0.5609999899999998,
+          0.74999999
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "search",
+      "label": "gate0.75_swing2_back0.35",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.07053432972570745,
+      "max_heading_deviation_deg": 44.133376095039175,
+      "max_driven_joint_speed_rad_s": 8.211844277973288,
+      "body_contact_samples": 3179,
+      "min_upright_cosine": 0.19987193509634615,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 2,
+        "recovery_phase": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "swing_granted": 53,
+          "landing_wait": 53,
+          "support_confirmed": 15,
+          "landing_timeout": 37,
+          "support_recovery": 44,
+          "recovery_finished": 44
+        },
+        "waiting_seconds": {
+          "left_front": 2.849999999999983,
+          "right_front": 2.5899999999999888,
+          "right_back": 0.5500000000000003,
+          "left_back": 0.6100000000000003
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "landing",
+          "swing"
+        ],
+        "final_phase": [
+          0.386,
+          0.6740000000000003,
+          0.12,
+          0.8000000000000004
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "search",
+      "label": "gate0.75_swing2_back0.5",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.09013547795447006,
+      "max_heading_deviation_deg": 64.38861135163987,
+      "max_driven_joint_speed_rad_s": 8.211844277973288,
+      "body_contact_samples": 3208,
+      "min_upright_cosine": 0.2679484448188623,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 2,
+        "recovery_phase": 0.5
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "swing_granted": 63,
+          "landing_wait": 63,
+          "support_confirmed": 48,
+          "landing_timeout": 15,
+          "support_recovery": 62,
+          "recovery_finished": 61
+        },
+        "waiting_seconds": {
+          "left_front": 3.5499999999999683,
+          "right_front": 3.899999999999961,
+          "right_back": 0.5300000000000002,
+          "left_back": 0.9600000000000006
+        },
+        "final_states": [
+          "stance",
+          "recover",
+          "swing",
+          "stance"
+        ],
+        "final_phase": [
+          0.2640000000000001,
+          0.6419999899999999,
+          0.9299999900000001,
+          0.4620000000000003
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "validation",
+      "label": "offset_minus",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.0725504040921594,
+      "max_heading_deviation_deg": 57.3678447892662,
+      "max_driven_joint_speed_rad_s": 8.211844277973654,
+      "body_contact_samples": 3239,
+      "min_upright_cosine": 0.44456738727619627,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 2,
+        "recovery_phase": 0.5
+      },
+      "initial_x_offset_m": -0.005,
+      "coordination": {
+        "event_counts": {
+          "swing_granted": 63,
+          "landing_wait": 62,
+          "support_confirmed": 45,
+          "landing_timeout": 17,
+          "support_recovery": 62,
+          "recovery_finished": 61
+        },
+        "waiting_seconds": {
+          "left_front": 3.7799999999999634,
+          "right_front": 3.9199999999999604,
+          "right_back": 0.35000000000000014,
+          "left_back": 0.6400000000000003
+        },
+        "final_states": [
+          "stance",
+          "recover",
+          "swing",
+          "swing"
+        ],
+        "final_phase": [
+          0.5,
+          0.6509999899999999,
+          0.056000000000000674,
+          0.9120000000000007
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "validation",
+      "label": "offset_plus",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.07337049601020729,
+      "max_heading_deviation_deg": 48.276187436848666,
+      "max_driven_joint_speed_rad_s": 8.211844277973336,
+      "body_contact_samples": 3287,
+      "min_upright_cosine": 0.5197532143243413,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 2,
+        "recovery_phase": 0.5
+      },
+      "initial_x_offset_m": 0.005,
+      "coordination": {
+        "event_counts": {
+          "swing_granted": 61,
+          "landing_wait": 62,
+          "support_confirmed": 49,
+          "landing_timeout": 13,
+          "support_recovery": 65,
+          "recovery_finished": 65
+        },
+        "waiting_seconds": {
+          "left_front": 3.9099999999999606,
+          "right_front": 4.0299999999999585,
+          "right_back": 0.34000000000000014,
+          "left_back": 0.5600000000000003
+        },
+        "final_states": [
+          "stance",
+          "stance",
+          "stance",
+          "stance"
+        ],
+        "final_phase": [
+          0.6440000000000001,
+          0.6080000000000001,
+          0.2280000000000001,
+          0.4440000000000003
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "validation",
+      "label": "flat",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.09013547795447006,
+      "max_heading_deviation_deg": 64.38861135163987,
+      "max_driven_joint_speed_rad_s": 8.211844277973288,
+      "body_contact_samples": 3208,
+      "min_upright_cosine": 0.2679484448188623,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 2,
+        "recovery_phase": 0.5
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "swing_granted": 63,
+          "landing_wait": 63,
+          "support_confirmed": 48,
+          "landing_timeout": 15,
+          "support_recovery": 62,
+          "recovery_finished": 61
+        },
+        "waiting_seconds": {
+          "left_front": 3.5499999999999683,
+          "right_front": 3.899999999999961,
+          "right_back": 0.5300000000000002,
+          "left_back": 0.9600000000000006
+        },
+        "final_states": [
+          "stance",
+          "recover",
+          "swing",
+          "stance"
+        ],
+        "final_phase": [
+          0.2640000000000001,
+          0.6419999899999999,
+          0.9299999900000001,
+          0.4620000000000003
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "validation",
+      "label": "single_4mm",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.09013547795447006,
+      "max_heading_deviation_deg": 64.38861135163987,
+      "max_driven_joint_speed_rad_s": 8.211844277973288,
+      "body_contact_samples": 3208,
+      "min_upright_cosine": 0.2679484448188623,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 2,
+        "recovery_phase": 0.5
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "swing_granted": 63,
+          "landing_wait": 63,
+          "support_confirmed": 48,
+          "landing_timeout": 15,
+          "support_recovery": 62,
+          "recovery_finished": 61
+        },
+        "waiting_seconds": {
+          "left_front": 3.5499999999999683,
+          "right_front": 3.899999999999961,
+          "right_back": 0.5300000000000002,
+          "left_back": 0.9600000000000006
+        },
+        "final_states": [
+          "stance",
+          "recover",
+          "swing",
+          "stance"
+        ],
+        "final_phase": [
+          0.2640000000000001,
+          0.6419999899999999,
+          0.9299999900000001,
+          0.4620000000000003
+        ]
+      }
+    },
+    {
+      "group": "\u7b49\u5f85\u56de\u64a4",
+      "kind": "validation",
+      "label": "stairs_2mm",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.09013547795447006,
+      "max_heading_deviation_deg": 64.38861135163987,
+      "max_driven_joint_speed_rad_s": 8.211844277973288,
+      "body_contact_samples": 3208,
+      "min_upright_cosine": 0.2679484448188623,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "support_recovery": true,
+        "swing_gate_phase": 0.75,
+        "minimum_support_feet": 2,
+        "support_phase_rate": 1.0,
+        "maximum_swing_feet": 2,
+        "recovery_phase": 0.5
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "swing_granted": 63,
+          "landing_wait": 63,
+          "support_confirmed": 48,
+          "landing_timeout": 15,
+          "support_recovery": 62,
+          "recovery_finished": 61
+        },
+        "waiting_seconds": {
+          "left_front": 3.5499999999999683,
+          "right_front": 3.899999999999961,
+          "right_back": 0.5300000000000002,
+          "left_back": 0.9600000000000006
+        },
+        "final_states": [
+          "stance",
+          "recover",
+          "swing",
+          "stance"
+        ],
+        "final_phase": [
+          0.2640000000000001,
+          0.6419999899999999,
+          0.9299999900000001,
+          0.4620000000000003
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "search",
+      "label": "kp0.4_feet1_rate0.35",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.21419461073248544,
+      "max_heading_deviation_deg": 152.18414000306808,
+      "max_driven_joint_speed_rad_s": 9.798476369261545,
+      "body_contact_samples": 47,
+      "min_upright_cosine": 0.257291155890116,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 1,
+        "coupled_slow_rate": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 25,
+          "support_timeout": 3
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 11.559999999999798,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.397800000000016,
+          0.8978000000000215,
+          0.6478000000000139,
+          0.14780000000002513
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "search",
+      "label": "kp0.4_feet1_rate0.65",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": false,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.15511659825335472,
+      "max_heading_deviation_deg": 149.72600283817215,
+      "max_driven_joint_speed_rad_s": 10.12670189390048,
+      "body_contact_samples": 888,
+      "min_upright_cosine": -0.1482603095193864,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 1,
+        "coupled_slow_rate": 0.65
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 36,
+          "support_timeout": 16
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 10.339999999999824,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.6200000000000189,
+          0.12000000000002423,
+          0.8700000000000152,
+          0.3700000000000268
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "search",
+      "label": "kp0.4_feet2_rate0.35",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.21432576241017776,
+      "max_heading_deviation_deg": 113.70093026584513,
+      "max_driven_joint_speed_rad_s": 9.910098093454627,
+      "body_contact_samples": 43,
+      "min_upright_cosine": 0.7133747943850637,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 91,
+          "support_timeout": 25
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 12.779999999999772,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.2909000000000086,
+          0.7909000000000128,
+          0.5409000000000067,
+          0.04090000000001345
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "search",
+      "label": "kp0.4_feet2_rate0.65",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": false,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.1902025827948203,
+      "max_heading_deviation_deg": 94.01980719786559,
+      "max_driven_joint_speed_rad_s": 10.505911922858274,
+      "body_contact_samples": 13,
+      "min_upright_cosine": 0.708695175885648,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.65
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 88,
+          "support_timeout": 11
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 12.779999999999772,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.9181000000000216,
+          0.41810000000001885,
+          0.16810000000001724,
+          0.6681000000000251
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "search",
+      "label": "kp0.7_feet1_rate0.35",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": false,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": false,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.08557189707258983,
+      "max_heading_deviation_deg": 179.36383527397808,
+      "max_driven_joint_speed_rad_s": 10.20556391807344,
+      "body_contact_samples": 290,
+      "min_upright_cosine": -0.9999999999124317,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.7,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 1,
+        "coupled_slow_rate": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 38,
+          "support_timeout": 7
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 10.53999999999982,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.8982000000000154,
+          0.3982000000000181,
+          0.1482000000000136,
+          0.6482000000000224
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "search",
+      "label": "kp0.7_feet1_rate0.65",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.16278588871258953,
+      "max_heading_deviation_deg": 130.70384804768622,
+      "max_driven_joint_speed_rad_s": 9.451747698778894,
+      "body_contact_samples": 14,
+      "min_upright_cosine": 0.7026138715388744,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.7,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 1,
+        "coupled_slow_rate": 0.65
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 32,
+          "support_timeout": 1
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 11.229999999999805,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.9207000000000166,
+          0.42070000000002344,
+          0.17070000000001637,
+          0.6707000000000269
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "search",
+      "label": "kp0.7_feet2_rate0.35",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.17775690430288935,
+      "max_heading_deviation_deg": 30.6478745604619,
+      "max_driven_joint_speed_rad_s": 7.786102511799367,
+      "body_contact_samples": 14,
+      "min_upright_cosine": 0.7390085112372426,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.7,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 96,
+          "support_timeout": 23
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 12.43999999999978,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.6527000000000107,
+          0.15270000000001252,
+          0.9027000000000082,
+          0.4027000000000134
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "search",
+      "label": "kp0.7_feet2_rate0.65",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.1295499539621695,
+      "max_heading_deviation_deg": 143.53867163156875,
+      "max_driven_joint_speed_rad_s": 9.607827898412685,
+      "body_contact_samples": 11,
+      "min_upright_cosine": 0.7616451614821017,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.7,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.65
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 82,
+          "support_timeout": 8
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 12.819999999999771,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.8632000000000216,
+          0.3632000000000201,
+          0.11320000000001659,
+          0.6132000000000248
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "validation",
+      "label": "offset_minus",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.1703142624658764,
+      "max_heading_deviation_deg": 50.65431308801324,
+      "max_driven_joint_speed_rad_s": 8.944172520302661,
+      "body_contact_samples": 7,
+      "min_upright_cosine": 0.763196715660203,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35
+      },
+      "initial_x_offset_m": -0.005,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 85,
+          "support_timeout": 26
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 12.719999999999773,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.4196000000000093,
+          0.9196000000000124,
+          0.6696000000000077,
+          0.16960000000001368
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "validation",
+      "label": "offset_plus",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.15057302663458705,
+      "max_heading_deviation_deg": 50.6543085331647,
+      "max_driven_joint_speed_rad_s": 8.944174279991081,
+      "body_contact_samples": 30,
+      "min_upright_cosine": 0.7450437284044307,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35
+      },
+      "initial_x_offset_m": 0.005,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 103,
+          "support_timeout": 29
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 12.739999999999773,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.1937000000000091,
+          0.6937000000000109,
+          0.443700000000007,
+          0.9437000000000122
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "validation",
+      "label": "flat",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 1.0577825116495696,
+      "max_heading_deviation_deg": 14.388735174099377,
+      "max_driven_joint_speed_rad_s": 8.790185908769626,
+      "body_contact_samples": 0,
+      "min_upright_cosine": 0.9337735974769129,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 109,
+          "support_timeout": 13
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 12.099999999999786,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.893000000000012,
+          0.39300000000001345,
+          0.14300000000000565,
+          0.6430000000000157
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "validation",
+      "label": "single_4mm",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.1451710499743729,
+      "max_heading_deviation_deg": 58.80203767485354,
+      "max_driven_joint_speed_rad_s": 8.944172750140018,
+      "body_contact_samples": 27,
+      "min_upright_cosine": 0.6893567226279185,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 95,
+          "support_timeout": 27
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 12.689999999999774,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.31070000000000847,
+          0.810700000000011,
+          0.5607000000000076,
+          0.060700000000013035
+        ]
+      }
+    },
+    {
+      "group": "\u5171\u540c\u76f8\u4f4d\u65f6\u949f",
+      "kind": "validation",
+      "label": "stairs_2mm",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": false,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.815738472444905,
+      "max_heading_deviation_deg": 22.594562387063434,
+      "max_driven_joint_speed_rad_s": 10.17734926464986,
+      "body_contact_samples": 0,
+      "min_upright_cosine": 0.9243659007198276,
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "coordination": {
+        "event_counts": {
+          "support_slowdown": 94,
+          "support_timeout": 20
+        },
+        "mode": "coupled_clock",
+        "slow_seconds": 12.119999999999786,
+        "relative_phase_preserved": true,
+        "final_phase": [
+          0.9776000000000101,
+          0.4776000000000138,
+          0.22760000000000796,
+          0.7276000000000175
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "Privileged simulator contacts; no hardware contact estimator or hardware validation.",
+    "Shared-clock mode preserves relative phases but does not guarantee support count. Timeout is explicitly logged.",
+    "Candidates selected on nominal trials; these are not population success-rate estimates.",
+    "Original acceptance unchanged; failed variants remain opt-in."
+  ]
+}

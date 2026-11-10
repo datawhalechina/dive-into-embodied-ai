@@ -6,6 +6,10 @@
 
 控制器只写四个关节的位置目标。机身位置由 MuJoCo 的动力学和地面接触推进，没有平移机体、传送坐标或施加外部推动力。本模型的弹簧、接触与舵机动态仍有近似，未经过实机标定。
 
+## 2026-11-10 基础版
+
+新增平地停走／转向交互、固定场景复跑入口和配套旧 PPO 权重，详见 [基础版说明](BASELINE.md)。2 mm 上台阶仅保留为标称条件的实验展示，本轮航向优化未通过独立条件检查；不列为稳定基础能力。
+
 ## 网页交互
 
 仓库根目录运行 `npm install` 和 `npm run dev`，进入网站的“项目实战 → 仿真实战 → Petoi Quaddle 四足步行仿真”。加载后可以行走、停止站立、暂停物理、重置和调整视角，无需本地 Python 服务。
@@ -91,7 +95,7 @@ macOS 的被动查看器需要 `mjpython`。`launch.py` 为 uv Python 的动态�
 
 这里的滑移指标是接触点的绝对切向速度，包含轮端转动的运动学贡献，不把轮心移动直接当作滑移。它不是单位前进距离的滑移损失，也不表示完全无滑移。身体倾角 RMS 约为旧版 8.34°、新版 8.47°，没有声称所有姿态指标都改善。
 
-`reports/walk_validation.json` 记录当前模型的 60 秒步行和停止检查（步行前另有 2 秒站立）；重新运行会写入 `outputs/walk_validation.json`：
+`reports/walk_validation.json` 记录修正启动前的 60 秒步行和停止检查（步行前另有 2 秒站立），下表为该存档结果。修正后的结果见下文 `startup_fix_2026-11-09.json`；重新运行会写入 `outputs/walk_validation.json`：
 
 | 指标 | 默认地面结果 |
 | --- | --- |
@@ -135,6 +139,61 @@ macOS 的被动查看器需要 `mjpython`。`launch.py` 为 uv Python 的动态�
 .venv/bin/python search_natural.py --pattern crawl --generations 25
 ```
 
+## 坡面与地面适应检查
+
+先复现平地，再只改变地面条件。以下坡度为探索档位，不代表机器人已具备爬坡能力：
+
+```bash
+.venv/bin/python check_terrain.py
+.venv/bin/python validate_walk.py --seconds 60 --sensitivity
+.venv/bin/python validate_walk.py --seconds 20 --slope-deg 3
+.venv/bin/python validate_walk.py --seconds 20 --slope-deg 5
+# Linux 无窗口录像；需要可用的 EGL 实现
+MUJOCO_GL=egl .venv/bin/python render_demo.py --seconds 10 --slope-deg 3 --output uphill3
+```
+
+正坡度沿机器人初始前方（世界 -Y）上升。`terrain.py` 同时旋转地面与初始机身，保持初始离地距离；修改地面姿态后调用 `mj_setConst` 更新编译时的坐标系快捷标记，否则地面可能仍按水平姿态参与计算。前进距离、离地高度和姿态倾斜均在坡面坐标系测量，避免把沿坡上升算作额外离地高度。航向控制器仍读取世界坐标真值，尚未改成坡面反馈或实机状态估计。
+
+`reports/ground_readiness_2026-11-09.json` 是 Linux / Python 3.12.13 / MuJoCo 3.16.0 的单次确定性复跑：平地60秒与停止检查通过；统一摩擦0.6/1.0均未通过；3°与5°上坡均出现机身触地和姿态超限。不同用例时长不同，不用于直接比较速度排名。默认场景使用混合摩擦参数，统一摩擦覆盖所有碰撞几何体，二者不是同一条件。
+
+测试仅验证当前模型和固定初始状态，不是多seed鲁棒性结论，也未进行真机验证。下一步应先做单变量控制对照，再引入初始姿态、接触和舵机响应扰动。
+
+### 启动站姿修复（2026-11-09）
+
+默认配置已增加 `startup_bias_rad=[0.2,0.2,-0.4,-0.4]`（乘电机方向符号前），用 `startup_ramp_seconds=0.05` 的平滑曲线建立支撑，继续受原8 rad/s目标变化率限制。2秒支撑阶段后，在原1.5秒起步窗口内从支撑姿态过渡到周期步态；没有改质量、弹簧、摩擦、地面角度或外加力。
+
+`reports/startup_fix_2026-11-09.json` 保存修复前后同条件复跑。新增前3.5秒的相对坡面俯仰与机身触地检查，分别要求小于15°和零触地。3°用例最大俯仰由40.35°降至3.93°，20秒行走检查通过；平地60秒和停止也通过。5°启动最大俯仰降至4.02°且无机身触地，但后续速度、足端支撑与连续前进未通过。统一摩擦用例也仍有失败。参数经过这些开发条件筛选，不能视为独立测试或实机稳健性证明。
+
+```bash
+.venv/bin/python check_startup.py
+.venv/bin/python validate_walk.py --seconds 20 --slope-deg 3
+.venv/bin/python validate_walk.py --seconds 20 --slope-deg 3 --config reference/pre-slope-startup-gait.json
+```
+
+先另存输出再跑下一组。旧基线配置不包含启动支撑参数，控制器保持其原有零位启动行为。`render_demo.py --config` 可用相同配置生成完整前后录像，画面标注坡度和相对坡面的俯仰。
+
+## 多场景实验入口
+
+`scenarios.py` 定义平地、3°/5°上坡、3°下坡、4mm×3级上下台阶、±3mm坑洼、已知地图绕障和8mm浅水近似。`scenario_matrix.py` 对行走/跑步候选分别进行实步动力学校验，生成可筛选的视频总览、每组JSON指标与CSV轨迹：
+
+```bash
+.venv/bin/python check_scenarios.py
+.venv/bin/python scenario_matrix.py --scene stairs_up --mode walk --seconds 20
+MUJOCO_GL=egl .venv/bin/python scenario_matrix.py --scene all --mode both --seconds 20 --video --workers 2
+.venv/bin/python -m http.server 8012 --bind 127.0.0.1 --directory outputs/scenario_matrix
+```
+
+浏览器打开 `http://127.0.0.1:8012`。失败任务也会保存，主命令不把物理失败当成程序崩溃；逐项检查`summary.json`中的`passed`与`checks`。录像与无录像共用5ms更新时刻，录像不额外调用动力学求解器，避免改变warm-start状态。6秒平地和绕障的有/无录像结果已做1e-12绝对容差对照。
+
+运行约束与解释：
+
+- 台阶尺寸仅为探索档位；坑洼底面实际降低6mm，凹坑不是被原平面填平的视觉效果。
+- 下台阶初始机身抬高12mm，使它真实站在起始平台。运行中不写机身位姿、不施加推进力。
+- 绕障由已知地图A*与仿真真值定位闭环完成；导航单独使用5rad/s目标变化率与0.45转向限幅，保留原10rad/s实际关节速度门槛。它尚未包含感知/建图。
+- `run_attempt`读取`reference/run-candidate.json`，仅是周期候选，尚未实现合格跑步。验收要求至少3个持续10ms的完整无地形接触区间、均速≥0.1m/s和全部其他检查。
+- 浅水显式施加局部浸没球冠浮力与二次阻力，并单独记录力与耗散。地面接触优先级设为1，使实际接触滑动摩擦采用0.55，避免被机器人几何体的0.8/1.0覆盖；测试直接检查求解器接触系数。假设体积/阻力/湿地摩擦未标定，无CFD或防水验证；水面视觉几何不碰撞。
+- 每条件只跑单一初态；源代码哈希和所有参数保存在报告中，不作为多seed稳健性结论。
+
 ## 官方模型及必要补充
 
 来源：https://huggingface.co/petoi/quaddle
@@ -157,7 +216,7 @@ macOS 的被动查看器需要 `mjpython`。`launch.py` 为 uv Python 的动态�
 
 - 官方弹簧零件仍作为刚体连杆处理，**没有模拟真实拉簧的轴向伸缩**。
 - 采用被动关节扭转弹簧作支撑近似：`*_motor_arm` 刚度 0.012 N·m/rad，阻尼 0.0004 N·m·s/rad；`*_leg` 刚度 0.08，阻尼 0.001。均为调试参数，不是实测值。
-- 舵机 PD 增益、转子惯量、摩擦系数、阻尼、碰撞外形均有工程假设。增加了目标角度变化率限制，仍未实现完整的舵机物理速度饱和、死区和延迟；当前 60 秒步行测得峰值关节速度约 8.76 rad/s，不能视作实物舵机可达到的指标；未验证真实驱动映射。
+- 舵机 PD 增益、转子惯量、摩擦系数、阻尼、碰撞外形均有工程假设。增加了目标角度变化率限制，仍未实现完整的舵机物理速度饱和、死区和延迟；旧基线 60 秒步行测得峰值关节速度约 8.76 rad/s，不能视作实物舵机可达到的指标；未验证真实驱动映射。
 - 关闭机器人自碰撞，保留地面接触；验证覆盖给定初始状态、默认平地和所记录的模式。
 - 官方未提供的外观部件不会自动添加，模型外观以该 URDF 为准。
 - 没有加载 Petoi 网页仿真器、OpenCat 固件或官方步态。步行使用约 1.936 Hz 周期目标、固定相位关系、前后腿不同的偏置/幅度、100 Hz 控制更新及方向反馈。方向反馈读取仿真真值中的航向、横向位置和角速度，调整左右步幅；实机还需要状态估计。
@@ -195,3 +254,191 @@ uv pip sync --python .venv/bin/python requirements.lock
 ```
 
 参考：[Petoi 官方模型](https://huggingface.co/petoi/quaddle)、[MuJoCo 模型说明](https://mujoco.readthedocs.io/en/stable/modeling.html)、[macOS 查看器说明](https://mujoco.readthedocs.io/en/stable/python.html#passive-viewer)。
+
+## 失败定位与分场景训练
+
+`diagnose_terrain.py` 记录原步态首次倾斜、触地、偏航和关节超速的时刻。先看失效顺序，再决定是改步态参数还是训练状态反馈。`search_terrain_gait.py` 用有边界的 CEM 搜索频率、幅度、偏置和方向反馈；它是步态参数优化，不能称作 PPO。
+
+楼梯、坑洼使用新增的 `terrain_rl.py` 和 `train_terrain_ppo.py`。旧 `rl_env.py` 是独立的平地示例，启动方式与本轮多场景评测不同，不能直接混用其 checkpoint。
+
+新环境保持 1 ms 物理步进、100 Hz 动作、原支撑启动姿态与关节限制。PPO 输出四个 ±0.25 rad 残差，叠加到周期目标后，再限制目标变化速率为 8 rad/s；这不是对实际关节速度的硬钳位，实际峰值仍按原 10 rad/s 阈值独立验收。训练目标包含前进、速度跟踪、偏航、实际关节超速和动作平滑代价，机身触地或倾倒会结束训练回合。独立评测仍运行完整 22 秒，保留失败后续状态。
+
+36 维观测包含姿态、速度、关节状态、上一动作、周期目标、相位与前方五个地形高度。高度和速度来自仿真真值；目前没有实现真机地形感知。训练只随机化初始横向位置 ±5 mm，不能据此宣称对未知地形、摩擦或模型误差鲁棒。
+
+本轮 CPU 环境使用 Python 3.12、MuJoCo 3.16.0、PyTorch 2.15.0+cpu、SB3 2.9.2、Gymnasium 1.4.0。在已有基础依赖环境中安装：
+
+```bash
+uv pip install --python .venv/bin/python torch==2.15.0+cpu --index-url https://download.pytorch.org/whl/cpu
+uv pip install --python .venv/bin/python stable-baselines3==2.9.2 gymnasium==1.4.0
+OPENBLAS_NUM_THREADS=1 .venv/bin/python check_terrain_rl.py
+OPENBLAS_NUM_THREADS=1 .venv/bin/python train_terrain_ppo.py \
+  --scene stairs_up --steps 32768 --envs 4 --seed 42 --output outputs/terrain_ppo/stairs_up/r1
+OPENBLAS_NUM_THREADS=1 .venv/bin/python train_terrain_ppo.py \
+  --scene stairs_up --steps 65536 --envs 4 --seed 42 \
+  --resume outputs/terrain_ppo/stairs_up/r1 --output outputs/terrain_ppo/stairs_up/r2
+MUJOCO_GL=egl OPENBLAS_NUM_THREADS=1 .venv/bin/python evaluate_terrain_stages.py \
+  --scene stairs_up --policy outputs/terrain_ppo/stairs_up/r2 \
+  --output outputs/terrain_ppo/stairs_up/r2/evaluation --video
+```
+
+每轮同时保存 `policy.zip`、`vecnormalize.pkl`、推理用的 `obs_stats.npz` 和记录训练步数、耗时、依赖版本、源码哈希的 `metadata.json`。这些文件必须成套使用。续训保留优化器和归一化统计；推理使用冻结统计。
+
+参数搜索与回放示例：
+
+```bash
+OPENBLAS_NUM_THREADS=1 .venv/bin/python search_terrain_gait.py \
+  --scene downhill3 --output outputs/terrain_ppo/search/downhill3
+MUJOCO_GL=egl .venv/bin/python scenario_matrix.py --scene downhill3 --mode walk \
+  --config outputs/terrain_ppo/search/downhill3/selected.json --video
+```
+
+本轮未修改默认 `gait.json`，每个通过的场景使用显式配置或 checkpoint；不存在一个已经验证能解决所有地形的统一策略。跑步还要通过原来的速度、至少三段完整腾空等检查，奖励提高或步频提高都不等于任务完成。
+
+2026-11-09实跑结果见 [`reports/terrain_iteration_2026-11-09.json`](reports/terrain_iteration_2026-11-09.json)：76组参数试验中，`reference/terrain-downhill3.json`、`terrain-stairs_down.json`、`terrain-uphill5.json` 在原场景通过，±5mm初始横向偏移也分别通过。上楼梯与坑洼各完成两轮、累计98,304步PPO，尚未通过；坑洼第二轮虽走得更远，但触地/超速退步，保留第一轮作为稳定候选。`reference/run-bound-candidate.json` 有完整腾空，但速度与关节限制仍不合格。未将这些场景配置或策略设为默认，也未发布“已会跑”的结论。模型与视频保存在本次实验本地归档中，未作为教程仓库二进制文件提交。
+
+## 地形课程与独立选模（实验版）
+
+`curriculum_rl.py` 在相同物理模型上提供 60 维观测：随机身朝向旋转的左右地形网格、足端接触、上一时刻关节状态与目标剩余距离。仍使用仿真真值。残差范围保持 ±0.25 rad；新增一次性进度奖励、终点奖励和实际关节超速代价。旧 36 维策略仍由原控制器加载，两种策略不能混用归一化文件。
+
+坑洼课程为 ±1、±2、±3 mm；楼梯课程为 1、2、4 mm。第三级与原场景的地形完全相同，低级通过不能记作原任务通过。每 16,384 步保存完整模型及归一化统计，并进行四次完整回放；四次全通过后，在 20 个独立条件下至少通过 16 次才升级。坑洼门槛使用未参与训练的地图种子 100–119。`best_checkpoint` 仅表示当前课程评分最好，仍须单独检查原始目标地形。
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python check_curriculum.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python train_curriculum.py \
+  --scene rough --gamma .999 --chunks-per-level 2 --output outputs/curriculum/rough_g999
+# --mixed 在地图种子 7、11、13、17 之间采样，并在高等级保留 20% 较容易的回合。
+# 可用 --resume <version-2-checkpoint> 续训；gamma 必须匹配。
+OPENBLAS_NUM_THREADS=1 .venv/bin/python check_curriculum_policy.py \
+  outputs/curriculum/rough_g999/level1_steps16384
+OPENBLAS_NUM_THREADS=1 .venv/bin/python evaluate_curriculum_target.py --arms rough_g999
+OPENBLAS_NUM_THREADS=1 .venv/bin/python check_single_step.py
+OPENBLAS_NUM_THREADS=1 .venv/bin/python search_step_phases.py
+MUJOCO_GL=egl OPENBLAS_NUM_THREADS=1 .venv/bin/python render_curriculum.py
+```
+
+输出位于 `outputs/curriculum/`。`progress.json` 保存选模历史，`evaluation.json` / `gate.json` 保存完整判定，`target_screen.json` 检查原始 ±3 mm 坑洼。目标筛查脚本等待指定训练结束；请在训练已启动后运行。`source/` 保存启动时的源码快照；checkpoint 的 `metadata.json` 记录其哈希。渲染脚本选择早期 checkpoint，展示同一策略在轻微坑洼和原始坑洼上的区别，以及 1/4 mm 单台阶，不会自动挑选最远位移掩盖失败。
+
+这是有预算上限的可行性实验。单台阶搜索失败不能证明机构无法跨越；一次训练种子也不能支持多种子鲁棒性结论。所有检查继续使用原关节、触地、姿态和进度阈值，不修改默认步态。
+
+本轮有界实跑结果见 [`reports/curriculum_iteration_2026-11-09.json`](reports/curriculum_iteration_2026-11-09.json)：两组折扣系数各 98,304 步，混合地图新增续训 32,768 步，共新增 229,376 步。14 个 checkpoint 在原始坑洼均未通过，也未达到课程升级门槛。1 mm 单台阶有通过，2/4 mm 搜索仍失败。课程机制已验证，不代表原任务已经解决；暂不扩大为多训练种子长跑。
+
+其他任务的有界复测入口（输出均独立保存）：
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python train_curriculum.py \
+  --scene stairs_up --gamma .999 --chunks-per-level 2 --output outputs/other_tasks/stairs_curriculum
+OPENBLAS_NUM_THREADS=1 .venv/bin/python evaluate_curriculum_target.py \
+  --root outputs/other_tasks --scene stairs_up --arms stairs_curriculum --report stairs_target.json
+OPENBLAS_NUM_THREADS=1 .venv/bin/python search_running_refinement.py
+OPENBLAS_NUM_THREADS=1 .venv/bin/python evaluate_other_tasks.py
+# 训练和参数搜索结束后，再录制选中模型/配置的完整回放。
+MUJOCO_GL=egl OPENBLAS_NUM_THREADS=1 .venv/bin/python render_other_tasks.py
+```
+
+跑步搜索围绕腾跃候选，在固定边界内调整步频、占空比、幅度、偏置、相位、航向增益和目标变化速度，最多24组；这是参数优化，不是PPO。原有跑步判据不变：速度至少0.1 m/s、至少三段完整腾空，并同时满足姿态、触地与实际关节速度等检查。`evaluate_other_tasks.py` 对其余七个已通过行走场景各做±5 mm横向起点复测；通过也不代表未知地图或真机可靠。
+
+本次扩展实跑见 [`reports/other_tasks_2026-11-09.json`](reports/other_tasks_2026-11-09.json)：上楼梯新增32,768步PPO，1mm三阶两轮均3/4通过，受实际关节超速限制未升级；原4mm三阶未通过。跑步24组参数搜索仍无合格配置，选中候选14段腾空但速度0.0456m/s、实际关节峰值10.3575rad/s。七个其余行走场景的起点复测14/14通过。零偏移1mm三阶原周期控制器也能通过，不能把低难度通过全部归因于PPO。
+
+## 混合难度续训与工作范围评测
+
+`practice_rl.py` 将地形缩放至原始高度的0.25/0.375/0.5/1.0倍，按30%/30%/30%/10%采样，并在复位时随机化±3°初始航向与0.9–1.1倍滑动摩擦。坑洼使用四个训练地图种子。参数是仿真扰动范围，不代表已测定的硬件分布；地形和摩擦在回合中保持不变。原难度体验是混合采样，不表示已经通过课程升级门槛。
+
+新的可选速度反馈在100Hz下，根据超过8rad/s的实际关节速度，沿反方向修正位置目标，增益0.02。仍只有原四个执行器，不能保证实际关节峰值低于10rad/s。默认增益为0，旧控制器保持不变。训练另对首次超过10rad/s、首次偏航达到25°各扣2分，避免少量违规被平均进度奖励掩盖。检查阈值不变。
+
+```bash
+OPENBLAS_NUM_THREADS=1 .venv/bin/python check_practice_rl.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python train_practice.py \
+  --scene stairs_up --resume outputs/other_tasks/stairs_curriculum/level1_steps32768 \
+  --output outputs/practice_20261110/stairs_up
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python train_practice.py \
+  --scene rough --resume outputs/curriculum/rough_g999/level1_steps16384 \
+  --output outputs/practice_20261110/rough
+OPENBLAS_NUM_THREADS=1 .venv/bin/python evaluate_operating_range.py
+```
+
+每项续训预算32,768步，使用seed43和学习率1e-4，继承各自策略与归一化统计。输出先保存`prior_policy`和`feedback_only`对照，再保存两轮续训模型；不能把控制器带来的收益归功于训练。`summary.json`记录原始难度的0/±5mm起点和中间难度评测。未通过时，不更新默认策略。
+
+`scenario_matrix.run_case`新增显式`initial_yaw_deg`、`friction_scale`参数和`first_failure`事件记录。默认0°、摩擦倍率1保持旧场景；关节超速按1ms记录，姿态/触地/偏航按5ms检查。`evaluate_operating_range.py`对七个已通过场景各做两个摩擦/朝向联合变化，另对平地、5°上坡、下楼梯做40秒运动（加2秒支撑）的检查。联合变化失败不能直接归因于某个单一因素。
+
+2026-11-10实跑见[`reports/practice_iteration_2026-11-10.json`](reports/practice_iteration_2026-11-10.json)：上楼梯和坑洼各新增32,768步，四个中间模型在原始难度三个起点的12次检查均未通过。仅加速度反馈也可能破坏稳定性，未设为默认；中间难度的通过不能归结为原任务完成。联合朝向/摩擦测试12/14通过，三项40秒运动均通过。单因素补测显示下楼梯的失败来自本次组合条件，浅水单独降低摩擦就会偏航。四段22秒视频含速度/偏航峰值，保留旧模型与本轮候选的完整失败过程。
+
+运行`isolate_operating_failure.py`可针对已完成的工作范围测试拆分朝向与摩擦影响；运行`render_practice.py`可生成原始地形前后对照。`selection.json`仅标记本轮两个新模型中相对较好的一个，不表示超过旧模型或通过任务。训练日志、源码快照及模型成套归档，未提交生成的二进制文件。
+
+## 2026-11-10：轨迹与触地阶段试验
+
+新增 `contact_phase_controller.py`，可选五次平滑关节轨迹、落地减速、侧壁接触短时补偿及每腿相位限幅。只写 `ctrl`；接触采用仿真真值，尚无真机接触估计器。默认控制器保持不变，旧PPO不能直接与新控制器混用。
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python diagnose_contact_phase.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python check_contact_phase.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python search_contact_phase.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python refine_contact_phase.py
+```
+
+共16组首轮、8组细化、6组复测，原4mm三阶仍无全项通过，未新增PPO训练。选中候选原地形前进0.181m，关节峰值9.55rad/s、偏航55.96°；横向起点±5mm均失败。相同配置在平地通过，1mm三阶仅关节峰值10.034rad/s失败，2mm三阶仅偏航31.28°失败。完整指标和配置见 [试验报告](reports/contact_phase_2026-11-10.json)。
+
+原始验收标准不变。前脚首次碰到侧壁发生在机身前进约0.12m、周期末端附近；触地减速改善部分标称试验的超速，但未解决可重复的单阶跨越。目标速度限幅不等于实际关节速度限制。训练启动门槛只选择候选，不替代任务验收；本轮未过门槛。
+
+首轮余弦无反馈重实现的极小舍入差异导致接触轨迹分叉，不计作改善。最终该路径直接复用旧控制器并通过逐状态一致性测试；重新执行搜索时该对照将与旧控制器完全一致，不能期待复现首轮重实现对照数据。初版哈希保留在报告中；接触与五次轨迹候选实现未变。当前结果不能推断机构极限。
+
+## 前后腿支撑与摆腿协调实验（2026-11-10）
+
+新增 `support_coordinator.py`，在 `ContactPhaseController` 上用 `support_coordination` 显式启用。三种可切换方案分别为逐腿支撑门控、`support_recovery` 等待回撤与轮换优先级、`coupled_support_clock` 共同相位时钟。前两种在发放新的摆腿许可时检查其他脚接触及前后对侧支撑；后者保持相对相位，仅短暂减慢整体时钟，不保证支撑数量。接触是仿真真值；超时单独记为失败事件。启动时继承的摆动阶段先完成，不声称从切换瞬间就满足摆腿数限制。
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python check_support_coordination.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python search_support_coordination.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python refine_support_coordination.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python search_coupled_support.py
+```
+
+搜索读取上一轮 `outputs/contact_phase_20261110/refinement/selected.json`，需要先跑上一节试验。输出在 `outputs/support_coordination_20261110/`，包含各轮源码快照、完整事件与指标。每轮按相同原检查排序选候选，并补测起点±5mm、平地、单个4mm台阶和2mm三阶。新试验共28组参数＋1组旧候选对照＋15组复测，报告见 [支撑协调结果](reports/support_coordination_2026-11-10.json)。
+
+逐腿等待候选在原地形只前进0.079m，且平地也失败；加入回撤仍未改善。共同相位时钟恢复平地通过，但原4mm三阶前进0.214m、偏航113.70°且机身触地。2mm三阶前进0.816m，仅关节超速失败。原任务仍无全项通过，默认步态保持不变，未新增PPO。关节相位调度不等于足端轨迹规划，不能据此推断机构极限。
+
+## 足端轨迹与脱离接触后超速（2026-11-10）
+
+`diagnose_foot_trajectory.py` 通过矩阵评测的可选只读 `observer`，按1kHz定位关节速度峰值，并利用已有200Hz forward保存各脚接触法向力、侧壁/支撑接触、关节角/目标角、机身姿态和足部碰撞网格最低顶点。无额外求解器调用；插桩前后验收指标完全一致。最低顶点会切换，不能当作固定足端点或可达空间。非刷新时刻的峰值几何可能滞后积分状态一个1ms物理步。
+
+```bash
+# 使用已配置的RL实验环境和上一节 coupled/selected.json
+uv pip install --python .venv/bin/python matplotlib==3.11.2
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python diagnose_foot_trajectory.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python plot_foot_trajectory.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python check_tracking_release.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python search_tracking_release.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python validate_tracking_short.py
+```
+
+输出为 `outputs/foot_trajectory_20261110/` 下的CSV、峰值JSON、PNG/SVG、搜索与扰动复测。完整参数和逐项结果见 [本轮报告](reports/foot_trajectory_2026-11-10.json)。
+
+原2mm台阶峰值出现在7.892s左后腿：10.177rad/s，当时无足地接触，前一阶段存在侧壁受阻及目标角落后。这支持“接触解除后的快速追赶”解释。新增 `riser_tracking_limit_rad`、`tracking_release_s`、`tracking_scope` 控制碰壁时和脱离后的期望角超前量，再执行原目标变化率限制；不直接限制实际关节速度，不改物理或验收阈值。
+
+四腿启用、0.35rad、40ms配置使2mm三阶前进0.910m，关节峰值8.919rad/s、偏航24.32°，全部通过。120ms配置也标称通过。两者均通过横向±5mm、朝向−3°、摩擦0.9复测，朝向+3°仍失败。40ms配置平地通过；原40s测试在走到1.8m平台边缘后偏航失败，单独延长末级平台至4m的40s诊断通过（前进2.102m）。后者是额外场景，不能覆盖原失败。
+
+原4mm单阶/三阶仍失败；轨迹中出现约39°机身上仰，前脚世界高度不能直接视为有效抬脚高度。未新增PPO，未替换默认步态，未验证真机或机构极限。
+
+## 下台阶推进余量与平缓坑洼诊断（2026-11-10）
+
+上台阶按用户确认以2mm三阶为阶段目标。下台阶仍用原4mm三阶；新增 `reference/terrain-stairs_down-margin.json` 作为可选配置，原配置不覆盖。频率增加6%至1.63509Hz，heading_kp设为0.3。原−3°朝向/摩擦0.9条件从0.705m提升至0.738m，标称0.827m；六个选择条件、十次复测均通过（其中四项为重复确认），40s前进1.696m。不能把这批指定条件视为独立随机鲁棒成功率。
+
+原±3mm坑洼的内部相邻最大高差为5.759mm，旧PPO仍只有0.296m；接触控制迁移的12组搜索和7组扰动也未过原任务，未替换旧PPO。新增 `graded_rough.py` 作为独立、较容易的诊断场景：空间平滑随机高度，并限制内部相邻格与进出口高度跳变≤2mm，目标距离仍1.04m。侧向外边界不包含在该跳变保证内。seed7内部最大跳变1.399mm，进出口2mm；它仍是分块地形，不是连续高度场。
+
+同一旧PPO在平缓场景标称前进1.449m，连同两个新地形种子、起点/朝向/摩擦补测共8个指定条件通过，未重新训练。这是地形变化后的结果，不能替代原坑洼验收；平滑也改变了高度分布，不能据此单独量化高差的因果影响。
+
+```bash
+# 使用前文已有RL环境、prior_policy与2mm候选输出
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python optimize_rough_descent.py --stage diagnose
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python optimize_rough_descent.py --stage search
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python validate_rough_descent.py --scene stairs_down
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python validate_rough_descent.py --scene rough
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python refine_descent_margin.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python finalize_descent_candidate.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python select_descent_stress.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python probe_graded_rough.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python validate_graded_policy.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python check_rough_descent.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python plot_rough_descent.py
+```
+
+脚本读取上一节2mm候选以及 `outputs/practice_20261110/rough/prior_policy`；复现前需已有这些实验产物，权重不包含在源码仓库中。输出在 `outputs/rough_descent_20261110/`；[完整报告](reports/rough_descent_2026-11-10.json)保留参数、条件、原任务失败、地形差异与PPO哈希。新增训练步数为0，默认步态未改，无真机结果。

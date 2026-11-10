@@ -15,6 +15,12 @@ class JointController:
         self.amplitudes = np.array(self.config["amplitude_rad"])
         self.biases = np.array(self.config["bias_rad"])
         self.phases = np.array(self.config["phase_rad"])
+        self.startup_bias = np.array(self.config.get("startup_bias_rad", [0., 0., 0., 0.]), dtype=float)
+        self.startup_ramp = self.config.get("startup_ramp_seconds", .15)
+        if self.startup_bias.shape != (4,) or not np.isfinite(self.startup_bias).all():
+            raise ValueError("startup_bias_rad must contain four finite angles")
+        if not math.isfinite(self.startup_ramp) or self.startup_ramp <= 0:
+            raise ValueError("startup_ramp_seconds must be finite and positive")
         self.mode = mode
         self.amplitude = amplitude
         self._last_mode = None
@@ -28,6 +34,7 @@ class JointController:
     def __call__(self, data):
         config = self.config
         if self.mode != self._last_mode or data.time < self._last_time:
+            self._initializing = self._last_mode is None or data.time < self._last_time
             self._start = float(data.time)
             self._from = data.ctrl.copy()
             self._last_mode = self.mode
@@ -37,19 +44,22 @@ class JointController:
         self._last_time = float(data.time)
         elapsed = float(data.time) - self._start
         if self.mode == "walk":
-            t = max(0., elapsed - config["settle_seconds"])
             # Match the 100 Hz action updates used in the search, independently
             # of the rendering frame rate and the 1 kHz physics step.
-            tick = int(np.floor(t * config["control_hz"] + 1e-8))
+            tick = int(np.floor((elapsed - config["settle_seconds"]) * config["control_hz"] + 1e-8))
             if tick != self._tick:
                 self._tick = tick
-                t = tick / config["control_hz"]
+                t = max(0., tick / config["control_hz"])
                 ramp = min(1., t / config["ramp_seconds"])
                 rot = data.body("body").xmat.reshape(3, 3)
                 yaw = math.atan2(rot[1, 0], rot[0, 0])
                 # Read simulated heading and lateral position. Correct direction
                 # solely by changing left/right stride amplitude.
-                error = yaw + config["lateral_kp"] * (data.qpos[0] - self._start_x)
+                heading_error = yaw
+                if "heading_target_rad" in config:
+                    delta = yaw - config["heading_target_rad"]
+                    heading_error = math.atan2(math.sin(delta), math.cos(delta))
+                error = heading_error + config["lateral_kp"] * (data.qpos[0] - self._start_x)
                 steer = np.clip(config["heading_kp"] * error + config["heading_kd"] * data.qvel[5],
                                 -config["steering_limit"], config["steering_limit"])
                 phase = 2 * np.pi * config["frequency_hz"] * t + self.phases
@@ -62,7 +72,10 @@ class JointController:
                 else:
                     h = config["harmonic"]
                     waveform = (np.sin(phase) + h * np.sin(2 * phase)) / (1 + abs(h))
-                target = np.clip(self.signs * ramp * (self.biases + self.amplitudes * (1 + steer * self.signs) * waveform), -1.2, 1.2)
+                startup_ramp = min(1., elapsed / self.startup_ramp)
+                startup = self.startup_bias * (startup_ramp * startup_ramp * (3 - 2 * startup_ramp))
+                walk = self.biases + self.amplitudes * (1 + steer * self.signs) * waveform
+                target = np.clip(self.signs * ((1 - ramp) * startup + ramp * walk), -1.2, 1.2)
                 if "max_target_speed_rad_s" in config:
                     max_delta = config["max_target_speed_rad_s"] / config["control_hz"]
                     self._target += np.clip(target - self._target, -max_delta, max_delta)
@@ -79,4 +92,7 @@ class JointController:
         # Smooth a user-requested stop or mode change over 350 ms.
         blend = np.clip(elapsed / .35, 0., 1.)
         blend = blend * blend * (3 - 2 * blend)
+        if self._initializing and self.mode == "walk" and "startup_bias_rad" in config:
+            # Startup already has its own smooth ramp and target slew limit.
+            blend = 1.
         data.ctrl[:] = (1 - blend) * self._from + blend * target

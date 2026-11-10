@@ -1,0 +1,278 @@
+{
+  "result": {
+    "passed": true,
+    "physical_checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "force_accounting": true
+    },
+    "segments": [
+      {
+        "command": {
+          "time_s": 0.0,
+          "mode": "walk",
+          "heading_deg": 0.0
+        },
+        "end_s": 8.0,
+        "progress_along_command_m": 0.19604178688995055,
+        "final_1s_max_heading_error_deg": 6.424692780833851,
+        "passed": true
+      },
+      {
+        "command": {
+          "time_s": 8.0,
+          "mode": "stand",
+          "heading_deg": 0.0
+        },
+        "end_s": 12.0,
+        "stop_drift_after_1s_m": 0.0017577393332078668,
+        "passed": true
+      },
+      {
+        "command": {
+          "time_s": 12.0,
+          "mode": "walk",
+          "heading_deg": 0.0
+        },
+        "end_s": 19.0,
+        "progress_along_command_m": 0.12498015414009078,
+        "final_1s_max_heading_error_deg": 6.091955738888203,
+        "passed": true
+      },
+      {
+        "command": {
+          "time_s": 19.0,
+          "mode": "walk",
+          "heading_deg": 20.0
+        },
+        "end_s": 27.0,
+        "progress_along_command_m": 0.39204705756934455,
+        "final_1s_max_heading_error_deg": 5.99158389501514,
+        "passed": true
+      },
+      {
+        "command": {
+          "time_s": 27.0,
+          "mode": "walk",
+          "heading_deg": -20.0
+        },
+        "end_s": 35.0,
+        "progress_along_command_m": 0.2837327841194041,
+        "final_1s_max_heading_error_deg": 5.750705070698132,
+        "passed": true
+      },
+      {
+        "command": {
+          "time_s": 35.0,
+          "mode": "stand",
+          "heading_deg": -20.0
+        },
+        "end_s": 40.0,
+        "stop_drift_after_1s_m": 0.0020173003490298116,
+        "passed": true
+      }
+    ],
+    "config": {
+      "name": "interaction_support_stop_heading_pi",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 1.9355721346722734,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 1.6,
+      "heading_kd": 0.03,
+      "lateral_kp": 0.0,
+      "steering_limit": 0.45,
+      "max_target_speed_rad_s": 4.0,
+      "note": "Flat-ground support-pose stop and walking heading arcs +/-20deg; bounded PI and heading-reference rate 10deg/s, joint target slew 4rad/s. Per-condition validation in baseline report; not arbitrary-input or hardware certification.",
+      "heading_ki": 0.3,
+      "heading_rate_deg_s": 10.0
+    },
+    "perturbation": {},
+    "joint_peak_rad_s": 7.993490705626602,
+    "note": "Intentional turns replace static heading and straight-line distance checks. Stop drift measured after 1s, <=2cm; walk segment progress >10cm and final 1s heading error <10deg. Fixed model; no forces/base-state edits."
+  },
+  "original_physics_metrics": {
+    "scene": {
+      "name": "flat",
+      "label": "Flat reference",
+      "slope_deg": 0.0,
+      "goal_m": 0.72,
+      "plane_z": 0.0,
+      "initial_height_m": 0.0,
+      "boxes": [],
+      "water_depth_m": 0.0,
+      "seed": 7
+    },
+    "mode": "walk",
+    "initial_x_offset_m": 0.0,
+    "initial_yaw_deg": 0.0,
+    "friction_scale": 1.0,
+    "first_failure": {
+      "heading": {
+        "time_s": 24.47600000000693,
+        "position_m": [
+          0.018475283741793618,
+          -0.5754474778133287,
+          0.04766189909752058
+        ]
+      }
+    },
+    "policy_sha256": null,
+    "passed": false,
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": false,
+      "task_goal": true,
+      "heading": false,
+      "force_accounting": true
+    },
+    "simulation_seconds": 39.99999999999748,
+    "commanded_seconds": 38.0,
+    "forward_m": 0.9658990706091858,
+    "average_forward_speed_m_s": 0.025418396594978573,
+    "final_position_m": [
+      -0.009292926185768562,
+      -0.966567387240082,
+      0.04619643405181314
+    ],
+    "goal_distance_xy_m": 0.24674244654597774,
+    "startup_max_abs_pitch_deg": 4.648683552276986,
+    "min_upright_cosine": 0.9760095502726313,
+    "min_root_clearance_m": 0.04541928426877112,
+    "max_heading_deviation_deg": 25.991583895015136,
+    "body_contact_samples": 0,
+    "obstacle_contact_samples": 0,
+    "max_torque_Nm": 0.0507198301263798,
+    "max_driven_joint_speed_rad_s": 7.993490705626602,
+    "max_closure_error_m": 0.0010023933646892728,
+    "foot_contact_fraction": {
+      "left_front": 0.8477631578947369,
+      "right_front": 0.6596052631578947,
+      "right_back": 0.6272368421052632,
+      "left_back": 0.9335526315789474
+    },
+    "completed_flight_intervals_s": [],
+    "longest_flight_s": 0.0,
+    "controller_config": {
+      "name": "interaction_support_stop_heading_pi",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 1.9355721346722734,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 1.6,
+      "heading_kd": 0.03,
+      "lateral_kp": 0.0,
+      "steering_limit": 0.45,
+      "max_target_speed_rad_s": 4.0,
+      "note": "Flat-ground support-pose stop and walking heading arcs +/-20deg; bounded PI and heading-reference rate 10deg/s, joint target slew 4rad/s. Per-condition validation in baseline report; not arbitrary-input or hardware certification.",
+      "heading_ki": 0.3,
+      "heading_rate_deg_s": 10.0
+    },
+    "controller_diagnostics": null,
+    "route_xy_m": [],
+    "localization": "simulator ground truth",
+    "navigation": null,
+    "video": "video.mp4",
+    "fluid": null
+  },
+  "video_sha256": "d843bd577fac0eebb44d88fd31e3919427c79e7d80e87348139776def21fb1cc"
+}

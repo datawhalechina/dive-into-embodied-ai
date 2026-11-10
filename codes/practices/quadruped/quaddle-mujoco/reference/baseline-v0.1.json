@@ -1,0 +1,100 @@
+{
+  "version": "v0.1",
+  "date": "2026-11-10",
+  "hardware_tested": false,
+  "new_ppo_steps": 0,
+  "runtime": {
+    "python": "3.12.13",
+    "mujoco": "3.16.0",
+    "numpy": "2.5.4",
+    "torch": "2.15.0+cpu",
+    "stable_baselines3": "2.9.2",
+    "platform": "Linux x86_64"
+  },
+  "cases": {
+    "interaction": {
+      "config": "reference/interaction.json"
+    },
+    "flat": {
+      "scene": "flat",
+      "config": "gait.json"
+    },
+    "uphill3": {
+      "scene": "uphill3",
+      "config": "gait.json"
+    },
+    "uphill5": {
+      "scene": "uphill5",
+      "config": "reference/terrain-uphill5.json"
+    },
+    "downhill3": {
+      "scene": "downhill3",
+      "config": "reference/terrain-downhill3.json"
+    },
+    "stairs_down": {
+      "scene": "stairs_down",
+      "config": "reference/terrain-stairs_down-margin.json"
+    },
+    "graded_rough": {
+      "scene": "rough",
+      "geometry": "graded_rough",
+      "seed": 7,
+      "policy": "reference/graded-rough-policy"
+    }
+  },
+  "experimental_cases": {
+    "stairs_up_demo": {
+      "scene": "stairs_up",
+      "geometry": "stairs_2mm",
+      "config": "reference/terrain-stairs_up-2mm-previous.json",
+      "status": "nominal-only; +3deg and all six new holdouts failed"
+    }
+  },
+  "sha256": {
+    "baseline.py": "5e424d084736a79c9ef7b1763398846c697c246c921e69aa868f75d40f29d4e3",
+    "command_interaction.py": "5a344b34bbee501de9ad1fa80989c9046d344ef99568abba70c9015fa1eb93b5",
+    "contact_phase_controller.py": "9a102faefb66064f2124ea22139e3486a0a8ac5e4b190a0eae4a22a460cab61a",
+    "curriculum_rl.py": "aed633cc05507ad7fca8deee7b18ac64bc887eb8c1d392e0a3d238266bbb3044",
+    "gait.json": "409afe24c7a058242bfe972ff3c375db4ebaee98ec5eafdef52f7fc203244f01",
+    "gait_controller.py": "560030737963731ccefa5f8b171ad0d280d96c4a27c7cbe8151e848b1c420f7e",
+    "graded_rough.py": "f43c426b92ff2e38d9357dfff4ceeb4b941c39a6234daa4a0a63ec4c38a4e9e7",
+    "models/assets/batterie_model_bl_5c.stl": "3812fc08797c5fdd6f14ed7ec5e866e214b0e7793ccd1e5749b38be6eabaac89",
+    "models/assets/battery_cap_thin.stl": "bfe7556842faf2c0334445785418113a9bfb0f4191a55d5c0b9e79e5f1af70c3",
+    "models/assets/bearing.stl": "653004d9ae11d368148ee57d0765a024c39c9ce54b561670c692995f55efdbf0",
+    "models/assets/body.stl": "ac74c95622c57111f96392464431f581ba4fda93052279d783a4034ffd50c90c",
+    "models/assets/body_bar.stl": "55f37569a478bdc7f5056e78a8f57c7d4e5c21c54fcf2a4a1d5ddb88b8452c58",
+    "models/assets/gear.stl": "4c18f23222f7fe2724252310e2e0fec117413461d1f5a54ee8fda2c5bba53a41",
+    "models/assets/leg.stl": "dc3a9f0a71d88e149c26b95f8550f020e031c3e72b8c8df1bd5a35e851238d1b",
+    "models/assets/leg_right.stl": "c13242d37cfa2d1507f19601ce5668c49a2598ee31e187209884b7f355574334",
+    "models/assets/lego_top_cap.stl": "0de56159a25180cd877e10fe331de0f9c5380fff4979c49bf339197a0c23b929",
+    "models/assets/long_spring.stl": "07977dfc6caf72ceeac06f0a920d3477e75bc302d20f52a4eb7924440f18c66b",
+    "models/assets/long_spring_right.stl": "6b674820191d1eccbe1b152f4a04b5663ac0fb7970c10e6468d356c24f3b39d9",
+    "models/assets/lower4wheel.stl": "661ce4fc567c686e4b8472993cd80831fc8b63005fc636787fd42b3f55e07745",
+    "models/assets/motor_arm.stl": "41605b1a86f5dc5a0371b6049061a50cdf4c3c53bd28a5045aceff055d168a4a",
+    "models/assets/power_cap.stl": "1c85e628495a8f8d53dd1990e03a2cbf1eac2612fc62998d6992a2c02a09d060",
+    "models/assets/screw_servo.stl": "20df5fc2c1c0b6bf17fe485df55d848c9eee47275d85781bddff7a4b437ef836",
+    "models/assets/thigh.stl": "3ee29bd64daf4d61dd5aaf72a59ec91ea81943802645c901f46c99812d692ee0",
+    "models/assets/thigh_right.stl": "839877255008fb4f514fa52de6008ebe6a7529b067cb51b941bc5f623d9a49fa",
+    "models/assets/tip.stl": "2494f66fce27d7de7c5b25d618952b2c2d6fa66b13212b239c78a789308aee68",
+    "models/assets/tip_wheel.stl": "4815b1a6353b060a9f20f2d3005ec6654c89be035d34476914458f187c229945",
+    "models/scene.xml": "10d1990f12c2dc79b739b67203422ff8a0090a01e424dacf780b9a03d6015b83",
+    "practice_rl.py": "0fa60145f51ff9d355e1d34fd1b02440baefa337cd99b24bd4dfd7940413744d",
+    "reference/graded-rough-policy/metadata.json": "4c5a74f3fc41ceb07073673368b86934472420e99835d71624709006e3840794",
+    "reference/graded-rough-policy/obs_stats.npz": "c03307dbdd5090cab53e603c23e0c999fca16cb1fe4a56513ec752371a48f980",
+    "reference/graded-rough-policy/policy.zip": "84da191bd5cbbb7a215c465f40f5612b5e7136287ab387bc958ab52d0700cca3",
+    "reference/interaction.json": "2f311856bd0f45a4811ce598d50b108385bdf3de3c3d68508ee6c9614bb12631",
+    "reference/terrain-downhill3.json": "0bb9adc800cd81e0a5e96176868c5c3b7411a979ac4d3d7900a53a46b0106f9a",
+    "reference/terrain-stairs_down-margin.json": "370e940b69626dd7cee8b8097302ac8b69957af6a00b9ba627fca806c37650aa",
+    "reference/terrain-stairs_up-2mm-previous.json": "19e4cb7de17de8246fe54a1ce2b416ec3e1f33153ae155fd5ac5949d7e9989be",
+    "reference/terrain-uphill5.json": "e30bdfd8b61a6f4cf595f0fd329d4c9fae2d00e60422a03b1c97eb6d377fff90",
+    "requirements-rl.lock": "b1ea606633272dafff010d875cd58eeeedcc4e0b23508847d7a2ed5b4284b85a",
+    "requirements.lock": "38204ba275bb4e58906c5388c258ed105eb0f9ef8a956dfad81bdf944ef9383e",
+    "rl_env.py": "f567130b3e9ac53f8224aaa3fb94694ad345b2ef88b09a8cf52084f2e94540ed",
+    "run_sim.py": "6557690d3687de004ccb484e1b76bb850c01a661f7ae009dd1d2a257202ebb3b",
+    "scenario_matrix.py": "b423b3b0f8346f24550ed9f238447f39d319e1810186d87a18b955bd656947a0",
+    "scenarios.py": "02c953047219c631f1a665c6879f76d64954e2cfec9511f9f56619d0c09b3e14",
+    "support_coordinator.py": "cf3e43c9628a5ea3b470298e9651bc050b1d3ef57253da5d36afeb25d10202f0",
+    "terrain.py": "d44dad4e18f5281eebd7a7647b6b291734f8412f4f597d70504d4d86ddcb4f66",
+    "terrain_rl.py": "102193b2f4f9cf1bc9749e4aad3c4787082d59c45ddc1e4358827e629580b698"
+  }
+}

@@ -1,0 +1,2223 @@
+{
+  "result": {
+    "scene": {
+      "name": "rough",
+      "label": "Graded rough / adjacent height jump <= 2mm / seed 7",
+      "slope_deg": 0.0,
+      "goal_m": 1.04,
+      "plane_z": -0.006,
+      "initial_height_m": 0.0,
+      "boxes": [
+        {
+          "name": "start",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": -0.4,
+          "s1": 0.18,
+          "top": 0.0,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": 0.002,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": 0.0014674815021240412,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": 0.00045525882623536186,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": -0.0003793222604209135,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": -0.0008983293337914047,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": -0.0005574768112609457,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": -0.0002744080828896865,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": 9.973851026352973e-05,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": 0.0016553685468343826,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": 0.0012861938561362556,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": 0.0005207798982043352,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": -0.00010875640246914921,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": -0.000654654639005233,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": -0.0006062771845337171,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": -0.0005778294528448733,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": -0.0004175656231684531,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": 0.0008125163483697472,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": 0.0008215165684998082,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": 0.0005622902282107832,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": 0.00016831710591563723,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": -0.00040867635347447144,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": -0.0007601736025310103,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": -0.0009941192048260016,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": -0.0011015560052731197,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -0.000586755225633994,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -4.749099953427791e-05,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": 0.0003877552357733821,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": 0.00043068617723029674,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -2.349770150423723e-05,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -0.0005697978174789861,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -0.0010065354955233067,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -0.0012966404125808171,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.0011037008088133726,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.0003686149153052662,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": 0.00023967816732983662,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": 0.00029916855850701043,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.00017650090431842332,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.0007178870175876723,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.0011331499386311125,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.0014211006309225304,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": -0.0005663689045885791,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": 4.3191449811200975e-05,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": 0.0004641707129330062,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": 0.0005075173967105128,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": -2.21152584130121e-06,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": -0.0004809041499589833,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": -0.0010290493587641236,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": -0.001361166822279576,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": 0.00023615586066275728,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": 0.0004456459298924306,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": 0.000476936066441515,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": 0.0002768865249256744,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": -0.00012662877157976503,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": -0.0005477768127672788,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": -0.0010645501422845145,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": -0.0014717995505000854,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.0007703468829016614,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.0006542880743864987,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.0006011695321306431,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.0005527844806132311,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.0005572675900493772,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.00010906971983511974,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": -0.0006113604767721722,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": -0.0013121759805134136,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.0005315169356119559,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.0002434493207843239,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.00022316460297386618,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.00037143824635476306,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.000853582099300359,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.0005054941709095753,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": -0.0002026787646152097,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": -0.001077693102547583,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.0003674171008208212,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 9.879334705091576e-05,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.00013509539682227546,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.0006375409876774006,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.0012762873529101864,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.001048465680306873,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.00022608018255776662,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": -0.0006687718594106248,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": -0.00032776863450376966,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": -0.00039665680258483936,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": -0.0002546896103733383,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": 0.0004256215229839823,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": 0.0009428074679536945,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": 0.0009136126615330926,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": 0.0003398589669891043,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": -0.00018019179902697277,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": -0.0008059901424049051,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": -0.0007221666933631454,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": -0.0004907950948072366,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": 0.00032457214087677804,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": 0.000667313263339465,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": 0.0007592057012744016,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": 0.0003802990638269683,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": 0.0002158211750655373,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "finish",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": 0.9,
+          "s1": 1.8,
+          "top": 0.0,
+          "bottom": -0.01,
+          "obstacle": false
+        }
+      ],
+      "water_depth_m": 0.0,
+      "seed": 7
+    },
+    "mode": "walk",
+    "initial_x_offset_m": 0.0,
+    "initial_yaw_deg": 0.0,
+    "friction_scale": 1.0,
+    "first_failure": {},
+    "policy_sha256": {
+      "policy.zip": "84da191bd5cbbb7a215c465f40f5612b5e7136287ab387bc958ab52d0700cca3",
+      "obs_stats.npz": "c03307dbdd5090cab53e603c23e0c999fca16cb1fe4a56513ec752371a48f980",
+      "metadata.json": "4c5a74f3fc41ceb07073673368b86934472420e99835d71624709006e3840794"
+    },
+    "passed": true,
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true
+    },
+    "simulation_seconds": 22.000000000003904,
+    "commanded_seconds": 20.0,
+    "forward_m": 1.4494336469307403,
+    "average_forward_speed_m_s": 0.07247168234653702,
+    "final_position_m": [
+      -0.02894345854451694,
+      -1.4465866500666886,
+      0.046950301213744695
+    ],
+    "goal_distance_xy_m": 0.4076155392094002,
+    "startup_max_abs_pitch_deg": 3.8707828796111303,
+    "min_upright_cosine": 0.9521844052421604,
+    "min_root_clearance_m": 0.04464163405041417,
+    "max_heading_deviation_deg": 10.573635706485549,
+    "body_contact_samples": 0,
+    "obstacle_contact_samples": 0,
+    "max_torque_Nm": 0.0480585342603285,
+    "max_driven_joint_speed_rad_s": 8.9268191646365,
+    "max_closure_error_m": 0.00104194602170219,
+    "foot_contact_fraction": {
+      "left_front": 0.76525,
+      "right_front": 0.453,
+      "right_back": 0.46125,
+      "left_back": 0.8605
+    },
+    "completed_flight_intervals_s": [],
+    "longest_flight_s": 0.0,
+    "controller_config": {
+      "name": "coordinated_crawl",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 1.9355721346722734,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+      "speed_feedback_gain": 0.0,
+      "speed_feedback_threshold": 8.0
+    },
+    "controller_diagnostics": null,
+    "route_xy_m": [],
+    "localization": "simulator ground truth",
+    "navigation": null,
+    "video": "video.mp4",
+    "fluid": null
+  },
+  "original_physics_metrics": {
+    "scene": {
+      "name": "rough",
+      "label": "Graded rough / adjacent height jump <= 2mm / seed 7",
+      "slope_deg": 0.0,
+      "goal_m": 1.04,
+      "plane_z": -0.006,
+      "initial_height_m": 0.0,
+      "boxes": [
+        {
+          "name": "start",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": -0.4,
+          "s1": 0.18,
+          "top": 0.0,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": 0.002,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": 0.0014674815021240412,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": 0.00045525882623536186,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": -0.0003793222604209135,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": -0.0008983293337914047,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": -0.0005574768112609457,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": -0.0002744080828896865,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_0_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.18,
+          "s1": 0.24,
+          "top": 9.973851026352973e-05,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": 0.0016553685468343826,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": 0.0012861938561362556,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": 0.0005207798982043352,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": -0.00010875640246914921,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": -0.000654654639005233,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": -0.0006062771845337171,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": -0.0005778294528448733,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_1_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.24,
+          "s1": 0.3,
+          "top": -0.0004175656231684531,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": 0.0008125163483697472,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": 0.0008215165684998082,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": 0.0005622902282107832,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": 0.00016831710591563723,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": -0.00040867635347447144,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": -0.0007601736025310103,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": -0.0009941192048260016,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_2_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.3,
+          "s1": 0.36,
+          "top": -0.0011015560052731197,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -0.000586755225633994,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -4.749099953427791e-05,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": 0.0003877552357733821,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": 0.00043068617723029674,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -2.349770150423723e-05,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -0.0005697978174789861,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -0.0010065354955233067,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_3_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.36,
+          "s1": 0.42,
+          "top": -0.0012966404125808171,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.0011037008088133726,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.0003686149153052662,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": 0.00023967816732983662,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": 0.00029916855850701043,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.00017650090431842332,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.0007178870175876723,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.0011331499386311125,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_4_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.42,
+          "s1": 0.48,
+          "top": -0.0014211006309225304,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": -0.0005663689045885791,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": 4.3191449811200975e-05,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": 0.0004641707129330062,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": 0.0005075173967105128,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": -2.21152584130121e-06,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": -0.0004809041499589833,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": -0.0010290493587641236,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_5_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.48,
+          "s1": 0.54,
+          "top": -0.001361166822279576,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": 0.00023615586066275728,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": 0.0004456459298924306,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": 0.000476936066441515,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": 0.0002768865249256744,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": -0.00012662877157976503,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": -0.0005477768127672788,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": -0.0010645501422845145,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_6_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.54,
+          "s1": 0.6,
+          "top": -0.0014717995505000854,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.0007703468829016614,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.0006542880743864987,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.0006011695321306431,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.0005527844806132311,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.0005572675900493772,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": 0.00010906971983511974,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": -0.0006113604767721722,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_7_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.6,
+          "s1": 0.6599999999999999,
+          "top": -0.0013121759805134136,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.0005315169356119559,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.0002434493207843239,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.00022316460297386618,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.00037143824635476306,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.000853582099300359,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": 0.0005054941709095753,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": -0.0002026787646152097,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_8_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.6599999999999999,
+          "s1": 0.72,
+          "top": -0.001077693102547583,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.0003674171008208212,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 9.879334705091576e-05,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.00013509539682227546,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.0006375409876774006,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.0012762873529101864,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.001048465680306873,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": 0.00022608018255776662,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_9_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.72,
+          "s1": 0.78,
+          "top": -0.0006687718594106248,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": -0.00032776863450376966,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": -0.00039665680258483936,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": -0.0002546896103733383,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": 0.0004256215229839823,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": 0.0009428074679536945,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": 0.0009136126615330926,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": 0.0003398589669891043,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_10_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.78,
+          "s1": 0.84,
+          "top": -0.00018019179902697277,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_0",
+          "xmin": -0.24,
+          "xmax": -0.18,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": -0.0008059901424049051,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_1",
+          "xmin": -0.18,
+          "xmax": -0.12,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": -0.0007221666933631454,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_2",
+          "xmin": -0.12,
+          "xmax": -0.06,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": -0.0004907950948072366,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_3",
+          "xmin": -0.06,
+          "xmax": 0.0,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": 0.00032457214087677804,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_4",
+          "xmin": 0.0,
+          "xmax": 0.06,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": 0.000667313263339465,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_5",
+          "xmin": 0.06,
+          "xmax": 0.12,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": 0.0007592057012744016,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_6",
+          "xmin": 0.12,
+          "xmax": 0.18,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": 0.0003802990638269683,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "tile_11_7",
+          "xmin": 0.18,
+          "xmax": 0.24,
+          "s0": 0.8399999999999999,
+          "s1": 0.8999999999999999,
+          "top": 0.0002158211750655373,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "finish",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": 0.9,
+          "s1": 1.8,
+          "top": 0.0,
+          "bottom": -0.01,
+          "obstacle": false
+        }
+      ],
+      "water_depth_m": 0.0,
+      "seed": 7
+    },
+    "mode": "walk",
+    "initial_x_offset_m": 0.0,
+    "initial_yaw_deg": 0.0,
+    "friction_scale": 1.0,
+    "first_failure": {},
+    "policy_sha256": {
+      "policy.zip": "84da191bd5cbbb7a215c465f40f5612b5e7136287ab387bc958ab52d0700cca3",
+      "obs_stats.npz": "c03307dbdd5090cab53e603c23e0c999fca16cb1fe4a56513ec752371a48f980",
+      "metadata.json": "4c5a74f3fc41ceb07073673368b86934472420e99835d71624709006e3840794"
+    },
+    "passed": true,
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true
+    },
+    "simulation_seconds": 22.000000000003904,
+    "commanded_seconds": 20.0,
+    "forward_m": 1.4494336469307403,
+    "average_forward_speed_m_s": 0.07247168234653702,
+    "final_position_m": [
+      -0.02894345854451694,
+      -1.4465866500666886,
+      0.046950301213744695
+    ],
+    "goal_distance_xy_m": 0.4076155392094002,
+    "startup_max_abs_pitch_deg": 3.8707828796111303,
+    "min_upright_cosine": 0.9521844052421604,
+    "min_root_clearance_m": 0.04464163405041417,
+    "max_heading_deviation_deg": 10.573635706485549,
+    "body_contact_samples": 0,
+    "obstacle_contact_samples": 0,
+    "max_torque_Nm": 0.0480585342603285,
+    "max_driven_joint_speed_rad_s": 8.9268191646365,
+    "max_closure_error_m": 0.00104194602170219,
+    "foot_contact_fraction": {
+      "left_front": 0.76525,
+      "right_front": 0.453,
+      "right_back": 0.46125,
+      "left_back": 0.8605
+    },
+    "completed_flight_intervals_s": [],
+    "longest_flight_s": 0.0,
+    "controller_config": {
+      "name": "coordinated_crawl",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 1.9355721346722734,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+      "speed_feedback_gain": 0.0,
+      "speed_feedback_threshold": 8.0
+    },
+    "controller_diagnostics": null,
+    "route_xy_m": [],
+    "localization": "simulator ground truth",
+    "navigation": null,
+    "video": "video.mp4",
+    "fluid": null
+  },
+  "video_sha256": "051b7f6a0d63a78f4aebee3c9c496a5ba04b87d3089712a61f58f574c4b533b5"
+}
