@@ -124,6 +124,10 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
         config.update(heading_target_rad=0., lateral_kp=0., heading_kp=.8,
                       steering_limit=.45, max_target_speed_rad_s=5.)
     controller = JointController('walk', config=config)
+    if config.get('contact_phase_controller'):
+        if policy_path:raise ValueError('Contact-phase controllers require a separately compatible policy environment')
+        from contact_phase_controller import ContactPhaseController
+        controller = ContactPhaseController(model,config)
     if policy_path:
         from terrain_rl import PolicyController
         policy_meta = json.loads((Path(policy_path)/'metadata.json').read_text())
@@ -139,6 +143,8 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
     recorder = Recorder(model, data, scene, mode, output, route) if video else None
     if recorder and policy_path:
         recorder.controller_label = 'Residual PPO'
+    elif recorder and config.get('contact_phase_controller'):
+        recorder.controller_label = 'Contact-phase experiment'
     support_geoms = {i for i in range(model.ngeom) if model.geom_bodyid[i]==0 and model.geom_contype[i]!=0}
     obstacle_geoms = {i for i in support_geoms if model.geom_group[i]==4}
     body_geom = model.geom('body_contact').id
@@ -257,7 +263,7 @@ def run_case(name, mode, seconds=20., output=None, video=False, policy_path=None
         max_torque_Nm=max_torque, max_driven_joint_speed_rad_s=max_joint_speed, max_closure_error_m=max_closure,
         foot_contact_fraction=dict(zip(SIDES, (foot_counts/max(1, contact_samples)).tolist())),
         completed_flight_intervals_s=flight_durations, longest_flight_s=longest_flight,
-        controller_config=config, route_xy_m=route, localization='simulator ground truth',
+        controller_config=config, controller_diagnostics=controller.diagnostics() if hasattr(controller,'diagnostics') else None, route_xy_m=route, localization='simulator ground truth',
         navigation='known-map inflated-obstacle A* and heading feedback' if route else None,
         wall_seconds=time.perf_counter()-clock, video='video.mp4' if video else None,
         fluid=dict(wet_steps=fluid.wet_steps, max_sample_force_N=fluid.max_force, max_drag_power_W=fluid.max_drag_power,

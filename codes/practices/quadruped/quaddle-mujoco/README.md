@@ -359,3 +359,20 @@ OPENBLAS_NUM_THREADS=1 .venv/bin/python evaluate_operating_range.py
 2026-11-10实跑见[`reports/practice_iteration_2026-11-10.json`](reports/practice_iteration_2026-11-10.json)：上楼梯和坑洼各新增32,768步，四个中间模型在原始难度三个起点的12次检查均未通过。仅加速度反馈也可能破坏稳定性，未设为默认；中间难度的通过不能归结为原任务完成。联合朝向/摩擦测试12/14通过，三项40秒运动均通过。单因素补测显示下楼梯的失败来自本次组合条件，浅水单独降低摩擦就会偏航。四段22秒视频含速度/偏航峰值，保留旧模型与本轮候选的完整失败过程。
 
 运行`isolate_operating_failure.py`可针对已完成的工作范围测试拆分朝向与摩擦影响；运行`render_practice.py`可生成原始地形前后对照。`selection.json`仅标记本轮两个新模型中相对较好的一个，不表示超过旧模型或通过任务。训练日志、源码快照及模型成套归档，未提交生成的二进制文件。
+
+## 2026-11-10：轨迹与触地阶段试验
+
+新增 `contact_phase_controller.py`，可选五次平滑关节轨迹、落地减速、侧壁接触短时补偿及每腿相位限幅。只写 `ctrl`；接触采用仿真真值，尚无真机接触估计器。默认控制器保持不变，旧PPO不能直接与新控制器混用。
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python diagnose_contact_phase.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python check_contact_phase.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python search_contact_phase.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python refine_contact_phase.py
+```
+
+共16组首轮、8组细化、6组复测，原4mm三阶仍无全项通过，未新增PPO训练。选中候选原地形前进0.181m，关节峰值9.55rad/s、偏航55.96°；横向起点±5mm均失败。相同配置在平地通过，1mm三阶仅关节峰值10.034rad/s失败，2mm三阶仅偏航31.28°失败。完整指标和配置见 [试验报告](reports/contact_phase_2026-11-10.json)。
+
+原始验收标准不变。前脚首次碰到侧壁发生在机身前进约0.12m、周期末端附近；触地减速改善部分标称试验的超速，但未解决可重复的单阶跨越。目标速度限幅不等于实际关节速度限制。训练启动门槛只选择候选，不替代任务验收；本轮未过门槛。
+
+首轮余弦无反馈重实现的极小舍入差异导致接触轨迹分叉，不计作改善。最终该路径直接复用旧控制器并通过逐状态一致性测试；重新执行搜索时该对照将与旧控制器完全一致，不能期待复现首轮重实现对照数据。初版哈希保留在报告中；接触与五次轨迹候选实现未变。当前结果不能推断机构极限。
