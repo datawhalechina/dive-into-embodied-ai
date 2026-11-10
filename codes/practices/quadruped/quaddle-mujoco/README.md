@@ -376,3 +376,18 @@ OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python refine_contact_phase.p
 原始验收标准不变。前脚首次碰到侧壁发生在机身前进约0.12m、周期末端附近；触地减速改善部分标称试验的超速，但未解决可重复的单阶跨越。目标速度限幅不等于实际关节速度限制。训练启动门槛只选择候选，不替代任务验收；本轮未过门槛。
 
 首轮余弦无反馈重实现的极小舍入差异导致接触轨迹分叉，不计作改善。最终该路径直接复用旧控制器并通过逐状态一致性测试；重新执行搜索时该对照将与旧控制器完全一致，不能期待复现首轮重实现对照数据。初版哈希保留在报告中；接触与五次轨迹候选实现未变。当前结果不能推断机构极限。
+
+## 前后腿支撑与摆腿协调实验（2026-11-10）
+
+新增 `support_coordinator.py`，在 `ContactPhaseController` 上用 `support_coordination` 显式启用。三种可切换方案分别为逐腿支撑门控、`support_recovery` 等待回撤与轮换优先级、`coupled_support_clock` 共同相位时钟。前两种在发放新的摆腿许可时检查其他脚接触及前后对侧支撑；后者保持相对相位，仅短暂减慢整体时钟，不保证支撑数量。接触是仿真真值；超时单独记为失败事件。启动时继承的摆动阶段先完成，不声称从切换瞬间就满足摆腿数限制。
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python check_support_coordination.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python search_support_coordination.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python refine_support_coordination.py
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python search_coupled_support.py
+```
+
+搜索读取上一轮 `outputs/contact_phase_20261110/refinement/selected.json`，需要先跑上一节试验。输出在 `outputs/support_coordination_20261110/`，包含各轮源码快照、完整事件与指标。每轮按相同原检查排序选候选，并补测起点±5mm、平地、单个4mm台阶和2mm三阶。新试验共28组参数＋1组旧候选对照＋15组复测，报告见 [支撑协调结果](reports/support_coordination_2026-11-10.json)。
+
+逐腿等待候选在原地形只前进0.079m，且平地也失败；加入回撤仍未改善。共同相位时钟恢复平地通过，但原4mm三阶前进0.214m、偏航113.70°且机身触地。2mm三阶前进0.816m，仅关节超速失败。原任务仍无全项通过，默认步态保持不变，未新增PPO。关节相位调度不等于足端轨迹规划，不能据此推断机构极限。

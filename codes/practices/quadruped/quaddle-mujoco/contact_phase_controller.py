@@ -19,12 +19,17 @@ class ContactPhaseController:
         self.previous_contact=np.zeros(4,dtype=bool);self.contact_count=np.zeros(4,dtype=int)
         self.landing_until=np.zeros(4);self.riser_until=np.zeros(4);self.cooldown=np.zeros(4)
         self.events=[];self.maximum_slew=0.;self.maximum_shift=0.;self.start_x=None
+        self.coordinator=None
+        if config.get('support_coordination'):
+            from support_coordinator import SupportCoordinator,CoupledSupportCoordinator
+            cls=CoupledSupportCoordinator if config.get('coupled_support_clock') else SupportCoordinator
+            self.coordinator=cls(config)
 
     def __call__(self,data):
         c=self.config
         if self.start_x is None:self.start_x=float(data.qpos[0])
         # Exact legacy path for the cosine/no-feedback control group.
-        if not c.get('contact_adaptation',False) and c.get('trajectory_shape','quintic')=='cosine':
+        if self.coordinator is None and not c.get('contact_adaptation',False) and c.get('trajectory_shape','quintic')=='cosine':
             previous=self.target.copy();self.startup(data);self.target=data.ctrl.copy()
             self.maximum_slew=max(self.maximum_slew,float(np.max(np.abs(self.target-previous)))*c['control_hz'])
             return
@@ -61,6 +66,10 @@ class ContactPhaseController:
         self.maximum_shift=max(self.maximum_shift,float(np.max(np.abs(self.shift))))
         self.boost+=.25*(np.where(blocked,c.get('riser_angle_rad',.12),0.)-self.boost)
         cycle=(t*c['frequency_hz']+self.phase+self.shift)%1
+        if self.coordinator is not None and t>=c['ramp_seconds']:
+            cycle=self.coordinator.advance(cycle,stable,dt,float(data.time))
+            if c.get('support_recovery') or c.get('coupled_support_clock'):
+                landing=np.array([s=='landing' for s in self.coordinator.state])
         duty=c['sweep_fraction'];u=np.where(cycle<duty,cycle/duty,(cycle-duty)/(1-duty))
         if c.get('trajectory_shape','quintic')=='quintic':
             smooth=u**3*(10-15*u+6*u*u)
@@ -80,4 +89,5 @@ class ContactPhaseController:
 
     def diagnostics(self):
         return dict(controller='contact_phase_v1',events=self.events,max_target_slew_rad_s=self.maximum_slew,
-            max_phase_shift_cycles=self.maximum_shift,contact_estimation='simulator contact normals')
+            max_phase_shift_cycles=self.maximum_shift,contact_estimation='simulator contact normals',
+            support_coordination=self.coordinator.diagnostics() if self.coordinator is not None else None)
