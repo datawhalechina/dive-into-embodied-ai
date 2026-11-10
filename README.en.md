@@ -191,6 +191,8 @@ npm run start -- --locale en
 npm run start -- --locale it
 ```
 
+You can also run `sh local-build.sh` to build all languages and start a preview on port 3001, automatically trying the next port if it is occupied. Use `sh local-build.sh 3002` to choose a different starting port. The script checks Node/npm versions and runs `npm ci` when dependencies are missing or the lockfile has changed. If the active Node version differs, it tries an existing runtime at `${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v<version>-<platform>-<arch>/`; otherwise, it asks you to select the required version first.
+
 The development server runs one language at a time. To test switching between all three languages, build, check, and serve the full site:
 
 ```bash

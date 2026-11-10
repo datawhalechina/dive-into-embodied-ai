@@ -163,6 +163,8 @@ Datawhale organizza gruppi attorno al corso. I programmi saranno raccolti in `do
 
 Lo sviluppo locale e CI usano **Node.js 26.11.1**, fissato in `.nvmrc`, con npm incluso; i requisiti sono in `package.json`. Con [nvm](https://github.com/nvm-sh/nvm#installing-and-updating), esegui `nvm install` e `nvm use` nel repository; gli altri metodi devono installare la stessa versione. `.npmrc` controlla le versioni durante l'installazione e disattiva Web Storage sperimentale di Node per gli script npm, evitando gli avvisi `localStorage` nella compilazione statica. L'archiviazione del browser non cambia.
 
+Puoi anche eseguire `sh local-build.sh` per compilare tutte le lingue e avviare l'anteprima sulla porta 3001, passando automaticamente alla successiva se occupata. Usa `sh local-build.sh 3002` per scegliere la porta iniziale. Lo script controlla le versioni di Node/npm ed esegue `npm ci` se mancano dipendenze o il lockfile è stato aggiornato. Se la versione attiva di Node è diversa, cerca un runtime già presente in `${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v<versione>-<piattaforma>-<architettura>/`; altrimenti chiede di selezionare prima la versione richiesta.
+
 Video e GIF usano **Git LFS**. Installa `git-lfs` ed esegui `git lfs pull` dopo il clone; altrimenti avrai solo puntatori testuali. Consulta [CONTRIBUTING.md](CONTRIBUTING.md#首次克隆必读), in cinese.
 
 ```bash

@@ -37,6 +37,41 @@ find_available_port() {
 
 cd "$SCRIPT_DIR"
 
+# Reuse a downloaded project runtime when the shell selects another Node version.
+NODE_VERSION=$(cat .nvmrc)
+if [ "$(node --version 2>/dev/null || true)" != "v${NODE_VERSION}" ]; then
+  NODE_PLATFORM=$(uname -s | tr '[:upper:]' '[:lower:]')
+  NODE_ARCH=$(uname -m)
+  case "$NODE_ARCH" in
+    x86_64) NODE_ARCH=x64 ;;
+    aarch64) NODE_ARCH=arm64 ;;
+  esac
+  LOCAL_NODE_BIN="${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v${NODE_VERSION}-${NODE_PLATFORM}-${NODE_ARCH}/bin"
+  if [ -x "$LOCAL_NODE_BIN/node" ] && [ -x "$LOCAL_NODE_BIN/npm" ]; then
+    export PATH="$LOCAL_NODE_BIN:$PATH"
+  fi
+fi
+
+if [ "$(node --version 2>/dev/null || true)" != "v${NODE_VERSION}" ]; then
+  echo "Node.js ${NODE_VERSION} is required. Run 'nvm install && nvm use' in this directory, or select that version with your Node version manager." >&2
+  exit 1
+fi
+
+NPM_VERSION=$(node -p 'require("./package.json").engines.npm')
+if [ "$(npm --version 2>/dev/null || true)" != "$NPM_VERSION" ]; then
+  echo "npm ${NPM_VERSION} is required. Select the npm bundled with Node.js ${NODE_VERSION}." >&2
+  exit 1
+fi
+
+# A pull can add dependencies even when node_modules already exists.
+if [ ! -f node_modules/.package-lock.json ] ||
+   [ package-lock.json -nt node_modules/.package-lock.json ] ||
+   [ package.json -nt node_modules/.package-lock.json ] ||
+   ! npm ls --depth=0 >/dev/null 2>&1; then
+  echo "==> Installing locked dependencies..."
+  npm ci
+fi
+
 # 本地预览不需要真实职位数据,默认走 fixture,避免 prebuild 因缺 JOBS_API_TOKEN 报错
 export JOBS_DATA_MODE="${JOBS_DATA_MODE:-fixture}"
 
