@@ -1,0 +1,275 @@
+{
+  "result": {
+    "scene": {
+      "name": "flat",
+      "label": "Flat reference",
+      "slope_deg": 0.0,
+      "goal_m": 0.72,
+      "plane_z": 0.0,
+      "initial_height_m": 0.0,
+      "boxes": [],
+      "water_depth_m": 0.0,
+      "seed": 7
+    },
+    "mode": "run_attempt",
+    "initial_x_offset_m": 0.0,
+    "policy_sha256": null,
+    "passed": false,
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": false,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": true
+    },
+    "simulation_seconds": 22.000000000003904,
+    "commanded_seconds": 20.0,
+    "forward_m": 0.9123190214693956,
+    "average_forward_speed_m_s": 0.04561595107346978,
+    "final_position_m": [
+      0.1116006235923694,
+      -0.9089658634888153,
+      0.04381709070654316
+    ],
+    "goal_distance_xy_m": 0.21946023956580218,
+    "startup_max_abs_pitch_deg": 4.0174595465014455,
+    "min_upright_cosine": 0.9028428541341161,
+    "min_root_clearance_m": 0.04257070864522435,
+    "max_heading_deviation_deg": 9.293362874667286,
+    "body_contact_samples": 0,
+    "obstacle_contact_samples": 0,
+    "max_torque_Nm": 0.04828202944776434,
+    "max_driven_joint_speed_rad_s": 10.357515892278132,
+    "max_closure_error_m": 0.0010452167135509198,
+    "foot_contact_fraction": {
+      "left_front": 0.4225,
+      "right_front": 0.2755,
+      "right_back": 0.47975,
+      "left_back": 0.928
+    },
+    "completed_flight_intervals_s": [
+      0.010000000000000002,
+      0.013000000000000005,
+      0.014000000000000005,
+      0.016000000000000007,
+      0.010000000000000002,
+      0.013000000000000005,
+      0.010000000000000002,
+      0.013000000000000005,
+      0.011000000000000003,
+      0.011000000000000003,
+      0.011000000000000003,
+      0.012000000000000004,
+      0.010000000000000002,
+      0.012000000000000004
+    ],
+    "longest_flight_s": 0.016000000000000007,
+    "controller_config": {
+      "name": "bound_search_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.33216220227121174,
+        0.33216220227121174,
+        0.424576821169797,
+        0.424576821169797
+      ],
+      "bias_rad": [
+        -0.3716960139025034,
+        -0.3716960139025034,
+        -0.21484949501125616,
+        -0.21484949501125616
+      ],
+      "phase_rad": [
+        0.0,
+        0.0,
+        3.1765370650202898,
+        3.1765370650202898
+      ],
+      "frequency_hz": 2.3374882172148364,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.5944467632625854,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.30909088877753277,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Parameter search candidate; acceptance is determined by metrics, not this label."
+    },
+    "route_xy_m": [],
+    "localization": "simulator ground truth",
+    "navigation": null,
+    "video": "video.mp4",
+    "fluid": null
+  },
+  "original_physics_metrics": {
+    "scene": {
+      "name": "flat",
+      "label": "Flat reference",
+      "slope_deg": 0.0,
+      "goal_m": 0.72,
+      "plane_z": 0.0,
+      "initial_height_m": 0.0,
+      "boxes": [],
+      "water_depth_m": 0.0,
+      "seed": 7
+    },
+    "mode": "run_attempt",
+    "initial_x_offset_m": 0.0,
+    "policy_sha256": null,
+    "passed": false,
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": false,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": true
+    },
+    "simulation_seconds": 22.000000000003904,
+    "commanded_seconds": 20.0,
+    "forward_m": 0.9123190214693956,
+    "average_forward_speed_m_s": 0.04561595107346978,
+    "final_position_m": [
+      0.1116006235923694,
+      -0.9089658634888153,
+      0.04381709070654316
+    ],
+    "goal_distance_xy_m": 0.21946023956580218,
+    "startup_max_abs_pitch_deg": 4.0174595465014455,
+    "min_upright_cosine": 0.9028428541341161,
+    "min_root_clearance_m": 0.04257070864522435,
+    "max_heading_deviation_deg": 9.293362874667286,
+    "body_contact_samples": 0,
+    "obstacle_contact_samples": 0,
+    "max_torque_Nm": 0.04828202944776434,
+    "max_driven_joint_speed_rad_s": 10.357515892278132,
+    "max_closure_error_m": 0.0010452167135509198,
+    "foot_contact_fraction": {
+      "left_front": 0.4225,
+      "right_front": 0.2755,
+      "right_back": 0.47975,
+      "left_back": 0.928
+    },
+    "completed_flight_intervals_s": [
+      0.010000000000000002,
+      0.013000000000000005,
+      0.014000000000000005,
+      0.016000000000000007,
+      0.010000000000000002,
+      0.013000000000000005,
+      0.010000000000000002,
+      0.013000000000000005,
+      0.011000000000000003,
+      0.011000000000000003,
+      0.011000000000000003,
+      0.012000000000000004,
+      0.010000000000000002,
+      0.012000000000000004
+    ],
+    "longest_flight_s": 0.016000000000000007,
+    "controller_config": {
+      "name": "bound_search_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.33216220227121174,
+        0.33216220227121174,
+        0.424576821169797,
+        0.424576821169797
+      ],
+      "bias_rad": [
+        -0.3716960139025034,
+        -0.3716960139025034,
+        -0.21484949501125616,
+        -0.21484949501125616
+      ],
+      "phase_rad": [
+        0.0,
+        0.0,
+        3.1765370650202898,
+        3.1765370650202898
+      ],
+      "frequency_hz": 2.3374882172148364,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.5944467632625854,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.30909088877753277,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Parameter search candidate; acceptance is determined by metrics, not this label."
+    },
+    "route_xy_m": [],
+    "localization": "simulator ground truth",
+    "navigation": null,
+    "video": "video.mp4",
+    "fluid": null
+  },
+  "video_sha256": "bdb95b79d6c4a6b7640b455fc2b05af30b7452aa334ee2c795feeebb6c087872"
+}

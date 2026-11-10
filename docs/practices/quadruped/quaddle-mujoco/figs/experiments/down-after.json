@@ -1,0 +1,311 @@
+{
+  "result": {
+    "scene": {
+      "name": "stairs_down",
+      "label": "Down stairs / 4 mm x 3",
+      "slope_deg": 0.0,
+      "goal_m": 0.72,
+      "plane_z": 0.0,
+      "initial_height_m": 0.012,
+      "boxes": [
+        {
+          "name": "step_0",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": -0.4,
+          "s1": 0.18,
+          "top": 0.012,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "step_1",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": 0.18,
+          "s1": 0.3,
+          "top": 0.008,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "step_2",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": 0.3,
+          "s1": 0.42,
+          "top": 0.004,
+          "bottom": -0.01,
+          "obstacle": false
+        }
+      ],
+      "water_depth_m": 0.0,
+      "seed": 7
+    },
+    "mode": "walk",
+    "initial_x_offset_m": 0.0,
+    "initial_yaw_deg": -3.0,
+    "friction_scale": 0.9,
+    "first_failure": {},
+    "policy_sha256": null,
+    "passed": true,
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true
+    },
+    "simulation_seconds": 22.000000000003904,
+    "commanded_seconds": 20.0,
+    "forward_m": 0.737508243859201,
+    "average_forward_speed_m_s": 0.03687541219296005,
+    "final_position_m": [
+      -0.03501078073902404,
+      -0.73498458583291,
+      0.04767794711585051
+    ],
+    "goal_distance_xy_m": 0.03808270710624267,
+    "startup_max_abs_pitch_deg": 4.176397342677202,
+    "min_upright_cosine": 0.9509324124562767,
+    "min_root_clearance_m": 0.04344216545972113,
+    "max_heading_deviation_deg": 13.700662501947818,
+    "body_contact_samples": 0,
+    "obstacle_contact_samples": 0,
+    "max_torque_Nm": 0.04694145408704374,
+    "max_driven_joint_speed_rad_s": 8.940759076085923,
+    "max_closure_error_m": 0.001174452779666535,
+    "foot_contact_fraction": {
+      "left_front": 0.70275,
+      "right_front": 0.4265,
+      "right_back": 0.46475,
+      "left_back": 0.9255
+    },
+    "completed_flight_intervals_s": [],
+    "longest_flight_s": 0.0,
+    "controller_config": {
+      "name": "terrain_stairs_down",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.3225173219527415,
+        0.3225173219527415,
+        0.4749167219019621,
+        0.4749167219019621
+      ],
+      "bias_rad": [
+        -0.31747900449793837,
+        -0.31747900449793837,
+        -0.20822567415893645,
+        -0.20822567415893645
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 1.635091894943432,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.3,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.3086864501213528,
+      "max_target_speed_rad_s": 8.0,
+      "note": "CEM-selected for this fixed terrain; passed nominal and +/-5 mm lateral resets for 20 s. Uncalibrated simulation, not a universal or hardware-validated gait."
+    },
+    "controller_diagnostics": null,
+    "route_xy_m": [],
+    "localization": "simulator ground truth",
+    "navigation": null,
+    "video": "video.mp4",
+    "fluid": null
+  },
+  "original_physics_metrics": {
+    "scene": {
+      "name": "stairs_down",
+      "label": "Down stairs / 4 mm x 3",
+      "slope_deg": 0.0,
+      "goal_m": 0.72,
+      "plane_z": 0.0,
+      "initial_height_m": 0.012,
+      "boxes": [
+        {
+          "name": "step_0",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": -0.4,
+          "s1": 0.18,
+          "top": 0.012,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "step_1",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": 0.18,
+          "s1": 0.3,
+          "top": 0.008,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "step_2",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": 0.3,
+          "s1": 0.42,
+          "top": 0.004,
+          "bottom": -0.01,
+          "obstacle": false
+        }
+      ],
+      "water_depth_m": 0.0,
+      "seed": 7
+    },
+    "mode": "walk",
+    "initial_x_offset_m": 0.0,
+    "initial_yaw_deg": -3.0,
+    "friction_scale": 0.9,
+    "first_failure": {},
+    "policy_sha256": null,
+    "passed": true,
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true
+    },
+    "simulation_seconds": 22.000000000003904,
+    "commanded_seconds": 20.0,
+    "forward_m": 0.737508243859201,
+    "average_forward_speed_m_s": 0.03687541219296005,
+    "final_position_m": [
+      -0.03501078073902404,
+      -0.73498458583291,
+      0.04767794711585051
+    ],
+    "goal_distance_xy_m": 0.03808270710624267,
+    "startup_max_abs_pitch_deg": 4.176397342677202,
+    "min_upright_cosine": 0.9509324124562767,
+    "min_root_clearance_m": 0.04344216545972113,
+    "max_heading_deviation_deg": 13.700662501947818,
+    "body_contact_samples": 0,
+    "obstacle_contact_samples": 0,
+    "max_torque_Nm": 0.04694145408704374,
+    "max_driven_joint_speed_rad_s": 8.940759076085923,
+    "max_closure_error_m": 0.001174452779666535,
+    "foot_contact_fraction": {
+      "left_front": 0.70275,
+      "right_front": 0.4265,
+      "right_back": 0.46475,
+      "left_back": 0.9255
+    },
+    "completed_flight_intervals_s": [],
+    "longest_flight_s": 0.0,
+    "controller_config": {
+      "name": "terrain_stairs_down",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.3225173219527415,
+        0.3225173219527415,
+        0.4749167219019621,
+        0.4749167219019621
+      ],
+      "bias_rad": [
+        -0.31747900449793837,
+        -0.31747900449793837,
+        -0.20822567415893645,
+        -0.20822567415893645
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 1.635091894943432,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.3,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.3086864501213528,
+      "max_target_speed_rad_s": 8.0,
+      "note": "CEM-selected for this fixed terrain; passed nominal and +/-5 mm lateral resets for 20 s. Uncalibrated simulation, not a universal or hardware-validated gait."
+    },
+    "controller_diagnostics": null,
+    "route_xy_m": [],
+    "localization": "simulator ground truth",
+    "navigation": null,
+    "video": "video.mp4",
+    "fluid": null
+  },
+  "video_sha256": "7515d5905e26060bc8631dcb970f31c30f68d95df35e264000d067047a6b7113"
+}
