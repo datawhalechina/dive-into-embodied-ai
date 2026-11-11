@@ -127,7 +127,7 @@ The foundations follow the four groups in the site navigation: decision making, 
 | :--- | :--- |
 | [Reinforcement learning for decisions](docs/foundations/rl-for-robotics/1.intro.md) | MDPs, DQN, PPO, SAC, DDPG/TD3, and imitation learning |
 | [Vision-language-action models (VLA)](docs/foundations/vla/vla-intro.md) | RT-1/RT-2, OpenVLA, ACT, Diffusion Policy, and the π family |
-| [World models](docs/foundations/world-model/0.intro.md) | Applying world models to embodied tasks |
+| [World models](docs/foundations/world-model/0.intro.md) | Applying world models to embodied tasks; [DreamerV3 reaching experiment and video](i18n/en/docusaurus-plugin-content-docs/current/foundations/world-model/2.dreamerv3-reacher.md) |
 
 #### Motion control
 

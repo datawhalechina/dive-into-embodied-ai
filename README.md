@@ -135,7 +135,7 @@
 | :--- | :--- |
 | [强化学习决策](docs/foundations/rl-for-robotics/1.intro.md) | MDP、DQN、PPO、SAC、DDPG/TD3 与模仿学习 |
 | [视觉-语言-动作大模型(VLA)](docs/foundations/vla/vla-intro.md) | RT-1/RT-2、OpenVLA、ACT、Diffusion Policy、π 系列 |
-| [World-Model](docs/foundations/world-model/0.intro.md) | 世界模型在具身场景下的落地路径 |
+| [World-Model](docs/foundations/world-model/0.intro.md) | 世界模型在具身场景下的落地路径；[DreamerV3 到点实验与视频](docs/foundations/world-model/2.dreamerv3-reacher.md) |
 
 #### 小脑：运动控制
 
