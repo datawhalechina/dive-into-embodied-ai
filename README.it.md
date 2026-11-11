@@ -127,7 +127,7 @@ Le quattro aree corrispondono alla navigazione del sito.
 | --- | --- |
 | [Rinforzo per le decisioni](docs/foundations/rl-for-robotics/1.intro.md) | MDP, DQN, PPO, SAC, DDPG/TD3 e imitazione |
 | [VLA](docs/foundations/vla/vla-intro.md) | RT-1/RT-2, OpenVLA, ACT, Diffusion Policy e famiglia π |
-| [Modelli del mondo](docs/foundations/world-model/0.intro.md) | Applicazioni ai compiti incarnati |
+| [Modelli del mondo](docs/foundations/world-model/0.intro.md) | Applicazioni ai compiti incarnati; [esperimento DreamerV3 e video](i18n/it/docusaurus-plugin-content-docs/current/foundations/world-model/2.dreamerv3-reacher.md) |
 
 #### Controllo del movimento
 
