@@ -11,7 +11,9 @@
 >
 > Usa **Copia come Markdown** all'inizio di tutorial ed esperimenti o apri l'anteprima. Conserva codice, tabelle ed equazioni LaTeX, con un link all'originale per le demo interattive.
 >
-> README, home e navigazione, introduzione con demo e risorse, mappa di apprendimento e panoramica dei progetti sono disponibili in inglese e italiano. Gli altri capitoli ed esperimenti autonomi restano in cinese, con avvisi sulla traduzione. Il menu permette di passare tra 中文, English e Italiano sulla stessa pagina.
+> Per simboli o termini sconosciuti, consulta la [guida rapida a termini e formule](i18n/it/docusaurus-plugin-content-docs/current/foundations/rl-for-robotics/quick-reference.md). I capitoli su MDP e differenza temporale offrono spiegazioni espandibili, derivazioni passo per passo ed esempi numerici accanto alle formule; questi due capitoli sono disponibili in cinese e inglese.
+>
+> README, home e navigazione, introduzione con demo e risorse, mappa di apprendimento, panoramica dei progetti e guida rapida a termini e formule sono disponibili in inglese e italiano. Alcuni altri capitoli sono disponibili anche in inglese; quelli non tradotti e gli esperimenti autonomi mostrano un avviso sul contenuto in cinese. Il menu permette di passare tra 中文, English e Italiano sulla stessa pagina.
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licenza" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>

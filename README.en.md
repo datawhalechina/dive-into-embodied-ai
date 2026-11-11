@@ -13,7 +13,9 @@
 >
 > Use **Copy as Markdown** at the top of tutorial and playground pages to copy their content, or open the dropdown to preview it. Code, tables, and LaTeX equations are preserved, with a link to the original page for interactive demos.
 >
-> The README, homepage and navigation, introduction (including interactive demos and resources), learning map, and project overview are available in English and Italian. Other tutorial chapters and standalone playgrounds are currently in Chinese, with notices explaining the translation scope. Use the language menu to switch between 中文, English, and Italiano on the same page.
+> For unfamiliar notation, use the [terms and formulas quick reference](i18n/en/docusaurus-plugin-content-docs/current/foundations/rl-for-robotics/quick-reference.md). The MDP and temporal-difference chapters include expandable explanations, step-by-step derivations, and small numerical examples beside key formulas.
+>
+> The README, homepage and navigation, introduction (including interactive demos and resources), learning map, project overview, and terms and formulas quick reference are available in English and Italian. Some other chapters, including MDPs and temporal difference, are also available in English; untranslated chapters and standalone playgrounds show a Chinese-content notice. Use the language menu to switch between 中文, English, and Italiano on the same page.
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="License" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>

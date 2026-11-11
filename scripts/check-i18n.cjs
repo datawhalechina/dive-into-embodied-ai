@@ -108,6 +108,7 @@ const translatedPages = [
   ...walk('build/docs/introduction').filter(file => file.endsWith('.html')),
   'build/docs/practices/intro.html',
   'build/docs/overview/embodied-ai-roadmap.html',
+  'build/docs/foundations/rl-for-robotics/quick-reference.html',
   'build/docs/foundations/robotics-and-ros2/intro.html',
 ];
 assert(translatedPages.length > 2, 'Missing introduction pages');

@@ -22,7 +22,7 @@ These perspectives overlap. For example, a robot arm can grasp objects using mot
 
 1. Start with the [introduction](/docs/introduction/intro) to understand the complete loop of perception, decision making, and action.
 2. Choose a project organized into chapters or a standalone experiment in [projects](/docs/practices/intro). Record the results and analyze failures.
-3. When you find a gap in your knowledge, look up the relevant topic in [foundations](/docs/foundations/intro).
+3. When you find a gap in your knowledge, look up the relevant topic in [foundations](/docs/foundations/intro). For RL notation and concepts, use the [terms and formulas quick reference](/docs/foundations/rl-for-robotics/quick-reference); the MDP and temporal-difference chapters also have expandable explanations and small numerical examples.
 4. Open [Simulation](/simulation) to control a robot with keyboard or on-screen buttons, or switch to a showcase of trained Go2/Pupper v3 policies and the Quaddle periodic gait. MicroDuck supports manual head and joint controls.
 
 For ROS2, start with the [tutorial overview](/docs/foundations/robotics-and-ros2/intro). The [companion code](https://github.com/datawhalechina/dive-into-embodied-ai/blob/master/codes/foundations/robotics-and-ros2/README.en.md) includes standalone kinematics scripts and ROS reference packages; generate the MoveIt configuration in lesson 10.

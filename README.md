@@ -13,6 +13,8 @@
 > 推荐使用网页版，支持全文搜索、章节导航和交互演示。初次学习可从 **[新手入门：具身导论 →](https://datawhalechina.github.io/dive-into-embodied-ai/docs/introduction/intro)** 开始。
 >
 > 教程和交互页上方的「复制为 Markdown」可复制正文，下拉菜单可预览 Markdown。支持代码、表格和 LaTeX 公式，文末附有原网页链接，方便继续查看交互演示。
+>
+> 公式或术语看不懂时，可查阅 [术语与公式速查](docs/foundations/rl-for-robotics/quick-reference.md)。MDP 和时序差分章在关键公式旁提供可展开的通俗解释、逐步推导与手算例子。
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="许可协议" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
