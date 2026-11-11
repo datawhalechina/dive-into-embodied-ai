@@ -1150,5 +1150,188 @@
   },
   "轮足系列": {
     "message": "Wheeled biped series"
+  },
+  "simulation.title": {
+    "message": "Online simulation"
+  },
+  "simulation.subtitle": {
+    "message": "Choose a robot. Take the controls or watch its learned behavior."
+  },
+  "simulation.browser": {
+    "message": "Runs in your browser"
+  },
+  "simulation.library": {
+    "message": "Model library"
+  },
+  "simulation.trained": {
+    "message": "Trained · PPO"
+  },
+  "simulation.controller": {
+    "message": "Rule-based gait"
+  },
+  "simulation.go2Brief": {
+    "message": "Quadruped · velocity tracking"
+  },
+  "simulation.quaddleBrief": {
+    "message": "Four servos · periodic gait"
+  },
+  "simulation.libraryNote": {
+    "message": "Switch between control and showcase in the same scene."
+  },
+  "simulation.mode": {
+    "message": "Run mode"
+  },
+  "simulation.manual": {
+    "message": "Free control"
+  },
+  "simulation.showcase": {
+    "message": "Policy showcase"
+  },
+  "simulation.canvas": {
+    "message": "Live robot simulation. Drag to orbit and scroll to zoom."
+  },
+  "simulation.keyboardArea": {
+    "message": "Robot keyboard controls"
+  },
+  "simulation.suspended": {
+    "message": "Auto-suspended"
+  },
+  "simulation.paused": {
+    "message": "Paused"
+  },
+  "simulation.resetCamera": {
+    "message": "Reset camera"
+  },
+  "simulation.fullscreen": {
+    "message": "Toggle fullscreen"
+  },
+  "simulation.focusHint": {
+    "message": "Click the scene for keyboard control · drag to orbit"
+  },
+  "simulation.cameraHint": {
+    "message": "Drag to orbit · scroll to zoom"
+  },
+  "simulation.loading": {
+    "message": "Preparing simulation…"
+  },
+  "simulation.error": {
+    "message": "Simulation interrupted"
+  },
+  "simulation.errorHint": {
+    "message": "Check your connection and retry in a browser with WebGL and WebAssembly support."
+  },
+  "simulation.welcome": {
+    "message": "Your turn to take control"
+  },
+  "simulation.manualDescription": {
+    "message": "Hold a direction key or an on-screen button to move. Release to stop the command."
+  },
+  "simulation.showcaseDescription": {
+    "message": "Run the selected controller automatically and watch its behavior in live physics."
+  },
+  "simulation.retry": {
+    "message": "Retry"
+  },
+  "simulation.load": {
+    "message": "Start simulation"
+  },
+  "simulation.download": {
+    "message": "The first load downloads the engine and model. No installation needed."
+  },
+  "simulation.errorDetails": {
+    "message": "Error details"
+  },
+  "simulation.resume": {
+    "message": "Resume"
+  },
+  "simulation.pause": {
+    "message": "Pause"
+  },
+  "simulation.reset": {
+    "message": "Reset"
+  },
+  "simulation.rate": {
+    "message": "Simulation speed"
+  },
+  "simulation.telemetry": {
+    "message": "Live state"
+  },
+  "simulation.time": {
+    "message": "Simulation time"
+  },
+  "simulation.velocity": {
+    "message": "Actual speed"
+  },
+  "simulation.position": {
+    "message": "Position X / Y"
+  },
+  "simulation.controls": {
+    "message": "Control panel"
+  },
+  "simulation.directionPad": {
+    "message": "Hold directional buttons to move"
+  },
+  "simulation.forward": {
+    "message": "Forward"
+  },
+  "simulation.back": {
+    "message": "Backward"
+  },
+  "simulation.left": {
+    "message": "Turn left"
+  },
+  "simulation.right": {
+    "message": "Turn right"
+  },
+  "simulation.stop": {
+    "message": "Stop movement command"
+  },
+  "simulation.strafeLeft": {
+    "message": "Strafe left"
+  },
+  "simulation.strafeRight": {
+    "message": "Strafe right"
+  },
+  "simulation.strafe": {
+    "message": "Strafe"
+  },
+  "simulation.keys": {
+    "message": "WASD / arrows to move, Q / E to strafe. Focus the scene, then Space to pause or R to reset."
+  },
+  "simulation.quaddleKeys": {
+    "message": "W forward, A / D walking turns, S stop. Arrow keys also work. This gait has no reverse or strafe."
+  },
+  "simulation.speed": {
+    "message": "Target forward speed"
+  },
+  "simulation.walkPolicy": {
+    "message": "Go2 · flat-ground walking"
+  },
+  "simulation.gaitDemo": {
+    "message": "Quaddle · periodic gait"
+  },
+  "simulation.policyInfo": {
+    "message": "Live PPO inference with a 0.6 m/s forward target. Switch to free control to steer."
+  },
+  "simulation.gaitInfo": {
+    "message": "Runs a periodic gait controller as a reference. This example does not use trained weights."
+  },
+  "simulation.follow": {
+    "message": "Follow robot"
+  },
+  "simulation.about": {
+    "message": "About this model"
+  },
+  "simulation.go2Info": {
+    "message": "Uses the repository’s Go2 PPO weights. Simplified visuals retain the original collision model; actual speed may differ from the command."
+  },
+  "simulation.quaddleInfo": {
+    "message": "Four servos drive passive linkages. Allow about 2 seconds to settle. Stop retracts the gait while physics keeps running."
+  },
+  "simulation.tutorial": {
+    "message": "Related tutorial"
+  },
+  "simulation.physicsNote": {
+    "message": "Live physics, not video playback. Hidden scenes suspend automatically; free control requires fresh input on return. Simulation time may run slower on less powerful devices."
   }
 }

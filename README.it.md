@@ -43,7 +43,9 @@ Costruisci un robot di IA incarnata da zero. Esplora rinforzo, modelli del mondo
 
 ## 🗂️ Contenuti del corso
 
-Tre sezioni: **Introduzione**, **Fondamenti** e **Progetti**. L'introduzione offre panoramica e risorse; i fondamenti spiegano i principi; i progetti includono percorsi a capitoli, demo e riproduzioni. Sono suddivisi in AMD, simulazione e robot reali.
+Quattro sezioni: **Introduzione**, **Fondamenti**, **Progetti** e **[Simulazione](https://datawhalechina.github.io/dive-into-embodied-ai/it/simulation)**. L'introduzione offre panoramica e risorse; i fondamenti spiegano i principi; i progetti includono percorsi a capitoli, demo e riproduzioni, suddivisi in AMD, simulazione e robot reali. La simulazione offre controllo libero in stile videogioco e dimostrazioni automatiche.
+
+La libreria iniziale include la politica PPO Go2 e un'andatura periodica Quaddle di riferimento. Sono disponibili tastiera e pulsanti direzionali, pausa, ripristino, rallentatore e inseguimento della telecamera. Go2 mostra una grafica semplificata delle collisioni originali. Consulta la [guida per aggiungere modelli](simulation/README.it.md).
 
 <a id="introduction"></a>
 

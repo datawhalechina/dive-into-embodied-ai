@@ -44,6 +44,7 @@ const sources = [
   'src/components/NavbarMegaMenu/data.ts',
   'src/components/PageMarkdown/index.tsx',
   'src/components/TranslationNotice/index.tsx',
+  'src/components/SimulationLab/messages.ts',
   ...walk('src/theme/DocItem/TOC').filter(file => /\.tsx?$/.test(file)),
   ...walk('src/components/docs/introduction').filter(file => /\.tsx?$/.test(file)),
 ];
@@ -110,6 +111,12 @@ const translatedPages = [
 ];
 assert(translatedPages.length > 2, 'Missing introduction pages');
 for (const locale of locales) {
+  const simulation = parse(`build/${prefix(locale)}simulation.html`);
+  const simulationMain = simulation.querySelector('main');
+  assert(simulationMain?.querySelector('h1'), `${locale}: missing simulation page`);
+  if (locale !== defaultLocale) assert(!hasHan(simulationMain.textContent), `${locale}: simulation UI contains Chinese text`);
+  assert(attributes(simulation.querySelector('nav.navbar'), 'a[href]', 'href').includes(`${baseUrl}${prefix(locale)}simulation`), `${locale}: missing simulation navigation`);
+  for (const alternate of locales) assert(attributes(simulation.querySelector('nav.navbar'), 'a[href]', 'href').includes(`${baseUrl}${prefix(alternate)}simulation`), `${locale}: missing simulation language switch to ${alternate}`);
   const page = parse(`build/${prefix(locale)}index.html`);
   const main = page.querySelector('main');
   assert.equal(page.documentElement.lang, locale, `${locale}: wrong page language`);

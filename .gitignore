@@ -6,6 +6,7 @@ build/
 .docusaurus-build-lock.sqlite*
 # Generated from the pinned npm package and canonical Quaddle model at build time.
 static/quaddle/
+static/simulation-assets/
 .DS_Store
 .env
 .env.local

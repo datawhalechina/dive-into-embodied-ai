@@ -1,0 +1,35 @@
+[
+  {
+    "id": "go2",
+    "name": "Unitree Go2",
+    "kind": "policy",
+    "adapter": "go2",
+    "source": "codes/practices/amd/unitree-rl-mjx",
+    "policy": "policies/go2/velocity/v0/exported/policy.onnx",
+    "deploy": "policies/go2/velocity/v0/params/deploy.yaml",
+    "scene": "src/unitree_rl_mjx/assets/robots/unitree_go2/xmls/scene_go2.xml",
+    "body": "base_link",
+    "cameraDistance": 1.8,
+    "demoCommand": [
+      0.6,
+      0,
+      0
+    ],
+    "tutorial": "/docs/practices/amd/intro"
+  },
+  {
+    "id": "quaddle",
+    "name": "Petoi Quaddle",
+    "kind": "controller",
+    "adapter": "quaddle",
+    "source": "codes/practices/quadruped/quaddle-mujoco",
+    "body": "body",
+    "cameraDistance": 0.4,
+    "demoCommand": [
+      1,
+      0,
+      0
+    ],
+    "tutorial": "/docs/practices/quadruped/quaddle-mujoco"
+  }
+]

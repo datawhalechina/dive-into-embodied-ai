@@ -4,5 +4,8 @@
   },
   "item.label.具身导论": {
     "message": "Introduzione"
+  },
+  "item.label.在线仿真": {
+    "message": "Simulazione"
   }
 }

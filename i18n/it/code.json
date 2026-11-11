@@ -1195,5 +1195,188 @@
   },
   "轮足系列": {
     "message": "Serie bipedi su ruote"
+  },
+  "simulation.title": {
+    "message": "Simulazione online"
+  },
+  "simulation.subtitle": {
+    "message": "Scegli un robot. Guidalo o osserva i comportamenti appresi."
+  },
+  "simulation.browser": {
+    "message": "Eseguito nel browser"
+  },
+  "simulation.library": {
+    "message": "Libreria modelli"
+  },
+  "simulation.trained": {
+    "message": "Addestrato · PPO"
+  },
+  "simulation.controller": {
+    "message": "Andatura programmata"
+  },
+  "simulation.go2Brief": {
+    "message": "Quadrupede · controllo velocità"
+  },
+  "simulation.quaddleBrief": {
+    "message": "Quattro servi · andatura periodica"
+  },
+  "simulation.libraryNote": {
+    "message": "Passa dal controllo alla dimostrazione nella stessa scena."
+  },
+  "simulation.mode": {
+    "message": "Modalità"
+  },
+  "simulation.manual": {
+    "message": "Controllo libero"
+  },
+  "simulation.showcase": {
+    "message": "Dimostrazione"
+  },
+  "simulation.canvas": {
+    "message": "Simulazione del robot. Trascina per ruotare, scorri per ingrandire."
+  },
+  "simulation.keyboardArea": {
+    "message": "Area di controllo del robot"
+  },
+  "simulation.suspended": {
+    "message": "Sospesa automaticamente"
+  },
+  "simulation.paused": {
+    "message": "In pausa"
+  },
+  "simulation.resetCamera": {
+    "message": "Ripristina vista"
+  },
+  "simulation.fullscreen": {
+    "message": "Attiva o disattiva schermo intero"
+  },
+  "simulation.focusHint": {
+    "message": "Clicca la scena per usare la tastiera · trascina per ruotare"
+  },
+  "simulation.cameraHint": {
+    "message": "Trascina per ruotare · scorri per ingrandire"
+  },
+  "simulation.loading": {
+    "message": "Preparazione della simulazione…"
+  },
+  "simulation.error": {
+    "message": "Simulazione interrotta"
+  },
+  "simulation.errorHint": {
+    "message": "Controlla la connessione e riprova con un browser che supporti WebGL e WebAssembly."
+  },
+  "simulation.welcome": {
+    "message": "Il robot è nelle tue mani"
+  },
+  "simulation.manualDescription": {
+    "message": "Tieni premuto un tasto direzionale o un pulsante sullo schermo. Rilascia per fermare il comando."
+  },
+  "simulation.showcaseDescription": {
+    "message": "Esegui automaticamente il controllore e osserva il comportamento nella simulazione fisica."
+  },
+  "simulation.retry": {
+    "message": "Riprova"
+  },
+  "simulation.load": {
+    "message": "Avvia simulazione"
+  },
+  "simulation.download": {
+    "message": "Il primo avvio scarica motore e modello. Nessuna installazione."
+  },
+  "simulation.errorDetails": {
+    "message": "Dettagli errore"
+  },
+  "simulation.resume": {
+    "message": "Riprendi"
+  },
+  "simulation.pause": {
+    "message": "Pausa"
+  },
+  "simulation.reset": {
+    "message": "Ripristina"
+  },
+  "simulation.rate": {
+    "message": "Velocità simulazione"
+  },
+  "simulation.telemetry": {
+    "message": "Stato in tempo reale"
+  },
+  "simulation.time": {
+    "message": "Tempo simulato"
+  },
+  "simulation.velocity": {
+    "message": "Velocità effettiva"
+  },
+  "simulation.position": {
+    "message": "Posizione X / Y"
+  },
+  "simulation.controls": {
+    "message": "Pannello di controllo"
+  },
+  "simulation.directionPad": {
+    "message": "Tieni premuti i pulsanti per muoverti"
+  },
+  "simulation.forward": {
+    "message": "Avanti"
+  },
+  "simulation.back": {
+    "message": "Indietro"
+  },
+  "simulation.left": {
+    "message": "Gira a sinistra"
+  },
+  "simulation.right": {
+    "message": "Gira a destra"
+  },
+  "simulation.stop": {
+    "message": "Ferma il comando di movimento"
+  },
+  "simulation.strafeLeft": {
+    "message": "Sposta a sinistra"
+  },
+  "simulation.strafeRight": {
+    "message": "Sposta a destra"
+  },
+  "simulation.strafe": {
+    "message": "Spostamento laterale"
+  },
+  "simulation.keys": {
+    "message": "WASD / frecce per muoverti, Q / E per spostarti lateralmente. Nella scena: Spazio per pausa, R per ripristinare."
+  },
+  "simulation.quaddleKeys": {
+    "message": "W avanti, A / D per girare camminando, S per fermarti. Funzionano anche le frecce. Nessuna retromarcia o traslazione laterale."
+  },
+  "simulation.speed": {
+    "message": "Velocità di avanzamento"
+  },
+  "simulation.walkPolicy": {
+    "message": "Go2 · camminata su terreno piano"
+  },
+  "simulation.gaitDemo": {
+    "message": "Quaddle · andatura periodica"
+  },
+  "simulation.policyInfo": {
+    "message": "Inferenza PPO in tempo reale con obiettivo di 0,6 m/s. Passa al controllo libero per guidarlo."
+  },
+  "simulation.gaitInfo": {
+    "message": "Esegue un controllore periodico come riferimento. Questo esempio non usa pesi addestrati."
+  },
+  "simulation.follow": {
+    "message": "Segui il robot"
+  },
+  "simulation.about": {
+    "message": "Informazioni sul modello"
+  },
+  "simulation.go2Info": {
+    "message": "Usa i pesi PPO Go2 del repository. La grafica semplificata conserva le collisioni originali; la velocità può differire dal comando."
+  },
+  "simulation.quaddleInfo": {
+    "message": "Quattro servi muovono collegamenti passivi. Attendi circa 2 secondi di stabilizzazione. Stop interrompe l’andatura, la fisica continua."
+  },
+  "simulation.tutorial": {
+    "message": "Tutorial correlato"
+  },
+  "simulation.physicsNote": {
+    "message": "Fisica in tempo reale. Le scene non visibili vengono sospese; al ritorno premi nuovamente i comandi. Sui dispositivi meno potenti il tempo simulato può scorrere più lentamente."
   }
 }

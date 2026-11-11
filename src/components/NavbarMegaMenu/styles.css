@@ -1,7 +1,7 @@
 .navbar-mega {position: relative; display: flex; align-items: center; align-self: stretch; padding: 0;}
 .navbar__inner > .navbar__items:first-child {flex: 1;}
 .navbar__inner > .navbar__items:first-child .navbar-center-start {margin-left: auto;}
-.navbar__inner > .navbar__items:first-child .navbar-mega:last-of-type {margin-right: auto;}
+.navbar__inner > .navbar__items:first-child .navbar-simulation {margin-right: auto; white-space: nowrap; flex-shrink: 0;}
 .navbar:has(.navbar-mega__panel--open) {background: var(--site-panel); border-bottom-color: transparent;}
 .navbar-mega__triggerWrap {display: flex; align-items: center; align-self: stretch;}
 .navbar-mega__trigger {display: inline-flex; align-items: center; justify-content: center; gap: .3rem; min-height: 44px; padding: .5rem 1rem; border: 0; background: transparent; cursor: pointer; font: inherit; font-size: .875rem; line-height: 1.5; font-weight: 500; color: var(--ifm-navbar-link-color); text-decoration: none; transition: color .18s ease;}

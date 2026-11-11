@@ -45,7 +45,9 @@ Build an embodied AI robot from scratch. Explore practical implementations of re
 
 ## 🗂️ Course outline
 
-The website has three sections: **Introduction**, **Foundations**, and **Projects**. The introduction gives an overview of the field and collects papers, datasets, open source projects, and tools; foundations explain the principles; projects offer both a sequence of chapters and standalone demos or reproduction studies. Projects are grouped into AMD projects, simulation projects, and real robot projects.
+The website has four sections: **Introduction**, **Foundations**, **Projects**, and **[Simulation](https://datawhalechina.github.io/dive-into-embodied-ai/en/simulation)**. The introduction covers the field and resources, foundations explain principles, and projects offer chapter sequences and standalone experiments, grouped into AMD, simulation, and real robot projects. Simulation offers game-style free control and automatic policy showcases.
+
+The initial library includes the Go2 PPO locomotion policy and a Quaddle periodic gait reference. Use keyboard or on-screen controls, pause, reset, slow motion, and camera tracking. Go2 uses simplified visuals of the original collision model. See the [model integration guide](simulation/README.en.md).
 
 <a id="introduction"></a>
 

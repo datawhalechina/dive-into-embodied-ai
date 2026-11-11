@@ -51,6 +51,7 @@ const config: Config = {
 
   plugins: [
     './scripts/docusaurus-quaddle.cjs',
+    './scripts/docusaurus-simulation.cjs',
     function nativeCssLayers() {
       return {
         name: 'native-css-layers',
@@ -145,6 +146,12 @@ const config: Config = {
           type: 'custom-navbarMegaMenu',
           menuId: 'practices',
           position: 'left',
+        },
+        {
+          to: '/simulation',
+          label: '在线仿真',
+          position: 'left',
+          className: 'navbar-simulation',
         },
         {
           type: 'localeDropdown',
