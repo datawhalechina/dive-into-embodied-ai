@@ -24,8 +24,17 @@
   "sidebar.practicesOverviewSidebar.link.玩转 Pupper 四足机器人": {
     "message": "Explore the Pupper quadruped"
   },
+  "sidebar.practicesOverviewSidebar.link.机械臂系列": {
+    "message": "Robot arm series"
+  },
   "sidebar.practicesOverviewSidebar.link.四足系列": {
     "message": "Quadruped series"
+  },
+  "sidebar.practicesOverviewSidebar.link.双足系列": {
+    "message": "Biped series"
+  },
+  "sidebar.practicesOverviewSidebar.link.轮足系列": {
+    "message": "Wheeled biped series"
   },
   "sidebar.practicesOverviewSidebar.link.从零到一搭建四足机器人": {
     "message": "Build a quadruped from scratch"
@@ -86,5 +95,50 @@
   },
   "sidebar.practicesFlamingoCourseSidebar.link.← 项目实战": {
     "message": "← Projects"
+  },
+  "sidebar.practicesRobotArmSidebar.link.← 项目实战": {
+    "message": "← Projects"
+  },
+  "sidebar.practicesRobotArmSidebar.category.机械臂系列": {
+    "message": "Robot arm series"
+  },
+  "sidebar.practicesRobotArmSidebar.category.MuJoCo 与连续控制": {
+    "message": "MuJoCo and continuous control"
+  },
+  "sidebar.practicesRobotArmSidebar.category.模仿学习与 VLA 操作": {
+    "message": "Imitation learning and VLA manipulation"
+  },
+  "sidebar.practicesRobotArmSidebar.link.ACT 双臂操作训练（AMD）": {
+    "message": "ACT bimanual training (AMD)"
+  },
+  "sidebar.practicesRobotArmSidebar.category.数据工程与真机部署": {
+    "message": "Data engineering and real robots"
+  },
+  "sidebar.practicesRobotArmSidebar.link.LeRobot 中文课程讲义": {
+    "message": "LeRobot course notes in Chinese"
+  },
+  "sidebar.practicesRobotArmSidebar.link.SO-101 + LeRobot 真机教程": {
+    "message": "SO-101 + LeRobot hardware tutorial"
+  },
+  "sidebar.practicesHumanoidSidebar.link.← 项目实战": {
+    "message": "← Projects"
+  },
+  "sidebar.practicesHumanoidSidebar.category.双足系列": {
+    "message": "Biped series"
+  },
+  "sidebar.practicesHumanoidSidebar.category.MicroDuck 双足强化学习": {
+    "message": "MicroDuck biped reinforcement learning"
+  },
+  "sidebar.practicesHumanoidSidebar.link.MicroDuck RL（AMD）": {
+    "message": "MicroDuck RL (AMD)"
+  },
+  "sidebar.practicesWheelLeggedSidebar.link.← 项目实战": {
+    "message": "← Projects"
+  },
+  "sidebar.practicesWheelLeggedSidebar.category.轮足系列": {
+    "message": "Wheeled biped series"
+  },
+  "sidebar.practicesWheelLeggedSidebar.link.两轮足 Flamingo · Isaac Lab": {
+    "message": "Flamingo wheeled biped · Isaac Lab"
   }
 }

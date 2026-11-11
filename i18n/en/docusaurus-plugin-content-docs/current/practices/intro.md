@@ -21,11 +21,11 @@ Before starting, check the environment and goals. Keep your code, parameters, an
 
 | Direction | Projects | Suitable for |
 | --- | --- | --- |
-| [Robot arms](/docs/practices/robot-arm/placeholder) | 5 | VLA, data collection, and imitation learning |
-| [Quadrupeds](/docs/practices/quadruped/placeholder) | 5 | Reinforcement learning, control, and sim-to-real |
-| [Bipeds and humanoids](/docs/practices/humanoid/placeholder) | 1 available, 2 planned | Advanced control, reinforcement learning, and task planning |
-| [Mobile manipulation](/docs/practices/mobile-manipulation/placeholder) | 3 | Combining navigation and manipulation |
-| [Wheeled bipeds](/docs/practices/wheel-legged/placeholder) | Preview | Underactuated balance, Isaac Lab, and cross-simulator validation |
+| [Robot arm series](/docs/practices/robot-arm/placeholder) | 9 available, 2 planned | Continuous control, VLA, data collection, imitation learning, and real arms |
+| [Quadruped series](/docs/practices/quadruped/placeholder) | 3 available, 2 planned | Reinforcement learning, kinematics, gait control, and sim-to-real |
+| [Biped series](/docs/practices/humanoid/placeholder) | 4 available, 3 planned | Parallel GPU PPO, multi-stage curriculum learning, and balance control |
+| [Wheeled biped series](/docs/practices/wheel-legged/placeholder) | Course preview | Underactuated balance, Isaac Lab, and cross-simulator validation |
+| [Mobile manipulation](/docs/practices/mobile-manipulation/placeholder) | 3 planned | Combining navigation and manipulation |
 
 ## Available projects \{#available-projects}
 

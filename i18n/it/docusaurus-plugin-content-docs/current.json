@@ -23,8 +23,17 @@
   "sidebar.practicesOverviewSidebar.link.玩转 Pupper 四足机器人": {
     "message": "Esplora il quadrupede Pupper"
   },
+  "sidebar.practicesOverviewSidebar.link.机械臂系列": {
+    "message": "Serie bracci robotici"
+  },
   "sidebar.practicesOverviewSidebar.link.四足系列": {
     "message": "Serie quadrupedi"
+  },
+  "sidebar.practicesOverviewSidebar.link.双足系列": {
+    "message": "Serie bipedi"
+  },
+  "sidebar.practicesOverviewSidebar.link.轮足系列": {
+    "message": "Serie bipedi su ruote"
   },
   "sidebar.practicesOverviewSidebar.link.从零到一搭建四足机器人": {
     "message": "Costruisci un quadrupede da zero"
@@ -85,5 +94,50 @@
   },
   "sidebar.practicesFlamingoCourseSidebar.link.← 项目实战": {
     "message": "← Progetti"
+  },
+  "sidebar.practicesRobotArmSidebar.link.← 项目实战": {
+    "message": "← Progetti"
+  },
+  "sidebar.practicesRobotArmSidebar.category.机械臂系列": {
+    "message": "Serie bracci robotici"
+  },
+  "sidebar.practicesRobotArmSidebar.category.MuJoCo 与连续控制": {
+    "message": "MuJoCo e controllo continuo"
+  },
+  "sidebar.practicesRobotArmSidebar.category.模仿学习与 VLA 操作": {
+    "message": "Apprendimento per imitazione e VLA"
+  },
+  "sidebar.practicesRobotArmSidebar.link.ACT 双臂操作训练（AMD）": {
+    "message": "Addestramento bimanuale con ACT (AMD)"
+  },
+  "sidebar.practicesRobotArmSidebar.category.数据工程与真机部署": {
+    "message": "Ingegneria dei dati e robot reali"
+  },
+  "sidebar.practicesRobotArmSidebar.link.LeRobot 中文课程讲义": {
+    "message": "Dispense del corso LeRobot in cinese"
+  },
+  "sidebar.practicesRobotArmSidebar.link.SO-101 + LeRobot 真机教程": {
+    "message": "Tutorial hardware SO-101 + LeRobot"
+  },
+  "sidebar.practicesHumanoidSidebar.link.← 项目实战": {
+    "message": "← Progetti"
+  },
+  "sidebar.practicesHumanoidSidebar.category.双足系列": {
+    "message": "Serie bipedi"
+  },
+  "sidebar.practicesHumanoidSidebar.category.MicroDuck 双足强化学习": {
+    "message": "Apprendimento per rinforzo bipede MicroDuck"
+  },
+  "sidebar.practicesHumanoidSidebar.link.MicroDuck RL（AMD）": {
+    "message": "MicroDuck RL (AMD)"
+  },
+  "sidebar.practicesWheelLeggedSidebar.link.← 项目实战": {
+    "message": "← Progetti"
+  },
+  "sidebar.practicesWheelLeggedSidebar.category.轮足系列": {
+    "message": "Serie bipedi su ruote"
+  },
+  "sidebar.practicesWheelLeggedSidebar.link.两轮足 Flamingo · Isaac Lab": {
+    "message": "Bipede su ruote Flamingo · Isaac Lab"
   }
 }

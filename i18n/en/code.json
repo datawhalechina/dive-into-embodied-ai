@@ -1138,5 +1138,17 @@
   },
   "translationNotice.fallback": {
     "message": "This page is currently available in Chinese. Explore the English {introduction}, or {original}."
+  },
+  "MicroDuck RL｜AMD ROCm": {
+    "message": "MicroDuck RL · AMD ROCm"
+  },
+  "机械臂系列": {
+    "message": "Robot arm series"
+  },
+  "双足系列": {
+    "message": "Biped series"
+  },
+  "轮足系列": {
+    "message": "Wheeled biped series"
   }
 }

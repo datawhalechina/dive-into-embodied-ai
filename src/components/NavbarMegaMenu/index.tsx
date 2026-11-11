@@ -31,9 +31,10 @@ function getActiveItemTo(menu: MegaMenuConfig, pathname: string): string | null 
   if (exactMatch) {
     return exactMatch.to;
   }
-  const baseMatch = allItems.find(
-    (item) => item.activeBasePath && matchesPath(pathname, item.activeBasePath),
-  );
+  const baseMatch = allItems.find((item) => {
+    const basePaths = item.activeBasePaths ?? (item.activeBasePath ? [item.activeBasePath] : []);
+    return basePaths.some((basePath) => matchesPath(pathname, basePath));
+  });
   return baseMatch?.to ?? null;
 }
 

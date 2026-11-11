@@ -21,11 +21,11 @@ Verifica ambiente e obiettivi prima di iniziare. Conserva codice, parametri e ri
 
 | Direzione | Progetti | Adatta a |
 | --- | --- | --- |
-| [Bracci](/docs/practices/robot-arm/placeholder) | 5 | VLA, dati e imitazione |
-| [Quadrupedi](/docs/practices/quadruped/placeholder) | 5 | Rinforzo, controllo e sim-to-real |
-| [Bipedi e umanoidi](/docs/practices/humanoid/placeholder) | 1 disponibile, 2 previsti | Controllo avanzato, rinforzo e pianificazione |
-| [Manipolazione mobile](/docs/practices/mobile-manipulation/placeholder) | 3 | Navigazione e manipolazione |
-| [Bipedi su ruote](/docs/practices/wheel-legged/placeholder) | Anteprima | Equilibrio sottoattuato, Isaac Lab e validazione tra simulatori |
+| [Serie bracci robotici](/docs/practices/robot-arm/placeholder) | 9 disponibili, 2 previsti | Controllo continuo, VLA, raccolta dati, imitazione e bracci reali |
+| [Serie quadrupedi](/docs/practices/quadruped/placeholder) | 3 disponibili, 2 previsti | Apprendimento per rinforzo, cinematica, andature e sim-to-real |
+| [Serie bipedi](/docs/practices/humanoid/placeholder) | 4 disponibili, 3 previsti | PPO parallelo su GPU, curriculum multi-stadio ed equilibrio |
+| [Serie bipedi su ruote](/docs/practices/wheel-legged/placeholder) | Anteprima del corso | Equilibrio sottoattuato, Isaac Lab e validazione tra simulatori |
+| [Manipolazione mobile](/docs/practices/mobile-manipulation/placeholder) | 3 previsti | Navigazione e manipolazione |
 
 ## Progetti disponibili \{#available-projects}
 

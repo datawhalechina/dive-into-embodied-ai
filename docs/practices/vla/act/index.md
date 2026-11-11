@@ -1,6 +1,7 @@
 ---
 title: "ACT 双臂操作训练实战"
 sidebar_position: 1
+displayed_sidebar: practicesRobotArmSidebar
 ---
 
 # ACT 双臂操作训练实战：从数据到成功 GIF

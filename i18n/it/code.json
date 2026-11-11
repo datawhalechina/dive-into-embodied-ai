@@ -1183,5 +1183,17 @@
   },
   "theme.colorToggle.ariaLabel.mode.system": {
     "message": "modalità di sistema"
+  },
+  "MicroDuck RL｜AMD ROCm": {
+    "message": "MicroDuck RL · AMD ROCm"
+  },
+  "机械臂系列": {
+    "message": "Serie bracci robotici"
+  },
+  "双足系列": {
+    "message": "Serie bipedi"
+  },
+  "轮足系列": {
+    "message": "Serie bipedi su ruote"
   }
 }

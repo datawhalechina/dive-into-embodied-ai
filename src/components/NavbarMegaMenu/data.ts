@@ -4,6 +4,7 @@ export type MegaMenuItem = {
   title: string;
   to: string;
   activeBasePath?: string;
+  activeBasePaths?: string[];
 };
 
 export type MegaMenuColumn = {
@@ -125,14 +126,19 @@ export const megaMenus: MegaMenuConfig[] = [
             activeBasePath: '/docs/practices/amd/aup-learning-cloud',
           },
           {
-            title: translate({message: "ACT 双臂操作训练"}),
-            to: '/docs/practices/amd/vla-act',
-            activeBasePath: '/docs/practices/amd/vla-act',
-          },
-          {
             title: translate({message: "玩转 Pupper 四足机器人"}),
             to: '/docs/practices/amd/pupper-control/intro',
             activeBasePath: '/docs/practices/amd/pupper-control',
+          },
+          {
+            title: translate({message: "MicroDuck RL｜AMD ROCm"}),
+            to: '/docs/practices/amd/microduck-rl',
+            activeBasePath: '/docs/practices/amd/microduck-rl',
+          },
+          {
+            title: translate({message: "ACT 双臂操作训练"}),
+            to: '/docs/practices/amd/vla-act',
+            activeBasePath: '/docs/practices/amd/vla-act',
           },
         ],
       },
@@ -140,29 +146,24 @@ export const megaMenus: MegaMenuConfig[] = [
         title: translate({message: "仿真实战"}),
         items: [
           {
+            title: translate({message: "机械臂系列"}),
+            to: '/docs/practices/robot-arm/placeholder',
+            activeBasePaths: ['/docs/practices/robot-arm', '/docs/practices/vla'],
+          },
+          {
             title: translate({message: "四足系列"}),
             to: '/docs/practices/quadruped/placeholder',
             activeBasePath: '/docs/practices/quadruped',
           },
           {
-            title: translate({message: "MicroDuck RL 小黄鸭双足机器人"}),
-            to: '/docs/practices/humanoid/microduck-rl',
-            activeBasePath: '/docs/practices/humanoid/microduck-rl',
+            title: translate({message: "双足系列"}),
+            to: '/docs/practices/humanoid/placeholder',
+            activeBasePath: '/docs/practices/humanoid',
           },
           {
-            title: translate({message: "MuJoCo 机械臂与 DDPG"}),
-            to: '/docs/practices/robot-arm/mujoco-arm-pick-place',
-            activeBasePath: '/docs/practices/robot-arm/ddpg-mujoco',
-          },
-          {
-            title: translate({message: "ACT 双臂操作训练"}),
-            to: '/docs/practices/vla/act',
-            activeBasePath: '/docs/practices/vla/act',
-          },
-          {
-            title: translate({message: "两轮足 Flamingo · 课程预告"}),
-            to: '/docs/practices/wheel-legged/flamingo-isaaclab/preview',
-            activeBasePath: '/docs/practices/wheel-legged/flamingo-isaaclab',
+            title: translate({message: "轮足系列"}),
+            to: '/docs/practices/wheel-legged/placeholder',
+            activeBasePath: '/docs/practices/wheel-legged',
           },
         ],
       },

@@ -21,11 +21,11 @@ displayed_sidebar: practicesOverviewSidebar
 
 | 方向 | 项目数 | 适合 |
 |------|--------|------|
-| [机械臂](./robot-arm/placeholder) | 5 个 | VLA / 数据采集 / 模仿学习入门 |
-| [四足机器人](./quadruped/placeholder) | 5 个 | 强化学习 / 控制 / sim2real |
-| [双足 / 人形](./humanoid/placeholder) | 1 个已上线，2 个规划中 | 进阶控制 / 强化学习 / 任务规划 |
-| [移动操作](./mobile-manipulation/placeholder) | 3 个 | 导航 + 操作综合 |
-| [轮足机器人](./wheel-legged/placeholder) | 预告 | 欠驱动平衡 / Isaac Lab / 跨仿真验证 |
+| [机械臂系列](./robot-arm/placeholder) | 9 个已上线，2 个规划中 | 连续控制 / VLA / 数据采集 / 模仿学习 / 真机入门 |
+| [四足系列](./quadruped/placeholder) | 3 个已上线，2 个规划中 | 强化学习 / 运动学与步态控制 / sim2real |
+| [双足系列](./humanoid/placeholder) | 4 个已上线，3 个规划中 | GPU 并行 PPO / 长链课程学习 / 进阶平衡控制 |
+| [轮足系列](./wheel-legged/placeholder) | 课程预告 | 欠驱动平衡 / Isaac Lab / 跨仿真验证 |
+| [移动操作](./mobile-manipulation/placeholder) | 3 个规划中 | 导航 + 操作综合 |
 
 ## 已上线项目 \{#available-projects}
 
