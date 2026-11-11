@@ -33,11 +33,12 @@ Run website commands from the repository root:
 npm run dev                          # Chinese development server
 npm run start -- --locale en          # English development server
 npm run start -- --locale it          # Italian development server
-sh local-build.sh                    # Build all locales and serve locally
+sh local-build.sh                    # Restart this checkout's preview, rebuilding all locales
 npm run build                        # Production build for all configured locales
 npm run serve                        # Serve an existing build
 npm run typecheck                    # TypeScript checks
 npm run check:build-lock              # Concurrent builds and interrupted-process recovery
+npm run check:local-build             # Preview restart and process ownership checks
 npm run assets:webp:check             # Raster asset policy
 npm run check:i18n                    # After building: translations, routes, anchors
 npm run check:page-markdown           # After building: page Markdown export

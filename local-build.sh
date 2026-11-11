@@ -3,28 +3,68 @@
 set -eu
 
 REQUESTED_PORT="${1:-3001}"
-SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+
+case "$REQUESTED_PORT" in
+  ''|*[!0-9]*) echo "Port must be an integer from 1 to 65535." >&2; exit 1 ;;
+esac
+if [ "${#REQUESTED_PORT}" -gt 5 ] || [ "$REQUESTED_PORT" -lt 1 ] || [ "$REQUESTED_PORT" -gt 65535 ]; then
+  echo "Port must be an integer from 1 to 65535." >&2
+  exit 1
+fi
+
+if ! command -v lsof >/dev/null 2>&1; then
+  echo "Automatic preview restart requires lsof. Install lsof, then retry." >&2
+  exit 1
+fi
 
 is_port_in_use() {
-  port="$1"
+  lsof -nP -iTCP:"$1" -sTCP:LISTEN >/dev/null 2>&1
+}
 
-  if command -v lsof >/dev/null 2>&1; then
-    lsof -nP -iTCP:"$port" -sTCP:LISTEN >/dev/null 2>&1
-    return $?
-  fi
+is_project_preview() {
+  preview_cwd=$(lsof -a -p "$1" -d cwd -Fn 2>/dev/null | sed -n 's/^n//p')
+  [ "$preview_cwd" = "$SCRIPT_DIR" ] || return 1
+  preview_command=$(ps -p "$1" -o args= 2>/dev/null) || return 1
+  case "$preview_command" in
+    *node_modules/.bin/docusaurus\ serve\ *|*node_modules/@docusaurus/core/bin/docusaurus.mjs\ serve\ *) return 0 ;;
+    *) return 1 ;;
+  esac
+}
 
-  if command -v nc >/dev/null 2>&1; then
-    nc -z 127.0.0.1 "$port" >/dev/null 2>&1 || nc -z ::1 "$port" >/dev/null 2>&1
-    return $?
-  fi
+stop_existing_preview() {
+  listener_pids=$(lsof -nP -tiTCP:"$1" -sTCP:LISTEN 2>/dev/null || true)
+  [ -n "$listener_pids" ] || return 0
 
-  return 1
+  # Check every listener before stopping anything. Never stop another checkout,
+  # a dev server, or an unrelated program just because it uses this port.
+  for listener_pid in $listener_pids; do
+    is_project_preview "$listener_pid" || return 0
+  done
+  echo "==> Stopping this checkout's preview on port $1..." >&2
+  for listener_pid in $listener_pids; do
+    kill -TERM "$listener_pid" 2>/dev/null || true
+  done
+
+  attempts=0
+  while is_port_in_use "$1"; do
+    if [ "$attempts" -ge 5 ]; then
+      echo "Preview port $1 did not close. Stop the old preview manually, then retry." >&2
+      return 1
+    fi
+    sleep 1
+    attempts=$((attempts + 1))
+  done
 }
 
 find_available_port() {
   port="$1"
 
   while is_port_in_use "$port"; do
+    stop_existing_preview "$port" || return 1
+    if ! is_port_in_use "$port"; then
+      break
+    fi
     port=$((port + 1))
     if [ "$port" -gt 65535 ]; then
       echo "No available port found starting from ${REQUESTED_PORT}." >&2
@@ -63,6 +103,11 @@ if [ "$(npm --version 2>/dev/null || true)" != "$NPM_VERSION" ]; then
   exit 1
 fi
 
+PORT=$(find_available_port "$REQUESTED_PORT")
+if [ "$PORT" != "$REQUESTED_PORT" ]; then
+  echo "==> Port ${REQUESTED_PORT} belongs to another process; using ${PORT} instead"
+fi
+
 # A pull can add dependencies even when node_modules already exists.
 if [ ! -f node_modules/.package-lock.json ] ||
    [ package-lock.json -nt node_modules/.package-lock.json ] ||
@@ -78,10 +123,10 @@ export JOBS_DATA_MODE="${JOBS_DATA_MODE:-fixture}"
 echo "==> Building site... (JOBS_DATA_MODE=${JOBS_DATA_MODE})"
 npm run build
 
-PORT=$(find_available_port "$REQUESTED_PORT")
-
-if [ "$PORT" != "$REQUESTED_PORT" ]; then
-  echo "==> Port ${REQUESTED_PORT} is in use; using ${PORT} instead"
+# Another process could have taken the selected port while the build ran.
+if is_port_in_use "$PORT"; then
+  echo "Port ${PORT} was occupied during the build. Retry with another port." >&2
+  exit 1
 fi
 
 echo "==> Serving build output on http://localhost:${PORT}"

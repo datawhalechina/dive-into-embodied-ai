@@ -191,7 +191,9 @@ npm run start -- --locale en
 npm run start -- --locale it
 ```
 
-You can also run `sh local-build.sh` to build all languages and start a preview on port 3001, automatically trying the next port if it is occupied. Use `sh local-build.sh 3002` to choose a different starting port. The script checks Node/npm versions and runs `npm ci` when dependencies are missing or the lockfile has changed. If the active Node version differs, it tries an existing runtime at `${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v<version>-<platform>-<arch>/`; otherwise, it asks you to select the required version first.
+You can also run `sh local-build.sh` to build all languages and start a preview on port 3001. Run the same command again after editing pages to restart: the script uses `lsof` to check the process's working directory and command, stops this checkout's Docusaurus preview on that port, then rebuilds and starts it again. No manual `kill` is needed. Other programs and previews from other checkouts are preserved, and the script tries the next port instead. Use `sh local-build.sh 3002` to choose a different starting port. macOS usually includes `lsof`; on Ubuntu/Debian, install it with `sudo apt install lsof`.
+
+The script checks Node/npm versions and installs dependencies through `npm run install:locked` when dependencies are missing or the lockfile has changed. If the active Node version differs, it tries an existing runtime at `${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v<version>-<platform>-<arch>/`; otherwise, it asks you to select the required version first. If the build fails, the script exits without serving an incomplete build.
 
 The development server runs one language at a time. To test switching between all three languages, build, check, and serve the full site:
 

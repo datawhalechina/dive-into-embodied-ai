@@ -200,7 +200,9 @@ npm ci
 npm run dev
 ```
 
-也可运行 `sh local-build.sh` 构建所有语言并启动预览，默认端口为 3001（占用时自动顺延，也可用 `sh local-build.sh 3002` 指定起始端口）。脚本会检查 Node/npm 版本，并在依赖缺失或锁文件更新时自动运行 `npm ci`。如果当前 Node 版本不符，会尝试使用 `${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v<版本>-<平台>-<架构>/` 中已有的运行时；否则会提示先切换版本。
+也可运行 `sh local-build.sh` 构建所有语言并启动预览，默认端口为 3001。修改页面后再次运行同一命令即可重启：脚本通过 `lsof` 核对进程的工作目录和启动命令，停止当前仓库在该端口上的 Docusaurus 预览，再重新构建并启动，无需手动执行 `kill`。其他程序或其他仓库的服务会保留，端口自动顺延；也可用 `sh local-build.sh 3002` 指定起始端口。macOS 通常已安装 `lsof`，Ubuntu/Debian 可用 `sudo apt install lsof` 安装。
+
+脚本会检查 Node/npm 版本，并在依赖缺失或锁文件更新时通过 `npm run install:locked` 安装依赖。如果当前 Node 版本不符，会尝试使用 `${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v<版本>-<平台>-<架构>/` 中已有的运行时；否则会提示先切换版本。构建失败时脚本退出，不会启动不完整的预览。
 
 网站默认中文，可通过导航栏的语言菜单切换为 [English](https://datawhalechina.github.io/dive-into-embodied-ai/en/) 或 [Italiano](https://datawhalechina.github.io/dive-into-embodied-ai/it/)。英文和意大利语版本均覆盖 README、首页与导航、具身导论（含交互演示与资源页）、学习地图和项目总览。其他教程正文与独立实验页暂时显示中文，并用当前语言标注翻译范围。
 
