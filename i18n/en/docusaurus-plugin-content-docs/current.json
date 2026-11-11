@@ -24,8 +24,14 @@
   "sidebar.practicesOverviewSidebar.link.玩转 Pupper 四足机器人": {
     "message": "Explore the Pupper quadruped"
   },
+  "sidebar.practicesOverviewSidebar.link.四足系列": {
+    "message": "Quadruped series"
+  },
   "sidebar.practicesOverviewSidebar.link.从零到一搭建四足机器人": {
     "message": "Build a quadruped from scratch"
+  },
+  "sidebar.practicesOverviewSidebar.link.MicroDuck RL：教小黄鸭学会一个动作": {
+    "message": "MicroDuck RL: teach a biped duck one skill"
   },
   "sidebar.practicesOverviewSidebar.link.MicroDuck RL：走路、起身和翻滚": {
     "message": "MicroDuck RL: walking, standing up, and rolling"
@@ -56,6 +62,21 @@
   },
   "sidebar.practicesOverviewSidebar.link.Sim2Real 指南": {
     "message": "Sim2Real guide"
+  },
+  "sidebar.practicesQuadrupedSidebar.link.← 项目实战": {
+    "message": "← Projects"
+  },
+  "sidebar.practicesQuadrupedSidebar.category.四足系列": {
+    "message": "Quadruped series"
+  },
+  "sidebar.practicesQuadrupedSidebar.link.从零到一搭建四足机器人": {
+    "message": "Build a quadruped from scratch"
+  },
+  "sidebar.practicesQuadrupedSidebar.category.Petoi Quaddle 四足步行仿真": {
+    "message": "Petoi Quaddle walking simulation"
+  },
+  "sidebar.practicesQuadrupedSidebar.link.玩转 Pupper 四足机器人（AMD）": {
+    "message": "Explore the Pupper quadruped (AMD)"
   },
   "sidebar.practicesCs123CourseSidebar.link.← 项目实战": {
     "message": "← Projects"

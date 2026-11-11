@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import os
 import posixpath
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -56,21 +57,28 @@ def iter_text_files() -> list[Path]:
 
 
 def run_cwebp(source: Path, output: Path, quality: int) -> None:
-    subprocess.run(
-        [
-            "cwebp",
-            "-quiet",
-            "-m",
-            "6",
-            "-mt",
-            "-q",
-            str(quality),
-            str(source),
-            "-o",
-            str(output),
-        ],
-        check=True,
-    )
+    if shutil.which("cwebp"):
+        subprocess.run(
+            [
+                "cwebp",
+                "-quiet",
+                "-m",
+                "6",
+                "-mt",
+                "-q",
+                str(quality),
+                str(source),
+                "-o",
+                str(output),
+            ],
+            check=True,
+        )
+        return
+
+    from PIL import Image
+
+    with Image.open(source) as img:
+        img.save(output, format="WEBP", quality=quality, method=6)
 
 
 def convert_image(path: Path) -> tuple[Path, int, int, int]:

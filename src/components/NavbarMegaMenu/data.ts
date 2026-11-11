@@ -1,22 +1,12 @@
 import {translate} from '@docusaurus/Translate';
-export type MegaMenuSubItem = {
+export type MegaMenuItem = {
   icon?: string;
   title: string;
   description: string;
   to: string;
   activeBasePath?: string;
   keywords?: string[];
-};
-
-export type MegaMenuItem = {
-  icon?: string;
-  title: string;
-  description: string;
-  to?: string;
-  activeBasePath?: string;
-  keywords?: string[];
   featured?: boolean;
-  children?: MegaMenuSubItem[];
 };
 
 export type MegaMenuColumn = {
@@ -222,24 +212,10 @@ export const megaMenus: MegaMenuConfig[] = [
             icon: '🐕',
             title: translate({message: "四足系列"}),
             description: translate({message: "从零到一搭建四足机器人与 Petoi Quaddle 四足步行仿真。"}),
+            to: '/docs/practices/quadruped/placeholder',
+            activeBasePath: '/docs/practices/quadruped',
             keywords: ['CS123', 'Petoi Quaddle', 'MuJoCo'],
-            children: [
-              {
-                title: translate({message: "从零到一搭建四足机器人"}),
-                description: translate({message: "沿着 8 章主线，从 PD 控制与运动学走到策略训练和感知。"}),
-                to: '/docs/practices/quadruped/cs123/intro',
-                activeBasePath: '/docs/practices/quadruped/cs123',
-                keywords: ['CS123', 'MuJoCo', translate({message: "8 章"})],
-              },
-              {
-                icon: '🐕',
-                title: translate({message: "Petoi Quaddle 四足步行仿真"}),
-                description: translate({message: "在网页里控制行走与停止，学习四舵机步态和残差 PPO 训练。"}),
-                to: '/docs/practices/quadruped/quaddle-mujoco',
-                activeBasePath: '/docs/practices/quadruped/quaddle-mujoco',
-                keywords: ['Petoi', 'Quaddle', 'MuJoCo'],
-              },
-            ],
+            featured: true,
           },
           {
             icon: '🐥',

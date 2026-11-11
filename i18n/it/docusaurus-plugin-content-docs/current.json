@@ -23,8 +23,14 @@
   "sidebar.practicesOverviewSidebar.link.玩转 Pupper 四足机器人": {
     "message": "Esplora il quadrupede Pupper"
   },
+  "sidebar.practicesOverviewSidebar.link.四足系列": {
+    "message": "Serie quadrupedi"
+  },
   "sidebar.practicesOverviewSidebar.link.从零到一搭建四足机器人": {
     "message": "Costruisci un quadrupede da zero"
+  },
+  "sidebar.practicesOverviewSidebar.link.MicroDuck RL：教小黄鸭学会一个动作": {
+    "message": "MicroDuck RL: insegna un movimento al paperotto"
   },
   "sidebar.practicesOverviewSidebar.link.MicroDuck RL：走路、起身和翻滚": {
     "message": "MicroDuck RL: camminare, rialzarsi e rotolare"
@@ -55,6 +61,21 @@
   },
   "sidebar.practicesOverviewSidebar.link.Sim2Real 指南": {
     "message": "Guida Sim2Real"
+  },
+  "sidebar.practicesQuadrupedSidebar.link.← 项目实战": {
+    "message": "← Progetti"
+  },
+  "sidebar.practicesQuadrupedSidebar.category.四足系列": {
+    "message": "Serie quadrupedi"
+  },
+  "sidebar.practicesQuadrupedSidebar.link.从零到一搭建四足机器人": {
+    "message": "Costruisci un quadrupede da zero"
+  },
+  "sidebar.practicesQuadrupedSidebar.category.Petoi Quaddle 四足步行仿真": {
+    "message": "Simulazione di camminata Petoi Quaddle"
+  },
+  "sidebar.practicesQuadrupedSidebar.link.玩转 Pupper 四足机器人（AMD）": {
+    "message": "Esplora il quadrupede Pupper (AMD)"
   },
   "sidebar.practicesCs123CourseSidebar.link.← 项目实战": {
     "message": "← Progetti"

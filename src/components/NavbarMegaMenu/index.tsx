@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import {ChevronDown} from 'lucide-react';
 import {useLocalPathname} from '@docusaurus/theme-common/internal';
-import {getMegaMenuById, type MegaMenuConfig, type MegaMenuItem, type MegaMenuSubItem} from './data';
+import {getMegaMenuById, type MegaMenuConfig, type MegaMenuItem} from './data';
 
 type NavbarMegaMenuProps = {
   menuId: string;
@@ -25,16 +25,8 @@ function matchesPath(pathname: string, basePath: string): boolean {
   return current === base || current.startsWith(`${base}/`);
 }
 
-function isSubItemActive(item: MegaMenuSubItem, pathname: string): boolean {
-  return matchesPath(pathname, item.activeBasePath ?? item.to);
-}
-
 function isItemActive(item: MegaMenuItem, pathname: string): boolean {
-  if (item.children?.length) {
-    return item.children.some((child) => isSubItemActive(child, pathname));
-  }
-  const basePath = item.activeBasePath ?? item.to;
-  return basePath ? matchesPath(pathname, basePath) : false;
+  return matchesPath(pathname, item.activeBasePath ?? item.to);
 }
 
 function isMenuActive(menu: MegaMenuConfig, pathname: string): boolean {
@@ -43,7 +35,6 @@ function isMenuActive(menu: MegaMenuConfig, pathname: string): boolean {
 
 function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
   const [open, setOpen] = useState(false);
-  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
   const [panelLeft, setPanelLeft] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -190,128 +181,36 @@ function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
               <section key={column.title} className="navbar-mega__column">
                 <h3 className="navbar-mega__columnTitle">{column.title}</h3>
                 <div className="navbar-mega__list">
-                  {column.items.map((item, itemIndex) => {
-                    if (item.children?.length) {
-                      const groupKey = `${column.title}-${item.title}-${itemIndex}`;
-                      const sublistId = `navbar-sublist-${menu.id}-${itemIndex}`;
-                      const hasActiveChild = item.children.some((child) => isSubItemActive(child, pathname));
-                      const isExpanded = expandedGroups[groupKey] ?? hasActiveChild;
-
-                      return (
-                        <div
-                          key={groupKey}
-                          className={clsx('navbar-mega__group', {
-                            'navbar-mega__group--expanded': isExpanded,
-                          })}
-                        >
-                          <button
-                            type="button"
-                            className={clsx('navbar-mega__item', 'navbar-mega__item--trigger', {
-                              'navbar-mega__item--featured': item.featured,
-                              'navbar-mega__item--active': hasActiveChild,
-                              'navbar-mega__item--expanded': isExpanded,
-                            })}
-                            aria-expanded={isExpanded}
-                            aria-controls={sublistId}
-                            onClick={() => {
-                              setExpandedGroups((prev) => ({
-                                ...prev,
-                                [groupKey]: !isExpanded,
-                              }));
-                            }}
-                          >
-                            <div className="navbar-mega__itemRow">
-                              <div className="navbar-mega__itemBody">
-                                <div className="navbar-mega__itemHeader">
-                                  <div className="navbar-mega__itemTitle">{item.title}</div>
-                                  <ChevronDown
-                                    size={16}
-                                    className="navbar-mega__itemChevron"
-                                    aria-hidden="true"
-                                  />
-                                </div>
-                                <p className="navbar-mega__itemDescription">{item.description}</p>
-                                {!!item.keywords?.length && (
-                                  <div className="navbar-mega__itemKeywords">
-                                    {item.keywords.map((keyword) => (
-                                      <span key={keyword} className="navbar-mega__keyword">
-                                        {keyword}
-                                      </span>
-                                    ))}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          </button>
-
-                          {isExpanded && (
-                            <div id={sublistId} className="navbar-mega__sublist">
-                              {item.children.map((child) => (
-                                <Link
-                                  key={child.to}
-                                  to={child.to}
-                                  className={clsx('navbar-mega__item', 'navbar-mega__subitem', {
-                                    'navbar-mega__item--active': isSubItemActive(child, pathname),
-                                  })}
-                                  onClick={() => {
-                                    clearCloseTimeout();
-                                    setOpen(false);
-                                  }}
-                                >
-                                  <div className="navbar-mega__itemRow">
-                                    <div className="navbar-mega__itemBody">
-                                      <div className="navbar-mega__itemTitle">{child.title}</div>
-                                      <p className="navbar-mega__itemDescription">{child.description}</p>
-                                      {!!child.keywords?.length && (
-                                        <div className="navbar-mega__itemKeywords">
-                                          {child.keywords.map((keyword) => (
-                                            <span key={keyword} className="navbar-mega__keyword">
-                                              {keyword}
-                                            </span>
-                                          ))}
-                                        </div>
-                                      )}
-                                    </div>
-                                  </div>
-                                </Link>
+                  {column.items.map((item) => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      className={clsx('navbar-mega__item', {
+                        'navbar-mega__item--featured': item.featured,
+                        'navbar-mega__item--active': isItemActive(item, pathname),
+                      })}
+                      onClick={() => {
+                        clearCloseTimeout();
+                        setOpen(false);
+                      }}
+                    >
+                      <div className="navbar-mega__itemRow">
+                        <div className="navbar-mega__itemBody">
+                          <div className="navbar-mega__itemTitle">{item.title}</div>
+                          <p className="navbar-mega__itemDescription">{item.description}</p>
+                          {!!item.keywords?.length && (
+                            <div className="navbar-mega__itemKeywords">
+                              {item.keywords.map((keyword) => (
+                                <span key={keyword} className="navbar-mega__keyword">
+                                  {keyword}
+                                </span>
                               ))}
                             </div>
                           )}
                         </div>
-                      );
-                    }
-
-                    return (
-                      <Link
-                        key={item.to ?? item.title}
-                        to={item.to}
-                        className={clsx('navbar-mega__item', {
-                          'navbar-mega__item--featured': item.featured,
-                          'navbar-mega__item--active': isItemActive(item, pathname),
-                        })}
-                        onClick={() => {
-                          clearCloseTimeout();
-                          setOpen(false);
-                        }}
-                      >
-                        <div className="navbar-mega__itemRow">
-                          <div className="navbar-mega__itemBody">
-                            <div className="navbar-mega__itemTitle">{item.title}</div>
-                            <p className="navbar-mega__itemDescription">{item.description}</p>
-                            {!!item.keywords?.length && (
-                              <div className="navbar-mega__itemKeywords">
-                                {item.keywords.map((keyword) => (
-                                  <span key={keyword} className="navbar-mega__keyword">
-                                    {keyword}
-                                  </span>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </Link>
-                    );
-                  })}
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </section>
             ))}

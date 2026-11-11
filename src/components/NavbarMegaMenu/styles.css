@@ -15,19 +15,11 @@
 .navbar-mega__column + .navbar-mega__column {border-left: 1px solid var(--site-border);}
 .navbar-mega__columnTitle {margin: .25rem .6rem .75rem; font-size: .875rem; font-weight: 600; color: var(--site-muted);}
 .navbar-mega__list {display: flex; flex-direction: column; gap: .35rem;}
-.navbar-mega__group {display: flex; flex-direction: column; gap: .25rem;}
-.navbar-mega__item {display: block; min-height: 44px; padding: .75rem; border-radius: 12px; border: 1px solid transparent; color: var(--site-ink); text-decoration: none; transition: background-color .18s ease, border-color .18s ease;}
-.navbar-mega__item--trigger {width: 100%; text-align: left; background: transparent; cursor: pointer; font: inherit;}
+.navbar-mega__item {display: block; min-height: 44px; padding: .75rem; border-radius: 12px; border: 1px solid transparent; color: var(--site-ink); text-decoration: none; transition: background-color .18s ease;}
 .navbar-mega__item:hover {color: var(--site-ink); text-decoration: none; background: var(--site-canvas);}
-.navbar-mega__item--expanded {border-color: var(--site-border); background: var(--site-canvas);}
 .navbar-mega__item--active, .navbar-mega__item--active:hover {border-color: var(--site-border); background: var(--ifm-menu-color-background-active);}
 .navbar-mega__itemBody {min-width: 0;}
-.navbar-mega__itemHeader {display: flex; align-items: center; justify-content: space-between; gap: .5rem;}
 .navbar-mega__itemTitle {font-size: .9375rem; font-weight: 600; line-height: 1.5;}
-.navbar-mega__itemChevron {flex-shrink: 0; color: var(--site-muted); transition: transform .18s ease, color .18s ease;}
-.navbar-mega__item--expanded .navbar-mega__itemChevron {transform: rotate(180deg); color: var(--site-blue);}
-.navbar-mega__sublist {display: flex; flex-direction: column; gap: .3rem; margin-left: .65rem; padding-left: .65rem; border-left: 2px solid var(--site-border);}
-.navbar-mega__subitem {padding: .6rem .75rem;}
 .navbar-mega__itemDescription {margin: .3rem 0 0; font-size: .875rem; line-height: 1.6; color: var(--site-muted);}
 .navbar-mega__itemKeywords {display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .5rem;}
 .navbar-mega__keyword {display: inline-flex; padding: .1rem .45rem; border-radius: 4px; font-size: .75rem; color: var(--site-muted); background: var(--site-canvas);}
