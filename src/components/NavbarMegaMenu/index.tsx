@@ -25,22 +25,39 @@ function matchesPath(pathname: string, basePath: string): boolean {
   return current === base || current.startsWith(`${base}/`);
 }
 
-function isItemActive(item: MegaMenuItem, pathname: string): boolean {
-  return matchesPath(pathname, item.activeBasePath ?? item.to);
+function getActiveItemTo(menu: MegaMenuConfig, pathname: string): string | null {
+  const allItems: MegaMenuItem[] = menu.columns.flatMap((column) => column.items);
+  const exactMatch = allItems.find((item) => matchesPath(pathname, item.to));
+  if (exactMatch) {
+    return exactMatch.to;
+  }
+  const baseMatch = allItems.find(
+    (item) => item.activeBasePath && matchesPath(pathname, item.activeBasePath),
+  );
+  return baseMatch?.to ?? null;
 }
 
 function isMenuActive(menu: MegaMenuConfig, pathname: string): boolean {
   return menu.activeBasePaths.some((basePath) => matchesPath(pathname, basePath));
 }
 
+const activeMenuListeners = new Set<(menuId: string | null) => void>();
+
+function notifyMenuOpened(menuId: string) {
+  activeMenuListeners.forEach((listener) => listener(menuId));
+}
+
 function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
   const [open, setOpen] = useState(false);
-  const [panelLeft, setPanelLeft] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLAnchorElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const focusFirstOnOpenRef = useRef(false);
+  const lastPointerTypeRef = useRef<string>('mouse');
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = useLocalPathname();
   const menuActive = isMenuActive(menu, pathname);
+  const activeItemTo = getActiveItemTo(menu, pathname);
 
   const clearCloseTimeout = () => {
     if (timeoutRef.current) {
@@ -49,9 +66,19 @@ function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
     }
   };
 
-  const handleMouseEnter = () => {
+  const openMenu = () => {
     clearCloseTimeout();
+    notifyMenuOpened(menu.id);
     setOpen(true);
+  };
+
+  const closeMenu = () => {
+    clearCloseTimeout();
+    setOpen(false);
+  };
+
+  const handleMouseEnter = () => {
+    openMenu();
   };
 
   const handleMouseLeave = () => {
@@ -59,8 +86,32 @@ function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
     timeoutRef.current = setTimeout(() => {
       timeoutRef.current = null;
       setOpen(false);
-    }, 150);
+    }, 140);
   };
+
+  useEffect(() => {
+    const listener = (openedId: string | null) => {
+      if (openedId !== menu.id) {
+        clearCloseTimeout();
+        setOpen(false);
+      }
+    };
+    activeMenuListeners.add(listener);
+    return () => {
+      activeMenuListeners.delete(listener);
+    };
+  }, [menu.id]);
+
+  useEffect(() => {
+    closeMenu();
+  }, [pathname]);
+
+  useEffect(() => {
+    if (open && focusFirstOnOpenRef.current) {
+      focusFirstOnOpenRef.current = false;
+      panelRef.current?.querySelector<HTMLAnchorElement>('a')?.focus();
+    }
+  }, [open]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -68,8 +119,7 @@ function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
         if (containerRef.current?.contains(document.activeElement)) {
           triggerRef.current?.focus();
         }
-        clearCloseTimeout();
-        setOpen(false);
+        closeMenu();
       }
     };
     document.addEventListener('keydown', onKeyDown);
@@ -80,154 +130,112 @@ function NavbarMegaMenuDesktop({menu}: {menu: MegaMenuConfig}) {
   }, []);
 
   useEffect(() => {
-    const onPointerDown = (event: MouseEvent) => {
+    const onPointerDown = (event: PointerEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        clearCloseTimeout();
-        setOpen(false);
+        closeMenu();
       }
     };
-    document.addEventListener('mousedown', onPointerDown);
-    return () => document.removeEventListener('mousedown', onPointerDown);
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => document.removeEventListener('pointerdown', onPointerDown);
   }, []);
-
-  useEffect(() => {
-    if (!open) return;
-
-    const updatePanelLeft = () => {
-      if (!triggerRef.current) return;
-
-      const rect = triggerRef.current.getBoundingClientRect();
-      const viewportWidth = window.innerWidth;
-      const panelWidth = Math.min(menu.panelWidth, viewportWidth - 24);
-      const halfPanelWidth = panelWidth / 2;
-      const viewportPadding = 12;
-      const preferredCenter = rect.left + rect.width / 2;
-      const minCenter = halfPanelWidth + viewportPadding;
-      const maxCenter = viewportWidth - halfPanelWidth - viewportPadding;
-      const clampedCenter = Math.max(minCenter, Math.min(maxCenter, preferredCenter));
-
-      setPanelLeft(clampedCenter);
-    };
-
-    updatePanelLeft();
-    window.addEventListener('resize', updatePanelLeft);
-    window.addEventListener('scroll', updatePanelLeft, true);
-    return () => {
-      window.removeEventListener('resize', updatePanelLeft);
-      window.removeEventListener('scroll', updatePanelLeft, true);
-    };
-  }, [open, menu.panelWidth]);
 
   return (
     <div
       ref={containerRef}
       className="navbar__item navbar-mega"
-      style={
-        {
-          '--mega-width': `${menu.panelWidth}px`,
-          '--mega-columns': String(menu.columns.length),
-        } as CSSProperties
-      }
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      style={{'--mega-columns': String(menu.columns.length)} as CSSProperties}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-          clearCloseTimeout();
-          setOpen(false);
+          closeMenu();
         }
       }}
     >
-      <button
-        ref={triggerRef}
-        type="button"
-        className={clsx('navbar__link', 'navbar-mega__trigger', {
-          'navbar__link--active': menuActive,
-          'navbar-mega__trigger--open': open,
-        })}
-        aria-expanded={open}
-        aria-controls={`navbar-panel-${menu.id}`}
-        id={`navbar-trigger-${menu.id}`}
-        onClick={(event) => {
-          clearCloseTimeout();
-          // Hover already opens the disclosure for a pointer; keyboard activation toggles it.
-          setOpen((value) => event.detail === 0 ? !value : true);
-        }}
+      <div
+        className="navbar-mega__triggerWrap"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
-        <span>{menu.label}</span>
-        <ChevronDown size={14} aria-hidden="true" />
-      </button>
+        <Link
+          ref={triggerRef}
+          to={menu.to}
+          className={clsx('navbar__link', 'navbar-mega__trigger', {
+            'navbar__link--active': menuActive,
+            'navbar-mega__trigger--open': open,
+          })}
+          aria-expanded={open}
+          aria-controls={`navbar-panel-${menu.id}`}
+          id={`navbar-trigger-${menu.id}`}
+          onPointerDown={(event) => {
+            lastPointerTypeRef.current = event.pointerType;
+          }}
+          onKeyDown={(event) => {
+            if (event.key === 'ArrowDown') {
+              event.preventDefault();
+              if (open) {
+                panelRef.current?.querySelector<HTMLAnchorElement>('a')?.focus();
+              } else {
+                focusFirstOnOpenRef.current = true;
+                openMenu();
+              }
+            }
+          }}
+          onClick={(event) => {
+            if (lastPointerTypeRef.current === 'touch' && !open) {
+              event.preventDefault();
+              openMenu();
+              return;
+            }
+            closeMenu();
+          }}
+        >
+          <span>{menu.label}</span>
+          <ChevronDown size={13} aria-hidden="true" />
+        </Link>
+      </div>
 
       {open && (
         <div
           className="navbar-mega__backdrop"
           aria-hidden="true"
-          onClick={() => {
-            clearCloseTimeout();
-            setOpen(false);
-          }}
+          onClick={closeMenu}
         />
       )}
 
       <div
+        ref={panelRef}
         id={`navbar-panel-${menu.id}`}
         role="region"
         aria-labelledby={`navbar-trigger-${menu.id}`}
         className={clsx('navbar-mega__panel', {'navbar-mega__panel--open': open})}
-        style={panelLeft ? ({left: `${panelLeft}px`} as CSSProperties) : undefined}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <div className="navbar-mega__surface">
           <div className="navbar-mega__columns">
             {menu.columns.map((column) => (
               <section key={column.title} className="navbar-mega__column">
                 <h3 className="navbar-mega__columnTitle">{column.title}</h3>
-                <div className="navbar-mega__list">
-                  {column.items.map((item) => (
-                    <Link
-                      key={item.to}
-                      to={item.to}
-                      className={clsx('navbar-mega__item', {
-                        'navbar-mega__item--featured': item.featured,
-                        'navbar-mega__item--active': isItemActive(item, pathname),
-                      })}
-                      onClick={() => {
-                        clearCloseTimeout();
-                        setOpen(false);
-                      }}
-                    >
-                      <div className="navbar-mega__itemRow">
-                        <div className="navbar-mega__itemBody">
-                          <div className="navbar-mega__itemTitle">{item.title}</div>
-                          <p className="navbar-mega__itemDescription">{item.description}</p>
-                          {!!item.keywords?.length && (
-                            <div className="navbar-mega__itemKeywords">
-                              {item.keywords.map((keyword) => (
-                                <span key={keyword} className="navbar-mega__keyword">
-                                  {keyword}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+                <ul className="navbar-mega__list">
+                  {column.items.map((item) => {
+                    const active = activeItemTo === item.to;
+                    return (
+                      <li key={item.to}>
+                        <Link
+                          to={item.to}
+                          aria-current={active ? 'page' : undefined}
+                          className={clsx('navbar-mega__item', {
+                            'navbar-mega__item--active': active,
+                          })}
+                          onClick={closeMenu}
+                        >
+                          {item.title}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
               </section>
             ))}
-          </div>
-
-          <div className="navbar-mega__footer">
-            <span className="navbar-mega__footerText">{menu.footer.text}</span>
-            <Link
-              className="navbar-mega__footerLink"
-              to={menu.footer.to}
-              onClick={() => {
-                clearCloseTimeout();
-                setOpen(false);
-              }}
-            >
-              {menu.footer.ctaLabel}
-            </Link>
           </div>
         </div>
       </div>
@@ -240,7 +248,7 @@ function NavbarMegaMenuMobile({menu, onClick}: {menu: MegaMenuConfig; onClick?: 
   const active = isMenuActive(menu, pathname);
   return (
     <Link
-      to={menu.footer.to}
+      to={menu.to}
       onClick={onClick}
       className={clsx('menu__link', {'menu__link--active': active})}>
       {menu.label}
