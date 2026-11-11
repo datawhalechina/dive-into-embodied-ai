@@ -13,7 +13,7 @@ Scegli piattaforme e ambienti secondo il loro scopo e inizia dalla documentazion
 | Strumento | Uso principale | Accesso ufficiale | Studia nel sito |
 | --- | --- | --- | --- |
 | MuJoCo | Dinamica, contatti e controllo robotico | [Sito e documentazione](https://mujoco.org/) | [Fondamenti](/docs/foundations/simulation/mujoco) · [Progetto iniziale](/docs/practices/robot-arm/mujoco-arm-pick-place) |
-| Isaac Lab | Apprendimento e simulazione su Isaac Sim | [Documentazione](https://isaac-sim.github.io/IsaacLab/main/index.html) | [Anteprima del corso Flamingo](/docs/practices/wheel-legged/flamingo-isaaclab/preview) |
+| Isaac Lab | Apprendimento e simulazione su Isaac Sim | [Documentazione](https://isaac-sim.github.io/IsaacLab/main/index.html) | [Corso pratico Flamingo](/docs/practices/humanoid/flamingo-isaaclab/intro) |
 | Gymnasium | Interfacce di ambienti RL e compiti di riferimento | [Documentazione](https://gymnasium.farama.org/) | [Primi passi](/docs/foundations/simulation/gymnasium) |
 
 </div>

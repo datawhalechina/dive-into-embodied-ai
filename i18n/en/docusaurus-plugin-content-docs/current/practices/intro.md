@@ -13,7 +13,7 @@ Choose a task and work through environment setup, training, control, and evaluat
 - To build a system from scratch: start with the [quadruped project](/docs/practices/quadruped/cs123/intro). Its eight chapters cover actuators, kinematics, modeling, gaits, and policy training. Basic Python is required; you can study control and linear algebra alongside the experiments.
 - To learn about arm datasets and hardware operation: read the [LeRobot course notes in Chinese](/docs/practices/robot-arm/data-collection/lerobot-course), then move on to the [SO-101 hardware tutorial](/docs/practices/robot-arm/data-collection/so101-lerobot-real). The notes cover Units 0–2 and require basic Python; the hardware tutorial requires a compatible robot.
 - To try a simulation first: choose [MicroDuck RL](/docs/practices/humanoid/microduck-rl) or [ACT bimanual manipulation](/docs/practices/vla/act), and set up the required environment.
-- To explore wheeled-biped balance control: read the [Flamingo project preview](/docs/practices/wheel-legged/flamingo-isaaclab/preview) for prerequisites and planned experiments.
+- To master wheeled-biped balance and cross-simulator deployment: follow the [Flamingo wheeled biped · Isaac Lab course](/docs/practices/humanoid/flamingo-isaaclab/intro), whose six chapters cover parallel PPO, Constraints as Terminations (CaT), ONNX export, and MuJoCo robustness benchmarking.
 
 Before starting, check the environment and goals. Keep your code, parameters, and results as you work, then use evaluation and failure cases to check your understanding. The project chapters are currently in Chinese; the status labels below describe the available source content.
 
@@ -23,12 +23,12 @@ Before starting, check the environment and goals. Keep your code, parameters, an
 | --- | --- | --- |
 | [Robot arm series](/docs/practices/robot-arm/placeholder) | 9 available, 2 planned | Continuous control, VLA, data collection, imitation learning, and real arms |
 | [Quadruped series](/docs/practices/quadruped/placeholder) | 3 available, 2 planned | Reinforcement learning, kinematics, gait control, and sim-to-real |
-| [Biped series](/docs/practices/humanoid/placeholder) | 4 available, 3 planned | Parallel GPU PPO, multi-stage curriculum learning, and balance control |
-| [Wheeled biped series](/docs/practices/wheel-legged/placeholder) | Course preview | Underactuated balance, Isaac Lab, and cross-simulator validation |
+| [Biped series](/docs/practices/humanoid/placeholder) | 5 available, 3 planned | Wheeled-biped Isaac Lab + CaT, parallel GPU PPO, and multi-stage curriculum learning |
 | [Mobile manipulation](/docs/practices/mobile-manipulation/placeholder) | 3 planned | Combining navigation and manipulation |
 
 ## Available projects \{#available-projects}
 
+- [Flamingo wheeled biped · Isaac Lab](/docs/practices/humanoid/flamingo-isaaclab/intro): build an end-to-end RL locomotion pipeline for an 8-DoF wheeled biped, covering delayed/geared actuators, 4096-env PPO vs CaT, ONNX normalizer fusion, and zero-shot MuJoCo Sim2Sim stress tests (overview and 6 chapters).
 - [MicroDuck RL: walking, standing up, and rolling](/docs/practices/humanoid/microduck-rl): start with MJCF, BAM actuators, and mjlab task registration; train 18 motion modes in MuJoCo Warp and inspect offscreen evaluation through GIF and MP4 recordings.
 
 ## AMD projects \{#amd}
@@ -52,7 +52,7 @@ Before starting, check the environment and goals. Keep your code, parameters, an
 | [ACT bimanual training](/docs/practices/vla/act) | ALOHA, imitation learning, ACT, and evaluation over multiple episodes | Available |
 | [π₀.₅ + RECAP: LIBERO reproduction](/docs/practices/vla/recap) | Value models, advantage annotation, ACP, and LIBERO evaluation | Available |
 | [Sim2Sim validation](/docs/practices/quadruped/sim2sim/placeholder) | Cross-simulator policy validation | In development |
-| [Flamingo wheeled biped · Isaac Lab](/docs/practices/wheel-legged/flamingo-isaaclab/preview) | Balance, reinforcement learning, and cross-simulator validation | Course preview |
+| [Flamingo wheeled biped · Isaac Lab](/docs/practices/humanoid/flamingo-isaaclab/intro) | 8-DoF wheeled-biped balance, PPO vs CaT, ONNX export, and MuJoCo Sim2Sim benchmarking | Overview and 6 chapters available |
 
 ## Real robot projects \{#real-robots}
 

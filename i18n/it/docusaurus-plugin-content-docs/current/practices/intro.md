@@ -13,7 +13,7 @@ Scegli un compito e affronta ambiente, addestramento, controllo e valutazione co
 - Da zero: il [progetto sui quadrupedi](/docs/practices/quadruped/cs123/intro) ha otto capitoli su attuatori, cinematica, modellazione, andature e politiche. Serve Python di base; puoi imparare controllo e algebra lineare durante la pratica.
 - Dati e hardware dei bracci: [dispense LeRobot in cinese](/docs/practices/robot-arm/data-collection/lerobot-course), unità 0–2 e Python di base, poi [SO-101](/docs/practices/robot-arm/data-collection/so101-lerobot-real), che richiede un robot compatibile.
 - Prima simulazione: [MicroDuck RL](/docs/practices/humanoid/microduck-rl) o [ACT bimanuale](/docs/practices/vla/act), configurando l'ambiente.
-- Equilibrio dei bipedi su ruote: [anteprima Flamingo](/docs/practices/wheel-legged/flamingo-isaaclab/preview), con prerequisiti ed esperimenti previsti.
+- Equilibrio dei bipedi su ruote e validazione tra simulatori: il [corso Flamingo · Isaac Lab](/docs/practices/humanoid/flamingo-isaaclab/intro) guida in sei capitoli tra PPO parallelo, Constraints as Terminations (CaT), esportazione ONNX e test di robustezza in MuJoCo.
 
 Verifica ambiente e obiettivi prima di iniziare. Conserva codice, parametri e risultati e analizza valutazioni e guasti. I capitoli dei progetti sono attualmente in cinese; gli stati seguenti descrivono quel contenuto originale.
 
@@ -23,12 +23,12 @@ Verifica ambiente e obiettivi prima di iniziare. Conserva codice, parametri e ri
 | --- | --- | --- |
 | [Serie bracci robotici](/docs/practices/robot-arm/placeholder) | 9 disponibili, 2 previsti | Controllo continuo, VLA, raccolta dati, imitazione e bracci reali |
 | [Serie quadrupedi](/docs/practices/quadruped/placeholder) | 3 disponibili, 2 previsti | Apprendimento per rinforzo, cinematica, andature e sim-to-real |
-| [Serie bipedi](/docs/practices/humanoid/placeholder) | 4 disponibili, 3 previsti | PPO parallelo su GPU, curriculum multi-stadio ed equilibrio |
-| [Serie bipedi su ruote](/docs/practices/wheel-legged/placeholder) | Anteprima del corso | Equilibrio sottoattuato, Isaac Lab e validazione tra simulatori |
+| [Serie bipedi](/docs/practices/humanoid/placeholder) | 5 disponibili, 3 previsti | Flamingo su Isaac Lab + CaT, PPO parallelo su GPU e curriculum multi-stadio |
 | [Manipolazione mobile](/docs/practices/mobile-manipulation/placeholder) | 3 previsti | Navigazione e manipolazione |
 
 ## Progetti disponibili \{#available-projects}
 
+- [Flamingo · Isaac Lab](/docs/practices/humanoid/flamingo-isaaclab/intro): pipeline completa per un bipede su ruote a 8 gradi di libertà, con attuatori ritardati, PPO vs CaT su 4096 ambienti, fusione ONNX e test zero-shot in MuJoCo (panoramica e 6 capitoli).
 - [MicroDuck RL: camminare, rialzarsi e rotolare](/docs/practices/humanoid/microduck-rl): MJCF, attuatori BAM e registrazione dei compiti mjlab; 18 modalità di movimento con MuJoCo Warp e valutazione senza schermo tramite GIF e MP4.
 
 ## Progetti AMD \{#amd}
@@ -52,7 +52,7 @@ Verifica ambiente e obiettivi prima di iniziare. Conserva codice, parametri e ri
 | [ACT bimanuale](/docs/practices/vla/act) | ALOHA, imitazione e valutazione su più episodi | Disponibile |
 | [π₀.₅ + RECAP: LIBERO](/docs/practices/vla/recap) | Modelli di valore, vantaggi, ACP e valutazione LIBERO | Disponibile |
 | [Validazione Sim2Sim](/docs/practices/quadruped/sim2sim/placeholder) | Politiche tra simulatori | In sviluppo |
-| [Flamingo · Isaac Lab](/docs/practices/wheel-legged/flamingo-isaaclab/preview) | Equilibrio, rinforzo e validazione tra simulatori | Anteprima del corso |
+| [Flamingo · Isaac Lab](/docs/practices/humanoid/flamingo-isaaclab/intro) | Equilibrio a 8 DoF, PPO vs CaT, esportazione ONNX e test Sim2Sim in MuJoCo | Panoramica e 6 capitoli disponibili |
 
 ## Progetti con robot reali \{#real-robots}
 

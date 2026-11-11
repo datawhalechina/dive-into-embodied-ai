@@ -160,11 +160,6 @@ export const megaMenus: MegaMenuConfig[] = [
             to: '/docs/practices/humanoid/placeholder',
             activeBasePath: '/docs/practices/humanoid',
           },
-          {
-            title: translate({message: "轮足系列"}),
-            to: '/docs/practices/wheel-legged/placeholder',
-            activeBasePath: '/docs/practices/wheel-legged',
-          },
         ],
       },
       {

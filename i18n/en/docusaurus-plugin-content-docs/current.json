@@ -33,9 +33,6 @@
   "sidebar.practicesOverviewSidebar.link.双足系列": {
     "message": "Biped series"
   },
-  "sidebar.practicesOverviewSidebar.link.轮足系列": {
-    "message": "Wheeled biped series"
-  },
   "sidebar.practicesOverviewSidebar.link.从零到一搭建四足机器人": {
     "message": "Build a quadruped from scratch"
   },
@@ -93,8 +90,11 @@
   "sidebar.practicesLerobotCourseSidebar.link.← 项目实战": {
     "message": "← Projects"
   },
-  "sidebar.practicesFlamingoCourseSidebar.link.← 项目实战": {
-    "message": "← Projects"
+  "sidebar.practicesFlamingoCourseSidebar.link.← 双足系列": {
+    "message": "← Biped series"
+  },
+  "sidebar.practicesFlamingoCourseSidebar.category.两轮足 Flamingo · Isaac Lab": {
+    "message": "Flamingo wheeled biped · Isaac Lab"
   },
   "sidebar.practicesRobotArmSidebar.link.← 项目实战": {
     "message": "← Projects"
@@ -126,19 +126,13 @@
   "sidebar.practicesHumanoidSidebar.category.双足系列": {
     "message": "Biped series"
   },
+  "sidebar.practicesHumanoidSidebar.link.两轮足 Flamingo · Isaac Lab": {
+    "message": "Flamingo wheeled biped · Isaac Lab"
+  },
   "sidebar.practicesHumanoidSidebar.category.MicroDuck 双足强化学习": {
     "message": "MicroDuck biped reinforcement learning"
   },
   "sidebar.practicesHumanoidSidebar.link.MicroDuck RL（AMD）": {
     "message": "MicroDuck RL (AMD)"
-  },
-  "sidebar.practicesWheelLeggedSidebar.link.← 项目实战": {
-    "message": "← Projects"
-  },
-  "sidebar.practicesWheelLeggedSidebar.category.轮足系列": {
-    "message": "Wheeled biped series"
-  },
-  "sidebar.practicesWheelLeggedSidebar.link.两轮足 Flamingo · Isaac Lab": {
-    "message": "Flamingo wheeled biped · Isaac Lab"
   }
 }

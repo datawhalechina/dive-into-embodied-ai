@@ -185,7 +185,6 @@ const sidebars: SidebarsConfig = {
         { type: 'link', label: '机械臂系列', href: '/docs/practices/robot-arm/placeholder' },
         { type: 'link', label: '四足系列', href: '/docs/practices/quadruped/placeholder' },
         { type: 'link', label: '双足系列', href: '/docs/practices/humanoid/placeholder' },
-        { type: 'link', label: '轮足系列', href: '/docs/practices/wheel-legged/placeholder' },
       ],
     },
     {
@@ -359,6 +358,7 @@ const sidebars: SidebarsConfig = {
       link: { type: 'doc', id: 'practices/humanoid/placeholder' },
       collapsible: false,
       items: [
+        { type: 'link', label: '两轮足 Flamingo · Isaac Lab', href: '/docs/practices/humanoid/flamingo-isaaclab/intro' },
         {
           type: 'category',
           label: 'MicroDuck 双足强化学习',
@@ -387,26 +387,21 @@ const sidebars: SidebarsConfig = {
     },
   ],
 
-  practicesWheelLeggedSidebar: [
-    { type: 'link', label: '← 项目实战', href: '/docs/practices/intro' },
-    {
-      type: 'category',
-      label: '轮足系列',
-      link: { type: 'doc', id: 'practices/wheel-legged/placeholder' },
-      collapsible: false,
-      items: [
-        { type: 'link', label: '两轮足 Flamingo · Isaac Lab', href: '/docs/practices/wheel-legged/flamingo-isaaclab/preview' },
-      ],
-    },
-  ],
-
   practicesFlamingoCourseSidebar: [
-    { type: 'link', label: '← 项目实战', href: '/docs/practices/intro' },
+    { type: 'link', label: '← 双足系列', href: '/docs/practices/humanoid/placeholder' },
     {
       type: 'category',
       label: '两轮足 Flamingo · Isaac Lab',
+      link: { type: 'doc', id: 'practices/humanoid/flamingo-isaaclab/intro' },
       collapsible: false,
-      items: ['practices/wheel-legged/flamingo-isaaclab/preview'],
+      items: [
+        { type: 'doc', id: 'practices/humanoid/flamingo-isaaclab/robot-and-env', label: '1. 本体建模与环境注册' },
+        { type: 'doc', id: 'practices/humanoid/flamingo-isaaclab/reward-and-ppo', label: '2. 奖励设计与 PPO 训练' },
+        { type: 'doc', id: 'practices/humanoid/flamingo-isaaclab/cat-constrained-rl', label: '3. 约束式强化学习（CaT）' },
+        { type: 'doc', id: 'practices/humanoid/flamingo-isaaclab/onnx-and-sim2sim', label: '4. 策略导出与 MuJoCo Sim2Sim' },
+        { type: 'doc', id: 'practices/humanoid/flamingo-isaaclab/robustness-eval', label: '5. 鲁棒性与抗扰动评测' },
+        { type: 'doc', id: 'practices/humanoid/flamingo-isaaclab/delivery-and-interview', label: '6. 项目复盘与工程交付' },
+      ],
     },
   ],
 
