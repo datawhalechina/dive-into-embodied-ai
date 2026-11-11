@@ -23,7 +23,7 @@ These perspectives overlap. For example, a robot arm can grasp objects using mot
 1. Start with the [introduction](/docs/introduction/intro) to understand the complete loop of perception, decision making, and action.
 2. Choose a project organized into chapters or a standalone experiment in [projects](/docs/practices/intro). Record the results and analyze failures.
 3. When you find a gap in your knowledge, look up the relevant topic in [foundations](/docs/foundations/intro).
-4. Open [Simulation](/simulation) to control a robot with keyboard or on-screen buttons, or switch to a showcase of the trained Go2 policy and the Quaddle periodic gait reference.
+4. Open [Simulation](/simulation) to control a robot with keyboard or on-screen buttons, or switch to a showcase of trained Go2/Pupper v3 policies and the Quaddle periodic gait. MicroDuck supports manual head and joint controls.
 
 ## Reference guides \{#references}
 

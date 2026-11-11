@@ -25,7 +25,7 @@
     "dev": "sh scripts/dev.sh",
     "preview": "sh scripts/preview.sh",
     "prepare": "husky",
-    "check:simulation": "node scripts/check-simulation.mjs"
+    "check:simulation": "node scripts/check-simulation.mjs && node scripts/check-simulation-models.mjs && node scripts/check-simulation-worker.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.10.1",

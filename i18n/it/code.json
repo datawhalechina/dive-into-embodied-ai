@@ -1375,5 +1375,104 @@
   },
   "simulation.physicsNote": {
     "message": "Fisica in tempo reale. Le scene non visibili vengono sospese; al ritorno premi nuovamente i comandi. Sui dispositivi meno potenti il tempo simulato può scorrere più lentamente."
+  },
+  "simulation.manualOnly": {
+    "message": "Controllo articolazioni"
+  },
+  "simulation.pupperBrief": {
+    "message": "Pupper v3 · andatura appresa"
+  },
+  "simulation.duckBrief": {
+    "message": "MicroDuck · 14 articolazioni"
+  },
+  "simulation.pupperPolicy": {
+    "message": "Pupper v3 · camminata PPO"
+  },
+  "simulation.pupperPolicyInfo": {
+    "message": "Esegue la politica del progetto a 8 milioni di passi, con obiettivo di 0,4 m/s."
+  },
+  "simulation.pupperInfo": {
+    "message": "Usa mesh Pupper v3 e pesi PPO del progetto. Supporta avanzamento, retromarcia, spostamento laterale e rotazione. Può derivare; rilasciare i comandi non blocca la posa."
+  },
+  "simulation.duckInfo": {
+    "message": "Usa mesh MicroDuck originali e servi di posizione. La base è fissata per regolare la posa; liberala per osservare gravità e collisioni. Nessuna politica di camminata collegata."
+  },
+  "simulation.duckDescription": {
+    "message": "Muovi la testa con i tasti direzionali o apri i cursori per regolare le articolazioni. Rilascia per mantenere l’angolo."
+  },
+  "simulation.duckKeys": {
+    "message": "W / S alza/abbassa la testa, A / D guarda a sinistra/destra, Q / E inclina. Nella scena: Spazio pausa, R ripristina."
+  },
+  "simulation.duckNoPolicy": {
+    "message": "Pesi addestrati non ancora collegati; il controllo libero è disponibile."
+  },
+  "simulation.headUp": {
+    "message": "Guarda in alto"
+  },
+  "simulation.headDown": {
+    "message": "Guarda in basso"
+  },
+  "simulation.headLeft": {
+    "message": "Guarda a sinistra"
+  },
+  "simulation.headRight": {
+    "message": "Guarda a destra"
+  },
+  "simulation.rollLeft": {
+    "message": "Inclina a sinistra"
+  },
+  "simulation.rollRight": {
+    "message": "Inclina a destra"
+  },
+  "simulation.headRoll": {
+    "message": "Inclinazione testa"
+  },
+  "simulation.jointControls": {
+    "message": "Controllo articolazioni"
+  },
+  "simulation.support": {
+    "message": "Fissa base (ripristina quando attivato)"
+  },
+  "simulation.joint.left_hip_yaw": {
+    "message": "Anca sinistra: imbardata"
+  },
+  "simulation.joint.left_hip_roll": {
+    "message": "Anca sinistra: rollio"
+  },
+  "simulation.joint.left_hip_pitch": {
+    "message": "Anca sinistra: beccheggio"
+  },
+  "simulation.joint.left_knee": {
+    "message": "Ginocchio sinistro"
+  },
+  "simulation.joint.left_ankle": {
+    "message": "Caviglia sinistra"
+  },
+  "simulation.joint.neck_pitch": {
+    "message": "Collo: beccheggio"
+  },
+  "simulation.joint.head_pitch": {
+    "message": "Testa: beccheggio"
+  },
+  "simulation.joint.head_yaw": {
+    "message": "Testa: imbardata"
+  },
+  "simulation.joint.head_roll": {
+    "message": "Testa: rollio"
+  },
+  "simulation.joint.right_hip_yaw": {
+    "message": "Anca destra: imbardata"
+  },
+  "simulation.joint.right_hip_roll": {
+    "message": "Anca destra: rollio"
+  },
+  "simulation.joint.right_hip_pitch": {
+    "message": "Anca destra: beccheggio"
+  },
+  "simulation.joint.right_knee": {
+    "message": "Ginocchio destro"
+  },
+  "simulation.joint.right_ankle": {
+    "message": "Caviglia destra"
   }
 }

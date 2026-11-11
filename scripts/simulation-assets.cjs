@@ -15,6 +15,7 @@ function readArray(yaml, key) {
 function generateSimulationAssets(root) {
   const output = path.join(root, 'static/simulation-assets');
   const catalog = JSON.parse(fs.readFileSync(path.join(root, 'simulation/models.json')));
+  fs.rmSync(output, {recursive: true, force: true});
   fs.mkdirSync(output, {recursive: true});
   const copy = (from, to) => {
     const bytes = fs.readFileSync(from);
@@ -31,6 +32,34 @@ function generateSimulationAssets(root) {
   copy(path.join(root, 'simulation/licenses/ONNX-Runtime-LICENSE'), 'ort/LICENSE');
   for (const entry of catalog) {
     if (entry.adapter === 'quaddle') continue; // Canonical assets from the Quaddle plugin.
+    if (['pupper', 'microduck'].includes(entry.adapter)) {
+      const source = path.join(root, entry.source);
+      const dir = path.dirname(path.join(source, entry.scene));
+      const files = ['scene.xml'];
+      let xml = fs.readFileSync(path.join(source, entry.scene), 'utf8');
+      if (entry.adapter === 'microduck') {
+        const robot = fs.readFileSync(path.join(dir, 'robot_allcollisions.xml'), 'utf8');
+        const supported = robot.replace('<equality/>', '<equality><weld name="manual_support" body1="trunk_base" solref="0.02 1"/></equality>');
+        fs.mkdirSync(path.join(output, entry.id), {recursive: true});
+        fs.writeFileSync(path.join(output, entry.id, 'robot_allcollisions.xml'), supported);
+        files.push('robot_allcollisions.xml');
+        for (const [, name] of robot.matchAll(/<mesh\s[^>]*file="([^"]+)"/g)) {
+          copy(path.join(dir, 'assets', name), `${entry.id}/assets/${name}`); files.push(`assets/${name}`);
+        }
+        for (const name of ['LICENSE', 'UPSTREAM_README.md']) copy(path.join(source, name), `${entry.id}/${name}`);
+      } else {
+        for (const [, name] of xml.matchAll(/<mesh\s[^>]*file="([^"]+)"/g)) {
+          copy(path.join(dir, 'meshes/stl', name), `${entry.id}/meshes/stl/${name}`); files.push(`meshes/stl/${name}`);
+        }
+        copy(path.join(source, entry.policy), `${entry.id}/policy.onnx`);
+        copy(path.join(source, entry.config), `${entry.id}/config.json`);
+        copy(path.join(path.dirname(path.join(source, entry.policy)), 'provenance.json'), `${entry.id}/provenance.json`);
+        copy(path.join(source, 'README.md'), `${entry.id}/SOURCE_README.md`);
+      }
+      fs.writeFileSync(path.join(output, entry.id, 'scene.xml'), xml);
+      fs.writeFileSync(path.join(output, entry.id, 'manifest.json'), JSON.stringify({files}, null, 2));
+      continue;
+    }
     if (entry.adapter !== 'go2') throw new Error(`No asset builder for ${entry.adapter}`);
     const source = path.join(root, entry.source);
     const yaml = fs.readFileSync(path.join(source, entry.deploy), 'utf8');

@@ -22,7 +22,7 @@ Le prospettive si sovrappongono. Un braccio può afferrare con pianificazione e 
 1. Leggi l'[introduzione](/docs/introduction/intro) per capire il ciclo completo.
 2. Scegli un corso a capitoli o un esperimento nei [progetti](/docs/practices/intro). Registra risultati e analizza guasti.
 3. Quando incontri una lacuna, consulta i [fondamenti](/docs/foundations/intro).
-4. Apri [Simulazione](/simulation) per controllare un robot con tastiera o pulsanti, oppure osserva la politica Go2 addestrata e l'andatura periodica Quaddle di riferimento.
+4. Apri [Simulazione](/simulation) per controllare un robot con tastiera o pulsanti, oppure osserva le politiche addestrate Go2/Pupper v3 e l'andatura Quaddle. MicroDuck offre controllo manuale di testa e articolazioni.
 
 ## Guide di riferimento \{#references}
 

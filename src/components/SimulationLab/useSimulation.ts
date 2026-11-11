@@ -3,6 +3,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import type {createScene, Snapshot} from './scene';
 
 export type Mode = 'manual' | 'showcase';
+export type Joint = {name: string; min: number; max: number};
 export function useSimulation(id: string, distance: number, mode: Mode, dark: boolean, canvasLabel: string) {
   const assetBase = useBaseUrl('/simulation-assets/');
   const host = useRef<HTMLDivElement>(null);
@@ -15,16 +16,18 @@ export function useSimulation(id: string, distance: number, mode: Mode, dark: bo
   const [error, setError] = useState('');
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [suspended, setSuspended] = useState(false);
+  const [joints, setJoints] = useState<Joint[]>([]);
   const send = (message: object) => worker.current?.postMessage(message);
 
   useEffect(() => {
     if (!attempt) return;
-    let disposed = false, localWorker: Worker | null = null;
+    let disposed = false, failed = false, localWorker: Worker | null = null;
     let localScene: ReturnType<typeof createScene> | null = null;
     let inView = true, lastUi = 0;
-    setStatus('loading'); setSnapshot(null); setError('');
+    setStatus('loading'); setSnapshot(null); setError(''); setJoints([]);
     const fail = (detail: string) => {
-      if (disposed) return;
+      if (disposed || failed) return;
+      failed = true;
       setError(detail); setStatus('error'); localWorker?.terminate();
       localScene?.setVisible(false);
     };
@@ -39,18 +42,18 @@ export function useSimulation(id: string, distance: number, mode: Mode, dark: bo
     document.addEventListener('visibilitychange', visibility);
     const timeout = setTimeout(() => fail('Loading timed out. Check the connection and retry.'), 90000);
     import('./scene').then(({createScene}) => {
-      if (disposed || !host.current) return;
+      if (disposed || failed || !host.current) return;
       localScene = createScene(host.current, distance, canvasLabel, () => fail('WebGL context lost.'));
       localScene.setDark(latest.current.dark); scene.current = localScene;
       localWorker = new Worker(`${assetBase}worker.mjs`, {type: 'module'});
       worker.current = localWorker;
       localWorker.onerror = event => fail(event.message);
       localWorker.onmessage = ({data}) => {
-        if (disposed) return;
+        if (disposed || failed) return;
         try {
           if (data.type === 'error') { clearTimeout(timeout); fail(data.detail); }
           if (data.type === 'ready') {
-            clearTimeout(timeout); localScene!.load(data.geometry); setStatus('ready');
+            clearTimeout(timeout); localScene!.load(data.geometry); setJoints(data.joints ?? []); setStatus('ready');
             localWorker!.postMessage({type: 'mode', value: latest.current.mode}); visibility();
           }
           if (data.type === 'state') {
@@ -69,5 +72,5 @@ export function useSimulation(id: string, distance: number, mode: Mode, dark: bo
   }, [attempt, id, distance, assetBase, canvasLabel]);
   useEffect(() => { send({type: 'mode', value: mode}); }, [mode]);
   useEffect(() => { scene.current?.setDark(dark); }, [dark]);
-  return {host, surface, scene, status, error, snapshot, suspended, send, start: () => setAttempt(value => value + 1)};
+  return {host, surface, scene, status, error, snapshot, suspended, joints, send, start: () => setAttempt(value => value + 1)};
 }

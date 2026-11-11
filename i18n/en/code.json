@@ -1330,5 +1330,104 @@
   },
   "simulation.physicsNote": {
     "message": "Live physics, not video playback. Hidden scenes suspend automatically; free control requires fresh input on return. Simulation time may run slower on less powerful devices."
+  },
+  "simulation.manualOnly": {
+    "message": "Manual joints"
+  },
+  "simulation.pupperBrief": {
+    "message": "Pupper v3 · learned gait"
+  },
+  "simulation.duckBrief": {
+    "message": "MicroDuck · 14 joints"
+  },
+  "simulation.pupperPolicy": {
+    "message": "Pupper v3 · PPO walking"
+  },
+  "simulation.pupperPolicyInfo": {
+    "message": "Runs the project’s 8M-step policy with a 0.4 m/s forward target."
+  },
+  "simulation.pupperInfo": {
+    "message": "Uses the project’s Pupper v3 meshes and PPO weights. Supports forward, reverse, strafe and turning. Tracking error and drift remain; releasing controls does not freeze the pose."
+  },
+  "simulation.duckInfo": {
+    "message": "Uses original MicroDuck meshes and position servos. The base is held for posing; release it to observe gravity and collisions. No walking policy is connected yet."
+  },
+  "simulation.duckDescription": {
+    "message": "Turn the head with direction keys or expand the sliders to pose all joints. Release to hold the target angle."
+  },
+  "simulation.duckKeys": {
+    "message": "W / S tilt up/down, A / D look left/right, Q / E roll the head. In the scene: Space pauses, R resets."
+  },
+  "simulation.duckNoPolicy": {
+    "message": "No trained weights connected yet; free control is available."
+  },
+  "simulation.headUp": {
+    "message": "Look up"
+  },
+  "simulation.headDown": {
+    "message": "Look down"
+  },
+  "simulation.headLeft": {
+    "message": "Look left"
+  },
+  "simulation.headRight": {
+    "message": "Look right"
+  },
+  "simulation.rollLeft": {
+    "message": "Tilt head left"
+  },
+  "simulation.rollRight": {
+    "message": "Tilt head right"
+  },
+  "simulation.headRoll": {
+    "message": "Head tilt"
+  },
+  "simulation.jointControls": {
+    "message": "Joint controls"
+  },
+  "simulation.support": {
+    "message": "Hold base (resets when enabled)"
+  },
+  "simulation.joint.left_hip_yaw": {
+    "message": "Left hip yaw"
+  },
+  "simulation.joint.left_hip_roll": {
+    "message": "Left hip roll"
+  },
+  "simulation.joint.left_hip_pitch": {
+    "message": "Left hip pitch"
+  },
+  "simulation.joint.left_knee": {
+    "message": "Left knee"
+  },
+  "simulation.joint.left_ankle": {
+    "message": "Left ankle"
+  },
+  "simulation.joint.neck_pitch": {
+    "message": "Neck pitch"
+  },
+  "simulation.joint.head_pitch": {
+    "message": "Head pitch"
+  },
+  "simulation.joint.head_yaw": {
+    "message": "Head yaw"
+  },
+  "simulation.joint.head_roll": {
+    "message": "Head roll"
+  },
+  "simulation.joint.right_hip_yaw": {
+    "message": "Right hip yaw"
+  },
+  "simulation.joint.right_hip_roll": {
+    "message": "Right hip roll"
+  },
+  "simulation.joint.right_hip_pitch": {
+    "message": "Right hip pitch"
+  },
+  "simulation.joint.right_knee": {
+    "message": "Right knee"
+  },
+  "simulation.joint.right_ankle": {
+    "message": "Right ankle"
   }
 }

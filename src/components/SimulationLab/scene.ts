@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
 export type Geometry = {id: number; type: number; size?: Float64Array; mesh?: number; vertices?: Float32Array; faces?: Int32Array; color: Float32Array};
-export type Snapshot = {time: number; paused: boolean; mode: 'manual' | 'showcase'; position: Float64Array; positions: Float64Array; rotations: Float64Array; speed: number; upright: number};
+export type Snapshot = {time: number; paused: boolean; mode: 'manual' | 'showcase'; position: Float64Array; positions: Float64Array; rotations: Float64Array; speed: number; upright: number; jointTargets?: number[]; supported?: boolean};
 
 export function createScene(host: HTMLElement, distance: number, label: string, onLost: () => void) {
   const renderer = new THREE.WebGLRenderer({antialias: true});

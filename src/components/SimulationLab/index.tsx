@@ -3,11 +3,23 @@ import Link from '@docusaurus/Link';
 import {useColorMode} from '@docusaurus/theme-common';
 import {ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Play, Pause, RotateCcw, Crosshair, Gamepad2, Clapperboard, Box, Maximize2, Square} from 'lucide-react';
 import catalog from '@site/simulation/models.json';
-import {useSimulation, type Mode} from './useSimulation';
+import {useSimulation, type Mode, type Joint} from './useSimulation';
 import {messages} from './messages';
 import styles from './styles.module.css';
 
 const keyMap: Record<string, string> = {KeyW: 'forward', ArrowUp: 'forward', KeyS: 'back', ArrowDown: 'back', KeyA: 'left', ArrowLeft: 'left', KeyD: 'right', ArrowRight: 'right', KeyQ: 'strafeLeft', KeyE: 'strafeRight'};
+
+function JointControl({joint, label, value, disabled, onChange}: {joint: Joint; label: string; value: number; disabled: boolean; onChange: (value: number) => void}) {
+  const editing = useRef(false);
+  const [degrees, setDegrees] = useState(value * 180 / Math.PI);
+  useEffect(() => { if (!editing.current) setDegrees(value * 180 / Math.PI); }, [value]);
+  return <label className={styles.jointControl}><span>{label}</span><output>{degrees.toFixed(0)}°</output>
+    <input type="range" min={joint.min * 180 / Math.PI} max={joint.max * 180 / Math.PI} step="1" value={degrees} disabled={disabled}
+      onPointerDown={() => { editing.current = true; }} onPointerUp={() => { editing.current = false; }} onPointerCancel={() => { editing.current = false; }}
+      onKeyDown={() => { editing.current = true; }} onKeyUp={() => { editing.current = false; }} onBlur={() => { editing.current = false; }}
+      onChange={event => { const next = Number(event.target.value); setDegrees(next); onChange(next * Math.PI / 180); }} />
+  </label>;
+}
 
 export default function SimulationLab() {
   const text = messages();
@@ -27,14 +39,22 @@ export default function SimulationLab() {
   const ready = sim.status === 'ready';
   const paused = sim.snapshot?.paused ?? false;
   const manual = mode === 'manual';
-  const go2 = model.adapter === 'go2';
+  const duck = model.adapter === 'microduck';
+  const policy = model.kind === 'policy';
+  const modelText: Record<string, {brief: string; about: string; demo: string; demoInfo: string}> = {
+    go2: {brief: text.go2Brief, about: text.go2Info, demo: text.walkPolicy, demoInfo: text.policyInfo},
+    pupper: {brief: text.pupperBrief, about: text.pupperInfo, demo: text.pupperPolicy, demoInfo: text.pupperPolicyInfo},
+    microduck: {brief: text.duckBrief, about: text.duckInfo, demo: '', demoInfo: text.duckNoPolicy},
+    quaddle: {brief: text.quaddleBrief, about: text.quaddleInfo, demo: text.gaitDemo, demoInfo: text.gaitInfo},
+  };
+  const description = manual ? (duck ? text.duckDescription : text.manualDescription) : text.showcaseDescription;
   const commandRef = useRef((active: string[]) => {});
   commandRef.current = active => {
     const has = (key: string) => active.includes(key) ? 1 : 0;
-    const x = go2 ? (has('forward') - has('back')) * Math.min(speed, has('back') ? .5 : 1) : has('back') ? 0 : has('forward');
-    const y = go2 ? (has('strafeLeft') - has('strafeRight')) * Math.min(speed, .5) : 0;
+    const x = duck ? has('forward') - has('back') : policy ? (has('forward') - has('back')) * Math.min(speed, has('back') ? .5 : 1) : has('back') ? 0 : has('forward');
+    const y = duck ? has('strafeLeft') - has('strafeRight') : policy ? (has('strafeLeft') - has('strafeRight')) * Math.min(speed, .5) : 0;
     const z = (has('left') - has('right')) * .7;
-    sim.send({type: 'command', value: [x, y, go2 || !has('back') ? z : 0]});
+    sim.send({type: 'command', value: [x, y, policy || duck || !has('back') ? z : 0]});
   };
   const syncInput = useCallback(() => {
     const active = [...new Set([...keys.current].map(code => keyMap[code]).filter(Boolean).concat([...pointers.current.values()]))];
@@ -53,7 +73,7 @@ export default function SimulationLab() {
   useEffect(() => { commandRef.current(pressed); }, [speed]);
   useEffect(() => { if (ready) { sim.send({type: 'rate', value: rate}); sim.scene.current?.setFollow(follow); } }, [ready, rate, follow]);
 
-  const chooseMode = (value: Mode) => { stopInput(); setMode(value); };
+  const chooseMode = (value: Mode) => { if (duck && value === 'showcase') return; stopInput(); setMode(value); };
   const reset = () => { stopInput(); sim.send({type: 'reset'}); sim.scene.current?.resetView(); };
   const togglePause = () => { stopInput(); sim.send({type: 'pause', value: !paused}); };
   const pointerButton = (direction: string, label: string, icon: React.ReactNode, key: string) => (
@@ -79,10 +99,10 @@ export default function SimulationLab() {
         <aside className={styles.library} aria-label={text.library}>
           <div className={styles.sectionTitle}><h2>{text.library}</h2><span>{catalog.length}</span></div>
           <div className={styles.modelList}>
-            {catalog.map(item => <button key={item.id} type="button" className={styles.model} aria-pressed={modelId === item.id} onClick={() => { stopInput(); setModelId(item.id); }}>
+            {catalog.map(item => <button key={item.id} type="button" className={styles.model} aria-pressed={modelId === item.id} onClick={() => { stopInput(); setModelId(item.id); setSpeed(item.demoCommand[0] || .4); if (item.kind === 'manual') setMode('manual'); }}>
               <span className={styles.modelGlyph}><Box size={25} aria-hidden="true" /></span>
-              <strong>{item.name}</strong><span>{item.kind === 'policy' ? text.trained : text.controller}</span>
-              <small>{item.adapter === 'go2' ? text.go2Brief : text.quaddleBrief}</small>
+              <strong>{item.name}</strong><span>{item.kind === 'policy' ? text.trained : item.kind === 'manual' ? text.manualOnly : text.controller}</span>
+              <small>{modelText[item.adapter].brief}</small>
             </button>)}
           </div>
           <p className={styles.libraryNote}>{text.libraryNote}</p>
@@ -91,7 +111,7 @@ export default function SimulationLab() {
           <div className={styles.topbar}>
             <div className={styles.modeSwitch} role="group" aria-label={text.mode}>
               <button type="button" aria-pressed={manual} onClick={() => chooseMode('manual')}><Gamepad2 size={17} aria-hidden="true" />{text.manual}</button>
-              <button type="button" aria-pressed={!manual} onClick={() => chooseMode('showcase')}><Clapperboard size={17} aria-hidden="true" />{text.showcase}</button>
+              <button type="button" aria-pressed={!manual} disabled={duck} title={duck ? text.duckNoPolicy : undefined} onClick={() => chooseMode('showcase')}><Clapperboard size={17} aria-hidden="true" />{text.showcase}</button>
             </div>
             <span className={styles.modelName}>{model.name}</span>
           </div>
@@ -123,7 +143,7 @@ export default function SimulationLab() {
             {sim.status !== 'ready' && <div className={styles.cover} role="status">
               <Box size={42} strokeWidth={1.3} aria-hidden="true" />
               <h2>{sim.status === 'loading' ? text.loading : sim.status === 'error' ? text.error : text.welcome}</h2>
-              <p>{sim.status === 'error' ? text.errorHint : manual ? text.manualDescription : text.showcaseDescription}</p>
+              <p>{sim.status === 'error' ? text.errorHint : description}</p>
               {sim.status !== 'loading' && <button type="button" className={styles.primary} onClick={sim.start}><Play size={17} aria-hidden="true" />{sim.status === 'error' ? text.retry : text.load}</button>}
               <small>{text.download}</small>
               {sim.status === 'error' && <details><summary>{text.errorDetails}</summary><pre>{sim.error}</pre></details>}
@@ -141,25 +161,34 @@ export default function SimulationLab() {
         </section>
         <aside className={styles.panel} aria-label={text.controls}>
           <h2>{manual ? text.manual : text.showcase}</h2>
-          <p id="simulation-controls-help">{manual ? text.manualDescription : text.showcaseDescription}</p>
+          <p id="simulation-controls-help">{description}</p>
           {manual ? <>
             <div className={styles.pad} role="group" aria-label={text.directionPad}>
-              <span />{pointerButton('forward', text.forward, <ArrowUp size={20} />, 'W')}<span />
-              {pointerButton('left', text.left, <ArrowLeft size={20} />, 'A')}
+              <span />{pointerButton('forward', duck ? text.headUp : text.forward, <ArrowUp size={20} />, 'W')}<span />
+              {pointerButton('left', duck ? text.headLeft : text.left, <ArrowLeft size={20} />, 'A')}
               <button type="button" className={styles.stop} disabled={!ready || paused} onClick={stopInput} aria-label={text.stop} title={text.stop}><Square size={14} /></button>
-              {pointerButton('right', text.right, <ArrowRight size={20} />, 'D')}
-              <span />{pointerButton('back', go2 ? text.back : text.stop, <ArrowDown size={20} />, 'S')}<span />
+              {pointerButton('right', duck ? text.headRight : text.right, <ArrowRight size={20} />, 'D')}
+              <span />{pointerButton('back', duck ? text.headDown : policy ? text.back : text.stop, <ArrowDown size={20} />, 'S')}<span />
             </div>
-            {go2 && <div className={styles.strafe}>
-              {pointerButton('strafeLeft', text.strafeLeft, <ArrowLeft size={18} />, 'Q')}
-              <span>{text.strafe}</span>
-              {pointerButton('strafeRight', text.strafeRight, <ArrowRight size={18} />, 'E')}
+            {(policy || duck) && <div className={styles.strafe}>
+              {pointerButton('strafeLeft', duck ? text.rollLeft : text.strafeLeft, <ArrowLeft size={18} />, 'Q')}
+              <span>{duck ? text.headRoll : text.strafe}</span>
+              {pointerButton('strafeRight', duck ? text.rollRight : text.strafeRight, <ArrowRight size={18} />, 'E')}
             </div>}
-            <p className={styles.small}>{go2 ? text.keys : text.quaddleKeys}</p>
-            {go2 && <label className={styles.speedLabel}>{text.speed}<output>{speed.toFixed(1)} m/s</output><input type="range" min=".2" max="1" step=".1" value={speed} onChange={event => setSpeed(Number(event.target.value))} /></label>}
-          </> : <div className={styles.showcaseInfo}><Play size={22} aria-hidden="true" /><strong>{go2 ? text.walkPolicy : text.gaitDemo}</strong><p>{go2 ? text.policyInfo : text.gaitInfo}</p></div>}
+            <p className={styles.small}>{duck ? text.duckKeys : policy ? text.keys : text.quaddleKeys}</p>
+            {policy && <label className={styles.speedLabel}>{text.speed}<output>{speed.toFixed(1)} m/s</output><input type="range" min={model.speedRange?.[0] ?? .2} max={model.speedRange?.[1] ?? 1} step=".1" value={speed} onChange={event => setSpeed(Number(event.target.value))} /></label>}
+          </> : <div className={styles.showcaseInfo}><Play size={22} aria-hidden="true" /><strong>{modelText[model.adapter].demo}</strong><p>{modelText[model.adapter].demoInfo}</p></div>}
+          {duck && <>
+            <p className={styles.manualNotice}>{text.duckNoPolicy}</p>
+            <label className={styles.follow}><input type="checkbox" disabled={!ready} checked={sim.snapshot?.supported ?? true} onChange={event => { stopInput(); sim.send({type: 'support', value: event.target.checked}); }} />{text.support}</label>
+            <details className={styles.jointPanel}><summary>{text.jointControls} · 14</summary>
+              {sim.joints.map((joint, index) => <JointControl key={joint.name} joint={joint} label={text.jointNames[joint.name] ?? joint.name} value={sim.snapshot?.jointTargets?.[index] ?? 0} disabled={!ready || paused}
+                onChange={value => sim.send({type: 'joint', index, value})} />)}
+              {!ready && <p>{text.load}</p>}
+            </details>
+          </>}
           <label className={styles.follow}><input type="checkbox" checked={follow} onChange={event => setFollow(event.target.checked)} />{text.follow}</label>
-          <div className={styles.modelInfo}><h3>{text.about}</h3><p>{go2 ? text.go2Info : text.quaddleInfo}</p><Link to={model.tutorial}>{text.tutorial} →</Link></div>
+          <div className={styles.modelInfo}><h3>{text.about}</h3><p>{modelText[model.adapter].about}</p><Link to={model.tutorial}>{text.tutorial} →</Link></div>
         </aside>
       </div>
       <p className={styles.footnote}>{text.physicsNote}</p>

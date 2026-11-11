@@ -74,11 +74,19 @@
 .speedLabel output { color: var(--lab-muted); font-variant-numeric: tabular-nums; }
 .speedLabel input { grid-column: 1 / -1; width: 100%; accent-color: var(--lab-accent); }
 .follow { display: flex; gap: 8px; align-items: center; font-size: 12px; min-height: 36px; cursor: pointer; }
-.follow input { accent-color: var(--lab-accent); width: 16px; height: 16px; }
+.follow input { accent-color: var(--lab-accent); width: 16px; height: 16px; flex-shrink: 0; }
 .modelInfo { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--lab-border); }
 .modelInfo h3 { font-size: 12px; margin: 0 0 8px; }
 .modelInfo p { font-size: 11px; color: var(--lab-muted); line-height: 1.8; margin-bottom: 10px; }
 .modelInfo a { color: var(--lab-accent); font-size: 12px; }
+.jointPanel, .panel > .manualNotice { grid-column: 1 / -1; }
+.panel > .manualNotice { font-size: 11px; margin: 12px 0; }
+.jointPanel { margin: 14px 0; border-top: 1px solid var(--lab-border); padding-top: 12px; font-size: 12px; }
+.jointPanel summary { cursor: pointer; min-height: 32px; }
+.jointPanel summary:focus-visible { outline: 3px solid var(--lab-accent); outline-offset: 3px; }
+.jointControl { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px; margin: 12px 0; font-size: 11px; }
+.jointControl input { grid-column: 1 / -1; width: 100%; min-height: 28px; accent-color: var(--lab-accent); }
+.jointControl output { color: var(--lab-muted); font-variant-numeric: tabular-nums; }
 .showcaseInfo { display: flex; flex-direction: column; gap: 12px; padding: 20px 14px; margin-bottom: 18px; background: var(--lab-tint); border-radius: 9px; color: var(--lab-accent); }
 .showcaseInfo strong { font-size: 13px; }
 .showcaseInfo p { color: var(--lab-muted); font-size: 12px; line-height: 1.8; margin: 0; }
@@ -86,5 +94,7 @@
 @media (max-width: 1200px) { .lab { padding: 24px 20px; } .workspace { grid-template-columns: 148px minmax(0, 1fr) 208px; gap: 14px; } .topbar { flex-wrap: wrap; } .modelName { display: none; } .panel { padding: 16px 12px; } }
 @media (max-width: 996px) { .workspace { grid-template-columns: minmax(0, 1fr) 220px; } .library { grid-column: 1 / -1; } .modelList { flex-direction: row; } .model { flex: 1; display: grid; grid-template-columns: 30px 1fr; gap: 4px 10px; } .modelGlyph { grid-row: 1 / 4; align-self: center; margin: 0; } .model small { display: none; } .libraryNote { display: none; } .stage { height: 420px; } }
 @media (max-width: 700px) { .lab { padding: 22px 12px; } .heading { margin-bottom: 20px; } .localBadge { display: none; } .workspace { grid-template-columns: minmax(0, 1fr); gap: 16px; } .stage { height: 360px; } .panel { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; padding: 18px; } .panel > h2, .panel > p:first-of-type { grid-column: 1 / -1; } .panel > p:first-of-type { margin: 0; } .pad { grid-row: span 3; } .strafe { margin: 0; gap: 10px; } .panel > .small { margin: 0; } .speedLabel { margin: 0; align-content: start; } .modelInfo { grid-column: 1 / -1; margin-top: 0; padding-top: 14px; } .showcaseInfo { grid-column: 1 / -1; margin-bottom: 0; } .transport { padding: 10px; } .telemetry { padding: 12px; gap: 10px; } .telemetry > div + div { padding-left: 10px; } .telemetry dd { font-size: 16px; } .model small { display: none; } }
-@media (max-width: 380px) { .panel { grid-template-columns: 1fr; } .pad { grid-row: auto; } .model { padding: 12px 8px; } .modelGlyph { display: none; } .model { display: flex; } .transport label { gap: 3px; } .modeSwitch button { padding-inline: 8px; } }
+@media (max-width: 480px) { .panel { grid-template-columns: 1fr; } .pad { grid-row: auto; } .model { padding: 12px 8px; } .modelGlyph { display: none; } .model { display: flex; } .transport { flex-wrap: wrap; } .transport label { gap: 3px; } .modeSwitch button { padding-inline: 8px; } }
 @media (prefers-reduced-motion: reduce) { .lab button { transition: none; } }
+@media (max-width: 996px) { .modelList { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); } .model { grid-template-columns: 1fr; } .modelGlyph { display: none; } }
+@media (max-width: 700px) { .modelList { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

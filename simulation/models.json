@@ -15,7 +15,51 @@
       0,
       0
     ],
-    "tutorial": "/docs/practices/amd/intro"
+    "tutorial": "/docs/practices/amd/intro",
+    "observationSize": 47,
+    "speedRange": [
+      0.2,
+      1
+    ]
+  },
+  {
+    "id": "pupper-v3",
+    "name": "Pupper v3",
+    "kind": "policy",
+    "adapter": "pupper",
+    "source": "codes/practices/quadruped/cs123",
+    "policy": "6.rl_pupper_v2_5/web/policy.onnx",
+    "config": "6.rl_pupper_v2_5/web/config.json",
+    "scene": "assets/mjcfs/pupper_v3.xml",
+    "body": "base_link",
+    "cameraDistance": 1.2,
+    "demoCommand": [
+      0.4,
+      0,
+      0
+    ],
+    "observationSize": 53,
+    "speedRange": [
+      0.1,
+      0.7
+    ],
+    "tutorial": "/docs/practices/quadruped/cs123/rl-gait"
+  },
+  {
+    "id": "microduck",
+    "name": "MicroDuck",
+    "kind": "manual",
+    "adapter": "microduck",
+    "source": "codes/practices/humanoid/microduck-rl",
+    "scene": "src/mjlab_microduck/robot/microduck/scene.xml",
+    "body": "trunk_base",
+    "cameraDistance": 0.65,
+    "demoCommand": [
+      0,
+      0,
+      0
+    ],
+    "tutorial": "/docs/practices/humanoid/microduck-rl"
   },
   {
     "id": "quaddle",

@@ -1,7 +1,8 @@
-export function extractGeometry(model) {
+export function extractGeometry(model, hideCollision = false) {
   const geometry = [];
   for (let id = 0; id < model.ngeom; id++) {
     const type = model.geom_type[id];
+    if (hideCollision && model.geom_group[id] === 3) continue;
     // The generic viewer draws the infinite ground. Omit invisible default geoms.
     if (type === 0 || model.geom_rgba[id * 4 + 3] === 0) continue;
     const material = model.geom_matid[id];

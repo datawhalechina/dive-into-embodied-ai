@@ -23,7 +23,7 @@ sidebar_position: 2
 1. 从 [具身导论](/docs/introduction/intro) 开始，理解感知、决策与行动的完整闭环。
 2. 到 [项目实战](/docs/practices/intro) 选择分章项目或独立实验，记录结果并分析失败原因。
 3. 遇到知识缺口时，到 [理论基础](/docs/foundations/intro) 查找对应专题。
-4. 在 [在线仿真](/simulation) 用键盘或屏幕按钮操纵机器人，或切换到策略展示，观察训练好的 Go2 策略与 Quaddle 周期步态对照。
+4. 在 [在线仿真](/simulation) 用键盘或屏幕按钮操纵机器人，或切换到策略展示，观察 Go2、Pupper v3 的训练策略与 Quaddle 周期步态；小黄鸭支持头部和关节自由操纵。
 
 ## 参考总纲 \{#references}
 
