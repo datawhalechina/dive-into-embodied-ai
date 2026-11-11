@@ -25,6 +25,8 @@ These perspectives overlap. For example, a robot arm can grasp objects using mot
 3. When you find a gap in your knowledge, look up the relevant topic in [foundations](/docs/foundations/intro).
 4. Open [Simulation](/simulation) to control a robot with keyboard or on-screen buttons, or switch to a showcase of trained Go2/Pupper v3 policies and the Quaddle periodic gait. MicroDuck supports manual head and joint controls.
 
+For ROS2, start with the [tutorial overview](/docs/foundations/robotics-and-ros2/intro). The [companion code](https://github.com/datawhalechina/dive-into-embodied-ai/blob/master/codes/foundations/robotics-and-ros2/README.en.md) includes standalone kinematics scripts and ROS reference packages; generate the MoveIt configuration in lesson 10.
+
 ## Reference guides \{#references}
 
 - [Embodied-AI-Guide](https://github.com/TianxingChen/Embodied-AI-Guide/blob/main/README.md): an index of algorithms, infrastructure, control, and hardware.

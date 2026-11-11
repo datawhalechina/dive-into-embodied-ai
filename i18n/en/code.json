@@ -1134,7 +1134,7 @@
     "message": "read the Chinese version"
   },
   "translationNotice.overview": {
-    "message": "The {readme}, {introduction}, {projects}, and {roadmap} are available in English. Other tutorial chapters and standalone playgrounds are currently in Chinese."
+    "message": "The {readme}, {introduction}, {projects}, and {roadmap} are available in English. Most other tutorial chapters and standalone playgrounds remain in Chinese."
   },
   "translationNotice.fallback": {
     "message": "This page is currently available in Chinese. Explore the English {introduction}, or {original}."

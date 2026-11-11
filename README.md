@@ -163,7 +163,7 @@
 | 章节 | 简介 |
 | :--- | :--- |
 | [仿真工具](docs/foundations/simulation/1.intro.md) | Isaac Sim、MuJoCo、Gymnasium、PyBullet 快速上手 |
-| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) | 坐标变换、FK/IK、tf2、URDF 与 MoveIt 2 |
+| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) · [配套代码](codes/foundations/robotics-and-ros2/README.md) | 坐标变换、FK/IK、tf2、URDF 与 MoveIt 2 |
 | [数据工程与模仿学习](docs/foundations/rl-for-robotics/12.imitation-learning.md) | 从遥操作数据到模仿学习、LeRobot 工具链和策略训练 |
 
 <a id="组队学习"></a>

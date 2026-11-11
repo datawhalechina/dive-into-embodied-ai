@@ -153,7 +153,7 @@ Robots need to estimate their position, orientation, velocity, and stability. Re
 | Topic | Description |
 | :--- | :--- |
 | [Simulation tools](docs/foundations/simulation/1.intro.md) | Getting started with Isaac Sim, MuJoCo, Gymnasium, and PyBullet |
-| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) | Coordinate transforms, FK/IK, tf2, URDF, and MoveIt 2 |
+| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) · [companion code](codes/foundations/robotics-and-ros2/README.en.md) | Coordinate transforms, FK/IK, tf2, URDF, and MoveIt 2 |
 | [Data engineering and imitation learning](docs/foundations/rl-for-robotics/12.imitation-learning.md) | Teleoperation data, imitation learning, LeRobot toolchains, and policy training |
 
 ## 👥 Study groups

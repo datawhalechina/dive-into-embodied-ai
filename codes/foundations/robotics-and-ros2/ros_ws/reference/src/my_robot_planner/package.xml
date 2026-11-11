@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>my_robot_planner</name>
+  <version>0.1.0</version>
+  <description>Reference examples for the robotics and ROS 2 lessons</description>
+  <maintainer email="maintainers@example.com">Dive into Embodied AI contributors</maintainer>
+  <license>CC-BY-NC-SA-4.0</license>
+  <buildtool_depend>ament_python</buildtool_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>moveit_msgs</exec_depend>
+  <exec_depend>shape_msgs</exec_depend>
+  <exec_depend>moveit_py</exec_depend>
+  <exec_depend>moveit_configs_utils</exec_depend>
+  <exec_depend>my_robot_basics</exec_depend>
+  <exec_depend>my_robot_moveit_config</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

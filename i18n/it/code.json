@@ -1134,7 +1134,7 @@
     "message": "leggere la versione cinese"
   },
   "translationNotice.overview": {
-    "message": "Il {readme}, l’{introduction}, la {projects} e la {roadmap} sono disponibili in italiano. Gli altri capitoli e gli esperimenti autonomi sono attualmente in cinese."
+    "message": "Il {readme}, l’{introduction}, la {projects} e la {roadmap} sono disponibili in italiano. La maggior parte degli altri capitoli e degli esperimenti autonomi rimane in cinese."
   },
   "translationNotice.fallback": {
     "message": "Questa pagina è attualmente disponibile in cinese. Puoi consultare l’{introduction} in italiano o {original}."

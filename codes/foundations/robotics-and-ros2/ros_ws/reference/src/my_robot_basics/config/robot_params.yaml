@@ -1,0 +1,17 @@
+# robot_params.yaml
+# 节点名必须和代码里 super().__init__('节点名') 一致
+
+kinematics_publisher:
+  ros__parameters:
+    l1: 1.0
+    l2: 0.8
+    publish_rate: 1.0
+
+# SolveIK uses the l1/l2 values in each request.
+
+move_to_action_server:
+  ros__parameters:
+    l1: 1.0
+    l2: 0.8
+    simulate_steps: 5
+    step_duration: 0.5

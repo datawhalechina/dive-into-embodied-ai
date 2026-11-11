@@ -24,6 +24,8 @@ Le prospettive si sovrappongono. Un braccio può afferrare con pianificazione e 
 3. Quando incontri una lacuna, consulta i [fondamenti](/docs/foundations/intro).
 4. Apri [Simulazione](/simulation) per controllare un robot con tastiera o pulsanti, oppure osserva le politiche addestrate Go2/Pupper v3 e l'andatura Quaddle. MicroDuck offre controllo manuale di testa e articolazioni.
 
+Per ROS2, parti dalla [panoramica del tutorial](/docs/foundations/robotics-and-ros2/intro). Il [codice di supporto](https://github.com/datawhalechina/dive-into-embodied-ai/blob/master/codes/foundations/robotics-and-ros2/README.it.md) include script autonomi di cinematica e pacchetti ROS di riferimento; la configurazione MoveIt va generata nella lezione 10.
+
 ## Guide di riferimento \{#references}
 
 - [Embodied-AI-Guide](https://github.com/TianxingChen/Embodied-AI-Guide/blob/main/README.md): indice di algoritmi, infrastruttura, controllo e hardware.

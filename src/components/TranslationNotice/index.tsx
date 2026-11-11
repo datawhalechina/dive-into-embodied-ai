@@ -25,7 +25,7 @@ export default function TranslationNotice({translated = false}: {translated?: bo
           projects: <Link to="/docs/practices/intro">{translate({id: 'translationNotice.projects', message: '项目总览'})}</Link>,
           roadmap: <Link to="/docs/overview/embodied-ai-roadmap">{translate({id: 'translationNotice.roadmap', message: '学习地图'})}</Link>,
         }}>
-          {'本语言版本已提供 {readme}、{introduction}、{projects}和{roadmap}。其他教程章节与独立实验页目前仍为中文。'}
+          {'本语言版本已提供 {readme}、{introduction}、{projects}和{roadmap}。其他教程章节与独立实验页多数仍为中文。'}
         </Translate>
       ) : (
         <Translate id="translationNotice.fallback" values={{

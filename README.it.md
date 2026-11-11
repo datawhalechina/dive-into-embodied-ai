@@ -151,7 +151,7 @@ Il robot stima posizione, orientamento, velocità e stabilità con telecamere, L
 | Argomento | Descrizione |
 | --- | --- |
 | [Simulazione](docs/foundations/simulation/1.intro.md) | Isaac Sim, MuJoCo, Gymnasium e PyBullet |
-| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) | Trasformazioni, FK/IK, tf2, URDF e MoveIt 2 |
+| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) · [codice di supporto](codes/foundations/robotics-and-ros2/README.it.md) | Trasformazioni, FK/IK, tf2, URDF e MoveIt 2 |
 | [Dati e imitazione](docs/foundations/rl-for-robotics/12.imitation-learning.md) | Teleoperazione, imitazione, strumenti LeRobot e politiche |
 
 ## 👥 Gruppi di studio

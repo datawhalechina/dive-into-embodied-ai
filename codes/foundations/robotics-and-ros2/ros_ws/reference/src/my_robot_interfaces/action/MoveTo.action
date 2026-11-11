@@ -1,0 +1,13 @@
+# Goal：目标末端位置
+float64 x
+float64 y
+---
+# Result：最终结果
+bool success
+float64 final_theta1_deg
+float64 final_theta2_deg
+string message
+---
+# Feedback：执行进度（0.0 ~ 1.0）
+float32 progress
+string status
