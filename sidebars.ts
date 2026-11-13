@@ -191,6 +191,7 @@ const sidebars: SidebarsConfig = {
         { type: 'link', label: 'DDPG Pusher', href: '/docs/practices/robot-arm/ddpg-mujoco/pusher-v5' },
         { type: 'link', label: 'ACT 双臂操作训练', href: '/docs/practices/vla/act' },
         { type: 'link', label: 'π₀.₅ + RECAP：LIBERO 复现', href: '/docs/practices/vla/recap' },
+        { type: 'link', label: 'Petoi Quaddle VLA 导航训练', href: '/docs/practices/vla/quaddle' },
         { type: 'link', label: 'Sim2Sim 验证', href: '/docs/practices/quadruped/sim2sim/placeholder' },
         { type: 'link', label: 'Flamingo 轮足课程 · 预告', href: '/docs/practices/wheel-legged/flamingo-isaaclab/preview' },
       ],

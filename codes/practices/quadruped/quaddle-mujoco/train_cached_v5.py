@@ -64,6 +64,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cache", default="/dataset/mtl_data/quaddle_vla/cache_emb_v51")
     ap.add_argument("--resume", default=f"{QD}/outputs/smolvla_quaddle_v51_18k/checkpoints/last")
+    ap.add_argument("--repo-id", default="local/quaddle_nav_352v51")
+    ap.add_argument("--dataset-root", default=MERGED)
     ap.add_argument("--output_dir", default="/dataset/mtl_data/quaddle_vla/runs/v51_30k_fast")
     ap.add_argument("--steps", type=int, default=30000, help="total target step (resume continues from ckpt step)")
     ap.add_argument("--decay", type=int, default=30000)
@@ -92,7 +94,7 @@ def main():
     lang_emb_table = torch.from_numpy(ds.meta["lang_emb"]).view(torch.bfloat16).cuda()
     lang_mask_table = torch.from_numpy(ds.meta["lang_mask"]).bool().cuda()
 
-    meta = LeRobotDatasetMetadata("local/quaddle_nav_352v51", root=MERGED)
+    meta = LeRobotDatasetMetadata(args.repo_id, root=args.dataset_root)
     pre, post = make_smolvla_pre_post_processors(cfg, meta.stats)
 
     trainable = [p for p in policy.parameters() if p.requires_grad]

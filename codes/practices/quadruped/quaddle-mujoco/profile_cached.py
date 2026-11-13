@@ -21,6 +21,8 @@ torch.backends.cudnn.benchmark = True
 policy = SmolVLAPolicy.from_pretrained(CKPT).to("cuda")
 cfg = policy.config
 cached = CachedSmolVLA(policy)
+cached.frozen_prefill = torch.compile(cached.frozen_prefill, mode="max-autotune-no-cudagraphs")
+cached.train_forward = torch.compile(cached.train_forward, mode="max-autotune-no-cudagraphs")
 ds = CacheDataset(CACHE)
 lang_emb_table = torch.from_numpy(ds.meta["lang_emb"]).view(torch.bfloat16).cuda()
 lang_mask_table = torch.from_numpy(ds.meta["lang_mask"]).bool().cuda()
@@ -39,7 +41,7 @@ def tick(name, t0):
     times[name] = times.get(name, 0) + (t1 - t0)
     return t1
 
-N = 20
+N = 40
 for step in range(N):
     t = time.perf_counter()
     b = next(it)
@@ -60,10 +62,10 @@ for step in range(N):
     torch.nn.utils.clip_grad_norm_(trainable, 10.0)
     opt.step()
     t = tick("clip+optim", t)
-    if step == 4:
+    if step == 14:
         times.clear()
 
-n = N - 5
+n = N - 15
 print("=== cached step stage breakdown (ms) ===")
 for k, v in times.items():
     print(f"{k:18s} {v/n*1000:7.1f}")

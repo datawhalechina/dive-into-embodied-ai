@@ -29,6 +29,8 @@ MERGED = f"{QD}/outputs/dataset_merged51"
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="/dataset/mtl_data/quaddle_vla/cache_emb_v51")
+    ap.add_argument("--repo-id", default="local/quaddle_nav_352v51")
+    ap.add_argument("--dataset-root", default=MERGED)
     ap.add_argument("--batch", type=int, default=64)
     ap.add_argument("--workers", type=int, default=8)
     args = ap.parse_args()
@@ -39,8 +41,8 @@ def main():
     cfg = policy.config
     vlm = policy.model.vlm_with_expert
     dim = vlm.config.text_config.hidden_size
-    meta = LeRobotDatasetMetadata("local/quaddle_nav_352v51", root=MERGED)
-    ds = LeRobotDataset("local/quaddle_nav_352v51", root=MERGED,
+    meta = LeRobotDatasetMetadata(args.repo_id, root=args.dataset_root)
+    ds = LeRobotDataset(args.repo_id, root=args.dataset_root,
                         delta_timestamps=resolve_delta_timestamps(cfg, meta), return_uint8=True)
     pre, _ = make_smolvla_pre_post_processors(cfg, ds.meta.stats)
     N = len(ds)
@@ -117,7 +119,7 @@ def main():
     info = {"n_frames": N, "img_dim": img_dim, "hidden": dim, "n_cams": n_cams,
             "tok_per_img": tok_per_img, "dtype": "bfloat16 (stored as uint16 bits)",
             "n_tasks": n_tasks, "chunk": 50, "state_dim": 8, "action_dim": 2,
-            "dataset": "local/quaddle_nav_352v51", "ckpt": CKPT}
+            "dataset": args.repo_id, "ckpt": CKPT}
     json.dump(info, open(os.path.join(args.out, "info.json"), "w"), indent=2)
     print(f"DONE {offset} frames in {(time.time()-t0)/60:.1f} min -> {args.out}", flush=True)
 

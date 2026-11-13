@@ -324,3 +324,185 @@ ep0 场景初始 bearing ≈ −161°（目标几乎正后方）。v3 诊断输�
 **下一步转向**：瓶颈已非欠拟合，而是 OOD 自旋态覆盖不足。优先 plan #3（单通道档位动作编码，
 消除 vx/wz 联合外推）或 #4（恢复数据扩量 + 更长自旋态覆盖）。8.2x 加速使这两条半天级迭代降到
 分钟级训练，可快速证伪/证实。
+
+---
+
+## v6：#3 单通道档位 + #4 扩量恢复（2026-11-12，阴性结果） \{#v6}
+
+用 8.2x 加速管线快速验证 plan #3/#4。**两条杠杆均未修复 OOD 自旋，1D 动作反而略降。**
+
+| 实验 | 动作空间 | 数据 | 训练 | seed7000 | 20eps |
+|---|---|---|---|---|---|
+| v5.1-ext | 2D [vx,wz] | 352（28% 恢复）| 18k | 1/3 | **6/20** |
+| v5.1-30k | 2D | 352 | 30k | 1/3 | 5/20 |
+| v5.1-43k | 2D | 352 | 43k | 1/3 | 2/20 |
+| **Exp A（#3）** | **1D mode** | **252 常规** | 18k | 1/3 | **3/20** |
+| **Exp B（#3+#4）** | **1D mode** | **352（扩量恢复）** | 18k | 1/3 | **2/20** |
+
+### 实现要点
+
+- **#3 1D 档位**：action=mode∈{−1,0,+1}={steer_R, forward/stop, steer_L}，消除 2D 联合外推区
+  （mode 负值=steer_R 合法，无原 vx<0 无执行器问题）。eval 量化阈值 ±0.5。
+- **lerobot 1D bug**：action_dim=1 时数据集把 singleton 维 squeeze 成 (B,50)，标准训练前向
+  `prepare_action` 崩溃（mat1 1024×50 vs mat2 32×720）。绕过：`init_1d_v6.py` 用 `make_policy`
+  只构造+加载权重（不前向）生成 1D 适配 step0 checkpoint，加速训练器读缓存 (N,50,1) 正常。
+- **#4 扩量恢复**：warmup 15-30s（原 1-6s）+ 转向档偏置 70%（诱发原地自旋 OOD 态，准原地转保持
+  远离目标）+ roll 防翻（body z 轴竖直分量<0.92 强制前进稳定）+ warmup 后距目标<20cm 丢弃
+  （避免 1 帧空 episode）。reg252/full352，action 均 1D。
+
+### 结论与反思
+
+**三个规划杠杆（#1 加训练、#3 动作空间、#4 恢复数据）全部证伪**——闭环成功率不升反降，
+失败例仍是 steer_R/steer_L 锁死 600 步原地自旋。这说明：
+
+1. **动作空间不是病灶**：1D 消除无效外推后自旋依旧，甚至略差（6→3/20），2D 的表达力反而有益。
+2. **恢复数据未触及真实 OOD 态**：专家恢复段覆盖的"乱态"与策略 rollout 实际漂移进的自旋态
+   分布不匹配，或策略在闭环中根本 ignoring 这些示范。
+3. **自旋是策略级闭环漂移**：flow matching + chunk50（5s 承诺）+ 重规划机制下，策略一旦进入
+   自旋就自我强化，单靠数据/动作编码无法打破。
+
+**需更深层改动**（超出原 plan，待决策）：观测表征消融（bearing/dist 特权信息是否被图像淹没，
+state-only 对照）、重规划间隔/chunk 缩短、加入自旋惩罚的 RL 后训练、或换更强的闭环架构。
+当前仿真 VLA 路线在 L2 导航任务上遇到方法论瓶颈。
+
+---
+
+## 步态顺畅度排查：模型无罪，重规划间隔是关键（2026-11-13） \{#gait-smooth}
+
+用户反馈"走路爬行不顺畅"。排查过程有一次**重要自我纠正**：
+
+### 错误诊断与纠正
+
+初版探针在 `outputs/dataset_w0/scene.xml`（**带积木**）上测得"任何步态只走 0.4mm/s"，
+据此误判"伺服 kp=0.15 太弱、需改模型"。后在**空场景** `models/scene.xml` 复测发现：
+**原始步态（kp=0.15）upright、69.8mm/s、垂直弹跳仅 0.86-1.0mm——走得又稳又顺**。
+"走不动"是探针场景里机器人被积木挡住的假象。**模型与步态本身无需修改**（kp=2 等"修正"已撤回，
+scene.xml/gait.json 从未改动）。执行器限速+换档斜坡在空场景改善可忽略（bounce 1.0→0.95mm），
+因底层本就顺。
+
+### 不顺畅的真正来源与修复
+
+导航 GIF 里的不顺畅 = **VLA 策略原地自旋**（OOD 坍缩），非步态问题。评估期杠杆
+**缩短重规划间隔**（`--replan-steps`，打破 chunk50=5s 的自旋承诺）在 18k checkpoint 上：
+
+| replan 间隔 | 20eps |
+|---|---|
+| 25 步=2.5s（旧默认）| 6/20 |
+| **5 步=0.5s** | **7/20（最佳，走路 upright 顺畅）** |
+| 10 步=1s | 1/20（非单调，共振自旋周期）|
+
+**结论**：保持原始步态（kp=0.15）+ eval 默认 `--replan-steps 5`，机器人 upright 顺畅行走导航，
+成功率 7/20（无需重训）。这是"顺畅走路"的正确形态。重规划间隔与自旋周期非单调，0.5s 为 sweet spot。
+
+### DAgger 闭环恢复重训（2026-11-13，阴性）
+
+用策略自身 rollout（replan5）访问的 OOD 态 + 专家 bearing/dist 标签采集 60 条
+（`dagger_collect_v5.py`），与 reg252 合并（312 集）从 18k 加速续训到 24k。
+结果 seed7000 1/3、20eps **3/20**，**差于基线 18k+replan5 的 7/20**。行为上 forward 尝试增多
+但仍 steer 振荡超时。DAgger 未能修复 compounding error。
+
+**全部训练侧杠杆汇总（20eps）**：18k+replan5=7/20（最佳）；30k/43k=5/20/2/20（过拟合）；
+#3 1D=3/20；#4 开环恢复=2/20；DAgger=3/20。OOD 自旋为顽固瓶颈，验收线（3/3、≥60%）未达。
+
+### Temporal ensembling 突破 OOD（2026-11-13，验收达标）🎯
+
+评估期 **ACT 式时间集成**（`eval_ensemble_v5.py`）：每 5 步 `predict_action_chunk` 重规划，
+对重叠 chunk 预测做 recency 加权平均（`exp(-k·age)`，k=0.01）后执行，取代固定动作队列。
+**无需重训**，在 18k checkpoint 上：
+
+- **seed7000 三场景 3/3**（ep0 red / ep1 green / ep2 blue 全✓）
+- **20eps 17/20 = 85%**，远超验收线 ≥60%
+
+行为质变：档位呈健康 forward+steer 混合（不再纯自旋锁死）。时间集成平滑了 chunk 间冲突、
+抑制 OOD 自旋 compounding error——此前所有训练侧杠杆失败，而评估期时序集成首次突破。
+
+**新 best = 2D 18k + temporal ensembling（replan5, k=0.01）**。验收（3/3、≥60%）**达标**。
+
+![L2 导航 best：SmolVLA 18k + temporal ensembling，20eps 17/20=85%（VLA 策略 rollout，斜视全场）](./figs/quaddle_L2_nav_ensemble_17of20.gif)
+
+**丝滑版（50fps 渲染）**：原始 GIF 为 10fps 显卡顿；改为每控制步渲染、50fps 播放后动作丝滑
+（同一 18k+ensembling 策略，6 集 5 胜）。提速需更快步态，但当前策略绑定训练步态，提速会伤导航，
+需在更快步态上重训（见下）。
+
+![L2 导航丝滑版：50fps 渲染，动作连贯（VLA 策略 rollout）](./figs/quaddle_L2_nav_silky50.gif)
+
+**这个 GIF 是怎么训练出来的（VLA）**：
+1. **模型**：SmolVLA 450M（`lerobot/smolvla_base`，SmolVLM2 骨干 + flow matching 动作专家）；冻结视觉编码器与 VLM 骨干，只训动作专家（~100M）+ 投影层。
+2. **数据**：查表 CPG 方位闭环专家在《Quaddle 入门》MuJoCo 环境采集 252 常规 + 100 恢复 = 352 条（v5.1），10Hz、3 相机 320² + 8 维状态 + 语言指令 `walk to the {color} block`；50% rear 过采样。
+3. **训练**：batch32 / AdamW + cosine，18000 步（v5.1-ext）；用 8.2x 加速管线（冻结视觉嵌入缓存 + 梯度分裂 + flash SDPA + torch.compile，509→62.5ms/step）。
+4. **评估（突破点）**：temporal ensembling——每 5 步 `predict_action_chunk` 重规划，对重叠 chunk 预测做 recency 加权平均（`exp(-0.01·age)`）后执行，平滑 chunk 冲突、抑制 OOD 自旋锁。20eps **17/20=85%**、seed7000 **3/3**。
+
+**非 VLA 对照（低层步态，无策略）**：
+
+![原始 CPG 步态开环前进（kp=0.15，upright、69.8mm/s、弹跳0.86mm）——低层运控演示，非 VLA](./figs/quaddle_gait_orig_smooth.gif)
+
+此 GIF 为低层查表 CPG 开环执行 forward 档，**不含 VLA 策略**，仅证明底层步态顺畅、模型无需修改。
+
+---
+
+## L1/L3/L4 任务扩展（2026-11-13） \{#l1-l3-l4}
+
+按《细化方案》考纲扩展 L1/L3/L4，均用 8.2x 加速管线（采集→缓存→训6k→eval），cclab loop-v7-gpu-0702：
+
+| 任务 | 数据 | 结果 | 目标 | 达标 |
+|---|---|---|---|---|
+| L1 指令跟随（walk forward/turn left/turn right/stop）| 200 | **100%** 一致率 | ≥90% | ✅ |
+| L3 避障（到目标+绕障碍）| 200 | **3/20=15%** | ≥50% | ❌ |
+| L4 条件组合（看到绿停/先红后蓝）| 200 | **0/20** | 触发+顺序 | ❌ |
+
+**结论**：L1（语言→档位映射）易学达标；L3 避障泛化不足（15%）；L4 条件触发/子任务顺序未学会（0%）。
+L2 导航（85%）与 L1（100%）达标，L3/L4 是短板——需更多样化的避障/条件数据或更强架构。
+采集/评估脚本：`collect_l1.py`/`collect_l3.py`/`collect_l4.py`、`eval_l1.py`/`eval_l3.py`/`eval_l4.py`、
+`chain_l1.sh`/`chain_l3.sh`/`chain_l4.sh`。
+
+## 提速天花板复验：K/V 缓存与 CUDA graphs 均否决（2026-11-13） \{#speed-ceiling}
+
+在 8.2x 基础上继续榨提速，两条路线实测均不可行，**确认 8.2x（no-cudagraphs）是单卡 L20 + 此 NAS 的安全天花板**。
+
+### 路线一：冻结前缀 K/V 缓存——NAS I/O 反噬（否决）
+
+思路：`frozen_prefill` 每步重算 198-token 前缀的逐层 K/V（实测 32.9ms，占 ~39%），VLM 冻结（vlm_layer0 可训张量 0/9）故 K/V 训练期恒定，理论上可预计算缓存跳过。
+
+实测否决（先算 I/O 成本再动手）：
+
+| 项 | 实测 |
+|---|---|
+| NAS 聚合读吞吐 | 4 线程 ~687 MB/s、8 线程 ~543 MB/s（NFS 服务端瓶颈，**不随线程扩展**） |
+| K/V 缓存 batch32 体积 | 131 MB（每帧 4.1MB，是图像 embedding 368KB 的 **11 倍**） |
+| 新增 I/O 耗时 | 131MB ÷ ~600MB/s ≈ **218 ms/step** |
+| 省下的计算 | ~30 ms（frozen_prefill） |
+| 当前整 step | 62.5 ms |
+
+K/V 缓存把 ~30ms 计算换成 ~218ms I/O → 训练反慢 ~4x。**缓存类优化必须先实测存储吞吐算 I/O 成本，不能只算省下的计算。** NAS 剩 7.5TB 容量够，但带宽喂不动。
+
+### 路线二：CUDA graphs——计算 bound 无收益（否决）
+
+`torch.compile` 改 `max-autotune`/`reduce-overhead`（含 cudagraphs）。首测两模式均崩：`accessing tensor output of CUDAGraphs that has been overwritten by a subsequent run`（frozen_prefill 的 kv 输出缓冲被下一步覆盖）。加 `torch.compiler.cudagraph_mark_step_begin()` 每步标记后崩溃解决，但基准（各 80 步）：
+
+| 模式 | 稳态 ms/step | mem | 问题 |
+|---|---|---|---|
+| no-cudagraphs（基线） | 69-70（稳定） | 3.4G | 无 |
+| max-autotune（graphs） | 62-69，偶发 96 尖峰 | 3.2G | 提速在噪声内 + 不稳定 |
+| reduce-overhead（graphs） | 70-77，偶发 91 尖峰 | 3.2G | 反而更慢 |
+
+且 graphs 模式 grad norm 明显偏离基线（如 2.11/1.43 vs 1.46/0.72）→ **数值不等价**。根因：管线是**计算 bound**（frozen_prefill 33ms + backward 29ms 的 matmul 主导），CUDA graphs 只省 kernel-launch 开销（此处占比极小）。生产代码恢复 no-cudagraphs。
+
+**结论**：再提速只能走 FP8 计算（Transformer Engine，L20 有 FP8 张量核，~1.5x → 累计 ~12x，但需等价+闭环精度验证）或蒸馏换小模型（改变模型）。基准脚本 `bench_compile_modes.sh`、剖面 `profile_cached.py`。
+
+## 快速步态重训：高速破坏二值导航（2026-11-13，阴性） \{#fast-gait}
+
+诉求"爬行太慢"。结论：**原始步态 ~70mm/s 已是当前二值档位架构的导航速度近优；更快步态会破坏闭环导航。"丝滑"靠 50fps 渲染解决，"更快"受动作空间架构硬约束。**
+
+| 配置 | 开环速度 | 闭环导航成功率 | 有效导航速度 |
+|---|---|---|---|
+| 原始步态 kp0.15 | 69.8 mm/s | **87.5%** | 正常 |
+| 盲改 freq2.3/amp1.15（kp0.15） | 滑移不走 | 5.4%（全超时） | — |
+| 搜索 rank3 freq2.63/kp0.40 | **108 mm/s (+55%)** | 25.9%（全超时） | ~11 mm/s |
+| rank3 + 驻留0.1s/死区8-20° | 108 mm/s | 23.8% | ~10 mm/s |
+
+根因链：
+1. 盲改失败因 servo kp 未提（默认 0.15 太软，追不上快目标→滑移）。步态搜索（`gait_speed_search.py`，调 freq/ascale/kp/kv）找到开环最快稳定步态 108mm/s，需 kp0.3-0.47。
+2. 但**开环快 ≠ 能导航**：二值档位（全速 steer_L/R）+ bang-bang 转向在高速下必然过冲振荡→绕目标打转、收敛极慢，开环 108 反成闭环 ~10mm/s。缩短驻留/减小死区救不回。
+3. 连续转向动作空间在 v4 已证失败（弱执行易超时），二值档位是刻意选择。故更快导航需重设计低层控制器/动作表征（超出本轮范围）。
+
+决策：**接受原始步态**，不发射 fast-gait 重训。`collect_v5.py`/`eval_ensemble_v5.py` 已加 `--gait-freq/--gait-amp-scale/--servo-kp/--servo-kv/--dwell-s/--deadzone-*` 参数（搜索↔采集↔评估动力学一致，position 执行器需同步 `biasprm[1]=-kp`）。
