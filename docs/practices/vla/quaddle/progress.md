@@ -1,4 +1,4 @@
-# Quaddle VLA 实施现状与计划（2026-11-12）
+# Quaddle VLA 实施现状与计划（2026-11-14 更新）
 
 > 团队进度汇报文档。接续 [experiment-notes.md](./experiment-notes.md)（v4/v5 试验记录）。
 > 所有时间均为北京时间。
@@ -36,7 +36,8 @@ seed7000 3/3 + 20eps 17/20=85%（≥60%）。** 此前训练侧杠杆均失败�
 | 20eps 扩展 | ≥60% | 17/20=85%（18k+ensembling）| ✅ |
 | 《细化方案》L2 导航 | ≥70% | 85% | ✅ |
 | rear 专项可靠 | 到达 | ensembling 下 rear 场景可达 | ✅ |
-| L1≥90% / L3 避障 / L4 组合 | — | 未测 | ⬜ |
+| L1 指令跟随 ≥90% | ≥90% | 100% | ✅ |
+| L3 避障 / L4 组合 | ≥50% / 触发+顺序 | 10% / 0%（600集扩充仍阴性，架构上限）| ❌ |
 | 真机交接 | 12 月 | 未开始 | ⬜ |
 
 **瓶颈与突破**：OOD 自旋 compounding error 曾使所有训练侧杠杆失败（加训练过拟合、
@@ -50,18 +51,37 @@ recency 加权平均，replan5/k=0.01）首次突破：平滑 chunk 间冲突、
 batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembling（replan5/k=0.01）。
 详见 [experiment-notes.md](./experiment-notes.md#temporal-ensembling-突破-ood2026-11-13验收达标)。
 
+## 本轮总结（2026-11-14）
+
+**核心基线达标，进阶项与提速均探到明确边界。** 本轮把"还能更快/更强吗"系统验证到底：
+
+| 维度 | 结论 | 证据 |
+|---|---|---|
+| **L2 导航** | ✅ 85% 达标 | 18k + temporal ensembling，seed7000 3/3 + 20eps 17/20 |
+| **L1 指令跟随** | ✅ 100% 达标 | 语言→档位映射 |
+| **L3 避障** | ❌ 10%（架构上限）| 200集15% → 600集10%，数据×3+训练×2 反略降 |
+| **L4 条件组合** | ❌ 0%（架构上限）| 200集0% → 600集0%，持平 |
+| **训练提速** | 8.2x 安全天花板 | K/V 缓存（NAS I/O 反慢 4x）、CUDA graphs（计算 bound 无收益+数值漂移）均实测否决 |
+| **步态速度** | 接受原始步态 ~70mm/s | 开环可达 108mm/s 但高速破坏二值闭环导航（~24%），原始近优 |
+
+**两条关键定论：**
+1. **数据量/训练量不是瓶颈**：L3/L4 扩到 600 集（×3）+ 12k（×2）+ 后方过采样仍不达标，证实是二值档位 450M VLA 的**架构/任务复杂度上限**（与 fast-gait 同源）。突破需连续动作空间/更强模型/任务分解，而非堆数据。
+2. **8.2x 是无损提速天花板**：缓存类受 NAS I/O 限制（聚合读 ~600MB/s，K/V 每帧 4.1MB 喂不动），graphs 类只救 launch-bound 而本管线计算 bound（frozen_prefill 33ms + backward 29ms）。再提速需 FP8（数值风险）或蒸馏（换模型）。
+
+**交付**：6 张 GIF 在本地 `outputs/`（L2×2 / L3 / L4 / 步态 / 环境）；代码+文档 commit 本地 `233da00`+`5eca35a`（feat/quaddle-vla，按指示不推送）。详见 [experiment-notes.md](./experiment-notes.md) 的 `#speed-ceiling` / `#fast-gait` / `#l3l4-expand`。
+
 ## 二、技术方案（当前生效版本 v5）
 
 | 层 | 方案 |
 |---|---|
 | **模型** | SmolVLA 450M（`lerobot/smolvla_base`：SmolVLM2 骨干 + flow matching 动作专家），LeRobot 0.6.1 微调 |
-| **微调范围** | 冻结视觉编码器与 VLM 骨干，只训动作专家（~350M 参数 + 投影层）|
+| **微调范围** | 冻结视觉编码器与 VLM 骨干（~350M），只训动作专家 + 投影层（**~100M**，实测 99.88M/450M 可训）|
 | **环境** | 《Quaddle 入门》MuJoCo 环境（`quaddle-mujoco`，官方 URDF 自建，MuJoCo 3.8.1），3 积木 + 3 相机（俯视/前视/斜视）320²，EGL GPU 渲染 |
 | **动作空间** | 2 维 `[vx_dir, wz_dir]`：forward=(1,0)、steer_left=(0,1)、steer_right=(0,−1)、stop=(0,0)——环境原生 duty 不对称转向（0.6-1.2 rad/s 准原地转） |
 | **专家** | 查表 CPG 方位闭环：死区 ±12-40° 随机 + 0.4s 切档驻留 + 50% rear 过采样 |
 | **数据** | 4 worker 并行采集 252 条常规 + 100 条恢复数据 = **352 条 / ~137k 帧**（lerobot v3.0 格式，官方 aggregate 合并）|
-| **训练** | batch 32 / fp32 / AdamW + cosine，6000 步（v5.1）→ 18000 步（v5.1-ext，进行中）|
-| **算力** | cclab 工作台 loop-v7-gpu-0702：L20 24GB（训练占用 11.3GB / util 98-100%）|
+| **训练** | batch 32 / AdamW + cosine，导航 18k（best）；L1 6k / L3·L4 12k（8.2x 缓存管线，bf16）|
+| **算力** | cclab 工作台 loop-v7-gpu-0702：L20 24GB（缓存训练占用 3.4GB / util 100%）|
 
 ## 三、实施现状（时间线 + 结果）
 
@@ -125,18 +145,19 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 | 4 | 恢复数据扩量：warmup 6s → 15-30s + 防翻安全偏置 | 半天 | 覆盖更长自旋 OOD 态 |
 | 5 | 环境统一文档：教程页交叉引用 + 两套环境差异说明 | 30 分钟 | 防混淆 |
 
-**当前推荐路径**：~~1~~ → **3 或 4**（30k 结果证实训练量饱和，瓶颈转为 OOD 自旋态覆盖）。
-8.2x 加速使重采重训迭代降到分钟级。训练-评估管线全自动，每次实验自动产出：
-逐场景成功率表、档位统计、rollout GIF。
+**当前推荐路径（2026-11-14 更新）**：核心基线（L2 85% / L1 100%）已达标，**加训练/加数据路线均已证伪**
+（30k/43k 过拟合、#3 1D、#4 恢复、DAgger、L3/L4 扩量全阴性）。进阶项（L3/L4）与更快步态均触到
+**二值档位 450M VLA 的架构上限**。下一步若要进一步突破，方向是**架构改进**（连续动作空间 / 更强模型 /
+任务分解），而非继续堆数据或训练量。8.2x 加速管线使任何重采重训迭代保持在分钟级。
 
 ### 训练加速里程碑（2026-11-12）
 
 训练过程极限优化落地：**509ms/step → 62.5ms/step（8.2x）**，显存 11.4G → 3.4G，数值等价
 （梯度 cosine 0.996+）。核心：冻结图像嵌入缓存（跳过占 52% 的视觉编码器）+ 梯度分裂前向
-（反向只穿过 51 个可训练 token）+ flash SDPA + torch.compile。100x 经论证超单卡 L20 物理极限
-（计算上限 ~57x、NAS I/O 上限 ~8x），8.2x 为无损约束下实际极限。详见
-[experiment-notes.md#fast-train](./experiment-notes.md#fast-train)。30k 续训（18k→30k）已用
-加速管线挂起，输出落 NAS `/dataset/mtl_data/quaddle_vla/runs/v51_30k_fast`。
+（反向只穿过 51 个可训练 token）+ flash SDPA + torch.compile。**2026-11-14 进一步实测确认 8.2x 为安全天花板**：
+前缀 K/V 缓存（NAS 聚合读 ~600MB/s 喂不动每帧 4.1MB 的 K/V，反慢 ~4x）与 CUDA graphs（管线计算 bound，
+graphs 只省 launch 开销、无收益且数值漂移）均否决。再提速需 FP8（数值风险）或蒸馏（换模型）。详见
+[experiment-notes.md#fast-train](./experiment-notes.md#fast-train) 与 [#speed-ceiling](./experiment-notes.md#speed-ceiling)。
 
 ## 五、资产清单
 
