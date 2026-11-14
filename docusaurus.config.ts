@@ -47,6 +47,13 @@ const config: Config = {
 
   markdown: {
     mermaid: true,
+    // `future.v4` disables MDX v1 compatibility by default. Keep the legacy
+    // admonition/heading/comment syntax that existing docs and translations use.
+    mdx1Compat: {
+      comments: true,
+      admonitions: true,
+      headingIds: true,
+    },
   },
 
   plugins: [
