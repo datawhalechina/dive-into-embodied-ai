@@ -14,7 +14,7 @@ Success criteria and RNG/scene protocol are byte-identical to eval_l4.py for
 an apples-to-apples comparison against the end-to-end 0% baseline.
 """
 from __future__ import annotations
-import argparse, math, os
+import argparse, math, os, subprocess
 from pathlib import Path
 import numpy as np
 import collect_v5 as cv
@@ -35,6 +35,9 @@ def main():
     ap.add_argument("--max-s", type=float, default=60.0)
     ap.add_argument("--start-ep", type=int, default=0, help="fast-forward RNG to this episode (debug single ep)")
     ap.add_argument("--skill-log", action="store_true", help="log skill/dist/bearing every 10 frames")
+    ap.add_argument("--mp4-out", default="", help="直出 960x720 H.264（高清重渲染）；设置后不再产 GIF")
+    ap.add_argument("--mp4-size", default="960x720")
+    ap.add_argument("--mp4-fps", type=int, default=25)
     ap.add_argument("--out", default=str(HERE / "outputs/rollout_l4_decomposed.gif"))
     args = ap.parse_args()
     os.environ.setdefault("MUJOCO_GL", "egl")
@@ -47,6 +50,7 @@ def main():
     policy = SmolVLAPolicy.from_pretrained(args.ckpt); policy.eval()
     device = "cuda" if torch.cuda.is_available() else "cpu"
     pre, post = make_pre_post_processors(cfg, policy_cfg_type="smolvla", device=device)
+    torch.manual_seed(7000)  # flow 采样噪声种子化：策略输出确定可复现
     model = mujoco.MjModel.from_xml_path(str(HERE / "outputs/dataset_l4/scene.xml"))
     model.opt.timestep = cv.DT_PHYS
     data = mujoco.MjData(model)
@@ -56,6 +60,17 @@ def main():
     renderer = mujoco.Renderer(model, height=cv.IMG, width=cv.IMG)
     gif_cam = mujoco.MjvCamera(); gif_cam.type = mujoco.mjtCamera.mjCAMERA_FREE
     gif_cam.lookat[:] = [0, 0, 0]; gif_cam.distance = 1.3; gif_cam.azimuth = 135; gif_cam.elevation = -35
+    # 高清 mp4：独立渲染器（策略观测仍 320²），帧流式喂 ffmpeg，不落巨型 GIF
+    mp4_proc = None; GIF_W = GIF_H = cv.IMG
+    if args.mp4_out:
+        GIF_W, GIF_H = map(int, args.mp4_size.split("x"))
+        ff = "/workspace/gifopt/ffbin/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2"
+        mp4_proc = subprocess.Popen([ff, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
+                                     "-s", f"{GIF_W}x{GIF_H}", "-r", str(args.mp4_fps), "-i", "-",
+                                     "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
+                                     "-pix_fmt", "yuv420p", args.mp4_out], stdin=subprocess.PIPE)
+        gif_renderer = mujoco.Renderer(model, height=GIF_H, width=GIF_W)
+        gif_cam.distance = 1.6
     rng = np.random.default_rng(args.seed)
     for ff in range(args.start_ep):   # 快进：复现逐集 RNG 消耗（layout + yaw0）
         cv.random_layout(rng); rng.uniform(-math.pi, math.pi)
@@ -168,13 +183,22 @@ def main():
                 t += cv.DT_CTRL
                 if data.body(body_id).xpos[2] < 0.030: fell = True; break
             if fell: break
-            renderer.update_scene(data, camera=gif_cam); ep_frames.append(renderer.render().copy())
+            if mp4_proc is not None:
+                if frame % 6 == 0:
+                    gif_renderer.update_scene(data, camera=gif_cam)
+                    mp4_proc.stdin.write(gif_renderer.render().tobytes())
+            else:
+                renderer.update_scene(data, camera=gif_cam); ep_frames.append(renderer.render().copy())
             frame += 1
             if task_type == 0 and forced_stop: success = True; break  # dist<0.20 且本步发 stop（镜像 eval_l4 判据）
         results.append(success)
         print(f"ep{ep}: {lang} {'✓' if success else '✗'} reached={reached} fell={fell} t={t:.1f}s stage={targets[stage]} dist={dist*100:.0f}cm", flush=True)
         all_frames.extend(ep_frames)
-    imageio.mimsave(args.out, all_frames, fps=10, loop=0)
+    if mp4_proc is not None:
+        mp4_proc.stdin.close(); mp4_proc.wait()
+        print(f"MP4_SAVED {args.mp4_out}", flush=True)
+    else:
+        imageio.mimsave(args.out, all_frames, fps=10, loop=0)
     n_ok = sum(results)
     print(f"L4_SUCCESS {n_ok}/{len(results)} (end-to-end baseline 0/20)", flush=True)
     os._exit(0)

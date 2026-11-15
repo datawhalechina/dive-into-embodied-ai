@@ -37,7 +37,7 @@ seed7000 3/3 + 20eps 17/20=85%（≥60%）。** 此前训练侧杠杆均失败�
 | 《细化方案》L2 导航 | ≥70% | 85% | ✅ |
 | rear 专项可靠 | 到达 | ensembling 下 rear 场景可达 | ✅ |
 | L1 指令跟随 ≥90% | ≥90% | 100% | ✅ |
-| L3 避障 / L4 组合 | ≥50% / 触发+顺序 | **85% / 80%**（任务分解，2026-11-15，[详见](./experiment-notes.md#decomposed)）| ✅ |
+| L3 避障 / L4 组合 | ≥50% / 触发+顺序 | **80% / 85%**（任务分解，2026-11-15，[详见](./experiment-notes.md#decomposed)）| ✅ |
 | 真机交接 | 12 月 | 未开始 | ⬜ |
 
 **瓶颈与突破**：OOD 自旋 compounding error 曾使所有训练侧杠杆失败（加训练过拟合、
@@ -45,7 +45,9 @@ seed7000 3/3 + 20eps 17/20=85%（≥60%）。** 此前训练侧杠杆均失败�
 recency 加权平均，replan5/k=0.01）首次突破：平滑 chunk 间冲突、抑制自旋锁，20eps 17/20=85%。
 新 best = 2D 18k + ensembling。
 
-![L2 导航 best：SmolVLA 18k + temporal ensembling，20eps 17/20=85%（VLA 策略 rollout，播放 3x）](./figs/quaddle_L2_nav_ensemble_17of20.gif)
+<video controls playsInline preload="metadata" src={require('./figs/quaddle_L2_nav_ensemble_17of20.mp4').default} style={{width: '100%'}} />
+
+L2 导航 best：SmolVLA 18k + temporal ensembling，20eps 17/20=85%（VLA 策略 rollout，播放 3x）
 
 训练方法：SmolVLA 450M 冻结骨干只训动作专家；352 条 CPG 专家数据（252 常规+100 恢复）；
 batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembling（replan5/k=0.01）。
@@ -54,18 +56,21 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 ## 本轮总结（2026-11-15）：任务分解打破 L3/L4 架构上限
 
 **不改模型、不加训练**，仅把任务分解为"确定性编排器 + 已验证 L2 技能（85%）"，端到端路线卡死的两个
-进阶任务双双达标：**L3 避障 10%→85%（17/20，≥50% 达标）、L4 条件组合 0%→80%（16/20，触发+顺序达标；
-"看到绿停" 10/10、"先红后蓝" red 达成 10/10 + blue 6/10）**。判据/RNG/场景与基线逐字节一致（apples-to-apples）。
+进阶任务双双达标：**L3 避障 10%→80%（16/20，≥50% 达标）、L4 条件组合 0%→85%（17/20，触发+顺序达标；
+"看到绿停" 10/10、"先红后蓝" red 达成 10/10 + blue 7/10）**。判据/RNG/场景与基线逐字节一致（apples-to-apples）。
+评估以**高清定稿跑**为准：960×720 mp4 直出、策略噪声种子化（torch.manual_seed(7000)，数字可复现），
+L2 同法重跑 17/20 与原值一致。
 
 | 维度 | 结论 |
 |---|---|
 | 顺序/触发逻辑 | 编排器确定性保证，切段 10/10 零失败——这正是端到端学不会的部分 |
-| blue 段残余失败（4/10）| 非编排问题：弱侧大角转向慢（净 ~5°/s）+ 贴块起步大方位角 OOD（训练分布空洞，flow 噪声下接近抛硬币）|
+| blue 段残余失败（3/10）| 非编排问题：弱侧大角转向慢（净 ~5°/s）+ 贴块起步大方位角 OOD（训练分布空洞，flow 噪声下接近抛硬币）|
 | 信息界面 | 编排器/反射层使用的 dist/bearing/障碍身份与策略自身输入 state[6:8] 同源，非新增特权信息；真机等价物 = 目标色跟踪器/障碍检测器 |
-| L4 辅助迭代 | 无辅助 13/20 → 距离门控 14/20 → 纯方位 15/20 → +每段 60s 预算 **16/20** |
+| L4 辅助迭代 | 无辅助 13/20 → 距离门控 14/20 → 纯方位 15/20 → +每段 60s 预算 16/20 → 高清定稿 **17/20** |
 
-**交付**：`eval_l4_decomposed.py` / `eval_l3_decomposed.py`；GIF `rollout_l3_decomposed_3x.gif` /
-`rollout_l4_decomposed_final_3x.gif`（figs/ 同步）。详见 [experiment-notes.md](./experiment-notes.md#decomposed)。
+**交付**：`eval_l4_decomposed.py` / `eval_l3_decomposed.py`；高清成品 `figs/quaddle_L3_decomposed_16of20.mp4`（2.3MB）、
+`figs/quaddle_L4_decomposed_17of20.mp4`（3.3MB）、`figs/quaddle_L2_nav_ensemble_17of20.mp4`（8.2MB）。
+详见 [experiment-notes.md](./experiment-notes.md#decomposed)。
 
 ## 本轮总结（2026-11-14）
 
@@ -98,7 +103,7 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 | **数据** | 4 worker 并行采集 252 条常规 + 100 条恢复数据 = **352 条 / ~137k 帧**（lerobot v3.0 格式，官方 aggregate 合并）|
 | **训练** | batch 32 / AdamW + cosine，导航 18k（best）；L1 6k / L3·L4 12k（8.2x 缓存管线，bf16）|
 | **算力** | cclab 工作台 loop-v7-gpu-0702：L20 24GB（缓存训练占用 3.4GB / util 100%）|
-| **任务分解（L3/L4）** | 确定性编排器（指令→阶段计划）+ L3 非目标块反射层 / L4 转向辅助，复用 L2 技能（18k+ensembling）；L3 **85%**、L4 **80%** |
+| **任务分解（L3/L4）** | 确定性编排器（指令→阶段计划）+ L3 非目标块反射层 / L4 转向辅助，复用 L2 技能（18k+ensembling）；L3 **80%**、L4 **85%** |
 
 ## 三、实施现状（时间线 + 结果）
 
@@ -128,8 +133,8 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 | **环境统一文档** | 教程交叉引用+两套环境差异说明 | ✅ | index.md 已注明 cs123 弃用/quaddle-mujoco 生效 |
 | **真机 OpenCat 映射** | `opencat_bridge.py` 档位→kwkF/ktrL/ktrR/kbalance | ✅ 接口就绪 | 真机采数据/后训练待 12 月硬件 |
 | **GIF 播放优化** | 4 张演示 GIF 时间压缩（cclab 分块上传→ffmpeg 30fps 插值→分块回传，md5 全程校验；北京时间 23:35 完成）| ✅ | L2 3x / L3·L4 4x，时长 14-20min → 1.5-5min，物理轨迹不变（[详见](./experiment-notes.md#gif-playback)）|
-| **任务分解 L3** | L2 技能 + 非目标块反射层（判据/RNG 镜像基线）| ✅ **达标** | **17/20=85%**（基线 2/20；≥50% 线达标）|
-| **任务分解 L4** | 编排器 + L2 技能 + 转向辅助 + 每段 60s 预算（四轮迭代 13→14→15→16）| ✅ **达标** | **16/20=80%**（基线 0/20；触发 10/10、red 达成 10/10、blue 6/10）|
+| **任务分解 L3** | L2 技能 + 非目标块反射层（判据/RNG 镜像基线）| ✅ **达标** | **16/20=80%**（基线 2/20；≥50% 线达标；首跑 17/20）|
+| **任务分解 L4** | 编排器 + L2 技能 + 转向辅助 + 每段 60s 预算（迭代 13→14→15→16→17）| ✅ **达标** | **17/20=85%**（基线 0/20；触发 10/10、red 达成 10/10、blue 7/10）|
 
 ### v5.1-ext / 30k 关键结果（训练量单变量对照）
 
@@ -165,7 +170,7 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 | 4 | 恢复数据扩量：warmup 6s → 15-30s + 防翻安全偏置 | 半天 | 覆盖更长自旋 OOD 态 |
 | 5 | 环境统一文档：教程页交叉引用 + 两套环境差异说明 | 30 分钟 | 防混淆 |
 
-**当前推荐路径（2026-11-15 更新）**：L2/L1/L3/L4 全部达标（85%/100%/85%/80%）。L3/L4 由**任务分解**
+**当前推荐路径（2026-11-15 更新）**：L2/L1/L3/L4 全部达标（85%/100%/80%/85%）。L3/L4 由**任务分解**
 达标（[experiment-notes #decomposed](./experiment-notes.md#decomposed)）；加训练/加数据路线此前均已证伪。
 剩余可做：① sequential-depart 数据补丁（采 30-60 条"从块旁出发去另一目标"专家数据微调 L2 ckpt，把 L4 task B
 6/10 推向 ~100%，8.2x 管线分钟级迭代）；② 弱侧转向运动学瓶颈需步态层解（与 #fast-gait 结论一致）；

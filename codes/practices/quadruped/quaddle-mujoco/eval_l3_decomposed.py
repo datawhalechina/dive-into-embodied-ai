@@ -13,7 +13,7 @@ Success/collision criteria and RNG/scene protocol are byte-identical to
 eval_l3.py (reach target <12cm, no non-target block within 9cm, no fall).
 """
 from __future__ import annotations
-import argparse, math, os
+import argparse, math, os, subprocess
 from pathlib import Path
 import numpy as np
 import collect_v5 as cv
@@ -32,6 +32,9 @@ def main():
     ap.add_argument("--reflex-r", type=float, default=0.15, help="trigger radius (collision judged at 0.09)")
     ap.add_argument("--reflex-dwell", type=float, default=0.8, help="steer-away hold time (s)")
     ap.add_argument("--max-s", type=float, default=60.0)
+    ap.add_argument("--mp4-out", default="", help="直出 960x720 H.264（高清重渲染）；设置后不再产 GIF")
+    ap.add_argument("--mp4-size", default="960x720")
+    ap.add_argument("--mp4-fps", type=int, default=25)
     ap.add_argument("--out", default=str(HERE / "outputs/rollout_l3_decomposed.gif"))
     args = ap.parse_args()
     os.environ.setdefault("MUJOCO_GL", "egl")
@@ -44,6 +47,7 @@ def main():
     policy = SmolVLAPolicy.from_pretrained(args.ckpt); policy.eval()
     device = "cuda" if torch.cuda.is_available() else "cpu"
     pre, post = make_pre_post_processors(cfg, policy_cfg_type="smolvla", device=device)
+    torch.manual_seed(7000)  # flow 采样噪声种子化：策略输出确定可复现
     model = mujoco.MjModel.from_xml_path(str(HERE / "outputs/dataset_l3/scene.xml"))
     model.opt.timestep = cv.DT_PHYS
     data = mujoco.MjData(model)
@@ -53,6 +57,17 @@ def main():
     renderer = mujoco.Renderer(model, height=cv.IMG, width=cv.IMG)
     gif_cam = mujoco.MjvCamera(); gif_cam.type = mujoco.mjtCamera.mjCAMERA_FREE
     gif_cam.lookat[:] = [0, 0, 0]; gif_cam.distance = 1.3; gif_cam.azimuth = 135; gif_cam.elevation = -35
+    # 高清 mp4：独立渲染器（策略观测仍 320²），帧流式喂 ffmpeg，不落巨型 GIF
+    mp4_proc = None; GIF_W = GIF_H = cv.IMG
+    if args.mp4_out:
+        GIF_W, GIF_H = map(int, args.mp4_size.split("x"))
+        ff = "/workspace/gifopt/ffbin/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2"
+        mp4_proc = subprocess.Popen([ff, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
+                                     "-s", f"{GIF_W}x{GIF_H}", "-r", str(args.mp4_fps), "-i", "-",
+                                     "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
+                                     "-pix_fmt", "yuv420p", args.mp4_out], stdin=subprocess.PIPE)
+        gif_renderer = mujoco.Renderer(model, height=GIF_H, width=GIF_W)
+        gif_cam.distance = 1.6
     rng = np.random.default_rng(args.seed)
     all_frames, results = [], []
     for ep in range(args.episodes):
@@ -148,14 +163,23 @@ def main():
                 t += cv.DT_CTRL
                 if data.body(body_id).xpos[2] < 0.030: fell = True; break
             if fell: break
-            renderer.update_scene(data, camera=gif_cam); ep_frames.append(renderer.render().copy())
+            if mp4_proc is not None:
+                if frame % 6 == 0:
+                    gif_renderer.update_scene(data, camera=gif_cam)
+                    mp4_proc.stdin.write(gif_renderer.render().tobytes())
+            else:
+                renderer.update_scene(data, camera=gif_cam); ep_frames.append(renderer.render().copy())
             frame += 1
             if dist < cv.SUCCESS_DIST: success = True; break
         ok = success and not collided
         results.append(ok)
         print(f"ep{ep}: {color} {'✓' if ok else '✗'} success={success} collided={collided} fell={fell} dist={dist*100:.0f}cm", flush=True)
         all_frames.extend(ep_frames)
-    imageio.mimsave(args.out, all_frames, fps=10, loop=0)
+    if mp4_proc is not None:
+        mp4_proc.stdin.close(); mp4_proc.wait()
+        print(f"MP4_SAVED {args.mp4_out}", flush=True)
+    else:
+        imageio.mimsave(args.out, all_frames, fps=10, loop=0)
     n_ok = sum(results)
     print(f"L3_SUCCESS {n_ok}/{len(results)} (target>=50%, end-to-end baseline 2/20)", flush=True)
     os._exit(0)

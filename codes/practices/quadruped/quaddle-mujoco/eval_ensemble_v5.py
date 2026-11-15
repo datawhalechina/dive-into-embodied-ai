@@ -5,7 +5,7 @@ Instead of draining a fixed action queue, replan via predict_action_chunk every
 predictions (temporal ensembling). Smoother, more stable actions -> less spin lock.
 """
 from __future__ import annotations
-import argparse, math, os
+import argparse, math, os, subprocess
 from pathlib import Path
 import numpy as np
 import collect_v5 as cv
@@ -24,6 +24,9 @@ def main():
     ap.add_argument("--max-s", type=float, default=60.0)
     ap.add_argument("--out", default=str(HERE / "outputs/rollout_ensemble.gif"))
     ap.add_argument("--gif-fps", type=int, default=50, help="render every control step, play at this fps (silky)")
+    ap.add_argument("--mp4-out", default="", help="直出 960x720 H.264（高清重渲染）；设置后不再产 GIF")
+    ap.add_argument("--mp4-size", default="960x720")
+    ap.add_argument("--mp4-fps", type=int, default=25)
     ap.add_argument("--gait-freq", type=float, default=0.0, help="override CPG freq (0=use gait.json)")
     ap.add_argument("--gait-amp-scale", type=float, default=1.0, help="scale leg amplitude (speed)")
     ap.add_argument("--servo-kp", type=float, default=0.0, help="override servo kp (0=scene.xml default 0.15)")
@@ -39,6 +42,7 @@ def main():
     policy = SmolVLAPolicy.from_pretrained(args.ckpt); policy.eval()
     device = "cuda" if torch.cuda.is_available() else "cpu"
     pre, post = make_pre_post_processors(cfg, policy_cfg_type="smolvla", device=device)
+    torch.manual_seed(7000)  # flow 采样噪声种子化：策略输出确定可复现
     FREQ = args.gait_freq if args.gait_freq > 0 else cv.FREQ
     AMPS = cv.AMPS * args.gait_amp_scale
 
@@ -57,6 +61,17 @@ def main():
     renderer = mujoco.Renderer(model, height=cv.IMG, width=cv.IMG)
     gif_cam = mujoco.MjvCamera(); gif_cam.type = mujoco.mjtCamera.mjCAMERA_FREE
     gif_cam.lookat[:] = [0, 0, 0]; gif_cam.distance = 1.3; gif_cam.azimuth = 135; gif_cam.elevation = -35
+    # 高清 mp4：独立渲染器（策略观测仍 320²），帧流式喂 ffmpeg，不落巨型 GIF
+    mp4_proc = None; GIF_W = GIF_H = cv.IMG
+    if args.mp4_out:
+        GIF_W, GIF_H = map(int, args.mp4_size.split("x"))
+        ff = "/workspace/gifopt/ffbin/imageio_ffmpeg/binaries/ffmpeg-linux-x86_64-v9.0.2"
+        mp4_proc = subprocess.Popen([ff, "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
+                                     "-s", f"{GIF_W}x{GIF_H}", "-r", str(args.mp4_fps), "-i", "-",
+                                     "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
+                                     "-pix_fmt", "yuv420p", args.mp4_out], stdin=subprocess.PIPE)
+        gif_renderer = mujoco.Renderer(model, height=GIF_H, width=GIF_W)
+        gif_cam.distance = 1.6
 
     rng = np.random.default_rng(args.seed)
     all_frames, results = [], []
@@ -134,7 +149,12 @@ def main():
                 for _ in range(cv.SUB): mujoco.mj_step(model, data)
                 t += cv.DT_CTRL
                 if data.body(body_id).xpos[2] < 0.030: fell = True; break
-                renderer.update_scene(data, camera=gif_cam); ep_frames.append(renderer.render().copy())
+                if mp4_proc is not None:
+                    if frame % 6 == 0:
+                        gif_renderer.update_scene(data, camera=gif_cam)
+                        mp4_proc.stdin.write(gif_renderer.render().tobytes())
+                else:
+                    renderer.update_scene(data, camera=gif_cam); ep_frames.append(renderer.render().copy())
             if fell: break
             frame += 1
             if dist < cv.SUCCESS_DIST: success = True; break
@@ -142,7 +162,11 @@ def main():
         tag = "✓到达" if success else ("✗翻倒" if fell else "✗超时")
         print(f"ep{ep}: {color:5s} {tag} 用时{t:.1f}s 末距离{dist*100:.0f}cm 档位{ {s: action_log.count(s) for s in set(action_log)} }", flush=True)
         all_frames.extend(ep_frames)
-    imageio.mimsave(args.out, all_frames, fps=args.gif_fps, loop=0)
+    if mp4_proc is not None:
+        mp4_proc.stdin.close(); mp4_proc.wait()
+        print(f"MP4_SAVED {args.mp4_out}", flush=True)
+    else:
+        imageio.mimsave(args.out, all_frames, fps=args.gif_fps, loop=0)
     n_ok = sum(1 for r in results if r[1])
     print(f"成功率: {n_ok}/{len(results)}", flush=True)
     os._exit(0)

@@ -418,7 +418,9 @@ scene.xml/gait.json 从未改动）。执行器限速+换档斜坡在空场景�
 
 **新 best = 2D 18k + temporal ensembling（replan5, k=0.01）**。验收（3/3、≥60%）**达标**。
 
-![L2 导航 best：SmolVLA 18k + temporal ensembling，20eps 17/20=85%（VLA 策略 rollout，斜视全场，播放 3x）](./figs/quaddle_L2_nav_ensemble_17of20.gif)
+<video controls playsInline preload="metadata" src={require('./figs/quaddle_L2_nav_ensemble_17of20.mp4').default} style={{width: '100%'}} />
+
+L2 导航 best：SmolVLA 18k + temporal ensembling，20eps 17/20=85%（VLA 策略 rollout，斜视全场，960×720，播放 3x）
 
 **丝滑版（50fps 渲染）**：原始 GIF 为 10fps 显卡顿；改为每控制步渲染、50fps 播放后动作丝滑
 （同一 18k+ensembling 策略，6 集 5 胜）。提速需更快步态，但当前策略绑定训练步态，提速会伤导航，
@@ -539,7 +541,7 @@ K/V 缓存把 ~30ms 计算换成 ~218ms I/O → 训练反慢 ~4x。**缓存类�
 
 ## 任务分解突破 L3/L4 架构上限（2026-11-15） \{#decomposed}
 
-**结论：L3 避障 10%→85%（17/20）、L4 条件组合 0%→80%（16/20），双双达标。** 此前已证端到端
+**结论：L3 避障 10%→80%（16/20）、L4 条件组合 0%→85%（17/20），双双达标。** 此前已证端到端
 450M VLA + 二值档位学不会复合任务（600 集扩充仍阴性）；本轮**不改模型、不加训练**，把任务分解为
 "编排器 + 已验证技能"，两个架构上限同时打破。
 
@@ -555,26 +557,32 @@ K/V 缓存把 ~30ms 计算换成 ~218ms I/O → 训练反慢 ~4x。**缓存类�
 
 判据与 RNG/场景协议逐字节镜像 `eval_l3.py` / `eval_l4.py`（同 seed 同 20 场景），apples-to-apples。
 
-### 结果
+### 结果（2026-11-15 高清重跑定稿：960×720 mp4 直出、策略噪声种子化 torch.manual_seed(7000)、数字可复现）
 
 | 任务 | 端到端基线 | 分解版 | 达标线 | 判定 |
 |---|---|---|---|---|
-| L3 避障（到目标+不碰障碍）| 2/20=10% | **17/20=85%** | ≥50% | ✅ |
+| L3 避障（到目标+不碰障碍）| 2/20=10% | **16/20=80%**（首跑 17/20，±1 噪声波动）| ≥50% | ✅ |
 | L4 看到绿停 | 混在 0/20 内 | **10/10** | 触发 | ✅ |
-| L4 先红后蓝 | 混在 0/20 内 | **6/10**（red 达成 10/10）| 顺序 | ✅ |
-| L4 合计 | 0/20 | **16/20=80%** | 触发+顺序 | ✅ |
+| L4 先红后蓝 | 混在 0/20 内 | **7/10**（red 达成 10/10）| 顺序 | ✅ |
+| L4 合计 | 0/20 | **17/20=85%**（首跑 16/20）| 触发+顺序 | ✅ |
 
-（L4 预算按目标数配：每段 60s。同日志可算严格总窗截断分：60s = 12/20、90s = 15/20，均远超 0%。）
+（L4 预算按目标数配：每段 60s。同日志可算严格总窗截断分：60s ≈ 12/20、90s ≈ 15/20，均远超 0%。
+L2 同法重跑 17/20 与原数字一致。）
 
-![L3 避障分解版：L2 技能 + 非目标块反射层，20eps 17/20=85%（VLA 技能闭环，播放 3x）](./figs/quaddle_L3_decomposed_17of20.gif)
+<video controls playsInline preload="metadata" src={require('./figs/quaddle_L3_decomposed_16of20.mp4').default} style={{width: '100%'}} />
 
-![L4 条件组合分解版：编排器 + L2 技能，看到绿停 10/10、先红后蓝 6/10，合计 16/20=80%（播放 3x）](./figs/quaddle_L4_decomposed_16of20.gif)
+L3 避障分解版：L2 技能 + 非目标块反射层，20eps 16/20=80%（VLA 技能闭环，960×720，播放 3x）
+
+<video controls playsInline preload="metadata" src={require('./figs/quaddle_L4_decomposed_17of20.mp4').default} style={{width: '100%'}} />
+
+L4 条件组合分解版：编排器 + L2 技能，看到绿停 10/10、先红后蓝 7/10，合计 17/20=85%（960×720，播放 3x）
 
 ### 关键发现
 
 1. **顺序切换本身零失败**：red 达成 + 切段 10/10（四轮运行一致）——"触发+顺序"由编排器确定性保证，这正是端到端学不会的部分。
 2. **blue 段残余失败 = 两个已知瓶颈叠加**，非编排问题：① **弱侧大角转向慢**——steer_R 大角净转速实测 ~5°/s（0.612 rad/s 规格被摆振抵消，与 v4"弱档弧线"同源），rear-start 光初始转向耗 20-30s；② **贴块起步 + 大方位角 OOD**——切段瞬间距 red 12cm 而指令是 blue，"近距+大角"状态在 L2 训练分布外，策略失锁可跑飞（ep15 曾漂到 127cm；同 episode 单独重跑可成功——flow 采样噪声下接近抛硬币）。
-3. **L4 辅助迭代**：无辅助 13/20 → 距离门控辅助 14/20（跑出 0.30m 即脱离辅助，门控失效）→ 纯方位辅助 15/20（90s）→ 加每段 60s 预算 **16/20**。信息界面声明：编排器使用的 dist/bearing 与策略自身输入 state[6:8] 同源（非新增特权信息），L3 反射层用障碍身份（场景状态）；真机等价物 = 目标色跟踪器/障碍检测器，均为常规感知组件。
+3. **L4 辅助迭代**：无辅助 13/20 → 距离门控辅助 14/20（跑出 0.30m 即脱离辅助，门控失效）→ 纯方位辅助 15/20（90s）→ 加每段 60s 预算 16/20（首跑）→ 高清定稿跑 **17/20**。信息界面声明：编排器使用的 dist/bearing 与策略自身输入 state[6:8] 同源（非新增特权信息），L3 反射层用障碍身份（场景状态）；真机等价物 = 目标色跟踪器/障碍检测器，均为常规感知组件。
 4. **下一步（若要把 task B 推向 ~100%）**：sequential-depart 数据补丁——采 30-60 条"从块旁出发去另一目标"专家数据（正是切段 OOD 态），8.2x 管线微调 L2 ckpt 仅需分钟级；弱侧转向运动学瓶颈需步态层解决（与 [#fast-gait](#fast-gait) 结论一致）。
 
-脚本 `eval_l4_decomposed.py` / `eval_l3_decomposed.py`；GIF `outputs/rollout_l3_decomposed_3x.gif`、`outputs/rollout_l4_decomposed_final_3x.gif`。
+脚本 `eval_l4_decomposed.py` / `eval_l3_decomposed.py`（`--mp4-out` 直出 960×720 H.264）；成品
+`figs/quaddle_L3_decomposed_16of20.mp4`、`figs/quaddle_L4_decomposed_17of20.mp4`。
