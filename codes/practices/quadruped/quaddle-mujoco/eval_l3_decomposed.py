@@ -84,7 +84,7 @@ def main():
         for _ in range(int(cv.SETTLE_S / cv.DT_PHYS)): mujoco.mj_step(model, data)
         amp_scale = phases_t = 0.0
         skill0 = None; last_switch_t = 0.0
-        chunks = []; frame = 0; force_replan = True
+        chunks = []; frame = 0; force_replan = True; cap_n = 0
         avoid_skill = None; reflex_until = -1.0
         success = fell = collided = False; t = 0.0
         ep_frames = []
@@ -162,13 +162,14 @@ def main():
                 for _ in range(cv.SUB): mujoco.mj_step(model, data)
                 t += cv.DT_CTRL
                 if data.body(body_id).xpos[2] < 0.030: fell = True; break
+                if mp4_proc is not None:
+                    cap_n += 1
+                    if cap_n % 2 == 0:  # 每 2 个控制步 1 帧（0.04s）@25fps = 1x 真实速度
+                        gif_renderer.update_scene(data, camera=gif_cam)
+                        mp4_proc.stdin.write(gif_renderer.render().tobytes())
+                else:
+                    renderer.update_scene(data, camera=gif_cam); ep_frames.append(renderer.render().copy())
             if fell: break
-            if mp4_proc is not None:
-                if frame % 2 == 0:  # 每 2 个控制步 1 帧（0.04s）@50fps = 2x 速丝滑
-                    gif_renderer.update_scene(data, camera=gif_cam)
-                    mp4_proc.stdin.write(gif_renderer.render().tobytes())
-            else:
-                renderer.update_scene(data, camera=gif_cam); ep_frames.append(renderer.render().copy())
             frame += 1
             if dist < cv.SUCCESS_DIST: success = True; break
         ok = success and not collided

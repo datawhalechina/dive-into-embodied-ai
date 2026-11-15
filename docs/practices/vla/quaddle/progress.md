@@ -33,8 +33,8 @@ seed7000 3/3 + 20eps 17/20=85%（≥60%）。** 此前训练侧杠杆均失败�
 | 目标 | 要求 | 当前最佳 | 状态 |
 |---|---|---|---|
 | seed7000 三场景 | 3/3 | 3/3（ensembling）| ✅ |
-| 20eps 扩展 | ≥60% | 17/20=85%（18k+ensembling）| ✅ |
-| 《细化方案》L2 导航 | ≥70% | 85% | ✅ |
+| 20eps 扩展 | ≥60% | **18/20=90%**（18k+ensembling+seq-depart 微调；微调前三跑 17/17/16）| ✅ |
+| 《细化方案》L2 导航 | ≥70% | **90%** | ✅ |
 | rear 专项可靠 | 到达 | ensembling 下 rear 场景可达 | ✅ |
 | L1 指令跟随 ≥90% | ≥90% | 100% | ✅ |
 | L3 避障 / L4 组合 | ≥50% / 触发+顺序 | **80% / 85%**（任务分解，2026-11-15，[详见](./experiment-notes.md#decomposed)）| ✅ |
@@ -70,8 +70,10 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 | L4 辅助迭代 | 无辅助 13/20 → 距离门控 14/20 → 纯方位 15/20 → +每段 60s 预算 16/20 → 高清定稿 **17/20** |
 
 **交付**：`eval_l4_decomposed.py` / `eval_l3_decomposed.py`；高清成品 `figs/quaddle_L3_decomposed_16of20.mp4`（2.3MB）、
-`figs/quaddle_L4_decomposed_17of20.mp4`（3.3MB）、`figs/quaddle_L2_nav_ensemble_17of20.mp4`（8.2MB）。
-详见 [experiment-notes.md](./experiment-notes.md#decomposed)。
+`figs/quaddle_L4_decomposed_17of20.mp4`（3.3MB）、`figs/quaddle_L2_nav_ensemble_16of20.mp4`（8.6MB）。
+**追加（同日）**：sequential-depart 数据补丁（48 条"刚到站→异色目标"专家数据 + 续训 22k 步）——
+**L2 回归评估 18/20=90%（新最佳）**，L4 持平 17/20；残余 3 败定性为运动学瓶颈（详见
+[experiment-notes.md](./experiment-notes.md#seq-depart)）。
 
 ## 本轮总结（2026-11-14）
 
@@ -101,7 +103,7 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 | **环境** | 《Quaddle 入门》MuJoCo 环境（`quaddle-mujoco`，官方 URDF 自建，MuJoCo 3.8.1），3 积木 + 3 相机（俯视/前视/斜视）320²，EGL GPU 渲染 |
 | **动作空间** | 2 维 `[vx_dir, wz_dir]`：forward=(1,0)、steer_left=(0,1)、steer_right=(0,−1)、stop=(0,0)——环境原生 duty 不对称转向（0.6-1.2 rad/s 准原地转） |
 | **专家** | 查表 CPG 方位闭环：死区 ±12-40° 随机 + 0.4s 切档驻留 + 50% rear 过采样 |
-| **数据** | 4 worker 并行采集 252 条常规 + 100 条恢复数据 = **352 条 / ~137k 帧**（lerobot v3.0 格式，官方 aggregate 合并）|
+| **数据** | 352 条常规+恢复（~137k 帧）+ 48 条 seq-depart 补丁 = **400 条**（lerobot v3.0 格式，官方 aggregate 合并）|
 | **训练** | batch 32 / AdamW + cosine，导航 18k（best）；L1 6k / L3·L4 12k（8.2x 缓存管线，bf16）|
 | **算力** | cclab 工作台 loop-v7-gpu-0702：L20 24GB（缓存训练占用 3.4GB / util 100%）|
 | **任务分解（L3/L4）** | 确定性编排器（指令→阶段计划）+ L3 非目标块反射层 / L4 转向辅助，复用 L2 技能（18k+ensembling）；L3 **80%**、L4 **85%** |
@@ -136,6 +138,7 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 | **GIF 播放优化** | 4 张演示 GIF 时间压缩（cclab 分块上传→ffmpeg 30fps 插值→分块回传，md5 全程校验；北京时间 23:35 完成）| ✅ | L2 3x / L3·L4 4x，时长 14-20min → 1.5-5min，物理轨迹不变（[详见](./experiment-notes.md#gif-playback)）|
 | **任务分解 L3** | L2 技能 + 非目标块反射层（判据/RNG 镜像基线）| ✅ **达标** | **16/20=80%**（基线 2/20；≥50% 线达标；首跑 17/20）|
 | **任务分解 L4** | 编排器 + L2 技能 + 转向辅助 + 每段 60s 预算（迭代 13→14→15→16→17）| ✅ **达标** | **17/20=85%**（基线 0/20；触发 10/10、red 达成 10/10、blue 7/10）|
+| **seq-depart 微调** | 48 条"刚到站→异色目标"专家数据 + 从 18k 续训 22k（30 分钟）| ✅ | **L2 18/20=90%（新最佳）**；L4 持平 17/20——B 段残余瓶颈定性为运动学（[详见](./experiment-notes.md#seq-depart)）|
 
 ### v5.1-ext / 30k 关键结果（训练量单变量对照）
 
@@ -152,7 +155,7 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 **瓶颈已从欠拟合转为 OOD 自旋态 compounding error + 过拟合**——加训练路线关闭，转向动作空间
 重设计（#3）与恢复数据扩量（#4）。
 
-### 已排除的假设（诊断证据链，diag_*_v5.py 全部沉淀）
+### 已排除的假设（五轮诊断证据链，记录于下方与 experiment-notes）
 
 1. 数据不均衡 ❌（90k 帧统计：三档位 44/32/24%，rear 区对称）
 2. flow matching 积分步数 ❌（fm10 = fm20）
@@ -171,11 +174,10 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 | 4 | 恢复数据扩量：warmup 6s → 15-30s + 防翻安全偏置 | 半天 | 覆盖更长自旋 OOD 态 |
 | 5 | 环境统一文档：教程页交叉引用 + 两套环境差异说明 | 30 分钟 | 防混淆 |
 
-**当前推荐路径（2026-11-15 更新）**：L2/L1/L3/L4 全部达标（85%/100%/80%/85%）。L3/L4 由**任务分解**
-达标（[experiment-notes #decomposed](./experiment-notes.md#decomposed)）；加训练/加数据路线此前均已证伪。
-剩余可做：① sequential-depart 数据补丁（采 30-60 条"从块旁出发去另一目标"专家数据微调 L2 ckpt，把 L4 task B
-6/10 推向 ~100%，8.2x 管线分钟级迭代）；② 弱侧转向运动学瓶颈需步态层解（与 #fast-gait 结论一致）；
-③ 真机 OpenCat 交接（12 月硬件）。
+**当前推荐路径（2026-11-15 更新）**：L2/L1/L3/L4 全部达标（**90%**/100%/80%/85%）。L3/L4 由**任务分解**
+达标（[experiment-notes #decomposed](./experiment-notes.md#decomposed)）；seq-depart 数据补丁已落地
+（L2 →90%，L4-B 残余 3 败定性为运动学瓶颈）。剩余可做：① 弱侧转向运动学瓶颈需步态层解（与
+#fast-gait 结论一致，超出本轮范围）；② 真机 OpenCat 交接（12 月硬件）。
 
 ### 训练加速里程碑（2026-11-12）
 
@@ -192,7 +194,7 @@ graphs 只省 launch 开销、无收益且数值漂移）均否决。再提速�
 |---|---|
 | 数据集 | 工作台 `quaddle-mujoco/outputs/dataset_w0..3`（常规）+ `dataset_r0..3`（恢复）+ `dataset_merged51`（352 条合并，lerobot v3.0）|
 | 模型 | `outputs/smolvla_quaddle_v51/checkpoints/last`（6k）、`smolvla_quaddle_v51_18k`（18k）|
-| 代码 | 仓库 `quaddle-mujoco/`：collect_v5 / eval_rollout_v5 / expert_smoke_v5 / spin_feasibility_v5 / chain_v51 / chain_v51ext / diag_*（5 个诊断脚本）|
+| 代码 | 仓库 `quaddle-mujoco/`：采集（collect_v5 / collect_l1-l4 / collect_seq_depart）、训练（build_cache_v5 / train_cached_v5 / cached_smolvla / init_1d_v6）、评估（eval_rollout_v5 / eval_ensemble_v5 / eval_l1-l4 / eval_l3-l4_decomposed）、接口（opencat_bridge）|
 | 评估 GIF | rollout_v5 / v5_fm20 / v5_eval20 / v51 / v51_18k（本地仓库 outputs/ 已同步 2 张）|
 | 文档 | experiment-notes.md（v4/v5 试验记录）、本文件 |
 
