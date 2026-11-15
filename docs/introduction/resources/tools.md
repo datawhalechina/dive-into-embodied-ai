@@ -14,7 +14,7 @@ displayed_sidebar: introductionSidebar
 | 工具 | 主要用途 | 官方入口 | 站内学习 |
 | --- | --- | --- | --- |
 | MuJoCo | 机器人动力学、接触仿真与控制实验 | [官网与文档入口](https://mujoco.org/) | [MuJoCo 基础](/docs/foundations/simulation/mujoco) · [仿真入门项目](/docs/practices/robot-arm/mujoco-arm-pick-place) |
-| Isaac Lab | 基于 Isaac Sim 的机器人学习与仿真实验 | [官方文档](https://isaac-sim.github.io/IsaacLab/main/index.html) | [Flamingo 课程预告](/docs/practices/wheel-legged/flamingo-isaaclab/preview) |
+| Isaac Lab | 基于 Isaac Sim 的机器人学习与仿真实验 | [官方文档](https://isaac-sim.github.io/IsaacLab/main/index.html) | [两轮足 Flamingo 实战课程](/docs/practices/humanoid/flamingo-isaaclab/intro) |
 | Gymnasium | 强化学习环境接口与基准任务 | [官方文档](https://gymnasium.farama.org/) | [Gymnasium 入门](/docs/foundations/simulation/gymnasium) |
 
 </div>

@@ -137,6 +137,15 @@ for (const docPath of listDocs(path.join(rootDir, 'docs/practices/quadruped/cs12
   assertDisplayedSidebar(docPath, 'practicesCs123CourseSidebar');
 }
 
+const flamingoRefs = collectSidebarRefs(sidebars.practicesFlamingoCourseSidebar);
+assert.ok(
+  flamingoRefs.includes('practices/humanoid/flamingo-isaaclab/intro'),
+  'Flamingo course sidebar should link to its course overview',
+);
+for (const docPath of listDocs(path.join(rootDir, 'docs/practices/humanoid/flamingo-isaaclab'))) {
+  assertDisplayedSidebar(docPath, 'practicesFlamingoCourseSidebar');
+}
+
 assertDisplayedSidebar(
   path.join(rootDir, 'docs/practices/robot-arm/data-collection/lerobot-course/index.md'),
   'practicesLerobotCourseSidebar',

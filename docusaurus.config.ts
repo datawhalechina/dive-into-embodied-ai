@@ -47,10 +47,18 @@ const config: Config = {
 
   markdown: {
     mermaid: true,
+    // `future.v4` disables MDX v1 compatibility by default. Keep the legacy
+    // admonition/heading/comment syntax that existing docs and translations use.
+    mdx1Compat: {
+      comments: true,
+      admonitions: true,
+      headingIds: true,
+    },
   },
 
   plugins: [
     './scripts/docusaurus-quaddle.cjs',
+    './scripts/docusaurus-simulation.cjs',
     function nativeCssLayers() {
       return {
         name: 'native-css-layers',
@@ -145,6 +153,12 @@ const config: Config = {
           type: 'custom-navbarMegaMenu',
           menuId: 'practices',
           position: 'left',
+        },
+        {
+          to: '/simulation',
+          label: '在线仿真',
+          position: 'left',
+          className: 'navbar-simulation',
         },
         {
           type: 'localeDropdown',

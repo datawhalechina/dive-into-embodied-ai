@@ -11,7 +11,9 @@
 >
 > Usa **Copia come Markdown** all'inizio di tutorial ed esperimenti o apri l'anteprima. Conserva codice, tabelle ed equazioni LaTeX, con un link all'originale per le demo interattive.
 >
-> README, home e navigazione, introduzione con demo e risorse, mappa di apprendimento e panoramica dei progetti sono disponibili in inglese e italiano. Gli altri capitoli ed esperimenti autonomi restano in cinese, con avvisi sulla traduzione. Il menu permette di passare tra 中文, English e Italiano sulla stessa pagina.
+> Per simboli o termini sconosciuti, consulta la [guida rapida a termini e formule](i18n/it/docusaurus-plugin-content-docs/current/foundations/rl-for-robotics/quick-reference.md). I capitoli su MDP e differenza temporale offrono spiegazioni espandibili, derivazioni passo per passo ed esempi numerici accanto alle formule; questi due capitoli sono disponibili in cinese e inglese.
+>
+> README, home e navigazione, introduzione con demo e risorse, mappa di apprendimento, panoramica dei progetti e guida rapida a termini e formule sono disponibili in inglese e italiano. Alcuni altri capitoli sono disponibili anche in inglese; quelli non tradotti e gli esperimenti autonomi mostrano un avviso sul contenuto in cinese. Il menu permette di passare tra 中文, English e Italiano sulla stessa pagina.
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licenza" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
@@ -43,7 +45,9 @@ Costruisci un robot di IA incarnata da zero. Esplora rinforzo, modelli del mondo
 
 ## 🗂️ Contenuti del corso
 
-Tre sezioni: **Introduzione**, **Fondamenti** e **Progetti**. L'introduzione offre panoramica e risorse; i fondamenti spiegano i principi; i progetti includono percorsi a capitoli, demo e riproduzioni. Sono suddivisi in AMD, simulazione e robot reali.
+Quattro sezioni: **Introduzione**, **Fondamenti**, **Progetti** e **[Simulazione](https://datawhalechina.github.io/dive-into-embodied-ai/it/simulation)**. L'introduzione offre panoramica e risorse; i fondamenti spiegano i principi; i progetti includono percorsi a capitoli, demo e riproduzioni, suddivisi in AMD, simulazione e robot reali. La simulazione offre controllo libero in stile videogioco e dimostrazioni automatiche.
+
+La libreria include locomozione PPO Go2 e Pupper v3, un'andatura periodica Quaddle e controllo di testa e articolazioni MicroDuck (senza pesi di camminata). Sono disponibili tastiera e pulsanti direzionali, pausa, ripristino, rallentatore e inseguimento della telecamera. Go2 mostra una grafica semplificata delle collisioni originali. Consulta la [guida per aggiungere modelli](simulation/README.it.md).
 
 <a id="introduction"></a>
 
@@ -125,7 +129,7 @@ Le quattro aree corrispondono alla navigazione del sito.
 | --- | --- |
 | [Rinforzo per le decisioni](docs/foundations/rl-for-robotics/1.intro.md) | MDP, DQN, PPO, SAC, DDPG/TD3 e imitazione |
 | [VLA](docs/foundations/vla/vla-intro.md) | RT-1/RT-2, OpenVLA, ACT, Diffusion Policy e famiglia π |
-| [Modelli del mondo](docs/foundations/world-model/0.intro.md) | Applicazioni ai compiti incarnati |
+| [Modelli del mondo](docs/foundations/world-model/0.intro.md) | Applicazioni ai compiti incarnati; [esperimento DreamerV3 e video](i18n/it/docusaurus-plugin-content-docs/current/foundations/world-model/2.dreamerv3-reacher.md) |
 
 #### Controllo del movimento
 
@@ -149,7 +153,7 @@ Il robot stima posizione, orientamento, velocità e stabilità con telecamere, L
 | Argomento | Descrizione |
 | --- | --- |
 | [Simulazione](docs/foundations/simulation/1.intro.md) | Isaac Sim, MuJoCo, Gymnasium e PyBullet |
-| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) | Trasformazioni, FK/IK, tf2, URDF e MoveIt 2 |
+| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) · [codice di supporto](codes/foundations/robotics-and-ros2/README.it.md) | Trasformazioni, FK/IK, tf2, URDF e MoveIt 2 |
 | [Dati e imitazione](docs/foundations/rl-for-robotics/12.imitation-learning.md) | Teleoperazione, imitazione, strumenti LeRobot e politiche |
 
 ## 👥 Gruppi di studio
@@ -162,6 +166,10 @@ Datawhale organizza gruppi attorno al corso. I programmi saranno raccolti in `do
 ## 💻 Anteprima locale
 
 Lo sviluppo locale e CI usano **Node.js 26.11.1**, fissato in `.nvmrc`, con npm incluso; i requisiti sono in `package.json`. Con [nvm](https://github.com/nvm-sh/nvm#installing-and-updating), esegui `nvm install` e `nvm use` nel repository; gli altri metodi devono installare la stessa versione. `.npmrc` controlla le versioni durante l'installazione e disattiva Web Storage sperimentale di Node per gli script npm, evitando gli avvisi `localStorage` nella compilazione statica. L'archiviazione del browser non cambia.
+
+Puoi anche eseguire `sh local-build.sh` per compilare tutte le lingue e avviare l'anteprima sulla porta 3001. Dopo aver modificato le pagine, esegui di nuovo lo stesso comando: lo script usa `lsof` per verificare la directory di lavoro e il comando del processo, arresta l'anteprima Docusaurus di questa copia del repository sulla porta scelta, quindi ricompila e la riavvia. Non serve eseguire `kill` manualmente. Gli altri programmi e le anteprime di altre copie del repository restano attivi e lo script passa alla porta successiva. Usa `sh local-build.sh 3002` per scegliere la porta iniziale. macOS di solito include `lsof`; su Ubuntu/Debian puoi installarlo con `sudo apt install lsof`.
+
+Lo script controlla le versioni di Node/npm e installa le dipendenze tramite `npm run install:locked` se mancano dipendenze o il lockfile è stato aggiornato. Se la versione attiva di Node è diversa, cerca un runtime già presente in `${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v<versione>-<piattaforma>-<architettura>/`; altrimenti chiede di selezionare prima la versione richiesta. Se la compilazione fallisce, lo script termina senza avviare un'anteprima incompleta.
 
 Video e GIF usano **Git LFS**. Installa `git-lfs` ed esegui `git lfs pull` dopo il clone; altrimenti avrai solo puntatori testuali. Consulta [CONTRIBUTING.md](CONTRIBUTING.md#首次克隆必读), in cinese.
 
@@ -186,6 +194,8 @@ npm run serve
 ```
 
 Il cinese è in `/dive-into-embodied-ai/`; l'inglese e l'italiano usano `/en/` e `/it/`. Le traduzioni dell'interfaccia sono in `i18n/<locale>/code.json`, navigazione e piè di pagina in `i18n/<locale>/docusaurus-theme-classic/`, con `<locale>` uguale a `en` o `it`.
+
+Compila con `npm run build`, oppure con `sh local-build.sh` / `npm run preview`, che lo richiamano. Ogni copia di lavoro consente una sola compilazione o installazione delle dipendenze tramite `npm run install:locked` alla volta; un secondo avvio invita ad attendere, evitando che un processo cancelli i risultati dell'altro. Anche l'installazione automatica in `local-build.sh` usa questa protezione. Il blocco si libera quando il processo termina o viene interrotto; non eliminare il file di blocco. I comandi diretti `npx docusaurus build` e `npm ci` aggirano la protezione. Usa `npm run install:locked` per reinstallare le dipendenze quando potrebbe essere in corso una compilazione.
 
 Aggiungi i capitoli tradotti in `i18n/<locale>/docusaurus-plugin-content-docs/current/`, mantenendo struttura, ID, slug e ancore esplicite. Senza traduzione, Docusaurus mostra il cinese con avviso localizzato e link all'originale. `npm run check:i18n` verifica testi, variabili, percorsi e ancore condivise.
 

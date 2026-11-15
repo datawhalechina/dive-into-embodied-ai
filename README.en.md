@@ -13,7 +13,9 @@
 >
 > Use **Copy as Markdown** at the top of tutorial and playground pages to copy their content, or open the dropdown to preview it. Code, tables, and LaTeX equations are preserved, with a link to the original page for interactive demos.
 >
-> The README, homepage and navigation, introduction (including interactive demos and resources), learning map, and project overview are available in English and Italian. Other tutorial chapters and standalone playgrounds are currently in Chinese, with notices explaining the translation scope. Use the language menu to switch between 中文, English, and Italiano on the same page.
+> For unfamiliar notation, use the [terms and formulas quick reference](i18n/en/docusaurus-plugin-content-docs/current/foundations/rl-for-robotics/quick-reference.md). The MDP and temporal-difference chapters include expandable explanations, step-by-step derivations, and small numerical examples beside key formulas.
+>
+> The README, homepage and navigation, introduction (including interactive demos and resources), learning map, project overview, and terms and formulas quick reference are available in English and Italian. Some other chapters, including MDPs and temporal difference, are also available in English; untranslated chapters and standalone playgrounds show a Chinese-content notice. Use the language menu to switch between 中文, English, and Italiano on the same page.
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="License" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
@@ -45,7 +47,9 @@ Build an embodied AI robot from scratch. Explore practical implementations of re
 
 ## 🗂️ Course outline
 
-The website has three sections: **Introduction**, **Foundations**, and **Projects**. The introduction gives an overview of the field and collects papers, datasets, open source projects, and tools; foundations explain the principles; projects offer both a sequence of chapters and standalone demos or reproduction studies. Projects are grouped into AMD projects, simulation projects, and real robot projects.
+The website has four sections: **Introduction**, **Foundations**, **Projects**, and **[Simulation](https://datawhalechina.github.io/dive-into-embodied-ai/en/simulation)**. The introduction covers the field and resources, foundations explain principles, and projects offer chapter sequences and standalone experiments, grouped into AMD, simulation, and real robot projects. Simulation offers game-style free control and automatic policy showcases.
+
+The library includes Go2 and Pupper v3 PPO locomotion, a Quaddle periodic gait reference, and MicroDuck head/joint controls (no walking weights yet). Use keyboard or on-screen controls, pause, reset, slow motion, and camera tracking. Go2 uses simplified visuals of the original collision model. See the [model integration guide](simulation/README.en.md).
 
 <a id="introduction"></a>
 
@@ -127,7 +131,7 @@ The foundations follow the four groups in the site navigation: decision making, 
 | :--- | :--- |
 | [Reinforcement learning for decisions](docs/foundations/rl-for-robotics/1.intro.md) | MDPs, DQN, PPO, SAC, DDPG/TD3, and imitation learning |
 | [Vision-language-action models (VLA)](docs/foundations/vla/vla-intro.md) | RT-1/RT-2, OpenVLA, ACT, Diffusion Policy, and the π family |
-| [World models](docs/foundations/world-model/0.intro.md) | Applying world models to embodied tasks |
+| [World models](docs/foundations/world-model/0.intro.md) | Applying world models to embodied tasks; [DreamerV3 reaching experiment and video](i18n/en/docusaurus-plugin-content-docs/current/foundations/world-model/2.dreamerv3-reacher.md) |
 
 #### Motion control
 
@@ -151,7 +155,7 @@ Robots need to estimate their position, orientation, velocity, and stability. Re
 | Topic | Description |
 | :--- | :--- |
 | [Simulation tools](docs/foundations/simulation/1.intro.md) | Getting started with Isaac Sim, MuJoCo, Gymnasium, and PyBullet |
-| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) | Coordinate transforms, FK/IK, tf2, URDF, and MoveIt 2 |
+| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) · [companion code](codes/foundations/robotics-and-ros2/README.en.md) | Coordinate transforms, FK/IK, tf2, URDF, and MoveIt 2 |
 | [Data engineering and imitation learning](docs/foundations/rl-for-robotics/12.imitation-learning.md) | Teleoperation data, imitation learning, LeRobot toolchains, and policy training |
 
 ## 👥 Study groups
@@ -191,6 +195,10 @@ npm run start -- --locale en
 npm run start -- --locale it
 ```
 
+You can also run `sh local-build.sh` to build all languages and start a preview on port 3001. Run the same command again after editing pages to restart: the script uses `lsof` to check the process's working directory and command, stops this checkout's Docusaurus preview on that port, then rebuilds and starts it again. No manual `kill` is needed. Other programs and previews from other checkouts are preserved, and the script tries the next port instead. Use `sh local-build.sh 3002` to choose a different starting port. macOS usually includes `lsof`; on Ubuntu/Debian, install it with `sudo apt install lsof`.
+
+The script checks Node/npm versions and installs dependencies through `npm run install:locked` when dependencies are missing or the lockfile has changed. If the active Node version differs, it tries an existing runtime at `${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v<version>-<platform>-<arch>/`; otherwise, it asks you to select the required version first. If the build fails, the script exits without serving an incomplete build.
+
 The development server runs one language at a time. To test switching between all three languages, build, check, and serve the full site:
 
 ```bash
@@ -200,6 +208,8 @@ npm run serve
 ```
 
 Chinese remains at `/dive-into-embodied-ai/`; English and Italian use the `/en/` and `/it/` subpaths. UI translations live in `i18n/<locale>/code.json`, and navigation/footer translations live in `i18n/<locale>/docusaurus-theme-classic/`, where `<locale>` is `en` or `it`.
+
+Build through `npm run build`, or through `sh local-build.sh` / `npm run preview`, which call it. Each checkout allows only one build or `npm run install:locked` dependency installation at a time; a second invocation asks you to wait, preventing one process from deleting another's output. Automatic dependency installation in `local-build.sh` uses the same protection. The lock releases when the process exits or is interrupted; do not delete the lock file. Direct `npx docusaurus build` and `npm ci` commands bypass this protection. Use `npm run install:locked` to reinstall dependencies when another build may be running.
 
 To translate a chapter later, add its Markdown under `i18n/<locale>/docusaurus-plugin-content-docs/current/`, keeping the source directory structure, document ID, slug, and explicit section anchors. Docusaurus displays the Chinese source with a localized notice and a link to the Chinese version when no translation exists. Run `npm run check:i18n` to check translations, placeholders, routes, and shared anchors.
 

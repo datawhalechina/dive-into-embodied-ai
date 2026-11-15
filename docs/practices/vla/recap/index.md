@@ -2,7 +2,7 @@
 title: "π₀.₅ + RECAP：LIBERO 长时程任务全流程复现"
 description: 从克隆 OpenPI、下载 RLinf 数据、计算统计量，到价值模型、ACP 微调与 LIBERO 仿真评估。
 sidebar_position: 2
-displayed_sidebar: practicesOverviewSidebar
+displayed_sidebar: practicesRobotArmSidebar
 hide_title: true
 ---
 

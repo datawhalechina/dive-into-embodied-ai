@@ -1,0 +1,59 @@
+diff --git a/dreamerv3/configs.yaml b/dreamerv3/configs.yaml
+index 786b67e..3dc1b05 100644
+--- a/dreamerv3/configs.yaml
++++ b/dreamerv3/configs.yaml
+@@ -33,7 +33,7 @@ defaults:
+     atari100k: {size: [64, 64], repeat: 4, sticky: False, gray: False, actions: needed, lives: unused, noops: 30, autostart: False, resize: pillow, clip_reward: False}
+     dmlab: {size: [64, 64], repeat: 4, episodic: True, use_seed: True}
+     minecraft: {size: [64, 64], break_speed: 100.0, logs: False, length: 36000}
+-    dmc: {size: [64, 64], repeat: 1, proprio: True, image: True, camera: -1}
++    dmc: {size: [64, 64], repeat: 1, proprio: True, image: True, camera: -1, use_seed: False}
+     loconav: {size: [64, 64], repeat: 1, camera: -1}
+ 
+   replay:
+@@ -218,3 +218,13 @@ debug:
+     .*\.hidden: 3
+     .*\.blocks: 4
+     .*\.depth: 2
++
++# Local tutorial run: explicit bounded budget and deterministic DMC seeds.
++tutorial_reacher:
++  task: dmc_reacher_easy
++  seed: 0
++  env.dmc.use_seed: True
++  run: {steps: 100000, envs: 4, eval_envs: 1, train_ratio: 128, log_every: 30, report_every: 300, save_every: 120, debug: False}
++  replay.size: 200000
++  jax.prealloc: False
++  logger.outputs: [jsonl, scope]
+diff --git a/embodied/envs/dmc.py b/embodied/envs/dmc.py
+index 1a6ec39..37107c6 100644
+--- a/embodied/envs/dmc.py
++++ b/embodied/envs/dmc.py
+@@ -19,7 +19,7 @@ class DMC(embodied.Env):
+   )
+ 
+   def __init__(
+-      self, env, repeat=1, size=(64, 64), proprio=True, image=True, camera=-1):
++      self, env, repeat=1, size=(64, 64), proprio=True, image=True, camera=-1, seed=None):
+     if 'MUJOCO_GL' not in os.environ:
+       os.environ['MUJOCO_GL'] = 'egl'
+     if isinstance(env, str):
+@@ -37,7 +37,7 @@ class DMC(embodied.Env):
+         # camera 5: eyes
+         env = getattr(basic_rodent_2020, task)()
+       else:
+-        env = suite.load(domain, task)
++        env = suite.load(domain, task, task_kwargs={"random": seed})
+     self._dmenv = env
+     self._env = from_dm.FromDM(self._dmenv)
+     self._env = embodied.wrappers.ActionRepeat(self._env, repeat)
+diff --git a/embodied/run/train.py b/embodied/run/train.py
+index fc791ec..7da7451 100644
+--- a/embodied/run/train.py
++++ b/embodied/run/train.py
+@@ -116,4 +116,5 @@ def train(make_agent, make_replay, make_env, make_stream, make_logger, args):
+     if should_save(step):
+       cp.save()
+ 
++  cp.save()  # Preserve the exact final training step.
+   logger.close()

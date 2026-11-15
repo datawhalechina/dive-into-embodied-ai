@@ -14,7 +14,7 @@ Find simulation platforms and learning environments by purpose, then get started
 | Tool | Main use | Official entry point | Learn on this site |
 | --- | --- | --- | --- |
 | MuJoCo | Robot dynamics, contact simulation, and control experiments | [Website and documentation](https://mujoco.org/) | [MuJoCo basics](/docs/foundations/simulation/mujoco) · [Introductory simulation project](/docs/practices/robot-arm/mujoco-arm-pick-place) |
-| Isaac Lab | Robot learning and simulation experiments built on Isaac Sim | [Official documentation](https://isaac-sim.github.io/IsaacLab/main/index.html) | [Flamingo course preview](/docs/practices/wheel-legged/flamingo-isaaclab/preview) |
+| Isaac Lab | Robot learning and simulation experiments built on Isaac Sim | [Official documentation](https://isaac-sim.github.io/IsaacLab/main/index.html) | [Flamingo wheeled-biped course](/docs/practices/humanoid/flamingo-isaaclab/intro) |
 | Gymnasium | Reinforcement learning environment interfaces and benchmark tasks | [Official documentation](https://gymnasium.farama.org/) | [Getting started with Gymnasium](/docs/foundations/simulation/gymnasium) |
 
 </div>

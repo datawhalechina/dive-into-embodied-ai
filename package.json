@@ -5,7 +5,10 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "node scripts/with-build-lock.mjs node_modules/@docusaurus/core/bin/docusaurus.mjs build",
+    "install:locked": "node scripts/with-build-lock.mjs --npm-ci",
+    "check:build-lock": "node --test scripts/with-build-lock.test.mjs",
+    "check:local-build": "node --test scripts/local-build.test.mjs",
     "serve": "docusaurus serve",
     "clear": "docusaurus clear",
     "typecheck": "tsc",
@@ -21,7 +24,8 @@
     "assets:webp:check": "python3 scripts/convert-images-to-webp.py --check",
     "dev": "sh scripts/dev.sh",
     "preview": "sh scripts/preview.sh",
-    "prepare": "husky"
+    "prepare": "husky",
+    "check:simulation": "node scripts/check-simulation.mjs && node scripts/check-simulation-models.mjs && node scripts/check-simulation-worker.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.10.1",
@@ -36,6 +40,7 @@
     "hastscript": "^9.0.1",
     "lucide-react": "^1.14.0",
     "mathjax-full": "^3.2.2",
+    "onnxruntime-web": "1.31.1",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

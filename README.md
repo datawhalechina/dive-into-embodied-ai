@@ -13,6 +13,8 @@
 > 推荐使用网页版，支持全文搜索、章节导航和交互演示。初次学习可从 **[新手入门：具身导论 →](https://datawhalechina.github.io/dive-into-embodied-ai/docs/introduction/intro)** 开始。
 >
 > 教程和交互页上方的「复制为 Markdown」可复制正文，下拉菜单可预览 Markdown。支持代码、表格和 LaTeX 公式，文末附有原网页链接，方便继续查看交互演示。
+>
+> 公式或术语看不懂时，可查阅 [术语与公式速查](docs/foundations/rl-for-robotics/quick-reference.md)。MDP 和时序差分章在关键公式旁提供可展开的通俗解释、逐步推导与手算例子。
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="许可协议" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
@@ -46,7 +48,9 @@
 
 ## 🗂️ 内容大纲
 
-网站分为「具身导论、理论基础、项目实战」三个栏目：具身导论介绍领域全貌，并整理论文、数据集、开源项目和工具；理论基础讲解原理；项目实战包含分章项目、独立 Demo 与复现案例，按「AMD 专区、仿真实战、真机实战」归类。
+网站分为「具身导论、理论基础、项目实战、在线仿真」四个栏目：具身导论介绍领域全貌，并整理论文、数据集、开源项目和工具；理论基础讲解原理；项目实战包含分章项目、独立 Demo 与复现案例，按「AMD 专区、仿真实战、真机实战」归类；[在线仿真](https://datawhalechina.github.io/dive-into-embodied-ai/simulation)提供游戏式自由操纵与策略展示两种模式。
+
+在线仿真包含 Go2 与 Pupper v3 的 PPO 行走策略、Quaddle 周期步态对照，以及小黄鸭 MicroDuck 的头部与全身关节自由操纵（暂无走路权重）。支持键盘与屏幕方向按钮、暂停、重置、慢速仿真和相机跟随；Go2 以简化外观显示原碰撞模型。后续模型接入见 [模型库说明](simulation/README.md)。
 
 <a id="具身导论"></a>
 
@@ -135,7 +139,7 @@
 | :--- | :--- |
 | [强化学习决策](docs/foundations/rl-for-robotics/1.intro.md) | MDP、DQN、PPO、SAC、DDPG/TD3 与模仿学习 |
 | [视觉-语言-动作大模型(VLA)](docs/foundations/vla/vla-intro.md) | RT-1/RT-2、OpenVLA、ACT、Diffusion Policy、π 系列 |
-| [World-Model](docs/foundations/world-model/0.intro.md) | 世界模型在具身场景下的落地路径 |
+| [World-Model](docs/foundations/world-model/0.intro.md) | 世界模型在具身场景下的落地路径；[DreamerV3 到点实验与视频](docs/foundations/world-model/2.dreamerv3-reacher.md) |
 
 #### 小脑：运动控制
 
@@ -161,7 +165,7 @@
 | 章节 | 简介 |
 | :--- | :--- |
 | [仿真工具](docs/foundations/simulation/1.intro.md) | Isaac Sim、MuJoCo、Gymnasium、PyBullet 快速上手 |
-| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) | 坐标变换、FK/IK、tf2、URDF 与 MoveIt 2 |
+| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) · [配套代码](codes/foundations/robotics-and-ros2/README.md) | 坐标变换、FK/IK、tf2、URDF 与 MoveIt 2 |
 | [数据工程与模仿学习](docs/foundations/rl-for-robotics/12.imitation-learning.md) | 从遥操作数据到模仿学习、LeRobot 工具链和策略训练 |
 
 <a id="组队学习"></a>
@@ -200,6 +204,10 @@ npm ci
 npm run dev
 ```
 
+也可运行 `sh local-build.sh` 构建所有语言并启动预览，默认端口为 3001。修改页面后再次运行同一命令即可重启：脚本通过 `lsof` 核对进程的工作目录和启动命令，停止当前仓库在该端口上的 Docusaurus 预览，再重新构建并启动，无需手动执行 `kill`。其他程序或其他仓库的服务会保留，端口自动顺延；也可用 `sh local-build.sh 3002` 指定起始端口。macOS 通常已安装 `lsof`，Ubuntu/Debian 可用 `sudo apt install lsof` 安装。
+
+脚本会检查 Node/npm 版本，并在依赖缺失或锁文件更新时通过 `npm run install:locked` 安装依赖。如果当前 Node 版本不符，会尝试使用 `${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v<版本>-<平台>-<架构>/` 中已有的运行时；否则会提示先切换版本。构建失败时脚本退出，不会启动不完整的预览。
+
 网站默认中文，可通过导航栏的语言菜单切换为 [English](https://datawhalechina.github.io/dive-into-embodied-ai/en/) 或 [Italiano](https://datawhalechina.github.io/dive-into-embodied-ai/it/)。英文和意大利语版本均覆盖 README、首页与导航、具身导论（含交互演示与资源页）、学习地图和项目总览。其他教程正文与独立实验页暂时显示中文，并用当前语言标注翻译范围。
 
 ```bash
@@ -215,6 +223,8 @@ npm run serve
 ```
 
 中文路径为 `/dive-into-embodied-ai/`，英文和意大利语分别位于 `/en/`、`/it/` 子路径。界面译文保存在 `i18n/<locale>/code.json`，导航和页脚译文位于 `i18n/<locale>/docusaurus-theme-classic/`，其中 `<locale>` 为 `en` 或 `it`。
+
+请通过 `npm run build`（或调用它的 `sh local-build.sh`、`npm run preview`）构建。同一工作目录一次只允许一个构建或 `npm run install:locked` 依赖安装进程；重复启动会提示等待，避免互相清空构建产物。`local-build.sh` 自动安装依赖时也使用这一保护。进程结束或被中断后锁自动释放，无需删除锁文件。直接运行 `npx docusaurus build` 或 `npm ci` 会绕过保护；需要在其他构建可能运行时重装依赖，请用 `npm run install:locked`。
 
 后续章节的译文 Markdown 可按原目录结构放入 `i18n/<locale>/docusaurus-plugin-content-docs/current/`，保留原文的文档 ID、slug 和显式章节锚点。缺少译稿时，Docusaurus 会显示中文原文，并提供当前语言的提示及中文版本链接。运行 `npm run check:i18n` 可检查译文、占位符、路由和跨语言锚点。
 

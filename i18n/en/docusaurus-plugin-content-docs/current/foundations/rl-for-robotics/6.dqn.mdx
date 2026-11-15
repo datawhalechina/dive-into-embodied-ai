@@ -1,0 +1,178 @@
+---
+sidebar_position: 6
+title: 6. DQN
+displayed_sidebar: foundationsRlForRoboticsSidebar
+---
+
+import Figure from '@site/src/components/Figure';
+import DqnVisualization from '@site/src/components/docs/tutorial/rl/dqn/DqnViz';
+
+# 6. DQN
+
+DQN extends Q-learning by using a deep neural network to approximate the action-value function $Q(\boldsymbol{s},\boldsymbol{a})$, allowing it to handle high-dimensional state spaces. Experience replay and a target network improve training stability and performance.
+
+> **Embodied AI perspective**: Approximating value functions with neural networks is a foundation of many robot-control algorithms. Understanding DQN helps prepare for DDPG, SAC, and other advanced methods.
+
+This chapter follows the [MDP reward-index convention](./2.mdp.md#21-智能体与环境交互): executing $a_t$ produces immediate reward $r_{t+1}$ and next state $s_{t+1}$. A transition is consistently written as $(s_t,a_t,r_{t+1},s_{t+1})$.
+
+## 6.1 The Q network \{#61-q-网络}
+
+Neural networks can approximate state values $V(\boldsymbol{s})$ and learn through gradient descent on TD errors. The same idea applies to action values $Q(\boldsymbol{s},\boldsymbol{a})$. Recall the Q-learning update:
+
+$$
+Q(s_t,a_t) \leftarrow Q(s_t,a_t)+\alpha[r_{t+1}+\gamma\max _{a}Q(s_{t+1},a)-Q(s_t,a_t)]
+$$
+
+Here $y_t = r_{t+1}+\gamma\max _{a}Q(s_{t+1},a)$ is the target Q value, $Q(s_t,a_t)$ the current estimate, and $\alpha$ the learning rate. With a parameterized approximation:
+
+$$
+Q_{\theta}(s_t,a_t) \leftarrow Q_{\theta}(s_t,a_t)+\alpha[y_t-Q_{\theta}(s_t,a_t)]
+$$
+
+The network parameters $\theta$ are optimized by gradient descent to reduce the difference between target and predicted Q values:
+
+$$
+\begin{aligned}
+L(\theta) &= (y_t - Q_{\theta}(s_t,a_t))^2 \\
+\theta &\leftarrow \theta - \alpha \nabla_{\theta} L(\theta)
+\end{aligned}
+$$
+
+Because this is a TD update, check whether the **next state** $s_{t+1}$ is terminal. A terminal transition retains its immediate reward $r_{t+1}$ and removes only the continuation value:
+
+$$
+y_t = \begin{cases}r_{t+1} & s_{t+1}\text{ is terminal} \\ r_{t+1}+\gamma \max _{a^{\prime}} Q_{\theta}(s_{t+1}, a^{\prime}) & s_{t+1}\text{ is nonterminal}\end{cases}
+$$
+
+## 6.2 Experience replay \{#62-经验回放}
+
+In basic Q-learning, each newly observed transition immediately updates the Q function:
+
+$$
+(s_t,a_t,r_{t+1},s_{t+1}) \rightarrow \text{update } Q(s_t,a_t)
+$$
+
+Using this approach with neural networks presents several difficulties. Single-sample updates can be unstable, consecutive transitions are temporally correlated rather than independent samples, and discarding each transition after one update wastes data. **Interaction can be expensive, so poor data reuse reduces training efficiency.**
+
+DQN addresses these problems through **experience replay**. Each transition $(s_t,a_t,r_{t+1},s_{t+1})$ is stored in a replay buffer:
+
+$$
+(s_t,a_t,r_{t+1},s_{t+1}) \rightarrow D
+$$
+
+For each network update, randomly sample a minibatch:
+
+$$
+D \rightarrow \{(s_i,a_i,r_i,s'_i)\}_{i=1}^{N}
+$$
+
+Here $i$ is a **minibatch sample index, not a time index**. The reward $r_i$ and next state $s'_i$ belong to the same transition as $s_i,a_i$; $s'_i$ does not mean the state of sample $i+1$. If that transition came from time step $t$, then $(s_i,a_i,r_i,s'_i)=(s_t,a_t,r_{t+1},s_{t+1})$. The minibatch contains $N$ samples. Compute their targets $y_i$ and update $\theta$ by gradient descent:
+
+$$
+\begin{aligned}
+L(\theta) &= \mathbb{E}_{(s_i,a_i,r_i,s'_i) \sim D} \left[ (y_i - Q_{\theta}(s_i,a_i))^2 \right] \\
+\theta &\leftarrow \theta - \alpha \nabla_{\theta} L(\theta)
+\end{aligned}
+$$
+
+Before introducing a target network, use $y_i=r_i+\gamma\max_{a'}Q_\theta(s'_i,a')$, or $y_i=r_i$ if $s'_i$ is terminal. With a target network, replace $Q_\theta$ here with $Q_{\theta^-}$. Both versions use the reward and next state from the same sample $i$.
+
+Instead of feeding only the newest transition directly into the model, DQN stores experience and trains on randomly selected batches from the buffer:
+
+<Figure caption="Experience replay (labels in Chinese)" width={500}>
+
+![Direct sample-to-model updates compared with storing samples in a replay buffer before training](@site/docs/foundations/rl-for-robotics/figs/replay.webp)
+
+</Figure>
+
+## 6.3 The target network \{#63-目标网络}
+
+So far, the target $y_t$ and current prediction use the same parameters $\theta$. Updating those parameters also changes the target, forcing the model to chase a moving value and potentially destabilizing learning.
+
+DQN maintains a **target network** $Q_{\theta^-}$ with the same architecture but separate parameters. It computes the target as:
+
+$$
+y_t = \begin{cases}r_{t+1} & s_{t+1}\text{ is terminal} \\ r_{t+1}+\gamma \max _{a^{\prime}} Q_{\theta^-}(s_{t+1}, a^{\prime}) & s_{t+1}\text{ is nonterminal}\end{cases}
+$$
+
+Periodically copy the current network's parameters into the target network:
+
+$$
+\theta^- \leftarrow \theta \quad \text{(every C steps)}
+$$
+
+The hyperparameter $C$ controls the copy interval. Keeping target parameters fixed between copies makes targets more stable and helps learning converge:
+
+<Figure caption="The target network (labels in Chinese)" width={500}>
+
+![The current network learns from replay samples; its parameters are copied to the target network every C steps](@site/docs/foundations/rl-for-robotics/figs/target_q.webp)
+
+</Figure>
+
+This periodic copy is called a **hard update**. An alternative is a **soft update**, which gradually moves target parameters toward current parameters:
+
+$$
+\theta^- \leftarrow \tau \theta + (1 - \tau) \theta^-
+$$
+
+The coefficient $\tau$ is usually small, for example $0.001$. Hard updates are standard in DQN, whereas soft updates are widely used in later methods such as DDPG and TD3.
+
+## 6.4 Epsilon-greedy exploration \{#64-varepsilon-贪婪策略}
+
+DQN balances **exploration** and **exploitation** with an $\varepsilon$-greedy policy:
+
+- With probability $\varepsilon$, choose a random action.
+- With probability $1-\varepsilon$, choose an action with the highest Q value.
+
+As training progresses, $\varepsilon$ usually decreases, shifting from extensive exploration toward exploiting learned values.
+
+## 6.5 Algorithm \{#65-算法流程}
+
+The full DQN procedure is:
+
+1. Initialize the current network $Q_\theta$, target network $Q_{\theta^-}$ with $\theta^-\leftarrow\theta$, and replay buffer $D$.
+2. Reset the environment to $s_0$ for each episode. Starting at $t=0$, select and execute $a_t$ using an $\varepsilon$-greedy policy. Observe $r_{t+1}$, $s_{t+1}$, and the terminal flag; store the transition in $D$.
+3. Once enough samples are available, draw a minibatch $(s_i,a_i,r_i,s'_i)$ and the associated terminal flags from $D$. Set $y_i=r_i$ for terminal transitions, otherwise $y_i=r_i+\gamma\max_{a'}Q_{\theta^-}(s'_i,a')$.
+4. Update $\theta$ by minimizing $\frac{1}{N}\sum_{i=1}^{N}(y_i-Q_\theta(s_i,a_i))^2$. Every $C$ environment steps, copy $\theta^-\leftarrow\theta$.
+5. End the episode if the environment transition was terminal. Otherwise set $t\leftarrow t+1$ and repeat the action selection and updates from step 2 onward.
+
+## 6.6 Interactive demonstration \{#66-交互式演示}
+
+In this 5×5 grid world, the agent (🤖) learns to avoid traps (🔥) and reach the goal (🚩):
+
+- **Left**: a heatmap shows how estimated state values change during training.
+- **Center**: the neural network's inputs, hidden layers, and action-value outputs.
+- **Right**: replay-buffer contents and training loss.
+
+The shared demonstration currently uses Chinese interface labels. Select **训练 (Train)** to watch the agent progress from random exploration toward a good path.
+
+<DqnVisualization />
+
+## 6.7 Limitations and improvements \{#67-dqn-的局限与改进}
+
+| Limitation | Improvement |
+| --- | --- |
+| Overestimated Q values | Double DQN selects actions with the online network and evaluates them with the target network |
+| Inefficient uniform sampling | Prioritized Experience Replay samples using TD-error priorities |
+| Discrete actions only | DDPG and SAC extend related ideas to continuous actions |
+| Expected return only | Distributional DQN models the distribution of returns |
+
+Later chapters introduce further developments.
+
+## 6.8 Questions \{#68-思考}
+
+**How does DQN improve on Q-learning?**
+
+Neural networks replace the Q table and handle high-dimensional, continuous state inputs. Experience replay stores state–action–reward–next-state transitions, reduces temporal correlation in training batches, and reuses data. A separate target network stabilizes the values used for TD updates.
+
+**Why use an $\varepsilon$-greedy policy?**
+
+The agent needs to balance exploiting actions with high estimated Q values and exploring actions whose values are still uncertain. Always following current estimates can miss better strategies; always acting randomly prevents effective exploitation. An $\varepsilon$-greedy policy provides both behaviors.
+
+**Why add a target network?**
+
+When one network produces both predictions and targets, every update changes both. Holding target parameters fixed for a period reduces this feedback and stabilizes learning. The target network has the same structure as the current network, but is updated less frequently.
+
+**What does experience replay do?**
+
+It stores past transitions and randomly resamples them for training. This reduces correlations within batches, increases data reuse, and makes updates less dependent on the newest trajectory. Together with a target network, it helps stabilize neural value-function learning.

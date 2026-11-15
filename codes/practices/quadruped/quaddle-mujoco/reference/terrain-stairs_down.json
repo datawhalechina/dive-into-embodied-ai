@@ -1,0 +1,53 @@
+{
+  "name": "terrain_stairs_down",
+  "joint_order": [
+    "left_front",
+    "right_front",
+    "right_back",
+    "left_back"
+  ],
+  "actuator_signs": [
+    1,
+    -1,
+    -1,
+    1
+  ],
+  "amplitude_rad": [
+    0.3225173219527415,
+    0.3225173219527415,
+    0.4749167219019621,
+    0.4749167219019621
+  ],
+  "bias_rad": [
+    -0.31747900449793837,
+    -0.31747900449793837,
+    -0.20822567415893645,
+    -0.20822567415893645
+  ],
+  "phase_rad": [
+    0.0,
+    3.141592653589793,
+    1.5707963267948966,
+    4.71238898038469
+  ],
+  "frequency_hz": 1.5425395235315396,
+  "waveform": "cosine_duty",
+  "sweep_fraction": 0.6232904419964411,
+  "harmonic": 0.0,
+  "control_hz": 100,
+  "settle_seconds": 2.0,
+  "startup_bias_rad": [
+    0.2,
+    0.2,
+    -0.4,
+    -0.4
+  ],
+  "startup_ramp_seconds": 0.05,
+  "ramp_seconds": 1.5,
+  "heading_kp": 0.35370743026929424,
+  "heading_kd": 0.03,
+  "lateral_kp": 2.0,
+  "steering_limit": 0.3086864501213528,
+  "max_target_speed_rad_s": 8.0,
+  "note": "CEM-selected for this fixed terrain; passed nominal and +/-5 mm lateral resets for 20 s. Uncalibrated simulation, not a universal or hardware-validated gait."
+}

@@ -13,15 +13,17 @@ $\text{DQN}$ 算法的核心思想是在 $\text{Q-learning}$ 算法的基础上�
 
 > **具身智能视角**：DQN 的核心思想——用神经网络逼近价值函数——是后续许多机器人控制算法的基础。理解 DQN 的原理有助于掌握更高级的算法如 DDPG、SAC 等。
 
+本章沿用 [MDP 的奖励下标约定](./2.mdp.md#21-智能体与环境交互)：执行 $a_t$ 后收到即时奖励 $r_{t+1}$ 并进入 $s_{t+1}$。交互样本统一写为 $(s_t,a_t,r_{t+1},s_{t+1})$。
+
 ## 6.1 Q 网络
 
 在深度学习基础章节中，我们演示了如何使用神经网络来近似状态价值函数 $V(\boldsymbol{s})$ 并使用梯度下降和 $\text{TD}$ 误差来更新网络参数。类似地，我们也可以使用神经网络来近似动作价值函数 $Q(\boldsymbol{s},\boldsymbol{a})$，回顾 $\text{Q-learning}$ 算法的更新公式，如下所示。
 
 $$
-Q(s_t,a_t) \leftarrow Q(s_t,a_t)+\alpha[r_t+\gamma\max _{a}Q^{\prime}(s_{t+1},a)-Q(s_t,a_t)]
+Q(s_t,a_t) \leftarrow Q(s_t,a_t)+\alpha[r_{t+1}+\gamma\max _{a}Q(s_{t+1},a)-Q(s_t,a_t)]
 $$
 
-其中 $y_t = r_t+\gamma\max _{a}Q^{\prime}(s_{t+1},a)$ 表示期望或目标的 $Q$ 值，$Q(s_t,a_t)$ 表示实际的 $Q$ 值，$\alpha$ 是学习率。引入神经网络近似 $Q$ 函数后，如下所示。
+其中 $y_t = r_{t+1}+\gamma\max _{a}Q(s_{t+1},a)$ 表示期望或目标的 $Q$ 值，$Q(s_t,a_t)$ 表示实际的 $Q$ 值，$\alpha$ 是学习率。引入神经网络近似 $Q$ 函数后，如下所示。
 
 $$
 Q_{\theta}(s_t,a_t) \leftarrow Q_{\theta}(s_t,a_t)+\alpha[y_t-Q_{\theta}(s_t,a_t)]
@@ -36,10 +38,10 @@ L(\theta) &= (y_t - Q_{\theta}(s_t,a_t))^2 \\
 \end{aligned}
 $$
 
-注意，由于是基于 $\text{TD}$ 更新的，因此依然需要判断终止状态：
+注意，由于是基于 $\text{TD}$ 更新的，需要判断动作执行后的 $s_{t+1}$ 是否为终止状态；终止转移仍保留即时奖励 $r_{t+1}$，只是去掉后续价值：
 
 $$
-y_t = \begin{cases}r_t & \text {对于终止状态} s_{t} \\ r_{t}+\gamma \max _{a^{\prime}} Q_{\theta}(s_{t+1}, a^{\prime}) & \text {对于非终止状态} s_{t}\end{cases}
+y_t = \begin{cases}r_{t+1} & s_{t+1}\text{ 为终止状态} \\ r_{t+1}+\gamma \max _{a^{\prime}} Q_{\theta}(s_{t+1}, a^{\prime}) & s_{t+1}\text{ 为非终止状态}\end{cases}
 $$
 
 ## 6.2 经验回放
@@ -47,31 +49,33 @@ $$
 在 $\text{Q-learning}$ 算法中，我们每次执行一步交互得到一个样本之后，就立即用这个最新的样本去更新 $Q$ 函数：
 
 $$
-(s_t,a_t,s_{t+1},r_{t+1}) \rightarrow \text{update } Q(s_t,a_t)
+(s_t,a_t,r_{t+1},s_{t+1}) \rightarrow \text{update } Q(s_t,a_t)
 $$
 
 这种更新方式在引入神经网络后会带来一些问题。首先，每次用单个样本去迭代网络参数很容易导致训练的不稳定，从而影响模型的收敛。其次，每次迭代的样本都是从环境中实时交互得到的，这样的样本是在时间上是连续的，即是有关联的，这与梯度下降法的数据假设不符，即**训练集中的样本必须是独立同分布的**。此外，每个样本只被使用一次就被丢弃，数据使用率较低，而在强化学习中与环境交互产生样本的成本往往较高，**较低的数据使用率会严重影响训练效率**。
 
-为了解决这些问题，$\text{DQN}$ 算法引入了经验回放机制。具体来说，我们会将每次与环境交互得到的样本 $(s_t,a_t,s_{t+1},r_{t+1})$ 存储在一个经验回放池（ $\text{Replay Buffer}$ ）中：
+为了解决这些问题，$\text{DQN}$ 算法引入了经验回放机制。具体来说，我们会将每次与环境交互得到的样本 $(s_t,a_t,r_{t+1},s_{t+1})$ 存储在一个经验回放池（ $\text{Replay Buffer}$ ）中：
 
 $$
-(s_t,a_t,s_{t+1},r_{t+1}) \rightarrow D
+(s_t,a_t,r_{t+1},s_{t+1}) \rightarrow D
 $$
 
 然后在每次更新网络参数时，我们会从经验回放池中随机抽取一个小批量的样本进行训练：
 
 $$
-D \rightarrow \{(s_i,a_i,s_{i+1},r_{i+1})\}_{i=1}^{N}
+D \rightarrow \{(s_i,a_i,r_i,s'_i)\}_{i=1}^{N}
 $$
 
-其中下标 $i$ 表示从经验回放池中随机抽取的样本，意味着不再跟时间相关，$N$ 是小批量的样本数量。利用这些样本，我们可以计算对应的目标 $Q$ 值 $y_i$，并使用梯度下降的方法来更新网络参数 $\theta$：
+其中 $i$ 是小批量内的样本编号，**不是时间下标**；$r_i$ 和 $s'_i$ 是第 $i$ 条转移中执行 $a_i$ 后得到的奖励与下一状态，$s'_i$ 不表示第 $i+1$ 条样本的状态。若这条样本来自时步 $t$，则 $(s_i,a_i,r_i,s'_i)=(s_t,a_t,r_{t+1},s_{t+1})$。$N$ 是小批量的样本数量。利用这些样本，我们可以计算对应的目标 $Q$ 值 $y_i$，并使用梯度下降的方法来更新网络参数 $\theta$：
 
 $$
 \begin{aligned}
-L(\theta) &= \mathbb{E}_{(s_i,a_i,s_{i+1},r_{i+1}) \sim D} \left[ (y_i - Q_{\theta}(s_i,a_i))^2 \right] \\
+L(\theta) &= \mathbb{E}_{(s_i,a_i,r_i,s'_i) \sim D} \left[ (y_i - Q_{\theta}(s_i,a_i))^2 \right] \\
 \theta &\leftarrow \theta - \alpha \nabla_{\theta} L(\theta)
 \end{aligned}
 $$
+
+在本节尚未引入目标网络时，$y_i=r_i+\gamma\max_{a'}Q_\theta(s'_i,a')$；若 $s'_i$ 是终止状态，则 $y_i=r_i$。引入目标网络后，将这里的 $Q_\theta$ 换成 $Q_{\theta^-}$。两者都使用第 $i$ 条样本自身的奖励和下一状态。
 
 如图所示，不同于 $\text{Q-learning}$ 算法每次用最新的样本直接喂入神经网络去更新网络模型，$\text{DQN}$ 算法会把每次与环境交互得到的样本都存储在一个经验回放中，然后每次从经验池中随机抽取一批样本来训练网络。
 
@@ -88,7 +92,7 @@ $$
 为了解决这个问题，$\text{DQN}$ 算法引入了目标网络（ $\text{Target Network}$ ）的概念。具体来说，我们会维护一个与当前网络结构相同但参数不同的目标网络 $Q_{\theta^-}$，并使用目标网络来计算目标 $Q$ 值：
 
 $$
-y_t = \begin{cases}r_t & \text {对于终止状态} s_{t} \\ r_{t}+\gamma \max _{a^{\prime}} Q_{\theta^-}(s_{t+1}, a^{\prime}) & \text {对于非终止状态} s_{t}\end{cases}
+y_t = \begin{cases}r_{t+1} & s_{t+1}\text{ 为终止状态} \\ r_{t+1}+\gamma \max _{a^{\prime}} Q_{\theta^-}(s_{t+1}, a^{\prime}) & s_{t+1}\text{ 为非终止状态}\end{cases}
 $$
 
 目标网络的参数 $\theta^-$ 会定期地从当前网络的参数 $\theta$ 复制过来：
@@ -124,13 +128,13 @@ $$
 
 ## 6.5 算法流程
 
-$\text{DQN}$ 算法的完整流程如图所示，包括初始化网络和经验回放池、与环境交互采样、存储样本到经验回放池、从经验回放池中随机采样小批量样本、计算目标 $Q$ 值和损失函数、更新网络参数以及定期更新目标网络参数等步骤。
+$\text{DQN}$ 算法的完整流程如下：
 
-<Figure caption="DQN 算法流程" width={600}>
-
-![DQN 算法流程](./figs/dqn_pseu.webp)
-
-</Figure>
+1. 初始化当前网络 $Q_\theta$、目标网络 $Q_{\theta^-}$（$\theta^-\leftarrow\theta$）和经验回放池 $D$。
+2. 每个回合重置环境得到 $s_0$。从 $t=0$ 开始，按 $\varepsilon$-贪婪策略选择并执行 $a_t$，观测 $r_{t+1}$、$s_{t+1}$ 以及是否终止，并将这条转移存入 $D$。
+3. 样本数量足够后，从 $D$ 随机抽取小批量 $(s_i,a_i,r_i,s'_i)$ 及对应的终止标记。若第 $i$ 条转移终止，令 $y_i=r_i$；否则令 $y_i=r_i+\gamma\max_{a'}Q_{\theta^-}(s'_i,a')$。
+4. 最小化小批量上的均方误差 $\frac{1}{N}\sum_{i=1}^{N}(y_i-Q_\theta(s_i,a_i))^2$，更新当前网络参数 $\theta$；每隔 $C$ 个环境交互步复制参数 $\theta^-\leftarrow\theta$。
+5. 如果本次交互到达终止状态，结束回合；否则令 $t\leftarrow t+1$，重复步骤 2 中的动作选择与后续更新。
 
 ## 6.6 交互式演示
 

@@ -1,0 +1,28 @@
+<mujoco model="microduck_wall">
+    <compiler angle="radian" autolimits="true"/>
+
+    <worldbody>
+        <!-- Run-3: raised 6cm -> 10cm. At 6cm the run-2 policy vaulted onto
+             the wall and rolled over (wall contact was cheap); 10cm is beyond
+             a contact-supported roll-over, forcing an actual leap. Still 2kg
+             with high friction so it stays put. -->
+        <!-- Run-11: back to 0.8m half-width. Run-10's 1.5m half-width reached
+             into NEIGHBOURING env lanes on the shared plane — probe 2026-10-02
+             23:50 showed walls bowled 0.25-2.36 m by other envs' ducks.
+             Anti-detour now handled purely by wall_lateral_termination
+             (max_lat 0.7 < wall half-width 0.8: airtight, no spillover). -->
+        <body name="wall" pos="0.3 0 0.06">
+            <freejoint name="wall_free"/>
+            <!-- Run-12: 2kg -> 500kg. The run-11 policy BOWLED the 2kg wall
+                 0.7-3.1 m and walked through the vacated plane (probe
+                 2026-10-03, 0/16 real leaps); runup's vx requirement made
+                 shoving more attractive than jumping and -3.0/step shove
+                 penalty couldn't outbid it. Immovable-by-mass kills the
+                 shove/climb/detour exploit family physically without touching
+                 reset code (freejoint must stay: reset_wall_ahead writes
+                 per-env root pose). diaginertia scaled 250x to match. -->
+            <inertial pos="0 0 0" mass="500.0" diaginertia="106.75 0.125 106.75"/>
+            <geom type="box" name="wall_geom" size="0.02 0.8 0.06" rgba="0.9 0.2 0.2 1" friction="2.0 0.005 0.0001" solref="0.005 1" solimp="0.95 0.99 0.001"/>
+        </body>
+    </worldbody>
+</mujoco>

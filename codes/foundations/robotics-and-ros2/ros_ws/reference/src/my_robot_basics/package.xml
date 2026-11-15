@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>my_robot_basics</name>
+  <version>0.1.0</version>
+  <description>Reference examples for the robotics and ROS 2 lessons</description>
+  <maintainer email="maintainers@example.com">Dive into Embodied AI contributors</maintainer>
+  <license>CC-BY-NC-SA-4.0</license>
+  <buildtool_depend>ament_python</buildtool_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>rcl_interfaces</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>my_robot_interfaces</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <export><build_type>ament_python</build_type></export>
+</package>

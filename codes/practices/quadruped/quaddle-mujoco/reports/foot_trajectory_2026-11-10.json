@@ -1,0 +1,5950 @@
+{
+  "date": "2026-11-10",
+  "new_parameter_terrain_trials": 24,
+  "baseline_trials": 2,
+  "validation_trials": 14,
+  "new_ppo_steps": 0,
+  "default_changed": false,
+  "diagnosis_peak": {
+    "speed_rad_s": 10.17734926464986,
+    "sample": {
+      "time_s": 7.89200000000097,
+      "leg": "left_back",
+      "q": -0.13134980393531528,
+      "dq": 10.17734926464986,
+      "target": 0.287777301259318,
+      "torque_Nm": 0.00413790504182019,
+      "normal_force_N": 0.0,
+      "support": 0,
+      "riser": 0,
+      "phase": 0.04800000000000401,
+      "foot_x_m": 0.0047753121068345745,
+      "foot_forward_m": 0.17213653350136535,
+      "foot_bottom_z_m": 2.5348570141877844e-05,
+      "body_forward_m": 0.1983773090479607,
+      "upright": 0.9955451363544247,
+      "yaw_deg": 7.461883843289967,
+      "pitch_deg": -2.6088809635305816,
+      "geometry_refreshed": false
+    }
+  },
+  "search": [
+    {
+      "label": "2mm_baseline",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": false,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.815738472444905,
+      "max_driven_joint_speed_rad_s": 10.17734926464986,
+      "max_heading_deviation_deg": 22.594562387063434,
+      "min_upright_cosine": 0.9243659007198276,
+      "body_contact_samples": 0,
+      "first_failure": {
+        "joint_speed": {
+          "time_s": 7.89100000000097,
+          "peak_rad_s": 10.042960521178713,
+          "position_m": [
+            -0.014521744460053672,
+            -0.19846402888496661,
+            0.04947783948635063
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.15_hold0.04_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.7319074377429903,
+      "max_driven_joint_speed_rad_s": 9.393469954451778,
+      "max_heading_deviation_deg": 52.740135598152015,
+      "min_upright_cosine": 0.9192774908919203,
+      "body_contact_samples": 0,
+      "first_failure": {
+        "heading": {
+          "time_s": 11.115999999999278,
+          "position_m": [
+            -0.026834861163486504,
+            -0.25213102684074473,
+            0.04924696088148101
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.15,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.15_hold0.04_all",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": false,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.6620207992362424,
+      "max_driven_joint_speed_rad_s": 9.20271583985043,
+      "max_heading_deviation_deg": 24.984281871886587,
+      "min_upright_cosine": 0.9172843238235623,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.15,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.15_hold0.12_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.43288176002630513,
+      "max_driven_joint_speed_rad_s": 9.212898546870086,
+      "max_heading_deviation_deg": 108.59640924306899,
+      "min_upright_cosine": 0.7072300440789043,
+      "body_contact_samples": 11,
+      "first_failure": {
+        "upright": {
+          "time_s": 9.38100000000024,
+          "position_m": [
+            -0.03248241065473276,
+            -0.15153678561312947,
+            0.04524753585519161
+          ]
+        },
+        "body_contact": {
+          "time_s": 9.406000000000226,
+          "position_m": [
+            -0.028708785606252386,
+            -0.15032954819440922,
+            0.0445689778988926
+          ]
+        },
+        "heading": {
+          "time_s": 15.240999999996992,
+          "position_m": [
+            -0.021980652174873674,
+            -0.37722766895909043,
+            0.05307750527456708
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.15,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.15_hold0.12_all",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.47539676871318465,
+      "max_driven_joint_speed_rad_s": 9.751753493854222,
+      "max_heading_deviation_deg": 48.14863598823852,
+      "min_upright_cosine": 0.8733530227178821,
+      "body_contact_samples": 0,
+      "first_failure": {
+        "heading": {
+          "time_s": 11.315999999999168,
+          "position_m": [
+            -0.016507439981052037,
+            -0.15714005143062681,
+            0.043597515510660566
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.15,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.25_hold0.04_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.9212422854158852,
+      "max_driven_joint_speed_rad_s": 9.224491758659454,
+      "max_heading_deviation_deg": 34.99067139669623,
+      "min_upright_cosine": 0.9011164040832805,
+      "body_contact_samples": 0,
+      "first_failure": {
+        "heading": {
+          "time_s": 9.446000000000204,
+          "position_m": [
+            -0.029744692738897103,
+            -0.24392868534930007,
+            0.0490654231212723
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.25,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.25_hold0.04_all",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.8063338907101731,
+      "max_driven_joint_speed_rad_s": 8.734510647680866,
+      "max_heading_deviation_deg": 29.33909897869744,
+      "min_upright_cosine": 0.9145930022378214,
+      "body_contact_samples": 0,
+      "first_failure": {
+        "heading": {
+          "time_s": 7.786000000000935,
+          "position_m": [
+            -0.023506934719932586,
+            -0.138204187261368,
+            0.047478098806739345
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.25,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.25_hold0.12_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.7104149434667419,
+      "max_driven_joint_speed_rad_s": 8.618179355058544,
+      "max_heading_deviation_deg": 28.736214211638426,
+      "min_upright_cosine": 0.7501830078717249,
+      "body_contact_samples": 8,
+      "first_failure": {
+        "upright": {
+          "time_s": 11.910999999998838,
+          "position_m": [
+            -0.05040859149175579,
+            -0.15122329167105458,
+            0.0455451476214722
+          ]
+        },
+        "body_contact": {
+          "time_s": 11.940999999998821,
+          "position_m": [
+            -0.04710352412910706,
+            -0.14919661871707018,
+            0.04507710378615506
+          ]
+        },
+        "heading": {
+          "time_s": 12.275999999998636,
+          "position_m": [
+            -0.018204154369586376,
+            -0.14684895809674903,
+            0.04521882103932348
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.25,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.25_hold0.12_all",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.6656916625476957,
+      "max_driven_joint_speed_rad_s": 8.653557665587835,
+      "max_heading_deviation_deg": 26.79469341728557,
+      "min_upright_cosine": 0.7336661222164342,
+      "body_contact_samples": 5,
+      "first_failure": {
+        "heading": {
+          "time_s": 7.786000000000935,
+          "position_m": [
+            -0.023506934719932586,
+            -0.138204187261368,
+            0.047478098806739345
+          ]
+        },
+        "upright": {
+          "time_s": 16.94099999999772,
+          "position_m": [
+            -0.013635458337780404,
+            -0.3867627209678817,
+            0.04508700154350539
+          ]
+        },
+        "body_contact": {
+          "time_s": 16.97099999999776,
+          "position_m": [
+            -0.011355995736774508,
+            -0.38544748570812776,
+            0.04595015172598683
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.25,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.35_hold0.04_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.920838884886858,
+      "max_driven_joint_speed_rad_s": 8.449059100938975,
+      "max_heading_deviation_deg": 20.122374680501057,
+      "min_upright_cosine": 0.7619112726304799,
+      "body_contact_samples": 9,
+      "first_failure": {
+        "upright": {
+          "time_s": 8.476000000000742,
+          "position_m": [
+            -0.034162576362362806,
+            -0.1523835257947422,
+            0.045677607621467387
+          ]
+        },
+        "body_contact": {
+          "time_s": 8.49600000000073,
+          "position_m": [
+            -0.0320314501613047,
+            -0.15123467462568074,
+            0.045582359418683126
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.35_hold0.04_all",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.9098192847385286,
+      "max_driven_joint_speed_rad_s": 8.919235976625666,
+      "max_heading_deviation_deg": 24.32193180488313,
+      "min_upright_cosine": 0.9102507551186564,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.35_hold0.12_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.580597999119689,
+      "max_driven_joint_speed_rad_s": 9.4627482524099,
+      "max_heading_deviation_deg": 33.10757771815855,
+      "min_upright_cosine": 0.7738509774081984,
+      "body_contact_samples": 8,
+      "first_failure": {
+        "upright": {
+          "time_s": 8.476000000000742,
+          "position_m": [
+            -0.03417446672098476,
+            -0.1522599536341768,
+            0.04549091562570921
+          ]
+        },
+        "body_contact": {
+          "time_s": 8.49600000000073,
+          "position_m": [
+            -0.03213837051657093,
+            -0.15093082587461182,
+            0.0452414539566247
+          ]
+        },
+        "heading": {
+          "time_s": 10.700999999999508,
+          "position_m": [
+            -0.02692157878259316,
+            -0.17121780503924153,
+            0.04722188373509728
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "2mm_lag0.35_hold0.12_all",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.918747808241913,
+      "max_driven_joint_speed_rad_s": 9.198790651187238,
+      "max_heading_deviation_deg": 24.32193180488313,
+      "min_upright_cosine": 0.9172937761436026,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_baseline",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.1451710499743729,
+      "max_driven_joint_speed_rad_s": 8.944172750140018,
+      "max_heading_deviation_deg": 58.80203767485354,
+      "min_upright_cosine": 0.6893567226279185,
+      "body_contact_samples": 27,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.976000000000664,
+          "position_m": [
+            -0.030279003953800166,
+            -0.12253525458829932,
+            0.04417194225097466
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.986000000000668,
+          "position_m": [
+            -0.030267335611505988,
+            -0.12165036101413632,
+            0.04449738796532045
+          ]
+        },
+        "heading": {
+          "time_s": 7.316000000000778,
+          "position_m": [
+            -0.0010804211106088726,
+            -0.11526609983336225,
+            0.04471765567261533
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.15_hold0.04_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.21457583889616852,
+      "max_driven_joint_speed_rad_s": 8.384476351143576,
+      "max_heading_deviation_deg": 37.615269732509894,
+      "min_upright_cosine": 0.7631967157300874,
+      "body_contact_samples": 7,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.976000000000664,
+          "position_m": [
+            -0.030279003953800166,
+            -0.12253525458829932,
+            0.04417194225097466
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.986000000000668,
+          "position_m": [
+            -0.030267335611505988,
+            -0.12165036101413632,
+            0.04449738796532045
+          ]
+        },
+        "heading": {
+          "time_s": 7.316000000000778,
+          "position_m": [
+            -0.0010804211106088726,
+            -0.11526609983336225,
+            0.04471765567261533
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.15,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.15_hold0.04_all",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.21535430578481507,
+      "max_driven_joint_speed_rad_s": 8.101567405248586,
+      "max_heading_deviation_deg": 46.3757392081464,
+      "min_upright_cosine": 0.772405836149391,
+      "body_contact_samples": 7,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.866000000000628,
+          "position_m": [
+            -0.0311623798519439,
+            -0.13100539668701933,
+            0.04426987531482922
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.876000000000631,
+          "position_m": [
+            -0.031200772486515954,
+            -0.12977386331433605,
+            0.0445692000875302
+          ]
+        },
+        "heading": {
+          "time_s": 7.211000000000743,
+          "position_m": [
+            -0.00428259356242414,
+            -0.12702376903672416,
+            0.04454872037734719
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.15,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.15_hold0.12_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.21958074787481927,
+      "max_driven_joint_speed_rad_s": 8.384476351143576,
+      "max_heading_deviation_deg": 37.615269732509894,
+      "min_upright_cosine": 0.7631967157300874,
+      "body_contact_samples": 7,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.976000000000664,
+          "position_m": [
+            -0.030279003953800166,
+            -0.12253525458829932,
+            0.04417194225097466
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.986000000000668,
+          "position_m": [
+            -0.030267335611505988,
+            -0.12165036101413632,
+            0.04449738796532045
+          ]
+        },
+        "heading": {
+          "time_s": 7.316000000000778,
+          "position_m": [
+            -0.0010804211106088726,
+            -0.11526609983336225,
+            0.04471765567261533
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.15,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.15_hold0.12_all",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.20817262988359556,
+      "max_driven_joint_speed_rad_s": 7.637307330741963,
+      "max_heading_deviation_deg": 77.04904507956314,
+      "min_upright_cosine": -0.12774607843601613,
+      "body_contact_samples": 2828,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.856000000000624,
+          "position_m": [
+            -0.03143016186513024,
+            -0.13085767422748734,
+            0.04412358966236577
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.861000000000626,
+          "position_m": [
+            -0.03143637600035255,
+            -0.1301583479695787,
+            0.04422095663095548
+          ]
+        },
+        "heading": {
+          "time_s": 7.2010000000007395,
+          "position_m": [
+            -0.00011993101816842796,
+            -0.13038069470152508,
+            0.04420829218530076
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.15,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.25_hold0.04_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.1283962963761861,
+      "max_driven_joint_speed_rad_s": 9.122609798955663,
+      "max_heading_deviation_deg": 179.78314989088108,
+      "min_upright_cosine": -0.07404335120117583,
+      "body_contact_samples": 100,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.976000000000664,
+          "position_m": [
+            -0.030279003953800166,
+            -0.12253525458829932,
+            0.04417194225097466
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.986000000000668,
+          "position_m": [
+            -0.030267335611505988,
+            -0.12165036101413632,
+            0.04449738796532045
+          ]
+        },
+        "heading": {
+          "time_s": 7.316000000000778,
+          "position_m": [
+            -0.0010804211106088726,
+            -0.11526609983336225,
+            0.04471765567261533
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.25,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.25_hold0.04_all",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.08657926493382687,
+      "max_driven_joint_speed_rad_s": 9.255871787683569,
+      "max_heading_deviation_deg": 179.96311131886188,
+      "min_upright_cosine": -0.14531273801695746,
+      "body_contact_samples": 90,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.896000000000638,
+          "position_m": [
+            -0.031018705291924773,
+            -0.12542704304783045,
+            0.04501558656429342
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.921000000000646,
+          "position_m": [
+            -0.030475283788258645,
+            -0.12358096351984803,
+            0.04548922901181766
+          ]
+        },
+        "heading": {
+          "time_s": 7.191000000000736,
+          "position_m": [
+            -0.0071127948932912625,
+            -0.11581103055755639,
+            0.04387241378082091
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.25,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.25_hold0.12_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": false,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.28844096239887607,
+      "max_driven_joint_speed_rad_s": 8.944172750140018,
+      "max_heading_deviation_deg": 64.30646213403853,
+      "min_upright_cosine": -0.9999999999361813,
+      "body_contact_samples": 767,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.976000000000664,
+          "position_m": [
+            -0.030279003953800166,
+            -0.12253525458829932,
+            0.04417194225097466
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.986000000000668,
+          "position_m": [
+            -0.030267335611505988,
+            -0.12165036101413632,
+            0.04449738796532045
+          ]
+        },
+        "heading": {
+          "time_s": 7.316000000000778,
+          "position_m": [
+            -0.0010804211106088726,
+            -0.11526609983336225,
+            0.04471765567261533
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.25,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.25_hold0.12_all",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": false,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.09502422455824762,
+      "max_driven_joint_speed_rad_s": 8.56579200789149,
+      "max_heading_deviation_deg": 175.30878898570015,
+      "min_upright_cosine": -0.9999999999155833,
+      "body_contact_samples": 705,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.896000000000638,
+          "position_m": [
+            -0.031018705291924773,
+            -0.12542704304783045,
+            0.04501558656429342
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.921000000000646,
+          "position_m": [
+            -0.030475283788258645,
+            -0.12358096351984803,
+            0.04548922901181766
+          ]
+        },
+        "heading": {
+          "time_s": 7.191000000000736,
+          "position_m": [
+            -0.0071127948932912625,
+            -0.11581103055755639,
+            0.04387241378082091
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.25,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.35_hold0.04_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.1620589152745294,
+      "max_driven_joint_speed_rad_s": 8.944172750140018,
+      "max_heading_deviation_deg": 50.654312489940466,
+      "min_upright_cosine": 0.7347327228673051,
+      "body_contact_samples": 17,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.976000000000664,
+          "position_m": [
+            -0.030279003953800166,
+            -0.12253525458829932,
+            0.04417194225097466
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.986000000000668,
+          "position_m": [
+            -0.030267335611505988,
+            -0.12165036101413632,
+            0.04449738796532045
+          ]
+        },
+        "heading": {
+          "time_s": 7.316000000000778,
+          "position_m": [
+            -0.0010804211106088726,
+            -0.11526609983336225,
+            0.04471765567261533
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.35_hold0.04_all",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": false,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.09280661547459627,
+      "max_driven_joint_speed_rad_s": 8.780493560472319,
+      "max_heading_deviation_deg": 149.64702561982529,
+      "min_upright_cosine": -0.9999999999590717,
+      "body_contact_samples": 1355,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.901000000000639,
+          "position_m": [
+            -0.03152425741338041,
+            -0.12695693707482772,
+            0.04430088633108764
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.911000000000643,
+          "position_m": [
+            -0.03171835632950461,
+            -0.12604109630280905,
+            0.04465995059569174
+          ]
+        },
+        "heading": {
+          "time_s": 7.226000000000748,
+          "position_m": [
+            -0.009111280483312452,
+            -0.11906638756426143,
+            0.04344839196766288
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.35_hold0.12_rear",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.18169016056798218,
+      "max_driven_joint_speed_rad_s": 9.087948799768647,
+      "max_heading_deviation_deg": 57.14907064592132,
+      "min_upright_cosine": 0.7303595906901712,
+      "body_contact_samples": 8,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.976000000000664,
+          "position_m": [
+            -0.030279003953800166,
+            -0.12253525458829932,
+            0.04417194225097466
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.986000000000668,
+          "position_m": [
+            -0.030267335611505988,
+            -0.12165036101413632,
+            0.04449738796532045
+          ]
+        },
+        "heading": {
+          "time_s": 7.316000000000778,
+          "position_m": [
+            -0.0010804211106088726,
+            -0.11526609983336225,
+            0.04471765567261533
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "rear"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "single4mm_lag0.35_hold0.12_all",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": false,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.09478571487976871,
+      "max_driven_joint_speed_rad_s": 8.737985787664343,
+      "max_heading_deviation_deg": 174.88490787768276,
+      "min_upright_cosine": -0.9999999999606017,
+      "body_contact_samples": 737,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.901000000000639,
+          "position_m": [
+            -0.03152425741338041,
+            -0.12695693707482772,
+            0.04430088633108764
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.911000000000643,
+          "position_m": [
+            -0.03171835632950461,
+            -0.12604109630280905,
+            0.04465995059569174
+          ]
+        },
+        "heading": {
+          "time_s": 7.226000000000748,
+          "position_m": [
+            -0.009111280483312452,
+            -0.11906638756426143,
+            0.04344839196766288
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 4 mm / 1 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.48,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 1.8,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    }
+  ],
+  "selected_validation": [
+    {
+      "label": "offset_minus",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.9408613295457321,
+      "max_driven_joint_speed_rad_s": 8.904166547649064,
+      "max_heading_deviation_deg": 24.353028678665417,
+      "min_upright_cosine": 0.9172861617106224,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": -0.005,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "offset_plus",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 1.009248307283232,
+      "max_driven_joint_speed_rad_s": 8.561412745433477,
+      "max_heading_deviation_deg": 24.778498513119896,
+      "min_upright_cosine": 0.916662106654671,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.005,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "yaw_minus",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.982817924817828,
+      "max_driven_joint_speed_rad_s": 8.817787841866803,
+      "max_heading_deviation_deg": 19.809729178735946,
+      "min_upright_cosine": 0.9152209221687999,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": -3.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "yaw_plus",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.8381739620405425,
+      "max_driven_joint_speed_rad_s": 9.594463419599233,
+      "max_heading_deviation_deg": 32.97094820621585,
+      "min_upright_cosine": 0.8994536936286445,
+      "body_contact_samples": 0,
+      "first_failure": {
+        "heading": {
+          "time_s": 7.096000000000704,
+          "position_m": [
+            -0.00623221571966894,
+            -0.1547945969625205,
+            0.04223937866441474
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 3.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "friction09",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.8840802674204887,
+      "max_driven_joint_speed_rad_s": 8.125520350334089,
+      "max_heading_deviation_deg": 19.79180291291686,
+      "min_upright_cosine": 0.914464727424715,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 0.9,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "original4mm",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": false,
+        "body_clearance": true,
+        "no_body_contact": false,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": false,
+        "task_goal": false,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.1369505560528302,
+      "max_driven_joint_speed_rad_s": 9.226551815504937,
+      "max_heading_deviation_deg": 179.67016607282648,
+      "min_upright_cosine": 0.7726434944305277,
+      "body_contact_samples": 7,
+      "first_failure": {
+        "upright": {
+          "time_s": 6.901000000000639,
+          "position_m": [
+            -0.03152425741337902,
+            -0.12695693707483288,
+            0.044300886331087516
+          ]
+        },
+        "body_contact": {
+          "time_s": 6.911000000000643,
+          "position_m": [
+            -0.031718356329503525,
+            -0.1260410963028137,
+            0.04465995059569063
+          ]
+        },
+        "heading": {
+          "time_s": 7.226000000000748,
+          "position_m": [
+            -0.009111280483318489,
+            -0.11906638756425654,
+            0.04344839196766279
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.12,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20.0,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Up stairs / 4 mm x 3",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.008,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.012,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    }
+  ],
+  "short_hold_validation": [
+    {
+      "label": "offset_minus",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.9178426219950453,
+      "max_driven_joint_speed_rad_s": 9.048933623292388,
+      "max_heading_deviation_deg": 24.32193181385861,
+      "min_upright_cosine": 0.9102513306154968,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": -0.005,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "offset_plus",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 1.009248307283232,
+      "max_driven_joint_speed_rad_s": 8.561412745433477,
+      "max_heading_deviation_deg": 24.778498513119896,
+      "min_upright_cosine": 0.916662106654671,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.005,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "yaw_minus",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.982817924817828,
+      "max_driven_joint_speed_rad_s": 8.817787841866803,
+      "max_heading_deviation_deg": 19.809729178735946,
+      "min_upright_cosine": 0.9152209221687999,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": -3.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "yaw_plus",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 0.7241897176471133,
+      "max_driven_joint_speed_rad_s": 9.594463419599233,
+      "max_heading_deviation_deg": 32.97094820621585,
+      "min_upright_cosine": 0.8994536936286445,
+      "body_contact_samples": 0,
+      "first_failure": {
+        "heading": {
+          "time_s": 7.096000000000704,
+          "position_m": [
+            -0.00623221571966894,
+            -0.1547945969625205,
+            0.04223937866441474
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 3.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "friction09",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 0.9685076558001413,
+      "max_driven_joint_speed_rad_s": 8.27827327345298,
+      "max_heading_deviation_deg": 12.482364033637774,
+      "min_upright_cosine": 0.914464727424715,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 0.9,
+      "commanded_seconds": 20,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "flat",
+      "passed": true,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": true,
+        "force_accounting": true
+      },
+      "forward_m": 1.0577825116495696,
+      "max_driven_joint_speed_rad_s": 8.790185908769626,
+      "max_heading_deviation_deg": 14.388735174099377,
+      "min_upright_cosine": 0.9337735974769129,
+      "body_contact_samples": 0,
+      "first_failure": {},
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 20,
+      "scene": {
+        "name": "flat",
+        "label": "Flat reference",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    },
+    {
+      "label": "long40",
+      "passed": false,
+      "checks": {
+        "complete": true,
+        "finite": true,
+        "no_warnings": true,
+        "upright": true,
+        "body_clearance": true,
+        "no_body_contact": true,
+        "no_obstacle_contact": true,
+        "startup_pitch": true,
+        "loop_closure": true,
+        "torque_limit": true,
+        "joint_speed": true,
+        "forward_speed": true,
+        "task_goal": true,
+        "heading": false,
+        "force_accounting": true
+      },
+      "forward_m": 2.006763420122361,
+      "max_driven_joint_speed_rad_s": 9.197338754456062,
+      "max_heading_deviation_deg": 60.869988939495414,
+      "min_upright_cosine": 0.9102507551186564,
+      "body_contact_samples": 0,
+      "first_failure": {
+        "heading": {
+          "time_s": 37.131000000004164,
+          "position_m": [
+            -0.010472113135835306,
+            -1.8173945563790324,
+            0.05438071111448816
+          ]
+        }
+      },
+      "controller_config": {
+        "name": "coordinated_crawl",
+        "joint_order": [
+          "left_front",
+          "right_front",
+          "right_back",
+          "left_back"
+        ],
+        "actuator_signs": [
+          1,
+          -1,
+          -1,
+          1
+        ],
+        "amplitude_rad": [
+          0.4049857989839647,
+          0.4049857989839647,
+          0.48095765454404177,
+          0.48095765454404177
+        ],
+        "bias_rad": [
+          -0.42075725226966854,
+          -0.42075725226966854,
+          -0.2219629667859576,
+          -0.2219629667859576
+        ],
+        "phase_rad": [
+          0.0,
+          3.141592653589793,
+          1.5707963267948966,
+          4.71238898038469
+        ],
+        "frequency_hz": 1.8,
+        "waveform": "cosine_duty",
+        "sweep_fraction": 0.6232904419964411,
+        "harmonic": 0.0,
+        "control_hz": 100,
+        "settle_seconds": 2.0,
+        "startup_bias_rad": [
+          0.2,
+          0.2,
+          -0.4,
+          -0.4
+        ],
+        "startup_ramp_seconds": 0.05,
+        "ramp_seconds": 1.5,
+        "heading_kp": 0.4,
+        "heading_kd": 0.03,
+        "lateral_kp": 2.0,
+        "steering_limit": 0.2,
+        "max_target_speed_rad_s": 5.0,
+        "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+        "contact_phase_controller": true,
+        "contact_adaptation": false,
+        "trajectory_shape": "quintic",
+        "riser_angle_rad": -0.15,
+        "riser_phase_rate": 1.2,
+        "landing_slew_rad_s": 3.0,
+        "landing_hold_s": 0.04,
+        "riser_hold_s": 0.08,
+        "support_coordination": true,
+        "coupled_support_clock": true,
+        "minimum_support_feet": 2,
+        "coupled_slow_rate": 0.35,
+        "riser_tracking_limit_rad": 0.35,
+        "tracking_release_s": 0.04,
+        "tracking_scope": "all"
+      },
+      "initial_x_offset_m": 0.0,
+      "initial_yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "commanded_seconds": 40,
+      "scene": {
+        "name": "stairs_up",
+        "label": "Stairs curriculum / 2 mm / 3 steps",
+        "slope_deg": 0.0,
+        "goal_m": 0.72,
+        "plane_z": 0.0,
+        "initial_height_m": 0.0,
+        "boxes": [
+          {
+            "name": "step_0",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.18,
+            "s1": 0.3,
+            "top": 0.002,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_1",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.3,
+            "s1": 0.42,
+            "top": 0.004,
+            "bottom": -0.01,
+            "obstacle": false
+          },
+          {
+            "name": "step_2",
+            "xmin": -0.3,
+            "xmax": 0.3,
+            "s0": 0.42,
+            "s1": 1.8,
+            "top": 0.006,
+            "bottom": -0.01,
+            "obstacle": false
+          }
+        ],
+        "water_depth_m": 0.0,
+        "seed": 7
+      }
+    }
+  ],
+  "extended_platform40": {
+    "passed": true,
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true
+    },
+    "forward_m": 2.102092678909353,
+    "max_driven_joint_speed_rad_s": 8.919235967864015,
+    "max_heading_deviation_deg": 24.32193180488313,
+    "min_upright_cosine": 0.9102507551186112,
+    "body_contact_samples": 0,
+    "first_failure": {},
+    "controller_config": {
+      "name": "coordinated_crawl",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 1.8,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.4,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 5.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+      "contact_phase_controller": true,
+      "contact_adaptation": false,
+      "trajectory_shape": "quintic",
+      "riser_angle_rad": -0.15,
+      "riser_phase_rate": 1.2,
+      "landing_slew_rad_s": 3.0,
+      "landing_hold_s": 0.04,
+      "riser_hold_s": 0.08,
+      "support_coordination": true,
+      "coupled_support_clock": true,
+      "minimum_support_feet": 2,
+      "coupled_slow_rate": 0.35,
+      "riser_tracking_limit_rad": 0.35,
+      "tracking_release_s": 0.04,
+      "tracking_scope": "all"
+    },
+    "initial_x_offset_m": 0.0,
+    "initial_yaw_deg": 0.0,
+    "friction_scale": 1.0,
+    "commanded_seconds": 40,
+    "scene": {
+      "name": "stairs_up",
+      "label": "Stairs curriculum / 2 mm / 3 steps / extended last platform to 4m",
+      "slope_deg": 0.0,
+      "goal_m": 0.72,
+      "plane_z": 0.0,
+      "initial_height_m": 0.0,
+      "boxes": [
+        {
+          "name": "step_0",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": 0.18,
+          "s1": 0.3,
+          "top": 0.002,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "step_1",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": 0.3,
+          "s1": 0.42,
+          "top": 0.004,
+          "bottom": -0.01,
+          "obstacle": false
+        },
+        {
+          "name": "step_2",
+          "xmin": -0.3,
+          "xmax": 0.3,
+          "s0": 0.42,
+          "s1": 4.0,
+          "top": 0.006,
+          "bottom": -0.01,
+          "obstacle": false
+        }
+      ],
+      "water_depth_m": 0.0,
+      "seed": 7
+    }
+  },
+  "source_sha256": {
+    "diagnose_foot_trajectory.py": "a0a5001023c644853133e872f15b82d73f7d25df739f5a09575183d2f5f31148",
+    "plot_foot_trajectory.py": "f63eb367a1f2af97e535303c790a47a3ab2fca12840ec4e97cca534fb510e409",
+    "check_tracking_release.py": "c1b880343fcfea0cc07d6bc275280ea27cd252d239dc91050876fed30e9275b0",
+    "search_tracking_release.py": "24e4e0aae09fddc6fd302bb64b07816d7d5334fd46def571b3fd7a65a36ecd07",
+    "validate_tracking_short.py": "c5caf464570744d9d2ea573bf63366271a5abca2c135e54a3a39562efe2b03db",
+    "contact_phase_controller.py": "3419545fe0d9c2e0d53fd0303a1c050dafe826edafd9ed716473ad9ad82a8935",
+    "support_coordinator.py": "cf3e43c9628a5ea3b470298e9651bc050b1d3ef57253da5d36afeb25d10202f0",
+    "scenario_matrix.py": "2041b504dfdb8c0233c2129a2b3a6f1184b78bc2e13472c215270ed7da3ceb2a",
+    "gait_controller.py": "560030737963731ccefa5f8b171ad0d280d96c4a27c7cbe8151e848b1c420f7e",
+    "gait.json": "409afe24c7a058242bfe972ff3c375db4ebaee98ec5eafdef52f7fc203244f01",
+    "scenarios.py": "02c953047219c631f1a665c6879f76d64954e2cfec9511f9f56619d0c09b3e14",
+    "curriculum_rl.py": "aed633cc05507ad7fca8deee7b18ac64bc887eb8c1d392e0a3d238266bbb3044"
+  },
+  "search_source_sha256": {
+    "contact_phase_controller.py": "3419545fe0d9c2e0d53fd0303a1c050dafe826edafd9ed716473ad9ad82a8935",
+    "support_coordinator.py": "cf3e43c9628a5ea3b470298e9651bc050b1d3ef57253da5d36afeb25d10202f0",
+    "search_tracking_release.py": "24e4e0aae09fddc6fd302bb64b07816d7d5334fd46def571b3fd7a65a36ecd07",
+    "diagnose_foot_trajectory.py": "ac0d7831cd312087e46d69c87df867363c7973809a5f11029a34ac1840f240c5",
+    "scenario_matrix.py": "2041b504dfdb8c0233c2129a2b3a6f1184b78bc2e13472c215270ed7da3ceb2a",
+    "gait_controller.py": "560030737963731ccefa5f8b171ad0d280d96c4a27c7cbe8151e848b1c420f7e",
+    "gait.json": "409afe24c7a058242bfe972ff3c375db4ebaee98ec5eafdef52f7fc203244f01",
+    "scenarios.py": "02c953047219c631f1a665c6879f76d64954e2cfec9511f9f56619d0c09b3e14"
+  },
+  "limitations": [
+    "Lowest foot collision-mesh vertex can switch; trace is not a fixed material point or a reachable workspace.",
+    "Peak sampled at 1kHz; geometry/contacts at non-refresh peak may precede integrated positions by one physics step. Full traces use existing 200Hz forward passes.",
+    "Tracking correction bounds the desired target before unchanged slew limit, not actual joint error or actual velocity.",
+    "Extended-platform 40s test changes only final platform extent from 1.8m to 4m and is a separate diagnostic. Original 40s failure retained.",
+    "Fixed-condition checks are not multi-seed robustness or hardware validation. Original 4mm target remains failed."
+  ]
+}

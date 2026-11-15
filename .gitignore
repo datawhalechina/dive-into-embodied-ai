@@ -2,8 +2,11 @@ node_modules/
 build/
 .docusaurus/
 .cache-loader/
+# Persistent lock file; the OS releases its lock when the build exits.
+.docusaurus-build-lock.sqlite*
 # Generated from the pinned npm package and canonical Quaddle model at build time.
 static/quaddle/
+static/simulation-assets/
 .DS_Store
 .env
 .env.local
@@ -16,9 +19,10 @@ __pycache__
 # Lab 6 brax/MJX scratch scripts (eval / render / plotting helpers)
 codes/practices/quadruped/cs123/exercises/lab_6_rl_pupper/scripts/
 
-# AI 协作 / Agent 痕迹（public 对外镜像不保留，仅 private 使用）
+# Keep personal agent files private; share the root contributor guide.
 **/CLAUDE.md
 **/AGENTS.md
+!/AGENTS.md
 .agents/
 .claude/
 .codex/
