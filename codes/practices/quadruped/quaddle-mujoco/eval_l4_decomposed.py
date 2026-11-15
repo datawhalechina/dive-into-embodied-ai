@@ -184,7 +184,7 @@ def main():
                 if data.body(body_id).xpos[2] < 0.030: fell = True; break
             if fell: break
             if mp4_proc is not None:
-                if frame % 6 == 0:
+                if frame % 2 == 0:  # 每 2 个控制步 1 帧（0.04s）@50fps = 2x 速丝滑
                     gif_renderer.update_scene(data, camera=gif_cam)
                     mp4_proc.stdin.write(gif_renderer.render().tobytes())
             else:

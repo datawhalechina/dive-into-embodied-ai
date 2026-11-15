@@ -74,6 +74,7 @@ def main():
         gif_cam.distance = 1.6
 
     rng = np.random.default_rng(args.seed)
+    cap_n = 0  # 控制步抓帧计数（每 2 步 1 帧 → 0.04s/帧 @50fps = 2x 速丝滑）
     all_frames, results = [], []
     for ep in range(args.episodes):
         color = cv.COLORS[ep % 3]
@@ -150,7 +151,8 @@ def main():
                 t += cv.DT_CTRL
                 if data.body(body_id).xpos[2] < 0.030: fell = True; break
                 if mp4_proc is not None:
-                    if frame % 6 == 0:
+                    cap_n += 1
+                    if cap_n % 2 == 0:  # 每个控制步都抓帧判定：修复旧 %6 在 5 子步循环里"连抓 5 帧+静默 0.6s"的突跳
                         gif_renderer.update_scene(data, camera=gif_cam)
                         mp4_proc.stdin.write(gif_renderer.render().tobytes())
                 else:

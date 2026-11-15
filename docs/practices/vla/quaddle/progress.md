@@ -45,9 +45,10 @@ seed7000 3/3 + 20eps 17/20=85%（≥60%）。** 此前训练侧杠杆均失败�
 recency 加权平均，replan5/k=0.01）首次突破：平滑 chunk 间冲突、抑制自旋锁，20eps 17/20=85%。
 新 best = 2D 18k + ensembling。
 
-<video controls playsInline preload="metadata" src={require('./figs/quaddle_L2_nav_ensemble_17of20.mp4').default} style={{width: '100%'}} />
+<video controls playsInline preload="metadata" src={require('./figs/quaddle_L2_nav_ensemble_16of20.mp4').default} style={{width: '100%'}} />
 
-L2 导航 best：SmolVLA 18k + temporal ensembling，20eps 17/20=85%（VLA 策略 rollout，播放 3x）
+L2 导航 best：SmolVLA 18k + temporal ensembling（VLA 策略 rollout，960×720 50fps 丝滑，2x 速；
+三次评测 17/17/16——GPU 非确定内核致 ±1 集波动，首评 17/20=85%）
 
 训练方法：SmolVLA 450M 冻结骨干只训动作专家；352 条 CPG 专家数据（252 常规+100 恢复）；
 batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembling（replan5/k=0.01）。
@@ -58,8 +59,8 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 **不改模型、不加训练**，仅把任务分解为"确定性编排器 + 已验证 L2 技能（85%）"，端到端路线卡死的两个
 进阶任务双双达标：**L3 避障 10%→80%（16/20，≥50% 达标）、L4 条件组合 0%→85%（17/20，触发+顺序达标；
 "看到绿停" 10/10、"先红后蓝" red 达成 10/10 + blue 7/10）**。判据/RNG/场景与基线逐字节一致（apples-to-apples）。
-评估以**高清定稿跑**为准：960×720 mp4 直出、策略噪声种子化（torch.manual_seed(7000)，数字可复现），
-L2 同法重跑 17/20 与原值一致。
+评估以**高清定稿跑**为准：960×720 / 50fps mp4 直出（2x 速丝滑）、策略噪声种子化。注意：种子固定采样，
+但 GPU 非确定内核仍致跨跑 **±1 集**波动（三次实测 L2 17/17/16、L4 16/17/17），达标余量充足。
 
 | 维度 | 结论 |
 |---|---|
