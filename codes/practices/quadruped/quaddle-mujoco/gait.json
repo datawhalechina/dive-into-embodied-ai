@@ -36,6 +36,8 @@
   "harmonic": 0.0,
   "control_hz": 100,
   "settle_seconds": 2.0,
+  "startup_bias_rad": [0.2, 0.2, -0.4, -0.4],
+  "startup_ramp_seconds": 0.05,
   "ramp_seconds": 1.5,
   "heading_kp": 0.1879347817835857,
   "heading_kd": 0.03,

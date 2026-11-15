@@ -1,15 +1,17 @@
 ---
-title: "Petoi Quaddle：四舵机 MuJoCo 步行仿真"
+title: "Quaddle 入门：让四足机器人走起来"
 sidebar_position: 2
 displayed_sidebar: practicesQuadrupedSidebar
 description: "在网页中运行 Quaddle MuJoCo 仿真，控制行走与停止，并学习残差 PPO 的环境、奖励、训练和评估。"
 ---
 
-# Petoi Quaddle：四舵机 MuJoCo 步行仿真
+# Quaddle 入门：让四足机器人走起来
 
 import QuaddleSimulator from '@site/src/components/QuaddleSimulator';
 
 这个实验使用 [Petoi 官方 Quaddle 模型](https://huggingface.co/petoi/quaddle)，补充 MuJoCo 的闭环约束、驱动器和接触配置，让四个舵机驱动机器人向前行走。控制器采用周期关节目标和方向反馈，没有使用强化学习或 Petoi 官方固件。
+
+本项目分为两篇：本页学习运行与控制基础；[多场景实验](./experiments.md)查看最新结果、成功与失败视频，以及复现和训练过程。
 
 ## 在线运行
 
@@ -80,8 +82,8 @@ macOS 启动器会调用 `mjpython`，并为当前进程设置 uv Python 所需�
 
 | 默认场景的检查 | 结果 |
 | --- | --- |
-| 连续步行 60 秒 | 前进约 4.57 m |
-| 最大横向偏离 | 约 4.3 cm |
+| 连续步行 60 秒 | 修正启动站姿后，前进约 4.51 m |
+| 最大横向偏离 | 约 4.7 cm |
 | 机身触地、数值警告、外加推动力 | 均为 0 |
 | 停止检查 | 步行后切换站立，速度降至 0.001 m/s 以下 |
 | 站立和小幅摆动 | 各运行 30 秒通过 |
@@ -120,7 +122,7 @@ macOS 启动器会调用 `mjpython`，并为当前进程设置 uv Python 所需�
 
 这里选择**残差 PPO**作为可复现实验。现有步态负责基本协调，策略只学习四个小修正量。零修正就能作为基线，因此可以测量策略究竟带来了改进，还是破坏了原来的稳定性。
 
-> **实验状态：** 网页仍使用周期控制器。PPO 示例已完成环境检查、2,048 个 transition 的短训练，以及保存后重新加载的评估；这仅证明训练链路可运行，没有证明策略优于基线，也没有把短训练权重装入网页。
+> **本页入门示例状态（32维观测）：** 网页仍使用周期控制器。PPO 示例已完成环境检查、2,048 个 transition 的短训练，以及保存后重新加载的评估；这仅证明训练链路可运行，没有证明策略优于基线，也没有把短训练权重装入网页。
 
 ### 1. 环境、观测与动作
 
@@ -240,7 +242,7 @@ uv pip sync --python .venv-rl/bin/python requirements-rl.lock
 | `evaluation-nominal.json` | 重新加载后与零残差基线的逐回合比较 |
 | `evaluation-randomized.json` | 在随机初始状态和摩擦下的逐回合比较 |
 
-训练脚本每次从头开始；保存了优化器不代表已经实现命令行续训。`outputs/` 中的权重和日志默认不进 Git。短训练检查结果保存在 `reports/rl_smoke.json`，它不是已收敛策略的性能报告。
+本页的 `train_ppo.py` 每次从头开始；保存了优化器不代表已经实现命令行续训。`outputs/` 中的权重和日志默认不进 Git。短训练检查结果保存在 `reports/rl_smoke.json`，它不是已收敛策略的性能报告。
 
 ### 5. 怎样判断策略真的更好
 
@@ -261,3 +263,7 @@ Quaddle 每条腿只有一个主动舵机，膝部使用被动连杆与弹簧，
 当前步态适用于已验证的默认平地和初始状态。将所有碰撞几何体的滑动摩擦统一改为 0.6 或 1.0 时，额外检查出现偏航、姿态或横向偏离超限，未通过。默认场景运行成功不代表实机验证或跨地面稳健性。
 
 官方源文件及 MIT 许可证保存在 `original/`，固定版本为 `d5ed8ccfd238f98c2c47eb47658ed23232b1a74d`。`source_manifest.json` 保存原始文件校验值；重建场景可运行 `.venv/bin/python build_model.py`。
+
+## 下一步：多场景实验
+
+已经能运行平地仿真后，继续看[Quaddle 多场景实验：结果与失败分析](./experiments.md)。那里使用独立的场景配置和地形训练环境；不要将32维入门策略与36维旧地形策略、60维课程策略混用。

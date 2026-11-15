@@ -404,6 +404,12 @@
   "仿真实战": {
     "message": "Simulation projects"
   },
+  "四足系列": {
+    "message": "Quadruped series"
+  },
+  "从零到一搭建四足机器人与 Petoi Quaddle 四足步行仿真。": {
+    "message": "Build a quadruped robot from scratch and run the Petoi Quaddle walking simulation."
+  },
   "Petoi Quaddle 四足步行仿真": {
     "message": "Petoi Quaddle walking simulation"
   },
@@ -1128,9 +1134,300 @@
     "message": "read the Chinese version"
   },
   "translationNotice.overview": {
-    "message": "The {readme}, {introduction}, {projects}, and {roadmap} are available in English. Other tutorial chapters and standalone playgrounds are currently in Chinese."
+    "message": "The {readme}, {introduction}, {projects}, and {roadmap} are available in English. Most other tutorial chapters and standalone playgrounds remain in Chinese."
   },
   "translationNotice.fallback": {
     "message": "This page is currently available in Chinese. Explore the English {introduction}, or {original}."
+  },
+  "MicroDuck RL｜AMD ROCm": {
+    "message": "MicroDuck RL · AMD ROCm"
+  },
+  "机械臂系列": {
+    "message": "Robot arm series"
+  },
+  "双足系列": {
+    "message": "Biped series"
+  },
+  "simulation.title": {
+    "message": "Online simulation"
+  },
+  "simulation.subtitle": {
+    "message": "Choose a robot. Take the controls or watch its learned behavior."
+  },
+  "simulation.browser": {
+    "message": "Runs in your browser"
+  },
+  "simulation.library": {
+    "message": "Model library"
+  },
+  "simulation.trained": {
+    "message": "Trained · PPO"
+  },
+  "simulation.controller": {
+    "message": "Rule-based gait"
+  },
+  "simulation.go2Brief": {
+    "message": "Quadruped · velocity tracking"
+  },
+  "simulation.quaddleBrief": {
+    "message": "Four servos · periodic gait"
+  },
+  "simulation.libraryNote": {
+    "message": "Switch between control and showcase in the same scene."
+  },
+  "simulation.mode": {
+    "message": "Run mode"
+  },
+  "simulation.manual": {
+    "message": "Free control"
+  },
+  "simulation.showcase": {
+    "message": "Policy showcase"
+  },
+  "simulation.canvas": {
+    "message": "Live robot simulation. Drag to orbit and scroll to zoom."
+  },
+  "simulation.keyboardArea": {
+    "message": "Robot keyboard controls"
+  },
+  "simulation.suspended": {
+    "message": "Auto-suspended"
+  },
+  "simulation.paused": {
+    "message": "Paused"
+  },
+  "simulation.resetCamera": {
+    "message": "Reset camera"
+  },
+  "simulation.fullscreen": {
+    "message": "Toggle fullscreen"
+  },
+  "simulation.focusHint": {
+    "message": "Click the scene for keyboard control · drag to orbit"
+  },
+  "simulation.cameraHint": {
+    "message": "Drag to orbit · scroll to zoom"
+  },
+  "simulation.loading": {
+    "message": "Preparing simulation…"
+  },
+  "simulation.error": {
+    "message": "Simulation interrupted"
+  },
+  "simulation.errorHint": {
+    "message": "Check your connection and retry in a browser with WebGL and WebAssembly support."
+  },
+  "simulation.welcome": {
+    "message": "Your turn to take control"
+  },
+  "simulation.manualDescription": {
+    "message": "Hold a direction key or an on-screen button to move. Release to stop the command."
+  },
+  "simulation.showcaseDescription": {
+    "message": "Run the selected controller automatically and watch its behavior in live physics."
+  },
+  "simulation.retry": {
+    "message": "Retry"
+  },
+  "simulation.load": {
+    "message": "Start simulation"
+  },
+  "simulation.download": {
+    "message": "The first load downloads the engine and model. No installation needed."
+  },
+  "simulation.errorDetails": {
+    "message": "Error details"
+  },
+  "simulation.resume": {
+    "message": "Resume"
+  },
+  "simulation.pause": {
+    "message": "Pause"
+  },
+  "simulation.reset": {
+    "message": "Reset"
+  },
+  "simulation.rate": {
+    "message": "Simulation speed"
+  },
+  "simulation.telemetry": {
+    "message": "Live state"
+  },
+  "simulation.time": {
+    "message": "Simulation time"
+  },
+  "simulation.velocity": {
+    "message": "Actual speed"
+  },
+  "simulation.position": {
+    "message": "Position X / Y"
+  },
+  "simulation.controls": {
+    "message": "Control panel"
+  },
+  "simulation.directionPad": {
+    "message": "Hold directional buttons to move"
+  },
+  "simulation.forward": {
+    "message": "Forward"
+  },
+  "simulation.back": {
+    "message": "Backward"
+  },
+  "simulation.left": {
+    "message": "Turn left"
+  },
+  "simulation.right": {
+    "message": "Turn right"
+  },
+  "simulation.stop": {
+    "message": "Stop movement command"
+  },
+  "simulation.strafeLeft": {
+    "message": "Strafe left"
+  },
+  "simulation.strafeRight": {
+    "message": "Strafe right"
+  },
+  "simulation.strafe": {
+    "message": "Strafe"
+  },
+  "simulation.keys": {
+    "message": "WASD / arrows to move, Q / E to strafe. Focus the scene, then Space to pause or R to reset."
+  },
+  "simulation.quaddleKeys": {
+    "message": "W forward, A / D walking turns, S stop. Arrow keys also work. This gait has no reverse or strafe."
+  },
+  "simulation.speed": {
+    "message": "Target forward speed"
+  },
+  "simulation.walkPolicy": {
+    "message": "Go2 · flat-ground walking"
+  },
+  "simulation.gaitDemo": {
+    "message": "Quaddle · periodic gait"
+  },
+  "simulation.policyInfo": {
+    "message": "Live PPO inference with a 0.6 m/s forward target. Switch to free control to steer."
+  },
+  "simulation.gaitInfo": {
+    "message": "Runs a periodic gait controller as a reference. This example does not use trained weights."
+  },
+  "simulation.follow": {
+    "message": "Follow robot"
+  },
+  "simulation.about": {
+    "message": "About this model"
+  },
+  "simulation.go2Info": {
+    "message": "Uses the repository’s Go2 PPO weights. Simplified visuals retain the original collision model; actual speed may differ from the command."
+  },
+  "simulation.quaddleInfo": {
+    "message": "Four servos drive passive linkages. Allow about 2 seconds to settle. Stop retracts the gait while physics keeps running."
+  },
+  "simulation.tutorial": {
+    "message": "Related tutorial"
+  },
+  "simulation.physicsNote": {
+    "message": "Live physics, not video playback. Hidden scenes suspend automatically; free control requires fresh input on return. Simulation time may run slower on less powerful devices."
+  },
+  "simulation.manualOnly": {
+    "message": "Manual joints"
+  },
+  "simulation.pupperBrief": {
+    "message": "Pupper v3 · learned gait"
+  },
+  "simulation.duckBrief": {
+    "message": "MicroDuck · 14 joints"
+  },
+  "simulation.pupperPolicy": {
+    "message": "Pupper v3 · PPO walking"
+  },
+  "simulation.pupperPolicyInfo": {
+    "message": "Runs the project’s 8M-step policy with a 0.4 m/s forward target."
+  },
+  "simulation.pupperInfo": {
+    "message": "Uses the project’s Pupper v3 meshes and PPO weights. Supports forward, reverse, strafe and turning. Tracking error and drift remain; releasing controls does not freeze the pose."
+  },
+  "simulation.duckInfo": {
+    "message": "Uses original MicroDuck meshes and position servos. The base is held for posing; release it to observe gravity and collisions. No walking policy is connected yet."
+  },
+  "simulation.duckDescription": {
+    "message": "Turn the head with direction keys or expand the sliders to pose all joints. Release to hold the target angle."
+  },
+  "simulation.duckKeys": {
+    "message": "W / S tilt up/down, A / D look left/right, Q / E roll the head. In the scene: Space pauses, R resets."
+  },
+  "simulation.duckNoPolicy": {
+    "message": "No trained weights connected yet; free control is available."
+  },
+  "simulation.headUp": {
+    "message": "Look up"
+  },
+  "simulation.headDown": {
+    "message": "Look down"
+  },
+  "simulation.headLeft": {
+    "message": "Look left"
+  },
+  "simulation.headRight": {
+    "message": "Look right"
+  },
+  "simulation.rollLeft": {
+    "message": "Tilt head left"
+  },
+  "simulation.rollRight": {
+    "message": "Tilt head right"
+  },
+  "simulation.headRoll": {
+    "message": "Head tilt"
+  },
+  "simulation.jointControls": {
+    "message": "Joint controls"
+  },
+  "simulation.support": {
+    "message": "Hold base (resets when enabled)"
+  },
+  "simulation.joint.left_hip_yaw": {
+    "message": "Left hip yaw"
+  },
+  "simulation.joint.left_hip_roll": {
+    "message": "Left hip roll"
+  },
+  "simulation.joint.left_hip_pitch": {
+    "message": "Left hip pitch"
+  },
+  "simulation.joint.left_knee": {
+    "message": "Left knee"
+  },
+  "simulation.joint.left_ankle": {
+    "message": "Left ankle"
+  },
+  "simulation.joint.neck_pitch": {
+    "message": "Neck pitch"
+  },
+  "simulation.joint.head_pitch": {
+    "message": "Head pitch"
+  },
+  "simulation.joint.head_yaw": {
+    "message": "Head yaw"
+  },
+  "simulation.joint.head_roll": {
+    "message": "Head roll"
+  },
+  "simulation.joint.right_hip_yaw": {
+    "message": "Right hip yaw"
+  },
+  "simulation.joint.right_hip_roll": {
+    "message": "Right hip roll"
+  },
+  "simulation.joint.right_hip_pitch": {
+    "message": "Right hip pitch"
+  },
+  "simulation.joint.right_knee": {
+    "message": "Right knee"
+  },
+  "simulation.joint.right_ankle": {
+    "message": "Right ankle"
   }
 }

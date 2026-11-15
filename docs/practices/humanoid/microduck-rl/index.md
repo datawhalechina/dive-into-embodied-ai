@@ -259,6 +259,7 @@ uv run python scripts/render_mjlab_checkpoint.py \
 | 奖励和观测如何计算 | `src/mjlab_microduck/tasks/mdp.py` |
 | 电机如何响应目标位置 | `src/mjlab_microduck/actuator/` |
 | 模型如何变成视频 | `scripts/render_mjlab_checkpoint.py` |
+| 动作如何串成链（跑→跳→越墙→滚翻） | [跳墙课程](./wall-curriculum.md) + `codes/practices/humanoid/microduck-wall-curriculum/` |
 
 <details>
 <summary>进阶：PPO 在优化什么？</summary>
@@ -269,4 +270,4 @@ uv run python scripts/render_mjlab_checkpoint.py \
 
 </details>
 
-需要查模型来源、完整模式表、验收字段或创意动作？查看[实验记录与创意动作](./experiment-notes.md)。这些材料供复核和拓展使用，不是完成本课的前置要求。
+需要查模型来源、完整模式表、验收字段或创意动作？查看[实验记录与创意动作](./experiment-notes.md)。准备把单个动作串成动作链？进入[跳墙课程](./wall-curriculum.md)：12 步课程带小黄鸭从平地翻滚跑到 5cm 墙全链。这些材料供复核和拓展使用，不是完成本课的前置要求。

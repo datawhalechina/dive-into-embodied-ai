@@ -1,0 +1,2 @@
+# Only the standalone lesson scripts and their checks; ROS dependencies use rosdep.
+numpy>=1.26,<3

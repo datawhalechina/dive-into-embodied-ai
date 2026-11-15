@@ -1,0 +1,96 @@
+{
+  "label": "uphill5",
+  "result": {
+    "passed": true,
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true
+    },
+    "first_failure": {},
+    "forward_m": 1.0748865554153069,
+    "max_heading_deviation_deg": 11.810287850656557,
+    "max_driven_joint_speed_rad_s": 8.191595697160656,
+    "min_upright_cosine": 0.9654513702902188,
+    "body_contact_samples": 0,
+    "controller_config": {
+      "name": "terrain_uphill5",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.47534027166785375,
+        0.47534027166785375,
+        0.5299936067396135,
+        0.5299936067396135
+      ],
+      "bias_rad": [
+        -0.4162716294052242,
+        -0.4162716294052242,
+        -0.2761035392788388,
+        -0.2761035392788388
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 2.010529421595243,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.6110656985212245,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.12832705725882035,
+      "max_target_speed_rad_s": 5.980644412882414,
+      "note": "CEM-selected for this fixed terrain; passed nominal and +/-5 mm lateral resets for 20 s. Uncalibrated simulation, not a universal or hardware-validated gait."
+    },
+    "initial_x_offset_m": 0.0,
+    "initial_yaw_deg": 0.0,
+    "friction_scale": 1.0,
+    "scene": {
+      "name": "uphill5",
+      "label": "Uphill +5 deg",
+      "slope_deg": 5.0,
+      "goal_m": 0.72,
+      "plane_z": 0.0,
+      "initial_height_m": 0.0,
+      "boxes": [],
+      "water_depth_m": 0.0,
+      "seed": 7
+    }
+  }
+}

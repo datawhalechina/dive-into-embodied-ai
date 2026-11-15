@@ -13,7 +13,7 @@ displayed_sidebar: practicesOverviewSidebar
 - 想从零搭建一个系统：从 [四足机器人项目](./quadruped/cs123/intro) 开始，按 8 章顺序学习执行器、运动学、建模、步态与策略训练。需要 Python 基础，控制和线性代数可以结合实验补齐。
 - 想学习机械臂数据与真机操作：先读 [LeRobot 中文课程讲义](./robot-arm/data-collection/lerobot-course)，再进入 [SO-101 真机教程](./robot-arm/data-collection/so101-lerobot-real)。讲义已整理 Unit 0–2，需要 Python 基础；后续操作需要对应硬件。
 - 想先体验一个仿真效果：选择 [MicroDuck RL](./humanoid/microduck-rl/) 或 [ACT 双臂操作](./vla/act)，按项目要求准备环境。
-- 想进一步学习轮足平衡控制：查看 [Flamingo 项目预告](./wheel-legged/flamingo-isaaclab/preview)，了解前置知识和计划中的实验。
+- 想系统掌握轮足平衡与跨仿真部署：进入 [两轮足 Flamingo · Isaac Lab](./humanoid/flamingo-isaaclab/intro)，按 6 章主线打通并行 PPO、约束式强化学习（CaT）、ONNX 导出与 MuJoCo 抗扰动压测。
 
 动手前先确认环境和目标，按步骤保留代码、参数与运行结果，再用评测和失败案例检查自己的理解。
 
@@ -21,15 +21,16 @@ displayed_sidebar: practicesOverviewSidebar
 
 | 方向 | 项目数 | 适合 |
 |------|--------|------|
-| [机械臂](./robot-arm/placeholder) | 5 个 | VLA / 数据采集 / 模仿学习入门 |
-| [四足机器人](./quadruped/placeholder) | 5 个 | 强化学习 / 控制 / VLA 导航 / sim2real |
-| [双足 / 人形](./humanoid/placeholder) | 1 个已上线，2 个规划中 | 进阶控制 / 强化学习 / 任务规划 |
-| [移动操作](./mobile-manipulation/placeholder) | 3 个 | 导航 + 操作综合 |
-| [轮足机器人](./wheel-legged/placeholder) | 预告 | 欠驱动平衡 / Isaac Lab / 跨仿真验证 |
+| [机械臂系列](./robot-arm/placeholder) | 9 个已上线，2 个规划中 | 连续控制 / VLA / 数据采集 / 模仿学习 / 真机入门 |
+| [四足系列](./quadruped/placeholder) | 4 个已上线，2 个规划中 | 强化学习 / 运动学与步态控制 / VLA 导航 / sim2real |
+| [双足系列](./humanoid/placeholder) | 5 个已上线，3 个规划中 | 两轮足 Isaac Lab + CaT / GPU 并行 PPO / 长链课程学习 |
+| [移动操作](./mobile-manipulation/placeholder) | 3 个规划中 | 导航 + 操作综合 |
 
 ## 已上线项目 \{#available-projects}
 
+- [两轮足 Flamingo · Isaac Lab 强化学习实战](./humanoid/flamingo-isaaclab/intro)：围绕 8 自由度双足轮腿机器人，从延迟与齿轮耦合执行器建模出发，完成 4096 环境并行 PPO 与约束式强化学习（CaT）对比、ONNX 归一化融合导出以及 MuJoCo 零样本抗扰动评测（总览与 6 章完整上线）。
 - [MicroDuck RL：让小黄鸭学会走路、起身和翻滚](./humanoid/microduck-rl/)：从 MJCF、BAM 执行器和 mjlab 任务注册开始，在 MuJoCo Warp 中训练 18 个动作模式，并用 GIF / MP4 展示离屏评估结果。
+- [MicroDuck 跳墙课程](./humanoid/microduck-rl/wall-curriculum)：在基础教程之上，用 12 步课程把跑步、跳跃、越墙、前滚翻、起身串成全链，含每步配置、GIF 验收标准与课程心法。
 
 ## AMD 专区 \{#amd}
 
@@ -45,6 +46,7 @@ displayed_sidebar: practicesOverviewSidebar
 | [从零到一搭建四足机器人](./quadruped/cs123/intro) | MuJoCo、PD 控制、运动学、步态、策略训练与感知 | 总览与 8 章可读 |
 | [Petoi Quaddle 四舵机步行仿真](./quadruped/quaddle-mujoco/) | 官方 URDF 适配、周期控制、接触验证与长距离地面显示 | 可用 |
 | [MicroDuck RL：走路、起身和翻滚](./humanoid/microduck-rl/) | mjlab、MuJoCo Warp、CUDA 并行 PPO、18 个动作模式 | 可用 |
+| [MicroDuck 跳墙课程](./humanoid/microduck-rl/wall-curriculum) | 12 步课程学习、跑跳滚翻全链、奖励防套利、GIF 验收 | 可用 |
 | [MuJoCo 仿真入门](./robot-arm/mujoco-arm-pick-place) | MJCF、物理仿真、Python 控制 | 可用 |
 | [DDPG InvertedPendulum](./robot-arm/ddpg-mujoco/invertedpendulum-v5) | 连续控制基础与 DDPG baseline | 可用 |
 | [DDPG Reacher](./robot-arm/ddpg-mujoco/reacher-v5) | 二维机械臂目标追踪 | 可用 |
@@ -53,7 +55,7 @@ displayed_sidebar: practicesOverviewSidebar
 | [π₀.₅ + RECAP：LIBERO 复现](./vla/recap) | 价值模型、优势标注、ACP、LIBERO 评估 | 可用 |
 | [Petoi Quaddle VLA 导航训练](./vla/quaddle/) | SmolVLA 微调、CPG 低层运控、temporal ensembling、任务分解 | 可用 |
 | [Sim2Sim 验证](./quadruped/sim2sim/placeholder) | 跨仿真策略验证 | 施工中 |
-| [两轮足 Flamingo · Isaac Lab](./wheel-legged/flamingo-isaaclab/preview) | 轮足平衡、强化学习训练与跨仿真验证 | 课程预告 |
+| [两轮足 Flamingo · Isaac Lab](./humanoid/flamingo-isaaclab/intro) | 8-DoF 轮足欠驱动平衡、PPO vs CaT、ONNX 导出与 MuJoCo Sim2Sim 压测 | 总览与 6 章可读 |
 
 ## 真机实战 \{#real-robots}
 

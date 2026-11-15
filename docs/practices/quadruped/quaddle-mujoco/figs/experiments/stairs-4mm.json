@@ -1,0 +1,155 @@
+{
+  "scene": {
+    "name": "stairs_up",
+    "label": "Up stairs / 4 mm x 3",
+    "slope_deg": 0.0,
+    "goal_m": 0.72,
+    "plane_z": 0.0,
+    "initial_height_m": 0.0,
+    "boxes": [
+      {
+        "name": "step_0",
+        "xmin": -0.3,
+        "xmax": 0.3,
+        "s0": 0.18,
+        "s1": 0.3,
+        "top": 0.004,
+        "bottom": -0.01,
+        "obstacle": false
+      },
+      {
+        "name": "step_1",
+        "xmin": -0.3,
+        "xmax": 0.3,
+        "s0": 0.3,
+        "s1": 0.42,
+        "top": 0.008,
+        "bottom": -0.01,
+        "obstacle": false
+      },
+      {
+        "name": "step_2",
+        "xmin": -0.3,
+        "xmax": 0.3,
+        "s0": 0.42,
+        "s1": 1.8,
+        "top": 0.012,
+        "bottom": -0.01,
+        "obstacle": false
+      }
+    ],
+    "water_depth_m": 0.0,
+    "seed": 7
+  },
+  "mode": "walk",
+  "initial_x_offset_m": 0.0,
+  "policy_sha256": {
+    "policy.zip": "8ff1f1fdb44e3e7ac6c64acd4b99c1077956a0172a8638526277f15d2a453400",
+    "obs_stats.npz": "b31ebd274cfe343cfd1397e9776e83c51f88f91b587c0f9771c29b1fd1b0820c",
+    "metadata.json": "8d04e55a33782e037ccb1359593b0e3e132c61a64326ba8953c90d5600bef248"
+  },
+  "passed": false,
+  "checks": {
+    "complete": true,
+    "finite": true,
+    "no_warnings": true,
+    "upright": true,
+    "body_clearance": true,
+    "no_body_contact": true,
+    "no_obstacle_contact": true,
+    "startup_pitch": true,
+    "loop_closure": true,
+    "torque_limit": true,
+    "joint_speed": true,
+    "forward_speed": false,
+    "task_goal": false,
+    "heading": false,
+    "force_accounting": true
+  },
+  "simulation_seconds": 22.000000000003904,
+  "commanded_seconds": 20.0,
+  "forward_m": 0.16453775351455902,
+  "average_forward_speed_m_s": 0.008226887675727951,
+  "final_position_m": [
+    0.17981535581989486,
+    -0.16118382359399555,
+    0.04688734309663356
+  ],
+  "goal_distance_xy_m": 0.5870341397241409,
+  "startup_max_abs_pitch_deg": 3.8568315694886475,
+  "min_upright_cosine": 0.8427634881982862,
+  "min_root_clearance_m": 0.0405136272590822,
+  "max_heading_deviation_deg": 32.34082469992308,
+  "body_contact_samples": 0,
+  "obstacle_contact_samples": 0,
+  "max_torque_Nm": 0.07056982926487242,
+  "max_driven_joint_speed_rad_s": 9.224233149093793,
+  "max_closure_error_m": 0.0010300795132103574,
+  "foot_contact_fraction": {
+    "left_front": 0.54625,
+    "right_front": 0.24825,
+    "right_back": 0.50325,
+    "left_back": 0.8955
+  },
+  "completed_flight_intervals_s": [],
+  "longest_flight_s": 0.001,
+  "controller_config": {
+    "name": "coordinated_crawl",
+    "joint_order": [
+      "left_front",
+      "right_front",
+      "right_back",
+      "left_back"
+    ],
+    "actuator_signs": [
+      1,
+      -1,
+      -1,
+      1
+    ],
+    "amplitude_rad": [
+      0.4049857989839647,
+      0.4049857989839647,
+      0.48095765454404177,
+      0.48095765454404177
+    ],
+    "bias_rad": [
+      -0.42075725226966854,
+      -0.42075725226966854,
+      -0.2219629667859576,
+      -0.2219629667859576
+    ],
+    "phase_rad": [
+      0.0,
+      3.141592653589793,
+      1.5707963267948966,
+      4.71238898038469
+    ],
+    "frequency_hz": 1.9355721346722734,
+    "waveform": "cosine_duty",
+    "sweep_fraction": 0.6232904419964411,
+    "harmonic": 0.0,
+    "control_hz": 100,
+    "settle_seconds": 2.0,
+    "startup_bias_rad": [
+      0.2,
+      0.2,
+      -0.4,
+      -0.4
+    ],
+    "startup_ramp_seconds": 0.05,
+    "ramp_seconds": 1.5,
+    "heading_kp": 0.1879347817835857,
+    "heading_kd": 0.03,
+    "lateral_kp": 2.0,
+    "steering_limit": 0.2,
+    "max_target_speed_rad_s": 8.0,
+    "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+  },
+  "route_xy_m": [],
+  "localization": "simulator ground truth",
+  "navigation": null,
+  "wall_seconds": 42.970747045008466,
+  "video": "video.mp4",
+  "fluid": null
+}

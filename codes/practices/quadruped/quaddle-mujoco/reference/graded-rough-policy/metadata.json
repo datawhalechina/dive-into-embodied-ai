@@ -1,0 +1,81 @@
+{
+  "environment_version": 2,
+  "observation_dim": 60,
+  "residual_scale_rad": 0.25,
+  "scene": "rough",
+  "level": 1,
+  "gamma": 0.999,
+  "seed": 42,
+  "total_steps": 16384,
+  "wall_seconds": 146.28278136253357,
+  "source_sha256": {
+    "practice_rl.py": "0fa60145f51ff9d355e1d34fd1b02440baefa337cd99b24bd4dfd7940413744d",
+    "train_practice.py": "8a3e7f3e8ea664efa9e9b3c17218309adb74a79926a785cd908a34c1f9097c96",
+    "curriculum_rl.py": "aed633cc05507ad7fca8deee7b18ac64bc887eb8c1d392e0a3d238266bbb3044",
+    "terrain_rl.py": "102193b2f4f9cf1bc9749e4aad3c4787082d59c45ddc1e4358827e629580b698",
+    "scenario_matrix.py": "f946fe7242fd923661ad02c273693db38840fdbdeac92f0195e73fde3d4f39a4",
+    "scenarios.py": "02c953047219c631f1a665c6879f76d64954e2cfec9511f9f56619d0c09b3e14",
+    "gait_controller.py": "560030737963731ccefa5f8b171ad0d280d96c4a27c7cbe8151e848b1c420f7e",
+    "gait.json": "409afe24c7a058242bfe972ff3c375db4ebaee98ec5eafdef52f7fc203244f01",
+    "models/scene.xml": "10d1990f12c2dc79b739b67203422ff8a0090a01e424dacf780b9a03d6015b83"
+  },
+  "hardware_tested": false,
+  "controller_config": {
+    "name": "coordinated_crawl",
+    "joint_order": [
+      "left_front",
+      "right_front",
+      "right_back",
+      "left_back"
+    ],
+    "actuator_signs": [
+      1,
+      -1,
+      -1,
+      1
+    ],
+    "amplitude_rad": [
+      0.4049857989839647,
+      0.4049857989839647,
+      0.48095765454404177,
+      0.48095765454404177
+    ],
+    "bias_rad": [
+      -0.42075725226966854,
+      -0.42075725226966854,
+      -0.2219629667859576,
+      -0.2219629667859576
+    ],
+    "phase_rad": [
+      0.0,
+      3.141592653589793,
+      1.5707963267948966,
+      4.71238898038469
+    ],
+    "frequency_hz": 1.9355721346722734,
+    "waveform": "cosine_duty",
+    "sweep_fraction": 0.6232904419964411,
+    "harmonic": 0.0,
+    "control_hz": 100,
+    "settle_seconds": 2.0,
+    "startup_bias_rad": [
+      0.2,
+      0.2,
+      -0.4,
+      -0.4
+    ],
+    "startup_ramp_seconds": 0.05,
+    "ramp_seconds": 1.5,
+    "heading_kp": 0.1879347817835857,
+    "heading_kd": 0.03,
+    "lateral_kp": 2.0,
+    "steering_limit": 0.2,
+    "max_target_speed_rad_s": 8.0,
+    "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+    "speed_feedback_gain": 0.0,
+    "speed_feedback_threshold": 8.0
+  },
+  "experiment_variant": "prior_policy",
+  "resume": "outputs/curriculum/rough_g999/level1_steps16384",
+  "new_training_steps": 0
+}

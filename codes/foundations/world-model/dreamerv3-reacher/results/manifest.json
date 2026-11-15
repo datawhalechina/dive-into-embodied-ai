@@ -1,0 +1,30 @@
+{
+  "task": "dmc_reacher_easy",
+  "training_seed": 0,
+  "source_commit": "e01491fad6434b2245a3b8ca201dd7faedcc458c",
+  "training_steps": [
+    100008,
+    100008,
+    300000
+  ],
+  "train_ratios": [
+    128,
+    1024,
+    1024
+  ],
+  "final_checkpoint": "20261111T011443F769513",
+  "video": {
+    "initial_index": 200,
+    "source_steps": 250,
+    "control_dt": 0.02,
+    "playback_speed": 0.5,
+    "size": [
+      1280,
+      800
+    ],
+    "replay_max_state_error": 3.4340613908057094e-07,
+    "actions": "recorded evaluation actions, unedited",
+    "sha256": "56429a77788de161b58feba6e23ef3b6c226202e08eca9d385bcb817cc93b294"
+  },
+  "scope": "One training seed; state observations; physics simulation only."
+}

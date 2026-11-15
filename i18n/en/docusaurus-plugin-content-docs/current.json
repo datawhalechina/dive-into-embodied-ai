@@ -24,8 +24,20 @@
   "sidebar.practicesOverviewSidebar.link.玩转 Pupper 四足机器人": {
     "message": "Explore the Pupper quadruped"
   },
+  "sidebar.practicesOverviewSidebar.link.机械臂系列": {
+    "message": "Robot arm series"
+  },
+  "sidebar.practicesOverviewSidebar.link.四足系列": {
+    "message": "Quadruped series"
+  },
+  "sidebar.practicesOverviewSidebar.link.双足系列": {
+    "message": "Biped series"
+  },
   "sidebar.practicesOverviewSidebar.link.从零到一搭建四足机器人": {
     "message": "Build a quadruped from scratch"
+  },
+  "sidebar.practicesOverviewSidebar.link.MicroDuck RL：教小黄鸭学会一个动作": {
+    "message": "MicroDuck RL: teach a biped duck one skill"
   },
   "sidebar.practicesOverviewSidebar.link.MicroDuck RL：走路、起身和翻滚": {
     "message": "MicroDuck RL: walking, standing up, and rolling"
@@ -57,13 +69,70 @@
   "sidebar.practicesOverviewSidebar.link.Sim2Real 指南": {
     "message": "Sim2Real guide"
   },
+  "sidebar.practicesQuadrupedSidebar.link.← 项目实战": {
+    "message": "← Projects"
+  },
+  "sidebar.practicesQuadrupedSidebar.category.四足系列": {
+    "message": "Quadruped series"
+  },
+  "sidebar.practicesQuadrupedSidebar.link.从零到一搭建四足机器人": {
+    "message": "Build a quadruped from scratch"
+  },
+  "sidebar.practicesQuadrupedSidebar.category.Petoi Quaddle 四足步行仿真": {
+    "message": "Petoi Quaddle walking simulation"
+  },
+  "sidebar.practicesQuadrupedSidebar.link.玩转 Pupper 四足机器人（AMD）": {
+    "message": "Explore the Pupper quadruped (AMD)"
+  },
   "sidebar.practicesCs123CourseSidebar.link.← 项目实战": {
     "message": "← Projects"
   },
   "sidebar.practicesLerobotCourseSidebar.link.← 项目实战": {
     "message": "← Projects"
   },
-  "sidebar.practicesFlamingoCourseSidebar.link.← 项目实战": {
+  "sidebar.practicesFlamingoCourseSidebar.link.← 双足系列": {
+    "message": "← Biped series"
+  },
+  "sidebar.practicesFlamingoCourseSidebar.category.两轮足 Flamingo · Isaac Lab": {
+    "message": "Flamingo wheeled biped · Isaac Lab"
+  },
+  "sidebar.practicesRobotArmSidebar.link.← 项目实战": {
     "message": "← Projects"
+  },
+  "sidebar.practicesRobotArmSidebar.category.机械臂系列": {
+    "message": "Robot arm series"
+  },
+  "sidebar.practicesRobotArmSidebar.category.MuJoCo 与连续控制": {
+    "message": "MuJoCo and continuous control"
+  },
+  "sidebar.practicesRobotArmSidebar.category.模仿学习与 VLA 操作": {
+    "message": "Imitation learning and VLA manipulation"
+  },
+  "sidebar.practicesRobotArmSidebar.link.ACT 双臂操作训练（AMD）": {
+    "message": "ACT bimanual training (AMD)"
+  },
+  "sidebar.practicesRobotArmSidebar.category.数据工程与真机部署": {
+    "message": "Data engineering and real robots"
+  },
+  "sidebar.practicesRobotArmSidebar.link.LeRobot 中文课程讲义": {
+    "message": "LeRobot course notes in Chinese"
+  },
+  "sidebar.practicesRobotArmSidebar.link.SO-101 + LeRobot 真机教程": {
+    "message": "SO-101 + LeRobot hardware tutorial"
+  },
+  "sidebar.practicesHumanoidSidebar.link.← 项目实战": {
+    "message": "← Projects"
+  },
+  "sidebar.practicesHumanoidSidebar.category.双足系列": {
+    "message": "Biped series"
+  },
+  "sidebar.practicesHumanoidSidebar.link.两轮足 Flamingo · Isaac Lab": {
+    "message": "Flamingo wheeled biped · Isaac Lab"
+  },
+  "sidebar.practicesHumanoidSidebar.category.MicroDuck 双足强化学习": {
+    "message": "MicroDuck biped reinforcement learning"
+  },
+  "sidebar.practicesHumanoidSidebar.link.MicroDuck RL（AMD）": {
+    "message": "MicroDuck RL (AMD)"
   }
 }

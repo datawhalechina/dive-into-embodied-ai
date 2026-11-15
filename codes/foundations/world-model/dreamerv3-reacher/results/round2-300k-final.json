@@ -1,0 +1,182 @@
+[
+  {
+    "mode": "random",
+    "env_index": 200,
+    "environment_seed": 704613630,
+    "return": 0.0,
+    "steps": 1000,
+    "target_occupancy": 0.0,
+    "last_100_target_occupancy": 0.0
+  },
+  {
+    "mode": "random",
+    "env_index": 201,
+    "environment_seed": 1232894185,
+    "return": 0.0,
+    "steps": 1000,
+    "target_occupancy": 0.0,
+    "last_100_target_occupancy": 0.0
+  },
+  {
+    "mode": "random",
+    "env_index": 202,
+    "environment_seed": 3490877006,
+    "return": 0.0,
+    "steps": 1000,
+    "target_occupancy": 0.0,
+    "last_100_target_occupancy": 0.0
+  },
+  {
+    "mode": "random",
+    "env_index": 203,
+    "environment_seed": 4019157561,
+    "return": 4.0,
+    "steps": 1000,
+    "target_occupancy": 0.004,
+    "last_100_target_occupancy": 0.04
+  },
+  {
+    "mode": "random",
+    "env_index": 204,
+    "environment_seed": 858761820,
+    "return": 0.0,
+    "steps": 1000,
+    "target_occupancy": 0.0,
+    "last_100_target_occupancy": 0.0
+  },
+  {
+    "mode": "random",
+    "env_index": 205,
+    "environment_seed": 1993333375,
+    "return": 0.0,
+    "steps": 1000,
+    "target_occupancy": 0.0,
+    "last_100_target_occupancy": 0.0
+  },
+  {
+    "mode": "random",
+    "env_index": 206,
+    "environment_seed": 2521613929,
+    "return": 109.0,
+    "steps": 1000,
+    "target_occupancy": 0.109,
+    "last_100_target_occupancy": 0.0
+  },
+  {
+    "mode": "random",
+    "env_index": 207,
+    "environment_seed": 484629456,
+    "return": 0.0,
+    "steps": 1000,
+    "target_occupancy": 0.0,
+    "last_100_target_occupancy": 0.0
+  },
+  {
+    "mode": "random",
+    "env_index": 208,
+    "environment_seed": 1012910010,
+    "return": 4.0,
+    "steps": 1000,
+    "target_occupancy": 0.004,
+    "last_100_target_occupancy": 0.0
+  },
+  {
+    "mode": "random",
+    "env_index": 209,
+    "environment_seed": 2147481565,
+    "return": 0.0,
+    "steps": 1000,
+    "target_occupancy": 0.0,
+    "last_100_target_occupancy": 0.0
+  },
+  {
+    "mode": "dreamer",
+    "env_index": 200,
+    "environment_seed": 704613630,
+    "return": 968.0,
+    "steps": 1000,
+    "target_occupancy": 0.968,
+    "last_100_target_occupancy": 1.0
+  },
+  {
+    "mode": "dreamer",
+    "env_index": 201,
+    "environment_seed": 1232894185,
+    "return": 969.0,
+    "steps": 1000,
+    "target_occupancy": 0.969,
+    "last_100_target_occupancy": 1.0
+  },
+  {
+    "mode": "dreamer",
+    "env_index": 202,
+    "environment_seed": 3490877006,
+    "return": 980.0,
+    "steps": 1000,
+    "target_occupancy": 0.98,
+    "last_100_target_occupancy": 1.0
+  },
+  {
+    "mode": "dreamer",
+    "env_index": 203,
+    "environment_seed": 4019157561,
+    "return": 990.0,
+    "steps": 1000,
+    "target_occupancy": 0.99,
+    "last_100_target_occupancy": 1.0
+  },
+  {
+    "mode": "dreamer",
+    "env_index": 204,
+    "environment_seed": 858761820,
+    "return": 967.0,
+    "steps": 1000,
+    "target_occupancy": 0.967,
+    "last_100_target_occupancy": 1.0
+  },
+  {
+    "mode": "dreamer",
+    "env_index": 205,
+    "environment_seed": 1993333375,
+    "return": 975.0,
+    "steps": 1000,
+    "target_occupancy": 0.975,
+    "last_100_target_occupancy": 1.0
+  },
+  {
+    "mode": "dreamer",
+    "env_index": 206,
+    "environment_seed": 2521613929,
+    "return": 919.0,
+    "steps": 1000,
+    "target_occupancy": 0.919,
+    "last_100_target_occupancy": 0.93
+  },
+  {
+    "mode": "dreamer",
+    "env_index": 207,
+    "environment_seed": 484629456,
+    "return": 968.0,
+    "steps": 1000,
+    "target_occupancy": 0.968,
+    "last_100_target_occupancy": 1.0
+  },
+  {
+    "mode": "dreamer",
+    "env_index": 208,
+    "environment_seed": 1012910010,
+    "return": 961.0,
+    "steps": 1000,
+    "target_occupancy": 0.961,
+    "last_100_target_occupancy": 1.0
+  },
+  {
+    "mode": "dreamer",
+    "env_index": 209,
+    "environment_seed": 2147481565,
+    "return": 851.0,
+    "steps": 1000,
+    "target_occupancy": 0.851,
+    "last_100_target_occupancy": 0.91
+  }
+]

@@ -1,0 +1,71 @@
+--- /tmp/logger_orig.py	2026-10-26 17:12:40.657581021 +0800
++++ /tmp/logger_patched.py	2026-10-26 17:13:10.529877295 +0800
+@@ -46,6 +46,12 @@
+         self.ep_extras = []
+         self.rewbuffer = deque(maxlen=100)
+         self.lenbuffer = deque(maxlen=100)
++        # PERF (microduck 2026-10-26): defer D2H pulls to log() to avoid per-step sync
++        self._pending_done_rew: list = []
++        self._pending_done_len: list = []
++        self._pending_done_mask: list = []
++        self._pending_erew: list = []
++        self._pending_irew: list = []
+         self.cur_reward_sum = torch.zeros(self.num_envs, dtype=torch.float, device=self.device)
+         self.cur_episode_length = torch.zeros(self.num_envs, dtype=torch.float, device=self.device)
+ 
+@@ -118,16 +124,23 @@
+             self.cur_episode_length += 1
+ 
+             # Clear data for completed episodes
+-            new_ids = (dones > 0).nonzero(as_tuple=False)
+-            self.rewbuffer.extend(self.cur_reward_sum[new_ids][:, 0].cpu().numpy().tolist())
+-            self.lenbuffer.extend(self.cur_episode_length[new_ids][:, 0].cpu().numpy().tolist())
+-            self.cur_reward_sum[new_ids] = 0
+-            self.cur_episode_length[new_ids] = 0
++            # PERF (microduck 2026-10-26): nonzero() + .cpu() forces a GPU sync
++            # every step. Instead stash GPU-side tensors and flush once per
++            # iteration in log(). Same values, zero per-step synchronization.
++            dmask = (dones > 0).to(self.cur_reward_sum.dtype).reshape(-1)
++            rew_vec = self.cur_reward_sum.reshape(-1) * dmask
++            len_vec = self.cur_episode_length.reshape(-1).to(torch.float32) * dmask
++            self._pending_done_mask.append(dmask)
++            self._pending_done_rew.append(rew_vec)
++            self._pending_done_len.append(len_vec)
++            keep = 1.0 - dmask
++            self.cur_reward_sum *= keep
++            self.cur_episode_length *= keep
+             if intrinsic_rewards is not None:
+-                self.erewbuffer.extend(self.cur_ereward_sum[new_ids][:, 0].cpu().numpy().tolist())
+-                self.irewbuffer.extend(self.cur_ireward_sum[new_ids][:, 0].cpu().numpy().tolist())
+-                self.cur_ereward_sum[new_ids] = 0
+-                self.cur_ireward_sum[new_ids] = 0
++                self._pending_erew.append(self.cur_ereward_sum.reshape(-1) * dmask)
++                self._pending_irew.append(self.cur_ireward_sum.reshape(-1) * dmask)
++                self.cur_ereward_sum *= keep
++                self.cur_ireward_sum *= keep
+ 
+     def log(
+         self,
+@@ -148,6 +161,22 @@
+ 
+         If videos are available, they are uploaded to the logging service (W&B) as well.
+         """
++        # PERF (microduck 2026-10-26): single D2H flush per iteration
++        if self._pending_done_rew:
++            masks = torch.stack(self._pending_done_mask)
++            rews = torch.stack(self._pending_done_rew)[masks > 0]
++            lens = torch.stack(self._pending_done_len)[masks > 0]
++            if rews.numel() > 0:
++                self.rewbuffer.extend(rews.cpu().tolist())
++                self.lenbuffer.extend(lens.cpu().tolist())
++            self._pending_done_rew.clear(); self._pending_done_len.clear(); self._pending_done_mask.clear()
++            if self._pending_erew:
++                erews = torch.stack(self._pending_erew)[masks > 0]
++                irews = torch.stack(self._pending_irew)[masks > 0]
++                if erews.numel() > 0:
++                    self.erewbuffer.extend(erews.cpu().tolist())
++                    self.irewbuffer.extend(irews.cpu().tolist())
++                self._pending_erew.clear(); self._pending_irew.clear()
+         if self.writer is not None:
+             collection_size = self.cfg["num_steps_per_env"] * self.num_envs * self.gpu_world_size
+             iteration_time = collect_time + learn_time

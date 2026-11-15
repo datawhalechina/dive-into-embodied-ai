@@ -46,6 +46,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const pages = [
   'build/docs/introduction/intro.html', 'build/en/docs/introduction/intro.html',
   'build/en/docs/foundations/controllers/intro.html',
+  'build/docs/foundations/rl-for-robotics/mdp.html',
+  'build/en/docs/foundations/rl-for-robotics/mdp.html',
 ];
 for (const file of pages) {
   const document = domino.createDocument(fs.readFileSync(path.join(root, file), 'utf8'));
@@ -55,5 +57,12 @@ for (const file of pages) {
   assert(result.includes('# '), `${file}: missing heading`);
   assert(!result.includes('Markdown 选项') && !result.includes('Markdown options'), `${file}: included copy controls`);
   if (file.includes('controllers')) assert(result.includes('This page is currently available in Chinese.'));
+  if (file.endsWith('/mdp.html')) {
+    // Explanations must remain available when copied while their panels are closed.
+    assert(surface.querySelector('details:not([open])'), `${file}: missing collapsed explanation`);
+    assert(result.includes(surface.querySelector('summary').textContent), `${file}: missing explanation title`);
+    assert(result.includes('G_t &= R_{t+1}'), `${file}: missing expanded derivation in Markdown`);
+    assert(result.includes('0.5\\times2+0.5\\times6=4'), `${file}: missing explanation example`);
+  }
 }
 console.log('Markdown export checks passed (formatting, code, math, links, page chrome, locales, and live DOM preservation).');

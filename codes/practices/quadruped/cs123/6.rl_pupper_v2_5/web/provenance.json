@@ -1,0 +1,14 @@
+{
+  "checkpoint": "codes/practices/quadruped/cs123/6.rl_pupper_v2_5/reports/raw/checkpoints/pupper_ppo_8000000_steps.zip",
+  "checkpointSha256": "f8dff2c476565d6c7f3ec1809f199f0838e5756eebb32618e70bc272cec6b79e",
+  "environmentSha256": "9a405d45a34c41c5896203b2db0d45ff93c3d81e67a815393d9e94112f3c9708",
+  "policySha256": "09818360675b878fb4b6e87551ab56992a32ee01d467de8ba57e14e1b1b9a536",
+  "maxActionError": 1.5497207641601562e-06,
+  "verificationSamples": 256,
+  "onnx": "1.23.2",
+  "onnxruntime": "1.31.1",
+  "torch": "2.13.0",
+  "observationSize": 53,
+  "gait": "trot",
+  "note": "Deterministic clipped SB3 actor; no observation normalization is used by this training pipeline."
+}

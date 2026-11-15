@@ -1,0 +1,1435 @@
+{
+  "date": "2026-11-09",
+  "hardware_tested": false,
+  "thresholds_changed": false,
+  "stairs_training": {
+    "scene": "stairs_up",
+    "gamma": 0.999,
+    "seed": 42,
+    "best_checkpoint": "outputs/other_tasks/stairs_curriculum/level1_steps32768",
+    "history": [
+      {
+        "checkpoint": "outputs/other_tasks/stairs_curriculum/level1_steps16384",
+        "level": 1,
+        "steps": 16384,
+        "passed": 3,
+        "trials": 4,
+        "selection_score": [
+          1,
+          3,
+          3,
+          1.4722141264595592
+        ]
+      },
+      {
+        "checkpoint": "outputs/other_tasks/stairs_curriculum/level1_steps32768",
+        "level": 1,
+        "steps": 32768,
+        "passed": 3,
+        "trials": 4,
+        "selection_score": [
+          1,
+          3,
+          3,
+          1.5568144493994287
+        ]
+      }
+    ],
+    "wall_seconds": 438.147563457489,
+    "completed_level": 0,
+    "status": "pilot_budget_exhausted_without_gate_pass"
+  },
+  "stairs_original": [
+    {
+      "checkpoint": "outputs/other_tasks/stairs_curriculum/level1_steps16384",
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": false,
+          "forward_speed": false,
+          "task_goal": false,
+          "heading": false,
+          "force_accounting": true
+        },
+        "forward_m": 0.18720881549390675,
+        "average_forward_speed_m_s": 0.009360440774695337,
+        "max_heading_deviation_deg": 101.90193945295785,
+        "max_driven_joint_speed_rad_s": 10.929348323203682,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "checkpoint": "outputs/other_tasks/stairs_curriculum/level1_steps32768",
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": false,
+          "task_goal": false,
+          "heading": false,
+          "force_accounting": true
+        },
+        "forward_m": 0.16453775351455902,
+        "average_forward_speed_m_s": 0.008226887675727951,
+        "max_heading_deviation_deg": 32.34082469992308,
+        "max_driven_joint_speed_rad_s": 9.224233149093793,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    }
+  ],
+  "stairs_baseline": [
+    {
+      "level": 1,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.3603873490668832,
+        "average_forward_speed_m_s": 0.06801936745334417,
+        "max_heading_deviation_deg": 19.83857022109161,
+        "max_driven_joint_speed_rad_s": 9.336477465548816,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "level": 2,
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": false,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": false,
+          "force_accounting": true
+        },
+        "forward_m": 1.2238710596481739,
+        "average_forward_speed_m_s": 0.061193552982408694,
+        "max_heading_deviation_deg": 27.50290039455807,
+        "max_driven_joint_speed_rad_s": 10.091687399137284,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "level": 3,
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": false,
+          "body_clearance": true,
+          "no_body_contact": false,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": false,
+          "forward_speed": false,
+          "task_goal": false,
+          "heading": false,
+          "force_accounting": true
+        },
+        "forward_m": -0.05015434425882674,
+        "average_forward_speed_m_s": -0.002507717212941337,
+        "max_heading_deviation_deg": 179.4604288535507,
+        "max_driven_joint_speed_rad_s": 11.029295157668681,
+        "body_contact_samples": 26,
+        "completed_flight_intervals_s": []
+      }
+    }
+  ],
+  "walking_rechecks": [
+    {
+      "scene": "flat",
+      "offset_m": -0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.4251470121396361,
+        "average_forward_speed_m_s": 0.07125735060698181,
+        "max_heading_deviation_deg": 6.8151783769626215,
+        "max_driven_joint_speed_rad_s": 8.928888972865302,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "flat",
+      "offset_m": 0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.4278739726525933,
+        "average_forward_speed_m_s": 0.07139369863262966,
+        "max_heading_deviation_deg": 7.884883029729506,
+        "max_driven_joint_speed_rad_s": 8.928888972865005,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "uphill3",
+      "offset_m": -0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.1716390846411315,
+        "average_forward_speed_m_s": 0.058581954232056574,
+        "max_heading_deviation_deg": 11.802050042768098,
+        "max_driven_joint_speed_rad_s": 9.171603596043724,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "uphill3",
+      "offset_m": 0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.1707253890870912,
+        "average_forward_speed_m_s": 0.05853626945435456,
+        "max_heading_deviation_deg": 11.802050039343781,
+        "max_driven_joint_speed_rad_s": 8.952393805417676,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "uphill5",
+      "offset_m": -0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.0728990989733511,
+        "average_forward_speed_m_s": 0.053644954948667556,
+        "max_heading_deviation_deg": 11.810286459943587,
+        "max_driven_joint_speed_rad_s": 8.450987504658043,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "uphill5",
+      "offset_m": 0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.0751235863674113,
+        "average_forward_speed_m_s": 0.05375617931837057,
+        "max_heading_deviation_deg": 11.810287168507475,
+        "max_driven_joint_speed_rad_s": 8.336363527615756,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "downhill3",
+      "offset_m": -0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.9593920192601225,
+        "average_forward_speed_m_s": 0.04796960096300613,
+        "max_heading_deviation_deg": 8.900168716229475,
+        "max_driven_joint_speed_rad_s": 9.059408911833522,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "downhill3",
+      "offset_m": 0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.9640142793811483,
+        "average_forward_speed_m_s": 0.04820071396905741,
+        "max_heading_deviation_deg": 8.919255769998673,
+        "max_driven_joint_speed_rad_s": 9.059408911833248,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "stairs_down",
+      "offset_m": -0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.7573426236888048,
+        "average_forward_speed_m_s": 0.03786713118444024,
+        "max_heading_deviation_deg": 16.55207818799833,
+        "max_driven_joint_speed_rad_s": 8.922956107320712,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "stairs_down",
+      "offset_m": 0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.7781256888998039,
+        "average_forward_speed_m_s": 0.0389062844449902,
+        "max_heading_deviation_deg": 9.951990633779566,
+        "max_driven_joint_speed_rad_s": 8.922956107321133,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "avoid",
+      "offset_m": -0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.9697341121981016,
+        "average_forward_speed_m_s": 0.048486705609905076,
+        "max_heading_deviation_deg": 35.90109972353135,
+        "max_driven_joint_speed_rad_s": 9.734204185895955,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "avoid",
+      "offset_m": 0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.9896782982475042,
+        "average_forward_speed_m_s": 0.04948391491237521,
+        "max_heading_deviation_deg": 38.329607705566225,
+        "max_driven_joint_speed_rad_s": 9.816763593016658,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "water",
+      "offset_m": -0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "entered_water": true,
+          "drag_dissipative": true,
+          "body_above_water": true
+        },
+        "forward_m": 1.3969129938760658,
+        "average_forward_speed_m_s": 0.06984564969380329,
+        "max_heading_deviation_deg": 22.659211053040032,
+        "max_driven_joint_speed_rad_s": 8.552824791442596,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    },
+    {
+      "scene": "water",
+      "offset_m": 0.005,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "entered_water": true,
+          "drag_dissipative": true,
+          "body_above_water": true
+        },
+        "forward_m": 1.3955850505000482,
+        "average_forward_speed_m_s": 0.06977925252500242,
+        "max_heading_deviation_deg": 22.659211053035065,
+        "max_driven_joint_speed_rad_s": 8.552824791442603,
+        "body_contact_samples": 0,
+        "completed_flight_intervals_s": []
+      }
+    }
+  ],
+  "running_search": {
+    "seed": 20261110,
+    "algorithm": "CEM",
+    "best_label": "g1_5",
+    "results": [
+      {
+        "label": "g0_0",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": true
+          },
+          "forward_m": 1.358467704434162,
+          "average_forward_speed_m_s": 0.0679233852217081,
+          "max_heading_deviation_deg": 12.851818757499672,
+          "max_driven_joint_speed_rad_s": 10.842696777616736,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": [
+            0.012000000000000004,
+            0.013000000000000005,
+            0.010000000000000002,
+            0.014000000000000005,
+            0.010000000000000002
+          ]
+        }
+      },
+      {
+        "label": "g0_1",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": false,
+            "task_goal": false,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 0.5360804482572284,
+          "average_forward_speed_m_s": 0.026804022412861422,
+          "max_heading_deviation_deg": 179.99779930359082,
+          "max_driven_joint_speed_rad_s": 10.500514544118511,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": []
+        }
+      },
+      {
+        "label": "g0_2",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": false,
+            "body_clearance": true,
+            "no_body_contact": false,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": true,
+            "forward_speed": true,
+            "task_goal": false,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 0.6640269663006035,
+          "average_forward_speed_m_s": 0.033201348315030174,
+          "max_heading_deviation_deg": 28.64626209716357,
+          "max_driven_joint_speed_rad_s": 9.136356970383192,
+          "body_contact_samples": 395,
+          "completed_flight_intervals_s": [
+            0.011000000000000003
+          ]
+        }
+      },
+      {
+        "label": "g0_3",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": true,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 1.2153142194584148,
+          "average_forward_speed_m_s": 0.06076571097292074,
+          "max_heading_deviation_deg": 13.052825847099436,
+          "max_driven_joint_speed_rad_s": 9.871920199894419,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": []
+        }
+      },
+      {
+        "label": "g0_4",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": false,
+            "body_clearance": false,
+            "no_body_contact": false,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": true,
+            "forward_speed": false,
+            "task_goal": false,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 0.08007647858017865,
+          "average_forward_speed_m_s": 0.004003823929008932,
+          "max_heading_deviation_deg": 40.298417573864384,
+          "max_driven_joint_speed_rad_s": 8.748133801742933,
+          "body_contact_samples": 3585,
+          "completed_flight_intervals_s": []
+        }
+      },
+      {
+        "label": "g0_5",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": true,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 1.1899009488452819,
+          "average_forward_speed_m_s": 0.059495047442264096,
+          "max_heading_deviation_deg": 26.19621556267681,
+          "max_driven_joint_speed_rad_s": 8.91703968496294,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": []
+        }
+      },
+      {
+        "label": "g0_6",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": false,
+            "body_clearance": false,
+            "no_body_contact": false,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": false,
+            "task_goal": false,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 0.15063935405003032,
+          "average_forward_speed_m_s": 0.007531967702501516,
+          "max_heading_deviation_deg": 50.013506884964855,
+          "max_driven_joint_speed_rad_s": 10.006629628281505,
+          "body_contact_samples": 3124,
+          "completed_flight_intervals_s": []
+        }
+      },
+      {
+        "label": "g0_7",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": false,
+            "body_clearance": false,
+            "no_body_contact": false,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": false,
+            "task_goal": false,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": true
+          },
+          "forward_m": 0.10915176531068732,
+          "average_forward_speed_m_s": 0.005457588265534366,
+          "max_heading_deviation_deg": 73.46881748837248,
+          "max_driven_joint_speed_rad_s": 11.109371447486883,
+          "body_contact_samples": 2319,
+          "completed_flight_intervals_s": [
+            0.010000000000000002,
+            0.010000000000000002,
+            0.014000000000000005,
+            0.017000000000000008,
+            0.010000000000000002,
+            0.012000000000000004
+          ]
+        }
+      },
+      {
+        "label": "g1_0",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 1.3389990196033457,
+          "average_forward_speed_m_s": 0.06694995098016729,
+          "max_heading_deviation_deg": 17.620766340250857,
+          "max_driven_joint_speed_rad_s": 10.09002511762255,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": [
+            0.012000000000000004
+          ]
+        }
+      },
+      {
+        "label": "g1_1",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": false,
+            "body_clearance": true,
+            "no_body_contact": false,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": true,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 1.4029832802614906,
+          "average_forward_speed_m_s": 0.07014916401307453,
+          "max_heading_deviation_deg": 31.894674766461932,
+          "max_driven_joint_speed_rad_s": 9.43230964321797,
+          "body_contact_samples": 74,
+          "completed_flight_intervals_s": [
+            0.014000000000000005
+          ]
+        }
+      },
+      {
+        "label": "g1_2",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": false,
+            "body_clearance": true,
+            "no_body_contact": false,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": true,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 0.7951473990524371,
+          "average_forward_speed_m_s": 0.03975736995262186,
+          "max_heading_deviation_deg": 19.570484050428657,
+          "max_driven_joint_speed_rad_s": 9.595236136660128,
+          "body_contact_samples": 351,
+          "completed_flight_intervals_s": []
+        }
+      },
+      {
+        "label": "g1_3",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 1.3692328066063157,
+          "average_forward_speed_m_s": 0.06846164033031579,
+          "max_heading_deviation_deg": 27.44544216592398,
+          "max_driven_joint_speed_rad_s": 10.512524978882194,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": [
+            0.011000000000000003
+          ]
+        }
+      },
+      {
+        "label": "g1_4",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": false,
+            "task_goal": false,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 0.13963529754562853,
+          "average_forward_speed_m_s": 0.006981764877281427,
+          "max_heading_deviation_deg": 179.82502075971902,
+          "max_driven_joint_speed_rad_s": 10.412095965611655,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": []
+        }
+      },
+      {
+        "label": "g1_5",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": true
+          },
+          "forward_m": 0.9123190214693956,
+          "average_forward_speed_m_s": 0.04561595107346978,
+          "max_heading_deviation_deg": 9.293362874667286,
+          "max_driven_joint_speed_rad_s": 10.357515892278132,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": [
+            0.010000000000000002,
+            0.013000000000000005,
+            0.014000000000000005,
+            0.016000000000000007,
+            0.010000000000000002,
+            0.013000000000000005,
+            0.010000000000000002,
+            0.013000000000000005,
+            0.011000000000000003,
+            0.011000000000000003,
+            0.011000000000000003,
+            0.012000000000000004,
+            0.010000000000000002,
+            0.012000000000000004
+          ]
+        }
+      },
+      {
+        "label": "g1_6",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": false,
+            "body_clearance": true,
+            "no_body_contact": false,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": true,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 1.5199191232978226,
+          "average_forward_speed_m_s": 0.07599595616489113,
+          "max_heading_deviation_deg": 13.373093881651997,
+          "max_driven_joint_speed_rad_s": 9.74736730236779,
+          "body_contact_samples": 32,
+          "completed_flight_intervals_s": []
+        }
+      },
+      {
+        "label": "g1_7",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": false,
+            "body_clearance": true,
+            "no_body_contact": false,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": false,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 1.7869897056814381,
+          "average_forward_speed_m_s": 0.08934948528407191,
+          "max_heading_deviation_deg": 10.854990123426672,
+          "max_driven_joint_speed_rad_s": 10.767619046405356,
+          "body_contact_samples": 39,
+          "completed_flight_intervals_s": [
+            0.010000000000000002
+          ]
+        }
+      },
+      {
+        "label": "g2_0",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": true
+          },
+          "forward_m": 1.1680702996668935,
+          "average_forward_speed_m_s": 0.05840351498334467,
+          "max_heading_deviation_deg": 11.973258086288807,
+          "max_driven_joint_speed_rad_s": 10.649921553363706,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": [
+            0.013000000000000005,
+            0.011000000000000003,
+            0.011000000000000003,
+            0.013000000000000005,
+            0.010000000000000002,
+            0.013000000000000005,
+            0.012000000000000004,
+            0.015000000000000006
+          ]
+        }
+      },
+      {
+        "label": "g2_1",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": false,
+            "body_clearance": true,
+            "no_body_contact": false,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": false,
+            "torque_limit": true,
+            "joint_speed": true,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": true
+          },
+          "forward_m": 0.7883722695239633,
+          "average_forward_speed_m_s": 0.03941861347619817,
+          "max_heading_deviation_deg": 20.70437787152435,
+          "max_driven_joint_speed_rad_s": 9.705331639395752,
+          "body_contact_samples": 229,
+          "completed_flight_intervals_s": [
+            0.017000000000000008,
+            0.014000000000000005,
+            0.010000000000000002,
+            0.015000000000000006,
+            0.012000000000000004,
+            0.025000000000000015,
+            0.012000000000000004
+          ]
+        }
+      },
+      {
+        "label": "g2_2",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": false,
+            "body_clearance": false,
+            "no_body_contact": false,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": false,
+            "task_goal": false,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 0.14821350065644393,
+          "average_forward_speed_m_s": 0.007410675032822197,
+          "max_heading_deviation_deg": 69.80269426726449,
+          "max_driven_joint_speed_rad_s": 10.4469315689446,
+          "body_contact_samples": 2193,
+          "completed_flight_intervals_s": [
+            0.011000000000000003
+          ]
+        }
+      },
+      {
+        "label": "g2_3",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": true,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 1.329261855334928,
+          "average_forward_speed_m_s": 0.0664630927667464,
+          "max_heading_deviation_deg": 23.2796979954076,
+          "max_driven_joint_speed_rad_s": 9.719212684417982,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": []
+        }
+      },
+      {
+        "label": "g2_4",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": false,
+            "task_goal": false,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": -0.3386539294639321,
+          "average_forward_speed_m_s": -0.016932696473196604,
+          "max_heading_deviation_deg": 179.99484646908726,
+          "max_driven_joint_speed_rad_s": 10.899258849902617,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": []
+        }
+      },
+      {
+        "label": "g2_5",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": true,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 1.1524614436080878,
+          "average_forward_speed_m_s": 0.05762307218040439,
+          "max_heading_deviation_deg": 14.627431608196117,
+          "max_driven_joint_speed_rad_s": 9.63311898249052,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": []
+        }
+      },
+      {
+        "label": "g2_6",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": false,
+            "body_clearance": true,
+            "no_body_contact": false,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": false,
+            "forward_speed": true,
+            "task_goal": true,
+            "heading": true,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": true
+          },
+          "forward_m": 1.6317357486854212,
+          "average_forward_speed_m_s": 0.08158678743427106,
+          "max_heading_deviation_deg": 16.988050026181952,
+          "max_driven_joint_speed_rad_s": 10.083507060907811,
+          "body_contact_samples": 34,
+          "completed_flight_intervals_s": [
+            0.022000000000000013,
+            0.022000000000000013,
+            0.022000000000000013,
+            0.022000000000000013,
+            0.017000000000000008,
+            0.017000000000000008,
+            0.010000000000000002
+          ]
+        }
+      },
+      {
+        "label": "g2_7",
+        "result": {
+          "passed": false,
+          "checks": {
+            "complete": true,
+            "finite": true,
+            "no_warnings": true,
+            "upright": true,
+            "body_clearance": true,
+            "no_body_contact": true,
+            "no_obstacle_contact": true,
+            "startup_pitch": true,
+            "loop_closure": true,
+            "torque_limit": true,
+            "joint_speed": true,
+            "forward_speed": false,
+            "task_goal": false,
+            "heading": false,
+            "force_accounting": true,
+            "running_speed": false,
+            "repeated_flight": false
+          },
+          "forward_m": 0.4547142976371928,
+          "average_forward_speed_m_s": 0.022735714881859638,
+          "max_heading_deviation_deg": 36.989685959762475,
+          "max_driven_joint_speed_rad_s": 9.931905768606729,
+          "body_contact_samples": 0,
+          "completed_flight_intervals_s": []
+        }
+      }
+    ]
+  }
+}

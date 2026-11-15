@@ -155,10 +155,14 @@ a {text-underline-offset: .2em;}
 /* Reading surfaces: quiet navigation, generous type, and restrained separators. */
 :root {--site-doc-reading-width: 860px;}
 .theme-doc-markdown {max-width: var(--site-doc-reading-width); color: var(--site-ink);}
-/* Keep the reading group near the chapter sidebar instead of centering it in all remaining space. */
+/* Center all three reading columns together, keeping navigation near the text. */
 @media (min-width: 997px) {
+  .docs-doc-page div:has(> .theme-doc-sidebar-container) {
+    max-width: calc(var(--doc-sidebar-width) + var(--site-doc-reading-width) + 20.5rem);
+    margin-inline: auto;
+  }
   .docs-doc-page main > .container {
-    margin-inline: 0;
+    margin-inline: auto;
     padding-inline: 2rem;
   }
   .site-doc-layout > .row {
@@ -196,13 +200,18 @@ a {text-underline-offset: .2em;}
 .theme-doc-markdown.markdown h3 {font-size: 1.35rem; line-height: 1.5; margin-top: 2rem;}
 .theme-doc-markdown.markdown a:not(.hash-link) {font-weight: 500; text-decoration: underline; text-decoration-thickness: .06em;}
 .theme-doc-markdown.markdown blockquote {margin: 1.5rem 0; padding: 1rem 1.25rem; color: var(--site-muted); border-left: 3px solid var(--site-blue); border-radius: 0 12px 12px 0; background: var(--site-canvas);}
-.theme-doc-markdown.markdown table {border: 1px solid var(--site-border); border-radius: 12px;}
-.theme-doc-markdown.markdown th {color: var(--site-ink); background: var(--site-canvas);}
+.theme-doc-markdown.markdown table {border: 1px solid var(--site-border); border-radius: 12px; margin: 1.5em 0 !important;}
+.theme-doc-markdown.markdown th {color: var(--site-ink); background: var(--site-canvas); text-align: start;}
 .theme-doc-markdown.markdown td, .theme-doc-markdown.markdown th {border-color: var(--site-border); padding: .8rem 1rem;}
 .markdown table {display: block !important; width: max-content; max-width: 100%; margin: 1.5em auto !important; overflow-x: auto;}
 /* Wide comparison tables scroll sideways instead of squeezing each column to a few characters. */
 .wide-table table :is(th, td) {min-width: 8rem;}
 .wide-table table :is(th, td):first-child {min-width: 5.5rem;}
+/* Keep narrow-screen labels readable instead of wrapping one character per line. */
+@media (max-width: 700px) {
+  .theme-doc-markdown.markdown table :is(th, td) {min-width: 8rem;}
+  .theme-doc-markdown.markdown table :is(th, td):first-child {min-width: 7rem;}
+}
 .theme-code-block, .theme-code-block pre {border-radius: 12px !important;}
 .theme-code-block {border: 1px solid var(--site-border); box-shadow: none;}
 .alert {border-radius: 12px; border-width: 1px;}

@@ -1,0 +1,1310 @@
+[
+  {
+    "kind": "run",
+    "parameters": [
+      2.2,
+      0
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        0,
+        3.141592653589793
+      ],
+      "frequency_hz": 2.2,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": false,
+      "task_goal": false,
+      "heading": false,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": -0.036207556451477586,
+    "max_joint_speed_rad_s": 9.573619286005687,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "run",
+    "parameters": [
+      2.2,
+      1.5707963267948966
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 2.2,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": 0.06983275127865594,
+    "max_joint_speed_rad_s": 9.513571005169426,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "run",
+    "parameters": [
+      2.2,
+      3.141592653589793
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        3.141592653589793,
+        6.283185307179586
+      ],
+      "frequency_hz": 2.2,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": true,
+      "task_goal": false,
+      "heading": true,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": 0.03506250663299628,
+    "max_joint_speed_rad_s": 8.9288889728656,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "run",
+    "parameters": [
+      2.2,
+      4.71238898038469
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        4.71238898038469,
+        7.853981633974483
+      ],
+      "frequency_hz": 2.2,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": false,
+      "forward_speed": false,
+      "task_goal": false,
+      "heading": false,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": -0.02785968267494375,
+    "max_joint_speed_rad_s": 10.268970903175621,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "run",
+    "parameters": [
+      2.7,
+      0
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        0,
+        3.141592653589793
+      ],
+      "frequency_hz": 2.7,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": false,
+      "task_goal": false,
+      "heading": false,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": -0.08213056844673279,
+    "max_joint_speed_rad_s": 8.990294014459193,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "run",
+    "parameters": [
+      2.7,
+      1.5707963267948966
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 2.7,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": false,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": 0.06987363979618515,
+    "max_joint_speed_rad_s": 10.398927175022683,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "run",
+    "parameters": [
+      2.7,
+      3.141592653589793
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        3.141592653589793,
+        6.283185307179586
+      ],
+      "frequency_hz": 2.7,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": true,
+      "task_goal": false,
+      "heading": true,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": 0.04062393819960327,
+    "max_joint_speed_rad_s": 9.356906729242027,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "run",
+    "parameters": [
+      2.7,
+      4.71238898038469
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        4.71238898038469,
+        7.853981633974483
+      ],
+      "frequency_hz": 2.7,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": false,
+      "task_goal": false,
+      "heading": false,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": -0.014283357274646013,
+    "max_joint_speed_rad_s": 9.936352369277342,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "run",
+    "parameters": [
+      3.2,
+      0
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        0,
+        3.141592653589793
+      ],
+      "frequency_hz": 3.2,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": false,
+      "task_goal": false,
+      "heading": false,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": 0.007091955286486373,
+    "max_joint_speed_rad_s": 9.384683407610442,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "run",
+    "parameters": [
+      3.2,
+      1.5707963267948966
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 3.2,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": false,
+      "forward_speed": false,
+      "task_goal": false,
+      "heading": false,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": 0.02447406291075078,
+    "max_joint_speed_rad_s": 10.07859692452885,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "run",
+    "parameters": [
+      3.2,
+      3.141592653589793
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        3.141592653589793,
+        6.283185307179586
+      ],
+      "frequency_hz": 3.2,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": false,
+      "task_goal": false,
+      "heading": true,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": 0.016663376177058483,
+    "max_joint_speed_rad_s": 8.9288889728656,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "run",
+    "parameters": [
+      3.2,
+      4.71238898038469
+    ],
+    "config": {
+      "name": "fast_gait_candidate",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0,
+        3.141592653589793,
+        4.71238898038469,
+        7.853981633974483
+      ],
+      "frequency_hz": 3.2,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.1879347817835857,
+      "heading_kd": 0.03,
+      "lateral_kp": 2.0,
+      "steering_limit": 0.2,
+      "max_target_speed_rad_s": 8.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated."
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": false,
+      "forward_speed": false,
+      "task_goal": false,
+      "heading": false,
+      "force_accounting": true,
+      "running_speed": false,
+      "repeated_flight": false
+    },
+    "speed_m_s": -0.008741652547418705,
+    "max_joint_speed_rad_s": 10.03486859630848,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "nav",
+    "parameters": [
+      5.0,
+      0.35
+    ],
+    "config": {
+      "name": "coordinated_crawl",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 1.9355721346722734,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.8,
+      "heading_kd": 0.03,
+      "lateral_kp": 0.0,
+      "steering_limit": 0.35,
+      "max_target_speed_rad_s": 5.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+      "heading_target_rad": 1.0225670693666666
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true
+    },
+    "speed_m_s": 0.048124880197026244,
+    "max_joint_speed_rad_s": 9.427851986203732,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "nav",
+    "parameters": [
+      5.0,
+      0.45
+    ],
+    "config": {
+      "name": "coordinated_crawl",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 1.9355721346722734,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.8,
+      "heading_kd": 0.03,
+      "lateral_kp": 0.0,
+      "steering_limit": 0.45,
+      "max_target_speed_rad_s": 5.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+      "heading_target_rad": -2.0115721137349656
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": true,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true
+    },
+    "speed_m_s": 0.050053092233162136,
+    "max_joint_speed_rad_s": 9.327383450252304,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "nav",
+    "parameters": [
+      6.0,
+      0.35
+    ],
+    "config": {
+      "name": "coordinated_crawl",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 1.9355721346722734,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.8,
+      "heading_kd": 0.03,
+      "lateral_kp": 0.0,
+      "steering_limit": 0.35,
+      "max_target_speed_rad_s": 6.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+      "heading_target_rad": 2.9814588841614658
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": false,
+      "forward_speed": true,
+      "task_goal": false,
+      "heading": true,
+      "force_accounting": true
+    },
+    "speed_m_s": 0.057170382844398335,
+    "max_joint_speed_rad_s": 10.259050543901084,
+    "flight_intervals_s": []
+  },
+  {
+    "kind": "nav",
+    "parameters": [
+      6.0,
+      0.45
+    ],
+    "config": {
+      "name": "coordinated_crawl",
+      "joint_order": [
+        "left_front",
+        "right_front",
+        "right_back",
+        "left_back"
+      ],
+      "actuator_signs": [
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "amplitude_rad": [
+        0.4049857989839647,
+        0.4049857989839647,
+        0.48095765454404177,
+        0.48095765454404177
+      ],
+      "bias_rad": [
+        -0.42075725226966854,
+        -0.42075725226966854,
+        -0.2219629667859576,
+        -0.2219629667859576
+      ],
+      "phase_rad": [
+        0.0,
+        3.141592653589793,
+        1.5707963267948966,
+        4.71238898038469
+      ],
+      "frequency_hz": 1.9355721346722734,
+      "waveform": "cosine_duty",
+      "sweep_fraction": 0.6232904419964411,
+      "harmonic": 0.0,
+      "control_hz": 100,
+      "settle_seconds": 2.0,
+      "startup_bias_rad": [
+        0.2,
+        0.2,
+        -0.4,
+        -0.4
+      ],
+      "startup_ramp_seconds": 0.05,
+      "ramp_seconds": 1.5,
+      "heading_kp": 0.8,
+      "heading_kd": 0.03,
+      "lateral_kp": 0.0,
+      "steering_limit": 0.45,
+      "max_target_speed_rad_s": 6.0,
+      "note": "Four quarter-cycle phases, paired left/right amplitudes and bounded target slew. Selected for lower slip and body bounce, not maximum distance. Locally searched approximate dynamics; not Petoi firmware or hardware validated.",
+      "heading_target_rad": 3.0177269688355395
+    },
+    "checks": {
+      "complete": true,
+      "finite": true,
+      "no_warnings": true,
+      "upright": true,
+      "body_clearance": true,
+      "no_body_contact": true,
+      "no_obstacle_contact": true,
+      "startup_pitch": true,
+      "loop_closure": true,
+      "torque_limit": true,
+      "joint_speed": false,
+      "forward_speed": true,
+      "task_goal": true,
+      "heading": true,
+      "force_accounting": true
+    },
+    "speed_m_s": 0.05089799124603509,
+    "max_joint_speed_rad_s": 11.365597763034302,
+    "flight_intervals_s": []
+  }
+]

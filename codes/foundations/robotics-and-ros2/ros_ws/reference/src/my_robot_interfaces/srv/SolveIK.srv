@@ -1,0 +1,11 @@
+# 请求：目标末端位置
+float64 x
+float64 y
+float64 l1
+float64 l2
+---
+# 响应：求解结果
+bool success
+float64 theta1_deg
+float64 theta2_deg
+string message

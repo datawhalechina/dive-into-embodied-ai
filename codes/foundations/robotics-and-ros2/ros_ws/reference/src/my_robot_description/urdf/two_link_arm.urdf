@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<!-- 根元素：一份 URDF 描述一棵树；name 仅作文档标识 -->
+<robot name="two_link_arm">
+
+  <!-- ==================== Links ==================== -->
+  <!-- 约定：每根连杆的 link 原点放在「靠近父关节」的一端；长方体 visual 的 origin 把几何中心摆到杆件中段 -->
+
+  <!-- 基座：通常作为整机的根 link；是否「在世界中固定」由外层 joint 或仿真决定，URDF 里只描述形状 -->
+  <link name="base_link">
+    <visual>
+      <!-- 盒子尺寸 0.1×0.1×0.05（米）；几何中心相对 link 原点抬高 0.025，使盒子底面落在 z=0 -->
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <!-- 规划与碰撞检测用；常与 visual 同形，也可单独简化 -->
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- 连杆 1：杆长 1.0 m（x 方向）；link 原点在父关节处（与 joint1 子端重合） -->
+  <link name="link1">
+    <visual>
+      <!-- 杆沿 +x 延伸：中心在 x=0.5，故 origin x=0.5，与 box 长度 1.0 一致 -->
+      <origin xyz="0.5 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="1.0 0.05 0.05"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.2 0.4 0.8 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.5 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="1.0 0.05 0.05"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- 连杆 2：杆长 0.8 m；原点同样在靠近 joint2 的一端 -->
+  <link name="link2">
+    <visual>
+      <origin xyz="0.4 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.8 0.04 0.04"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0.2 0.7 0.3 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.4 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.8 0.04 0.04"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- 末端执行器：无碰撞模型也可（仅显示）；球心与 link 原点重合 -->
+  <link name="end_effector">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius="0.03"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0.2 0.2 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- ==================== Joints ==================== -->
+  <!-- 平面臂：两关节轴均平行于 z，在 xy 平面内摆动 -->
+
+  <!-- joint1：子 link1 的原点贴在父 base_link 上；z=0.05 为基座顶面（台座高 0.05） -->
+  <joint name="joint1" type="revolute">
+    <parent link="base_link"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <!-- ±90°；effort/velocity 为占位，与 1.3 节 limit 说明一致 -->
+    <limit lower="-1.5708" upper="1.5708" effort="10.0" velocity="1.0"/>
+  </joint>
+
+  <!-- joint2：父为 link1；origin x=1.0 即 link1 几何末端（杆长 1.0），第二段从此处接出 -->
+  <joint name="joint2" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="1.0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <!-- 约 ±120° -->
+    <limit lower="-2.0944" upper="2.0944" effort="10.0" velocity="1.0"/>
+  </joint>
+
+  <!-- fixed：无自由度；用于安装法兰、工具或纯可视化标记 -->
+  <joint name="ee_joint" type="fixed">
+    <parent link="link2"/>
+    <child link="end_effector"/>
+    <!-- link2 杆长 0.8，末端在父系 +x=0.8；ee 的 link 原点即末端点 -->
+    <origin xyz="0.8 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ros2_control：使用 mock hardware，让控制器能接管关节状态 -->
+  <ros2_control name="two_link_arm" type="system">
+    <hardware>
+      <plugin>mock_components/GenericSystem</plugin>
+    </hardware>
+    <joint name="joint1">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="joint2">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+
+</robot>

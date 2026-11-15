@@ -1,0 +1,1965 @@
+{
+  "date": "2026-11-10",
+  "hardware_tested": false,
+  "thresholds_changed": false,
+  "training": {
+    "stairs_up": {
+      "scene": "stairs_up",
+      "baseline": [
+        {
+          "label": "prior_policy",
+          "evaluations": [
+            {
+              "scale": 1.0,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.16453775351455902,
+                "average_forward_speed_m_s": 0.008226887675727951,
+                "max_heading_deviation_deg": 32.34082469992308,
+                "max_driven_joint_speed_rad_s": 9.224233149093793,
+                "body_contact_samples": 0,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 5.901000000000305,
+                    "position_m": [
+                      0.006745801500703802,
+                      -0.11078684784114899,
+                      0.04684596795221165
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 0.375,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": true,
+                  "task_goal": true,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 1.4796135786348898,
+                "average_forward_speed_m_s": 0.0739806789317445,
+                "max_heading_deviation_deg": 26.26600984738461,
+                "max_driven_joint_speed_rad_s": 9.843558434009285,
+                "body_contact_samples": 0,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 6.056000000000357,
+                    "position_m": [
+                      -0.02403997099899792,
+                      -0.16915305804790257,
+                      0.04726879671253808
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "label": "feedback_only",
+          "evaluations": [
+            {
+              "scale": 1.0,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": false,
+                  "body_clearance": true,
+                  "no_body_contact": false,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": false,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.2843706004125245,
+                "average_forward_speed_m_s": 0.014218530020626225,
+                "max_heading_deviation_deg": 147.60967848941792,
+                "max_driven_joint_speed_rad_s": 10.302011028554432,
+                "body_contact_samples": 14,
+                "first_failure": {
+                  "upright": {
+                    "time_s": 5.746000000000254,
+                    "position_m": [
+                      -0.018447011072391332,
+                      -0.10803887273478599,
+                      0.04230601385732241
+                    ]
+                  },
+                  "body_contact": {
+                    "time_s": 5.776000000000264,
+                    "position_m": [
+                      -0.013086521278265156,
+                      -0.1038056895172752,
+                      0.042621668929378985
+                    ]
+                  },
+                  "heading": {
+                    "time_s": 6.286000000000434,
+                    "position_m": [
+                      -0.004535017160061018,
+                      -0.13276113239974976,
+                      0.04235349417100331
+                    ]
+                  },
+                  "joint_speed": {
+                    "time_s": 6.646000000000554,
+                    "peak_rad_s": 10.005788160559424,
+                    "position_m": [
+                      0.03466893997406554,
+                      -0.17525643118166717,
+                      0.051257290169259645
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 0.375,
+              "offset": 0.0,
+              "result": {
+                "passed": true,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": true,
+                  "task_goal": true,
+                  "heading": true,
+                  "force_accounting": true
+                },
+                "forward_m": 1.5100547623209464,
+                "average_forward_speed_m_s": 0.07550273811604732,
+                "max_heading_deviation_deg": 23.42807231757444,
+                "max_driven_joint_speed_rad_s": 9.81690087970202,
+                "body_contact_samples": 0,
+                "first_failure": {}
+              }
+            }
+          ]
+        }
+      ],
+      "history": [
+        {
+          "checkpoint": "outputs/practice_20261110/stairs_up/new_steps16384",
+          "evaluations": [
+            {
+              "scale": 1.0,
+              "offset": -0.005,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": false,
+                  "body_clearance": true,
+                  "no_body_contact": false,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.16725869408852428,
+                "average_forward_speed_m_s": 0.008362934704426214,
+                "max_heading_deviation_deg": 48.53189773237661,
+                "max_driven_joint_speed_rad_s": 9.55222955463082,
+                "body_contact_samples": 16,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 5.486000000000167,
+                    "position_m": [
+                      -0.02853523466413928,
+                      -0.1427483942274023,
+                      0.04585949467959688
+                    ]
+                  },
+                  "upright": {
+                    "time_s": 7.706000000000908,
+                    "position_m": [
+                      -0.0485187247371729,
+                      -0.15402904771235212,
+                      0.04533718327164773
+                    ]
+                  },
+                  "body_contact": {
+                    "time_s": 7.721000000000913,
+                    "position_m": [
+                      -0.04762538009321147,
+                      -0.15312178835268037,
+                      0.04554946581796597
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 1.0,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": false,
+                  "body_clearance": false,
+                  "no_body_contact": false,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.0881434127125746,
+                "average_forward_speed_m_s": 0.00440717063562873,
+                "max_heading_deviation_deg": 114.00650625162397,
+                "max_driven_joint_speed_rad_s": 9.175996552811071,
+                "body_contact_samples": 2607,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 5.481000000000165,
+                    "position_m": [
+                      -0.016061115957150155,
+                      -0.14504093499232348,
+                      0.04555484477485955
+                    ]
+                  },
+                  "upright": {
+                    "time_s": 7.2160000000007445,
+                    "position_m": [
+                      -0.03815442867217441,
+                      -0.1545067888631613,
+                      0.0458145292987937
+                    ]
+                  },
+                  "body_contact": {
+                    "time_s": 7.2760000000007645,
+                    "position_m": [
+                      -0.030346497643202786,
+                      -0.1489589819817331,
+                      0.043685307802191424
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 1.0,
+              "offset": 0.005,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": false,
+                  "body_clearance": true,
+                  "no_body_contact": false,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": false,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.31509417420665115,
+                "average_forward_speed_m_s": 0.015754708710332556,
+                "max_heading_deviation_deg": 121.31284321268159,
+                "max_driven_joint_speed_rad_s": 10.573848950310305,
+                "body_contact_samples": 11,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 5.471000000000162,
+                    "position_m": [
+                      -0.007988611625566773,
+                      -0.14202219912803699,
+                      0.04533374129880199
+                    ]
+                  },
+                  "upright": {
+                    "time_s": 9.736000000000043,
+                    "position_m": [
+                      -0.031196894518619737,
+                      -0.15873360005064974,
+                      0.04411348782518588
+                    ]
+                  },
+                  "body_contact": {
+                    "time_s": 9.751000000000035,
+                    "position_m": [
+                      -0.03195331722114513,
+                      -0.1576001561767071,
+                      0.0448414929652583
+                    ]
+                  },
+                  "joint_speed": {
+                    "time_s": 14.023999999997667,
+                    "peak_rad_s": 10.041630080511109,
+                    "position_m": [
+                      -0.004434359759668233,
+                      -0.2112321116217252,
+                      0.05265416167688237
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 0.375,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": false,
+                  "forward_speed": true,
+                  "task_goal": true,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 1.5719563472694718,
+                "average_forward_speed_m_s": 0.07859781736347358,
+                "max_heading_deviation_deg": 26.50100640770318,
+                "max_driven_joint_speed_rad_s": 10.418609975748359,
+                "body_contact_samples": 0,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 5.49600000000017,
+                    "position_m": [
+                      -0.019934282892939928,
+                      -0.156654151225467,
+                      0.04679354075507196
+                    ]
+                  },
+                  "joint_speed": {
+                    "time_s": 9.83199999999999,
+                    "peak_rad_s": 10.293211113111758,
+                    "position_m": [
+                      -0.08980718473266255,
+                      -0.45208650974857556,
+                      0.05244570683886634
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "checkpoint": "outputs/practice_20261110/stairs_up/new_steps32768",
+          "evaluations": [
+            {
+              "scale": 1.0,
+              "offset": -0.005,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": false,
+                  "body_clearance": true,
+                  "no_body_contact": false,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": false,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.192167587028496,
+                "average_forward_speed_m_s": 0.009608379351424801,
+                "max_heading_deviation_deg": 145.98457589539086,
+                "max_driven_joint_speed_rad_s": 11.726000185151124,
+                "body_contact_samples": 26,
+                "first_failure": {
+                  "upright": {
+                    "time_s": 5.73600000000025,
+                    "position_m": [
+                      -0.03160508473023749,
+                      -0.11153761496130969,
+                      0.04352207287570668
+                    ]
+                  },
+                  "body_contact": {
+                    "time_s": 5.751000000000255,
+                    "position_m": [
+                      -0.028503864130531787,
+                      -0.10931198638193784,
+                      0.04215236351682592
+                    ]
+                  },
+                  "heading": {
+                    "time_s": 9.456000000000198,
+                    "position_m": [
+                      -0.022528469463266736,
+                      -0.150623745841614,
+                      0.04466478458439644
+                    ]
+                  },
+                  "joint_speed": {
+                    "time_s": 10.880999999999409,
+                    "peak_rad_s": 10.153458166955753,
+                    "position_m": [
+                      0.03818201167617177,
+                      -0.18813000433227714,
+                      0.04969865134944257
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 1.0,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": false,
+                  "body_clearance": true,
+                  "no_body_contact": false,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": false,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.21377968864545543,
+                "average_forward_speed_m_s": 0.010688984432272772,
+                "max_heading_deviation_deg": 127.6007969963249,
+                "max_driven_joint_speed_rad_s": 11.276630012370314,
+                "body_contact_samples": 33,
+                "first_failure": {
+                  "upright": {
+                    "time_s": 5.76600000000026,
+                    "position_m": [
+                      -0.02429495771673037,
+                      -0.10340839691377082,
+                      0.04163850748220776
+                    ]
+                  },
+                  "body_contact": {
+                    "time_s": 5.786000000000267,
+                    "position_m": [
+                      -0.022495070771271445,
+                      -0.10017357056708591,
+                      0.042333910036085366
+                    ]
+                  },
+                  "heading": {
+                    "time_s": 5.851000000000289,
+                    "position_m": [
+                      -0.01528824409316391,
+                      -0.09626477508044784,
+                      0.04630417425692288
+                    ]
+                  },
+                  "joint_speed": {
+                    "time_s": 8.29800000000084,
+                    "peak_rad_s": 10.196684466428252,
+                    "position_m": [
+                      0.08412515654398976,
+                      -0.19184698788380816,
+                      0.049740455634973896
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 1.0,
+              "offset": 0.005,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": false,
+                  "body_clearance": true,
+                  "no_body_contact": false,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.18528897990136448,
+                "average_forward_speed_m_s": 0.009264448995068224,
+                "max_heading_deviation_deg": 45.58140128886498,
+                "max_driven_joint_speed_rad_s": 9.775783732379638,
+                "body_contact_samples": 26,
+                "first_failure": {
+                  "upright": {
+                    "time_s": 7.736000000000918,
+                    "position_m": [
+                      -0.02922723891852697,
+                      -0.15403367720681554,
+                      0.046155421440112886
+                    ]
+                  },
+                  "body_contact": {
+                    "time_s": 7.786000000000935,
+                    "position_m": [
+                      -0.023052805725661683,
+                      -0.15040553235134754,
+                      0.04499935284756069
+                    ]
+                  },
+                  "heading": {
+                    "time_s": 8.396000000000786,
+                    "position_m": [
+                      -0.003758027279469787,
+                      -0.18843372846504794,
+                      0.050318865489409746
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 0.375,
+              "offset": 0.0,
+              "result": {
+                "passed": true,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": true,
+                  "task_goal": true,
+                  "heading": true,
+                  "force_accounting": true
+                },
+                "forward_m": 1.6697641778028285,
+                "average_forward_speed_m_s": 0.08348820889014143,
+                "max_heading_deviation_deg": 23.332624886452347,
+                "max_driven_joint_speed_rad_s": 9.590439831171288,
+                "body_contact_samples": 0,
+                "first_failure": {}
+              }
+            }
+          ]
+        }
+      ],
+      "new_training_steps": 32768,
+      "wall_seconds": 416.02528071403503,
+      "status": "finished",
+      "hardware_tested": false,
+      "selection": {
+        "checkpoint": "outputs/practice_20261110/stairs_up/new_steps32768",
+        "score": [
+          0,
+          0,
+          28,
+          0.19707875185843862
+        ],
+        "note": "Best of this run trained candidates on three original-terrain offsets; does not establish task completion"
+      },
+      "protocol": {
+        "terrain_scales": [
+          0.25,
+          0.375,
+          0.5,
+          1.0
+        ],
+        "probabilities": [
+          0.3,
+          0.3,
+          0.3,
+          0.1
+        ],
+        "terrain_seeds": [
+          7,
+          11,
+          13,
+          17
+        ],
+        "initial_yaw_deg": [
+          -3,
+          3
+        ],
+        "friction_scale": [
+          0.9,
+          1.1
+        ],
+        "seed": 43,
+        "learning_rate": 0.0001,
+        "new_steps_per_task": 32768,
+        "legacy_metadata_note": "level and sampling inherited from resume checkpoint describe the source curriculum, not PracticeEnv sampling; this protocol and training_environment define the new run"
+      }
+    },
+    "rough": {
+      "scene": "rough",
+      "baseline": [
+        {
+          "label": "prior_policy",
+          "evaluations": [
+            {
+              "scale": 1.0,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": true,
+                  "force_accounting": true
+                },
+                "forward_m": 0.29645124053331334,
+                "average_forward_speed_m_s": 0.014822562026665667,
+                "max_heading_deviation_deg": 22.263341375027,
+                "max_driven_joint_speed_rad_s": 9.114276906397969,
+                "body_contact_samples": 0,
+                "first_failure": {}
+              }
+            },
+            {
+              "scale": 0.375,
+              "offset": 0.0,
+              "result": {
+                "passed": true,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": true,
+                  "task_goal": true,
+                  "heading": true,
+                  "force_accounting": true
+                },
+                "forward_m": 1.39432701892183,
+                "average_forward_speed_m_s": 0.0697163509460915,
+                "max_heading_deviation_deg": 18.353639807175544,
+                "max_driven_joint_speed_rad_s": 9.822734319035677,
+                "body_contact_samples": 0,
+                "first_failure": {}
+              }
+            }
+          ]
+        },
+        {
+          "label": "feedback_only",
+          "evaluations": [
+            {
+              "scale": 1.0,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": false,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.30495894743824115,
+                "average_forward_speed_m_s": 0.015247947371912058,
+                "max_heading_deviation_deg": 62.55965646090773,
+                "max_driven_joint_speed_rad_s": 10.12059101790108,
+                "body_contact_samples": 0,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 10.415999999999666,
+                    "position_m": [
+                      -0.019204967883712693,
+                      -0.3103963936392621,
+                      0.0477472530921618
+                    ]
+                  },
+                  "joint_speed": {
+                    "time_s": 13.861999999997757,
+                    "peak_rad_s": 10.058648694512714,
+                    "position_m": [
+                      -0.019581714883222117,
+                      -0.3158027592737944,
+                      0.04695241034283875
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 0.375,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": false,
+                  "forward_speed": true,
+                  "task_goal": true,
+                  "heading": true,
+                  "force_accounting": true
+                },
+                "forward_m": 1.3550714279352383,
+                "average_forward_speed_m_s": 0.06775357139676191,
+                "max_heading_deviation_deg": 16.1363407924059,
+                "max_driven_joint_speed_rad_s": 10.56100218390711,
+                "body_contact_samples": 0,
+                "first_failure": {
+                  "joint_speed": {
+                    "time_s": 13.972999999997695,
+                    "peak_rad_s": 10.271706476256126,
+                    "position_m": [
+                      -0.04600795787554753,
+                      -0.7405141467017001,
+                      0.04735240104989445
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "history": [
+        {
+          "checkpoint": "outputs/practice_20261110/rough/new_steps16384",
+          "evaluations": [
+            {
+              "scale": 1.0,
+              "offset": -0.005,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.2984617975135538,
+                "average_forward_speed_m_s": 0.014923089875677689,
+                "max_heading_deviation_deg": 30.86192909129246,
+                "max_driven_joint_speed_rad_s": 9.519718025892399,
+                "body_contact_samples": 0,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 7.391000000000803,
+                    "position_m": [
+                      -0.009417905255179689,
+                      -0.23809612258196322,
+                      0.04208879749373753
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 1.0,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": true,
+                  "force_accounting": true
+                },
+                "forward_m": 0.301682274679245,
+                "average_forward_speed_m_s": 0.015084113733962252,
+                "max_heading_deviation_deg": 21.26175623128694,
+                "max_driven_joint_speed_rad_s": 9.427147596533656,
+                "body_contact_samples": 0,
+                "first_failure": {}
+              }
+            },
+            {
+              "scale": 1.0,
+              "offset": 0.005,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.3019221420297711,
+                "average_forward_speed_m_s": 0.015096107101488555,
+                "max_heading_deviation_deg": 54.91235551610345,
+                "max_driven_joint_speed_rad_s": 9.757161091969092,
+                "body_contact_samples": 0,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 9.38100000000024,
+                    "position_m": [
+                      -0.01881307130857874,
+                      -0.3086525952397845,
+                      0.04748827740626353
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 0.375,
+              "offset": 0.0,
+              "result": {
+                "passed": true,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": true,
+                  "task_goal": true,
+                  "heading": true,
+                  "force_accounting": true
+                },
+                "forward_m": 1.4220535681142927,
+                "average_forward_speed_m_s": 0.07110267840571463,
+                "max_heading_deviation_deg": 22.01988778261596,
+                "max_driven_joint_speed_rad_s": 9.338817287141413,
+                "body_contact_samples": 0,
+                "first_failure": {}
+              }
+            }
+          ]
+        },
+        {
+          "checkpoint": "outputs/practice_20261110/rough/new_steps32768",
+          "evaluations": [
+            {
+              "scale": 1.0,
+              "offset": -0.005,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": false,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.3078005150425148,
+                "average_forward_speed_m_s": 0.015390025752125742,
+                "max_heading_deviation_deg": 61.08361665415545,
+                "max_driven_joint_speed_rad_s": 10.395321060383083,
+                "body_contact_samples": 0,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 6.521000000000512,
+                    "position_m": [
+                      -0.033373854670297964,
+                      -0.21637009334276433,
+                      0.046541430162626164
+                    ]
+                  },
+                  "joint_speed": {
+                    "time_s": 16.56299999999726,
+                    "peak_rad_s": 10.19945141797519,
+                    "position_m": [
+                      -0.02203613393071937,
+                      -0.3141028399686322,
+                      0.048160882679408025
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 1.0,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": false,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.308127411744175,
+                "average_forward_speed_m_s": 0.015406370587208751,
+                "max_heading_deviation_deg": 111.47001052544519,
+                "max_driven_joint_speed_rad_s": 11.474809816087621,
+                "body_contact_samples": 0,
+                "first_failure": {
+                  "joint_speed": {
+                    "time_s": 6.4840000000005,
+                    "peak_rad_s": 10.101666722999497,
+                    "position_m": [
+                      -0.0296806252245623,
+                      -0.21985953744162212,
+                      0.04669290807858636
+                    ]
+                  },
+                  "heading": {
+                    "time_s": 7.89100000000097,
+                    "position_m": [
+                      -0.04529860427354286,
+                      -0.22744728337164377,
+                      0.0427626355765031
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 1.0,
+              "offset": 0.005,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": false,
+                  "task_goal": false,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 0.30074445945851436,
+                "average_forward_speed_m_s": 0.015037222972925719,
+                "max_heading_deviation_deg": 29.32034244276662,
+                "max_driven_joint_speed_rad_s": 9.5915030970547,
+                "body_contact_samples": 0,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 20.77600000000241,
+                    "position_m": [
+                      -0.050788349575710184,
+                      -0.3008646580695955,
+                      0.046661275276031575
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "scale": 0.375,
+              "offset": 0.0,
+              "result": {
+                "passed": false,
+                "checks": {
+                  "complete": true,
+                  "finite": true,
+                  "no_warnings": true,
+                  "upright": true,
+                  "body_clearance": true,
+                  "no_body_contact": true,
+                  "no_obstacle_contact": true,
+                  "startup_pitch": true,
+                  "loop_closure": true,
+                  "torque_limit": true,
+                  "joint_speed": true,
+                  "forward_speed": true,
+                  "task_goal": true,
+                  "heading": false,
+                  "force_accounting": true
+                },
+                "forward_m": 1.3258988375270067,
+                "average_forward_speed_m_s": 0.06629494187635034,
+                "max_heading_deviation_deg": 48.809211076037776,
+                "max_driven_joint_speed_rad_s": 9.238582927151324,
+                "body_contact_samples": 0,
+                "first_failure": {
+                  "heading": {
+                    "time_s": 13.920999999997724,
+                    "position_m": [
+                      -0.10155292849194536,
+                      -0.7343718173610952,
+                      0.04733790512436264
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "new_training_steps": 32768,
+      "wall_seconds": 435.27145648002625,
+      "status": "finished",
+      "hardware_tested": false,
+      "selection": {
+        "checkpoint": "outputs/practice_20261110/rough/new_steps16384",
+        "score": [
+          0,
+          1,
+          37,
+          0.30068873807419
+        ],
+        "note": "Best of this run trained candidates on three original-terrain offsets; does not establish task completion"
+      },
+      "protocol": {
+        "terrain_scales": [
+          0.25,
+          0.375,
+          0.5,
+          1.0
+        ],
+        "probabilities": [
+          0.3,
+          0.3,
+          0.3,
+          0.1
+        ],
+        "terrain_seeds": [
+          7,
+          11,
+          13,
+          17
+        ],
+        "initial_yaw_deg": [
+          -3,
+          3
+        ],
+        "friction_scale": [
+          0.9,
+          1.1
+        ],
+        "seed": 43,
+        "learning_rate": 0.0001,
+        "new_steps_per_task": 32768,
+        "legacy_metadata_note": "level and sampling inherited from resume checkpoint describe the source curriculum, not PracticeEnv sampling; this protocol and training_environment define the new run"
+      }
+    }
+  },
+  "operating_range": [
+    {
+      "label": "yaw-3.0_friction0.9",
+      "scene": "flat",
+      "yaw_deg": -3.0,
+      "friction_scale": 0.9,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.434313422492978,
+        "average_forward_speed_m_s": 0.07171567112464891,
+        "max_heading_deviation_deg": 10.09437690698633,
+        "max_driven_joint_speed_rad_s": 8.94700813179738,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "yaw+3.0_friction1.1",
+      "scene": "flat",
+      "yaw_deg": 3.0,
+      "friction_scale": 1.1,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.372202619388835,
+        "average_forward_speed_m_s": 0.06861013096944175,
+        "max_heading_deviation_deg": 9.518644823725287,
+        "max_driven_joint_speed_rad_s": 9.574629455461126,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "yaw-3.0_friction0.9",
+      "scene": "uphill3",
+      "yaw_deg": -3.0,
+      "friction_scale": 0.9,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.0885041147684147,
+        "average_forward_speed_m_s": 0.05442520573842073,
+        "max_heading_deviation_deg": 15.734069422384783,
+        "max_driven_joint_speed_rad_s": 8.916871246987325,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "yaw+3.0_friction1.1",
+      "scene": "uphill3",
+      "yaw_deg": 3.0,
+      "friction_scale": 1.1,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.1771345620390783,
+        "average_forward_speed_m_s": 0.058856728101953915,
+        "max_heading_deviation_deg": 21.490808865170454,
+        "max_driven_joint_speed_rad_s": 9.078925067612781,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "yaw-3.0_friction0.9",
+      "scene": "uphill5",
+      "yaw_deg": -3.0,
+      "friction_scale": 0.9,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.0792846281991162,
+        "average_forward_speed_m_s": 0.05396423140995581,
+        "max_heading_deviation_deg": 14.582513081908255,
+        "max_driven_joint_speed_rad_s": 8.018845918333508,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "yaw+3.0_friction1.1",
+      "scene": "uphill5",
+      "yaw_deg": 3.0,
+      "friction_scale": 1.1,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.0367105656434012,
+        "average_forward_speed_m_s": 0.051835528282170064,
+        "max_heading_deviation_deg": 11.203921171301372,
+        "max_driven_joint_speed_rad_s": 8.603017489452856,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "yaw-3.0_friction0.9",
+      "scene": "downhill3",
+      "yaw_deg": -3.0,
+      "friction_scale": 0.9,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.0045371539151586,
+        "average_forward_speed_m_s": 0.05022685769575793,
+        "max_heading_deviation_deg": 6.204688172897416,
+        "max_driven_joint_speed_rad_s": 9.098632857861572,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "yaw+3.0_friction1.1",
+      "scene": "downhill3",
+      "yaw_deg": 3.0,
+      "friction_scale": 1.1,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.9071598989400407,
+        "average_forward_speed_m_s": 0.04535799494700203,
+        "max_heading_deviation_deg": 13.785186165558539,
+        "max_driven_joint_speed_rad_s": 9.002705644445726,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "yaw-3.0_friction0.9",
+      "scene": "stairs_down",
+      "yaw_deg": -3.0,
+      "friction_scale": 0.9,
+      "seconds": 20.0,
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": false,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.7051810847012352,
+        "average_forward_speed_m_s": 0.03525905423506176,
+        "max_heading_deviation_deg": 14.400739674151398,
+        "max_driven_joint_speed_rad_s": 8.940759076085923,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "yaw+3.0_friction1.1",
+      "scene": "stairs_down",
+      "yaw_deg": 3.0,
+      "friction_scale": 1.1,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.7651651608037698,
+        "average_forward_speed_m_s": 0.038258258040188495,
+        "max_heading_deviation_deg": 12.54315349720575,
+        "max_driven_joint_speed_rad_s": 8.975415398715388,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "yaw-3.0_friction0.9",
+      "scene": "avoid",
+      "yaw_deg": -3.0,
+      "friction_scale": 0.9,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.0011596799789224,
+        "average_forward_speed_m_s": 0.05005798399894612,
+        "max_heading_deviation_deg": 41.32235159658946,
+        "max_driven_joint_speed_rad_s": 9.487892381880426,
+        "body_contact_samples": 0,
+        "first_failure": {
+          "heading": {
+            "time_s": 9.16600000000036,
+            "position_m": [
+              -0.10339640295180033,
+              -0.30734664342222257,
+              0.04705721949926009
+            ]
+          }
+        }
+      }
+    },
+    {
+      "label": "yaw+3.0_friction1.1",
+      "scene": "avoid",
+      "yaw_deg": 3.0,
+      "friction_scale": 1.1,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.9945080048855028,
+        "average_forward_speed_m_s": 0.049725400244275145,
+        "max_heading_deviation_deg": 37.48246992550124,
+        "max_driven_joint_speed_rad_s": 9.949633457826623,
+        "body_contact_samples": 0,
+        "first_failure": {
+          "heading": {
+            "time_s": 19.77100000000118,
+            "position_m": [
+              -0.08754861309334601,
+              -0.8587769839377376,
+              0.046287325375756735
+            ]
+          }
+        }
+      }
+    },
+    {
+      "label": "yaw-3.0_friction0.9",
+      "scene": "water",
+      "yaw_deg": -3.0,
+      "friction_scale": 0.9,
+      "seconds": 20.0,
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": false,
+          "force_accounting": true,
+          "entered_water": true,
+          "drag_dissipative": true,
+          "body_above_water": true
+        },
+        "forward_m": 1.383943721498364,
+        "average_forward_speed_m_s": 0.0691971860749182,
+        "max_heading_deviation_deg": 26.293488693103157,
+        "max_driven_joint_speed_rad_s": 8.465285940928618,
+        "body_contact_samples": 0,
+        "first_failure": {
+          "heading": {
+            "time_s": 5.531000000000182,
+            "position_m": [
+              -0.03455988426725596,
+              -0.12910928942092134,
+              0.047202001964757045
+            ]
+          }
+        }
+      }
+    },
+    {
+      "label": "yaw+3.0_friction1.1",
+      "scene": "water",
+      "yaw_deg": 3.0,
+      "friction_scale": 1.1,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "entered_water": true,
+          "drag_dissipative": true,
+          "body_above_water": true
+        },
+        "forward_m": 1.3775143974790258,
+        "average_forward_speed_m_s": 0.06887571987395129,
+        "max_heading_deviation_deg": 19.185473551355223,
+        "max_driven_joint_speed_rad_s": 8.711398422633696,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "long40s",
+      "scene": "flat",
+      "yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "seconds": 40.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 2.9728973088579993,
+        "average_forward_speed_m_s": 0.07432243272144998,
+        "max_heading_deviation_deg": 8.06329210644593,
+        "max_driven_joint_speed_rad_s": 8.9288889728656,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "long40s",
+      "scene": "uphill5",
+      "yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "seconds": 40.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 2.237921858666419,
+        "average_forward_speed_m_s": 0.055948046466660475,
+        "max_heading_deviation_deg": 11.810287850656557,
+        "max_driven_joint_speed_rad_s": 8.282066633656605,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "long40s",
+      "scene": "stairs_down",
+      "yaw_deg": 0.0,
+      "friction_scale": 1.0,
+      "seconds": 40.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 1.5781080405718046,
+        "average_forward_speed_m_s": 0.03945270101429511,
+        "max_heading_deviation_deg": 9.082105593717985,
+        "max_driven_joint_speed_rad_s": 8.922956107320433,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    }
+  ],
+  "isolated": [
+    {
+      "label": "isolate_yaw-3.0",
+      "scene": "stairs_down",
+      "yaw_deg": -3.0,
+      "friction_scale": 1.0,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.7824123803440615,
+        "average_forward_speed_m_s": 0.039120619017203075,
+        "max_heading_deviation_deg": 10.490922134478664,
+        "max_driven_joint_speed_rad_s": 8.922858584698027,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "isolate_friction0.9",
+      "scene": "stairs_down",
+      "yaw_deg": 0.0,
+      "friction_scale": 0.9,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true
+        },
+        "forward_m": 0.7355728385667816,
+        "average_forward_speed_m_s": 0.03677864192833908,
+        "max_heading_deviation_deg": 9.446159422538063,
+        "max_driven_joint_speed_rad_s": 8.940850147766827,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "isolate_yaw-3.0",
+      "scene": "water",
+      "yaw_deg": -3.0,
+      "friction_scale": 1.0,
+      "seconds": 20.0,
+      "result": {
+        "passed": true,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "entered_water": true,
+          "drag_dissipative": true,
+          "body_above_water": true
+        },
+        "forward_m": 1.4033829034052416,
+        "average_forward_speed_m_s": 0.07016914517026208,
+        "max_heading_deviation_deg": 23.53629487410562,
+        "max_driven_joint_speed_rad_s": 8.508967000941494,
+        "body_contact_samples": 0,
+        "first_failure": {}
+      }
+    },
+    {
+      "label": "isolate_friction0.9",
+      "scene": "water",
+      "yaw_deg": 0.0,
+      "friction_scale": 0.9,
+      "seconds": 20.0,
+      "result": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": false,
+          "force_accounting": true,
+          "entered_water": true,
+          "drag_dissipative": true,
+          "body_above_water": true
+        },
+        "forward_m": 1.3810951877907296,
+        "average_forward_speed_m_s": 0.06905475938953648,
+        "max_heading_deviation_deg": 26.25442228524619,
+        "max_driven_joint_speed_rad_s": 8.483770478191188,
+        "body_contact_samples": 0,
+        "first_failure": {
+          "heading": {
+            "time_s": 5.991000000000335,
+            "position_m": [
+              -0.040551778101047,
+              -0.16128709521297468,
+              0.04703548141254115
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
