@@ -1,7 +1,7 @@
 ---
 title: "Petoi Quaddle VLA：10GB 显存训一个导航策略"
 sidebar_position: 3
-displayed_sidebar: practicesOverviewSidebar
+displayed_sidebar: practicesQuadrupedSidebar
 description: "在桌面四足 Quaddle 上，用 SmolVLA 高层决策 + 查表 CPG 低层运控，走通数据采集→微调→闭环评估的 VLA 全链路，得到 10GB 显存可复现的导航基线。"
 ---
 
@@ -9,7 +9,7 @@ description: "在桌面四足 Quaddle 上，用 SmolVLA 高层决策 + 查表 CP
 
 只告诉机器人“走到红色积木旁”，不写死每一步动作，它能自己转向、分辨颜色、走到目标停下吗？再换一个约束：只有一张预算 10GB 显存的本地显卡，这条 VLA 训练链路还跑得通吗？这一课用 Petoi Quaddle（4 舵机桌面四足）给出一个可复现的答案。
 
-[看懂分层 ↓](#architecture) · [动手复现 ↓](#reproduce) · [能力边界 ↓](#boundary)
+[效果预览 ↓](#demos) · [看懂分层 ↓](#architecture) · [动手复现 ↓](#reproduce) · [能力边界 ↓](#boundary)
 
 先说结论：**10GB 显存训 VLA 完全可行**——SmolVLA 450M 在本地走通了“数据采集 → 微调 → 闭环评估”的全流程。当前模型是一个**前侧方导航基线**：目标在机器人前侧方时可靠到达，目标在正后方时还会失败。补齐“原地转”原语的 v4 试验与后续路线，放在[实验记录与 v5 路线图](./experiment-notes.md)。
 
@@ -19,6 +19,34 @@ description: "在桌面四足 Quaddle 上，用 SmolVLA 高层决策 + 查表 CP
 > 官方 URDF 自建、duty 不对称转向 0.6–1.2 rad/s、MuJoCo 3.8.1）。**两套环境的数据/策略不可互换**。
 > 最新进展（v5/v6、temporal ensembling 验收达标 3/3+85%、L1/L3/L4 路线）见
 > [实施现状与计划](./progress.md) 与 [实验记录](./experiment-notes.md)。本页保留作 10GB 复现基线。
+
+## 效果预览：当前主线成果 \{#demos}
+
+以下视频与 GIF 是**当前主线**（《Quaddle 入门》环境 + temporal ensembling / 任务分解）跑出来的
+真实评估录像，不是渲染动画。注意它们与本页下方可复现的 cs123 基线**不是同一套环境/策略**，
+验收数据与训练细节见[实施现状与计划](./progress.md)。
+
+**L2 语言导航 best：SmolVLA 18k + temporal ensembling + seq-depart 微调，20eps 18/20=90%**
+（VLA 策略 rollout，960×720 25fps、1x 真实速度、逐集指令标注）：
+
+<video controls playsInline preload="metadata" src={require('./figs/quaddle_L2_nav_ensemble_16of20.mp4').default} style={{width: '100%'}} />
+
+丝滑版 GIF（同一策略，50fps 渲染 + 3x 播放，适合快速浏览）：
+
+![L2 导航丝滑版：50fps 渲染 + 播放 3x，动作连贯（VLA 策略 rollout）](./figs/quaddle_L2_nav_silky50.gif)
+
+**L3 避障分解版**：L2 技能 + 非目标块反射层，20eps 16/20=80%：
+
+<video controls playsInline preload="metadata" src={require('./figs/quaddle_L3_decomposed_16of20.mp4').default} style={{width: '100%'}} />
+
+**L4 条件组合分解版**：编排器 + L2 技能，看到绿停 10/10、先红后蓝 7/10，合计 17/20=85%：
+
+<video controls playsInline preload="metadata" src={require('./figs/quaddle_L4_decomposed_17of20.mp4').default} style={{width: '100%'}} />
+
+**低层步态对照（非 VLA，无策略）**——原始 CPG 步态开环前进（kp=0.15，upright、69.8mm/s、
+弹跳 0.86mm），证明底层行走顺畅、模型无需修改：
+
+![原始 CPG 步态开环前进——低层运控演示，非 VLA](./figs/quaddle_gait_orig_smooth.gif)
 
 ## 你将完成什么 \{#routes}
 
@@ -42,7 +70,7 @@ description: "在桌面四足 Quaddle 上，用 SmolVLA 高层决策 + 查表 CP
 | 低层运控 | 查表 CPG，50Hz，免学习（W2 标定） | 把档位变成四条腿的周期舵机目标 |
 | checkpoint | 保存下来的模型与训练状态 | 把当前学到的导航习惯存个档 |
 
-任务本身：桌面散布 red/green/blue 三个 5cm 立方积木，指令指定目标颜色，机器人从随机初始朝向出发，走到目标积木旁（<12cm）停下。非目标颜色积木同时在场景里，强迫策略学会颜色分辨。
+任务本身：桌面散布 red/green/blue 三个 5cm 立方积木，指令指定目标颜色，机器人从随机初始朝向出发，走到目标积木旁（&lt;12cm）停下。非目标颜色积木同时在场景里，强迫策略学会颜色分辨。
 
 ## 系统怎样分层 \{#architecture}
 
@@ -82,9 +110,9 @@ MuJoCo 物理（1kHz，闭链四连杆 + 滚轮足端，q=0 = 平衡站姿）
 | `quaddle-data/outputs/rollout*.gif` | v1/v3 闭环行为 GIF |
 | `~/.cache/huggingface/hub/` | smolvla_base（873MB）+ SmolVLM2（6.7GB），离线训练就绪 |
 
-:::note[为什么页面里没有嵌入 rollout 视频？]
+:::note[为什么本页不嵌入 cs123 基线的 rollout 视频？]
 
-数据集、检查点和 GIF 都在 `outputs/` 下，体积约 18GB，已被 `.gitignore` 排除，只在本机保留。本页不随仓库分发这些产物。按下面的步骤训练后，你会在自己的 `outputs/` 里得到对应的 GIF；页面展示素材与训练产物分开管理，和 [Quaddle 步行仿真](/docs/practices/quadruped/quaddle-mujoco)一课的做法一致。
+数据集、检查点和 cs123 基线的 rollout GIF 都在 `outputs/` 下，体积约 18GB，已被 `.gitignore` 排除，只在本机保留；按下面的步骤训练后，你会在自己的 `outputs/` 里得到对应的 GIF。上方[效果预览](#demos)里的视频是**主线最新成果**（已随仓库入库），与本页复现的基线分属两套环境/策略，两者不要混淆；验收数据与训练细节见[实施现状与计划](./progress.md)与[实验记录](./experiment-notes.md)。
 
 :::
 
@@ -92,7 +120,7 @@ MuJoCo 物理（1kHz，闭链四连杆 + 滚轮足端，q=0 = 平衡站姿）
 
 | 路径 | 内容 |
 | --- | --- |
-| `Petoi-Quaddle-VLA训练方案-10GB.md`（仓库根） | 总方案 + W1/W2/W5 执行记录 |
+| `Petoi-Quaddle-VLA训练方案-10GB.md`（仓库根，本地保留不入库） | 总方案 + W1/W2/W5 执行记录 |
 | `7.quaddle-mjcf/README.md` | MJCF 构建、验收、踩坑 |
 | `8.rl_quaddle/README.md` | RL 三轮迭代、CPG 控制器、评估报告 |
 | `quaddle-data/README.md` | 数据管线、SmolVLA 训练命令、W5 三轮评估 + 根因分析 |
@@ -203,4 +231,4 @@ GPU 14.7 steps/s 相对 CPU 约 395 倍。唯一注意：显存与用户其他�
 
 - 想看 v4 如何补“原地转”、与真机《细化方案》的逐维对照、以及 v5+ 任务考纲？查看[实验记录与 v5 路线图](./experiment-notes.md)。这些材料供复核和拓展使用，不是完成本课基线复现的前置要求。
 - 想理解低层 MJCF 闭链、平衡站姿与查表 CPG 的标定细节？读 `7.quaddle-mjcf/README.md` 与 `8.rl_quaddle/README.md`。
-- 总方案与 W1/W2/W5 执行记录见仓库根的 `Petoi-Quaddle-VLA训练方案-10GB.md`。
+- 总方案与 W1/W2/W5 执行记录见仓库根的 `Petoi-Quaddle-VLA训练方案-10GB.md`（本地保留，不入库）。

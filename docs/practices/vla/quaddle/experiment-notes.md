@@ -1,12 +1,12 @@
 ---
 title: "Quaddle VLA：实验记录与 v5 路线图"
 sidebar_position: 99
-displayed_sidebar: practicesOverviewSidebar
+displayed_sidebar: practicesQuadrupedSidebar
 ---
 
 # 实验记录与 v5 路线图
 
-这里保留 Quaddle VLA 的历史实验结果、v4 试验记录与后续路线。初次复现请从[Quaddle VLA 动手教程](./index.md)开始。本页接续仓库根的总方案 `Petoi-Quaddle-VLA训练方案-10GB.md`（W1/W2/W5 执行记录），并对照真机主线的《Quaddle_SmolVLA训练目标细化方案.md》（本地 Downloads，下文简称《细化方案》）。
+这里保留 Quaddle VLA 的历史实验结果、v4 试验记录与后续路线。初次复现请从[Quaddle VLA 动手教程](./index.md)开始。本页接续仓库根的总方案 `Petoi-Quaddle-VLA训练方案-10GB.md`（W1/W2/W5 执行记录；该文档本地保留、已不入库），并对照真机主线的《Quaddle_SmolVLA训练目标细化方案.md》（本地 Downloads，下文简称《细化方案》）。
 
 ## 如何理解这些记录 \{#how-to-read}
 
@@ -93,7 +93,7 @@ dist < 12cm                    → stop（成功）
 | 动作平滑正则 | 差分惩罚（保护舵机） | 不需要 | 档位空间 + amp ramp + 驻留已内置 |
 | 观测状态 | 4 维舵机角 | 8 维（舵机+vx/wz+**bearing/dist**） | bearing/dist 是特权信息：真机需外置相机定位求出，或让 VLA 从图像学（方案的“外置俯拍相机”路线兼容） |
 | flow matching 步数 | 推理 5~10 步 | 计划测 20 步 | v3 幅值保守教训支持多步；两种都测 |
-| 评估 | 每任务 20 次，L2≥70%，延迟 <100ms，平滑度指标 | seed 7000 固定 3 场景 | 方案统计力强，**扩到 20 episodes/任务**；延迟/平滑度真机阶段再测 |
+| 评估 | 每任务 20 次，L2≥70%，延迟 &lt;100ms，平滑度指标 | seed 7000 固定 3 场景 | 方案统计力强，**扩到 20 episodes/任务**；延迟/平滑度真机阶段再测 |
 | 周期与验收 | 4 周，L1≥90%/L2≥70%/L3≥50% | 单任务闭环 | 真机阶段按方案验收 |
 
 ### 2.3 《细化方案》可吸收清单（按成本排序）
@@ -179,7 +179,7 @@ PYTHONNOUSERSITE=1 MUJOCO_GL=egl LD_LIBRARY_PATH=/usr/local/nvidia/lib HF_HUB_OF
 
 ### 根因分析（诊断脚本 diag_ep0 实测）
 
-ep0 场景初始 bearing ≈ −161°（目标几乎正后方）。v3 诊断输出：模型方向正确（wz<0 右转）但强度不足（−0.47），且 **turn 档执行自带直行分量 → 弧线稳态中 bearing 恒定**（几何性质）→ 无限右弧。W5 当时归因为“动作空间缺纯原地转原语”；v4 进一步发现弧线档本身不可靠（见 §1.2），归因已修正。
+ep0 场景初始 bearing ≈ −161°（目标几乎正后方）。v3 诊断输出：模型方向正确（wz&lt;0 右转）但强度不足（−0.47），且 **turn 档执行自带直行分量 → 弧线稳态中 bearing 恒定**（几何性质）→ 无限右弧。W5 当时归因为“动作空间缺纯原地转原语”；v4 进一步发现弧线档本身不可靠（见 §1.2），归因已修正。
 
 ### 低层 RL 的存档结论
 
@@ -233,7 +233,7 @@ ep0 场景初始 bearing ≈ −161°（目标几乎正后方）。v3 诊断输�
 
 1. 数据分布：steer_R 32.1% / steer_L 23.5% / forward 44.1%，rear 区转向选择 48/48 对称——**数据健康 ✅**
 2. fm-steps 10 vs 20：逐档位统计完全一致——**积分步数假设否定 ✅**
-3. 量化器硬约束（vx<0 置零、|wz|>0.5 强制纯转向）：2/20 持平——**量化层排除 ✅**
+3. 量化器硬约束（vx&lt;0 置零、|wz|>0.5 强制纯转向）：2/20 持平——**量化层排除 ✅**
 4. 重规划间隔 2.5s → 0.5s：行为质变（单档锁死 → 出现方向修正，末距离 48→29cm）但仍 1/3——**推理机制部分改善，不达标**
 5. **训练观测直接喂模型**（policy.reset() 清 select_action 内部队列后）：**7 帧档位判别全对**——
    forward 帧 → (+1.01, +0.09)，steer 帧 → (−0.87, ±1.38)。模型本身在训练分布内是好的 ✅
@@ -256,7 +256,7 @@ ep0 场景初始 bearing ≈ −161°（目标几乎正后方）。v3 诊断输�
 ### 待验证假设与下一步（按成本排序）
 
 1. 训练欠拟合 → 12k-20k 步延长训练（loss 终值 0.105，需对比 loss 平台）
-2. 动作空间重设计：单通道档位编码（mode ∈ {−1,0,+1} 消除 vx/wz 联合外推空间）
+2. 动作空间重设计：单通道档位编码（`mode ∈ {−1,0,+1}` 消除 vx/wz 联合外推空间）
 3. 恢复数据扩量 + 覆盖更长自旋态（warmup 6s → 15-30s，配安全偏置防翻）
 4. 升级 lerobot 修 bf16 AMP（2x 提速，为 1-3 的多轮迭代降本）
 5. 观测表征：bearing/dist 特权信息可能被图像通道淹没，尝试 state-only 消融
@@ -341,13 +341,13 @@ ep0 场景初始 bearing ≈ −161°（目标几乎正后方）。v3 诊断输�
 
 ### 实现要点
 
-- **#3 1D 档位**：action=mode∈{−1,0,+1}={steer_R, forward/stop, steer_L}，消除 2D 联合外推区
-  （mode 负值=steer_R 合法，无原 vx<0 无执行器问题）。eval 量化阈值 ±0.5。
+- **#3 1D 档位**：`action=mode∈{−1,0,+1}={steer_R, forward/stop, steer_L}`，消除 2D 联合外推区
+  （mode 负值=steer_R 合法，无原 vx&lt;0 无执行器问题）。eval 量化阈值 ±0.5。
 - **lerobot 1D bug**：action_dim=1 时数据集把 singleton 维 squeeze 成 (B,50)，标准训练前向
   `prepare_action` 崩溃（mat1 1024×50 vs mat2 32×720）。绕过：`init_1d_v6.py` 用 `make_policy`
   只构造+加载权重（不前向）生成 1D 适配 step0 checkpoint，加速训练器读缓存 (N,50,1) 正常。
 - **#4 扩量恢复**：warmup 15-30s（原 1-6s）+ 转向档偏置 70%（诱发原地自旋 OOD 态，准原地转保持
-  远离目标）+ roll 防翻（body z 轴竖直分量<0.92 强制前进稳定）+ warmup 后距目标<20cm 丢弃
+  远离目标）+ roll 防翻（body z 轴竖直分量&lt;0.92 强制前进稳定）+ warmup 后距目标&lt;20cm 丢弃
   （避免 1 帧空 episode）。reg252/full352，action 均 1D。
 
 ### 结论与反思
@@ -420,12 +420,13 @@ scene.xml/gait.json 从未改动）。执行器限速+换档斜坡在空场景�
 
 <video controls playsInline preload="metadata" src={require('./figs/quaddle_L2_nav_ensemble_16of20.mp4').default} style={{width: '100%'}} />
 
-L2 导航 best：SmolVLA 18k + temporal ensembling（VLA 策略 rollout，斜视全场，960×720 50fps，2x 速；三次评测 17/17/16，首评 17/20=85%）
+L2 导航 best：SmolVLA 18k + temporal ensembling（VLA 策略 rollout，斜视全场，960×720 25fps、1x 真实速度、逐集指令标注；三次评测 17/17/16，首评 17/20=85%）
 
 **丝滑版（50fps 渲染）**：原始 GIF 为 10fps 显卡顿；改为每控制步渲染、50fps 播放后动作丝滑
 （同一 18k+ensembling 策略，6 集 5 胜）。提速需更快步态，但当前策略绑定训练步态，提速会伤导航，
-需在更快步态上重训（见下）。以上两张 GIF 均已做**播放期 3x 时间压缩 + 30fps 运动补偿插值**
-（2026-11-14，物理轨迹不变，见 [#gif-playback](#gif-playback)）。
+需在更快步态上重训（见下）。丝滑 GIF 已做**播放期 3x 时间压缩 + 30fps 运动补偿插值**
+（2026-11-14，物理轨迹不变，见 [#gif-playback](#gif-playback)）；上方定稿 mp4 最终版为
+**25fps、1x 真实速度、逐集指令标注**（2026-11-15，取代早前的 2x 速压缩版）。
 
 ![L2 导航丝滑版：50fps 渲染 + 播放 3x，动作连贯（VLA 策略 rollout）](./figs/quaddle_L2_nav_silky50.gif)
 
@@ -550,14 +551,14 @@ K/V 缓存把 ~30ms 计算换成 ~218ms I/O → 训练反慢 ~4x。**缓存类�
 | 层 | 实现 |
 |---|---|
 | 编排器（脚本级，确定性） | 指令解析 → 阶段计划："先红后蓝" = [nav(red), nav(blue)]；"看到绿停" = [nav(green) + stop 门控] |
-| 导航技能 | **原封不动复用 85% L2 资产**：18k ckpt + temporal ensembling（replan5/k=0.01）+ 原生训练短语 "walk to the {color} block" |
-| L3 反射层（subsumption） | 最近**非目标**块 <15cm 且在前方 → 转向避让 0.8s → 清集成缓冲交还技能（目标色块不误触发——相机可分辨颜色）|
-| L4 转向辅助 | task B 中 \|bearing\|>45° 即脚本转向、<31.5° 交还策略（贴块起步+大方位角是训练分布空洞）|
+| 导航技能 | **原封不动复用 85% L2 资产**：18k ckpt + temporal ensembling（replan5/k=0.01）+ 原生训练短语 "walk to the \{color\} block" |
+| L3 反射层（subsumption） | 最近**非目标**块 &lt;15cm 且在前方 → 转向避让 0.8s → 清集成缓冲交还技能（目标色块不误触发——相机可分辨颜色）|
+| L4 转向辅助 | task B 中 \|bearing\|>45° 即脚本转向、&lt;31.5° 交还策略（贴块起步+大方位角是训练分布空洞）|
 | 阶段切换/停停门控 | 与策略 state[6:8] 同源的目标状态接口（dist/bearing；真机对应目标色跟踪器）|
 
 判据与 RNG/场景协议逐字节镜像 `eval_l3.py` / `eval_l4.py`（同 seed 同 20 场景），apples-to-apples。
 
-### 结果（2026-11-15 高清重跑定稿：960×720 / 50fps mp4 直出，2x 速丝滑；策略噪声种子化 torch.manual_seed(7000)）
+### 结果（2026-11-15 高清重跑定稿：960×720 mp4 直出，25fps、1x 真实速度、逐集指令标注；策略噪声种子化 torch.manual_seed(7000)）
 
 | 任务 | 端到端基线 | 分解版 | 达标线 | 判定 |
 |---|---|---|---|---|
@@ -572,11 +573,11 @@ L2 同法三跑 17/17/16。）
 
 <video controls playsInline preload="metadata" src={require('./figs/quaddle_L3_decomposed_16of20.mp4').default} style={{width: '100%'}} />
 
-L3 避障分解版：L2 技能 + 非目标块反射层，20eps 16/20=80%（VLA 技能闭环，960×720 50fps，2x 速）
+L3 避障分解版：L2 技能 + 非目标块反射层，20eps 16/20=80%（VLA 技能闭环，960×720 25fps、1x 真实速度、逐集指令标注）
 
 <video controls playsInline preload="metadata" src={require('./figs/quaddle_L4_decomposed_17of20.mp4').default} style={{width: '100%'}} />
 
-L4 条件组合分解版：编排器 + L2 技能，看到绿停 10/10、先红后蓝 7/10，合计 17/20=85%（960×720 50fps，2x 速）
+L4 条件组合分解版：编排器 + L2 技能，看到绿停 10/10、先红后蓝 7/10，合计 17/20=85%（960×720 25fps、1x 真实速度、逐集指令标注）
 
 ### 关键发现
 

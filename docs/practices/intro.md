@@ -22,7 +22,7 @@ displayed_sidebar: practicesOverviewSidebar
 | 方向 | 项目数 | 适合 |
 |------|--------|------|
 | [机械臂](./robot-arm/placeholder) | 5 个 | VLA / 数据采集 / 模仿学习入门 |
-| [四足机器人](./quadruped/placeholder) | 5 个 | 强化学习 / 控制 / sim2real |
+| [四足机器人](./quadruped/placeholder) | 5 个 | 强化学习 / 控制 / VLA 导航 / sim2real |
 | [双足 / 人形](./humanoid/placeholder) | 1 个已上线，2 个规划中 | 进阶控制 / 强化学习 / 任务规划 |
 | [移动操作](./mobile-manipulation/placeholder) | 3 个 | 导航 + 操作综合 |
 | [轮足机器人](./wheel-legged/placeholder) | 预告 | 欠驱动平衡 / Isaac Lab / 跨仿真验证 |
@@ -51,6 +51,7 @@ displayed_sidebar: practicesOverviewSidebar
 | [DDPG Pusher](./robot-arm/ddpg-mujoco/pusher-v5) | 机械臂接触操作与奖励设计 | 可用 |
 | [ACT 双臂操作训练](./vla/act) | ALOHA、模仿学习、ACT、多回合评估 | 可用 |
 | [π₀.₅ + RECAP：LIBERO 复现](./vla/recap) | 价值模型、优势标注、ACP、LIBERO 评估 | 可用 |
+| [Petoi Quaddle VLA 导航训练](./vla/quaddle/) | SmolVLA 微调、CPG 低层运控、temporal ensembling、任务分解 | 可用 |
 | [Sim2Sim 验证](./quadruped/sim2sim/placeholder) | 跨仿真策略验证 | 施工中 |
 | [两轮足 Flamingo · Isaac Lab](./wheel-legged/flamingo-isaaclab/preview) | 轮足平衡、强化学习训练与跨仿真验证 | 课程预告 |
 
