@@ -33,4 +33,9 @@ codes/practices/quadruped/cs123/7.quaddle-mjcf/outputs/
 codes/practices/quadruped/cs123/8.rl_quaddle/outputs/
 codes/practices/vla/quaddle-data/outputs/
 
+# 本地文档（方案 / 交接 / 审阅报告，不入库）
+/Petoi-Quaddle-VLA训练方案-10GB.md
+/分支交接-master对比与提交清单.md
+/quaddle-handoff-v2-report.html
+
 specs
