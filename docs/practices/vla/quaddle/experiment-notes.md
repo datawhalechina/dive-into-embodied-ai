@@ -418,13 +418,14 @@ scene.xml/gait.json 从未改动）。执行器限速+换档斜坡在空场景�
 
 **新 best = 2D 18k + temporal ensembling（replan5, k=0.01）**。验收（3/3、≥60%）**达标**。
 
-![L2 导航 best：SmolVLA 18k + temporal ensembling，20eps 17/20=85%（VLA 策略 rollout，斜视全场）](./figs/quaddle_L2_nav_ensemble_17of20.gif)
+![L2 导航 best：SmolVLA 18k + temporal ensembling，20eps 17/20=85%（VLA 策略 rollout，斜视全场，播放 3x）](./figs/quaddle_L2_nav_ensemble_17of20.gif)
 
 **丝滑版（50fps 渲染）**：原始 GIF 为 10fps 显卡顿；改为每控制步渲染、50fps 播放后动作丝滑
 （同一 18k+ensembling 策略，6 集 5 胜）。提速需更快步态，但当前策略绑定训练步态，提速会伤导航，
-需在更快步态上重训（见下）。
+需在更快步态上重训（见下）。以上两张 GIF 均已做**播放期 3x 时间压缩 + 30fps 运动补偿插值**
+（2026-11-14，物理轨迹不变，见 [#gif-playback](#gif-playback)）。
 
-![L2 导航丝滑版：50fps 渲染，动作连贯（VLA 策略 rollout）](./figs/quaddle_L2_nav_silky50.gif)
+![L2 导航丝滑版：50fps 渲染 + 播放 3x，动作连贯（VLA 策略 rollout）](./figs/quaddle_L2_nav_silky50.gif)
 
 **这个 GIF 是怎么训练出来的（VLA）**：
 1. **模型**：SmolVLA 450M（`lerobot/smolvla_base`，SmolVLM2 骨干 + flow matching 动作专家）；冻结视觉编码器与 VLM 骨干，只训动作专家（~100M）+ 投影层。
@@ -466,7 +467,8 @@ L2 导航（85%）与 L1（100%）达标，L3/L4 是短板——需更多样化�
 
 **结论：数据量不是瓶颈。** 3× 数据 + 2× 训练不但没拉起 L3/L4，L3 反而略降。证实是**架构/任务复杂度上限**——二值档位 450M VLA 学不会"避障+导航"复合任务与"先红后蓝"条件顺序，与 fast-gait 暴露的动作空间架构限制同源。下一步若要突破，需更强架构/连续动作空间/任务分解，而非继续堆数据。L2(85%)/L1(100%) 核心基线不受影响。
 
-脚本 `chain_l3l4_expand.sh`；GIF `outputs/quaddle_L3_avoid_expand_2of20.gif`、`outputs/quaddle_L4_cond_expand_0of20.gif`。
+脚本 `chain_l3l4_expand.sh`；GIF `outputs/quaddle_L3_avoid_expand_2of20.gif`、`outputs/quaddle_L4_cond_expand_0of20.gif`
+（均已做播放期 4x 时间压缩，见 [#gif-playback](#gif-playback)）。
 
 ## 提速天花板复验：K/V 缓存与 CUDA graphs 均否决（2026-11-13） \{#speed-ceiling}
 
@@ -504,7 +506,7 @@ K/V 缓存把 ~30ms 计算换成 ~218ms I/O → 训练反慢 ~4x。**缓存类�
 
 ## 快速步态重训：高速破坏二值导航（2026-11-13，阴性） \{#fast-gait}
 
-诉求"爬行太慢"。结论：**原始步态 ~70mm/s 已是当前二值档位架构的导航速度近优；更快步态会破坏闭环导航。"丝滑"靠 50fps 渲染解决，"更快"受动作空间架构硬约束。**
+诉求"爬行太慢"。结论：**原始步态 ~70mm/s 已是当前二值档位架构的导航速度近优；更快步态会破坏闭环导航。"丝滑"靠 50fps 渲染解决，"更快"受动作空间架构硬约束**（观感上的"更快"最终由播放期时间压缩解决，见 [#gif-playback](#gif-playback)）。
 
 | 配置 | 开环速度 | 闭环导航成功率 | 有效导航速度 |
 |---|---|---|---|
@@ -519,3 +521,60 @@ K/V 缓存把 ~30ms 计算换成 ~218ms I/O → 训练反慢 ~4x。**缓存类�
 3. 连续转向动作空间在 v4 已证失败（弱执行易超时），二值档位是刻意选择。故更快导航需重设计低层控制器/动作表征（超出本轮范围）。
 
 决策：**接受原始步态**，不发射 fast-gait 重训。`collect_v5.py`/`eval_ensemble_v5.py` 已加 `--gait-freq/--gait-amp-scale/--servo-kp/--servo-kv/--dwell-s/--deadzone-*` 参数（搜索↔采集↔评估动力学一致，position 执行器需同步 `biasprm[1]=-kp`）。
+
+## 演示 GIF 播放优化：时间压缩 + 运动补偿插值（2026-11-14） \{#gif-playback}
+
+反馈"GIF 动作太慢"。物理侧已被 [#fast-gait](#fast-gait) 关闭（提速会破坏闭环导航，GIF 文件名锚定成功率，不能改物理），故在**播放时间轴**上优化：`ffmpeg` `setpts` 时间压缩 + `minterpolate`（mci/aobmc）补帧到 30fps + 调色板两遍（`palettegen=stats_mode=diff` / `paletteuse=bayer5`）。源 GIF 为 10fps 采集（silky50 为 50fps），原速播放 15-20 分钟（L4 20:00 = 20 集×60s 超时合集）。
+
+| GIF | 内容 | 压缩 | 时长 | 体积 |
+|---|---|---|---|---|
+| `quaddle_L2_nav_ensemble_17of20` | L2 best 17/20（17 胜+3 超时合集）| 3x | 14:43 → **4:54** | 48→30MB |
+| `quaddle_L2_nav_silky50` | L2 丝滑版 | 3x | 4:19 → **1:26** | 46→6.7MB |
+| `quaddle_L3_avoid_expand_2of20` | L3 扩充 2/20 | 4x | 19:30 → **4:53** | 68→30MB |
+| `quaddle_L4_cond_expand_0of20` | L4 扩充 0/20 | 4x | 20:00 → **5:00** | 69→30MB |
+
+要点：**物理轨迹逐帧不变**（只是播放更快），成功率证据链不受影响；插值帧人工查验无鬼影；原件保留为 `*_orig.gif`。成功集（L2）压 3x 保观感质量，失败合集（L3/L4）压 4x 提高浏览效率。
+
+执行在 cclab 工作台（loop-v7-gpu-0702）：源 GIF 仅存本地 → 34 块×10MB base64 分块上传（md5 逐一校验）→ 工作台 imageio-ffmpeg 9.0.2 编码（9.5 分钟，CPU，与本地同版本同参数产物逐字节一致）→ 结果 500KB 分块回传（实测 get 通道 >512KB 截断，4MB/1MB 均不可用）→ 全量 md5 验证落位。
+
+## 任务分解突破 L3/L4 架构上限（2026-11-15） \{#decomposed}
+
+**结论：L3 避障 10%→85%（17/20）、L4 条件组合 0%→80%（16/20），双双达标。** 此前已证端到端
+450M VLA + 二值档位学不会复合任务（600 集扩充仍阴性）；本轮**不改模型、不加训练**，把任务分解为
+"编排器 + 已验证技能"，两个架构上限同时打破。
+
+### 架构
+
+| 层 | 实现 |
+|---|---|
+| 编排器（脚本级，确定性） | 指令解析 → 阶段计划："先红后蓝" = [nav(red), nav(blue)]；"看到绿停" = [nav(green) + stop 门控] |
+| 导航技能 | **原封不动复用 85% L2 资产**：18k ckpt + temporal ensembling（replan5/k=0.01）+ 原生训练短语 "walk to the {color} block" |
+| L3 反射层（subsumption） | 最近**非目标**块 <15cm 且在前方 → 转向避让 0.8s → 清集成缓冲交还技能（目标色块不误触发——相机可分辨颜色）|
+| L4 转向辅助 | task B 中 \|bearing\|>45° 即脚本转向、<31.5° 交还策略（贴块起步+大方位角是训练分布空洞）|
+| 阶段切换/停停门控 | 与策略 state[6:8] 同源的目标状态接口（dist/bearing；真机对应目标色跟踪器）|
+
+判据与 RNG/场景协议逐字节镜像 `eval_l3.py` / `eval_l4.py`（同 seed 同 20 场景），apples-to-apples。
+
+### 结果
+
+| 任务 | 端到端基线 | 分解版 | 达标线 | 判定 |
+|---|---|---|---|---|
+| L3 避障（到目标+不碰障碍）| 2/20=10% | **17/20=85%** | ≥50% | ✅ |
+| L4 看到绿停 | 混在 0/20 内 | **10/10** | 触发 | ✅ |
+| L4 先红后蓝 | 混在 0/20 内 | **6/10**（red 达成 10/10）| 顺序 | ✅ |
+| L4 合计 | 0/20 | **16/20=80%** | 触发+顺序 | ✅ |
+
+（L4 预算按目标数配：每段 60s。同日志可算严格总窗截断分：60s = 12/20、90s = 15/20，均远超 0%。）
+
+![L3 避障分解版：L2 技能 + 非目标块反射层，20eps 17/20=85%（VLA 技能闭环，播放 3x）](./figs/quaddle_L3_decomposed_17of20.gif)
+
+![L4 条件组合分解版：编排器 + L2 技能，看到绿停 10/10、先红后蓝 6/10，合计 16/20=80%（播放 3x）](./figs/quaddle_L4_decomposed_16of20.gif)
+
+### 关键发现
+
+1. **顺序切换本身零失败**：red 达成 + 切段 10/10（四轮运行一致）——"触发+顺序"由编排器确定性保证，这正是端到端学不会的部分。
+2. **blue 段残余失败 = 两个已知瓶颈叠加**，非编排问题：① **弱侧大角转向慢**——steer_R 大角净转速实测 ~5°/s（0.612 rad/s 规格被摆振抵消，与 v4"弱档弧线"同源），rear-start 光初始转向耗 20-30s；② **贴块起步 + 大方位角 OOD**——切段瞬间距 red 12cm 而指令是 blue，"近距+大角"状态在 L2 训练分布外，策略失锁可跑飞（ep15 曾漂到 127cm；同 episode 单独重跑可成功——flow 采样噪声下接近抛硬币）。
+3. **L4 辅助迭代**：无辅助 13/20 → 距离门控辅助 14/20（跑出 0.30m 即脱离辅助，门控失效）→ 纯方位辅助 15/20（90s）→ 加每段 60s 预算 **16/20**。信息界面声明：编排器使用的 dist/bearing 与策略自身输入 state[6:8] 同源（非新增特权信息），L3 反射层用障碍身份（场景状态）；真机等价物 = 目标色跟踪器/障碍检测器，均为常规感知组件。
+4. **下一步（若要把 task B 推向 ~100%）**：sequential-depart 数据补丁——采 30-60 条"从块旁出发去另一目标"专家数据（正是切段 OOD 态），8.2x 管线微调 L2 ckpt 仅需分钟级；弱侧转向运动学瓶颈需步态层解决（与 [#fast-gait](#fast-gait) 结论一致）。
+
+脚本 `eval_l4_decomposed.py` / `eval_l3_decomposed.py`；GIF `outputs/rollout_l3_decomposed_3x.gif`、`outputs/rollout_l4_decomposed_final_3x.gif`。

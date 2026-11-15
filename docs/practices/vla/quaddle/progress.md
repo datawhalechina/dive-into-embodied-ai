@@ -1,4 +1,4 @@
-# Quaddle VLA 实施现状与计划（2026-11-14 更新）
+# Quaddle VLA 实施现状与计划（2026-11-15 更新）
 
 > 团队进度汇报文档。接续 [experiment-notes.md](./experiment-notes.md)（v4/v5 试验记录）。
 > 所有时间均为北京时间。
@@ -37,7 +37,7 @@ seed7000 3/3 + 20eps 17/20=85%（≥60%）。** 此前训练侧杠杆均失败�
 | 《细化方案》L2 导航 | ≥70% | 85% | ✅ |
 | rear 专项可靠 | 到达 | ensembling 下 rear 场景可达 | ✅ |
 | L1 指令跟随 ≥90% | ≥90% | 100% | ✅ |
-| L3 避障 / L4 组合 | ≥50% / 触发+顺序 | 10% / 0%（600集扩充仍阴性，架构上限）| ❌ |
+| L3 避障 / L4 组合 | ≥50% / 触发+顺序 | **85% / 80%**（任务分解，2026-11-15，[详见](./experiment-notes.md#decomposed)）| ✅ |
 | 真机交接 | 12 月 | 未开始 | ⬜ |
 
 **瓶颈与突破**：OOD 自旋 compounding error 曾使所有训练侧杠杆失败（加训练过拟合、
@@ -45,11 +45,27 @@ seed7000 3/3 + 20eps 17/20=85%（≥60%）。** 此前训练侧杠杆均失败�
 recency 加权平均，replan5/k=0.01）首次突破：平滑 chunk 间冲突、抑制自旋锁，20eps 17/20=85%。
 新 best = 2D 18k + ensembling。
 
-![L2 导航 best：SmolVLA 18k + temporal ensembling，20eps 17/20=85%（VLA 策略 rollout）](./figs/quaddle_L2_nav_ensemble_17of20.gif)
+![L2 导航 best：SmolVLA 18k + temporal ensembling，20eps 17/20=85%（VLA 策略 rollout，播放 3x）](./figs/quaddle_L2_nav_ensemble_17of20.gif)
 
 训练方法：SmolVLA 450M 冻结骨干只训动作专家；352 条 CPG 专家数据（252 常规+100 恢复）；
 batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembling（replan5/k=0.01）。
 详见 [experiment-notes.md](./experiment-notes.md#temporal-ensembling-突破-ood2026-11-13验收达标)。
+
+## 本轮总结（2026-11-15）：任务分解打破 L3/L4 架构上限
+
+**不改模型、不加训练**，仅把任务分解为"确定性编排器 + 已验证 L2 技能（85%）"，端到端路线卡死的两个
+进阶任务双双达标：**L3 避障 10%→85%（17/20，≥50% 达标）、L4 条件组合 0%→80%（16/20，触发+顺序达标；
+"看到绿停" 10/10、"先红后蓝" red 达成 10/10 + blue 6/10）**。判据/RNG/场景与基线逐字节一致（apples-to-apples）。
+
+| 维度 | 结论 |
+|---|---|
+| 顺序/触发逻辑 | 编排器确定性保证，切段 10/10 零失败——这正是端到端学不会的部分 |
+| blue 段残余失败（4/10）| 非编排问题：弱侧大角转向慢（净 ~5°/s）+ 贴块起步大方位角 OOD（训练分布空洞，flow 噪声下接近抛硬币）|
+| 信息界面 | 编排器/反射层使用的 dist/bearing/障碍身份与策略自身输入 state[6:8] 同源，非新增特权信息；真机等价物 = 目标色跟踪器/障碍检测器 |
+| L4 辅助迭代 | 无辅助 13/20 → 距离门控 14/20 → 纯方位 15/20 → +每段 60s 预算 **16/20** |
+
+**交付**：`eval_l4_decomposed.py` / `eval_l3_decomposed.py`；GIF `rollout_l3_decomposed_3x.gif` /
+`rollout_l4_decomposed_final_3x.gif`（figs/ 同步）。详见 [experiment-notes.md](./experiment-notes.md#decomposed)。
 
 ## 本轮总结（2026-11-14）
 
@@ -68,7 +84,7 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 1. **数据量/训练量不是瓶颈**：L3/L4 扩到 600 集（×3）+ 12k（×2）+ 后方过采样仍不达标，证实是二值档位 450M VLA 的**架构/任务复杂度上限**（与 fast-gait 同源）。突破需连续动作空间/更强模型/任务分解，而非堆数据。
 2. **8.2x 是无损提速天花板**：缓存类受 NAS I/O 限制（聚合读 ~600MB/s，K/V 每帧 4.1MB 喂不动），graphs 类只救 launch-bound 而本管线计算 bound（frozen_prefill 33ms + backward 29ms）。再提速需 FP8（数值风险）或蒸馏（换模型）。
 
-**交付**：6 张 GIF 在本地 `outputs/`（L2×2 / L3 / L4 / 步态 / 环境）；代码+文档 commit 本地 `233da00`+`5eca35a`（feat/quaddle-vla，按指示不推送）。详见 [experiment-notes.md](./experiment-notes.md) 的 `#speed-ceiling` / `#fast-gait` / `#l3l4-expand`。
+**交付**：6 张 GIF 在本地 `outputs/`（L2×2 / L3 / L4 / 步态 / 环境），其中 4 张演示 GIF 已做**播放期时间压缩**（L2 3x、L3/L4 4x，30fps 运动补偿插值，物理轨迹不变——14-20 分钟合集压到 1.5-5 分钟，详见 [experiment-notes.md](./experiment-notes.md#gif-playback)）；代码+文档 commit 本地 `233da00`+`5eca35a`（feat/quaddle-vla，按指示不推送）。详见 [experiment-notes.md](./experiment-notes.md) 的 `#speed-ceiling` / `#fast-gait` / `#l3l4-expand`。
 
 ## 二、技术方案（当前生效版本 v5）
 
@@ -82,6 +98,7 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 | **数据** | 4 worker 并行采集 252 条常规 + 100 条恢复数据 = **352 条 / ~137k 帧**（lerobot v3.0 格式，官方 aggregate 合并）|
 | **训练** | batch 32 / AdamW + cosine，导航 18k（best）；L1 6k / L3·L4 12k（8.2x 缓存管线，bf16）|
 | **算力** | cclab 工作台 loop-v7-gpu-0702：L20 24GB（缓存训练占用 3.4GB / util 100%）|
+| **任务分解（L3/L4）** | 确定性编排器（指令→阶段计划）+ L3 非目标块反射层 / L4 转向辅助，复用 L2 技能（18k+ensembling）；L3 **85%**、L4 **80%** |
 
 ## 三、实施现状（时间线 + 结果）
 
@@ -110,6 +127,9 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 | **L4 条件扩充** | 600集（×3）+训12k（×2）+60/40任务配比 | ✅ 阴性 | **0/20**（持平）——架构/任务复杂度上限 |
 | **环境统一文档** | 教程交叉引用+两套环境差异说明 | ✅ | index.md 已注明 cs123 弃用/quaddle-mujoco 生效 |
 | **真机 OpenCat 映射** | `opencat_bridge.py` 档位→kwkF/ktrL/ktrR/kbalance | ✅ 接口就绪 | 真机采数据/后训练待 12 月硬件 |
+| **GIF 播放优化** | 4 张演示 GIF 时间压缩（cclab 分块上传→ffmpeg 30fps 插值→分块回传，md5 全程校验；北京时间 23:35 完成）| ✅ | L2 3x / L3·L4 4x，时长 14-20min → 1.5-5min，物理轨迹不变（[详见](./experiment-notes.md#gif-playback)）|
+| **任务分解 L3** | L2 技能 + 非目标块反射层（判据/RNG 镜像基线）| ✅ **达标** | **17/20=85%**（基线 2/20；≥50% 线达标）|
+| **任务分解 L4** | 编排器 + L2 技能 + 转向辅助 + 每段 60s 预算（四轮迭代 13→14→15→16）| ✅ **达标** | **16/20=80%**（基线 0/20；触发 10/10、red 达成 10/10、blue 6/10）|
 
 ### v5.1-ext / 30k 关键结果（训练量单变量对照）
 
@@ -145,10 +165,11 @@ batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembl
 | 4 | 恢复数据扩量：warmup 6s → 15-30s + 防翻安全偏置 | 半天 | 覆盖更长自旋 OOD 态 |
 | 5 | 环境统一文档：教程页交叉引用 + 两套环境差异说明 | 30 分钟 | 防混淆 |
 
-**当前推荐路径（2026-11-14 更新）**：核心基线（L2 85% / L1 100%）已达标，**加训练/加数据路线均已证伪**
-（30k/43k 过拟合、#3 1D、#4 恢复、DAgger、L3/L4 扩量全阴性）。进阶项（L3/L4）与更快步态均触到
-**二值档位 450M VLA 的架构上限**。下一步若要进一步突破，方向是**架构改进**（连续动作空间 / 更强模型 /
-任务分解），而非继续堆数据或训练量。8.2x 加速管线使任何重采重训迭代保持在分钟级。
+**当前推荐路径（2026-11-15 更新）**：L2/L1/L3/L4 全部达标（85%/100%/85%/80%）。L3/L4 由**任务分解**
+达标（[experiment-notes #decomposed](./experiment-notes.md#decomposed)）；加训练/加数据路线此前均已证伪。
+剩余可做：① sequential-depart 数据补丁（采 30-60 条"从块旁出发去另一目标"专家数据微调 L2 ckpt，把 L4 task B
+6/10 推向 ~100%，8.2x 管线分钟级迭代）；② 弱侧转向运动学瓶颈需步态层解（与 #fast-gait 结论一致）；
+③ 真机 OpenCat 交接（12 月硬件）。
 
 ### 训练加速里程碑（2026-11-12）
 
