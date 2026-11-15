@@ -2,18 +2,29 @@
 
 任务：桌面上散布 3 个彩色积木（red/green/blue），指令指定目标颜色，
 机器人须走到该积木旁停下。专家用查表 CPG 控制器（`8.rl_quaddle/
-cpg_controller.py`，W2 交付物）做方位闭环：
+cpg_controller.py`，W2 交付物 + v4 spin 档）做方位闭环：
 
-    |bearing| < 25° 且 dist > 0.12m → forward
-    bearing > +25°                  → turn_left
-    bearing < -25°                  → turn_right
     dist < 0.12m                    → stop（成功）
+    |bearing| > deadzone(±12~40°)   → spin_left / spin_right（支点转，方向锁定）
+    否则                            → forward
+
+v4（W6，2026-11-11）相对 v3 的两处专家改动（expert_spin_smoke.py 闭环验证
+23/24 vs v3 2/24，详见该脚本头部注释）：
+1. 转向 100% 用支点转原语——差频弧线档 weak 表净转向≈0 且符号随机、
+   strong 表持续执行 2s 内翻倒，均不可靠；
+2. 切档最小驻留 0.4s——死区边界 spin↔forward 抖动会让 amp 斜坡反复清零，
+   腿部冲击是近目标翻倒的诱因。
 
 数据（fps=10，物理 1kHz / 控制 50Hz / 每 5 控制步记 1 帧）：
     observation.image  320×320 overhead RGB（固定俯视相机）
     observation.state  [4 舵机角, vx, wz, bearing, dist]（8 维）
-    action             [vx_dir, wz_dir] ∈ {-1,0,+1}²（档位指令）
+    action             [vx_dir, wz_dir, spin] ∈ {-1,0,+1}²×{0,1}
+                       forward=(1,0,0) spin_left=(0,+1,1) spin_right=(0,-1,1)
+                       stop=(0,0,0)
     task               "walk to the {color} block"
+
+初始朝向 50% 过采样"目标正后方"（bearing≈±180°，v3 均匀 yaw 下仅 1/3 覆盖
+且专家在该域大量翻倒被静默丢弃——v4 失败模式的主要来源）。
 
 失败 episode（翻倒/超时 45s）整段丢弃，不入库。
 
@@ -46,11 +57,13 @@ COLOR_RGBA = {"red": (0.9, 0.2, 0.2, 1), "green": (0.2, 0.8, 0.3, 1), "blue": (0
 OBJ_RNG = (0.28, 0.70)      # 目标极径范围（m）：更远 → 每条路径更多档位切换
 MIN_OBJ_GAP = 0.22          # 积木间最小间距
 SUCCESS_DIST = 0.12         # 到达判定（含 stop 滑行余量）
-# 专家死区每回合随机化（改进路径 1）：固定死区使 turn→forward 切换边界
+# 专家死区每回合随机化（改进路径 1）：固定死区使 spin→forward 切换边界
 # 在数据中过稀（v2 训练数据实际仍是固定 ±25°，ep0/1 转向锁死归因之一）
 BEARING_DEADZONE_MIN = math.radians(12.0)
 BEARING_DEADZONE_MAX = math.radians(40.0)
 BEARING_DEADZONE = math.radians(25.0)  # 保留兼容旧引用
+REAR_OVERSAMPLE = 0.5       # 初始朝向"目标正后方"过采样比例（v3 均匀 yaw 仅 1/3）
+DWELL_S = 0.4               # 切档最小驻留（防 amp 斜坡反复清零的抖动冲击）
 TIMEOUT_S = 45.0
 CTRL_HZ = 50
 DATA_HZ = 10                # 数据帧率
@@ -146,7 +159,7 @@ def main() -> None:
         "observation.images.camera3": {"dtype": "video", "shape": (IMG, IMG, 3),
                               "names": ["height", "width", "channel"]},
         "observation.state": {"dtype": "float32", "shape": (8,), "names": ["state"]},
-        "action": {"dtype": "float32", "shape": (2,), "names": ["action"]},
+        "action": {"dtype": "float32", "shape": (3,), "names": ["action"]},
     }
     ds_root = out_dir / "lerobot"
     if ds_root.exists():
@@ -177,7 +190,12 @@ def main() -> None:
         deadzone = float(rng.uniform(BEARING_DEADZONE_MIN, BEARING_DEADZONE_MAX))
         layout = random_layout(rng)
         target_xy = layout[COLORS.index(color)]
-        yaw0 = float(rng.uniform(-math.pi, math.pi))
+        th_t = math.atan2(target_xy[1], target_xy[0])
+        if rng.random() < REAR_OVERSAMPLE:
+            # 目标正后方（±30°）：home 前进=(sin yaw0, −cos yaw0)，差 −π/2 即背对
+            yaw0 = th_t - math.pi / 2 + rng.uniform(-math.radians(30), math.radians(30))
+        else:
+            yaw0 = float(rng.uniform(-math.pi, math.pi))
 
         # --- reset：home keyframe + 随机 yaw + 布点 + 沉降 ---
         mujoco.mj_resetDataKeyframe(model, data, 0)
@@ -203,6 +221,8 @@ def main() -> None:
         tgt = np.array([target_xy[0], target_xy[1], 0.0])
         frames: list[dict] = []
         success, t_sim = False, 0.0
+        skill0, last_switch_t = None, 0.0
+        spin_active, spin_dir = False, None
         while t_sim < TIMEOUT_S:
             r = data.body(body_id).xmat.reshape(3, 3)
             pos = data.body(body_id).xpos
@@ -212,22 +232,26 @@ def main() -> None:
             bearing = math.atan2(d_body[0], -d_body[1])  # 左正；前向 = -body_y
 
             if dist < SUCCESS_DIST:
-                skill, act = "stop", (0.0, 0.0)
+                skill, act = "stop", (0.0, 0.0, 0.0)
                 success = True
-            elif bearing > deadzone:
-                # 转向动作连续强度编码：bearing 越大越强（0.35~1.0），
-                # 匹配 flow matching 保守输出特性（W5 首测 ep0/1 弧线死循环归因）
-                strength = min(1.0, 0.35 + abs(bearing) / math.radians(90))
-                skill, act = "turn_left", (0.0, strength)
-            elif bearing < -deadzone:
-                strength = min(1.0, 0.35 + abs(bearing) / math.radians(90))
-                skill, act = "turn_right", (0.0, -strength)
+            elif abs(bearing) > deadzone:
+                # 支点转（方向锁定：近 ±180° 时 bearing 符号会被噪声翻转）
+                if not spin_active:
+                    spin_active, spin_dir = True, ("spin_left" if bearing > 0 else "spin_right")
+                skill, act = spin_dir, (0.0, 1.0 if bearing > 0 else -1.0, 1.0)
             else:
-                skill, act = "forward", (1.0, 0.0)
-            if skill.startswith("turn"):
-                ctrl.set_turn_skill(skill.split("_")[1], abs(act[1]))
-            else:
-                ctrl.set_skill(skill)
+                spin_active = False
+                skill, act = "forward", (1.0, 0.0, 0.0)
+
+            # 切档最小驻留（记录的动作跟随实际执行的档位，保证 obs-action 一致）
+            if (skill != skill0 and skill0 is not None
+                    and t_sim - last_switch_t < DWELL_S and skill != "stop"):
+                skill = skill0
+                act = {"forward": (1.0, 0.0, 0.0), "stop": (0.0, 0.0, 0.0),
+                       "spin_left": (0.0, 1.0, 1.0), "spin_right": (0.0, -1.0, 1.0)}[skill]
+            ctrl.set_skill(skill)
+            if skill != skill0:
+                skill0, last_switch_t = skill, t_sim
 
             for _ in range(n_ctrl_per_frame):
                 ctrl.step()

@@ -1,12 +1,14 @@
 """Quaddle 查表 CPG 控制器（W2 交付物，W3 数据采集的专家执行层）。
 
-设计对齐真机 OpenCat：离散技能档位（前进/后退/左转/右转/停），
+设计对齐真机 OpenCat：离散技能档位（前进/后退/左转/右转/原地转/停），
 每档是一组每腿 CPG 参数 (amp_deg, freq, phase0, skew)，相位钟全局连续，
 切档时幅值 0.3s 斜坡防冲击。速度幅值取自实测标定（滚轮足端模型，
 2026-11-08，见 scripts/wz_table_roller.json 与 README 版本记录）：
 
     forward    trot (0,π/2,0,π/2)  10.5° 2.5Hz skew−0.45  → vx ≈ +21 mm/s
     back       同上 skew+0.45                               → vx ≈ −46 mm/s
+    spin_left  左腿停摆 + 右腿 trot（支点转）               → wz ≈ +0.50 rad/s
+    spin_right 镜像                                        → wz ≈ −0.42 rad/s
     turn_left  左腿 1.5Hz / 右腿 2.5Hz（差频）               → wz ≈ +0.33 rad/s
     turn_right 左右互换                                      → wz ≈ −0.33 rad/s
     stop       amp 0                                        → 静止站姿
@@ -56,6 +58,19 @@ SKILLS = {
     "turn_right_strong": [
         (10.5, 3.0, 0.0, -0.45), (10.5, 1.0, math.pi / 2, -0.45),
         (10.5, 3.0, 0.0, -0.45), (10.5, 1.0, math.pi / 2, -0.45),
+    ],
+    # v4（2026-11-11）支点转/原地转：一侧腿停摆、另一侧 trot（OpenCat ktrL 机制
+    # 的仿真近似）。MuJoCo 3.8.1 实测 wz +0.50 / −0.42 rad/s，连续 10s roll<13°
+    # 不翻；滚轮单向棘轮下这是唯一可靠的转向原语——差频弧线档 weak 表净转向≈0
+    # 且符号随机（W2 仅标定了 strong 表），strong 表持续执行 2s 内翻倒，
+    # 专家闭环证据见 vla/quaddle-data/expert_spin_smoke.py（v4_spin 23/24 vs v3 2/24）。
+    "spin_left": [
+        (0.0, 2.5, 0.0, -0.45), (10.5, 2.5, math.pi / 2, -0.45),
+        (10.5, 2.5, 0.0, -0.45), (0.0, 2.5, math.pi / 2, -0.45),
+    ],
+    "spin_right": [
+        (10.5, 2.5, 0.0, -0.45), (0.0, 2.5, math.pi / 2, -0.45),
+        (0.0, 2.5, 0.0, -0.45), (10.5, 2.5, math.pi / 2, -0.45),
     ],
     "stop": [(0.0, 2.5, 0.0, 0.0)] * 4,
 }

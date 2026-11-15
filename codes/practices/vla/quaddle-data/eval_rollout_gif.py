@@ -29,14 +29,17 @@ sys.path.insert(0, str(CS123 / "8.rl_quaddle"))
 import mujoco  # noqa: E402
 
 
-def quantize(action2: np.ndarray) -> tuple[str, tuple[float, float]]:
-    """连续动作 → 技能：argmax 判别档位类型，转向保留连续强度。"""
-    vx, wz = float(action2[0]), float(action2[1])
+def quantize(action3: np.ndarray) -> tuple[str, tuple[float, float, float]]:
+    """连续动作 → 技能（v4 三维）：spin 旗标优先（支点转主转向原语），
+    其余沿用 argmax 相对判别（flow matching 输出幅值保守，绝对阈值会全判 stop）。"""
+    vx, wz, sp = float(action3[0]), float(action3[1]), float(action3[2])
+    if sp > 0.45 and abs(wz) > 0.15:
+        return ("spin_left", (0.0, 1.0, 1.0)) if wz > 0 else ("spin_right", (0.0, -1.0, 1.0))
     if max(abs(vx), abs(wz)) < 0.12:
-        return ("stop", (0.0, 0.0))
-    if abs(wz) >= abs(vx):
-        return ("turn_left", (0.0, abs(wz))) if wz > 0 else ("turn_right", (0.0, -abs(wz)))
-    return ("forward", (1.0, 0.0)) if vx > 0 else ("stop", (0.0, 0.0))
+        return ("stop", (0.0, 0.0, 0.0))
+    if abs(wz) >= abs(vx) and abs(wz) > 0.15:
+        return ("turn_left", (0.0, abs(wz), 0.0)) if wz > 0 else ("turn_right", (0.0, -abs(wz), 0.0))
+    return ("forward", (1.0, 0.0, 0.0)) if vx > 0 else ("stop", (0.0, 0.0, 0.0))
 
 
 def main() -> None:
@@ -47,6 +50,8 @@ def main() -> None:
     ap.add_argument("--seed", type=int, default=7000)
     ap.add_argument("--max-s", type=float, default=30.0)
     ap.add_argument("--gif-fps", type=int, default=10)
+    ap.add_argument("--fm-steps", type=int, default=0,
+                    help="flow matching 积分步数（0=用检查点默认 10；v4 试验 20）")
     args = ap.parse_args()
 
     import os
@@ -63,6 +68,14 @@ def main() -> None:
     cfg = PreTrainedConfig.from_pretrained(str(ckpt))
     policy = SmolVLAPolicy.from_pretrained(str(ckpt))
     policy.eval()
+    if args.fm_steps > 0:
+        fm_attr = next((a for a in ("num_steps", "n_steps", "num_inference_steps")
+                        if hasattr(policy.config, a)), None)
+        if fm_attr:
+            setattr(policy.config, fm_attr, args.fm_steps)
+            print(f"flow matching 步数: {fm_attr} = {args.fm_steps}")
+        else:
+            print("未找到 flow matching 步数配置项，忽略 --fm-steps")
     device = "cuda" if torch.cuda.is_available() else "cpu"
     pre, post = make_pre_post_processors(cfg, policy_cfg_type="smolvla", device=device)
 
@@ -130,6 +143,7 @@ def main() -> None:
         action_log = []
         success, fell = False, False
         t = 0.0
+        skill0, last_switch_t = None, 0.0  # 执行器切档驻留（与采集动力学一致）
         n_ctrl_per_gif_frame = int(50 // args.gif_fps)  # 每 GIF 帧 0.1s
         INFER_EVERY = 25  # 每 0.5s 重推理一次动作块
 
@@ -170,10 +184,16 @@ def main() -> None:
             act = chunk[0].float().cpu().numpy()
             chunk_i += 1
             skill, act_vec = quantize(act)
+            # 切档最小驻留 0.4s：spin↔forward 边界抖动会反复清零 amp 斜坡（采集侧同规则）
+            if (skill != skill0 and skill0 is not None
+                    and t - last_switch_t < 0.4 and skill != "stop"):
+                skill = skill0
             if skill.startswith("turn"):
                 ctrl.set_turn_skill(skill.split("_")[1], abs(act_vec[1]))
             else:
                 ctrl.set_skill(skill)
+            if skill != skill0:
+                skill0, last_switch_t = skill, t
             action_log.append(skill)
 
             for _ in range(5):  # 0.1s
