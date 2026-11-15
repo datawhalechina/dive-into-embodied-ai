@@ -16,6 +16,15 @@ BAD_LFS=""
 
 STAGED=$(git diff --cached --name-only --diff-filter=ACM)
 
+# During a merge, blobs byte-identical to the merged branch (MERGE_HEAD) were
+# already committed upstream — only content authored on this side needs the
+# size/LFS guards.
+UPSTREAM_HEAD=""
+MERGE_HEAD_PATH="$(git rev-parse --git-dir 2>/dev/null)/MERGE_HEAD"
+if [ -f "$MERGE_HEAD_PATH" ]; then
+  UPSTREAM_HEAD=$(cat "$MERGE_HEAD_PATH")
+fi
+
 IFS='
 '
 for f in $STAGED; do
@@ -24,6 +33,14 @@ for f in $STAGED; do
   case " $SKIP_FILES " in
     *" $f "*) continue ;;
   esac
+
+  if [ -n "$UPSTREAM_HEAD" ]; then
+    staged_blob=$(git rev-parse ":$f" 2>/dev/null) || staged_blob=""
+    upstream_blob=$(git rev-parse "$UPSTREAM_HEAD:$f" 2>/dev/null) || upstream_blob=""
+    if [ -n "$staged_blob" ] && [ "$staged_blob" = "$upstream_blob" ]; then
+      continue
+    fi
+  fi
 
   if git check-attr filter -- "$f" | grep -q "lfs"; then
     # File is declared as LFS in .gitattributes — make sure the *staged*
