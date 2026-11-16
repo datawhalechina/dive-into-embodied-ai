@@ -22,7 +22,7 @@ Verifica ambiente e obiettivi prima di iniziare. Conserva codice, parametri e ri
 | Direzione | Progetti | Adatta a |
 | --- | --- | --- |
 | [Serie bracci robotici](/docs/practices/robot-arm/placeholder) | 9 disponibili, 2 previsti | Controllo continuo, VLA, raccolta dati, imitazione e bracci reali |
-| [Serie quadrupedi](/docs/practices/quadruped/placeholder) | 3 disponibili, 2 previsti | Apprendimento per rinforzo, cinematica, andature e sim-to-real |
+| [Serie quadrupedi](/docs/practices/quadruped/placeholder) | 2 disponibili, 2 previsti | Apprendimento per rinforzo, cinematica, andature e sim-to-real |
 | [Serie bipedi](/docs/practices/humanoid/placeholder) | 5 disponibili, 3 previsti | Flamingo su Isaac Lab + CaT, PPO parallelo su GPU e curriculum multi-stadio |
 | [Manipolazione mobile](/docs/practices/mobile-manipulation/placeholder) | 3 previsti | Navigazione e manipolazione |
 

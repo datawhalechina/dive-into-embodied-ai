@@ -22,7 +22,7 @@ Before starting, check the environment and goals. Keep your code, parameters, an
 | Direction | Projects | Suitable for |
 | --- | --- | --- |
 | [Robot arm series](/docs/practices/robot-arm/placeholder) | 9 available, 2 planned | Continuous control, VLA, data collection, imitation learning, and real arms |
-| [Quadruped series](/docs/practices/quadruped/placeholder) | 3 available, 2 planned | Reinforcement learning, kinematics, gait control, and sim-to-real |
+| [Quadruped series](/docs/practices/quadruped/placeholder) | 2 available, 2 planned | Reinforcement learning, kinematics, gait control, and sim-to-real |
 | [Biped series](/docs/practices/humanoid/placeholder) | 5 available, 3 planned | Wheeled-biped Isaac Lab + CaT, parallel GPU PPO, and multi-stage curriculum learning |
 | [Mobile manipulation](/docs/practices/mobile-manipulation/placeholder) | 3 planned | Combining navigation and manipulation |
 
