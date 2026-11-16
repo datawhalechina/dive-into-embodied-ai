@@ -20,6 +20,7 @@ __pycache__
 codes/practices/quadruped/cs123/exercises/lab_6_rl_pupper/scripts/
 
 # Keep personal agent files private; share the root contributor guide.
+/AGENTS.override.md
 **/CLAUDE.md
 **/AGENTS.md
 !/AGENTS.md
