@@ -2,7 +2,7 @@
 
 set -eu
 
-REQUESTED_PORT="${1:-3001}"
+REQUESTED_PORT="${1:-3002}"
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 
 case "$REQUESTED_PORT" in
@@ -129,5 +129,14 @@ if is_port_in_use "$PORT"; then
   exit 1
 fi
 
-echo "==> Serving build output on http://localhost:${PORT}"
-exec ./node_modules/.bin/docusaurus serve --dir build --port "${PORT}"
+PREVIEW_HOST=$(node <<'NODE'
+const {networkInterfaces} = require('node:os');
+const addresses = Object.values(networkInterfaces()).flat()
+  .filter(info => info && !info.internal && info.family === 'IPv4')
+  .map(info => info.address)
+  .filter(address => /^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(address));
+console.log(addresses[0] ?? 'localhost');
+NODE
+)
+echo "==> Starting preview (Ctrl+C to stop)"
+exec ./node_modules/.bin/docusaurus serve --dir build --host "$PREVIEW_HOST" --port "$PORT" --no-open
