@@ -1,0 +1,203 @@
+[
+  {
+    "experiment": "advanced-simple3",
+    "episodes": [
+      {
+        "episode": 0,
+        "steps": 150,
+        "return": 346.4927607580315,
+        "destination_reached": true,
+        "is_collision": false,
+        "out_of_lane": false,
+        "time_exceeded": false,
+        "sensor_collisions": 0,
+        "observed_collision": false,
+        "runner_truncated": false,
+        "waiting_seconds_below_0.2mps": 0.30000000000000004,
+        "minimum_vehicle_center_distance_m": null,
+        "recorded_frames": 147,
+        "missing_camera_frames": 3,
+        "wall_seconds": 28.764705404173583,
+        "success": true
+      },
+      {
+        "episode": 1,
+        "steps": 155,
+        "return": 348.36685911098687,
+        "destination_reached": true,
+        "is_collision": false,
+        "out_of_lane": false,
+        "time_exceeded": false,
+        "sensor_collisions": 0,
+        "observed_collision": false,
+        "runner_truncated": false,
+        "waiting_seconds_below_0.2mps": 0.5,
+        "minimum_vehicle_center_distance_m": null,
+        "recorded_frames": 151,
+        "missing_camera_frames": 4,
+        "wall_seconds": 14.101569118909538,
+        "success": true
+      },
+      {
+        "episode": 2,
+        "steps": 145,
+        "return": 348.1384804408698,
+        "destination_reached": true,
+        "is_collision": false,
+        "out_of_lane": false,
+        "time_exceeded": false,
+        "sensor_collisions": 0,
+        "observed_collision": false,
+        "runner_truncated": false,
+        "waiting_seconds_below_0.2mps": 0.30000000000000004,
+        "minimum_vehicle_center_distance_m": null,
+        "recorded_frames": 141,
+        "missing_camera_frames": 4,
+        "wall_seconds": 12.852236376609653,
+        "success": true
+      }
+    ],
+    "cleanup_audits": [
+      [],
+      [],
+      []
+    ],
+    "prediction_windows": 9,
+    "prediction_mean_normalized_mae": 0.025084067121820732,
+    "hold_frame_mean_normalized_mae": 0.08962109288355956
+  },
+  {
+    "experiment": "advanced-transfer-medium3",
+    "episodes": [
+      {
+        "episode": 0,
+        "steps": 134,
+        "return": 31.13099710189215,
+        "destination_reached": false,
+        "is_collision": true,
+        "out_of_lane": false,
+        "time_exceeded": false,
+        "sensor_collisions": 1,
+        "observed_collision": true,
+        "runner_truncated": false,
+        "waiting_seconds_below_0.2mps": 0.30000000000000004,
+        "minimum_vehicle_center_distance_m": 3.4405157566070557,
+        "recorded_frames": 125,
+        "missing_camera_frames": 9,
+        "wall_seconds": 23.694314762949944,
+        "success": false
+      },
+      {
+        "episode": 1,
+        "steps": 139,
+        "return": -65.5619895105616,
+        "destination_reached": false,
+        "is_collision": true,
+        "out_of_lane": false,
+        "time_exceeded": false,
+        "sensor_collisions": 1,
+        "observed_collision": true,
+        "runner_truncated": false,
+        "waiting_seconds_below_0.2mps": 0.8,
+        "minimum_vehicle_center_distance_m": 3.6603169441223145,
+        "recorded_frames": 135,
+        "missing_camera_frames": 4,
+        "wall_seconds": 12.622884701006114,
+        "success": false
+      },
+      {
+        "episode": 2,
+        "steps": 159,
+        "return": 337.71713809077573,
+        "destination_reached": true,
+        "is_collision": false,
+        "out_of_lane": false,
+        "time_exceeded": false,
+        "sensor_collisions": 0,
+        "observed_collision": false,
+        "runner_truncated": false,
+        "waiting_seconds_below_0.2mps": 0.8,
+        "minimum_vehicle_center_distance_m": 4.965795516967773,
+        "recorded_frames": 149,
+        "missing_camera_frames": 10,
+        "wall_seconds": 13.422349979169667,
+        "success": true
+      }
+    ],
+    "cleanup_audits": [
+      [],
+      [],
+      []
+    ],
+    "prediction_windows": 9,
+    "prediction_mean_normalized_mae": 0.05115136089346682,
+    "hold_frame_mean_normalized_mae": 0.09217118966496653
+  },
+  {
+    "experiment": "advanced-matched-medium3",
+    "episodes": [
+      {
+        "episode": 0,
+        "steps": 135,
+        "return": 343.47102875538565,
+        "destination_reached": true,
+        "is_collision": false,
+        "out_of_lane": false,
+        "time_exceeded": false,
+        "sensor_collisions": 0,
+        "observed_collision": false,
+        "runner_truncated": false,
+        "waiting_seconds_below_0.2mps": 0.30000000000000004,
+        "minimum_vehicle_center_distance_m": 3.1207990646362305,
+        "recorded_frames": 126,
+        "missing_camera_frames": 9,
+        "wall_seconds": 23.356787268072367,
+        "success": true
+      },
+      {
+        "episode": 1,
+        "steps": 161,
+        "return": 350.86810883657756,
+        "destination_reached": true,
+        "is_collision": false,
+        "out_of_lane": false,
+        "time_exceeded": false,
+        "sensor_collisions": 0,
+        "observed_collision": false,
+        "runner_truncated": false,
+        "waiting_seconds_below_0.2mps": 0.8,
+        "minimum_vehicle_center_distance_m": 3.337610960006714,
+        "recorded_frames": 152,
+        "missing_camera_frames": 9,
+        "wall_seconds": 15.435931162908673,
+        "success": true
+      },
+      {
+        "episode": 2,
+        "steps": 142,
+        "return": 341.2329753233203,
+        "destination_reached": true,
+        "is_collision": false,
+        "out_of_lane": false,
+        "time_exceeded": false,
+        "sensor_collisions": 0,
+        "observed_collision": false,
+        "runner_truncated": false,
+        "waiting_seconds_below_0.2mps": 0.4,
+        "minimum_vehicle_center_distance_m": 3.3699285984039307,
+        "recorded_frames": 136,
+        "missing_camera_frames": 6,
+        "wall_seconds": 13.042433032300323,
+        "success": true
+      }
+    ],
+    "cleanup_audits": [
+      [],
+      [],
+      []
+    ],
+    "prediction_windows": 9,
+    "prediction_mean_normalized_mae": 0.03368621811322454,
+    "hold_frame_mean_normalized_mae": 0.09526371561352992
+  }
+]

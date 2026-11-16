@@ -1,0 +1,45 @@
+diff --git a/car_dreamer/toolkit/carla_manager/world_manager.py b/car_dreamer/toolkit/carla_manager/world_manager.py
+index bec496b..082a205 100644
+--- a/car_dreamer/toolkit/carla_manager/world_manager.py
++++ b/car_dreamer/toolkit/carla_manager/world_manager.py
+@@ -38,4 +38,8 @@ class WorldManager:
+         self._client = carla.Client("127.0.0.1", self._config.carla_port)
+-        self._client.set_timeout(20.0)
+-        self._world = self._client.load_world(self._config.town)
++        self._client.set_timeout(60.0)
++        current_world = self._client.get_world()
++        if current_world.get_map().name.rsplit("/", 1)[-1] == self._config.town:
++            self._world = current_world
++        else:
++            self._world = self._client.load_world(self._config.town)
+         self._map = self._world.get_map()
+diff --git a/dreamerv3/embodied/replay/__init__.py b/dreamerv3/embodied/replay/__init__.py
+index 4b5e0be..9ebf06b 100644
+--- a/dreamerv3/embodied/replay/__init__.py
++++ b/dreamerv3/embodied/replay/__init__.py
+@@ -1,8 +1,20 @@
++"""Load optional training replay backends only when requested."""
++from importlib import import_module
+ from . import limiters, selectors
+ from .generic import Generic
+-from .prioritized_experience_replay import PrioritizedExperienceReplay
+ from .replays import Uniform
+-from .reverb import Reverb
+-from .curious_replay import CuriousReplay
+-from .adversarial import AdversarialReplay
+-from .count_based import CountBasedReplay
++
++_OPTIONAL = {
++    'PrioritizedExperienceReplay': 'prioritized_experience_replay',
++    'Reverb': 'reverb',
++    'CuriousReplay': 'curious_replay',
++    'AdversarialReplay': 'adversarial',
++    'CountBasedReplay': 'count_based',
++}
++
++def __getattr__(name):
++    if name not in _OPTIONAL:
++        raise AttributeError(name)
++    value = getattr(import_module('.' + _OPTIONAL[name], __name__), name)
++    globals()[name] = value
++    return value
