@@ -22,7 +22,7 @@ Verifica ambiente e obiettivi prima di iniziare. Conserva codice, parametri e ri
 | Direzione | Progetti | Adatta a |
 | --- | --- | --- |
 | [Serie bracci robotici](/docs/practices/robot-arm/placeholder) | 9 disponibili, 2 previsti | Controllo continuo, VLA, raccolta dati, imitazione e bracci reali |
-| [Serie quadrupedi](/docs/practices/quadruped/placeholder) | 3 disponibili, 2 previsti | Apprendimento per rinforzo, cinematica, andature e sim-to-real |
+| [Serie quadrupedi](/docs/practices/quadruped/placeholder) | 3 disponibili, 2 previsti | Apprendimento per rinforzo, cinematica, andature, navigazione VLA e sim-to-real |
 | [Serie bipedi](/docs/practices/humanoid/placeholder) | 5 disponibili, 3 previsti | Flamingo su Isaac Lab + CaT, PPO parallelo su GPU e curriculum multi-stadio |
 | [Manipolazione mobile](/docs/practices/mobile-manipulation/placeholder) | 3 previsti | Navigazione e manipolazione |
 
@@ -51,6 +51,7 @@ Verifica ambiente e obiettivi prima di iniziare. Conserva codice, parametri e ri
 | [DDPG Pusher](/docs/practices/robot-arm/ddpg-mujoco/pusher-v5) | Contatto e progettazione delle ricompense | Disponibile |
 | [ACT bimanuale](/docs/practices/vla/act) | ALOHA, imitazione e valutazione su più episodi | Disponibile |
 | [π₀.₅ + RECAP: LIBERO](/docs/practices/vla/recap) | Modelli di valore, vantaggi, ACP e valutazione LIBERO | Disponibile |
+| [Navigazione VLA con Petoi Quaddle](/docs/practices/vla/quaddle/) | Fine-tuning di SmolVLA, controllo CPG, temporal ensembling e decomposizione dei compiti | Disponibile |
 | [Validazione Sim2Sim](/docs/practices/quadruped/sim2sim/placeholder) | Politiche tra simulatori | In sviluppo |
 | [Flamingo · Isaac Lab](/docs/practices/humanoid/flamingo-isaaclab/intro) | Equilibrio a 8 DoF, PPO vs CaT, esportazione ONNX e test Sim2Sim in MuJoCo | Panoramica e 6 capitoli disponibili |
 

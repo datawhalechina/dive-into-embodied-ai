@@ -68,13 +68,17 @@ def test_reward_components_ordering():
 
 
 def test_servo_actuation_moves_joint(env):
+    """CPG 输出周期运动；检查轨迹位移，避免末帧回到起点时误报。"""
     obs, _ = env.reset(seed=3)
     env._cmd[:] = [0.0, 0.0, 0.0]
     q0 = float(env.data.qpos[7])
+    peak_displacement = 0.0
     for _ in range(100):
-        env.step(np.full(6, 1.0))  # 满幅前偏
-    q1 = float(env.data.qpos[7])
-    assert abs(q1 - q0) > math.radians(3.0), f"舵机未动：Δ={math.degrees(q1 - q0):.1f}°"
+        _, _, terminated, truncated, _ = env.step(np.full(6, 1.0))  # 满幅 CPG
+        peak_displacement = max(peak_displacement, abs(float(env.data.qpos[7]) - q0))
+        if terminated or truncated:
+            break
+    assert peak_displacement > math.radians(3.0), f"舵机未动：峰值位移={math.degrees(peak_displacement):.1f}°"
 
 
 def test_termination_on_tip_over(env):

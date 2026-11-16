@@ -22,7 +22,7 @@ Before starting, check the environment and goals. Keep your code, parameters, an
 | Direction | Projects | Suitable for |
 | --- | --- | --- |
 | [Robot arm series](/docs/practices/robot-arm/placeholder) | 9 available, 2 planned | Continuous control, VLA, data collection, imitation learning, and real arms |
-| [Quadruped series](/docs/practices/quadruped/placeholder) | 3 available, 2 planned | Reinforcement learning, kinematics, gait control, and sim-to-real |
+| [Quadruped series](/docs/practices/quadruped/placeholder) | 3 available, 2 planned | Reinforcement learning, kinematics, gait control, VLA navigation, and sim-to-real |
 | [Biped series](/docs/practices/humanoid/placeholder) | 5 available, 3 planned | Wheeled-biped Isaac Lab + CaT, parallel GPU PPO, and multi-stage curriculum learning |
 | [Mobile manipulation](/docs/practices/mobile-manipulation/placeholder) | 3 planned | Combining navigation and manipulation |
 
@@ -51,6 +51,7 @@ Before starting, check the environment and goals. Keep your code, parameters, an
 | [DDPG Pusher](/docs/practices/robot-arm/ddpg-mujoco/pusher-v5) | Contact manipulation and reward design | Available |
 | [ACT bimanual training](/docs/practices/vla/act) | ALOHA, imitation learning, ACT, and evaluation over multiple episodes | Available |
 | [π₀.₅ + RECAP: LIBERO reproduction](/docs/practices/vla/recap) | Value models, advantage annotation, ACP, and LIBERO evaluation | Available |
+| [Petoi Quaddle VLA navigation training](/docs/practices/vla/quaddle/) | SmolVLA fine-tuning, low-level CPG control, temporal ensembling, and task decomposition | Available |
 | [Sim2Sim validation](/docs/practices/quadruped/sim2sim/placeholder) | Cross-simulator policy validation | In development |
 | [Flamingo wheeled biped · Isaac Lab](/docs/practices/humanoid/flamingo-isaaclab/intro) | 8-DoF wheeled-biped balance, PPO vs CaT, ONNX export, and MuJoCo Sim2Sim benchmarking | Overview and 6 chapters available |
 

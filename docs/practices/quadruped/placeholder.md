@@ -1,6 +1,6 @@
 ---
 title: "四足系列"
-description: "四足机器人项目总览：从零到一搭建四足机器人（CS123 仿真版）、Petoi Quaddle 四足步行仿真、Quaddle VLA 导航训练与 Pupper 强化学习实战。"
+description: "四足机器人项目总览：从零到一搭建四足机器人（CS123 仿真版）、Petoi Quaddle 四足步行仿真与 Quaddle VLA 导航训练。"
 sidebar_position: 1
 displayed_sidebar: practicesQuadrupedSidebar
 ---
@@ -16,14 +16,13 @@ displayed_sidebar: practicesQuadrupedSidebar
 | 分章主线 | [从零到一搭建四足机器人](./cs123/intro) | 沿着 8 章主线，从 MuJoCo 执行器、正逆运动学、Pupper 建模走到开环步态、PPO 训练、LLM 控制与视觉追球 |
 | 网页与多场景仿真 | [Petoi Quaddle 四足步行仿真](./quaddle-mujoco/) | 在浏览器里直接控制四舵机机器人行走与停止，学习闭环连杆适配、残差 PPO 训练与多地形实验分析 |
 | 语言视觉闭环 | [Petoi Quaddle VLA 导航训练](../vla/quaddle/) | 只凭语言指令与相机画面的自主导航：SmolVLA 高层决策 + 查表 CPG 低层运控，10GB 显存复现（L2 导航 90% / L3 避障 80% / L4 组合 85%） |
-| AMD 专区旗舰 | [玩转 Pupper 四足机器人](/docs/practices/amd/pupper-control/intro) | 在 AMD ROCm 平台上完成 Pupper 强化学习速度跟踪策略（Locomotion）与视觉-语言-动作（VLA）闭环实验 |
 | 跨仿真验证 | [Sim2Sim 验证](./sim2sim/placeholder) | 跨物理引擎策略迁移与一致性验证（施工中） |
 | 真机部署 | [Sim2Real 指南](./sim2real-guide/placeholder) | 从仿真策略到真实四足硬件的标定、安全保护与部署流程（施工中） |
 
 ## 🎬 典型演示 \{#demos}
 
-| [![CS123 四足步态对比](./cs123/figs/lab5_forward_gait_comparison.gif)](./cs123/intro)<br/>**[从零到一搭建四足机器人](./cs123/intro)**<br/>CS123 仿真版 · Walk / Pace / Bound / Gallop 步态对比 | [![PPO 强化学习步态策略对比](./cs123/figs/lab6_rl_comparison.gif)](./cs123/rl-gait)<br/>**[PPO 步态策略训练](./cs123/rl-gait)**<br/>MuJoCo + Stable-Baselines3 · 闭环平衡与速度跟踪 | [![AMD ROCm Pupper 速度指令切换演示](../amd/pupper-control/figs/rocm-command-demo.gif)](/docs/practices/amd/pupper-control/locomotion)<br/>**[Pupper Locomotion · ROCm](/docs/practices/amd/pupper-control/locomotion)**<br/>12 自由度残差策略 · 前进、转向与停止切换 |
-| :---: | :---: | :---: |
+| [![CS123 四足步态对比](./cs123/figs/lab5_forward_gait_comparison.gif)](./cs123/intro)<br/>**[从零到一搭建四足机器人](./cs123/intro)**<br/>CS123 仿真版 · Walk / Pace / Bound / Gallop 步态对比 | [![PPO 强化学习步态策略对比](./cs123/figs/lab6_rl_comparison.gif)](./cs123/rl-gait)<br/>**[PPO 步态策略训练](./cs123/rl-gait)**<br/>MuJoCo + Stable-Baselines3 · 闭环平衡与速度跟踪 |
+| :---: | :---: |
 
 ### 从零到一搭建四足机器人 · 分章典型 GIF \{#cs123-gifs}
 
@@ -77,13 +76,3 @@ displayed_sidebar: practicesQuadrupedSidebar
 | [VLA 导航：10GB 显存训一个策略](../vla/quaddle/) | 数据采集 → SmolVLA 微调 → 闭环评估的复现路线；效果预览（L2 导航 90%）与能力边界 |
 | [实验记录与 v5 路线图](../vla/quaddle/experiment-notes) | v4/v5/v6 全部试验（含阴性结果）；temporal ensembling 突破与 8.2x 训练加速 |
 | [实施现状与计划](../vla/quaddle/progress) | L1-L4 验收进度、任务分解（L3 避障 80% / L4 组合 85%）与真机交接计划 |
-
-### 4. 玩转 Pupper 四足机器人（AMD 专区） \{#pupper-amd}
-
-在《从零到一搭建四足机器人》的基础上，面向 AMD ROCm 平台展开强化学习运动控制与多模态具身智能实验。
-
-| 篇章 | 内容 |
-| :--- | :--- |
-| [项目导览](/docs/practices/amd/pupper-control/intro) | 实验主线、环境边界与交付要求 |
-| [Pupper Locomotion｜强化学习运动策略](/docs/practices/amd/pupper-control/locomotion) | ROCm + PyTorch + PPO 速度指令跟踪 `(vx, vy, wz)`、长训曲线与基准评测 |
-| [Pupper VLA｜视觉-语言-动作智能](/docs/practices/amd/pupper-control/vla) | 串联相机感知、自然语言理解与底层运动技能接口，完成寻球导航任务 |
