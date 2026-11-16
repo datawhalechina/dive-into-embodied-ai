@@ -1,0 +1,101 @@
+{
+  "legs": {
+    "lf": {
+      "thigh_home_deg": 6.9499999999999975,
+      "psi_deg": 6.9499999999999975,
+      "sigma_deg": 0.0,
+      "lam_deg": 0.0,
+      "closure_residual_x_m": 0.0018900796076442156,
+      "closure_residual_yz_m": 1.835879324567132e-08,
+      "foot_body_frame": [
+        0.023373896248678198,
+        -0.06060845307752491,
+        -0.04536518480470508
+      ],
+      "wheel_body_frame": [
+        0.023373861315111807,
+        -0.0584783423313571,
+        -0.04117554997362015
+      ]
+    },
+    "rf": {
+      "thigh_home_deg": 6.9499999999999975,
+      "psi_deg": 6.9499999999999975,
+      "sigma_deg": 0.0,
+      "lam_deg": 0.0,
+      "closure_residual_x_m": -0.0018900745234595728,
+      "closure_residual_yz_m": 2.046826192075598e-08,
+      "foot_body_frame": [
+        -0.03390685030083845,
+        -0.04814628294877392,
+        -0.04906522523632126
+      ],
+      "wheel_body_frame": [
+        -0.03390681394103919,
+        -0.04708501711380826,
+        -0.04448656531924808
+      ]
+    },
+    "rb": {
+      "thigh_home_deg": 40.0,
+      "psi_deg": 40.0,
+      "sigma_deg": 0.0,
+      "lam_deg": 0.0,
+      "closure_residual_x_m": -0.0018899153082479608,
+      "closure_residual_yz_m": 1.0204725417795197e-08,
+      "foot_body_frame": [
+        -0.033906674869765036,
+        0.04668766430435126,
+        -0.04537359421600656
+      ],
+      "wheel_body_frame": [
+        -0.033906652741965054,
+        0.04508014498979389,
+        -0.04095700124598596
+      ]
+    },
+    "lb": {
+      "thigh_home_deg": -40.0,
+      "psi_deg": -40.0,
+      "sigma_deg": 0.0,
+      "lam_deg": 0.0,
+      "closure_residual_x_m": 0.0018900796077253312,
+      "closure_residual_yz_m": 2.4787972466948496e-08,
+      "foot_body_frame": [
+        0.023373739080767935,
+        0.04668764051636874,
+        -0.045373602285228555
+      ],
+      "wheel_body_frame": [
+        0.023373717042619566,
+        0.04508012120165913,
+        -0.04095700931526292
+      ]
+    }
+  },
+  "spawn_z": 0.06,
+  "balanced_stand": {
+    "back_legs_deg": 40.0,
+    "front_legs_adj_deg": 6.9499999999999975,
+    "front_back_foot_z_diff_m": 8.417480523471854e-06
+  },
+  "total_mass_kg": 0.188253,
+  "meshes": [
+    "batterie_model_bl_5c.stl",
+    "battery_cap_thin.stl",
+    "bearing.stl",
+    "body.stl",
+    "body_bar.stl",
+    "gear.stl",
+    "leg.stl",
+    "leg_right.stl",
+    "lego_top_cap.stl",
+    "lower4wheel.stl",
+    "motor_arm.stl",
+    "power_cap.stl",
+    "screw_servo.stl",
+    "thigh.stl",
+    "thigh_right.stl",
+    "tip_wheel.stl"
+  ]
+}

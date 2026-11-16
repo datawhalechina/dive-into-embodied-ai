@@ -80,6 +80,18 @@
   "sidebar.practicesQuadrupedSidebar.category.Petoi Quaddle 四足步行仿真": {
     "message": "Simulazione di camminata Petoi Quaddle"
   },
+  "sidebar.practicesQuadrupedSidebar.category.Petoi Quaddle VLA 导航训练": {
+    "message": "Navigazione VLA con Petoi Quaddle"
+  },
+  "sidebar.practicesQuadrupedSidebar.doc.VLA 导航：10GB 显存训一个策略": {
+    "message": "Navigazione VLA: addestrare una politica con 10GB di VRAM"
+  },
+  "sidebar.practicesQuadrupedSidebar.doc.实验记录与 v5 路线图": {
+    "message": "Note sperimentali e roadmap v5"
+  },
+  "sidebar.practicesQuadrupedSidebar.doc.实施现状与计划": {
+    "message": "Stato di implementazione e piani"
+  },
   "sidebar.practicesCs123CourseSidebar.link.← 项目实战": {
     "message": "← Progetti"
   },

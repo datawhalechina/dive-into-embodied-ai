@@ -1,0 +1,233 @@
+---
+title: "Quaddle VLA 实施现状与计划"
+displayed_sidebar: practicesQuadrupedSidebar
+---
+
+# Quaddle VLA 实施现状与计划（2026-11-15 更新）
+
+> 团队进度汇报文档。接续 [experiment-notes.md](./experiment-notes.md)（v4/v5 试验记录）。
+> 所有时间均为北京时间。
+
+---
+
+## 一、项目目标
+
+让 Petoi Quaddle（4 舵机桌面四足）在 MuJoCo 仿真中实现**语言指令驱动的视觉导航**：
+听懂 "walk to the \{color\} block"，从任意初始朝向（含目标正后方）自主走到指定颜色
+积木旁（12cm 内）停下。验收指标：**seed 7000 三场景闭环成功率 3/3，20 episodes
+扩展统计 ≥60%**（基线 v1-v3：1/3，rear 场景全失败）。
+
+### 目标达成对齐（2026-11-13 更新）
+
+**结论：验收达标 🎯 —— 2D 18k + 评估期 temporal ensembling（无需重训）实现
+seed7000 3/3 + 20eps 17/20=85%（≥60%）。** 此前训练侧杠杆均失败，评估期 ACT 式时间集成
+（重叠 chunk recency 加权平均）首次突破 OOD 自旋 compounding error。
+
+✅ 已达成：
+
+| 能力 | 证据 |
+|---|---|
+| 语言→视觉导航核心能力成立 | 成功例覆盖红/绿/蓝三色；ep2 blue 多版稳定 ~2.8s 到达 |
+| 部分 rear/任意朝向处理 | 从 v3"rear 全失败"进步到"先转向再直行"混合导航 |
+| 顺畅稳定底层行走 | 原始步态（kp=0.15）upright、69.8mm/s、弹跳 0.86mm，无需改模型 |
+| 全自动训练-评估管线 + 8.2x 加速 | 采集→训练→评估闭环；30k 续训 ~13min |
+| 任务可解性上界 | 脚本专家 21/21 到达——任务可解，差距在 learned policy |
+
+✅ 验收达标（2D 18k + temporal ensembling，无需重训）+ 其余待办：
+
+| 目标 | 要求 | 当前最佳 | 状态 |
+|---|---|---|---|
+| seed7000 三场景 | 3/3 | 3/3（ensembling）| ✅ |
+| 20eps 扩展 | ≥60% | **18/20=90%**（18k+ensembling+seq-depart 微调；微调前三跑 17/17/16）| ✅ |
+| 《细化方案》L2 导航 | ≥70% | **90%** | ✅ |
+| rear 专项可靠 | 到达 | ensembling 下 rear 场景可达 | ✅ |
+| L1 指令跟随 ≥90% | ≥90% | 100% | ✅ |
+| L3 避障 / L4 组合 | ≥50% / 触发+顺序 | **80% / 85%**（任务分解，2026-11-15，[详见](./experiment-notes.md#decomposed)）| ✅ |
+| 真机交接 | 12 月 | 未开始 | ⬜ |
+
+**瓶颈与突破**：OOD 自旋 compounding error 曾使所有训练侧杠杆失败（加训练过拟合、
+#3 1D、#4 开环恢复、DAgger 均 ≤3/20）。**评估期 ACT 式 temporal ensembling**（重叠 chunk
+recency 加权平均，replan5/k=0.01）首次突破：平滑 chunk 间冲突、抑制自旋锁，20eps 17/20=85%。
+新 best = 2D 18k + ensembling。
+
+<video controls playsInline preload="metadata" src={require('./figs/quaddle_L2_nav_ensemble_16of20.mp4').default} style={{width: '100%'}} />
+
+L2 导航 best：SmolVLA 18k + temporal ensembling + seq-depart 微调（VLA 策略 rollout，960×720 25fps、1x 真实速度、逐集指令标注；
+18k+ensembling 三次评测 17/17/16——GPU 非确定内核致 ±1 集波动，首评 17/20=85%）
+
+训练方法：SmolVLA 450M 冻结骨干只训动作专家；352 条 CPG 专家数据（252 常规+100 恢复）；
+batch32/AdamW+cosine 18k 步（8.2x 加速管线）；评估期 temporal ensembling（replan5/k=0.01）。
+详见 [experiment-notes.md](./experiment-notes.md#temporal-ensembling-突破-ood2026-11-13验收达标)。
+
+**丝滑版（50fps 渲染 + 3x 播放）**：同一策略的快速浏览版，动作连贯；播放期时间压缩只改播放速度、
+物理轨迹不变（详见 [experiment-notes.md#gif-playback](./experiment-notes.md#gif-playback)）。
+
+![L2 导航丝滑版：50fps 渲染 + 播放 3x，动作连贯（VLA 策略 rollout）](./figs/quaddle_L2_nav_silky50.gif)
+
+**非 VLA 对照（低层步态，无策略）**：原始 CPG 步态开环前进（kp=0.15，upright、69.8mm/s、弹跳 0.86mm），
+证明底层行走顺畅、模型无需修改。
+
+![原始 CPG 步态开环前进——低层运控演示，非 VLA](./figs/quaddle_gait_orig_smooth.gif)
+
+## 本轮总结（2026-11-15）：任务分解打破 L3/L4 架构上限
+
+**不改模型、不加训练**，仅把任务分解为"确定性编排器 + 已验证 L2 技能（85%）"，端到端路线卡死的两个
+进阶任务双双达标：**L3 避障 10%→80%（16/20，≥50% 达标）、L4 条件组合 0%→85%（17/20，触发+顺序达标；
+"看到绿停" 10/10、"先红后蓝" red 达成 10/10 + blue 7/10）**。判据/RNG/场景与基线逐字节一致（apples-to-apples）。
+评估以**高清定稿跑**为准：960×720 mp4 直出（25fps、1x 真实速度、逐集指令标注）、策略噪声种子化。注意：种子固定采样，
+但 GPU 非确定内核仍致跨跑 **±1 集**波动（三次实测 L2 17/17/16、L4 16/17/17），达标余量充足。
+
+| 维度 | 结论 |
+|---|---|
+| 顺序/触发逻辑 | 编排器确定性保证，切段 10/10 零失败——这正是端到端学不会的部分 |
+| blue 段残余失败（3/10）| 非编排问题：弱侧大角转向慢（净 ~5°/s）+ 贴块起步大方位角 OOD（训练分布空洞，flow 噪声下接近抛硬币）|
+| 信息界面 | 编排器/反射层使用的 dist/bearing/障碍身份与策略自身输入 state[6:8] 同源，非新增特权信息；真机等价物 = 目标色跟踪器/障碍检测器 |
+| L4 辅助迭代 | 无辅助 13/20 → 距离门控 14/20 → 纯方位 15/20 → +每段 60s 预算 16/20 → 高清定稿 **17/20** |
+
+<video controls playsInline preload="metadata" src={require('./figs/quaddle_L3_decomposed_16of20.mp4').default} style={{width: '100%'}} />
+
+L3 避障分解版：L2 技能 + 非目标块反射层，20eps 16/20=80%（VLA 技能闭环，960×720 25fps、1x 真实速度、逐集指令标注）
+
+<video controls playsInline preload="metadata" src={require('./figs/quaddle_L4_decomposed_17of20.mp4').default} style={{width: '100%'}} />
+
+L4 条件组合分解版：编排器 + L2 技能，看到绿停 10/10、先红后蓝 7/10，合计 17/20=85%（960×720 25fps、1x 真实速度、逐集指令标注）
+
+**交付**：`eval_l4_decomposed.py` / `eval_l3_decomposed.py`；高清成品 `figs/quaddle_L3_decomposed_16of20.mp4`（22.9MB）、
+`figs/quaddle_L4_decomposed_17of20.mp4`（32.8MB）、`figs/quaddle_L2_nav_ensemble_16of20.mp4`（20.6MB，1x 真实速度版）。
+**追加（同日）**：sequential-depart 数据补丁（48 条"刚到站→异色目标"专家数据 + 续训 22k 步）——
+**L2 回归评估 18/20=90%（新最佳）**，L4 持平 17/20；残余 3 败定性为运动学瓶颈（详见
+[experiment-notes.md](./experiment-notes.md#seq-depart)）。
+
+## 本轮总结（2026-11-14）
+
+**核心基线达标，进阶项与提速均探到明确边界。** 本轮把"还能更快/更强吗"系统验证到底：
+
+| 维度 | 结论 | 证据 |
+|---|---|---|
+| **L2 导航** | ✅ 85% 达标 | 18k + temporal ensembling，seed7000 3/3 + 20eps 17/20 |
+| **L1 指令跟随** | ✅ 100% 达标 | 语言→档位映射 |
+| **L3 避障** | ❌ 10%（架构上限）| 200集15% → 600集10%，数据×3+训练×2 反略降 |
+| **L4 条件组合** | ❌ 0%（架构上限）| 200集0% → 600集0%，持平 |
+| **训练提速** | 8.2x 安全天花板 | K/V 缓存（NAS I/O 反慢 4x）、CUDA graphs（计算 bound 无收益+数值漂移）均实测否决 |
+| **步态速度** | 接受原始步态 ~70mm/s | 开环可达 108mm/s 但高速破坏二值闭环导航（~24%），原始近优 |
+
+**两条关键定论：**
+1. **数据量/训练量不是瓶颈**：L3/L4 扩到 600 集（×3）+ 12k（×2）+ 后方过采样仍不达标，证实是二值档位 450M VLA 的**架构/任务复杂度上限**（与 fast-gait 同源）。突破需连续动作空间/更强模型/任务分解，而非堆数据。
+2. **8.2x 是无损提速天花板**：缓存类受 NAS I/O 限制（聚合读 ~600MB/s，K/V 每帧 4.1MB 喂不动），graphs 类只救 launch-bound 而本管线计算 bound（frozen_prefill 33ms + backward 29ms）。再提速需 FP8（数值风险）或蒸馏（换模型）。
+
+**交付**：6 张 GIF 在本地 `outputs/`（L2×2 / L3 / L4 / 步态 / 环境），其中 4 张演示 GIF 已做**播放期时间压缩**（L2 3x、L3/L4 4x，30fps 运动补偿插值，物理轨迹不变——14-20 分钟合集压到 1.5-5 分钟，详见 [experiment-notes.md](./experiment-notes.md#gif-playback)）；代码+文档 commit 本地 `233da00`+`5eca35a`（feat/quaddle-vla，按指示不推送）。详见 [experiment-notes.md](./experiment-notes.md) 的 `#speed-ceiling` / `#fast-gait` / `#l3l4-expand`。
+
+## 二、技术方案（当前生效版本 v5）
+
+| 层 | 方案 |
+|---|---|
+| **模型** | SmolVLA 450M（`lerobot/smolvla_base`：SmolVLM2 骨干 + flow matching 动作专家），LeRobot 0.6.1 微调 |
+| **微调范围** | 冻结视觉编码器与 VLM 骨干（~350M），只训动作专家 + 投影层（**~100M**，实测 99.88M/450M 可训）|
+| **环境** | 《Quaddle 入门》MuJoCo 环境（`quaddle-mujoco`，官方 URDF 自建，MuJoCo 3.8.1），3 积木 + 3 相机（俯视/前视/斜视）320²，EGL GPU 渲染 |
+| **动作空间** | 2 维 `[vx_dir, wz_dir]`：forward=(1,0)、steer_left=(0,1)、steer_right=(0,−1)、stop=(0,0)——环境原生 duty 不对称转向（0.6-1.2 rad/s 准原地转） |
+| **专家** | 查表 CPG 方位闭环：死区 ±12-40° 随机 + 0.4s 切档驻留 + 50% rear 过采样 |
+| **数据** | 352 条常规+恢复（~137k 帧）+ 48 条 seq-depart 补丁 = **400 条**（lerobot v3.0 格式，官方 aggregate 合并）|
+| **训练** | batch 32 / AdamW + cosine，导航 18k（best）；L1 6k / L3·L4 12k（8.2x 缓存管线，bf16）|
+| **算力** | cclab 工作台 loop-v7-gpu-0702：L20 24GB（缓存训练占用 3.4GB / util 100%）|
+| **任务分解（L3/L4）** | 确定性编排器（指令→阶段计划）+ L3 非目标块反射层 / L4 转向辅助，复用 L2 技能（18k+ensembling）；L3 **80%**、L4 **85%** |
+
+## 三、实施现状（时间线 + 结果）
+
+| 阶段 | 内容 | 状态 | 结果 |
+|---|---|---|---|
+| W1-W4（11-07~11） | cs123 环境：MJCF 构建 / CPG 标定 / 400 条数据 / SmolVLA 三轮训练 | ✅ | 基线 1/3（rear 全失败）；发现转向原语缺陷 |
+| v4（11-11） | spin 原语 + 3 维动作 + 400 条（cs123 环境）| ⏹ 中止 | 专家验证 23/24 ✅；训练 40% 时环境统一决策，归档 |
+| **环境迁移** | VLA 管线迁移到《Quaddle 入门》环境 | ✅ | 结构兼容、转向重扫描、专家重验证 |
+| v5 转向扫描 | 7 候选步态开环扫描 | ✅ | steer_L 1.22 / steer_R 0.61 rad/s；pivot 不迁移 |
+| v5 专家闭环 | 两 seed × 21 场景 | ✅ | **21/21 到达、零翻倒** |
+| v5 数据 | 4 worker × 63 条 = 252 条 | ✅ | 90k 帧，成功率 87.5% |
+| v5 训练+评估 | batch32 / 6k 步 | ✅ | **seed 7000 1/3，20 eps 2/20** |
+| 五轮诊断 | 数据/fm/量化/重规划/训练观测 | ✅ | 根因：**OOD 自旋转状态坍缩**（详见 experiment-notes）|
+| v5.1 恢复数据 | +100 条恢复数据重训 | ✅ 证伪 | 2/20 持平——该假设在此配比下不成立 |
+| **v5.1-ext 延长训练** | 同数据 18000 步（1.4 → 4.2 epochs）| ✅ | seed 7000 1/3，20 eps 6/20 |
+| **训练极限加速** | 视觉缓存+梯度分裂+flash+compile | ✅ | **509→62.5ms/step（8.2x）**，数值等价，显存 11.4→3.4G |
+| **v5.1-30k-fast** | 加速管线续训 18k→30k（7 epochs）| ✅ | seed 7000 1/3，**20 eps 5/20——训练量假设饱和** |
+| **v5.1-43k-fast** | 续训 30k→43k（10 epochs）| ✅ | **20 eps 2/20——过拟合恶化，加训练路线关闭** |
+| **v6 #3/#4** | 1D 档位动作 + 扩量恢复数据，重采重训 | ✅ 阴性 | Exp A 3/20、Exp B 2/20——**均不及 2D 基线 6/20，三杠杆全证伪** |
+| **DAgger 闭环恢复** | 策略 rollout OOD 态+专家标签，18k→24k | ✅ 阴性 | 3/20，未突破 |
+| **temporal ensembling** | 评估期 ACT 式时间集成（replan5/k=0.01，无需重训）| ✅ **突破** | **seed7000 3/3 + 20eps 17/20=85%，验收达标** |
+| **L1 指令跟随** | 语言→档位采集200+加速训6k+eval | ✅ | **100% 一致率（≥90% 达标）** |
+| **L3 避障** | 障碍排斥专家采集200+训6k+eval | ✅ 未达标 | **3/20=15%（&lt;50%）**——避障泛化不足 |
+| **L4 条件组合** | 看到绿停/先红后蓝 采集200+训6k+eval | ✅ 未达标 | **0/20**——条件触发/子任务顺序未学会 |
+| **L3 避障扩充** | 600集（×3）+训12k（×2）+后方过采样 | ✅ 阴性 | **2/20=10%**（不及200集15%）——数据量非瓶颈 |
+| **L4 条件扩充** | 600集（×3）+训12k（×2）+60/40任务配比 | ✅ 阴性 | **0/20**（持平）——架构/任务复杂度上限 |
+| **环境统一文档** | 教程交叉引用+两套环境差异说明 | ✅ | index.md 已注明 cs123 弃用/quaddle-mujoco 生效 |
+| **真机 OpenCat 映射** | `opencat_bridge.py` 档位→kwkF/ktrL/ktrR/kbalance | ✅ 接口就绪 | 真机采数据/后训练待 12 月硬件 |
+| **GIF 播放优化** | 4 张演示 GIF 时间压缩（cclab 分块上传→ffmpeg 30fps 插值→分块回传，md5 全程校验；北京时间 23:35 完成）| ✅ | L2 3x / L3·L4 4x，时长 14-20min → 1.5-5min，物理轨迹不变（[详见](./experiment-notes.md#gif-playback)）|
+| **任务分解 L3** | L2 技能 + 非目标块反射层（判据/RNG 镜像基线）| ✅ **达标** | **16/20=80%**（基线 2/20；≥50% 线达标；首跑 17/20）|
+| **任务分解 L4** | 编排器 + L2 技能 + 转向辅助 + 每段 60s 预算（迭代 13→14→15→16→17）| ✅ **达标** | **17/20=85%**（基线 0/20；触发 10/10、red 达成 10/10、blue 7/10）|
+| **seq-depart 微调** | 48 条"刚到站→异色目标"专家数据 + 从 18k 续训 22k（30 分钟）| ✅ | **L2 18/20=90%（新最佳）**；L4 持平 17/20——B 段残余瓶颈定性为运动学（[详见](./experiment-notes.md#seq-depart)）|
+
+### v5.1-ext / 30k 关键结果（训练量单变量对照）
+
+| 配置 | epochs | 20 eps 成功率 |
+|---|---|---|
+| v5（6k 步）| 1.4 | 2/20 |
+| v5.1（6k + 恢复数据）| 1.4 | 2/20 |
+| v5.1-ext（18k 步）| 4.2 | 6/20（30%）|
+| v5.1-30k-fast（30k 步）| 7.0 | 5/20（25%）|
+| **v5.1-43k-fast（43k 步）** | **10.0** | **2/20（过拟合恶化）** |
+
+**欠拟合假设部分成立但已饱和并转为过拟合**：6k→18k 训练量三倍 → 成功率三倍（2→6），行为质变；
+但 18k→30k→43k（6→5→2）单调恶化，训练 loss 仍降（0.073→0.054→更低）而闭环成功率下降。
+**瓶颈已从欠拟合转为 OOD 自旋态 compounding error + 过拟合**——加训练路线关闭，转向动作空间
+重设计（#3）与恢复数据扩量（#4）。
+
+### 已排除的假设（五轮诊断证据链，记录于下方与 experiment-notes）
+
+1. 数据不均衡 ❌（90k 帧统计：三档位 44/32/24%，rear 区对称）
+2. flow matching 积分步数 ❌（fm10 = fm20）
+3. 量化器偏差 ❌（硬约束后 2/20 持平）
+4. 推理重规划间隔 ❌（2.5s → 0.5s 行为改善但不达标）
+5. 模型容量/训练 ✅ 部分成立但**已饱和**（6k→18k 单调增益，18k→30k plateau；loss 仍降但闭环不升）
+6. 恢复数据（28% 配比）❌ 暂证伪（不排除更长自旋态覆盖有效）
+
+## 四、下一步计划（待决策 / 顺序已排）
+
+| # | 方案 | 成本 | 预期 |
+|---|---|---|---|
+| 1 | **继续加大训练**：30k 步（~7 epochs）→ 视结果 43k（~10 epochs）| ~~4.3-6h/轮~~ **~13min/轮**（8.2x 加速后）| 按当前曲线外推 40-50%+ |
+| 2 | ~~bf16 AMP 修复~~ **已被 8.2x 缓存加速取代**（见 experiment-notes#fast-train）| 已完成 | 视觉缓存+梯度分裂+flash+compile，509→62.5ms/step，数值等价 |
+| 3 | 单通道档位动作编码（`mode ∈ {−1,0,+1}`）重采重训 | 半天 | 消除 vx/wz 联合外推空间（v5 诊断：模型外推出数据中不存在的 vx&lt;0）|
+| 4 | 恢复数据扩量：warmup 6s → 15-30s + 防翻安全偏置 | 半天 | 覆盖更长自旋 OOD 态 |
+| 5 | 环境统一文档：教程页交叉引用 + 两套环境差异说明 | 30 分钟 | 防混淆 |
+
+**当前推荐路径（2026-11-15 更新）**：L2/L1/L3/L4 全部达标（**90%**/100%/80%/85%）。L3/L4 由**任务分解**
+达标（[experiment-notes #decomposed](./experiment-notes.md#decomposed)）；seq-depart 数据补丁已落地
+（L2 →90%，L4-B 残余 3 败定性为运动学瓶颈）。剩余可做：① 弱侧转向运动学瓶颈需步态层解（与
+#fast-gait 结论一致，超出本轮范围）；② 真机 OpenCat 交接（12 月硬件）。
+
+### 训练加速里程碑（2026-11-12）
+
+训练过程极限优化落地：**509ms/step → 62.5ms/step（8.2x）**，显存 11.4G → 3.4G，数值等价
+（梯度 cosine 0.996+）。核心：冻结图像嵌入缓存（跳过占 52% 的视觉编码器）+ 梯度分裂前向
+（反向只穿过 51 个可训练 token）+ flash SDPA + torch.compile。**2026-11-14 进一步实测确认 8.2x 为安全天花板**：
+前缀 K/V 缓存（NAS 聚合读 ~600MB/s 喂不动每帧 4.1MB 的 K/V，反慢 ~4x）与 CUDA graphs（管线计算 bound，
+graphs 只省 launch 开销、无收益且数值漂移）均否决。再提速需 FP8（数值风险）或蒸馏（换模型）。详见
+[experiment-notes.md#fast-train](./experiment-notes.md#fast-train) 与 [#speed-ceiling](./experiment-notes.md#speed-ceiling)。
+
+## 五、资产清单
+
+| 类型 | 位置（工作台 loop-v7-gpu-0702 / 本仓库）|
+|---|---|
+| 数据集 | 工作台 `quaddle-mujoco/outputs/dataset_w0..3`（常规）+ `dataset_r0..3`（恢复）+ `dataset_merged51`（352 条合并，lerobot v3.0）|
+| 模型 | `outputs/smolvla_quaddle_v51/checkpoints/last`（6k）、`smolvla_quaddle_v51_18k`（18k）|
+| 代码 | 仓库 `quaddle-mujoco/`：采集（collect_v5 / collect_l1-l4 / collect_seq_depart）、训练（build_cache_v5 / train_cached_v5 / cached_smolvla / init_1d_v6）、评估（eval_rollout_v5 / eval_ensemble_v5 / eval_l1-l4 / eval_l3-l4_decomposed）、接口（opencat_bridge）|
+| 评估 GIF | rollout_v5 / v5_fm20 / v5_eval20 / v51 / v51_18k（本地仓库 outputs/ 已同步 2 张）|
+| 教程定稿媒体 | 仓库 `docs/practices/vla/quaddle/figs/`（已入库）：L2 导航 mp4 + 丝滑 GIF、L3/L4 分解 mp4、步态 GIF，本页与 experiment-notes 已全部嵌入 |
+| 文档 | experiment-notes.md（v4/v5 试验记录）、本文件 |
+
+## 六、风险与备注
+
+- 两套环境并存过渡期：教程环境为唯一 VLA 环境，cs123 环境已弃用（资产归档）；
+  教程页需加交叉引用说明（待办 #5）
+- lerobot 0.6.1 已知限制：多数据集训练未实现（用官方 aggregate 绕过）、bf16 AMP
+  GradScaler 兼容 bug（fp32 代替）、mujoco 3.8.1 与教程 WASM 3.16 物理版本不同
+- 数据/策略在两套环境间不可互换
+- 分支已重建并推送 fork：`feat/quaddle-vla` = c497aed（89084c14 基座线性 12 提交，末态树与原交接 bundle 逐字节一致）；
+  总方案文档已移出版本库（本地保留）；原版交接分支本地保留 `feat/quaddle-vla-bundle`；PR 未创建

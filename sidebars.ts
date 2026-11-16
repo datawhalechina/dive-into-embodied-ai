@@ -304,6 +304,14 @@ const sidebars: SidebarsConfig = {
             { type: 'doc', id: 'practices/quadruped/quaddle-mujoco/experiments', label: '多场景实验：结果与失败分析' },
           ],
         },
+        {
+          type: 'category', label: 'Petoi Quaddle VLA 导航训练', collapsed: false,
+          items: [
+            { type: 'doc', id: 'practices/vla/quaddle/index', label: 'VLA 导航：10GB 显存训一个策略' },
+            { type: 'doc', id: 'practices/vla/quaddle/experiment-notes', label: '实验记录与 v5 路线图' },
+            { type: 'doc', id: 'practices/vla/quaddle/progress', label: '实施现状与计划' },
+          ],
+        },
       ],
     },
   ],

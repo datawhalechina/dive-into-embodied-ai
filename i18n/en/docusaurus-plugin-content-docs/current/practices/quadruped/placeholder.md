@@ -1,6 +1,6 @@
 ---
 title: "Quadruped series"
-description: "Quadruped projects: build a robot from scratch with the CS123 simulation course and explore Petoi Quaddle walking simulation."
+description: "Quadruped projects: build a robot from scratch with the CS123 simulation course, explore Petoi Quaddle walking simulation, and train Quaddle VLA navigation."
 sidebar_position: 1
 displayed_sidebar: practicesQuadrupedSidebar
 ---
@@ -15,6 +15,7 @@ Explore quadruped modeling, control, reinforcement learning, and multimodal deci
 | :--- | :--- | :--- |
 | Chapter-based course | [Build a quadruped from scratch](/docs/practices/quadruped/cs123/intro) | Eight chapters covering MuJoCo actuators, forward and inverse kinematics, Pupper modeling, open-loop gaits, PPO training, LLM control, and visual ball tracking |
 | Browser simulation and terrain experiments | [Petoi Quaddle walking simulation](/docs/practices/quadruped/quaddle-mujoco/) | Control a four-servo robot in the browser and explore closed-loop linkage adaptation, residual PPO training, and terrain experiments |
+| Language and vision feedback | [Petoi Quaddle VLA navigation training](/docs/practices/vla/quaddle/) | Navigate using language instructions and camera images: SmolVLA decisions with low-level lookup-table CPG control on a 10GB GPU (L2 navigation 90%, L3 obstacle avoidance 80%, L4 composition 85%) |
 | Cross-simulator validation | [Sim2Sim validation](/docs/practices/quadruped/sim2sim/placeholder) | Policy transfer and consistency checks across physics engines (in development) |
 | Hardware deployment | [Sim2Real guide](/docs/practices/quadruped/sim2real-guide/placeholder) | Calibration, safety protections, and deployment from simulation policies to quadruped hardware (in development) |
 
@@ -32,6 +33,11 @@ Explore quadruped modeling, control, reinforcement learning, and multimodal deci
 ### Petoi Quaddle walking simulation · Scene previews \{#quaddle-demos}
 
 | [![Quaddle walking on an infinite checkerboard](@site/docs/practices/quadruped/quaddle-mujoco/figs/ground-long-walk.webp)](/docs/practices/quadruped/quaddle-mujoco/)<br/>**[Quaddle introduction: browser simulation and residual PPO](/docs/practices/quadruped/quaddle-mujoco/)**<br/>Run MuJoCo WebAssembly in the browser to walk, stand, and pause | [![Quaddle flat-ground stopping and turning](@site/docs/practices/quadruped/quaddle-mujoco/figs/experiments/interaction.webp)](/docs/practices/quadruped/quaddle-mujoco/experiments)<br/>**[Quaddle experiments: results and failure analysis](/docs/practices/quadruped/quaddle-mujoco/experiments)**<br/>Recorded tests and analysis of stopping, turning, slopes, steps, and uneven terrain |
+| :---: | :---: |
+
+### Petoi Quaddle VLA navigation · Previews \{#quaddle-vla-demos}
+
+| [![L2 language navigation](@site/docs/practices/vla/quaddle/figs/quaddle_L2_nav_silky50.gif)](/docs/practices/vla/quaddle/)<br/>**[VLA navigation: train a policy on a 10GB GPU](/docs/practices/vla/quaddle/)**<br/>SmolVLA with temporal ensembling, 90% over 20 episodes of navigating to a red block | [![Original CPG gait baseline](@site/docs/practices/vla/quaddle/figs/quaddle_gait_orig_smooth.gif)](/docs/practices/vla/quaddle/experiment-notes)<br/>**[Low-level control baseline (without VLA)](/docs/practices/vla/quaddle/experiment-notes)**<br/>Open-loop lookup-table CPG gait, upright at 69.8 mm/s |
 | :---: | :---: |
 
 ## 🧭 Course outline \{#outline}
@@ -60,3 +66,13 @@ Based on Petoi's official Quaddle model, with MuJoCo closed-loop linkage constra
 | :--- | :--- |
 | [Introduction: make a quadruped walk](/docs/practices/quadruped/quaddle-mujoco/) | Real-time MuJoCo in the browser, local `mjpython`, an infinite ground plane, and a 32-dimensional residual PPO training workflow |
 | [Experiments: results and failure analysis](/docs/practices/quadruped/quaddle-mujoco/experiments) | Recorded comparisons and reproduction commands for stopping and turning, 3°/5° slopes, 4 mm descents, 2 mm ascents, uneven ground, and candidate running policies |
+
+### 3. Petoi Quaddle VLA navigation training \{#quaddle-vla}
+
+Build a VLA pipeline in the Quaddle introduction environment: given "walk to the red block," the robot turns, distinguishes colors, approaches the target, and stops. SmolVLA 450M provides high-level decisions, with lookup-table CPG control and a 10GB GPU memory budget.
+
+| Chapter | Topics |
+| :--- | :--- |
+| [VLA navigation: train a policy on a 10GB GPU](/docs/practices/vla/quaddle/) | Data collection, SmolVLA fine-tuning, and closed-loop evaluation; L2 navigation demos (90%) and capability limits |
+| [Experiment notes and v5 roadmap](/docs/practices/vla/quaddle/experiment-notes) | v4/v5/v6 experiments, including negative results; temporal ensembling and 8.2x faster training |
+| [Implementation status and plans](/docs/practices/vla/quaddle/progress) | L1–L4 evaluation progress, task decomposition (L3 obstacle avoidance 80%, L4 composition 85%), and hardware handoff plans |
