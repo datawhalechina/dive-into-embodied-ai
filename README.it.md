@@ -177,8 +177,6 @@ Apri l'URL mostrato nel terminale per visualizzare il sito; premi `Ctrl+C` per f
 
 ## 🤝 Collaboratori
 
-In ciascun gruppo, i collaboratori sono elencati in ordine decrescente per il totale delle righe aggiunte ed eliminate nei commit inclusi in `master`, esclusi i commit di merge. Gli alias dello stesso autore sono raggruppati; i file binari non hanno un conteggio delle righe.
-
 ### Collaboratori principali
 
 * Jiang Ji (江季) [@johnjim0816](https://github.com/johnjim0816), autore di [Easy RL](https://github.com/datawhalechina/easy-rl), ricercatore sul rinforzo.

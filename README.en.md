@@ -183,8 +183,6 @@ Open the URL printed in the terminal to preview the site; press `Ctrl+C` to stop
 
 ## 🤝 Contributors
 
-Within each group, contributors are listed in descending order of cumulative lines added and deleted in non-merge commits included in `master`. Author aliases are combined; binary files have no line count.
-
 ### Core contributors
 
 * Jiang Ji (江季) [@johnjim0816](https://github.com/johnjim0816), author of [Easy RL](https://github.com/datawhalechina/easy-rl), reinforcement learning researcher.

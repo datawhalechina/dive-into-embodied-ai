@@ -201,8 +201,6 @@ sh local-build.sh
 
 ## 🤝 贡献者名单
 
-各组按已合入 `master` 的非合并提交累计内容增减行数（新增 + 删除）降序排列；同一作者的不同署名合并统计，二进制文件不计行数。
-
 ### 核心贡献者
 
 * 江季 [@johnjim0816](https://github.com/johnjim0816)，[蘑菇书](https://github.com/datawhalechina/easy-rl)作者，强化学习算法研究员。
