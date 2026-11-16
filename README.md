@@ -10,6 +10,8 @@
 > [!TIP]
 > **📖 在线阅读：[点击进入完整教程 →](https://datawhalechina.github.io/dive-into-embodied-ai/)**
 >
+> 从新的 [项目实战](https://datawhalechina.github.io/dive-into-embodied-ai/practices) 图文目录选择四足、双足、机械臂或 AMD 项目；[理论基础](https://datawhalechina.github.io/dive-into-embodied-ai/foundations) 按决策、控制、感知与工程组织学习入口。两页提供粒子交互、系列定位和直达教程的链接，动效可暂停，并适配减少动态效果设置。
+>
 > 推荐使用网页版，支持全文搜索、章节导航和交互演示。初次学习可从 **[新手入门：具身导论 →](https://datawhalechina.github.io/dive-into-embodied-ai/docs/introduction/intro)** 开始。
 >
 > 教程和交互页上方的「复制为 Markdown」可复制正文，下拉菜单可预览 Markdown。支持代码、表格和 LaTeX 公式，文末附有原网页链接，方便继续查看交互演示。

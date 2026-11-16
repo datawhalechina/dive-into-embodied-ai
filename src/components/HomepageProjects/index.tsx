@@ -32,7 +32,7 @@ export default function HomepageProjects(): React.JSX.Element {
       <div className="home-container">
         <div className="home-section-heading">
           <div><p className="section-kicker">{translate({message: "精选实战"})}</p><h2 id="homepage-projects-title">{translate({message: "让知识，真的动起来。"})}</h2></div>
-          <Link className="site-text-link" to="/docs/practices/intro">{translate({message: "查看全部项目"})}<ArrowRight size={17} aria-hidden="true" /></Link>
+          <Link className="site-text-link" to="/practices">{translate({message: "查看全部项目"})}<ArrowRight size={17} aria-hidden="true" /></Link>
         </div>
         <div className={styles.grid}>{projects.map(project => <ProjectCard key={project.to} project={project} />)}</div>
         <div className={styles.moreProjects}>

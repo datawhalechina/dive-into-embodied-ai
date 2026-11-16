@@ -1,0 +1,131 @@
+.hub {background: var(--site-canvas); color: var(--site-ink); --hub-width: 1160px;}
+.hub h1, .hub h2, .hub h3, .hub p {margin: 0;}
+.hub a {text-decoration: none;}
+.hero, .content, .navInner {width: min(var(--hub-width), calc(100% - 4rem)); margin-inline: auto;}
+.seriesNav {position: sticky; top: var(--ifm-navbar-height); z-index: 20; background: var(--site-panel); border-bottom: 1px solid var(--site-border);}
+.navInner {display: flex; align-items: center; justify-content: center; min-height: 92px;}
+.navLinks {display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: stretch; gap: 1.5rem; width: min(100%, 1000px);}
+.navLinks a {display: flex; align-items: center; justify-content: center; gap: .65rem; min-height: 90px; padding-block: .8rem; color: var(--site-muted); font-size: .875rem; line-height: 1.5; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s;}
+.navLinks a:hover, .navLinks a[aria-current] {color: var(--site-blue); border-bottom-color: var(--site-blue);}
+.categoryMotion {display: block; width: 70px; height: 48px; flex-shrink: 0; overflow: visible;}
+.motionNode {fill: var(--site-panel);}
+.stepFront {animation: categoryStep 2s ease-in-out infinite; transform-origin: 44px 27px;}
+.stepBack {animation: categoryStep 2s ease-in-out -1s infinite; transform-origin: 44px 27px;}
+.armSwing {animation: categoryArm 3.6s ease-in-out infinite; transform-origin: 35px 43px;}
+.radarSweep {animation: categoryRadar 6s linear infinite; transform-origin: 44px 28px;}
+.chipPulse {animation: categoryPulse 3s ease-in-out infinite;}
+.layerFloat {animation: categoryLayers 3s ease-in-out infinite;}
+.signalTrace {stroke-dasharray: 4 8; animation: categorySignal 2s linear infinite;}
+.hub[data-motion-paused='true'] .categoryMotion * {animation-play-state: paused;}
+@keyframes categoryStep {0%, 100% {transform: rotate(-6deg);} 50% {transform: rotate(6deg);}}
+@keyframes categoryArm {0%, 100% {transform: rotate(-7deg);} 50% {transform: rotate(7deg);}}
+@keyframes categoryRadar {to {transform: rotate(360deg);}}
+@keyframes categoryPulse {0%, 100% {opacity: .35;} 50% {opacity: 1;}}
+@keyframes categoryLayers {0%, 100% {transform: translateY(0);} 50% {transform: translateY(-3px);}}
+@keyframes categorySignal {to {stroke-dashoffset: -24;}}
+.hero {display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 1.5rem; padding-block: 5rem 4.5rem;}
+.eyebrow {font-size: .875rem; font-weight: 600; color: var(--site-blue); letter-spacing: .02em;}
+.hero h1 {font-size: clamp(2.4rem, 4.2vw, 4rem); font-weight: 650; line-height: 1.22; letter-spacing: -.055em; max-width: 10em; margin-block: 1rem 1.5rem; text-wrap: balance; white-space: pre-line;}
+.heroDescription {max-width: 33rem; color: var(--site-muted); line-height: 1.85; font-size: 1.05rem;}
+.heroActions {display: flex; flex-wrap: wrap; gap: .8rem 1.5rem; align-items: center; margin-top: 2rem;}
+.textLink {display: inline-flex; gap: .45rem; align-items: center; min-height: 44px; color: var(--site-blue); font-size: .875rem; font-weight: 550;}
+.textLink svg {flex-shrink: 0;}
+.textLink:hover {text-decoration: underline;}
+.scene {min-width: 0; position: relative;}
+.scene canvas {display: block; width: 100%; height: 370px; touch-action: pan-y;}
+.sceneCaption {display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; color: var(--site-muted); font-size: .75rem; padding-inline: .5rem;}
+.sceneCaption button {display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 44px; padding: .3rem .65rem; border: 1px solid var(--site-border); border-radius: 999px; background: var(--site-panel); color: var(--site-muted); cursor: pointer; font-size: .75rem;}
+.sceneCaption button:disabled {cursor: default;}
+.content {padding-bottom: 3rem;}
+.practiceSection {padding-block: 4.5rem; border-top: 1px solid var(--site-border); scroll-margin-top: 180px;}
+.sectionHeader {display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 2rem;}
+.sectionHeader > div {max-width: 47rem;}
+.sectionHeader > a {flex-shrink: 0;}
+.sectionHeader h2 {font-size: clamp(1.7rem, 3vw, 2.65rem); line-height: 1.35; letter-spacing: -.04em; margin-block: .6rem .9rem; text-wrap: balance;}
+.sectionDescription {color: var(--site-muted); font-size: .9375rem; line-height: 1.85;}
+.seriesContent {display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;}
+.feature {display: block; border-radius: 22px; overflow: hidden; color: var(--site-ink); background: var(--site-panel); transition: box-shadow .25s, transform .25s;}
+.feature:hover {color: var(--site-ink); transform: translateY(-4px); box-shadow: 0 14px 36px #0000000d;}
+.featureImage {overflow: hidden; aspect-ratio: 16 / 9; background: #253d52;}
+.featureImage img {display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .6s;}
+.feature:hover img {transform: scale(1.035);}
+.featureBody {padding: 1.5rem 1.7rem;}
+.tags {display: block; font-size: .75rem; color: var(--site-muted); margin-bottom: .55rem;}
+.featureBody h3 {font-size: 1.35rem; line-height: 1.5; letter-spacing: -.025em;}
+.featureBody p {font-size: .875rem; line-height: 1.8; color: var(--site-muted); margin-block: .6rem .8rem;}
+.courseList {list-style: none; padding: 0; margin: 0;}
+.courseList > li {border-bottom: 1px solid var(--site-border);}
+.courseLink {display: flex; gap: 1.25rem; justify-content: space-between; align-items: center; padding: 1.35rem .3rem; color: var(--site-ink);}
+.courseLink > svg {flex-shrink: 0; color: var(--site-muted); transition: transform .2s;}
+.courseLink h3 {font-size: 1.06rem; font-weight: 600; line-height: 1.55;}
+.courseLink p {font-size: .875rem; color: var(--site-muted); line-height: 1.75; margin-top: .35rem;}
+.courseLink:hover {color: var(--site-blue);}
+.courseLink:hover > svg {color: var(--site-blue); transform: translate(2px, -2px);}
+.subcourses {display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; padding-bottom: 1rem;}
+.subcourses a {display: inline-flex; gap: .3rem; align-items: center; font-size: .8rem; min-height: 34px; color: var(--site-blue);}
+.subcourses a:hover {text-decoration: underline;}
+.planning {display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; padding-block: 2.5rem; border-block: 1px solid var(--site-border);}
+.planning h2 {font-size: 1.1rem; margin-bottom: .6rem;}
+.planning p {color: var(--site-muted); font-size: .875rem;}
+.planning > div:last-child {display: flex; flex-direction: column; align-items: flex-start; justify-content: center;}
+.planning a {display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; font-size: .875rem;}
+.bridge {padding: 5rem 1rem 3rem; text-align: center;}
+.bridge h2 {font-size: clamp(1.7rem, 3vw, 2.5rem); line-height: 1.4; letter-spacing: -.04em;}
+.bridge p {color: var(--site-muted); max-width: 34rem; margin: 1rem auto 1.75rem; font-size: .9375rem;}
+.scope {font-size: .8125rem; color: var(--site-muted); max-width: 45rem; margin: 1rem auto 0 !important; text-align: center;}
+.loop {display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1rem 2rem; padding: 1.6rem 1rem; margin-bottom: 3rem; border-block: 1px solid var(--site-border);}
+.loop span {font-weight: 600; font-size: .9375rem;}
+.loop > svg {color: var(--site-blue);}
+.moduleGrid {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem;}
+.module {padding: 2rem 2.25rem; background: var(--site-panel); border-radius: 24px; scroll-margin-top: 180px; display: flex; flex-direction: column; align-items: flex-start;}
+.moduleHeader {display: flex; align-items: center; gap: .65rem; color: var(--site-blue); font-size: .875rem; font-weight: 600;}
+.module > h2 {font-size: 1.7rem; letter-spacing: -.035em; line-height: 1.4; margin-bottom: .8rem;}
+.module .courseList {width: 100%; margin-block: 1rem 1.25rem; flex: 1;}
+.module .courseLink {padding-block: 1rem;}
+.module .courseLink h3 {font-size: .9375rem; font-weight: 500;}
+.diagram {width: 100%; height: auto; margin-block: 1.25rem 1.5rem;}
+.diagramLine {stroke: var(--site-blue); stroke-width: 1.5; opacity: .25;}
+.diagramNode {fill: var(--site-panel); stroke: var(--site-blue); stroke-width: 1.7;}
+.diagramDot {fill: var(--site-blue);}
+.diagramArrow {stroke: var(--site-blue); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round;}
+.diagram text {fill: var(--site-blue); text-anchor: middle; font-size: 15px; font-weight: 500;}
+@media (max-width: 996px) {
+  .navInner {gap: 1rem;}
+  .navLinks {gap: 1rem;}
+  .navLinks {width: 100%;}
+  .categoryMotion {width: 54px; height: 42px;}
+  .hero {padding-block: 3rem; gap: .5rem;}
+  .hero h1 {font-size: 2.65rem;}
+  .scene canvas {height: 320px;}
+  .seriesContent {gap: 1.75rem;}
+  .module {padding: 1.6rem;}
+  .sectionHeader {align-items: flex-start; flex-direction: column; gap: .7rem;}
+}
+@media (max-width: 767px) {
+  .hero, .content, .navInner {width: calc(100% - 2.5rem);}
+  .seriesNav {position: relative; top: auto;}
+  .navLinks {display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem;}
+  .navLinks a {flex-direction: column; min-height: 82px; font-size: .8rem; gap: .25rem; padding-block: .6rem; text-align: center;}
+  .categoryMotion {width: 48px; height: 38px;}
+  .hero {grid-template-columns: 1fr; padding-block: 2.5rem 2rem;}
+  .hero h1 {font-size: clamp(2.2rem, 7.8vw, 3.25rem); max-width: 13em;}
+  .heroDescription {font-size: .9375rem;}
+  .heroActions {gap: .5rem 1.3rem; margin-top: 1.5rem;}
+  .scene {margin-top: .5rem;}
+  .scene canvas {height: 280px;}
+  .seriesContent, .moduleGrid {grid-template-columns: 1fr;}
+  .practiceSection, .module {scroll-margin-top: 90px;}
+  .practiceSection {padding-block: 2.5rem;}
+  .sectionHeader {margin-bottom: 1.3rem;}
+  .sectionHeader h2 {font-size: 1.8rem;}
+  .featureBody {padding: 1.25rem;}
+  .planning {grid-template-columns: 1fr; gap: 1rem;}
+  .bridge {padding: 3rem 0 2rem;}
+  .loop {gap: .55rem; padding-inline: 0; margin-bottom: 1.5rem;}
+  .loop span {font-size: .8rem;}
+  .loop > svg {width: 14px;}
+}
+@media (prefers-reduced-motion: reduce) {
+  .hub *, .hub *::before, .hub *::after {transition: none !important; animation: none !important; scroll-behavior: auto !important;}
+  .feature:hover, .feature:hover img, .courseLink:hover > svg {transform: none;}
+}

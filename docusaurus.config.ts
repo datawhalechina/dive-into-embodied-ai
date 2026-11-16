@@ -145,13 +145,15 @@ const config: Config = {
           className: 'navbar-introduction',
         },
         {
-          type: 'custom-navbarMegaMenu',
-          menuId: 'foundations',
+          to: '/foundations',
+          label: '理论基础',
+          activeBaseRegex: '/(foundations|docs/foundations)(/|$)',
           position: 'left',
         },
         {
-          type: 'custom-navbarMegaMenu',
-          menuId: 'practices',
+          to: '/practices',
+          label: '项目实战',
+          activeBaseRegex: '/(practices|docs/practices|cs123)(/|$)',
           position: 'left',
         },
         {
@@ -183,8 +185,8 @@ const config: Config = {
           title: '内容',
           items: [
             { label: '具身导论', to: '/docs/introduction/intro' },
-            { label: '理论基础', to: '/docs/foundations/intro' },
-            { label: '项目实战', to: '/docs/practices/intro' },
+            { label: '理论基础', to: '/foundations' },
+            { label: '项目实战', to: '/practices' },
           ],
         },
         {

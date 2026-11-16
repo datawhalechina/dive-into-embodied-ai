@@ -1474,5 +1474,335 @@
   },
   "simulation.joint.right_ankle": {
     "message": "Caviglia destra"
+  },
+  "hub.practices": {
+    "message": "Progetti"
+  },
+  "hub.foundations": {
+    "message": "Fondamenti"
+  },
+  "hub.practiceTitle": {
+    "message": "Dai un corpo alle tue conoscenze."
+  },
+  "hub.practiceDescription": {
+    "message": "Dal primo passo di un quadrupede alla prima presa di un braccio. Scegli un robot e trasforma le idee in azioni concrete."
+  },
+  "hub.foundationTitle": {
+    "message": "Comprendi l’intelligenza in movimento."
+  },
+  "hub.foundationDescription": {
+    "message": "Percepisci il mondo, prendi una decisione e metti il corpo in movimento. Costruisci le tue conoscenze intorno a questo ciclo."
+  },
+  "hub.explore": {
+    "message": "Esplora le serie"
+  },
+  "hub.exploreTheory": {
+    "message": "Esplora la mappa delle conoscenze"
+  },
+  "hub.simulation": {
+    "message": "Prova il laboratorio di simulazione"
+  },
+  "hub.quickNavigation": {
+    "message": "Navigazione delle serie"
+  },
+  "hub.modulesNavigation": {
+    "message": "Moduli di conoscenza"
+  },
+  "hub.robotCloud": {
+    "message": "Quadrupede · illustrazione a nuvola di punti"
+  },
+  "hub.knowledgeCloud": {
+    "message": "Percezione · decisione · azione"
+  },
+  "hub.pause": {
+    "message": "Pausa animazione"
+  },
+  "hub.play": {
+    "message": "Avvia animazione"
+  },
+  "hub.staticView": {
+    "message": "Vista statica"
+  },
+  "hub.quadruped": {
+    "message": "Quadrupedi"
+  },
+  "hub.humanoid": {
+    "message": "Bipedi e robot su ruote e gambe"
+  },
+  "hub.arm": {
+    "message": "Bracci robotici"
+  },
+  "hub.amd": {
+    "message": "Progetti AMD"
+  },
+  "hub.quadrupedLead": {
+    "message": "Dal primo passo al movimento libero."
+  },
+  "hub.quadrupedDescription": {
+    "message": "Parti dalla cinematica e dal controllo dei giunti, costruisci un’andatura in simulazione ed esplora apprendimento per rinforzo e navigazione guidata dal linguaggio."
+  },
+  "hub.humanoidLead": {
+    "message": "Trova l’equilibrio. Esplora nuove possibilità."
+  },
+  "hub.humanoidDescription": {
+    "message": "Insegna un movimento a MicroDuck o mantieni in equilibrio un robot su ruote e gambe. Avanza per gradi e valuta la strategia appresa."
+  },
+  "hub.armLead": {
+    "message": "Metti le tue idee nelle mani di un robot."
+  },
+  "hub.armDescription": {
+    "message": "Collega simulazione, dimostrazioni e bracci reali attraverso controllo continuo e apprendimento per imitazione."
+  },
+  "hub.amdLead": {
+    "message": "Esplora un’altra piattaforma di calcolo."
+  },
+  "hub.amdDescription": {
+    "message": "Trova ambienti cloud, addestramento ROCm e guide robotiche dedicate alla piattaforma."
+  },
+  "hub.allSeries": {
+    "message": "Esplora tutta la serie"
+  },
+  "hub.startCourse": {
+    "message": "Apri il tutorial"
+  },
+  "hub.cs123": {
+    "message": "Costruisci un quadrupede da zero"
+  },
+  "hub.cs123Description": {
+    "message": "8 capitoli su attuatori, cinematica, andature, addestramento e percezione."
+  },
+  "hub.quaddle": {
+    "message": "Quaddle: camminare con quattro servomotori"
+  },
+  "hub.quaddleDescription": {
+    "message": "Esplora controllo periodico, contatti ed esperimenti sul terreno in MuJoCo."
+  },
+  "hub.quaddleVla": {
+    "message": "Navigazione VLA con Quaddle"
+  },
+  "hub.quaddleVlaDescription": {
+    "message": "Collega istruzioni linguistiche e osservazioni visive al controllo dell’andatura."
+  },
+  "hub.microduck": {
+    "message": "MicroDuck: insegna un movimento al robot"
+  },
+  "hub.microduckDescription": {
+    "message": "Dagli esperimenti interattivi sulle ricompense a PPO parallelo in MuJoCo Warp."
+  },
+  "hub.flamingo": {
+    "message": "Apprendimento per rinforzo con Flamingo"
+  },
+  "hub.flamingoDescription": {
+    "message": "6 capitoli su Isaac Lab, PPO / CaT e validazione tra simulatori con MuJoCo."
+  },
+  "hub.wall": {
+    "message": "Curriculum di salto degli ostacoli con MicroDuck"
+  },
+  "hub.wallDescription": {
+    "message": "12 passi per collegare corsa, salto, rotolamento e rialzata."
+  },
+  "hub.experiments": {
+    "message": "Esperimenti e movimenti creativi di MicroDuck"
+  },
+  "hub.experimentsDescription": {
+    "message": "Esplora valutazioni in condizioni fisse ed esperimenti con movimenti diversi."
+  },
+  "hub.act": {
+    "message": "Addestramento bimanuale con ACT"
+  },
+  "hub.actDescription": {
+    "message": "Impara la previsione di sequenze di azioni e la valutazione in ciclo chiuso con dimostrazioni ALOHA."
+  },
+  "hub.mujoco": {
+    "message": "Primi passi con MuJoCo"
+  },
+  "hub.mujocoDescription": {
+    "message": "Carica un modello MJCF ed esegui il tuo primo ciclo di controllo Python."
+  },
+  "hub.ddpg": {
+    "message": "Esperimenti di controllo continuo con DDPG"
+  },
+  "hub.recap": {
+    "message": "π₀.₅ + RECAP in LIBERO"
+  },
+  "hub.recapDescription": {
+    "message": "Un percorso di riproduzione con modelli di valore, etichette di vantaggio e fine-tuning della strategia."
+  },
+  "hub.lerobot": {
+    "message": "Appunti del corso LeRobot"
+  },
+  "hub.lerobotDescription": {
+    "message": "Unità 0–2: apprendimento robotico, dataset e strumenti."
+  },
+  "hub.so101": {
+    "message": "SO-101 + LeRobot su hardware reale"
+  },
+  "hub.so101Description": {
+    "message": "Dai collegamenti hardware e test iniziali alla prima riproduzione dei movimenti."
+  },
+  "hub.cloud": {
+    "message": "AUP Learning Cloud"
+  },
+  "hub.cloudDescription": {
+    "message": "JupyterHub, Code Server e ROCm nel browser."
+  },
+  "hub.pupperAmd": {
+    "message": "Esplora la robotica con Pupper"
+  },
+  "hub.pupperAmdDescription": {
+    "message": "Strategie di locomozione ed esperimenti VLA su hardware AMD."
+  },
+  "hub.microduckAmd": {
+    "message": "MicroDuck RL · AMD ROCm"
+  },
+  "hub.microduckAmdDescription": {
+    "message": "Configura ROCm Warp e addestra un bipede con PPO."
+  },
+  "hub.actAmd": {
+    "message": "Addestramento bimanuale ACT · AMD ROCm"
+  },
+  "hub.actAmdDescription": {
+    "message": "Addestramento, ripresa da checkpoint e valutazione in ciclo chiuso su GPU Radeon."
+  },
+  "hub.planning": {
+    "message": "Altre direzioni"
+  },
+  "hub.planningDescription": {
+    "message": "Le guide su manipolazione mobile e Sim2Real sono in sviluppo. Consulta le panoramiche delle serie per i contenuti previsti."
+  },
+  "hub.mobile": {
+    "message": "Manipolazione mobile (prevista)"
+  },
+  "hub.sim2real": {
+    "message": "Sim2Real (in sviluppo)"
+  },
+  "hub.brain": {
+    "message": "Decisioni intelligenti"
+  },
+  "hub.control": {
+    "message": "Controllo del movimento"
+  },
+  "hub.perception": {
+    "message": "Percezione"
+  },
+  "hub.engineering": {
+    "message": "Ingegneria"
+  },
+  "hub.brainLead": {
+    "message": "Decidi cosa fare dopo."
+  },
+  "hub.brainDescription": {
+    "message": "Parti da ricompense e strategie per comprendere apprendimento per rinforzo, VLA e modelli del mondo."
+  },
+  "hub.controlLead": {
+    "message": "Rendi ogni movimento più preciso."
+  },
+  "hub.controlDescription": {
+    "message": "Trasforma gli obiettivi in movimenti eseguibili con controllo in retroazione e pianificazione."
+  },
+  "hub.perceptionLead": {
+    "message": "Percepisci il mondo e te stesso."
+  },
+  "hub.perceptionDescription": {
+    "message": "Collega visione, localizzazione e sensori per ottenere osservazioni affidabili dello stato."
+  },
+  "hub.engineeringLead": {
+    "message": "Collega tutte le parti."
+  },
+  "hub.engineeringDescription": {
+    "message": "Simulazione, ROS2, comunicazione e dati trasformano gli algoritmi in sistemi funzionanti."
+  },
+  "hub.rl": {
+    "message": "Apprendimento per rinforzo per la robotica"
+  },
+  "hub.vla": {
+    "message": "Modelli visione–linguaggio–azione"
+  },
+  "hub.world": {
+    "message": "Modelli del mondo"
+  },
+  "hub.controllers": {
+    "message": "Controllori: PID → LQR → MPC"
+  },
+  "hub.ppo": {
+    "message": "Controllo con apprendimento per rinforzo · PPO"
+  },
+  "hub.planningMotion": {
+    "message": "Pianificazione del movimento · MoveIt 2"
+  },
+  "hub.vlm": {
+    "message": "Percezione visiva e VLM"
+  },
+  "hub.calibration": {
+    "message": "Calibrazione dei sensori e sim2real"
+  },
+  "hub.stateEstimation": {
+    "message": "Timestamp e stima dello stato"
+  },
+  "hub.projection": {
+    "message": "Proiezione di camera, LiDAR e IMU"
+  },
+  "hub.onlineCalibration": {
+    "message": "Calibrazione online e diagnostica"
+  },
+  "hub.perceptionOverview": {
+    "message": "Localizzazione, tatto e percezione"
+  },
+  "hub.simulationTools": {
+    "message": "Strumenti di simulazione"
+  },
+  "hub.communication": {
+    "message": "Comunicazione CAN e MCU"
+  },
+  "hub.hardware": {
+    "message": "Strutture meccaniche"
+  },
+  "hub.imitation": {
+    "message": "Dati e apprendimento per imitazione"
+  },
+  "hub.apply": {
+    "message": "Applica in un progetto"
+  },
+  "hub.loop": {
+    "message": "Dalla percezione all’azione"
+  },
+  "hub.observation": {
+    "message": "Osserva"
+  },
+  "hub.policy": {
+    "message": "Strategia"
+  },
+  "hub.action": {
+    "message": "Agisci"
+  },
+  "hub.feedback": {
+    "message": "Retroazione"
+  },
+  "hub.bridgeTitle": {
+    "message": "Dove le idee incontrano la pratica."
+  },
+  "hub.bridgePractice": {
+    "message": "Quando un concetto richiede una spiegazione, trova il prossimo tassello nella mappa."
+  },
+  "hub.bridgeTheory": {
+    "message": "Scegli un robot e applica i concetti appresi a un compito concreto."
+  },
+  "hub.viewFoundations": {
+    "message": "Esplora i fondamenti"
+  },
+  "hub.viewPractices": {
+    "message": "Esplora i progetti"
+  },
+  "hub.scope": {
+    "message": "Le panoramiche sono tradotte; alcuni tutorial sono ancora in cinese e mostrano un avviso."
+  },
+  "hub.pupperAlt": {
+    "message": "Quadrupede Pupper su un pavimento a scacchi in MuJoCo"
+  },
+  "hub.microduckAlt": {
+    "message": "Bipede MicroDuck in simulazione"
+  },
+  "hub.actAlt": {
+    "message": "Robot bimanuale ALOHA in simulazione"
   }
 }

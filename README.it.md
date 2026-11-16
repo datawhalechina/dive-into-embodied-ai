@@ -7,6 +7,8 @@
 > [!TIP]
 > **📖 [Apri il corso in italiano →](https://datawhalechina.github.io/dive-into-embodied-ai/it/)**
 >
+> Esplora tutorial su quadrupedi, bipedi, bracci e AMD nel catalogo illustrato [Progetti](https://datawhalechina.github.io/dive-into-embodied-ai/it/practices). [Fondamenti](https://datawhalechina.github.io/dive-into-embodied-ai/it/foundations) organizza gli argomenti per decisioni, controllo, percezione e ingegneria. Entrambe le pagine offrono nuvole di punti interattive, navigazione per sezioni, link ai tutorial, pausa delle animazioni e supporto al movimento ridotto.
+>
 > Ricerca nel testo, navigazione per capitoli e demo interattive. **[Inizia dall'introduzione →](https://datawhalechina.github.io/dive-into-embodied-ai/it/docs/introduction/intro)**.
 >
 > Usa **Copia come Markdown** all'inizio di tutorial ed esperimenti o apri l'anteprima. Conserva codice, tabelle ed equazioni LaTeX, con un link all'originale per le demo interattive.

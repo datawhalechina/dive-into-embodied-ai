@@ -78,7 +78,7 @@ function HomepageHeader() {
           <p className={styles.intro}>{translate({message: "从理解一个算法，到迈出机器人的第一步。"})}<br />{translate({message: "动手连接感知、学习与控制，在仿真中走向真实。"})}</p>
           <div className={styles.actions}>
             <Link className={styles.heroCta} to="/docs/introduction/intro">{translate({message: "新手入门"})}<ArrowRight size={17} aria-hidden="true" /></Link>
-            <Link className={styles.heroSecondary} to="/docs/practices/intro">{translate({message: "探索实战"})}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+            <Link className={styles.heroSecondary} to="/practices">{translate({message: "探索实战"})}<ArrowUpRight size={16} aria-hidden="true" /></Link>
           </div>
           <div className={styles.heroNotes} aria-label={translate({message: "课程特色"})}>
             <span><BookOpen size={14} aria-hidden="true" />{translate({message: "中文教程"})}</span>

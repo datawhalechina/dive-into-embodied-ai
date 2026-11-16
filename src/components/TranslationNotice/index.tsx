@@ -22,7 +22,7 @@ export default function TranslationNotice({translated = false}: {translated?: bo
         <Translate id="translationNotice.overview" values={{
           readme: <Link href={`https://github.com/datawhalechina/dive-into-embodied-ai/blob/master/README.${i18n.currentLocale}.md`}>README</Link>,
           introduction: <Link to="/docs/introduction/intro">{translate({id: 'translationNotice.introduction', message: '具身导论'})}</Link>,
-          projects: <Link to="/docs/practices/intro">{translate({id: 'translationNotice.projects', message: '项目总览'})}</Link>,
+          projects: <Link to="/practices">{translate({id: 'translationNotice.projects', message: '项目总览'})}</Link>,
           roadmap: <Link to="/docs/overview/embodied-ai-roadmap">{translate({id: 'translationNotice.roadmap', message: '学习地图'})}</Link>,
         }}>
           {'本语言版本已提供 {readme}、{introduction}、{projects}和{roadmap}。其他教程章节与独立实验页多数仍为中文。'}

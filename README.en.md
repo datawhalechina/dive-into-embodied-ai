@@ -9,6 +9,8 @@
 > [!TIP]
 > **📖 Read online: [Open the course →](https://datawhalechina.github.io/dive-into-embodied-ai/en/)**
 >
+> Browse quadruped, biped, robot-arm, and AMD tutorials in the illustrated [Projects](https://datawhalechina.github.io/dive-into-embodied-ai/en/practices) directory. [Foundations](https://datawhalechina.github.io/dive-into-embodied-ai/en/foundations) groups topics by decision-making, control, perception, and engineering. Both pages include interactive point clouds, section navigation, direct tutorial links, a pause control, and reduced-motion support.
+>
 > The website offers full-text search, chapter navigation, and interactive demos. **[Get started with the introduction →](https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/introduction/intro)**.
 >
 > Use **Copy as Markdown** at the top of tutorial and playground pages to copy their content, or open the dropdown to preview it. Code, tables, and LaTeX equations are preserved, with a link to the original page for interactive demos.

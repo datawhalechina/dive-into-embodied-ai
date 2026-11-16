@@ -7,5 +7,11 @@
   },
   "item.label.在线仿真": {
     "message": "Simulazione"
+  },
+  "item.label.项目实战": {
+    "message": "Progetti"
+  },
+  "item.label.理论基础": {
+    "message": "Fondamenti"
   }
 }

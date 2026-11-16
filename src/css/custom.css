@@ -80,6 +80,10 @@ a {text-underline-offset: .2em;}
 /* The navbar is the only translucent surface; content remains opaque. */
 .navbar {background: var(--site-nav); border-bottom: 1px solid var(--site-border); box-shadow: none; backdrop-filter: blur(20px); padding-inline: 2rem;}
 .navbar__inner {max-width: 1440px; margin-inline: auto;}
+.navbar__inner > .navbar__items:first-child {flex: 1;}
+.navbar__inner > .navbar__items:first-child .navbar-center-start {margin-left: auto;}
+.navbar__inner > .navbar__items:first-child .navbar-simulation {margin-right: auto;}
+.navbar__link {white-space: nowrap; flex-shrink: 0;}
 .navbar__brand {min-width: 0; gap: .6rem; flex-shrink: 0;}
 .navbar__logo {display: block; height: 28px; margin: 0;}
 .navbar__title {color: var(--site-ink); font-size: 1rem; font-weight: 650; letter-spacing: -.035em;}
@@ -259,8 +263,7 @@ a {text-underline-offset: .2em;}
   *, *::before, *::after {animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important;}
 }
 @media (prefers-reduced-transparency: reduce) {
-  .navbar, .navbar-mega__surface {background: var(--site-panel) !important; backdrop-filter: none !important;}
-  .navbar-mega__backdrop {backdrop-filter: none !important;}
+  .navbar {background: var(--site-panel) !important; backdrop-filter: none !important;}
 }
 @media (prefers-contrast: more) {
   :root {--site-muted: #3b3b40; --site-border: #74747c;}

@@ -1429,5 +1429,335 @@
   },
   "simulation.joint.right_ankle": {
     "message": "Right ankle"
+  },
+  "hub.practices": {
+    "message": "Projects"
+  },
+  "hub.foundations": {
+    "message": "Foundations"
+  },
+  "hub.practiceTitle": {
+    "message": "Give your knowledge a body."
+  },
+  "hub.practiceDescription": {
+    "message": "From a quadruped’s first step to a robot arm’s first grasp. Pick a robot and turn ideas into actions you can see."
+  },
+  "hub.foundationTitle": {
+    "message": "Understand intelligence in motion."
+  },
+  "hub.foundationDescription": {
+    "message": "Perceive the world, make a decision, and put the body in motion. Build your knowledge around this complete loop."
+  },
+  "hub.explore": {
+    "message": "Explore the series"
+  },
+  "hub.exploreTheory": {
+    "message": "Explore the knowledge map"
+  },
+  "hub.simulation": {
+    "message": "Try the simulation lab"
+  },
+  "hub.quickNavigation": {
+    "message": "Series navigation"
+  },
+  "hub.modulesNavigation": {
+    "message": "Knowledge modules"
+  },
+  "hub.robotCloud": {
+    "message": "Quadruped · point-cloud illustration"
+  },
+  "hub.knowledgeCloud": {
+    "message": "Perception · decision · action"
+  },
+  "hub.pause": {
+    "message": "Pause animation"
+  },
+  "hub.play": {
+    "message": "Play animation"
+  },
+  "hub.staticView": {
+    "message": "Static view"
+  },
+  "hub.quadruped": {
+    "message": "Quadrupeds"
+  },
+  "hub.humanoid": {
+    "message": "Bipeds & wheel-legged robots"
+  },
+  "hub.arm": {
+    "message": "Robot arms"
+  },
+  "hub.amd": {
+    "message": "AMD projects"
+  },
+  "hub.quadrupedLead": {
+    "message": "From the first step to walking freely."
+  },
+  "hub.quadrupedDescription": {
+    "message": "Start with kinematics and joint control, build a gait in simulation, then explore reinforcement learning and language-guided navigation."
+  },
+  "hub.humanoidLead": {
+    "message": "Find balance. Explore what comes next."
+  },
+  "hub.humanoidDescription": {
+    "message": "Teach MicroDuck a movement or balance a wheel-legged robot. Build up training step by step and evaluate the resulting policy."
+  },
+  "hub.armLead": {
+    "message": "Put your ideas in a robot’s hands."
+  },
+  "hub.armDescription": {
+    "message": "Connect simulation, demonstrations, and real robot arms through continuous control and imitation learning."
+  },
+  "hub.amdLead": {
+    "message": "Explore another computing platform."
+  },
+  "hub.amdDescription": {
+    "message": "Find cloud environments, ROCm training, and platform-specific robotics guides in one place."
+  },
+  "hub.allSeries": {
+    "message": "View the full series"
+  },
+  "hub.startCourse": {
+    "message": "Open tutorial"
+  },
+  "hub.cs123": {
+    "message": "Build a quadruped from scratch"
+  },
+  "hub.cs123Description": {
+    "message": "8 chapters covering actuators, kinematics, gaits, policy training, and perception."
+  },
+  "hub.quaddle": {
+    "message": "Quaddle four-servo walking"
+  },
+  "hub.quaddleDescription": {
+    "message": "Explore periodic control, contacts, and terrain experiments in MuJoCo."
+  },
+  "hub.quaddleVla": {
+    "message": "Quaddle VLA navigation"
+  },
+  "hub.quaddleVlaDescription": {
+    "message": "Connect language instructions and visual observations to low-level gait control."
+  },
+  "hub.microduck": {
+    "message": "MicroDuck: teach a robot a movement"
+  },
+  "hub.microduckDescription": {
+    "message": "From interactive reward design to parallel PPO in MuJoCo Warp."
+  },
+  "hub.flamingo": {
+    "message": "Flamingo wheel-legged reinforcement learning"
+  },
+  "hub.flamingoDescription": {
+    "message": "6 chapters on Isaac Lab, PPO / CaT, and cross-simulator validation in MuJoCo."
+  },
+  "hub.wall": {
+    "message": "MicroDuck wall-jumping curriculum"
+  },
+  "hub.wallDescription": {
+    "message": "12 steps connecting running, jumping, rolling, and standing up."
+  },
+  "hub.experiments": {
+    "message": "MicroDuck experiments and creative motions"
+  },
+  "hub.experimentsDescription": {
+    "message": "Explore fixed-condition evaluations and experiments with different motions."
+  },
+  "hub.act": {
+    "message": "ACT bimanual training"
+  },
+  "hub.actDescription": {
+    "message": "Learn action chunking and closed-loop evaluation with ALOHA demonstrations."
+  },
+  "hub.mujoco": {
+    "message": "Getting started with MuJoCo"
+  },
+  "hub.mujocoDescription": {
+    "message": "Load an MJCF model and run your first Python control loop."
+  },
+  "hub.ddpg": {
+    "message": "DDPG continuous-control experiments"
+  },
+  "hub.recap": {
+    "message": "π₀.₅ + RECAP in LIBERO"
+  },
+  "hub.recapDescription": {
+    "message": "A reproduction path through value models, advantage labels, and policy fine-tuning."
+  },
+  "hub.lerobot": {
+    "message": "LeRobot course notes"
+  },
+  "hub.lerobotDescription": {
+    "message": "Units 0–2: robot learning, datasets, and tooling."
+  },
+  "hub.so101": {
+    "message": "SO-101 + LeRobot on real hardware"
+  },
+  "hub.so101Description": {
+    "message": "From hardware connections and basic checks to your first motion replay."
+  },
+  "hub.cloud": {
+    "message": "AUP Learning Cloud"
+  },
+  "hub.cloudDescription": {
+    "message": "JupyterHub, Code Server, and ROCm in your browser."
+  },
+  "hub.pupperAmd": {
+    "message": "Explore Pupper robotics"
+  },
+  "hub.pupperAmdDescription": {
+    "message": "Locomotion policies and VLA experiments on AMD hardware."
+  },
+  "hub.microduckAmd": {
+    "message": "MicroDuck RL · AMD ROCm"
+  },
+  "hub.microduckAmdDescription": {
+    "message": "Set up ROCm Warp and train a biped with PPO."
+  },
+  "hub.actAmd": {
+    "message": "ACT bimanual training · AMD ROCm"
+  },
+  "hub.actAmdDescription": {
+    "message": "Training, checkpoint resumption, and closed-loop evaluation on Radeon GPUs."
+  },
+  "hub.planning": {
+    "message": "Further directions"
+  },
+  "hub.planningDescription": {
+    "message": "Mobile manipulation and Sim2Real guides are still in development. See each series overview for planned content."
+  },
+  "hub.mobile": {
+    "message": "Mobile manipulation (planned)"
+  },
+  "hub.sim2real": {
+    "message": "Sim2Real (in development)"
+  },
+  "hub.brain": {
+    "message": "Decision-making"
+  },
+  "hub.control": {
+    "message": "Motion control"
+  },
+  "hub.perception": {
+    "message": "Perception"
+  },
+  "hub.engineering": {
+    "message": "Engineering"
+  },
+  "hub.brainLead": {
+    "message": "Decide what to do next."
+  },
+  "hub.brainDescription": {
+    "message": "Start with rewards and policies to understand reinforcement learning, VLA, and world models."
+  },
+  "hub.controlLead": {
+    "message": "Make every movement count."
+  },
+  "hub.controlDescription": {
+    "message": "Turn goals into executable motion through feedback control and trajectory planning."
+  },
+  "hub.perceptionLead": {
+    "message": "Sense the world and yourself."
+  },
+  "hub.perceptionDescription": {
+    "message": "Connect vision, localization, and sensors to build reliable state observations."
+  },
+  "hub.engineeringLead": {
+    "message": "Bring every part together."
+  },
+  "hub.engineeringDescription": {
+    "message": "Simulation, ROS2, communication, and data turn algorithms into working systems."
+  },
+  "hub.rl": {
+    "message": "Reinforcement learning for robotics"
+  },
+  "hub.vla": {
+    "message": "Vision–language–action models"
+  },
+  "hub.world": {
+    "message": "World models"
+  },
+  "hub.controllers": {
+    "message": "Controllers: PID → LQR → MPC"
+  },
+  "hub.ppo": {
+    "message": "Reinforcement learning control · PPO"
+  },
+  "hub.planningMotion": {
+    "message": "Motion planning · MoveIt 2"
+  },
+  "hub.vlm": {
+    "message": "Visual perception and VLMs"
+  },
+  "hub.calibration": {
+    "message": "Sensor calibration and sim2real"
+  },
+  "hub.stateEstimation": {
+    "message": "Timestamps and state estimation"
+  },
+  "hub.projection": {
+    "message": "Camera, LiDAR, and IMU projection"
+  },
+  "hub.onlineCalibration": {
+    "message": "Online calibration and diagnostics"
+  },
+  "hub.perceptionOverview": {
+    "message": "Localization, touch, and perception"
+  },
+  "hub.simulationTools": {
+    "message": "Simulation tools"
+  },
+  "hub.communication": {
+    "message": "CAN and MCU communication"
+  },
+  "hub.hardware": {
+    "message": "Mechanical structures"
+  },
+  "hub.imitation": {
+    "message": "Data and imitation learning"
+  },
+  "hub.apply": {
+    "message": "Apply it in a project"
+  },
+  "hub.loop": {
+    "message": "From perception to action"
+  },
+  "hub.observation": {
+    "message": "Observe"
+  },
+  "hub.policy": {
+    "message": "Policy"
+  },
+  "hub.action": {
+    "message": "Act"
+  },
+  "hub.feedback": {
+    "message": "Feedback"
+  },
+  "hub.bridgeTitle": {
+    "message": "Where ideas meet practice."
+  },
+  "hub.bridgePractice": {
+    "message": "When a concept needs explaining, find the next piece in the knowledge map."
+  },
+  "hub.bridgeTheory": {
+    "message": "Choose a robot and put the concepts you’ve learned into a concrete task."
+  },
+  "hub.viewFoundations": {
+    "message": "Explore foundations"
+  },
+  "hub.viewPractices": {
+    "message": "Explore projects"
+  },
+  "hub.scope": {
+    "message": "These overview pages are translated; some tutorials remain in Chinese and display a translation notice."
+  },
+  "hub.pupperAlt": {
+    "message": "Pupper quadruped on a MuJoCo checkerboard floor"
+  },
+  "hub.microduckAlt": {
+    "message": "MicroDuck biped in simulation"
+  },
+  "hub.actAlt": {
+    "message": "ALOHA bimanual robot in simulation"
   }
 }

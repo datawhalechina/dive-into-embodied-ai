@@ -41,10 +41,10 @@ const sources = [
   'src/pages/index.tsx',
   'src/components/HomepageFeatures/index.tsx',
   'src/components/HomepageProjects/index.tsx',
-  'src/components/NavbarMegaMenu/data.ts',
   'src/components/PageMarkdown/index.tsx',
   'src/components/TranslationNotice/index.tsx',
   'src/components/SimulationLab/messages.ts',
+  'src/components/LearningHub/messages.ts',
   ...walk('src/theme/DocItem/TOC').filter(file => /\.tsx?$/.test(file)),
   ...walk('src/components/docs/introduction').filter(file => /\.tsx?$/.test(file)),
 ];
@@ -113,6 +113,28 @@ const translatedPages = [
 ];
 assert(translatedPages.length > 2, 'Missing introduction pages');
 for (const locale of locales) {
+  for (const hub of ['practices', 'foundations']) {
+    const hubPage = parse(`build/${prefix(locale)}${hub}.html`);
+    const hubMain = hubPage.querySelector(`[data-learning-hub="${hub}"]`);
+    assert(hubMain?.querySelector('h1'), `${locale}: missing ${hub} hub content`);
+    const hubNav = hubPage.querySelector('nav.navbar');
+    const navHrefs = attributes(hubNav, 'a[href]', 'href');
+    assert(navHrefs.includes(`${baseUrl}${prefix(locale)}${hub}`), `${locale}: missing ${hub} navbar link`);
+    assert(!hubNav.querySelector('.navbar-mega'), `${locale}: old dropdown still rendered`);
+    for (const alternate of locales) assert(navHrefs.includes(`${baseUrl}${prefix(alternate)}${hub}`), `${locale}: missing ${hub} language switch to ${alternate}`);
+    if (locale !== defaultLocale) assert(!hasHan(hubMain.textContent), `${locale}: ${hub} hub contains Chinese text`);
+    const originalHub = parse(`build/${hub}.html`).querySelector('[data-learning-hub]');
+    assert.deepEqual(anchors(hubMain), anchors(originalHub), `${locale}: ${hub} section anchors differ`);
+    for (const href of attributes(hubMain, 'a[href]', 'href')) {
+      if (href.startsWith('#')) {
+        assert(hubMain.querySelector(`[id="${href.slice(1)}"]`), `${locale}: missing hub anchor ${href}`);
+      } else if (href.startsWith(baseUrl)) {
+        assert(href.startsWith(`${baseUrl}${prefix(locale)}`), `${locale}: hub link loses locale: ${href}`);
+        const route = href.slice(baseUrl.length).split('#')[0].replace(/\/$/, '');
+        assert(fs.existsSync(path.join(root, 'build', `${route}.html`)) || fs.existsSync(path.join(root, 'build', route, 'index.html')), `${locale}: missing hub destination ${href}`);
+      }
+    }
+  }
   const simulation = parse(`build/${prefix(locale)}simulation.html`);
   const simulationMain = simulation.querySelector('main');
   assert(simulationMain?.querySelector('h1'), `${locale}: missing simulation page`);
