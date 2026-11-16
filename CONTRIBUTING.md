@@ -22,15 +22,54 @@ ls -lh docs/foundations/simulation/figs/isaac-sim-cube-demo.mp4
 
 ## 本地预览
 
-本地和 CI 使用 `.nvmrc` 中的 Node.js 26.11.1 及其自带的 npm，具体版本由 `package.json` 和 `.npmrc` 检查。以下命令假定已安装 [nvm](https://github.com/nvm-sh/nvm#installing-and-updating)；也可通过其他方式安装同一版本。`.npmrc` 已为 npm 脚本关闭 Node 实验性 Web Storage，无需为构建额外设置 `NODE_OPTIONS`。
+本地和 CI 使用 `.nvmrc` 指定的 Node.js 及其自带的 npm。使用 [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) 时，在仓库根目录切换版本；也可通过其他方式安装同一版本：
 
 ```bash
 nvm install
 nvm use
-npm ci
-npm run dev          # 日常预览，不会动 LFS
-PULL_LFS=1 npm run dev   # 想顺带刷新 LFS 文件再用这个
 ```
+
+### 完整站点预览
+
+完成上面的 Git LFS 初始化与下载后，运行：
+
+```bash
+sh local-build.sh
+```
+
+脚本会按需安装依赖、构建全部语言并启动预览。打开终端打印的完整地址（含 `/dive-into-embodied-ai/`），同一局域网内的设备也可访问；没有局域网 IPv4 时使用 `localhost`。保持终端运行，按 `Ctrl+C` 停止。
+
+默认端口为 3002，可用 `sh local-build.sh 3003` 指定起始端口。修改页面后再次运行即可重新构建并重启当前仓库的预览；若端口由其他程序占用，脚本会选用后续端口。自动重启需要 `lsof`，macOS 通常自带，Ubuntu/Debian 可用 `sudo apt install lsof` 安装。
+
+### 开发与翻译
+
+日常编辑可启动自动刷新的开发服务器，一次运行一种语言：
+
+```bash
+npm run install:locked       # 首次使用或依赖变更后安装
+npm run dev                  # 中文，不重新下载 LFS 文件
+# 或选择英文 / 意大利语
+npm run start -- --locale en
+npm run start -- --locale it
+```
+
+中文路径为 `/dive-into-embodied-ai/`，英文和意大利语分别使用 `/en/`、`/it/` 子路径。完整构建后可在导航栏切换语言。
+
+翻译章节放在 `i18n/<locale>/docusaurus-plugin-content-docs/current/`，保留源文件目录结构、文档 ID、slug 和显式锚点。界面译文位于 `i18n/<locale>/code.json`，导航和页脚译文位于 `i18n/<locale>/docusaurus-theme-classic/`。其中 `<locale>` 为 `en` 或 `it`；缺少译稿时，页面显示中文原文与翻译范围提示。
+
+发布前检查所有语言：
+
+```bash
+npm run build
+npm run check:i18n
+npm run check:page-markdown
+```
+
+### 构建与依赖安装
+
+使用 `npm run build` 构建、`npm run install:locked` 安装依赖；`local-build.sh` 也使用这两个命令。同一工作目录同时只能执行一个构建或依赖安装，进程结束后锁自动释放，无需删除锁文件。直接运行 `npx docusaurus build` 或 `npm ci` 会绕过保护。
+
+`package.json` 和 `.npmrc` 检查 Node/npm 版本；`.npmrc` 也为 npm 脚本关闭 Node 实验性 Web Storage，无需额外设置 `NODE_OPTIONS`。`local-build.sh` 会优先检查当前运行时，版本不符时尝试本机已下载的项目运行时，否则提示切换版本；构建失败时不会启动预览。
 
 ## 提交规则
 

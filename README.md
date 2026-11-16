@@ -181,54 +181,11 @@ Datawhale 会围绕本教程组织组队学习。历史与在筹备中的组队�
 
 ## 💻 本地预览
 
-本地开发和 CI 统一使用 `.nvmrc` 指定的 **Node.js 26.11.1** 及其自带的 npm，版本要求见 `package.json`。使用 [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) 时，在仓库目录运行 `nvm install` 和 `nvm use`；其他安装方式请选同一版本。`.npmrc` 会检查安装时的版本，并为 npm 脚本关闭 Node 的实验性 Web Storage，避免静态构建触发 `localStorage` 警告；浏览器中的存储功能不受影响。
-
-仓库使用 **Git LFS** 存放视频和 GIF。clone 之后必须先装 `git-lfs` 再 `git lfs pull`,否则本地看到的图/视频是 pointer 文本而不是真内容。完整步骤见 [CONTRIBUTING.md](CONTRIBUTING.md#首次克隆必读)。
-
 ```bash
-# 1. 装 git-lfs(每台机器只需一次)
-# brew install git-lfs        # macOS
-# sudo apt install git-lfs    # Ubuntu / Debian
-# choco install git-lfs       # Windows
-
-# 2. 初始化并拉取 LFS 文件
-git lfs install
-git lfs pull
-
-# 3. 切换到 .nvmrc 指定版本（已安装 nvm 时）
-nvm install
-nvm use
-
-# 4. 按锁文件装依赖、起本地预览
-npm ci
-npm run dev
+sh local-build.sh
 ```
 
-也可运行 `sh local-build.sh` 构建所有语言并启动预览，默认端口为 3002。脚本会自动识别本机局域网 IPv4 地址，并在最后的服务启动成功信息中打印完整访问地址（含 `/dive-into-embodied-ai/` 路径），同一局域网的设备可直接打开该地址；没有局域网 IPv4 时使用 `localhost`。脚本不会自动打开浏览器。保持终端运行，按 `Ctrl+C` 停止服务。
-
-修改页面后再次运行同一命令即可重启：脚本通过 `lsof` 核对进程的工作目录和启动命令，停止当前仓库在该端口上的 Docusaurus 预览，再重新构建并启动，无需手动执行 `kill`。其他程序或其他仓库的服务会保留，端口自动顺延；也可用 `sh local-build.sh 3003` 指定起始端口。macOS 通常已安装 `lsof`，Ubuntu/Debian 可用 `sudo apt install lsof` 安装。
-
-脚本会检查 Node/npm 版本，并在依赖缺失或锁文件更新时通过 `npm run install:locked` 安装依赖。如果当前 Node 版本不符，会尝试使用 `${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v<版本>-<平台>-<架构>/` 中已有的运行时；否则会提示先切换版本。构建失败时脚本退出，不会启动不完整的预览。
-
-网站默认中文，可通过导航栏的语言菜单切换为 [English](https://datawhalechina.github.io/dive-into-embodied-ai/en/) 或 [Italiano](https://datawhalechina.github.io/dive-into-embodied-ai/it/)。英文和意大利语版本均覆盖 README、首页与导航、具身导论（含交互演示与资源页）、学习地图和项目总览。其他教程正文与独立实验页暂时显示中文，并用当前语言标注翻译范围。
-
-```bash
-# 单独启动英文开发环境（开发服务器一次只运行一种语言）
-npm run start -- --locale en
-# 意大利语
-npm run start -- --locale it
-
-# 构建并检查三种语言，再预览跨语言切换
-npm run build
-npm run check:i18n
-npm run serve
-```
-
-中文路径为 `/dive-into-embodied-ai/`，英文和意大利语分别位于 `/en/`、`/it/` 子路径。界面译文保存在 `i18n/<locale>/code.json`，导航和页脚译文位于 `i18n/<locale>/docusaurus-theme-classic/`，其中 `<locale>` 为 `en` 或 `it`。
-
-请通过 `npm run build`（或调用它的 `sh local-build.sh`、`npm run preview`）构建。同一工作目录一次只允许一个构建或 `npm run install:locked` 依赖安装进程；重复启动会提示等待，避免互相清空构建产物。`local-build.sh` 自动安装依赖时也使用这一保护。进程结束或被中断后锁自动释放，无需删除锁文件。直接运行 `npx docusaurus build` 或 `npm ci` 会绕过保护；需要在其他构建可能运行时重装依赖，请用 `npm run install:locked`。
-
-后续章节的译文 Markdown 可按原目录结构放入 `i18n/<locale>/docusaurus-plugin-content-docs/current/`，保留原文的文档 ID、slug 和显式章节锚点。缺少译稿时，Docusaurus 会显示中文原文，并提供当前语言的提示及中文版本链接。运行 `npm run check:i18n` 可检查译文、占位符、路由和跨语言锚点。
+打开终端显示的地址即可预览，按 `Ctrl+C` 停止。详细说明见[贡献指南](CONTRIBUTING.md#本地预览)。
 
 <a id="star-history"></a>
 
@@ -238,13 +195,13 @@ npm run serve
   <a href="assets/star-history.svg">
     <img src="assets/star-history.svg" width="900" alt="Dive into Embodied AI Star History Chart" />
   </a>
-  <br />
-  <sub>由 GitHub Actions 自动更新</sub>
 </p>
 
 <a id="贡献者名单"></a>
 
 ## 🤝 贡献者名单
+
+各组按已合入 `master` 的非合并提交累计内容增减行数（新增 + 删除）降序排列；同一作者的不同署名合并统计，二进制文件不计行数。
 
 ### 核心贡献者
 
@@ -256,6 +213,8 @@ npm run serve
 
 * 康博 [@bokang-ugent](https://github.com/bokang-ugent)，nobl.ai 联合创始人 & 比利时根特大学访问教授。
 * 罗如意 [@ruyiluo](https://github.com/ruyiluo)，智能汽车竞赛国奖 & FunRec 开源项目负责人。
+* YirongZheng [@Yirzzzz](https://github.com/Yirzzzz)，LIBERO 长时程任务上的 RECAP 复现与奖励函数可视化贡献者。
+* Ariestar [@Ariestar](https://github.com/Ariestar)，MDP 章节公式排版与 Docusaurus 提示块修复贡献者。
 
 <a id="关注我们"></a>
 

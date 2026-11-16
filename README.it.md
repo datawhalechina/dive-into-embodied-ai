@@ -165,47 +165,19 @@ Datawhale organizza gruppi attorno al corso. I programmi saranno raccolti in `do
 
 ## 💻 Anteprima locale
 
-Lo sviluppo locale e CI usano **Node.js 26.11.1**, fissato in `.nvmrc`, con npm incluso; i requisiti sono in `package.json`. Con [nvm](https://github.com/nvm-sh/nvm#installing-and-updating), esegui `nvm install` e `nvm use` nel repository; gli altri metodi devono installare la stessa versione. `.npmrc` controlla le versioni durante l'installazione e disattiva Web Storage sperimentale di Node per gli script npm, evitando gli avvisi `localStorage` nella compilazione statica. L'archiviazione del browser non cambia.
-
-Puoi anche eseguire `sh local-build.sh` per compilare tutte le lingue e avviare l'anteprima sulla porta 3002. Lo script rileva un indirizzo IPv4 della LAN e include l'URL completo, con il percorso `/dive-into-embodied-ai/`, nel messaggio finale di avvio del server. I dispositivi sulla stessa LAN possono aprire questo URL; se non è disponibile un indirizzo IPv4 della LAN, lo script usa `localhost`. Lo script non apre automaticamente il browser; mantieni il terminale in esecuzione e premi `Ctrl+C` per arrestare il server.
-
-Dopo aver modificato le pagine, esegui di nuovo lo stesso comando: lo script usa `lsof` per verificare la directory di lavoro e il comando del processo, arresta l'anteprima Docusaurus di questa copia del repository sulla porta scelta, quindi ricompila e la riavvia. Non serve eseguire `kill` manualmente. Gli altri programmi e le anteprime di altre copie del repository restano attivi e lo script passa alla porta successiva. Usa `sh local-build.sh 3003` per scegliere la porta iniziale. macOS di solito include `lsof`; su Ubuntu/Debian puoi installarlo con `sudo apt install lsof`.
-
-Lo script controlla le versioni di Node/npm e installa le dipendenze tramite `npm run install:locked` se mancano dipendenze o il lockfile è stato aggiornato. Se la versione attiva di Node è diversa, cerca un runtime già presente in `${XDG_DATA_HOME:-$HOME/.local/share}/dive-into-embodied-ai/node-v<versione>-<piattaforma>-<architettura>/`; altrimenti chiede di selezionare prima la versione richiesta. Se la compilazione fallisce, lo script termina senza avviare un'anteprima incompleta.
-
-Video e GIF usano **Git LFS**. Installa `git-lfs` ed esegui `git lfs pull` dopo il clone; altrimenti avrai solo puntatori testuali. Consulta [CONTRIBUTING.md](CONTRIBUTING.md#首次克隆必读), in cinese.
-
 ```bash
-# Installa Git LFS una volta: brew install git-lfs (macOS)
-# Ubuntu/Debian: sudo apt install git-lfs; Windows: choco install git-lfs
-git lfs install
-git lfs pull
-# Seleziona la versione di .nvmrc (richiede nvm)
-nvm install
-nvm use
-npm ci
-# Sito cinese predefinito
-npm run dev
-# Una lingua per server di sviluppo
-npm run start -- --locale it
-npm run start -- --locale en
-# Compila le tre lingue e verifica il passaggio tra loro
-npm run build
-npm run check:i18n
-npm run serve
+sh local-build.sh
 ```
 
-Il cinese è in `/dive-into-embodied-ai/`; l'inglese e l'italiano usano `/en/` e `/it/`. Le traduzioni dell'interfaccia sono in `i18n/<locale>/code.json`, navigazione e piè di pagina in `i18n/<locale>/docusaurus-theme-classic/`, con `<locale>` uguale a `en` o `it`.
-
-Compila con `npm run build`, oppure con `sh local-build.sh` / `npm run preview`, che lo richiamano. Ogni copia di lavoro consente una sola compilazione o installazione delle dipendenze tramite `npm run install:locked` alla volta; un secondo avvio invita ad attendere, evitando che un processo cancelli i risultati dell'altro. Anche l'installazione automatica in `local-build.sh` usa questa protezione. Il blocco si libera quando il processo termina o viene interrotto; non eliminare il file di blocco. I comandi diretti `npx docusaurus build` e `npm ci` aggirano la protezione. Usa `npm run install:locked` per reinstallare le dipendenze quando potrebbe essere in corso una compilazione.
-
-Aggiungi i capitoli tradotti in `i18n/<locale>/docusaurus-plugin-content-docs/current/`, mantenendo struttura, ID, slug e ancore esplicite. Senza traduzione, Docusaurus mostra il cinese con avviso localizzato e link all'originale. `npm run check:i18n` verifica testi, variabili, percorsi e ancore condivise.
+Apri l'URL mostrato nel terminale per visualizzare il sito; premi `Ctrl+C` per fermare il server. Consulta la [guida ai contributi](CONTRIBUTING.md#本地预览) (in cinese) per i dettagli.
 
 ## ⭐ Storico delle stelle
 
-<p align="center"><a href="assets/star-history.svg"><img src="assets/star-history.svg" width="900" alt="Storico delle stelle di Dive into Embodied AI" /></a><br /><sub>Aggiornato automaticamente da GitHub Actions</sub></p>
+<p align="center"><a href="assets/star-history.svg"><img src="assets/star-history.svg" width="900" alt="Storico delle stelle di Dive into Embodied AI" /></a></p>
 
 ## 🤝 Collaboratori
+
+In ciascun gruppo, i collaboratori sono elencati in ordine decrescente per il totale delle righe aggiunte ed eliminate nei commit inclusi in `master`, esclusi i commit di merge. Gli alias dello stesso autore sono raggruppati; i file binari non hanno un conteggio delle righe.
 
 ### Collaboratori principali
 
@@ -217,6 +189,8 @@ Aggiungi i capitoli tradotti in `i18n/<locale>/docusaurus-plugin-content-docs/cu
 
 * Kang Bo (康博) [@bokang-ugent](https://github.com/bokang-ugent), cofondatore di nobl.ai e professore ospite all'Università di Gand, Belgio.
 * Luo Ruyi (罗如意) [@ruyiluo](https://github.com/ruyiluo), premio nazionale nella competizione di veicoli intelligenti e responsabile di FunRec.
+* YirongZheng [@Yirzzzz](https://github.com/Yirzzzz), collaboratore alla riproduzione di RECAP su attività a lungo orizzonte in LIBERO e alla visualizzazione della funzione di ricompensa.
+* Ariestar [@Ariestar](https://github.com/Ariestar), collaboratore alle correzioni della formattazione delle formule MDP e dei blocchi di avviso di Docusaurus.
 
 ## 📣 Seguici
 
