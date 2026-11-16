@@ -246,12 +246,16 @@ npm run serve
 
 ## 🤝 贡献者名单
 
-| 姓名 | 职责 | 简介 |
-| :--- | :--- | :--- |
-| 江季  | 项目负责人 | [蘑菇书](https://github.com/datawhalechina/easy-rl)作者，强化学习算法研究员 |
-| 康博 | 项目负责人 | nobl.ai 联合创始人 & 比利时根特大学访问教授|
-| 黄潇 | 项目负责人 | 同济大学毕业，智驾算法工程师 |
-| 罗如意 | 项目负责人 | 智能汽车竞赛国奖&FunRec开源项目负责人 |
+### 核心贡献者
+
+* 江季 [@johnjim0816](https://github.com/johnjim0816)，[蘑菇书](https://github.com/datawhalechina/easy-rl)作者，强化学习算法研究员。
+* 黄潇 [@huang-xiao-01](https://github.com/huang-xiao-01)，同济大学毕业，智驾算法工程师。
+* 孙成超 [@scchy](https://github.com/scchy)，Quaddle VLA 导航训练与仿真教程贡献者。
+
+### 其他贡献者
+
+* 康博 [@bokang-ugent](https://github.com/bokang-ugent)，nobl.ai 联合创始人 & 比利时根特大学访问教授。
+* 罗如意 [@ruyiluo](https://github.com/ruyiluo)，智能汽车竞赛国奖 & FunRec 开源项目负责人。
 
 <a id="关注我们"></a>
 

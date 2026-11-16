@@ -207,12 +207,16 @@ Aggiungi i capitoli tradotti in `i18n/<locale>/docusaurus-plugin-content-docs/cu
 
 ## 🤝 Collaboratori
 
-| Nome | Ruolo | Esperienza |
-| --- | --- | --- |
-| Jiang Ji (江季) | Responsabile del progetto | Autore di [Easy RL](https://github.com/datawhalechina/easy-rl), ricercatore sul rinforzo |
-| Kang Bo (康博) | Responsabile del progetto | Cofondatore di nobl.ai e professore ospite all'Università di Gand, Belgio |
-| Huang Xiao (黄潇) | Responsabile del progetto | Laureato a Tongji, ingegnere di algoritmi per la guida intelligente |
-| Luo Ruyi (罗如意) | Responsabile del progetto | Premio nazionale nella competizione di veicoli intelligenti e responsabile di FunRec |
+### Collaboratori principali
+
+* Jiang Ji (江季) [@johnjim0816](https://github.com/johnjim0816), autore di [Easy RL](https://github.com/datawhalechina/easy-rl), ricercatore sul rinforzo.
+* Huang Xiao (黄潇) [@huang-xiao-01](https://github.com/huang-xiao-01), laureato a Tongji, ingegnere di algoritmi per la guida intelligente.
+* Sun Chengchao (孙成超) [@scchy](https://github.com/scchy), collaboratore ai tutorial di simulazione e addestramento alla navigazione VLA con Quaddle.
+
+### Altri collaboratori
+
+* Kang Bo (康博) [@bokang-ugent](https://github.com/bokang-ugent), cofondatore di nobl.ai e professore ospite all'Università di Gand, Belgio.
+* Luo Ruyi (罗如意) [@ruyiluo](https://github.com/ruyiluo), premio nazionale nella competizione di veicoli intelligenti e responsabile di FunRec.
 
 ## 📣 Seguici
 

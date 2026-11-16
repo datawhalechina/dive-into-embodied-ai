@@ -227,12 +227,16 @@ To translate a chapter later, add its Markdown under `i18n/<locale>/docusaurus-p
 
 ## 🤝 Contributors
 
-| Name | Role | Background |
-| :--- | :--- | :--- |
-| Jiang Ji (江季) | Project lead | Author of [Easy RL](https://github.com/datawhalechina/easy-rl), reinforcement learning researcher |
-| Kang Bo (康博) | Project lead | Co-founder of nobl.ai and visiting professor at Ghent University, Belgium |
-| Huang Xiao (黄潇) | Project lead | Tongji University graduate, intelligent-driving algorithm engineer |
-| Luo Ruyi (罗如意) | Project lead | National award winner in the smart car competition and lead of the FunRec open source project |
+### Core contributors
+
+* Jiang Ji (江季) [@johnjim0816](https://github.com/johnjim0816), author of [Easy RL](https://github.com/datawhalechina/easy-rl), reinforcement learning researcher.
+* Huang Xiao (黄潇) [@huang-xiao-01](https://github.com/huang-xiao-01), Tongji University graduate, intelligent-driving algorithm engineer.
+* Sun Chengchao (孙成超) [@scchy](https://github.com/scchy), contributor to Quaddle VLA navigation training and simulation tutorials.
+
+### Other contributors
+
+* Kang Bo (康博) [@bokang-ugent](https://github.com/bokang-ugent), co-founder of nobl.ai and visiting professor at Ghent University, Belgium.
+* Luo Ruyi (罗如意) [@ruyiluo](https://github.com/ruyiluo), national award winner in the smart car competition and lead of the FunRec open source project.
 
 ## 📣 Follow us
 
