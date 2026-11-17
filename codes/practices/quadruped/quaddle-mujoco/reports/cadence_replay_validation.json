@@ -1,0 +1,115 @@
+{
+  "base_commit": "48d3ead",
+  "cases": [
+    {
+      "controller": "baseline",
+      "case": "nominal",
+      "exact_metrics_match": true,
+      "cadence_pass": true,
+      "original_running_pass": false
+    },
+    {
+      "controller": "baseline",
+      "case": "heldout_0",
+      "exact_metrics_match": true,
+      "cadence_pass": true,
+      "original_running_pass": false
+    },
+    {
+      "controller": "baseline",
+      "case": "heldout_1",
+      "exact_metrics_match": true,
+      "cadence_pass": false,
+      "original_running_pass": false
+    },
+    {
+      "controller": "baseline",
+      "case": "heldout_2",
+      "exact_metrics_match": true,
+      "cadence_pass": true,
+      "original_running_pass": false
+    },
+    {
+      "controller": "baseline",
+      "case": "heldout_3",
+      "exact_metrics_match": true,
+      "cadence_pass": false,
+      "original_running_pass": false
+    },
+    {
+      "controller": "baseline",
+      "case": "heldout_4",
+      "exact_metrics_match": true,
+      "cadence_pass": false,
+      "original_running_pass": false
+    },
+    {
+      "controller": "baseline",
+      "case": "heldout_5",
+      "exact_metrics_match": true,
+      "cadence_pass": false,
+      "original_running_pass": false
+    },
+    {
+      "controller": "optimized",
+      "case": "nominal",
+      "exact_metrics_match": true,
+      "cadence_pass": true,
+      "original_running_pass": false
+    },
+    {
+      "controller": "optimized",
+      "case": "heldout_0",
+      "exact_metrics_match": true,
+      "cadence_pass": true,
+      "original_running_pass": false
+    },
+    {
+      "controller": "optimized",
+      "case": "heldout_1",
+      "exact_metrics_match": true,
+      "cadence_pass": true,
+      "original_running_pass": false
+    },
+    {
+      "controller": "optimized",
+      "case": "heldout_2",
+      "exact_metrics_match": true,
+      "cadence_pass": true,
+      "original_running_pass": false
+    },
+    {
+      "controller": "optimized",
+      "case": "heldout_3",
+      "exact_metrics_match": true,
+      "cadence_pass": true,
+      "original_running_pass": false
+    },
+    {
+      "controller": "optimized",
+      "case": "heldout_4",
+      "exact_metrics_match": true,
+      "cadence_pass": true,
+      "original_running_pass": false
+    },
+    {
+      "controller": "optimized",
+      "case": "heldout_5",
+      "exact_metrics_match": true,
+      "cadence_pass": true,
+      "original_running_pass": false
+    }
+  ],
+  "exact_keys": [
+    "checks",
+    "forward_m",
+    "final_position_m",
+    "max_driven_joint_speed_rad_s",
+    "max_heading_deviation_deg",
+    "completed_flight_intervals_s",
+    "min_upright_cosine",
+    "max_closure_error_m"
+  ],
+  "all_frequency_measurements_and_cadence_checks_match": true,
+  "new_training_steps": 0
+}

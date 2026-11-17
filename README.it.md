@@ -84,6 +84,7 @@ La [panoramica dei progetti](i18n/it/docusaurus-plugin-content-docs/current/prac
 | AMD | [MicroDuck RL · AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700, ROCm MuJoCo Warp, test dei contatti dinamici e PPO bipede |
 | AMD | [Esplora Pupper](docs/practices/amd/pupper-control/intro.md) | Politiche di locomozione RL ed esperimenti VLA |
 | Simulazione | [Quadrupede da zero](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo, PD, cinematica, politiche, controllo linguistico e percezione |
+| Simulazione | [Quaddle: miglioramenti e limiti](i18n/it/docusaurus-plugin-content-docs/current/practices/quadruped/quaddle-mujoco/optimization.md) | Confronto a 3,34 Hz, riproduzione e limiti su terreni e corsa |
 | Simulazione | [MicroDuck RL](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp, PPO parallelo e camminata bipede su GPU |
 | Simulazione | [MuJoCo e DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | Ambienti ed esperimenti di controllo continuo |
 | Simulazione | [ACT bimanuale](docs/practices/vla/act/index.md) | ACT + ALOHA: addestramento, valutazione e riproduzione |

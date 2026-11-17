@@ -89,6 +89,7 @@
 | AMD 专区 | [MicroDuck RL｜AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700、ROCm MuJoCo Warp、动态接触回归与双足 PPO |
 | AMD 专区 | [玩转 Pupper 四足机器人](docs/practices/amd/pupper-control/intro.md) | AMD 平台上的强化学习运动策略与 VLA 实验 |
 | 仿真实战 | [从零到一搭建四足机器人](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo、PD、运动学、策略训练、语言控制与感知 |
+| 仿真实战 | [Quaddle 优化进展与瓶颈](docs/practices/quadruped/quaddle-mujoco/optimization.md) | 3.34 Hz高频慢行对照、复跑入口与台阶/坑洼/跑步边界 |
 | 仿真实战 | [Petoi Quaddle 四舵机步行仿真](docs/practices/quadruped/quaddle-mujoco/index.md) | 官方 URDF 适配、交替步态、接触验证与无限棋盘地面 |
 | 仿真实战 | [MicroDuck RL 小黄鸭双足机器人](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp：GPU 并行 PPO 与双足步态训练 |
 | 仿真实战 | [MuJoCo 机械臂与 DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | MuJoCo 环境与连续控制实验 |

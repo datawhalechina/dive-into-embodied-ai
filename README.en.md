@@ -86,6 +86,7 @@ Use the [project overview](i18n/en/docusaurus-plugin-content-docs/current/practi
 | AMD | [MicroDuck RL · AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700, ROCm MuJoCo Warp, dynamic-contact regression tests, and biped PPO |
 | AMD | [Explore the Pupper quadruped](docs/practices/amd/pupper-control/intro.md) | RL locomotion policies and VLA experiments on AMD hardware |
 | Simulation | [Build a quadruped from scratch](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo, PD control, kinematics, policy training, language control, and perception |
+| Simulation | [Quaddle optimization and bottlenecks](i18n/en/docusaurus-plugin-content-docs/current/practices/quadruped/quaddle-mujoco/optimization.md) | 3.34 Hz cadence comparison, replay code, and terrain/running limits |
 | Simulation | [MicroDuck RL biped](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp: parallel PPO and biped gait training on GPUs |
 | Simulation | [MuJoCo robot arms and DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | MuJoCo environments and continuous-control experiments |
 | Simulation | [ACT bimanual training](docs/practices/vla/act/index.md) | ACT + ALOHA: training, evaluation, and reproduction |

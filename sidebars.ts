@@ -302,6 +302,7 @@ const sidebars: SidebarsConfig = {
           items: [
             { type: 'doc', id: 'practices/quadruped/quaddle-mujoco/index', label: '入门：让机器人走起来' },
             { type: 'doc', id: 'practices/quadruped/quaddle-mujoco/experiments', label: '多场景实验：结果与失败分析' },
+            { type: 'doc', id: 'practices/quadruped/quaddle-mujoco/optimization', label: '优化进展与瓶颈' },
           ],
         },
         {

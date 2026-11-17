@@ -1,0 +1,576 @@
+{
+  "scope": "MuJoCo simulation; fixed-condition development and validation; no real hardware result",
+  "source_commit": "b0e5ec771abbe838beb558b95b7525bf327519bb",
+  "model_sha256": "10d1990f12c2dc79b739b67203422ff8a0090a01e424dacf780b9a03d6015b83",
+  "versions": {
+    "python": "3.12",
+    "mujoco": "3.16.0"
+  },
+  "cadence_protocol": {
+    "purpose": "User prioritizes faster leg cadence, forward speed need not meet running threshold; no flight requirement for this new stepping objective",
+    "nominal_evaluations": 9,
+    "controller": "DwellController without predictive guard",
+    "frequency_hz": [
+      3.34,
+      4.0,
+      5.0,
+      6.0
+    ],
+    "amplitude_multipliers": [
+      0.6,
+      1.0
+    ],
+    "physical_checks": "all original checks except ['running_speed', 'repeated_flight', 'forward_speed', 'task_goal']",
+    "cadence_criteria": {
+      "command_frequency_min_hz": 3.3,
+      "actual_fft_tolerance_fraction": 0.15,
+      "each_leg_excursion_min_rad": 0.12,
+      "forward_progress_min_m": 0.1
+    },
+    "actual_measurement": "100Hz joint position; t>=5s; windowed FFT 0.5–12Hz and independent peak-interval diagnostics",
+    "selection": "passing new cadence criteria; maximize command frequency, then maximize minimum actual leg excursion",
+    "heldout": [
+      {
+        "initial_yaw_deg": -3
+      },
+      {
+        "initial_yaw_deg": 3
+      },
+      {
+        "initial_x_offset": -0.005
+      },
+      {
+        "initial_x_offset": 0.005
+      },
+      {
+        "friction_scale": 0.9
+      },
+      {
+        "friction_scale": 1.1
+      }
+    ],
+    "new_ppo_steps": 0,
+    "physics": "unchanged; original running results preserved separately"
+  },
+  "stability_protocol": {
+    "frequency_hz": 3.3426081506172167,
+    "physics": "unchanged",
+    "new_ppo_steps": 0,
+    "baseline_controls": 2,
+    "screening_configs": 22,
+    "screening_conditions": [
+      {},
+      {
+        "friction_scale": 0.9
+      }
+    ],
+    "shortlist": 3,
+    "additional_development_conditions": [
+      {
+        "initial_yaw_deg": -3
+      },
+      {
+        "initial_yaw_deg": 3
+      },
+      {
+        "initial_x_offset": 0.005
+      },
+      {
+        "friction_scale": 1.1
+      }
+    ],
+    "heldout": [
+      {
+        "initial_yaw_deg": -1.5,
+        "friction_scale": 0.95
+      },
+      {
+        "initial_yaw_deg": 1.5,
+        "friction_scale": 1.05
+      },
+      {
+        "initial_x_offset": -0.0075
+      },
+      {
+        "initial_x_offset": 0.0075
+      },
+      {
+        "friction_scale": 0.95
+      },
+      {
+        "friction_scale": 1.05
+      }
+    ],
+    "cadence_criteria": "same as cadence-study/protocol.json",
+    "ranking": "maximize passed cases, minimize other physical failures, minimize heading excess, maximize minimum forward progress; no minimum running speed/flight requirement",
+    "selection": "top 3 based on initial two development cases, then select on all six development cases; freeze before heldout; no heldout reselection"
+  },
+  "cadence_full_evaluations": 73,
+  "new_ppo_steps_in_cadence_study": 0,
+  "terrain_scope": {
+    "rough_original": "failed on seeds 7, 19, 23",
+    "step_2mm_recovery": "local +15mm edge condition improved; fixed recovery candidate passed 4/10 mixed validation conditions; not globally adopted",
+    "stairs_4mm": "failed; optimization paused"
+  },
+  "published_video": "docs/practices/quadruped/quaddle-mujoco/figs/optimization/cadence-optimized.mp4",
+  "limitations": [
+    "Uncalibrated springs, actuation and contact model",
+    "Finite 22-second evaluations, not independent random trials",
+    "New cadence criteria do not replace original aerial-running criteria",
+    "No new combined terrain-and-cadence validation",
+    "Checkpoints and full PPO retraining workflow are outside this results PR"
+  ],
+  "selected_config": {
+    "name": "bound_search_candidate",
+    "joint_order": [
+      "left_front",
+      "right_front",
+      "right_back",
+      "left_back"
+    ],
+    "actuator_signs": [
+      1,
+      -1,
+      -1,
+      1
+    ],
+    "amplitude_rad": [
+      0.33216220227121174,
+      0.33216220227121174,
+      0.424576821169797,
+      0.424576821169797
+    ],
+    "bias_rad": [
+      -0.3716960139025034,
+      -0.3716960139025034,
+      -0.21484949501125616,
+      -0.21484949501125616
+    ],
+    "phase_rad": [
+      0.0,
+      0.0,
+      3.1765370650202898,
+      3.1765370650202898
+    ],
+    "frequency_hz": 3.3426081506172167,
+    "waveform": "cosine_duty",
+    "sweep_fraction": 0.5,
+    "harmonic": 0.0,
+    "control_hz": 100,
+    "settle_seconds": 2.0,
+    "startup_bias_rad": [
+      0.2,
+      0.2,
+      -0.4,
+      -0.4
+    ],
+    "startup_ramp_seconds": 0.05,
+    "ramp_seconds": 1.5,
+    "heading_kp": 0.1,
+    "heading_kd": 0.03,
+    "lateral_kp": 0.0,
+    "steering_limit": 0.12,
+    "max_target_speed_rad_s": 8.0,
+    "note": "Parameter search candidate; acceptance is determined by metrics, not this label.",
+    "endpoint_dwell": [
+      0.04,
+      0.04
+    ],
+    "steering_profile": "bias"
+  },
+  "selected_label": "bias_g0.1",
+  "development_passed": 6,
+  "matched_heldout": [
+    {
+      "condition": {
+        "initial_yaw_deg": -1.5,
+        "friction_scale": 0.95
+      },
+      "baseline_pass": true,
+      "selected_pass": true,
+      "baseline": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 1.4284455995010723,
+        "average_forward_speed_m_s": 0.07142227997505361,
+        "max_heading_deviation_deg": 11.92281548931679,
+        "max_driven_joint_speed_rad_s": 8.938654779112582
+      },
+      "selected": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 1.4280498876860668,
+        "average_forward_speed_m_s": 0.07140249438430334,
+        "max_heading_deviation_deg": 8.19217496082626,
+        "max_driven_joint_speed_rad_s": 8.938654779112582
+      },
+      "baseline_lateral_max_sampled_m": 0.05689163591502398,
+      "selected_lateral_max_sampled_m": 0.07214075224058324
+    },
+    {
+      "condition": {
+        "initial_yaw_deg": 1.5,
+        "friction_scale": 1.05
+      },
+      "baseline_pass": false,
+      "selected_pass": true,
+      "baseline": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": false,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 0.8917874694312299,
+        "average_forward_speed_m_s": 0.04458937347156149,
+        "max_heading_deviation_deg": 119.08861151948005,
+        "max_driven_joint_speed_rad_s": 9.15292401371453
+      },
+      "selected": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 1.3158325582037456,
+        "average_forward_speed_m_s": 0.06579162791018728,
+        "max_heading_deviation_deg": 6.495125301418899,
+        "max_driven_joint_speed_rad_s": 8.989718334405124
+      },
+      "baseline_lateral_max_sampled_m": 0.6120319014697436,
+      "selected_lateral_max_sampled_m": 0.05383619743114719
+    },
+    {
+      "condition": {
+        "initial_x_offset": -0.0075
+      },
+      "baseline_pass": true,
+      "selected_pass": true,
+      "baseline": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 1.3920368692314018,
+        "average_forward_speed_m_s": 0.06960184346157008,
+        "max_heading_deviation_deg": 16.891423351738528,
+        "max_driven_joint_speed_rad_s": 9.05631343393558
+      },
+      "selected": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 1.387564425606551,
+        "average_forward_speed_m_s": 0.06937822128032754,
+        "max_heading_deviation_deg": 7.981091764922711,
+        "max_driven_joint_speed_rad_s": 8.92888897286518
+      },
+      "baseline_lateral_max_sampled_m": 0.13516387664503923,
+      "selected_lateral_max_sampled_m": 0.03951257467519465
+    },
+    {
+      "condition": {
+        "initial_x_offset": 0.0075
+      },
+      "baseline_pass": false,
+      "selected_pass": true,
+      "baseline": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": false,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 1.3740324221776516,
+        "average_forward_speed_m_s": 0.06870162110888259,
+        "max_heading_deviation_deg": 52.266352648074246,
+        "max_driven_joint_speed_rad_s": 9.092281752817646
+      },
+      "selected": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 1.3891328982345192,
+        "average_forward_speed_m_s": 0.06945664491172596,
+        "max_heading_deviation_deg": 6.962800407637585,
+        "max_driven_joint_speed_rad_s": 8.928888972865533
+      },
+      "baseline_lateral_max_sampled_m": 0.22145382731263968,
+      "selected_lateral_max_sampled_m": 0.032826084039908436
+    },
+    {
+      "condition": {
+        "friction_scale": 0.95
+      },
+      "baseline_pass": false,
+      "selected_pass": true,
+      "baseline": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": false,
+          "heading": false,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 0.6273572953268751,
+        "average_forward_speed_m_s": 0.031367864766343755,
+        "max_heading_deviation_deg": 169.86871161710093,
+        "max_driven_joint_speed_rad_s": 8.938666220314344
+      },
+      "selected": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 1.41468763139958,
+        "average_forward_speed_m_s": 0.070734381569979,
+        "max_heading_deviation_deg": 6.704698341739165,
+        "max_driven_joint_speed_rad_s": 9.090114589828486
+      },
+      "baseline_lateral_max_sampled_m": 0.7322655311931724,
+      "selected_lateral_max_sampled_m": 0.07126971985846195
+    },
+    {
+      "condition": {
+        "friction_scale": 1.05
+      },
+      "baseline_pass": false,
+      "selected_pass": true,
+      "baseline": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": false,
+          "task_goal": false,
+          "heading": false,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 0.22070761876125877,
+        "average_forward_speed_m_s": 0.011035380938062939,
+        "max_heading_deviation_deg": 179.27019089268092,
+        "max_driven_joint_speed_rad_s": 9.46899729426377
+      },
+      "selected": {
+        "passed": false,
+        "checks": {
+          "complete": true,
+          "finite": true,
+          "no_warnings": true,
+          "upright": true,
+          "body_clearance": true,
+          "no_body_contact": true,
+          "no_obstacle_contact": true,
+          "startup_pitch": true,
+          "loop_closure": true,
+          "torque_limit": true,
+          "joint_speed": true,
+          "forward_speed": true,
+          "task_goal": true,
+          "heading": true,
+          "force_accounting": true,
+          "running_speed": false,
+          "repeated_flight": false
+        },
+        "forward_m": 1.324884934936191,
+        "average_forward_speed_m_s": 0.06624424674680955,
+        "max_heading_deviation_deg": 7.8019511250015885,
+        "max_driven_joint_speed_rad_s": 8.917619216904152
+      },
+      "baseline_lateral_max_sampled_m": 0.8986010247800055,
+      "selected_lateral_max_sampled_m": 0.029238394812611427
+    }
+  ],
+  "raw_evidence": {
+    "file": "optimization-evidence-2026-11-16.jsonl",
+    "sha256": "f55b370ea3d83f767a190aab5362cd1671c78ffddd059fcff96ea7679d05cc0d",
+    "format": "JSONL: 73 full cadence-case records plus historical selection, validation, ablation, PPO and terrain records",
+    "cadence_cases": 73,
+    "records": 80
+  },
+  "training_budgets": {
+    "running_initial_steps": 131072,
+    "running_contrast_steps": 131072,
+    "combination_steps": 32768,
+    "new_training_steps_in_cadence_optimization": 0
+  },
+  "video_provenance": {
+    "duration_s": 22,
+    "fps": 25,
+    "width": 960,
+    "height": 720,
+    "sha256": "59525c8962cc00b4527218fc09ebb5c57e4dd9d9af8c28b5c5c44076c4164f8c",
+    "metrics_match_nominal_replay": true,
+    "method": "Actual MuJoCo rendering at normal speed, including startup"
+  },
+  "portable_replay_validation": "cadence_replay_validation.json"
+}

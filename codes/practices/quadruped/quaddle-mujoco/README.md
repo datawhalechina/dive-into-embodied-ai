@@ -10,6 +10,17 @@
 
 新增平地停走／转向交互、固定场景复跑入口和配套旧 PPO 权重，详见 [基础版说明](BASELINE.md)。2 mm 上台阶仅保留为标称条件的实验展示，本轮航向优化未通过独立条件检查；不列为稳定基础能力。
 
+## 2026-11-16 高频慢行优化与瓶颈
+
+新增独立实验控制器`cadence_controller.py`、冻结配置`reference/cadence-*.json`及`evaluate_cadence.py`。约3.34 Hz下，同一组六项扰动旧方案2/6、新方案6/6通过新快步判据；原腾空跑、原始坑洼、稳定上台阶仍未解决，默认Python与网页步态均不替换。没有新增PPO训练或真机验证。
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python evaluate_cadence.py --workers 3 --output outputs/cadence-review
+MUJOCO_GL=egl .venv/bin/python evaluate_cadence.py --controller optimized --suite nominal --video --output outputs/cadence-video
+```
+
+依赖沿用本项目Python环境。每次运动20秒加启动2秒，输出分别保存`cadence_pass`和原`result.passed`，不能将新快步通过视为腾空跑通过；单项目录存在时拒绝覆盖。完整研究记录在`reports/optimization-2026-11-16.json`，三语教程见[优化进展与瓶颈](../../../../docs/practices/quadruped/quaddle-mujoco/optimization.md)。PPO失败评估属于历史归档，本PR不包含相关checkpoint或完整再训练入口。
+
 ## 网页交互
 
 仓库根目录运行 `npm install` 和 `npm run dev`，进入网站的“项目实战 → 仿真实战 → Petoi Quaddle 四足步行仿真”。加载后可以行走、停止站立、暂停物理、重置和调整视角，无需本地 Python 服务。
