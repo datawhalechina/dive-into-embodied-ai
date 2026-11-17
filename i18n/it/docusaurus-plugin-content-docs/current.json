@@ -142,5 +142,8 @@
   },
   "sidebar.practicesHumanoidSidebar.link.MicroDuck RL（AMD）": {
     "message": "MicroDuck RL (AMD)"
+  },
+  "sidebar.practicesQuadrupedSidebar.doc.优化进展与瓶颈": {
+    "message": "Miglioramenti e limiti"
   }
 }
