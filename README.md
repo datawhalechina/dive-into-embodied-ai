@@ -49,10 +49,10 @@
 <table align="center">
   <tr>
     <td align="center" width="33%">
-      <a href="docs/practices/humanoid/microduck-rl/index.md">
-        <img src="docs/practices/humanoid/microduck-rl/figs/focus-final/ballkick_final.gif" height="200" alt="MicroDuck 小黄鸭双足踢球与收势平衡" />
+      <a href="docs/practices/amd/microduck-rl/index.md">
+        <img src="docs/practices/amd/microduck-rl/figs/microduck-amd-r9700-model750.gif" height="200" alt="MicroDuck 小黄鸭双足稳定行走回放" />
       </a>
-      <br/><sub><b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · 双足踢球与平衡</a></b><br/>mjlab + MuJoCo Warp · GPU 并行 PPO</sub>
+      <br/><sub><b><a href="docs/practices/amd/microduck-rl/index.md">MicroDuck RL · 双足稳定行走</a></b><br/>mjlab + MuJoCo Warp · GPU 并行 PPO（ROCm / CUDA）</sub>
     </td>
     <td align="center" width="33%">
       <a href="docs/practices/humanoid/flamingo-isaaclab/0.intro.md">
@@ -139,6 +139,23 @@ sh local-build.sh
     <img src="assets/star-history.svg" width="900" alt="Dive into Embodied AI Star History Chart" />
   </a>
 </p>
+
+<a id="如何贡献"></a>
+
+## 🙌 如何贡献
+
+欢迎任何形式的参与——无论你是刚入门的读者，还是有仿真、算法或真机经验的开发者：
+
+- **纠错与建议**：发现公式、代码、链接错误或表述不清，欢迎直接提 [Issue](https://github.com/datawhalechina/dive-into-embodied-ai/issues) 或发起 PR。
+- **补充教程与实战**：欢迎认领占位章节，或提交新的仿真实验、论文复现、真机部署案例与在线仿真模型。
+- **完善多语言翻译**：协助同步英文（`i18n/en/`）与意大利语（`i18n/it/`）译文。
+
+### 提交流程
+
+1. Fork 本仓库并克隆到本地，按 [贡献指南](CONTRIBUTING.md) 安装 Git LFS 并拉取大文件（`git lfs install && git lfs pull`）。
+2. 使用 `.nvmrc` 指定的 Node.js 版本，运行 `sh local-build.sh` 或 `npm run dev` 本地预览修改。
+3. 新增位图请转为 WebP（`npm run assets:webp`），提交前运行 `npm run assets:webp:check` 与 `npm run build` 确保构建和检查通过。
+4. 向 `master` 分支发起 Pull Request，简要说明改动内容与验证结果；完整规范与环境配置见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 <a id="贡献者名单"></a>
 

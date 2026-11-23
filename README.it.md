@@ -42,10 +42,10 @@ L'IA incarnata unisce molte discipline: **non serve completare tutta la teoria p
 <table align="center">
   <tr>
     <td align="center" width="33%">
-      <a href="docs/practices/humanoid/microduck-rl/index.md">
-        <img src="docs/practices/humanoid/microduck-rl/figs/focus-final/ballkick_final.gif" height="200" alt="Il bipede MicroDuck calcia la palla e recupera l'equilibrio" />
+      <a href="docs/practices/amd/microduck-rl/index.md">
+        <img src="docs/practices/amd/microduck-rl/figs/microduck-amd-r9700-model750.gif" height="200" alt="Riproduzione della camminata stabile del bipede MicroDuck" />
       </a>
-      <br/><sub><b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · Calcio bipede ed equilibrio</a></b><br/>mjlab + MuJoCo Warp · PPO parallelo su GPU</sub>
+      <br/><sub><b><a href="docs/practices/amd/microduck-rl/index.md">MicroDuck RL · Camminata bipede stabile</a></b><br/>mjlab + MuJoCo Warp · PPO parallelo (ROCm / CUDA)</sub>
     </td>
     <td align="center" width="33%">
       <a href="docs/practices/humanoid/flamingo-isaaclab/0.intro.md">
@@ -122,6 +122,21 @@ Apri l'URL mostrato nel terminale per visualizzare il sito; premi `Ctrl+C` per f
 ## ⭐ Storico delle stelle
 
 <p align="center"><a href="assets/star-history.svg"><img src="assets/star-history.svg" width="900" alt="Storico delle stelle di Dive into Embodied AI" /></a></p>
+
+## 🙌 Come contribuire
+
+Qualsiasi contributo è benvenuto, sia da chi sta iniziando sia da chi lavora su simulazione, algoritmi o hardware:
+
+- **Correzioni e suggerimenti**: se trovi errori in formule, codice, link o testo, apri una [Issue](https://github.com/datawhalechina/dive-into-embodied-ai/issues) o una PR.
+- **Tutorial e progetti**: completa capitoli in preparazione o proponi nuovi esperimenti di simulazione, riproduzioni di articoli, guide su robot reali o modelli per la simulazione online.
+- **Traduzioni**: aiuta a mantenere allineate le versioni inglese (`i18n/en/`) e italiana (`i18n/it/`).
+
+### Procedura di invio
+
+1. Fai fork e clona il repository, poi installa Git LFS e scarica i file multimediali (`git lfs install && git lfs pull`).
+2. Usa la versione di Node.js indicata in `.nvmrc` e verifica le modifiche in locale con `sh local-build.sh` o `npm run dev`.
+3. Converti le nuove immagini raster in WebP (`npm run assets:webp`) ed esegui `npm run assets:webp:check` e `npm run build` prima del commit.
+4. Apri una Pull Request verso `master` descrivendo modifiche e verifiche. Consulta [CONTRIBUTING.md](CONTRIBUTING.md) (in cinese) per i dettagli.
 
 ## 🤝 Collaboratori
 

@@ -44,10 +44,10 @@ Embodied AI spans many disciplines—**you do not need to finish all the theory 
 <table align="center">
   <tr>
     <td align="center" width="33%">
-      <a href="docs/practices/humanoid/microduck-rl/index.md">
-        <img src="docs/practices/humanoid/microduck-rl/figs/focus-final/ballkick_final.gif" height="200" alt="MicroDuck biped kicking a ball and recovering balance" />
+      <a href="docs/practices/amd/microduck-rl/index.md">
+        <img src="docs/practices/amd/microduck-rl/figs/microduck-amd-r9700-model750.gif" height="200" alt="MicroDuck biped stable walking gait playback" />
       </a>
-      <br/><sub><b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · Biped kick &amp; balance</a></b><br/>mjlab + MuJoCo Warp · Parallel PPO on GPUs</sub>
+      <br/><sub><b><a href="docs/practices/amd/microduck-rl/index.md">MicroDuck RL · Stable biped walking</a></b><br/>mjlab + MuJoCo Warp · Parallel PPO (ROCm / CUDA)</sub>
     </td>
     <td align="center" width="33%">
       <a href="docs/practices/humanoid/flamingo-isaaclab/0.intro.md">
@@ -128,6 +128,21 @@ Open the URL printed in the terminal to preview the site; press `Ctrl+C` to stop
     <img src="assets/star-history.svg" width="900" alt="Dive into Embodied AI star history chart" />
   </a>
 </p>
+
+## 🙌 How to contribute
+
+Contributions of all kinds are welcome—whether you are learning embodied AI for the first time or building simulation, algorithm, and hardware systems:
+
+- **Fixes &amp; feedback**: spot an error in equations, code, links, or wording? Open an [Issue](https://github.com/datawhalechina/dive-into-embodied-ai/issues) or submit a PR.
+- **Tutorials &amp; projects**: fill in placeholder chapters or contribute new simulation experiments, paper reproductions, real-robot guides, or browser simulation models.
+- **Translations**: help keep the English (`i18n/en/`) and Italian (`i18n/it/`) docs synchronized.
+
+### Contribution workflow
+
+1. Fork and clone the repository, then install Git LFS and pull binary assets (`git lfs install && git lfs pull`).
+2. Switch to the Node.js version in `.nvmrc` and preview locally with `sh local-build.sh` or `npm run dev`.
+3. Use WebP for new raster images (`npm run assets:webp`), and run `npm run assets:webp:check` and `npm run build` before committing.
+4. Open a Pull Request against `master` summarizing your changes and checks. See [CONTRIBUTING.md](CONTRIBUTING.md) (in Chinese) for full guidelines.
 
 ## 🤝 Contributors
 
