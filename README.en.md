@@ -29,125 +29,82 @@ The README, homepage and navigation, introduction (including interactive demos a
 
 ## 🎯 About this project
 
-Build an embodied AI robot from scratch. Explore practical implementations of reinforcement learning, world models, and vision-language-action models (VLA), alongside simulation, controllers, motion planning, and perception. Connect decision making, control, and perception in real projects.
+An open-source course taking you from beginner concepts to real engineering in embodied AI. Centered on the real-world **perception–decision–control** closed loop, it connects perception and localization, RL / VLA / world models, planning and motion control, and simulation, data, and deployment—bringing theory into runnable code across simulated and physical robots.
 
-🧭 **Get started: [Introduction](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md)** — explore embodied AI concepts, tasks, platforms, and methods.
+## 🧭 Getting started
+
+Embodied AI spans many disciplines—**you do not need to finish all the theory before building**. Follow three practical steps:
+
+1. **Build a learning map first**: skim the [Introduction](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md) to grasp core concepts, robot skills, platforms, and how the technology stack fits together (or jump straight into [Simulation](https://datawhalechina.github.io/dive-into-embodied-ai/en/simulation) in your browser).
+2. **Study foundations with concrete questions**: pick an area that interests you and explore the matching chapters in [Foundations](https://datawhalechina.github.io/dive-into-embodied-ai/en/foundations) on demand.
+3. **Solve real problems through projects**: run a full loop in [Projects](https://datawhalechina.github.io/dive-into-embodied-ai/en/practices)—reproducing, tuning, and debugging in simulation or on real hardware.
+
+## 🎬 Featured project demos
+
+<table align="center">
+  <tr>
+    <td align="center" width="33%">
+      <a href="docs/practices/humanoid/microduck-rl/index.md">
+        <img src="docs/practices/humanoid/microduck-rl/figs/focus-final/ballkick_final.gif" height="200" alt="MicroDuck biped kicking a ball and recovering balance" />
+      </a>
+      <br/><sub><b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · Biped kick &amp; balance</a></b><br/>mjlab + MuJoCo Warp · Parallel PPO on GPUs</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/humanoid/flamingo-isaaclab/0.intro.md">
+        <img src="assets/hero_swarm.gif" height="200" alt="Flamingo wheel-legged robots running in parallel in Isaac Lab" />
+      </a>
+      <br/><sub><b><a href="docs/practices/humanoid/flamingo-isaaclab/0.intro.md">Flamingo · Wheel-legged swarm RL</a></b><br/>Isaac Lab · Dynamic balance &amp; PPO / CaT control</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/quadruped/cs123/0.intro.md">
+        <img src="docs/practices/quadruped/cs123/figs/lab8_ball_chase.gif" height="200" alt="CS123 quadruped visual perception and closed-loop ball chasing" />
+      </a>
+      <br/><sub><b><a href="docs/practices/quadruped/cs123/0.intro.md">Build a quadruped from scratch</a></b><br/>MuJoCo + RL gaits + closed-loop visual chase</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <a href="docs/practices/vla/recap/index.md">
+        <img src="docs/practices/vla/recap/videos/state_030_success_value.gif" height="200" alt="π0.5 + RECAP long-horizon manipulation and value curve in LIBERO" />
+      </a>
+      <br/><sub><b><a href="docs/practices/vla/recap/index.md">π₀.₅ + RECAP · Long-horizon VLA</a></b><br/>LIBERO benchmark · Value modeling &amp; RL post-training</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/vla/act/index.md">
+        <img src="docs/practices/vla/act/figs/act_50k_success.gif" height="200" alt="ACT transferring a block between two arms in ALOHA simulation" />
+      </a>
+      <br/><sub><b><a href="docs/practices/vla/act/index.md">ACT · ALOHA bimanual transfer</a></b><br/>Action-chunking imitation · MuJoCo evaluation</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="assets/rebot_act_training.gif" height="200" alt="ReBot-Act robot arm using an ACT policy on real hardware" />
+      <br/><sub><b>ReBot-Act · Real-robot imitation</b><br/>Physical arm · Visual block pick-and-place</sub>
+    </td>
+  </tr>
+</table>
+
+> Browse more quadruped, biped, arm, and AMD ROCm tutorials in **[Projects →](https://datawhalechina.github.io/dive-into-embodied-ai/en/practices)**, or try Go2, Pupper v3, Quaddle, and MicroDuck right in your browser in **[Simulation →](https://datawhalechina.github.io/dive-into-embodied-ai/en/simulation)**.
 
 <a id="course-outline"></a>
 
 ## 🗂️ Course outline
 
-The website has four sections: **Introduction**, **Foundations**, **Projects**, and **[Simulation](https://datawhalechina.github.io/dive-into-embodied-ai/en/simulation)**. The introduction covers the field and resources, foundations explain principles, and projects offer chapter sequences and standalone experiments, grouped into AMD, simulation, and real robot projects. Simulation offers game-style free control and automatic policy showcases.
+The course is organized around four top-level website sections (use the web version for full-text search, interactive demos, and one-click Markdown copy):
 
-The library includes Go2 and Pupper v3 PPO locomotion, a Quaddle periodic gait reference, and MicroDuck head/joint controls (no walking weights yet). Use keyboard or on-screen controls, pause, reset, slow motion, and camera tracking. Go2 uses simplified visuals of the original collision model. See the [model integration guide](simulation/README.en.md).
+| Section | When to use it | What it covers | Links |
+| :--- | :--- | :--- | :--- |
+| **🧭 Introduction** | Start here for the big picture | Concepts, history, skills, platforms, challenges, technology stack, career roles, and curated resources | [Read online](https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/introduction/intro) · [Repo index](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md) |
+| **📐 Foundations** | Look up principles as questions arise | Brain (RL / VLA / World Models), Cerebellum (controllers / planning), Sensing (VLM / calibration), Engineering (simulation / ROS 2 / imitation) | [Foundations hub](https://datawhalechina.github.io/dive-into-embodied-ai/en/foundations) · [Skill tree](docs/foundations/intro.md) |
+| **🛠️ Projects** | Run code and solve concrete tasks | Quadruped, biped, and wheel-legged control, arm &amp; VLA reproductions, LeRobot + SO-101 hardware, and AMD ROCm projects | [Projects hub](https://datawhalechina.github.io/dive-into-embodied-ai/en/practices) · [Overview](i18n/en/docusaurus-plugin-content-docs/current/practices/intro.md) |
+| **🎮 Simulation** | Try robots with zero setup | Go2 &amp; Pupper v3 PPO gaits, Quaddle periodic reference, MicroDuck free joint control (see [model guide](simulation/README.en.md)) | [Launch in browser](https://datawhalechina.github.io/dive-into-embodied-ai/en/simulation) |
 
-<a id="introduction"></a>
+<details>
+<summary>Expand quick links to key chapters</summary>
 
-### 🧭 Introduction
+- **Introduction**: [1. What is embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/1.what-is-embodied-ai.md) · [2. Brief history](i18n/en/docusaurus-plugin-content-docs/current/introduction/2.history.md) · [3. Robot skills](i18n/en/docusaurus-plugin-content-docs/current/introduction/3.tasks-and-skills.md) · [4. Platforms](i18n/en/docusaurus-plugin-content-docs/current/introduction/4.embodiments.md) · [5. Key challenges](i18n/en/docusaurus-plugin-content-docs/current/introduction/5.challenges.md) · [6. Technology stack](i18n/en/docusaurus-plugin-content-docs/current/introduction/6.tech-stack.md) · [7. Career roles](i18n/en/docusaurus-plugin-content-docs/current/introduction/7.careers.md) · [Resources](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/index.md)
+- **Foundations**: [RL for robotics](docs/foundations/rl-for-robotics/1.intro.md) · [VLA models](docs/foundations/vla/vla-intro.md) · [World models](docs/foundations/world-model/0.intro.md) · [Controllers](docs/foundations/controllers/intro.md) · [Visual perception &amp; VLMs](docs/foundations/vlm/0.intro.md) · [Calibration &amp; sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) · [Simulation tools](docs/foundations/simulation/1.intro.md) · [ROS 2](docs/foundations/robotics-and-ros2/0.intro.md) ([code](codes/foundations/robotics-and-ros2/README.en.md))
+- **Projects**: [MicroDuck RL](docs/practices/humanoid/microduck-rl/index.md) · [Flamingo wheel-legged](docs/practices/humanoid/flamingo-isaaclab/0.intro.md) · [CS123 quadruped](docs/practices/quadruped/cs123/0.intro.md) · [Quaddle optimization](i18n/en/docusaurus-plugin-content-docs/current/practices/quadruped/quaddle-mujoco/optimization.md) · [π₀.₅ + RECAP](docs/practices/vla/recap/index.md) · [ACT bimanual](docs/practices/vla/act/index.md) · [SO-101 + LeRobot](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) · [AMD zone](docs/practices/amd/intro.md)
 
-Start with the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md) to see the big picture, then move on to the foundations and projects for specific techniques:
-
-| Chapter | Contents |
-| :--- | :--- |
-| [1. What is embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/1.what-is-embodied-ai.md) | Definition, the perception–decision–action loop, and why the body matters |
-| [2. A brief history](i18n/en/docusaurus-plugin-content-docs/current/introduction/2.history.md) | Four periods: programmed rules, model-based control, deep reinforcement learning, and foundation models |
-| [3. Robot skills](i18n/en/docusaurus-plugin-content-docs/current/introduction/3.tasks-and-skills.md) | Defining tasks; grasping, manipulation, locomotion, and navigation |
-| [4. Embodied AI platforms](i18n/en/docusaurus-plugin-content-docs/current/introduction/4.embodiments.md) | Humanoids, arms, wheeled and legged robots, mobile manipulators, and simulated bodies |
-| [5. Key challenges](i18n/en/docusaurus-plugin-content-docs/current/introduction/5.challenges.md) | Data, sim-to-real transfer, generalization, real-time execution, safety, and evaluation |
-| [6. Technology stack](i18n/en/docusaurus-plugin-content-docs/current/introduction/6.tech-stack.md) | Problem-driven overview and learning links for perception, foundation models and policies, planning and control, simulation, data, deployment, and hardware |
-| [7. Career roles](i18n/en/docusaurus-plugin-content-docs/current/introduction/7.careers.md) | Responsibilities and interview preparation for brain algorithms, motion control, perception and navigation, engineering platforms, and hardware |
-
-The introduction's [resources](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/index.md) collect public learning and research materials:
-
-- [Papers and research](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/papers.md): original papers, project pages, and explanations.
-- [Embodied AI datasets](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/datasets.md): robot demonstrations and evaluation benchmarks.
-- [Open source projects](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/open-source.md): model code and training frameworks.
-- [Simulation and tools](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/tools.md): simulation engines, learning environments, and official documentation.
-
-### 🛠️ Projects
-
-Use the [project overview](i18n/en/docusaurus-plugin-content-docs/current/practices/intro.md) to choose a project organized into chapters or a standalone experiment, then work through implementation and evaluation.
-
-| Category | Project | Description |
-| :--- | :--- | :--- |
-| AMD | [AUP Learning Cloud](docs/practices/amd/aup-learning-cloud.md) | Ryzen AI APUs, ROCm, JupyterHub, and Code Server |
-| AMD | [MicroDuck RL · AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700, ROCm MuJoCo Warp, dynamic-contact regression tests, and biped PPO |
-| AMD | [Explore the Pupper quadruped](docs/practices/amd/pupper-control/intro.md) | RL locomotion policies and VLA experiments on AMD hardware |
-| Simulation | [Build a quadruped from scratch](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo, PD control, kinematics, policy training, language control, and perception |
-| Simulation | [Quaddle optimization and bottlenecks](i18n/en/docusaurus-plugin-content-docs/current/practices/quadruped/quaddle-mujoco/optimization.md) | 3.34 Hz cadence comparison, replay code, and terrain/running limits |
-| Simulation | [MicroDuck RL biped](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp: parallel PPO and biped gait training on GPUs |
-| Simulation | [MuJoCo robot arms and DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | MuJoCo environments and continuous-control experiments |
-| Simulation | [ACT bimanual training](docs/practices/vla/act/index.md) | ACT + ALOHA: training, evaluation, and reproduction |
-| Real robots | [LeRobot course notes in Chinese](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | Units 0–2: robot learning, datasets, toolchains, and classical robotics as preparation for hardware projects |
-| Real robots | [SO-101 + LeRobot hardware tutorial](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) | Hardware connectivity, safety tests, and action playback |
-
-### 🦆 Latest demo: MicroDuck RL
-
-<p align="center">
-  <a href="docs/practices/humanoid/microduck-rl/index.md">
-    <img src="docs/practices/humanoid/microduck-rl/figs/microduck-training-1500.webp" width="640" alt="MicroDuck biped stable gait playback" />
-  </a>
-  <br/>
-  <sub><b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · Stable biped locomotion</a></b><br/>mjlab + MuJoCo Warp · Parallel PPO training on GPUs (iteration 1500)</sub>
-</p>
-
-<table align="center">
-  <tr>
-    <td align="center" width="33%">
-      <a href="https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/practices/quadruped/cs123/intro">
-        <img src="assets/lab5_forward_gait_comparison.gif" height="220" alt="CS123 quadruped gait comparison" />
-      </a>
-      <br/><sub><b><a href="https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/practices/quadruped/cs123/intro">Build a quadruped from scratch</a></b><br/>CS123 simulation course · MuJoCo + PPO + LLM control</sub>
-    </td>
-    <td align="center" width="33%">
-      <img src="assets/rebot_act_training.gif" height="220" alt="ReBot-Act robot arm using an ACT policy" />
-      <br/><sub><b>ReBot-Act · ACT training results</b><br/>Visual imitation learning on hardware · Block pick-and-place</sub>
-    </td>
-    <td align="center" width="33%">
-      <a href="docs/practices/vla/act/index.md">
-        <img src="docs/practices/vla/act/figs/act_50k_success.gif" height="220" alt="ACT transferring a block between two arms in ALOHA simulation" />
-      </a>
-      <br/><sub><b><a href="docs/practices/vla/act/index.md">ACT · ALOHA bimanual transfer</a></b><br/>50k training · 50% success over 20 MuJoCo episodes</sub>
-    </td>
-  </tr>
-</table>
-
-### 📐 Foundations
-
-The foundations follow the four groups in the site navigation: decision making, motion control, perception, and engineering foundations.
-
-#### Decision making
-
-| Topic | Description |
-| :--- | :--- |
-| [Reinforcement learning for decisions](docs/foundations/rl-for-robotics/1.intro.md) | MDPs, DQN, PPO, SAC, DDPG/TD3, and imitation learning |
-| [Vision-language-action models (VLA)](docs/foundations/vla/vla-intro.md) | RT-1/RT-2, OpenVLA, ACT, Diffusion Policy, and the π family |
-| [World models](docs/foundations/world-model/0.intro.md) | Applying world models to embodied tasks; [DreamerV3 reaching experiment and video](i18n/en/docusaurus-plugin-content-docs/current/foundations/world-model/2.dreamerv3-reacher.md); [CarDreamer cross-traffic and future prediction](i18n/en/docusaurus-plugin-content-docs/current/foundations/world-model/3.cardreamer-right-turn.md) |
-
-#### Motion control
-
-| Topic | Description |
-| :--- | :--- |
-| [Reinforcement learning for control](docs/foundations/rl-for-robotics/10.ppo.md) | Connecting policy learning to continuous control and robotics |
-| [Controllers](docs/foundations/controllers/intro.md) | PID, LQR, MPC, impedance control, and system integration |
-| [Motion planning](docs/foundations/robotics-and-ros2/10.moveit2_basics.md) | Motion planning and closed-loop planning with MoveIt 2 |
-
-#### Perception
-
-Robots need to estimate their position, orientation, velocity, and stability. Relevant observations come from cameras, LiDAR, touch, motor currents, IMUs, foot contacts, body pose, and end-effector position.
-
-| Topic | Description |
-| :--- | :--- |
-| [Visual perception and VLMs](docs/foundations/vlm/0.intro.md) | Transformers, ViT, vision encoders, and multimodal fusion |
-| [Sensor calibration and sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) | Coordinate frames, synchronization, extrinsic-error amplification, and online calibration monitoring |
-
-#### Engineering foundations
-
-| Topic | Description |
-| :--- | :--- |
-| [Simulation tools](docs/foundations/simulation/1.intro.md) | Getting started with Isaac Sim, MuJoCo, Gymnasium, and PyBullet |
-| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) · [companion code](codes/foundations/robotics-and-ros2/README.en.md) | Coordinate transforms, FK/IK, tf2, URDF, and MoveIt 2 |
-| [Data engineering and imitation learning](docs/foundations/rl-for-robotics/12.imitation-learning.md) | Teleoperation data, imitation learning, LeRobot toolchains, and policy training |
+</details>
 
 ## 👥 Study groups
 

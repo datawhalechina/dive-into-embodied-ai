@@ -30,134 +30,86 @@
 
 ## 🎯 项目定位
 
-从零到一搭建一台具身智能机器人：深入强化学习、World-Model、VLA 等智能决策方法的工程落地，贯穿仿真环境、控制器、运动规划、感知系统等技能树模块,并在真实项目中跑通"决策—控制—感知"完整链路。
+一套面向入门与工程进阶的具身智能开源教程：围绕机器人在真实世界中完成**感知—决策—控制**闭环，系统串联感知与定位、强化学习 / VLA / World-Model、规划与运动控制，以及仿真、数据与部署等核心技术栈，并通过仿真实验与真机项目将原理落到可运行的代码上。
 
-🧭 **新手入门：[具身导论](docs/introduction/intro.md)** — 了解具身智能的概念、任务、载体与方法。
+<a id="新手入门"></a>
+
+## 🧭 新手入门
+
+具身智能跨学科、模块多，**不必等所有理论都学完再动手**，建议按下面三步循序推进：
+
+1. **先建学习地图**：快速浏览 [具身导论](docs/introduction/intro.md)，先摸清核心概念、常见技能、载体形态与技术栈分工，建立起全局视野（也可以先到 [在线仿真](https://datawhalechina.github.io/dive-into-embodied-ai/simulation) 直接动手体验）。
+2. **带着问题补理论**：从最感兴趣的方向切入，带着具体问题进入 [理论基础](https://datawhalechina.github.io/dive-into-embodied-ai/foundations) 查漏补缺，需要什么学什么。
+3. **用实战解决真问题**：选一个 [项目实战](https://datawhalechina.github.io/dive-into-embodied-ai/practices) 在仿真或真机中跑通闭环，在复现、调参与排错中真正解决实际问题。
+
+<a id="精选实战-demo"></a>
+
+## 🎬 精选实战 Demo
+
+<table align="center">
+  <tr>
+    <td align="center" width="33%">
+      <a href="docs/practices/humanoid/microduck-rl/index.md">
+        <img src="docs/practices/humanoid/microduck-rl/figs/focus-final/ballkick_final.gif" height="200" alt="MicroDuck 小黄鸭双足踢球与收势平衡" />
+      </a>
+      <br/><sub><b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · 双足踢球与平衡</a></b><br/>mjlab + MuJoCo Warp · GPU 并行 PPO</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/humanoid/flamingo-isaaclab/0.intro.md">
+        <img src="assets/hero_swarm.gif" height="200" alt="Flamingo 两轮足机器人在 Isaac Lab 中并行仿真" />
+      </a>
+      <br/><sub><b><a href="docs/practices/humanoid/flamingo-isaaclab/0.intro.md">Flamingo · 两轮足并行训练</a></b><br/>Isaac Lab · 动态平衡与 PPO / CaT 控制</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/quadruped/cs123/0.intro.md">
+        <img src="docs/practices/quadruped/cs123/figs/lab8_ball_chase.gif" height="200" alt="CS123 四足视觉感知与闭环追球" />
+      </a>
+      <br/><sub><b><a href="docs/practices/quadruped/cs123/0.intro.md">从 0 到 1 搭建四足机器人</a></b><br/>MuJoCo + RL 步态 + 视觉闭环追球</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <a href="docs/practices/vla/recap/index.md">
+        <img src="docs/practices/vla/recap/videos/state_030_success_value.gif" height="200" alt="π0.5 + RECAP 在 LIBERO 中执行长时程操作并输出价值曲线" />
+      </a>
+      <br/><sub><b><a href="docs/practices/vla/recap/index.md">π₀.₅ + RECAP · 长时程 VLA</a></b><br/>LIBERO 评测 · 价值模型与 RL 后训练</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/vla/act/index.md">
+        <img src="docs/practices/vla/act/figs/act_50k_success.gif" height="200" alt="ACT 在 ALOHA 仿真中完成双臂方块交接" />
+      </a>
+      <br/><sub><b><a href="docs/practices/vla/act/index.md">ACT · ALOHA 双臂交接</a></b><br/>动作分块模仿学习 · MuJoCo 闭环评测</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="assets/rebot_act_training.gif" height="200" alt="ReBot-Act 机械臂 ACT 策略真机抓取与放置" />
+      <br/><sub><b>ReBot-Act · 真机视觉模仿学习</b><br/>真实机械臂 · 方块抓取与放置</sub>
+    </td>
+  </tr>
+</table>
+
+> 更多四足、双足、机械臂与 AMD ROCm 实战请浏览 **[项目实战目录 →](https://datawhalechina.github.io/dive-into-embodied-ai/practices)**；无需配置环境即可在 **[在线仿真 →](https://datawhalechina.github.io/dive-into-embodied-ai/simulation)** 试玩 Go2、Pupper v3、Quaddle 与 MicroDuck。
 
 <a id="内容大纲"></a>
 
 ## 🗂️ 内容大纲
 
-网站分为「具身导论、理论基础、项目实战、在线仿真」四个栏目：具身导论介绍领域全貌，并整理论文、数据集、开源项目和工具；理论基础讲解原理；项目实战包含分章项目、独立 Demo 与复现案例，按「AMD 专区、仿真实战、真机实战」归类；[在线仿真](https://datawhalechina.github.io/dive-into-embodied-ai/simulation)提供游戏式自由操纵与策略展示两种模式。
+教程按网站顶部的四个栏目组织，推荐在网页版阅读以获得全文搜索、交互演示与一键复制 Markdown：
 
-在线仿真包含 Go2 与 Pupper v3 的 PPO 行走策略、Quaddle 周期步态对照，以及小黄鸭 MicroDuck 的头部与全身关节自由操纵（暂无走路权重）。支持键盘与屏幕方向按钮、暂停、重置、慢速仿真和相机跟随；Go2 以简化外观显示原碰撞模型。后续模型接入见 [模型库说明](simulation/README.md)。
+| 栏目 | 适合什么时候看 | 核心内容 | 入口 |
+| :--- | :--- | :--- | :--- |
+| **🧭 具身导论** | 刚入门，先建全局地图 | 什么是具身智能、发展脉络、技能与载体、核心挑战、技术栈、就业岗位与领域资源 | [开始阅读](https://datawhalechina.github.io/dive-into-embodied-ai/docs/introduction/intro) · [本地目录](docs/introduction/intro.md) |
+| **📐 理论基础** | 带着问题查原理、补底座 | 大脑（RL / VLA / World-Model）、小脑（控制器 / 运动规划）、感官（VLM / 标定）、工程（仿真 / ROS 2 / 模仿学习） | [理论目录](https://datawhalechina.github.io/dive-into-embodied-ai/foundations) · [技能树](docs/foundations/intro.md) |
+| **🛠️ 项目实战** | 跑通代码、解决真实问题 | 四足 / 双足 / 轮腿运控、机械臂与 VLA 复现、LeRobot + SO-101 真机实战与 AMD ROCm 专区 | [项目目录](https://datawhalechina.github.io/dive-into-embodied-ai/practices) · [实战总览](docs/practices/intro.md) |
+| **🎮 在线仿真** | 零配置直接上手体验 | Go2 / Pupper v3 的 PPO 行走、Quaddle 步态对照、MicroDuck 关节自由操纵（见 [模型库说明](simulation/README.md)） | [立即体验](https://datawhalechina.github.io/dive-into-embodied-ai/simulation) |
 
-<a id="具身导论"></a>
+<details>
+<summary>展开查看重点章节直达链接</summary>
 
-### 🧭 具身导论
+- **具身导论**：[1. 什么是具身智能](docs/introduction/1.what-is-embodied-ai.md) · [2. 发展脉络](docs/introduction/2.history.md) · [3. 机器人的技能](docs/introduction/3.tasks-and-skills.md) · [4. 具身智能的载体](docs/introduction/4.embodiments.md) · [5. 核心挑战](docs/introduction/5.challenges.md) · [6. 技术栈](docs/introduction/6.tech-stack.md) · [7. 就业岗位](docs/introduction/7.careers.md) · [领域资源](docs/introduction/resources/index.md)
+- **理论基础**：[强化学习](docs/foundations/rl-for-robotics/1.intro.md) · [VLA 大模型](docs/foundations/vla/vla-intro.md) · [World-Model](docs/foundations/world-model/0.intro.md) · [控制器](docs/foundations/controllers/intro.md) · [VLM 与视觉](docs/foundations/vlm/0.intro.md) · [传感器标定与 sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) · [仿真工具](docs/foundations/simulation/1.intro.md) · [ROS 2](docs/foundations/robotics-and-ros2/0.intro.md)
+- **项目实战**：[MicroDuck RL](docs/practices/humanoid/microduck-rl/index.md) · [Flamingo 两轮足](docs/practices/humanoid/flamingo-isaaclab/0.intro.md) · [CS123 四足](docs/practices/quadruped/cs123/0.intro.md) · [Quaddle 仿真与优化](docs/practices/quadruped/quaddle-mujoco/index.md) · [π₀.₅ + RECAP](docs/practices/vla/recap/index.md) · [ACT 双臂](docs/practices/vla/act/index.md) · [LeRobot + SO-101 真机](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) · [AMD 专区](docs/practices/amd/intro.md)
 
-从 [具身导论](docs/introduction/intro.md) 建立对具身智能的全局认识，再进入理论基础与项目实战学习具体技术：
-
-| 章节 | 内容 |
-| :--- | :--- |
-| [1. 什么是具身智能](docs/introduction/1.what-is-embodied-ai.md) | 定义、感知—决策—行动闭环，以及身体为什么重要 |
-| [2. 发展脉络](docs/introduction/2.history.md) | 规则编程、模型控制、深度强化学习和大模型四个时期 |
-| [3. 机器人的技能](docs/introduction/3.tasks-and-skills.md) | 定义任务，认识抓取、操作、运动与导航 |
-| [4. 具身智能的载体](docs/introduction/4.embodiments.md) | 人形、机械臂、轮式、四足、移动操作与仿真载体 |
-| [5. 核心挑战](docs/introduction/5.challenges.md) | 数据、仿真到真实、泛化、实时性、安全与评测 |
-| [6. 技术栈](docs/introduction/6.tech-stack.md) | 按感知与定位、大模型与策略、规划与控制、仿真、数据、部署与硬件介绍各模块解决的问题与学习入口 |
-| [7. 就业岗位](docs/introduction/7.careers.md) | 大脑类算法、小脑类算法、感知导航、工程平台与硬件岗位的职责和面试准备 |
-
-导论中的 [领域资源](docs/introduction/resources/index.md) 整理公开的学习与研究资源：
-
-- [论文与研究](docs/introduction/resources/papers.md)：原论文、项目主页与站内解读。
-- [具身数据集](docs/introduction/resources/datasets.md)：机器人示教数据与评测基准。
-- [开源项目](docs/introduction/resources/open-source.md)：模型代码与训练框架。
-- [仿真与工具](docs/introduction/resources/tools.md)：仿真引擎、学习环境与官方文档。
-
-<a id="项目实战"></a>
-
-### 🛠️ 项目实战
-
-从 [项目实战总览](docs/practices/intro.md) 选择分章项目或独立实验，按步骤完成实现与评测。
-
-| 分类 | 章节 | 简介 |
-| :--- | :--- | :--- |
-| AMD 专区 | [AUP Learning Cloud 云算力](docs/practices/amd/aup-learning-cloud.md) | Ryzen AI APU、ROCm、JupyterHub 与 Code Server |
-| AMD 专区 | [MicroDuck RL｜AMD ROCm](docs/practices/amd/microduck-rl/index.md) | R9700、ROCm MuJoCo Warp、动态接触回归与双足 PPO |
-| AMD 专区 | [玩转 Pupper 四足机器人](docs/practices/amd/pupper-control/intro.md) | AMD 平台上的强化学习运动策略与 VLA 实验 |
-| 仿真实战 | [从零到一搭建四足机器人](docs/practices/quadruped/cs123/0.intro.md) | MuJoCo、PD、运动学、策略训练、语言控制与感知 |
-| 仿真实战 | [Quaddle 优化进展与瓶颈](docs/practices/quadruped/quaddle-mujoco/optimization.md) | 3.34 Hz高频慢行对照、复跑入口与台阶/坑洼/跑步边界 |
-| 仿真实战 | [Petoi Quaddle 四舵机步行仿真](docs/practices/quadruped/quaddle-mujoco/index.md) | 官方 URDF 适配、交替步态、接触验证与无限棋盘地面 |
-| 仿真实战 | [MicroDuck RL 小黄鸭双足机器人](docs/practices/humanoid/microduck-rl/index.md) | mjlab + MuJoCo Warp：GPU 并行 PPO 与双足步态训练 |
-| 仿真实战 | [MuJoCo 机械臂与 DDPG](docs/practices/robot-arm/mujoco-arm-pick-place/index.md) | MuJoCo 环境与连续控制实验 |
-| 仿真实战 | [ACT 双臂操作训练](docs/practices/vla/act/index.md) | ACT + ALOHA：训练、评估与结果复现 |
-| 真机实战 | [LeRobot 中文课程讲义](docs/practices/robot-arm/data-collection/lerobot-course/index.md) | Unit 0–2：机器人学习、数据集、工具链与经典机器人学，为真机实践做准备 |
-| 真机实战 | [SO-101 + LeRobot 真机教程](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) | 硬件连通、安全测试与动作回放 |
-
-<a id="最新-demomicroduck-rl-小黄鸭"></a>
-
-### 🦆 最新 Demo：MicroDuck RL 小黄鸭
-
-<p align="center">
-  <a href="docs/practices/humanoid/microduck-rl/index.md">
-    <img src="docs/practices/humanoid/microduck-rl/figs/microduck-training-1500.webp" width="640" alt="MicroDuck 小黄鸭双足机器人稳定步态回放" />
-  </a>
-  <br/>
-  <sub><b><a href="docs/practices/humanoid/microduck-rl/index.md">MicroDuck RL · 小黄鸭双足稳定步态</a></b><br/>mjlab + MuJoCo Warp · PPO GPU 并行训练（iteration 1500）</sub>
-</p>
-
-<table align="center">
-  <tr>
-    <td align="center" width="33%">
-      <a href="https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/intro">
-        <img src="assets/lab5_forward_gait_comparison.gif" height="220" alt="CS123 四足步态对比" />
-      </a>
-      <br/><sub><b><a href="https://datawhalechina.github.io/dive-into-embodied-ai/docs/practices/quadruped/cs123/intro">从 0 到 1 搭建四足机器人</a></b><br/>CS123 仿真版 · MuJoCo + PPO + LLM 控制</sub>
-    </td>
-    <td align="center" width="33%">
-      <img src="assets/rebot_act_training.gif" height="220" alt="ReBot-Act 机械臂 ACT 策略训练效果" />
-      <br/><sub><b>ReBot-Act · ACT 训练效果</b><br/>真机视觉模仿学习 · 方块抓取与放置</sub>
-    </td>
-    <td align="center" width="33%">
-      <a href="docs/practices/vla/act/index.md">
-        <img src="docs/practices/vla/act/figs/act_50k_success.gif" height="220" alt="ACT 在 ALOHA 仿真中完成双臂方块交接" />
-      </a>
-      <br/><sub><b><a href="docs/practices/vla/act/index.md">ACT · ALOHA 双臂交接</a></b><br/>50k 训练 · MuJoCo 20 回合成功率 50%</sub>
-    </td>
-  </tr>
-</table>
-
-<a id="理论基础"></a>
-
-### 📐 理论基础
-
-理论基础按当前导航的四列组织：大脑、小脑、感知系统、工程底座。
-
-#### 大脑：智能决策
-
-| 章节 | 简介 |
-| :--- | :--- |
-| [强化学习决策](docs/foundations/rl-for-robotics/1.intro.md) | MDP、DQN、PPO、SAC、DDPG/TD3 与模仿学习 |
-| [视觉-语言-动作大模型(VLA)](docs/foundations/vla/vla-intro.md) | RT-1/RT-2、OpenVLA、ACT、Diffusion Policy、π 系列 |
-| [World-Model](docs/foundations/world-model/0.intro.md) | 世界模型在具身场景下的落地路径；[DreamerV3 到点实验与视频](docs/foundations/world-model/2.dreamerv3-reacher.md); [CarDreamer 车流右转与未来预测](docs/foundations/world-model/3.cardreamer-right-turn.md) |
-
-#### 小脑：运动控制
-
-| 章节 | 简介 |
-| :--- | :--- |
-| [强化学习控制](docs/foundations/rl-for-robotics/10.ppo.md) | 把策略学习接到连续控制和机器人任务上 |
-| [控制器](docs/foundations/controllers/intro.md) | PID、LQR、MPC、阻抗控制与系统集成教程 |
-| [运动规划](docs/foundations/robotics-and-ros2/10.moveit2_basics.md) | Motion Planning 与 MoveIt 2 规划闭环 |
-
-#### 感官：感知系统
-
-本体感知：机器人必须知道自己在哪里、姿态如何、速度如何、是否失稳。
-
-外部感知：相机、雷达、触觉、电机电流、IMU、足端接触、机身姿态、末端位置。
-
-| 章节 | 简介 |
-| :--- | :--- |
-| [视觉感知与 VLM](docs/foundations/vlm/0.intro.md) | Transformer、ViT、视觉编码器与多模态融合 |
-| [传感器标定与 sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) | 坐标系、时间同步、外参误差放大和在线标定监控 |
-
-#### 工程底座
-
-| 章节 | 简介 |
-| :--- | :--- |
-| [仿真工具](docs/foundations/simulation/1.intro.md) | Isaac Sim、MuJoCo、Gymnasium、PyBullet 快速上手 |
-| [ROS2](docs/foundations/robotics-and-ros2/0.intro.md) · [配套代码](codes/foundations/robotics-and-ros2/README.md) | 坐标变换、FK/IK、tf2、URDF 与 MoveIt 2 |
-| [数据工程与模仿学习](docs/foundations/rl-for-robotics/12.imitation-learning.md) | 从遥操作数据到模仿学习、LeRobot 工具链和策略训练 |
+</details>
 
 <a id="组队学习"></a>
 
