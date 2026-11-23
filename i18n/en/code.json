@@ -1759,5 +1759,206 @@
   },
   "hub.actAlt": {
     "message": "ALOHA bimanual robot in simulation"
+  },
+  "techStack.eyebrow": {
+    "message": "Embodied AI · Technology Stack Overview"
+  },
+  "techStack.title": {
+    "message": "Runtime loop on top, engineering and physical foundation below"
+  },
+  "techStack.instruction": {
+    "message": "Select any module to see the problem it solves, representative tools, and its role in fetching a red cup."
+  },
+  "techStack.badge": {
+    "message": "7 modules · 2 layers"
+  },
+  "techStack.runtimeAria": {
+    "message": "Runtime closed-loop modules"
+  },
+  "techStack.runtimeTitle": {
+    "message": "Runtime closed loop"
+  },
+  "techStack.runtimeMeta": {
+    "message": "Sensing → Brain → Cerebellum · Slow reasoning with fast control"
+  },
+  "techStack.selectRuntime": {
+    "message": "Select a runtime loop module"
+  },
+  "techStack.feedback": {
+    "message": "Physical interaction updates the world and feeds new observations back"
+  },
+  "techStack.bridge": {
+    "message": "Supports training, data iteration, and reliable onboard execution"
+  },
+  "techStack.supportAria": {
+    "message": "Engineering and physical foundation modules"
+  },
+  "techStack.supportTitle": {
+    "message": "Engineering foundation & physical limits"
+  },
+  "techStack.supportMeta": {
+    "message": "Train cheaply · Learn well · Run reliably · Respect physics"
+  },
+  "techStack.selectSupport": {
+    "message": "Select a foundation module"
+  },
+  "techStack.jump": {
+    "message": "Jump to section"
+  },
+  "techStack.labelProblem": {
+    "message": "Problem solved"
+  },
+  "techStack.labelTools": {
+    "message": "Representative technologies & tools"
+  },
+  "techStack.exampleLabel": {
+    "message": "In the “red cup” task"
+  },
+  "techStack.m1.name": {
+    "message": "Perception & localization"
+  },
+  "techStack.m1.pillar": {
+    "message": "Runtime · Sensing"
+  },
+  "techStack.m1.rate": {
+    "message": "Tens of Hz"
+  },
+  "techStack.m1.keywords": {
+    "message": "Calibration · 3D vision · SLAM"
+  },
+  "techStack.m1.problem": {
+    "message": "What is around me, where is the cup in 3D space, where am I, and is my body tilting or slipping?"
+  },
+  "techStack.m1.tools": {
+    "message": "RGB-D / lidar / IMU / tactile, hand-eye calibration, 6D pose, state estimation, tf2, SLAM"
+  },
+  "techStack.m1.example": {
+    "message": "Locates the red cup and plate in 3D while continuously tracking the robot’s pose in the kitchen."
+  },
+  "techStack.m2.name": {
+    "message": "Models & policies"
+  },
+  "techStack.m2.pillar": {
+    "message": "Runtime · Brain"
+  },
+  "techStack.m2.rate": {
+    "message": "A few–tens of Hz"
+  },
+  "techStack.m2.keywords": {
+    "message": "VLM · IL / VLA · World models"
+  },
+  "techStack.m2.problem": {
+    "message": "How do I understand natural-language instructions, ground them in images, and learn actions from data?"
+  },
+  "techStack.m2.tools": {
+    "message": "VLM, imitation learning (ACT / Diffusion Policy), VLA (OpenVLA / π0), world models"
+  },
+  "techStack.m2.example": {
+    "message": "Grounds “put the red cup on the plate” in the camera view and generates pick-and-place action sequences."
+  },
+  "techStack.m3.name": {
+    "message": "Planning & control"
+  },
+  "techStack.m3.pillar": {
+    "message": "Runtime · Cerebellum"
+  },
+  "techStack.m3.rate": {
+    "message": "Tens–1000 Hz"
+  },
+  "techStack.m3.keywords": {
+    "message": "MoveIt 2 · MPC / Force · RL"
+  },
+  "techStack.m3.problem": {
+    "message": "How do I reach around obstacles smoothly, grip without crushing the cup, and walk without falling?"
+  },
+  "techStack.m3.tools": {
+    "message": "FK/IK, MoveIt 2 / Nav2, PID / LQR / MPC / WBC, impedance force control, Pinocchio, PPO locomotion"
+  },
+  "techStack.m3.example": {
+    "message": "Plans collision-free arm trajectories, regulates grasp force compliantly, and keeps balance while moving."
+  },
+  "techStack.m4.name": {
+    "message": "Simulation"
+  },
+  "techStack.m4.pillar": {
+    "message": "Support · Virtual trials"
+  },
+  "techStack.m4.rate": {
+    "message": "Massively parallel"
+  },
+  "techStack.m4.keywords": {
+    "message": "MuJoCo · Isaac Lab"
+  },
+  "techStack.m4.problem": {
+    "message": "Real robots are expensive and slow to repair; how do I train and benchmark safely at scale first?"
+  },
+  "techStack.m4.tools": {
+    "message": "URDF / MJCF, MuJoCo, Isaac Sim / Isaac Lab, Gymnasium, domain randomization"
+  },
+  "techStack.m4.example": {
+    "message": "Runs thousands of virtual kitchen grasp and walking trials in parallel before deploying to hardware."
+  },
+  "techStack.m5.name": {
+    "message": "Data"
+  },
+  "techStack.m5.pillar": {
+    "message": "Support · Demonstrations"
+  },
+  "techStack.m5.rate": {
+    "message": "Trajectory pipeline"
+  },
+  "techStack.m5.keywords": {
+    "message": "Teleop · LeRobot"
+  },
+  "techStack.m5.problem": {
+    "message": "Learned policies depend on trajectory quality; how do I collect, align, clean, and manage training data?"
+  },
+  "techStack.m5.tools": {
+    "message": "Leader-follower teleoperation, multi-stream timestamp sync, quality checks, LeRobot, OXE / DROID"
+  },
+  "techStack.m5.example": {
+    "message": "Records human cup-grasping demonstrations across cameras and joints while filtering dropped frames and anomalies."
+  },
+  "techStack.m6.name": {
+    "message": "Deployment"
+  },
+  "techStack.m6.pillar": {
+    "message": "Support · Onboard runtime"
+  },
+  "techStack.m6.rate": {
+    "message": "Low-latency real time"
+  },
+  "techStack.m6.keywords": {
+    "message": "ROS 2 · TensorRT · RTC"
+  },
+  "techStack.m6.problem": {
+    "message": "How do I move a workstation model onto real sensors and actuators with low latency and safety guards?"
+  },
+  "techStack.m6.tools": {
+    "message": "ROS 2 / DDS, ONNX Runtime / TensorRT, RTC async execution, Jetson edge compute, limits & E-stop"
+  },
+  "techStack.m6.example": {
+    "message": "Decouples policy inference from high-rate controllers onboard with velocity and torque safety limits."
+  },
+  "techStack.m7.name": {
+    "message": "Hardware"
+  },
+  "techStack.m7.pillar": {
+    "message": "Support · Physical limits"
+  },
+  "techStack.m7.rate": {
+    "message": "Physical ceiling"
+  },
+  "techStack.m7.keywords": {
+    "message": "Mechanics · Drives · CAN"
+  },
+  "techStack.m7.problem": {
+    "message": "Can the structure, motors, power, and buses deliver commanded motion—and how do you tell software bugs from hardware limits?"
+  },
+  "techStack.m7.tools": {
+    "message": "Links & gearboxes, motors & multi-loop drives, encoders, power protection, MCUs & CAN bus"
+  },
+  "techStack.m7.example": {
+    "message": "Ensures arm payload, gripper stiffness, joint responsiveness, and bus latency can carry out the cup task."
   }
 }

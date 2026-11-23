@@ -7,20 +7,8 @@
 
 <p align="center"><b>中文</b> · <a href="README.en.md" lang="en">English</a> · <a href="README.it.md" lang="it">Italiano</a></p>
 
-> [!TIP]
-> **📖 在线阅读：[点击进入完整教程 →](https://datawhalechina.github.io/dive-into-embodied-ai/)**
->
-> 从新的 [项目实战](https://datawhalechina.github.io/dive-into-embodied-ai/practices) 图文目录选择四足、双足、机械臂或 AMD 项目；[理论基础](https://datawhalechina.github.io/dive-into-embodied-ai/foundations) 按决策、控制、感知与工程组织学习入口。两页提供粒子交互、系列定位和直达教程的链接，动效可暂停，并适配减少动态效果设置。
->
-> 推荐使用网页版，支持全文搜索、章节导航和交互演示。初次学习可从 **[新手入门：具身导论 →](https://datawhalechina.github.io/dive-into-embodied-ai/docs/introduction/intro)** 开始。
->
-> 教程和交互页上方的「复制为 Markdown」可复制正文，下拉菜单可预览 Markdown。支持代码、表格和 LaTeX 公式，文末附有原网页链接，方便继续查看交互演示。
->
-> 公式或术语看不懂时，可查阅 [术语与公式速查](docs/foundations/rl-for-robotics/quick-reference.md)。MDP 和时序差分章在关键公式旁提供可展开的通俗解释、逐步推导与手算例子。
-
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="许可协议" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
-  <img alt="状态" src="https://img.shields.io/badge/status-Alpha-orange" />
 </p>
 
 <h3 align="center">🤝 合作支持</h3>
@@ -35,8 +23,8 @@
   </a>
 </p>
 
-> [!CAUTION]
-> **Alpha 内测版本**:仍在迁移和重构中,部分章节是占位页,欢迎提 Issue 反馈问题或建议。
+> [!TIP]
+> **📖 在线阅读：[点击进入完整教程 →](https://datawhalechina.github.io/dive-into-embodied-ai/)**
 
 <a id="项目定位"></a>
 
@@ -67,7 +55,7 @@
 | [3. 机器人的技能](docs/introduction/3.tasks-and-skills.md) | 定义任务，认识抓取、操作、运动与导航 |
 | [4. 具身智能的载体](docs/introduction/4.embodiments.md) | 人形、机械臂、轮式、四足、移动操作与仿真载体 |
 | [5. 核心挑战](docs/introduction/5.challenges.md) | 数据、仿真到真实、泛化、实时性、安全与评测 |
-| [6. 技术栈](docs/introduction/6.tech-stack.md) | VLM、VLA、世界模型与操作、运控、导航等模块的介绍和学习入口 |
+| [6. 技术栈](docs/introduction/6.tech-stack.md) | 按感知与定位、大模型与策略、规划与控制、仿真、数据、部署与硬件介绍各模块解决的问题与学习入口 |
 | [7. 就业岗位](docs/introduction/7.careers.md) | 大脑类算法、小脑类算法、感知导航、工程平台与硬件岗位的职责和面试准备 |
 
 导论中的 [领域资源](docs/introduction/resources/index.md) 整理公开的学习与研究资源：

@@ -4,22 +4,10 @@
 <p align="center"><b>Un corso aperto per imparare l'IA incarnata con progetti pratici</b></p>
 <p align="center"><a href="README.md" lang="zh-Hans">中文</a> · <a href="README.en.md" lang="en">English</a> · <b>Italiano</b></p>
 
-> [!TIP]
-> **📖 [Apri il corso in italiano →](https://datawhalechina.github.io/dive-into-embodied-ai/it/)**
->
-> Esplora tutorial su quadrupedi, bipedi, bracci e AMD nel catalogo illustrato [Progetti](https://datawhalechina.github.io/dive-into-embodied-ai/it/practices). [Fondamenti](https://datawhalechina.github.io/dive-into-embodied-ai/it/foundations) organizza gli argomenti per decisioni, controllo, percezione e ingegneria. Entrambe le pagine offrono nuvole di punti interattive, navigazione per sezioni, link ai tutorial, pausa delle animazioni e supporto al movimento ridotto.
->
-> Ricerca nel testo, navigazione per capitoli e demo interattive. **[Inizia dall'introduzione →](https://datawhalechina.github.io/dive-into-embodied-ai/it/docs/introduction/intro)**.
->
-> Usa **Copia come Markdown** all'inizio di tutorial ed esperimenti o apri l'anteprima. Conserva codice, tabelle ed equazioni LaTeX, con un link all'originale per le demo interattive.
->
-> Per simboli o termini sconosciuti, consulta la [guida rapida a termini e formule](i18n/it/docusaurus-plugin-content-docs/current/foundations/rl-for-robotics/quick-reference.md). I capitoli su MDP e differenza temporale offrono spiegazioni espandibili, derivazioni passo per passo ed esempi numerici accanto alle formule; questi due capitoli sono disponibili in cinese e inglese.
->
-> README, home e navigazione, introduzione con demo e risorse, mappa di apprendimento, panoramica dei progetti e guida rapida a termini e formule sono disponibili in inglese e italiano. Alcuni altri capitoli sono disponibili anche in inglese; quelli non tradotti e gli esperimenti autonomi mostrano un avviso sul contenuto in cinese. Il menu permette di passare tra 中文, English e Italiano sulla stessa pagina.
+README, home e navigazione, introduzione con demo e risorse, mappa di apprendimento, panoramica dei progetti e guida rapida a termini e formule sono disponibili in inglese e italiano. Alcuni altri capitoli sono disponibili anche in inglese; quelli non tradotti e gli esperimenti autonomi mostrano un avviso sul contenuto in cinese. Il menu permette di passare tra 中文, English e Italiano sulla stessa pagina.
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licenza" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
-  <img alt="Stato" src="https://img.shields.io/badge/status-Alpha-orange" />
 </p>
 
 ### 🤝 Con il supporto di
@@ -34,8 +22,8 @@
   </a>
 </p>
 
-> [!CAUTION]
-> **Versione alfa:** migrazione e riorganizzazione proseguono e alcuni capitoli attendono contenuti. Condividi problemi e suggerimenti aprendo una segnalazione.
+> [!TIP]
+> **📖 [Apri il corso in italiano →](https://datawhalechina.github.io/dive-into-embodied-ai/it/)**
 
 ## 🎯 Il progetto
 
@@ -64,7 +52,7 @@ Parti dall'[introduzione](i18n/it/docusaurus-plugin-content-docs/current/introdu
 | [3. Abilità robotiche](i18n/it/docusaurus-plugin-content-docs/current/introduction/3.tasks-and-skills.md) | Definizione dei compiti; presa, manipolazione, locomozione e navigazione |
 | [4. Piattaforme](i18n/it/docusaurus-plugin-content-docs/current/introduction/4.embodiments.md) | Umanoidi, bracci, ruote, zampe, manipolazione mobile e simulazione |
 | [5. Sfide principali](i18n/it/docusaurus-plugin-content-docs/current/introduction/5.challenges.md) | Dati, sim-to-real, generalizzazione, tempo reale, sicurezza e valutazione |
-| [6. Tecnologie e moduli](i18n/it/docusaurus-plugin-content-docs/current/introduction/6.tech-stack.md) | VLM, VLA, modelli del mondo, manipolazione, controllo, navigazione e ingegneria |
+| [6. Tecnologie e moduli](i18n/it/docusaurus-plugin-content-docs/current/introduction/6.tech-stack.md) | Percezione, modelli fondazionali e politiche, pianificazione e controllo, simulazione, dati, messa in opera e hardware per problema risolto |
 | [7. Profili professionali](i18n/it/docusaurus-plugin-content-docs/current/introduction/7.careers.md) | Responsabilità e colloqui per algoritmi, controllo, percezione, piattaforme e hardware |
 
 Le [risorse](i18n/it/docusaurus-plugin-content-docs/current/introduction/resources/index.md) raccolgono:

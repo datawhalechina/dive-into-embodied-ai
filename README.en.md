@@ -6,22 +6,10 @@
 <p align="center"><b>An open course for learning embodied AI through hands-on projects</b></p>
 <p align="center"><a href="README.md" lang="zh-Hans">中文</a> · <b>English</b> · <a href="README.it.md" lang="it">Italiano</a></p>
 
-> [!TIP]
-> **📖 Read online: [Open the course →](https://datawhalechina.github.io/dive-into-embodied-ai/en/)**
->
-> Browse quadruped, biped, robot-arm, and AMD tutorials in the illustrated [Projects](https://datawhalechina.github.io/dive-into-embodied-ai/en/practices) directory. [Foundations](https://datawhalechina.github.io/dive-into-embodied-ai/en/foundations) groups topics by decision-making, control, perception, and engineering. Both pages include interactive point clouds, section navigation, direct tutorial links, a pause control, and reduced-motion support.
->
-> The website offers full-text search, chapter navigation, and interactive demos. **[Get started with the introduction →](https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/introduction/intro)**.
->
-> Use **Copy as Markdown** at the top of tutorial and playground pages to copy their content, or open the dropdown to preview it. Code, tables, and LaTeX equations are preserved, with a link to the original page for interactive demos.
->
-> For unfamiliar notation, use the [terms and formulas quick reference](i18n/en/docusaurus-plugin-content-docs/current/foundations/rl-for-robotics/quick-reference.md). The MDP and temporal-difference chapters include expandable explanations, step-by-step derivations, and small numerical examples beside key formulas.
->
-> The README, homepage and navigation, introduction (including interactive demos and resources), learning map, project overview, and terms and formulas quick reference are available in English and Italian. Some other chapters, including MDPs and temporal difference, are also available in English; untranslated chapters and standalone playgrounds show a Chinese-content notice. Use the language menu to switch between 中文, English, and Italiano on the same page.
+The README, homepage and navigation, introduction (including interactive demos and resources), learning map, project overview, and terms and formulas quick reference are available in English and Italian. Some other chapters, including MDPs and temporal difference, are also available in English; untranslated chapters and standalone playgrounds show a Chinese-content notice. Use the language menu to switch between 中文, English, and Italiano on the same page.
 
 <p align="center">
   <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="License" src="https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-lightgrey" /></a>
-  <img alt="Status" src="https://img.shields.io/badge/status-Alpha-orange" />
 </p>
 
 <h3 align="center">🤝 Supported by</h3>
@@ -36,8 +24,8 @@
   </a>
 </p>
 
-> [!CAUTION]
-> **Alpha release:** Migration and restructuring are ongoing, and some chapters are placeholders. Please open an issue with feedback or suggestions.
+> [!TIP]
+> **📖 Read online: [Open the course →](https://datawhalechina.github.io/dive-into-embodied-ai/en/)**
 
 ## 🎯 About this project
 
@@ -66,7 +54,7 @@ Start with the [introduction to embodied AI](i18n/en/docusaurus-plugin-content-d
 | [3. Robot skills](i18n/en/docusaurus-plugin-content-docs/current/introduction/3.tasks-and-skills.md) | Defining tasks; grasping, manipulation, locomotion, and navigation |
 | [4. Embodied AI platforms](i18n/en/docusaurus-plugin-content-docs/current/introduction/4.embodiments.md) | Humanoids, arms, wheeled and legged robots, mobile manipulators, and simulated bodies |
 | [5. Key challenges](i18n/en/docusaurus-plugin-content-docs/current/introduction/5.challenges.md) | Data, sim-to-real transfer, generalization, real-time execution, safety, and evaluation |
-| [6. Technology stack](i18n/en/docusaurus-plugin-content-docs/current/introduction/6.tech-stack.md) | Introductions and learning links for VLMs, VLAs, world models, manipulation, motion control, navigation, and more |
+| [6. Technology stack](i18n/en/docusaurus-plugin-content-docs/current/introduction/6.tech-stack.md) | Problem-driven overview and learning links for perception, foundation models and policies, planning and control, simulation, data, deployment, and hardware |
 | [7. Career roles](i18n/en/docusaurus-plugin-content-docs/current/introduction/7.careers.md) | Responsibilities and interview preparation for brain algorithms, motion control, perception and navigation, engineering platforms, and hardware |
 
 The introduction's [resources](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/index.md) collect public learning and research materials:

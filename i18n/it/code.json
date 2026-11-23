@@ -1804,5 +1804,206 @@
   },
   "hub.actAlt": {
     "message": "Robot bimanuale ALOHA in simulazione"
+  },
+  "techStack.eyebrow": {
+    "message": "IA Incarnata · Panoramica dello Stack"
+  },
+  "techStack.title": {
+    "message": "Ciclo operativo in alto, base ingegneristica e fisica in basso"
+  },
+  "techStack.instruction": {
+    "message": "Seleziona un modulo per vedere il problema risolto, gli strumenti tipici e il ruolo nel compito della tazza rossa."
+  },
+  "techStack.badge": {
+    "message": "7 moduli · 2 livelli"
+  },
+  "techStack.runtimeAria": {
+    "message": "Moduli del ciclo operativo"
+  },
+  "techStack.runtimeTitle": {
+    "message": "Ciclo operativo"
+  },
+  "techStack.runtimeMeta": {
+    "message": "Percezione → Cervello → Cervelletto · Decisioni lente e controllo rapido"
+  },
+  "techStack.selectRuntime": {
+    "message": "Seleziona un modulo del ciclo operativo"
+  },
+  "techStack.feedback": {
+    "message": "L'interazione fisica aggiorna l'ambiente e invia nuove osservazioni"
+  },
+  "techStack.bridge": {
+    "message": "Sostiene addestramento, iterazione dei dati ed esecuzione reale"
+  },
+  "techStack.supportAria": {
+    "message": "Moduli di base ingegneristica e fisica"
+  },
+  "techStack.supportTitle": {
+    "message": "Base ingegneristica e limiti fisici"
+  },
+  "techStack.supportMeta": {
+    "message": "Provare a basso costo · Buoni dati · Tempo reale · Vincoli fisici"
+  },
+  "techStack.selectSupport": {
+    "message": "Seleziona un modulo di supporto"
+  },
+  "techStack.jump": {
+    "message": "Vai alla sezione"
+  },
+  "techStack.labelProblem": {
+    "message": "Problema risolto"
+  },
+  "techStack.labelTools": {
+    "message": "Tecnologie e strumenti tipici"
+  },
+  "techStack.exampleLabel": {
+    "message": "Nel compito della «tazza rossa»"
+  },
+  "techStack.m1.name": {
+    "message": "Percezione e localizzazione"
+  },
+  "techStack.m1.pillar": {
+    "message": "Ciclo · Percezione"
+  },
+  "techStack.m1.rate": {
+    "message": "Decine di Hz"
+  },
+  "techStack.m1.keywords": {
+    "message": "Calibrazione · Visione 3D · SLAM"
+  },
+  "techStack.m1.problem": {
+    "message": "Cosa c'è attorno, dov'è la tazza nello spazio 3D, dove si trova il robot e se il corpo sta perdendo equilibrio?"
+  },
+  "techStack.m1.tools": {
+    "message": "RGB-D / LiDAR / IMU / tatto, calibrazione mano-occhio, posa 6D, stima dello stato, tf2, SLAM"
+  },
+  "techStack.m1.example": {
+    "message": "Localizza in 3D la tazza rossa e il piatto mentre traccia continuamente la posa del robot in cucina."
+  },
+  "techStack.m2.name": {
+    "message": "Modelli e politiche"
+  },
+  "techStack.m2.pillar": {
+    "message": "Ciclo · Cervello"
+  },
+  "techStack.m2.rate": {
+    "message": "Pochi–decine di Hz"
+  },
+  "techStack.m2.keywords": {
+    "message": "VLM · IL / VLA · Modelli del mondo"
+  },
+  "techStack.m2.problem": {
+    "message": "Come comprendere istruzioni in linguaggio naturale, collegarle alle immagini e apprendere azioni dai dati?"
+  },
+  "techStack.m2.tools": {
+    "message": "VLM, imitazione (ACT / Diffusion Policy), VLA (OpenVLA / π0), modelli del mondo"
+  },
+  "techStack.m2.example": {
+    "message": "Associa «metti la tazza rossa sul piatto» agli oggetti nella scena e genera sequenze di presa e posa."
+  },
+  "techStack.m3.name": {
+    "message": "Pianificazione e controllo"
+  },
+  "techStack.m3.pillar": {
+    "message": "Ciclo · Cervelletto"
+  },
+  "techStack.m3.rate": {
+    "message": "Decine–1000 Hz"
+  },
+  "techStack.m3.keywords": {
+    "message": "MoveIt 2 · MPC / Forza · RL"
+  },
+  "techStack.m3.problem": {
+    "message": "Come raggiungere il bersaglio senza urti, dosare la forza senza schiacciare la tazza e camminare con stabilità?"
+  },
+  "techStack.m3.tools": {
+    "message": "FK/IK, MoveIt 2 / Nav2, PID / LQR / MPC / WBC, controllo di impedenza, Pinocchio, locomozione RL"
+  },
+  "techStack.m3.example": {
+    "message": "Pianifica traiettorie prive di collisioni, regola la forza di presa e mantiene l'equilibrio durante gli spostamenti."
+  },
+  "techStack.m4.name": {
+    "message": "Simulazione"
+  },
+  "techStack.m4.pillar": {
+    "message": "Supporto · Prove virtuali"
+  },
+  "techStack.m4.rate": {
+    "message": "Parallela su GPU"
+  },
+  "techStack.m4.keywords": {
+    "message": "MuJoCo · Isaac Lab"
+  },
+  "techStack.m4.problem": {
+    "message": "L'hardware reale è costoso e lento da riparare: come addestrare e valutare in sicurezza su larga scala?"
+  },
+  "techStack.m4.tools": {
+    "message": "URDF / MJCF, MuJoCo, Isaac Sim / Isaac Lab, Gymnasium, randomizzazione di dominio"
+  },
+  "techStack.m4.example": {
+    "message": "Esegue migliaia di prove virtuali di presa e camminata in cucina prima del trasferimento al robot reale."
+  },
+  "techStack.m5.name": {
+    "message": "Dati"
+  },
+  "techStack.m5.pillar": {
+    "message": "Supporto · Dimostrazioni"
+  },
+  "techStack.m5.rate": {
+    "message": "Pipeline traiettorie"
+  },
+  "techStack.m5.keywords": {
+    "message": "Teleop · LeRobot"
+  },
+  "techStack.m5.problem": {
+    "message": "Le politiche dipendono dalla qualità delle traiettorie: come raccogliere, allineare, pulire e gestire i dati?"
+  },
+  "techStack.m5.tools": {
+    "message": "Teleoperazione leader-follower, sincronizzazione timestamp, controlli qualità, LeRobot, OXE / DROID"
+  },
+  "techStack.m5.example": {
+    "message": "Registra dimostrazioni umane multi-camera e articolari eliminando frame persi e traiettorie anomale."
+  },
+  "techStack.m6.name": {
+    "message": "Messa in opera"
+  },
+  "techStack.m6.pillar": {
+    "message": "Supporto · Esecuzione reale"
+  },
+  "techStack.m6.rate": {
+    "message": "Tempo reale"
+  },
+  "techStack.m6.keywords": {
+    "message": "ROS 2 · TensorRT · RTC"
+  },
+  "techStack.m6.problem": {
+    "message": "Come portare un modello da workstation a sensori e attuatori reali con bassa latenza e protezioni di sicurezza?"
+  },
+  "techStack.m6.tools": {
+    "message": "ROS 2 / DDS, ONNX Runtime / TensorRT, esecuzione asincrona RTC, calcolo edge Jetson, limiti ed emergenza"
+  },
+  "techStack.m6.example": {
+    "message": "Disaccoppia inferenza della politica e controllori rapidi a bordo con limiti di velocità e coppia."
+  },
+  "techStack.m7.name": {
+    "message": "Hardware"
+  },
+  "techStack.m7.pillar": {
+    "message": "Supporto · Limiti fisici"
+  },
+  "techStack.m7.rate": {
+    "message": "Vincoli fisici"
+  },
+  "techStack.m7.keywords": {
+    "message": "Meccanica · Azionamenti · CAN"
+  },
+  "techStack.m7.problem": {
+    "message": "Struttura, motori, alimentazione e bus reggono davvero i comandi, e come distinguere bug software dai limiti fisici?"
+  },
+  "techStack.m7.tools": {
+    "message": "Link e riduttori, motori e driver multi-anello, encoder, protezioni elettriche, MCU e bus CAN"
+  },
+  "techStack.m7.example": {
+    "message": "Garantisce che carico del braccio, rigidezza della pinza, coppia articolare e bus sostengano il compito."
   }
 }
