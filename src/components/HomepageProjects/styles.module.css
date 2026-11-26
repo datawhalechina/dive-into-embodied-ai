@@ -4,10 +4,10 @@
 .card:hover {color: var(--site-ink); text-decoration: none; border-color: var(--site-blue); box-shadow: 0 16px 35px -25px #16385540;}
 .visual {background: #101820; aspect-ratio: 4 / 3; overflow: hidden;}
 .visual img {display: block; height: 100%; width: 100%; object-fit: cover;}
-.body {display: flex; flex-direction: column; flex: 1; padding: 1.5rem;}
-.category {font-size: .8125rem; color: var(--site-muted); margin: 0 0 .6rem;}
-.body h3 {font-size: 1.35rem; line-height: 1.5; letter-spacing: -.025em; margin: 0 0 .65rem;}
-.description {font-size: 1rem; line-height: 1.8; color: var(--site-muted); margin-bottom: 1.5rem;}
+.body {display: flex; flex-direction: column; flex: 1; padding: 1.35rem 1.45rem;}
+.metaPill {align-self: flex-start; padding: .2rem .6rem; border-radius: 999px; background: var(--site-canvas); color: var(--site-muted); font-size: .75rem; font-weight: 600; margin-bottom: .75rem;}
+.body h3 {font-size: 1.25rem; line-height: 1.4; letter-spacing: -.025em; margin: 0 0 .45rem;}
+.description {font-size: .9375rem; line-height: 1.65; color: var(--site-muted); margin-bottom: 1.2rem;}
 .bottom {display: flex; align-items: center; justify-content: space-between; gap: .5rem; color: var(--site-blue); margin-top: auto;}
 .bottom > span {font-size: .8125rem; color: var(--site-muted);}
 .moreProjects {display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4rem; margin-top: 1.4rem;}

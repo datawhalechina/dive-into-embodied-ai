@@ -38,6 +38,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   foundationsOverviewSidebar: [
+    { type: 'link', label: '← 理论基础', href: '/foundations' },
     'foundations/intro',
     {
       type: 'category',
@@ -65,6 +66,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         { type: 'link', label: '视觉语言大模型(VLM)', href: '/docs/foundations/vlm/intro' },
+        { type: 'link', label: '定位、触觉与感知总览', href: '/docs/foundations/perception/placeholder' },
         { type: 'link', label: '传感器标定与 sim2real', href: '/docs/foundations/perception/sensor-calibration-sim2real' },
         { type: 'link', label: 'ODO、时间戳与状态估计', href: '/docs/foundations/perception/odo-timestamps-state-estimation' },
         { type: 'link', label: '相机、LiDAR 与 IMU 外参与投影', href: '/docs/foundations/perception/sensor-projection' },
@@ -86,6 +88,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   foundationsRoboticsAndRos2Sidebar: [
+    { type: 'link', label: '← 理论基础', href: '/foundations' },
     {
       type: 'category',
       label: 'ROS2',
@@ -96,6 +99,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   foundationsSimulationSidebar: [
+    { type: 'link', label: '← 理论基础', href: '/foundations' },
     {
       type: 'category',
       label: '仿真工具',
@@ -106,6 +110,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   foundationsRlForRoboticsSidebar: [
+    { type: 'link', label: '← 理论基础', href: '/foundations' },
     {
       type: 'category',
       label: '强化学习与控制',
@@ -116,6 +121,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   foundationsControllersSidebar: [
+    { type: 'link', label: '← 理论基础', href: '/foundations' },
     {
       type: 'category',
       label: '控制器',
@@ -135,6 +141,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   foundationsVlmSidebar: [
+    { type: 'link', label: '← 理论基础', href: '/foundations' },
     {
       type: 'category',
       label: '视觉语言大模型(VLM)',
@@ -145,6 +152,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   foundationsVlaSidebar: [
+    { type: 'link', label: '← 理论基础', href: '/foundations' },
     {
       type: 'category',
       label: '视觉-语言-动作大模型(VLA)',
@@ -155,6 +163,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   foundationsWorldModelSidebar: [
+    { type: 'link', label: '← 理论基础', href: '/foundations' },
     {
       type: 'category',
       label: '世界模型(World Model)',
@@ -165,6 +174,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   practicesOverviewSidebar: [
+    { type: 'link', label: '← 项目实战', href: '/practices' },
     'practices/intro',
     {
       type: 'category',
@@ -183,9 +193,10 @@ const sidebars: SidebarsConfig = {
       label: '仿真实战',
       collapsed: false,
       items: [
-        { type: 'link', label: '机械臂系列', href: '/docs/practices/robot-arm/placeholder' },
+        { type: 'link', label: '双足与人形', href: '/docs/practices/humanoid/placeholder' },
         { type: 'link', label: '四足系列', href: '/docs/practices/quadruped/placeholder' },
-        { type: 'link', label: '双足系列', href: '/docs/practices/humanoid/placeholder' },
+        { type: 'link', label: '机械臂系列', href: '/docs/practices/robot-arm/placeholder' },
+        { type: 'link', label: '移动操作', href: '/docs/practices/mobile-manipulation/placeholder' },
       ],
     },
     {
@@ -202,148 +213,109 @@ const sidebars: SidebarsConfig = {
   ],
 
   practicesAmdSidebar: [
+    { type: 'link', label: '← 项目实战', href: '/practices' },
+    { type: 'doc', id: 'practices/amd/intro', label: 'AMD 专区总览' },
+    { type: 'doc', id: 'practices/amd/aup-learning-cloud', label: 'AUP Learning Cloud 云算力' },
     {
       type: 'category',
-      label: 'AMD 专区',
-      link: { type: 'doc', id: 'practices/amd/intro' },
-      collapsible: false,
+      label: 'Go2 运控｜MJX（ROCm / CUDA）',
+      link: { type: 'doc', id: 'practices/amd/unitree-rl-mjx/index' },
+      collapsed: false,
       items: [
-        {
-          type: 'doc',
-          id: 'practices/amd/aup-learning-cloud',
-          label: 'AUP Learning Cloud 云算力',
-        },
-        {
-          type: 'category',
-          label: 'Go2 运控｜MJX（ROCm / CUDA）',
-          link: { type: 'doc', id: 'practices/amd/unitree-rl-mjx/index' },
-          collapsed: false,
-          items: [
-            {
-              type: 'doc',
-              id: 'practices/amd/unitree-rl-mjx/environment-setup',
-              label: '1. 环境安装与硬件约束',
-            },
-            {
-              type: 'doc',
-              id: 'practices/amd/unitree-rl-mjx/training',
-              label: '2. 训练 Go2 速度策略',
-            },
-            {
-              type: 'doc',
-              id: 'practices/amd/unitree-rl-mjx/sim2sim',
-              label: '3. ONNX 导出与官方栈 Sim2Sim',
-            },
-          ],
-        },
-        {
-          type: 'doc',
-          id: 'practices/amd/microduck-rl/index',
-          label: 'MicroDuck RL｜AMD ROCm',
-        },
-        {
-          type: 'doc',
-          id: 'practices/amd/vla-act/index',
-          label: 'ACT 双臂操作训练｜AMD ROCm',
-        },
-        {
-          type: 'category',
-          label: '玩转 Pupper 四足机器人',
-          link: { type: 'doc', id: 'practices/amd/pupper-control/intro' },
-          collapsed: false,
-          items: [
-            {
-              type: 'doc',
-              id: 'practices/amd/pupper-control/locomotion',
-              label: 'Pupper Locomotion｜强化学习运动策略',
-            },
-            {
-              type: 'doc',
-              id: 'practices/amd/pupper-control/vla',
-              label: 'Pupper VLA｜视觉-语言-动作智能',
-            },
-          ],
-        },
+        { type: 'doc', id: 'practices/amd/unitree-rl-mjx/environment-setup', label: '1. 环境安装与硬件约束' },
+        { type: 'doc', id: 'practices/amd/unitree-rl-mjx/training', label: '2. 训练 Go2 速度策略' },
+        { type: 'doc', id: 'practices/amd/unitree-rl-mjx/sim2sim', label: '3. ONNX 导出与官方栈 Sim2Sim' },
+      ],
+    },
+    { type: 'doc', id: 'practices/amd/microduck-rl/index', label: 'MicroDuck RL｜AMD ROCm' },
+    { type: 'doc', id: 'practices/amd/vla-act/index', label: 'ACT 双臂操作训练｜AMD ROCm' },
+    {
+      type: 'category',
+      label: '玩转 Pupper 四足机器人',
+      link: { type: 'doc', id: 'practices/amd/pupper-control/intro' },
+      collapsed: false,
+      items: [
+        { type: 'doc', id: 'practices/amd/pupper-control/locomotion', label: 'Pupper Locomotion｜强化学习运动策略' },
+        { type: 'doc', id: 'practices/amd/pupper-control/vla', label: 'Pupper VLA｜视觉-语言-动作智能' },
       ],
     },
   ],
 
   practicesRobotArmSidebar: [
-    { type: 'link', label: '← 项目实战', href: '/docs/practices/intro' },
+    { type: 'link', label: '← 项目实战', href: '/practices' },
+    { type: 'doc', id: 'practices/robot-arm/placeholder', label: '机械臂系列总览' },
     {
       type: 'category',
-      label: '机械臂系列',
-      link: { type: 'doc', id: 'practices/robot-arm/placeholder' },
-      collapsible: false,
+      label: 'MuJoCo 与连续控制',
+      collapsed: false,
       items: [
-        {
-          type: 'category',
-          label: 'MuJoCo 与连续控制',
-          collapsed: false,
-          items: [
-            'practices/robot-arm/mujoco-arm-pick-place/index',
-            'practices/robot-arm/ddpg-mujoco/invertedpendulum-v5/index',
-            'practices/robot-arm/ddpg-mujoco/reacher-v5/index',
-            'practices/robot-arm/ddpg-mujoco/pusher-v5/index',
-          ],
-        },
-        {
-          type: 'category',
-          label: '模仿学习与 VLA 操作',
-          collapsed: false,
-          items: [
-            'practices/vla/act/index',
-            'practices/vla/recap/index',
-            { type: 'link', label: 'ACT 双臂操作训练（AMD）', href: '/docs/practices/amd/vla-act' },
-          ],
-        },
-        {
-          type: 'category',
-          label: '数据工程与真机部署',
-          collapsed: false,
-          items: [
-            { type: 'link', label: 'LeRobot 中文课程讲义', href: '/docs/practices/robot-arm/data-collection/lerobot-course' },
-            { type: 'link', label: 'SO-101 + LeRobot 真机教程', href: '/docs/practices/robot-arm/data-collection/so101-lerobot-real' },
-            'practices/robot-arm/ros2-arm-control/placeholder',
-            'practices/robot-arm/imitation-learning/placeholder',
-          ],
-        },
+        'practices/robot-arm/mujoco-arm-pick-place/index',
+        'practices/robot-arm/ddpg-mujoco/invertedpendulum-v5/index',
+        'practices/robot-arm/ddpg-mujoco/reacher-v5/index',
+        'practices/robot-arm/ddpg-mujoco/pusher-v5/index',
+      ],
+    },
+    {
+      type: 'category',
+      label: '模仿学习与 VLA 操作',
+      collapsed: false,
+      items: [
+        'practices/vla/act/index',
+        'practices/vla/recap/index',
+        'practices/robot-arm/imitation-learning/placeholder',
+        { type: 'link', label: 'ACT 双臂操作训练（AMD）', href: '/docs/practices/amd/vla-act' },
+      ],
+    },
+    {
+      type: 'category',
+      label: '数据工程与真机部署',
+      collapsed: false,
+      items: [
+        { type: 'link', label: 'LeRobot 中文课程讲义', href: '/docs/practices/robot-arm/data-collection/lerobot-course' },
+        { type: 'link', label: 'SO-101 + LeRobot 真机教程', href: '/docs/practices/robot-arm/data-collection/so101-lerobot-real' },
+        'practices/robot-arm/ros2-arm-control/placeholder',
       ],
     },
   ],
 
   practicesQuadrupedSidebar: [
-    { type: 'link', label: '← 项目实战', href: '/docs/practices/intro' },
+    { type: 'link', label: '← 项目实战', href: '/practices' },
+    { type: 'doc', id: 'practices/quadruped/placeholder', label: '四足系列总览' },
+    { type: 'link', label: '从零到一搭建四足机器人', href: '/docs/practices/quadruped/cs123/intro' },
     {
       type: 'category',
-      label: '四足系列',
-      link: { type: 'doc', id: 'practices/quadruped/placeholder' },
-      collapsible: false,
+      label: 'Petoi Quaddle 四足步行仿真',
+      collapsed: false,
       items: [
-        { type: 'link', label: '从零到一搭建四足机器人', href: '/docs/practices/quadruped/cs123/intro' },
-        { type: 'link', label: 'Unitree Go2 运控（MJX / Sim2Sim）', href: '/docs/practices/amd/unitree-rl-mjx' },
-        {
-          type: 'category', label: 'Petoi Quaddle 四足步行仿真', collapsed: false,
-          items: [
-            { type: 'doc', id: 'practices/quadruped/quaddle-mujoco/index', label: '入门：让机器人走起来' },
-            { type: 'doc', id: 'practices/quadruped/quaddle-mujoco/experiments', label: '多场景实验：结果与失败分析' },
-            { type: 'doc', id: 'practices/quadruped/quaddle-mujoco/optimization', label: '优化进展与瓶颈' },
-          ],
-        },
-        {
-          type: 'category', label: 'Petoi Quaddle VLA 导航训练', collapsed: false,
-          items: [
-            { type: 'doc', id: 'practices/vla/quaddle/index', label: 'VLA 导航：10GB 显存训一个策略' },
-            { type: 'doc', id: 'practices/vla/quaddle/experiment-notes', label: '实验记录与 v5 路线图' },
-            { type: 'doc', id: 'practices/vla/quaddle/progress', label: '实施现状与计划' },
-          ],
-        },
+        { type: 'doc', id: 'practices/quadruped/quaddle-mujoco/index', label: '入门：让机器人走起来' },
+        { type: 'doc', id: 'practices/quadruped/quaddle-mujoco/experiments', label: '多场景实验：结果与失败分析' },
+        { type: 'doc', id: 'practices/quadruped/quaddle-mujoco/optimization', label: '优化进展与瓶颈' },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Petoi Quaddle VLA 导航训练',
+      collapsed: false,
+      items: [
+        { type: 'doc', id: 'practices/vla/quaddle/index', label: 'VLA 导航：10GB 显存训一个策略' },
+        { type: 'doc', id: 'practices/vla/quaddle/experiment-notes', label: '实验记录与 v5 路线图' },
+        { type: 'doc', id: 'practices/vla/quaddle/progress', label: '实施现状与计划' },
+      ],
+    },
+    { type: 'link', label: 'Unitree Go2 运控（MJX / Sim2Sim）', href: '/docs/practices/amd/unitree-rl-mjx' },
+    {
+      type: 'category',
+      label: '跨仿真与真机部署',
+      collapsed: false,
+      items: [
+        'practices/quadruped/sim2sim/placeholder',
+        'practices/quadruped/sim2real-guide/placeholder',
       ],
     },
   ],
 
   practicesCs123CourseSidebar: [
-    { type: 'link', label: '← 项目实战', href: '/docs/practices/intro' },
+    { type: 'link', label: '← 项目实战', href: '/practices' },
     {
       type: 'category',
       label: '从零到一搭建四足机器人',
@@ -363,7 +335,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   practicesLerobotCourseSidebar: [
-    { type: 'link', label: '← 项目实战', href: '/docs/practices/intro' },
+    { type: 'link', label: '← 项目实战', href: '/practices' },
     {
       type: 'category',
       label: 'LeRobot 开源课程',
@@ -373,6 +345,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   practicesSo101CourseSidebar: [
+    { type: 'link', label: '← 项目实战', href: '/practices' },
     {
       type: 'category',
       label: 'SO-101 + LeRobot 真机教程',
@@ -382,36 +355,36 @@ const sidebars: SidebarsConfig = {
   ],
 
   practicesHumanoidSidebar: [
-    { type: 'link', label: '← 项目实战', href: '/docs/practices/intro' },
+    { type: 'link', label: '← 项目实战', href: '/practices' },
+    { type: 'doc', id: 'practices/humanoid/placeholder', label: '双足与人形总览' },
     {
       type: 'category',
-      label: '双足系列',
-      link: { type: 'doc', id: 'practices/humanoid/placeholder' },
-      collapsible: false,
+      label: 'Unitree G1 人形运控实战',
+      link: { type: 'doc', id: 'practices/humanoid/unitree-g1/index' },
+      collapsed: false,
       items: [
-        {
-          type: 'category',
-          label: 'Unitree G1 人形运控实战',
-          link: { type: 'doc', id: 'practices/humanoid/unitree-g1/index' },
-          collapsed: false,
-          items: [
-            { type: 'doc', id: 'practices/humanoid/unitree-g1/reward-and-training', label: '1. 奖励函数与训练动力学' },
-            { type: 'doc', id: 'practices/humanoid/unitree-g1/sim2sim-and-web', label: '2. Sim2Sim 与浏览器 LSTM 部署' },
-            { type: 'doc', id: 'practices/humanoid/unitree-g1/whole-body-extensions', label: '3. AMP / 起身与 GR00T 全身控制' },
-          ],
-        },
-        { type: 'link', label: '两轮足 Flamingo · Isaac Lab', href: '/docs/practices/humanoid/flamingo-isaaclab/intro' },
-        {
-          type: 'category',
-          label: 'MicroDuck 双足强化学习',
-          collapsed: false,
-          items: [
-            'practices/humanoid/microduck-rl/index',
-            'practices/humanoid/microduck-rl/wall-curriculum',
-            'practices/humanoid/microduck-rl/experiment-notes',
-            { type: 'link', label: 'MicroDuck RL（AMD）', href: '/docs/practices/amd/microduck-rl' },
-          ],
-        },
+        { type: 'doc', id: 'practices/humanoid/unitree-g1/reward-and-training', label: '1. 奖励函数与训练动力学' },
+        { type: 'doc', id: 'practices/humanoid/unitree-g1/sim2sim-and-web', label: '2. Sim2Sim 与浏览器 LSTM 部署' },
+        { type: 'doc', id: 'practices/humanoid/unitree-g1/whole-body-extensions', label: '3. AMP / 起身与 GR00T 全身控制' },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'MicroDuck 双足强化学习',
+      collapsed: false,
+      items: [
+        'practices/humanoid/microduck-rl/index',
+        'practices/humanoid/microduck-rl/wall-curriculum',
+        'practices/humanoid/microduck-rl/experiment-notes',
+        { type: 'link', label: 'MicroDuck RL（AMD）', href: '/docs/practices/amd/microduck-rl' },
+      ],
+    },
+    { type: 'link', label: '两轮足 Flamingo · Isaac Lab', href: '/docs/practices/humanoid/flamingo-isaaclab/intro' },
+    {
+      type: 'category',
+      label: '平衡、跟踪与任务规划',
+      collapsed: false,
+      items: [
         'practices/humanoid/balance-control/placeholder',
         'practices/humanoid/motion-tracking/placeholder',
         'practices/humanoid/task-planning-demo/placeholder',
@@ -420,6 +393,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   practicesMobileManipulationSidebar: [
+    { type: 'link', label: '← 项目实战', href: '/practices' },
     {
       type: 'category',
       label: '移动操作',
@@ -430,7 +404,7 @@ const sidebars: SidebarsConfig = {
   ],
 
   practicesFlamingoCourseSidebar: [
-    { type: 'link', label: '← 双足系列', href: '/docs/practices/humanoid/placeholder' },
+    { type: 'link', label: '← 双足与人形', href: '/practices#humanoid' },
     {
       type: 'category',
       label: '两轮足 Flamingo · Isaac Lab',
@@ -446,7 +420,6 @@ const sidebars: SidebarsConfig = {
       ],
     },
   ],
-
 };
 
 export default sidebars;

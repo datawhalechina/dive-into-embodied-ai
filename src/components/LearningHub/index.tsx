@@ -16,8 +16,14 @@ const icons = {quadruped: PawPrint, humanoid: Footprints, 'robot-arm': Bot, amd:
 function CourseList({courses}: {courses: Course[]}) {
   return <ul className={styles.courseList}>{courses.map(course => <li key={course.to}>
     <Link className={styles.courseLink} to={course.to}>
-      <div><h3>{course.title}</h3>{course.description && <p>{course.description}</p>}</div>
-      <ArrowUpRight size={19} aria-hidden="true" />
+      <div>
+        <div className={styles.courseTitleRow}>
+          <h3>{course.title}</h3>
+          {course.meta && <span className={`${styles.metaBadge} ${styles[`meta_${course.tone ?? 'free'}`]}`}>{course.meta}</span>}
+        </div>
+        {course.description && <p>{course.description}</p>}
+      </div>
+      <ArrowUpRight size={18} aria-hidden="true" />
     </Link>
     {course.children && <div className={styles.subcourses}>{course.children.map(child => <Link key={child.to} to={child.to}>{child.title}<ArrowUpRight size={13} aria-hidden="true" /></Link>)}</div>}
   </li>)}</ul>;
@@ -34,7 +40,13 @@ function PracticeSection({group}: {group: PracticeGroup}) {
     <div className={styles.seriesContent}>
       <Link className={styles.feature} to={feature.to}>
         <div className={styles.featureImage}><img src={useBaseUrl(group.image)} alt={group.alt} loading="lazy" width="720" height="540" /></div>
-        <div className={styles.featureBody}><span className={styles.tags}>{feature.tags}</span><h3>{feature.title}</h3><p>{feature.description}</p><span className={styles.textLink}>{text.startCourse}<ArrowUpRight size={17} aria-hidden="true" /></span></div>
+        <div className={styles.featureBody}>
+          <div className={styles.featureMetaRow}>
+            {feature.meta && <span className={`${styles.metaBadge} ${styles[`meta_${feature.tone ?? 'free'}`]}`}>{feature.meta}</span>}
+            {feature.tags && <span className={styles.tags}>{feature.tags}</span>}
+          </div>
+          <h3>{feature.title}</h3><p>{feature.description}</p><span className={styles.textLink}>{text.startCourse}<ArrowUpRight size={17} aria-hidden="true" /></span>
+        </div>
       </Link>
       <CourseList courses={courses} />
     </div>

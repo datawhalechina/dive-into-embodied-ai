@@ -114,14 +114,15 @@ assert.ok(
 const so101Refs = collectSidebarRefs(sidebars.practicesSo101CourseSidebar);
 assert.deepEqual(
   so101Refs,
-  ['practices/robot-arm/data-collection/so101-lerobot-real/index'],
-  'SO-101 course sidebar should only include its own document',
+  ['/practices', 'practices/robot-arm/data-collection/so101-lerobot-real/index'],
+  'SO-101 course sidebar should only include the projects back link and its own document',
 );
 
 const amdRefs = collectSidebarRefs(sidebars.practicesAmdSidebar);
 assert.deepEqual(
   amdRefs,
   [
+    '/practices',
     'practices/amd/intro',
     'practices/amd/aup-learning-cloud',
     'practices/amd/unitree-rl-mjx/index',
@@ -134,7 +135,7 @@ assert.deepEqual(
     'practices/amd/pupper-control/locomotion',
     'practices/amd/pupper-control/vla',
   ],
-  'AMD sidebar should only include its overview, cloud guide, Go2 MJX, MicroDuck, ACT tutorial, and Pupper project',
+  'AMD sidebar should only include the projects back link, overview, cloud guide, Go2 MJX, MicroDuck, ACT tutorial, and Pupper project',
 );
 
 for (const docPath of listDocs(path.join(rootDir, 'docs/practices/quadruped/cs123'))) {

@@ -6,15 +6,21 @@ displayed_sidebar: introductionSidebar
 ---
 # Introduzione
 
-Questa introduzione presenta l'IA incarnata: cosa studia, da dove nasce, quali abilità e forme corporee hanno i robot e quali problemi restano aperti. Gli ultimi due capitoli spiegano come apprendere i moduli tecnici e come si divide il lavoro tra le diverse professioni. Prosegui poi con fondamenti e progetti per studiare tecniche specifiche.
+:::tip Prima visita? Inizia in 3 minuti
+- Vuoi prima un'esperienza pratica? Apri la [Simulazione online](/simulation) e guida 7 robot con motore fisico nel browser, senza installazione.
+- Vuoi un percorso su misura? Usa il [selettore di percorso in 30 secondi](/#learning-paths) in home per ottenere 3 passi adatti al tuo profilo.
+:::
+
+Questa introduzione offre una visione d'insieme senza prerequisiti di matematica o codice: cosa studia l'IA incarnata, cosa sanno fare i robot, quali sfide restano aperte e come pianificare studio o carriera.
 
 ## Il ruolo dell'introduzione \{#site-structure}
 
 | Sezione | A cosa serve | Quando leggerla |
 | --- | --- | --- |
-| Introduzione | Spiega il campo, le sue difficoltà e gli approcci esistenti | Alla prima visita, per costruire una visione d'insieme |
-| [Fondamenti](/docs/foundations/intro) | Spiega i principi: apprendimento per rinforzo, VLA, controllo, percezione e simulazione | Quando incontri una lacuna specifica |
-| [Progetti](/docs/practices/intro) | Offre progetti suddivisi in capitoli, esperimenti autonomi, demo e riproduzioni | Quando vuoi costruire un sistema completo o provare un metodo |
+| Introduzione | Concetti, storia, piattaforme, sfide principali e percorsi | Alla prima visita, per costruire una mappa mentale |
+| [Simulazione online](/simulation) | 7 robot MuJoCo guidati da tastiera ed esperimenti interattivi | Per costruire intuizione subito, senza installazione |
+| [Fondamenti](/foundations) | Apprendimento per rinforzo, VLA, controllo, percezione e simulazione | Quando incontri una lacuna teorica o matematica |
+| [Progetti](/practices) | 29 progetti pratici per livello, dalla simulazione all'hardware reale | Quando vuoi addestrare, riprodurre o distribuire un robot |
 
 ## Capitoli \{#chapters}
 
@@ -41,10 +47,10 @@ Le [risorse](./resources/index.md) raccolgono articoli, dataset, progetti open s
 
 ## Come leggere \{#how-to-read}
 
-- Se inizi con l'IA incarnata: leggi i capitoli 1 → 3 → 4, poi scegli il primo esperimento nei [progetti](/docs/practices/intro).
-- Se conosci già il machine learning: leggi 1 → 2 → 5 per la storia del campo e i problemi aperti.
-- Per uno studio strutturato: leggi [6. Tecnologie e moduli](./6.tech-stack.md) e segui i rimandi a teoria e progetti.
-- Per esplorare le professioni: consulta [7. Profili professionali](./7.careers.md).
-- Per trovare articoli, dati o codice: vai direttamente alle [risorse](./resources/index.md).
+- **Principiante assoluto**: prova 3 minuti di [Simulazione online](/simulation), leggi 1 → 3 → 4, poi scegli un laboratorio Base in [Progetti](/practices).
+- **Profilo ML / IA**: leggi 1 → 2 → 5 per i problemi aperti, poi passa a imitation learning (ACT) o RL in [Progetti](/practices).
+- **Studio strutturato**: leggi [6. Tecnologie e moduli](./6.tech-stack.md) e segui i collegamenti tra [Fondamenti](/foundations) e [Progetti](/practices).
+- **Orientamento professionale**: consulta [7. Profili professionali](./7.careers.md) per ruoli e preparazione ai colloqui.
+- **Cerchi articoli, dataset o codice**: vai direttamente alle [Risorse](./resources/index.md).
 
-L'introduzione non richiede conoscenze pregresse di programmazione o matematica. Ogni capitolo termina con letture del sito per approfondire.
+L'introduzione non richiede conoscenze pregresse di programmazione o matematica. Ogni capitolo termina con letture mirate del sito per approfondire al bisogno.

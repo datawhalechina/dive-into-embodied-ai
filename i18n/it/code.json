@@ -1482,16 +1482,16 @@
     "message": "Fondamenti"
   },
   "hub.practiceTitle": {
-    "message": "Dai un corpo alle tue conoscenze."
+    "message": "Scegli un robot e completa il ciclo."
   },
   "hub.practiceDescription": {
-    "message": "Dal primo passo di un quadrupede alla prima presa di un braccio. Scegli un robot e trasforma le idee in azioni concrete."
+    "message": "Ordinati da base a robot reale, con requisiti hardware chiari su ogni scheda."
   },
   "hub.foundationTitle": {
-    "message": "Comprendi l’intelligenza in movimento."
+    "message": "Consulta la teoria\nquando ti serve."
   },
   "hub.foundationDescription": {
-    "message": "Percepisci il mondo, prendi una decisione e metti il corpo in movimento. Costruisci le tue conoscenze intorno a questo ciclo."
+    "message": "Non serve studiare tutto prima: apri Cervello, Controllo, Percezione o Ingegneria al bisogno."
   },
   "hub.explore": {
     "message": "Esplora le serie"
@@ -2152,5 +2152,299 @@
   },
   "hub.g1Alt": {
     "message": "Umanoide bipede Unitree G1 che cammina in simulazione MuJoCo"
+  },
+  "home.pg.pdDesc": {
+    "message": "Regola i guadagni e osserva subito risposta e sovraelongazione."
+  },
+  "home.pg.fkDesc": {
+    "message": "Muovi i giunti e osserva le coordinate del piede in tempo reale."
+  },
+  "home.pg.ikDesc": {
+    "message": "Trascina il bersaglio per esplorare lo spazio raggiungibile."
+  },
+  "home.pg.trySim": {
+    "message": "Prova 7 robot nella Simulazione"
+  },
+  "home.stage.g1Tab": {
+    "message": "Unitree G1"
+  },
+  "home.stage.g1Badge": {
+    "message": "LSTM 50 Hz · Nel browser"
+  },
+  "home.stage.g1Caption": {
+    "message": "Camminata bipede 12-DoF con recupero da spinta laterale 0,55 m/s"
+  },
+  "home.stage.g1Action": {
+    "message": "Guida in Simulazione"
+  },
+  "home.stage.g1Alt": {
+    "message": "Umanoide Unitree G1 che recupera una spinta laterale in MuJoCo"
+  },
+  "home.stage.duckTab": {
+    "message": "MicroDuck"
+  },
+  "home.stage.duckBadge": {
+    "message": "PPO · ROCm / CUDA"
+  },
+  "home.stage.duckCaption": {
+    "message": "PPO parallelo su MuJoCo Warp e curriculum di salto in 12 passi"
+  },
+  "home.stage.duckAction": {
+    "message": "Apri tutorial"
+  },
+  "home.stage.duckAlt": {
+    "message": "Bipede MicroDuck che cammina stabilmente in simulazione"
+  },
+  "home.stage.actTab": {
+    "message": "ACT Bimanuale"
+  },
+  "home.stage.actBadge": {
+    "message": "ALOHA · Imitazione"
+  },
+  "home.stage.actCaption": {
+    "message": "Riproduzione Action Chunking e valutazione in ciclo chiuso MuJoCo"
+  },
+  "home.stage.actAction": {
+    "message": "Apri guida bracci"
+  },
+  "home.stage.actAlt": {
+    "message": "Braccio bimanuale ACT che trasferisce un cubo in simulazione ALOHA"
+  },
+  "home.heroLead": {
+    "message": "Guida veri robot nel browser senza installazioni, poi costruisci umanoidi, quadrupedi e bracci da zero."
+  },
+  "home.ctaSim": {
+    "message": "Prova la simulazione live"
+  },
+  "home.ctaPath": {
+    "message": "Percorso in 30s"
+  },
+  "home.statRobots": {
+    "message": "robot live nel browser"
+  },
+  "home.statProjects": {
+    "message": "progetti pratici"
+  },
+  "home.statSetup": {
+    "message": "configurazione richiesta"
+  },
+  "home.stageTabsLabel": {
+    "message": "Cambia demo robot"
+  },
+  "home.communityShort": {
+    "message": "Gratuito e open source (CC BY-NC-SA 4.0). Apri una issue, condividi una riproduzione o contribuisci a un capitolo."
+  },
+  "path.kicker": {
+    "message": "GUIDA RAPIDA IN 30 SECONDI"
+  },
+  "path.title": {
+    "message": "Scegli il tuo profilo e inizia subito."
+  },
+  "path.tabsAria": {
+    "message": "Scegli il tuo background"
+  },
+  "path.go": {
+    "message": "Inizia ora"
+  },
+  "path.beginner.label": {
+    "message": "Principiante assoluto"
+  },
+  "path.beginner.hint": {
+    "message": "Senza GPU · Prima prova"
+  },
+  "path.beginner.s1Title": {
+    "message": "Gioca 3 min in Simulazione"
+  },
+  "path.beginner.s1Desc": {
+    "message": "Guida G1, Go2 e MicroDuck e prova le spinte laterali"
+  },
+  "path.beginner.s2Title": {
+    "message": "Scorri l'Introduzione"
+  },
+  "path.beginner.s2Desc": {
+    "message": "Mappa compiti, piattaforme e stack tecnico in 20 minuti"
+  },
+  "path.beginner.s3Title": {
+    "message": "Costruisci un quadrupede da zero"
+  },
+  "path.beginner.s3Desc": {
+    "message": "Segui gli 8 capitoli CS123 con PD, FK e IK interattivi"
+  },
+  "path.algo.label": {
+    "message": "Ingegnere ML / AI"
+  },
+  "path.algo.hint": {
+    "message": "Conosce PyTorch"
+  },
+  "path.algo.s1Title": {
+    "message": "Colma controllo e coordinate"
+  },
+  "path.algo.s1Desc": {
+    "message": "Ripassa PID→MPC, calibrazione sensori e ROS 2"
+  },
+  "path.algo.s2Title": {
+    "message": "Riproduci Unitree G1 RL"
+  },
+  "path.algo.s2Desc": {
+    "message": "16 ricompense, 10k iterazioni PPO e Sim2Sim MuJoCo"
+  },
+  "path.algo.s3Title": {
+    "message": "Esegui VLA (ACT / π₀.₅)"
+  },
+  "path.algo.s3Desc": {
+    "message": "Riproduci ALOHA bimanuale e post-training RL su LIBERO"
+  },
+  "path.hw.label": {
+    "message": "Hardware / Controlli"
+  },
+  "path.hw.hint": {
+    "message": "Conosce meccanica o MCU"
+  },
+  "path.hw.s1Title": {
+    "message": "Collega il controllo al RL"
+  },
+  "path.hw.s1Desc": {
+    "message": "Traduce ricompense, politiche e fisica GPU parallela"
+  },
+  "path.hw.s2Title": {
+    "message": "CAN / MCU e calibrazione"
+  },
+  "path.hw.s2Desc": {
+    "message": "Allinea banda bus, timestamp e protezioni di sicurezza"
+  },
+  "path.hw.s3Title": {
+    "message": "Avvia SO-101 + LeRobot"
+  },
+  "path.hw.s3Desc": {
+    "message": "Collega il braccio reale, raccogli dati e riproduci azioni"
+  },
+  "path.amd.label": {
+    "message": "AMD / GPU Cloud"
+  },
+  "path.amd.hint": {
+    "message": "ROCm o cloud nel browser"
+  },
+  "path.amd.s1Title": {
+    "message": "Apri AUP Learning Cloud"
+  },
+  "path.amd.s1Desc": {
+    "message": "Avvia JupyterHub e ROCm direttamente dal browser"
+  },
+  "path.amd.s2Title": {
+    "message": "Go2 MJX su ROCm 10"
+  },
+  "path.amd.s2Desc": {
+    "message": "Bastano 8 GB di VRAM; 984M passi in 4,5 h su R9700"
+  },
+  "path.amd.s3Title": {
+    "message": "MicroDuck / ACT su ROCm"
+  },
+  "path.amd.s3Desc": {
+    "message": "Compila MuJoCo Warp nativamente e addestra ACT in BF16"
+  },
+  "path.meta.browser": {
+    "message": "Zero setup · Browser"
+  },
+  "path.meta.read": {
+    "message": "Base · Lettura"
+  },
+  "path.meta.cpu": {
+    "message": "Base · Solo CPU"
+  },
+  "path.meta.theory": {
+    "message": "Mappa · Consultazione"
+  },
+  "path.meta.gpu": {
+    "message": "Avanzato · 1 GPU"
+  },
+  "path.meta.gpu10": {
+    "message": "Avanzato · 10GB+ VRAM"
+  },
+  "path.meta.rl": {
+    "message": "Fondamenti · RL"
+  },
+  "path.meta.eng": {
+    "message": "Ingegneria · Hardware"
+  },
+  "path.meta.real": {
+    "message": "Robot reale · Low cost"
+  },
+  "path.meta.cloud": {
+    "message": "Cloud · Zero driver"
+  },
+  "path.meta.rocm": {
+    "message": "Avanzato · ROCm / CUDA"
+  },
+  "path.meta.rocm2": {
+    "message": "Pratica · GPU Radeon"
+  },
+  "home.proj.heading": {
+    "message": "Progetti chiave: scegline uno ed eseguilo."
+  },
+  "home.proj.g1Badge": {
+    "message": "Avanzato · GPU / Browser"
+  },
+  "home.proj.g1Short": {
+    "message": "16 ricompense, 10k PPO, Sim2Sim e LSTM 50 Hz nel browser."
+  },
+  "home.proj.duckBadge": {
+    "message": "Intermedio · ROCm / CUDA"
+  },
+  "home.proj.duckShort": {
+    "message": "PPO parallelo su MuJoCo Warp e salto ostacoli in 12 passi."
+  },
+  "home.proj.actBadge": {
+    "message": "Intermedio · 1 GPU"
+  },
+  "home.proj.actShort": {
+    "message": "Addestra politiche Action Chunking su ALOHA in ciclo chiuso."
+  },
+  "home.more.go2Short": {
+    "message": "8 GB VRAM minimi; 4,5 h su R9700 pronte per Sim2Sim ufficiale"
+  },
+  "home.more.cs123Title": {
+    "message": "Costruisci un quadrupede da zero (CS123)"
+  },
+  "home.more.cs123Short": {
+    "message": "8 capitoli: PD, FK/IK, andature, RL e inseguimento visivo"
+  },
+  "home.more.cs123Badge": {
+    "message": "Base · CPU"
+  },
+  "home.more.mobileShort": {
+    "message": "SLAM + Nav2, navigazione visione-linguaggio e base + braccio"
+  },
+  "hub.meta.introCpu": {
+    "message": "Base · CPU"
+  },
+  "hub.meta.midGpu": {
+    "message": "Intermedio · GPU"
+  },
+  "hub.meta.advGpu": {
+    "message": "Avanzato · GPU"
+  },
+  "hub.meta.gpu10": {
+    "message": "Avanzato · 10GB VRAM"
+  },
+  "hub.meta.gpuRocm": {
+    "message": "Avanzato · ROCm / CUDA"
+  },
+  "hub.meta.cloud": {
+    "message": "Cloud · Zero setup"
+  },
+  "hub.meta.browser": {
+    "message": "Base · Browser"
+  },
+  "hub.meta.guide": {
+    "message": "Guida ingegneristica"
+  },
+  "hub.meta.realGuide": {
+    "message": "Guida hardware"
+  },
+  "hub.meta.realArm": {
+    "message": "Braccio reale · SO-101"
+  },
+  "hub.meta.notes": {
+    "message": "Note sperimentali"
   }
 }

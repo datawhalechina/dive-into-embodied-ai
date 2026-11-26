@@ -175,5 +175,74 @@
   },
   "sidebar.practicesHumanoidSidebar.doc.3. AMP / 起身与 GR00T 全身控制": {
     "message": "3. AMP, Get-Up e GR00T WBC"
+  },
+  "sidebar.foundationsOverviewSidebar.link.← 理论基础": {
+    "message": "← Fondamenti"
+  },
+  "sidebar.foundationsOverviewSidebar.link.定位、触觉与感知总览": {
+    "message": "Percezione, localizzazione e tatto"
+  },
+  "sidebar.foundationsRoboticsAndRos2Sidebar.link.← 理论基础": {
+    "message": "← Fondamenti"
+  },
+  "sidebar.foundationsSimulationSidebar.link.← 理论基础": {
+    "message": "← Fondamenti"
+  },
+  "sidebar.foundationsRlForRoboticsSidebar.link.← 理论基础": {
+    "message": "← Fondamenti"
+  },
+  "sidebar.foundationsControllersSidebar.link.← 理论基础": {
+    "message": "← Fondamenti"
+  },
+  "sidebar.foundationsVlmSidebar.link.← 理论基础": {
+    "message": "← Fondamenti"
+  },
+  "sidebar.foundationsVlaSidebar.link.← 理论基础": {
+    "message": "← Fondamenti"
+  },
+  "sidebar.foundationsWorldModelSidebar.link.← 理论基础": {
+    "message": "← Fondamenti"
+  },
+  "sidebar.practicesOverviewSidebar.link.← 项目实战": {
+    "message": "← Progetti"
+  },
+  "sidebar.practicesOverviewSidebar.link.双足与人形": {
+    "message": "Bipedi e umanoidi"
+  },
+  "sidebar.practicesOverviewSidebar.link.移动操作": {
+    "message": "Manipolazione mobile"
+  },
+  "sidebar.practicesAmdSidebar.link.← 项目实战": {
+    "message": "← Progetti"
+  },
+  "sidebar.practicesAmdSidebar.doc.AMD 专区总览": {
+    "message": "Panoramica progetti AMD"
+  },
+  "sidebar.practicesRobotArmSidebar.doc.机械臂系列总览": {
+    "message": "Panoramica bracci robotici"
+  },
+  "sidebar.practicesQuadrupedSidebar.doc.四足系列总览": {
+    "message": "Panoramica quadrupedi"
+  },
+  "sidebar.practicesQuadrupedSidebar.category.跨仿真与真机部署": {
+    "message": "Sim2Sim e deployment reale"
+  },
+  "sidebar.practicesSo101CourseSidebar.link.← 项目实战": {
+    "message": "← Progetti"
+  },
+  "sidebar.practicesHumanoidSidebar.doc.双足与人形总览": {
+    "message": "Panoramica bipedi e umanoidi"
+  },
+  "sidebar.practicesHumanoidSidebar.category.平衡、跟踪与任务规划": {
+    "message": "Equilibrio, tracking e pianificazione"
+  },
+  "sidebar.practicesMobileManipulationSidebar.link.← 项目实战": {
+    "message": "← Progetti"
+  },
+  "sidebar.practicesMobileManipulationSidebar.category.移动操作": {
+    "message": "Manipolazione mobile"
+  },
+  "sidebar.practicesFlamingoCourseSidebar.link.← 双足与人形": {
+    "message": "← Bipedi e umanoidi"
   }
 }

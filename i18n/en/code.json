@@ -1437,16 +1437,16 @@
     "message": "Foundations"
   },
   "hub.practiceTitle": {
-    "message": "Give your knowledge a body."
+    "message": "Pick a robot and run the full loop."
   },
   "hub.practiceDescription": {
-    "message": "From a quadruped’s first step to a robot arm’s first grasp. Pick a robot and turn ideas into actions you can see."
+    "message": "Ordered from beginner to real hardware, with clear compute requirements on every card."
   },
   "hub.foundationTitle": {
-    "message": "Understand intelligence in motion."
+    "message": "Look up theory\nwhen you need it."
   },
   "hub.foundationDescription": {
-    "message": "Perceive the world, make a decision, and put the body in motion. Build your knowledge around this complete loop."
+    "message": "No need to read everything upfront—jump straight to Brain, Control, Sensing, or Engineering when stuck."
   },
   "hub.explore": {
     "message": "Explore the series"
@@ -2107,5 +2107,299 @@
   },
   "hub.g1Alt": {
     "message": "Unitree G1 bipedal humanoid walking in MuJoCo simulation"
+  },
+  "home.pg.pdDesc": {
+    "message": "Tune gains and see step response and overshoot live."
+  },
+  "home.pg.fkDesc": {
+    "message": "Move joints and watch foot coordinates update live."
+  },
+  "home.pg.ikDesc": {
+    "message": "Drag the target point to explore the leg workspace."
+  },
+  "home.pg.trySim": {
+    "message": "Try 7 robots in Simulation"
+  },
+  "home.stage.g1Tab": {
+    "message": "Unitree G1"
+  },
+  "home.stage.g1Badge": {
+    "message": "50 Hz LSTM · Playable in browser"
+  },
+  "home.stage.g1Caption": {
+    "message": "12-DoF bipedal walking with 0.55 m/s lateral push recovery"
+  },
+  "home.stage.g1Action": {
+    "message": "Drive in Simulation"
+  },
+  "home.stage.g1Alt": {
+    "message": "Unitree G1 humanoid recovering from a lateral push in MuJoCo"
+  },
+  "home.stage.duckTab": {
+    "message": "MicroDuck"
+  },
+  "home.stage.duckBadge": {
+    "message": "PPO · ROCm / CUDA"
+  },
+  "home.stage.duckCaption": {
+    "message": "Parallel MuJoCo Warp PPO and 12-step wall-jumping curriculum"
+  },
+  "home.stage.duckAction": {
+    "message": "Open tutorial"
+  },
+  "home.stage.duckAlt": {
+    "message": "MicroDuck biped walking stably in simulation"
+  },
+  "home.stage.actTab": {
+    "message": "ACT Bimanual"
+  },
+  "home.stage.actBadge": {
+    "message": "ALOHA · Imitation"
+  },
+  "home.stage.actCaption": {
+    "message": "Action-chunking policy reproduction and closed-loop MuJoCo eval"
+  },
+  "home.stage.actAction": {
+    "message": "Open arm track"
+  },
+  "home.stage.actAlt": {
+    "message": "ACT bimanual robot arm transferring a cube in ALOHA simulation"
+  },
+  "home.heroLead": {
+    "message": "Drive real robots in your browser with zero setup, then build humanoids, quadrupeds, and arms end to end."
+  },
+  "home.ctaSim": {
+    "message": "Try live simulation"
+  },
+  "home.ctaPath": {
+    "message": "30-sec path finder"
+  },
+  "home.statRobots": {
+    "message": "live browser robots"
+  },
+  "home.statProjects": {
+    "message": "hands-on projects"
+  },
+  "home.statSetup": {
+    "message": "setup to start"
+  },
+  "home.stageTabsLabel": {
+    "message": "Switch robot demo"
+  },
+  "home.communityShort": {
+    "message": "Free and open source (CC BY-NC-SA 4.0). Open an issue, share your reproduction, or claim a chapter."
+  },
+  "path.kicker": {
+    "message": "30-SEC START GUIDE"
+  },
+  "path.title": {
+    "message": "Pick your background and start step one."
+  },
+  "path.tabsAria": {
+    "message": "Choose your background"
+  },
+  "path.go": {
+    "message": "Start now"
+  },
+  "path.beginner.label": {
+    "message": "Complete beginner"
+  },
+  "path.beginner.hint": {
+    "message": "No GPU needed · Play first"
+  },
+  "path.beginner.s1Title": {
+    "message": "Play 3 min in Simulation"
+  },
+  "path.beginner.s1Desc": {
+    "message": "Drive G1, Go2, and MicroDuck and trigger push recovery"
+  },
+  "path.beginner.s2Title": {
+    "message": "Skim the Introduction"
+  },
+  "path.beginner.s2Desc": {
+    "message": "Map tasks, robot bodies, and the tech stack in 20 minutes"
+  },
+  "path.beginner.s3Title": {
+    "message": "Build a quadruped from scratch"
+  },
+  "path.beginner.s3Desc": {
+    "message": "Run the 8-chapter CS123 loop with interactive PD / FK / IK"
+  },
+  "path.algo.label": {
+    "message": "ML / LLM engineer"
+  },
+  "path.algo.hint": {
+    "message": "Knows PyTorch"
+  },
+  "path.algo.s1Title": {
+    "message": "Fill control & frame gaps"
+  },
+  "path.algo.s1Desc": {
+    "message": "Brush up on PID-to-MPC, sensor calibration, and ROS 2"
+  },
+  "path.algo.s2Title": {
+    "message": "Reproduce Unitree G1 RL"
+  },
+  "path.algo.s2Desc": {
+    "message": "Break down 16 rewards, 10k PPO curves, and MuJoCo Sim2Sim"
+  },
+  "path.algo.s3Title": {
+    "message": "Run VLA (ACT / π₀.₅)"
+  },
+  "path.algo.s3Desc": {
+    "message": "Reproduce ALOHA bimanual tasks and LIBERO RL post-training"
+  },
+  "path.hw.label": {
+    "message": "Hardware / controls"
+  },
+  "path.hw.hint": {
+    "message": "Knows circuits or mechanics"
+  },
+  "path.hw.s1Title": {
+    "message": "Connect control to RL"
+  },
+  "path.hw.s1Desc": {
+    "message": "Map rewards, policies, and parallel GPU physics to control loops"
+  },
+  "path.hw.s2Title": {
+    "message": "CAN / MCU & calibration"
+  },
+  "path.hw.s2Desc": {
+    "message": "Align bus bandwidth, timestamps, and hardware safety guards"
+  },
+  "path.hw.s3Title": {
+    "message": "Deploy SO-101 + LeRobot"
+  },
+  "path.hw.s3Desc": {
+    "message": "Connect a real arm, collect teleop demos, and replay policies"
+  },
+  "path.amd.label": {
+    "message": "AMD / cloud GPU"
+  },
+  "path.amd.hint": {
+    "message": "ROCm or browser cloud"
+  },
+  "path.amd.s1Title": {
+    "message": "Open AUP Learning Cloud"
+  },
+  "path.amd.s1Desc": {
+    "message": "Launch JupyterHub and ROCm directly in your browser"
+  },
+  "path.amd.s2Title": {
+    "message": "Go2 MJX on ROCm 10"
+  },
+  "path.amd.s2Desc": {
+    "message": "Fits in 8 GB VRAM; full 984M-step run completes in 4.5h on R9700"
+  },
+  "path.amd.s3Title": {
+    "message": "MicroDuck / ACT on ROCm"
+  },
+  "path.amd.s3Desc": {
+    "message": "Build MuJoCo Warp natively and train ACT in BF16 on Radeon"
+  },
+  "path.meta.browser": {
+    "message": "Zero setup · Browser"
+  },
+  "path.meta.read": {
+    "message": "Beginner · Reading"
+  },
+  "path.meta.cpu": {
+    "message": "Beginner · CPU ready"
+  },
+  "path.meta.theory": {
+    "message": "Skill tree · Lookup"
+  },
+  "path.meta.gpu": {
+    "message": "Advanced · Single GPU"
+  },
+  "path.meta.gpu10": {
+    "message": "Advanced · 10GB+ VRAM"
+  },
+  "path.meta.rl": {
+    "message": "Foundations · RL"
+  },
+  "path.meta.eng": {
+    "message": "Engineering · Hardware"
+  },
+  "path.meta.real": {
+    "message": "Real robot · Low cost"
+  },
+  "path.meta.cloud": {
+    "message": "Cloud · Zero driver setup"
+  },
+  "path.meta.rocm": {
+    "message": "Advanced · ROCm / CUDA"
+  },
+  "path.meta.rocm2": {
+    "message": "Hands-on · Radeon GPU"
+  },
+  "home.proj.heading": {
+    "message": "Flagship projects—pick one and run it."
+  },
+  "home.proj.g1Badge": {
+    "message": "Advanced · GPU / Browser"
+  },
+  "home.proj.g1Short": {
+    "message": "16 rewards, 10k PPO, Sim2Sim, and live 50 Hz browser LSTM."
+  },
+  "home.proj.duckBadge": {
+    "message": "Intermediate · ROCm / CUDA"
+  },
+  "home.proj.duckShort": {
+    "message": "Parallel MuJoCo Warp PPO and 12-step wall-jumping curriculum."
+  },
+  "home.proj.actBadge": {
+    "message": "Intermediate · Single GPU"
+  },
+  "home.proj.actShort": {
+    "message": "Train action-chunking policies on ALOHA demos with closed-loop eval."
+  },
+  "home.more.go2Short": {
+    "message": "8 GB VRAM minimum; full 4.5h R9700 run exports straight to Sim2Sim"
+  },
+  "home.more.cs123Title": {
+    "message": "Build a quadruped from scratch (CS123)"
+  },
+  "home.more.cs123Short": {
+    "message": "8-chapter closed loop: PD, FK/IK, gaits, RL, and visual chase"
+  },
+  "home.more.cs123Badge": {
+    "message": "Beginner · CPU"
+  },
+  "home.more.mobileShort": {
+    "message": "SLAM + Nav2, vision-language navigation, and base-arm coordination"
+  },
+  "hub.meta.introCpu": {
+    "message": "Beginner · CPU"
+  },
+  "hub.meta.midGpu": {
+    "message": "Intermediate · GPU"
+  },
+  "hub.meta.advGpu": {
+    "message": "Advanced · GPU"
+  },
+  "hub.meta.gpu10": {
+    "message": "Advanced · 10GB VRAM"
+  },
+  "hub.meta.gpuRocm": {
+    "message": "Advanced · ROCm / CUDA"
+  },
+  "hub.meta.cloud": {
+    "message": "Cloud · Zero setup"
+  },
+  "hub.meta.browser": {
+    "message": "Beginner · Browser"
+  },
+  "hub.meta.guide": {
+    "message": "Engineering guide"
+  },
+  "hub.meta.realGuide": {
+    "message": "Hardware guide"
+  },
+  "hub.meta.realArm": {
+    "message": "Real arm · SO-101"
+  },
+  "hub.meta.notes": {
+    "message": "Experiment notes"
   }
 }

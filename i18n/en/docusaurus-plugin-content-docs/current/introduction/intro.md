@@ -7,15 +7,21 @@ displayed_sidebar: introductionSidebar
 
 # Introduction
 
-This introduction gives an overview of embodied AI: what it studies, where it came from, which skills and body types robots have, and which problems remain open. The final two chapters explain how to learn the technical modules and how career roles divide the work. After the introduction, move on to the foundations and projects to learn specific techniques.
+:::tip First time here? Start in 3 minutes
+- Want hands-on intuition first? Open [Live Simulation](/simulation) and drive 7 physics-simulated robots in your browser—no setup required.
+- Want a tailored starting point? Use the [30-second path picker](/#learning-paths) on the homepage to get 3 steps matched to your background.
+:::
+
+This introduction gives you the big picture with zero math or coding prerequisites: what embodied AI studies, what robots can do, which problems remain hard, and how to plan your learning or career path.
 
 ## Where the introduction fits \{#site-structure}
 
 | Section | What it does | When to read it |
 | --- | --- | --- |
-| Introduction | Helps beginners get started: what the field is, why it is hard, and which approaches exist | On your first visit, to build an overall understanding |
-| [Foundations](/docs/foundations/intro) | Explains the principles: reinforcement learning, VLA, control, perception, simulation, and more | When you hit a specific knowledge gap |
-| [Projects](/docs/practices/intro) | Offers projects organized into chapters, standalone experiments, demos, and reproductions | When you want to build a complete system or test a method yourself |
+| Introduction | Concepts, history, platforms, key challenges, and learning paths | On your first visit, to build a mental map |
+| [Live Simulation](/simulation) | 7 MuJoCo robots driven by keyboard plus interactive playgrounds | To build intuition immediately with zero setup |
+| [Foundations](/foundations) | Reinforcement learning, VLA, control, perception, and simulation | When you hit a specific concept or math gap |
+| [Projects](/practices) | 29 difficulty-tagged hands-on projects from simulation to real hardware | When you are ready to train, reproduce, or deploy |
 
 ## Chapters \{#chapters}
 
@@ -42,10 +48,10 @@ The [resources](./resources/index.md) collect papers, datasets, open source proj
 
 ## How to read \{#how-to-read}
 
-- New to embodied AI: read chapters 1 → 3 → 4, then go to [projects](/docs/practices/intro) to choose your first experiment.
-- Already familiar with machine learning: read chapters 1 → 2 → 5 for an overview of the field's history and open problems.
-- Starting structured learning: read [6. Technology stack](./6.tech-stack.md), then follow its modules into theory courses and projects.
-- Exploring career directions: read [7. Career roles](./7.careers.md) for responsibilities and preparation topics.
-- Looking for papers, data, or code: go straight to the [resources](./resources/index.md).
+- **Complete beginner**: Spend 3 minutes in [Live Simulation](/simulation), read chapters 1 → 3 → 4, then pick a Beginner lab in [Projects](/practices).
+- **ML / AI background**: Read chapters 1 → 2 → 5 for core open problems, then jump into imitation learning (ACT) or RL training in [Projects](/practices).
+- **Structured study**: Read [6. Technology stack](./6.tech-stack.md) and follow modules across [Foundations](/foundations) and [Projects](/practices).
+- **Career planning**: Read [7. Career roles](./7.careers.md) for role breakdowns and interview preparation.
+- **Looking for papers, datasets, or code**: Go straight to [Resources](./resources/index.md).
 
-The introduction requires no programming or math background. Each chapter ends with further reading on this site for when you want to go deeper.
+The introduction requires no programming or math background. Each chapter ends with further reading on this site so you can go deeper on demand.
