@@ -2,16 +2,18 @@ import {translate} from '@docusaurus/Translate';
 import React from 'react';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import {ArrowRight, ArrowUpRight, Bot, Cog} from 'lucide-react';
+import {ArrowRight, ArrowUpRight, Bot, Cog, Cpu, Compass} from 'lucide-react';
 import styles from './styles.module.css';
 
 const projects = [
+  {title: translate({id: "home.proj.g1Title", message: "Unitree G1 人形运控实战"}), category: translate({id: "home.proj.g1Cat", message: "人形运控 / 强化学习"}), description: translate({id: "home.proj.g1Desc", message: "16 项奖励拆解、万轮 PPO、两级 MuJoCo Sim2Sim 与浏览器 50 Hz LSTM 部署。"}), to: '/docs/practices/humanoid/unitree-g1', image: '/img/unitree-g1-poster.webp', alt: translate({id: "home.proj.g1Alt", message: "Unitree G1 双足人形机器人在 MuJoCo 仿真中行走"}), tags: ['12-DoF LSTM', 'Sim2Sim']},
   {title: translate({message: "MicroDuck 双足机器人"}), category: translate({message: "双足行走 / 强化学习"}), description: translate({message: "从 PPO 训练到动作回放，探索行走、起身与轮式动作。"}), to: '/docs/practices/humanoid/microduck-rl', image: '/img/microduck-poster.webp', alt: translate({message: "MicroDuck 双足机器人在 MuJoCo 仿真中行走"}), tags: ['MuJoCo Warp', 'PPO']},
-  {title: translate({message: "玩转 Pupper 四足机器人"}), category: translate({message: "AMD 实践 / 四足控制"}), description: translate({message: "在 AMD 平台上探索 Pupper 的强化学习运动策略与 VLA 实验。"}), to: '/docs/practices/amd/pupper-control/intro', image: '/img/pupper-poster.webp', alt: translate({message: "Pupper 四足机器人前进步态仿真"}), tags: ['AMD', translate({message: "运动控制"})]},
   {title: translate({message: "ACT 双臂操作训练"}), category: translate({message: "双臂协作 / 模仿学习"}), description: translate({message: "使用 ALOHA 仿真数据训练策略，在评测中验证双臂操作能力。"}), to: '/docs/practices/vla/act', image: '/img/act-poster.webp', alt: translate({message: "ALOHA 双臂机器人操作任务仿真"}), tags: ['ACT', 'ALOHA']},
 ];
 const moreProjects = [
-  {title: translate({message: "MuJoCo 机械臂与 DDPG"}), description: translate({message: "探索机械臂的连续控制任务"}), to: '/docs/practices/robot-arm/mujoco-arm-pick-place', icon: Bot, status: translate({message: "机械臂"})},
+  {title: translate({id: "home.more.go2Title", message: "Go2 四足运控 · MJX（ROCm / CUDA）"}), description: translate({id: "home.more.go2Desc", message: "单卡 8GB 显存跨平台训练 Go2 速度策略，导出 ONNX 直通官方 Sim2Sim 栈"}), to: '/docs/practices/amd/unitree-rl-mjx', icon: Cpu, status: translate({id: "home.more.go2Badge", message: "AMD / MJX"})},
+  {title: translate({message: "玩转 Pupper 四足机器人"}), description: translate({message: "在 AMD 平台上探索 Pupper 的强化学习运动策略与 VLA 实验。"}), to: '/docs/practices/amd/pupper-control/intro', icon: Bot, status: translate({id: "home.more.pupperBadge", message: "四足 / VLA"})},
+  {title: translate({id: "home.more.mobileTitle", message: "移动操作与自主导航（SLAM / VLN）"}), description: translate({id: "home.more.mobileDesc", message: "打通 SLAM + Nav2、视觉语言导航与底盘-机械臂全身协同"}), to: '/docs/practices/mobile-manipulation/placeholder', icon: Compass, status: translate({id: "home.more.mobileBadge", message: "移动操作"})},
   {title: translate({message: "SO-101 + LeRobot 真机实践"}), description: translate({message: "硬件连通、基础测试与动作回放"}), to: '/docs/practices/robot-arm/data-collection/so101-lerobot-real', icon: Cog, status: translate({message: "真机"})},
 ];
 function ProjectCard({project}: {project: typeof projects[number]}) {

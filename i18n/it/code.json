@@ -1338,7 +1338,7 @@
     "message": "Spostamento laterale"
   },
   "simulation.keys": {
-    "message": "WASD / frecce per muoverti, Q / E per spostarti lateralmente. Nella scena: Spazio per pausa, R per ripristinare."
+    "message": "WASD / frecce per muovere, Q / E per traslare. Con la scena attiva, Spazio mette in pausa, R ripristina e P applica una spinta."
   },
   "simulation.quaddleKeys": {
     "message": "W avanti, A / D per girare camminando, S per fermarti. Funzionano anche le frecce. Nessuna retromarcia o traslazione laterale."
@@ -1383,7 +1383,7 @@
     "message": "Pupper v3 · andatura appresa"
   },
   "simulation.duckBrief": {
-    "message": "MicroDuck · 14 articolazioni"
+    "message": "Bipede · andatura appresa"
   },
   "simulation.pupperPolicy": {
     "message": "Pupper v3 · camminata PPO"
@@ -1395,7 +1395,7 @@
     "message": "Usa mesh Pupper v3 e pesi PPO del progetto. Supporta avanzamento, retromarcia, spostamento laterale e rotazione. Può derivare; rilasciare i comandi non blocca la posa."
   },
   "simulation.duckInfo": {
-    "message": "Usa mesh MicroDuck originali e servi di posizione. La base è fissata per regolare la posa; liberala per osservare gravità e collisioni. Nessuna politica di camminata collegata."
+    "message": "Usa le mesh originali di MicroDuck con una politica PPO addestrata, riproducendo nel browser il modello motore XL330 BAM M6 con limiti di tensione/corrente e ritardo di 20 ms. Supporta camminata, passo laterale, rotazione sul posto, arresto stabile e recupero da spinte."
   },
   "simulation.duckDescription": {
     "message": "Muovi la testa con i tasti direzionali o apri i cursori per regolare le articolazioni. Rilascia per mantenere l’angolo."
@@ -1527,7 +1527,7 @@
     "message": "Quadrupedi"
   },
   "hub.humanoid": {
-    "message": "Bipedi e robot su ruote e gambe"
+    "message": "Bipedi e umanoidi"
   },
   "hub.arm": {
     "message": "Bracci robotici"
@@ -1539,13 +1539,13 @@
     "message": "Dal primo passo al movimento libero."
   },
   "hub.quadrupedDescription": {
-    "message": "Parti dalla cinematica e dal controllo dei giunti, costruisci un’andatura in simulazione ed esplora apprendimento per rinforzo e navigazione guidata dal linguaggio."
+    "message": "Parti dalla cinematica e dal controllo dei giunti, costruisci un’andatura in simulazione ed esplora apprendimento per rinforzo, MJX e deployment reale."
   },
   "hub.humanoidLead": {
     "message": "Trova l’equilibrio. Esplora nuove possibilità."
   },
   "hub.humanoidDescription": {
-    "message": "Insegna un movimento a MicroDuck o mantieni in equilibrio un robot su ruote e gambe. Avanza per gradi e valuta la strategia appresa."
+    "message": "Dalla camminata dell'umanoide Unitree G1 e il salto di MicroDuck al robot ruote-zampe Flamingo: padroneggia equilibrio bipede, Sim2Sim e controllo whole-body."
   },
   "hub.armLead": {
     "message": "Metti le tue idee nelle mani di un robot."
@@ -1664,17 +1664,23 @@
   "hub.actAmdDescription": {
     "message": "Addestramento, ripresa da checkpoint e valutazione in ciclo chiuso su GPU Radeon."
   },
+  "hub.go2Mjx": {
+    "message": "Locomozione Go2 · MJX (ROCm / CUDA)"
+  },
+  "hub.go2MjxDescription": {
+    "message": "Addestra politiche di velocità Go2 su una GPU da 8 GB ed esporta ONNX nello stack ufficiale Sim2Sim."
+  },
   "hub.planning": {
-    "message": "Altre direzioni"
+    "message": "Manipolazione mobile e navigazione"
   },
   "hub.planningDescription": {
-    "message": "Le guide su manipolazione mobile e Sim2Real sono in sviluppo. Consulta le panoramiche delle serie per i contenuti previsti."
+    "message": "3 guide complete: navigazione autonoma SLAM + Nav2, navigazione visione-linguaggio (VLN) e coordinazione base mobile + braccio."
   },
   "hub.mobile": {
-    "message": "Manipolazione mobile (prevista)"
+    "message": "Panoramica manipolazione mobile"
   },
   "hub.sim2real": {
-    "message": "Sim2Real (in sviluppo)"
+    "message": "Guida al deployment Sim2Real"
   },
   "hub.brain": {
     "message": "Decisioni intelligenti"
@@ -2005,5 +2011,146 @@
   },
   "techStack.m7.example": {
     "message": "Garantisce che carico del braccio, rigidezza della pinza, coppia articolare e bus sostengano il compito."
+  },
+  "simulation.g1Brief": {
+    "message": "Umanoide · camminata bipede"
+  },
+  "simulation.g1Policy": {
+    "message": "Unitree G1 · politica LSTM di camminata"
+  },
+  "simulation.g1PolicyInfo": {
+    "message": "Politica ricorrente LSTM a 12 gradi di libertà a 50 Hz con obiettivo 0,5 m/s. Prova una spinta laterale durante la camminata."
+  },
+  "simulation.g1Info": {
+    "message": "Esegue una politica LSTM bipede per Unitree G1 (12 DoF) con mesh leggere, preservando inerzie e punti di contatto dei piedi. Supporta camminata, rotazione, passo laterale e recupero da spinte."
+  },
+  "simulation.h1Brief": {
+    "message": "Umanoide full-size · 10-DoF"
+  },
+  "simulation.h1Policy": {
+    "message": "Unitree H1 · politica LSTM di camminata"
+  },
+  "simulation.h1PolicyInfo": {
+    "message": "Politica LSTM inferiore a 10 DoF per Unitree H1 (1,8 m) a 50 Hz con obiettivo 0,5 m/s. Supporta il recupero da spinte."
+  },
+  "simulation.h1Info": {
+    "message": "Esegue la politica LSTM pre-addestrata a 10 DoF di Unitree H1 con mesh leggere, preservando inerzie e contatti originali. Supporta camminata, retromarcia, passo laterale, rotazione e recupero da spinte."
+  },
+  "simulation.h12Brief": {
+    "message": "Umanoide full-size · 12-DoF"
+  },
+  "simulation.h12Policy": {
+    "message": "Unitree H1-2 · politica LSTM di camminata"
+  },
+  "simulation.h12PolicyInfo": {
+    "message": "Politica LSTM inferiore a 12 DoF (con caviglie a 2 assi) per Unitree H1-2 a 50 Hz con obiettivo 0,5 m/s. Supporta il recupero da spinte."
+  },
+  "simulation.h12Info": {
+    "message": "Esegue la politica LSTM pre-addestrata a 12 DoF di Unitree H1-2 con mesh leggere, aggiungendo il rollio alla caviglia rispetto ad H1 per una maggiore stabilità laterale."
+  },
+  "simulation.push": {
+    "message": "Spinta"
+  },
+  "simulation.pushTitle": {
+    "message": "Applica un impulso orizzontale di velocità per testare l'equilibrio (tasto P)"
+  },
+  "simulation.duckPolicy": {
+    "message": "MicroDuck · politica PPO di camminata"
+  },
+  "simulation.duckPolicyInfo": {
+    "message": "Politica PPO bipede a 14 DoF (modello motore DC XL330 BAM M6 + ritardo 20 ms) con obiettivo 0,3 m/s e recupero da spinte."
+  },
+  "hub.g1": {
+    "message": "Locomozione umanoide Unitree G1"
+  },
+  "hub.g1Description": {
+    "message": "Percorso in 4 parti: 16 ricompense, 10k PPO, Sim2Sim, LSTM nel browser e GR00T WBC."
+  },
+  "home.topic.g1": {
+    "message": "Umanoide Unitree G1"
+  },
+  "home.proj.g1Title": {
+    "message": "Locomozione umanoide Unitree G1"
+  },
+  "home.proj.g1Cat": {
+    "message": "Umanoide / Apprendimento per rinforzo"
+  },
+  "home.proj.g1Desc": {
+    "message": "Analisi di 16 ricompense, curve PPO da 10k iterazioni, Sim2Sim MuJoCo a due stadi e LSTM live nel browser a 50 Hz."
+  },
+  "home.proj.g1Alt": {
+    "message": "Umanoide bipede Unitree G1 che cammina in simulazione MuJoCo"
+  },
+  "home.more.go2Title": {
+    "message": "Locomozione Go2 · MJX (ROCm / CUDA)"
+  },
+  "home.more.go2Desc": {
+    "message": "Addestra politiche Go2 su GPU da 8 GB ed esporta ONNX nello stack ufficiale Sim2Sim"
+  },
+  "home.more.go2Badge": {
+    "message": "AMD / MJX"
+  },
+  "home.more.pupperBadge": {
+    "message": "Quadrupede / VLA"
+  },
+  "home.more.mobileTitle": {
+    "message": "Manipolazione mobile e navigazione (SLAM / VLN)"
+  },
+  "home.more.mobileDesc": {
+    "message": "Integra SLAM + Nav2, navigazione visione-linguaggio e coordinazione base mobile + braccio"
+  },
+  "home.more.mobileBadge": {
+    "message": "Mobile manip"
+  },
+  "hub.mobileNav": {
+    "message": "Mappatura e navigazione (SLAM / Nav2)"
+  },
+  "hub.mobileVln": {
+    "message": "Navigazione visione-linguaggio (VLN)"
+  },
+  "hub.mobileDemo": {
+    "message": "Progetto completo di manipolazione mobile"
+  },
+  "hub.sim2sim": {
+    "message": "Guida alla validazione Sim2Sim"
+  },
+  "hub.sim2simDescription": {
+    "message": "Allineamento tra simulatori, checklist diagnostiche ed esempi pratici Go2 / Flamingo / G1."
+  },
+  "hub.sim2realDescription": {
+    "message": "Identificazione di sistema, randomizzazione di dominio, protezioni e avvio graduale su hardware."
+  },
+  "hub.balanceControl": {
+    "message": "Equilibrio dinamico bipede e recupero da spinte"
+  },
+  "hub.balanceControlDescription": {
+    "message": "Recupero di centro di massa e momento angolare, test di spinta laterale e simulazione live nel browser."
+  },
+  "hub.motionTracking": {
+    "message": "Tracciamento del moto whole-body umanoide"
+  },
+  "hub.motionTrackingDescription": {
+    "message": "Retargeting mocap, ricompense di tracciamento e imitazione whole-body."
+  },
+  "hub.taskPlanning": {
+    "message": "Pianificazione di alto livello per bipedi"
+  },
+  "hub.taskPlanningDescription": {
+    "message": "Scomposizione di istruzioni VLM/LLM, orchestrazione di abilità e vincoli di sicurezza."
+  },
+  "hub.ros2Arm": {
+    "message": "Controllo braccio robotico con ROS 2"
+  },
+  "hub.ros2ArmDescription": {
+    "message": "Interfacce ros2_control, pianificazione MoveIt 2 ed esecuzione sicura."
+  },
+  "hub.imitationArm": {
+    "message": "Imitation learning su compiti personalizzati"
+  },
+  "hub.imitationArmDescription": {
+    "message": "Raccolta dati teleoperati, pulizia e fine-tuning in ciclo chiuso con ACT / Diffusion Policy."
+  },
+  "hub.g1Alt": {
+    "message": "Umanoide bipede Unitree G1 che cammina in simulazione MuJoCo"
   }
 }

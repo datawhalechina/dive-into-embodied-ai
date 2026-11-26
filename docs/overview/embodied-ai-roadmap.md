@@ -23,7 +23,7 @@ sidebar_position: 2
 1. 从 [具身导论](/docs/introduction/intro) 开始，理解感知、决策与行动的完整闭环。
 2. 到 [项目实战](/practices) 选择分章项目或独立实验，记录结果并分析失败原因。
 3. 遇到知识缺口时，到 [理论基础](/foundations) 查找对应专题；强化学习中的符号与概念可查阅 [术语与公式速查](/docs/foundations/rl-for-robotics/quick-reference)，MDP 和时序差分章还提供就地展开的通俗解释与手算例子。
-4. 在 [在线仿真](/simulation) 用键盘或屏幕按钮操纵机器人，或切换到策略展示，观察 Go2、Pupper v3 的训练策略与 Quaddle 周期步态；小黄鸭支持头部和关节自由操纵。
+4. 在 [在线仿真](/simulation) 用键盘或屏幕按钮操纵机器人，实时体验 Go2、Pupper v3、Unitree G1 / H1 / H1-2（LSTM 双足人形行走）与 MicroDuck 小黄鸭（14 自由度 PPO 步态）的强化学习策略、Quaddle 周期步态对照，以及一键**外力推撞（`P`）**抗扰测试。
 
 学习 ROS2 时，从[教程总览](/docs/foundations/robotics-and-ros2/intro)进入；[配套代码](https://github.com/datawhalechina/dive-into-embodied-ai/tree/master/codes/foundations/robotics-and-ros2)包含独立运动学脚本和 ROS 参考包，MoveIt 配置需按第 10 讲生成。
 

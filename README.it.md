@@ -42,6 +42,12 @@ L'IA incarnata unisce molte discipline: **non serve completare tutta la teoria p
 <table align="center">
   <tr>
     <td align="center" width="33%">
+      <a href="docs/practices/humanoid/unitree-g1/index.md">
+        <img src="docs/practices/humanoid/unitree-g1/figs/unitree-g1-push.gif" height="200" alt="Umanoide Unitree G1 12-DoF che cammina e recupera una spinta laterale da 0,55 m/s in MuJoCo" />
+      </a>
+      <br/><sub><b><a href="docs/practices/humanoid/unitree-g1/index.md">Unitree G1 · Umanoide 12-DoF</a></b><br/>Politica LSTM · Sim2Sim e recupero da spinta</sub>
+    </td>
+    <td align="center" width="33%">
       <a href="docs/practices/amd/microduck-rl/index.md">
         <img src="docs/practices/amd/microduck-rl/figs/microduck-amd-r9700-model750.gif" height="200" alt="Riproduzione della camminata stabile del bipede MicroDuck" />
       </a>
@@ -53,11 +59,25 @@ L'IA incarnata unisce molte discipline: **non serve completare tutta la teoria p
       </a>
       <br/><sub><b><a href="docs/practices/humanoid/flamingo-isaaclab/0.intro.md">Flamingo · RL parallelo ruote-zampe</a></b><br/>Isaac Lab · Equilibrio dinamico e PPO / CaT</sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="33%">
       <a href="docs/practices/quadruped/cs123/0.intro.md">
         <img src="docs/practices/quadruped/cs123/figs/lab8_ball_chase.gif" height="200" alt="Quadrupede CS123 con percezione visiva e inseguimento palla" />
       </a>
       <br/><sub><b><a href="docs/practices/quadruped/cs123/0.intro.md">Quadrupede da zero</a></b><br/>MuJoCo + andature RL + inseguimento visivo</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/vla/quaddle/index.md">
+        <img src="docs/practices/vla/quaddle/figs/quaddle_L2_nav_silky50.gif" height="200" alt="Robot Quaddle in navigazione end-to-end SmolVLA" />
+      </a>
+      <br/><sub><b><a href="docs/practices/vla/quaddle/index.md">Quaddle · Navigazione SmolVLA</a></b><br/>10 GB VRAM · Controllo VLA e andatura CPG</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/amd/pupper-control/intro.md">
+        <img src="docs/practices/amd/pupper-control/figs/rocm-command-demo.gif" height="200" alt="Quadrupede Pupper addestrato su AMD ROCm" />
+      </a>
+      <br/><sub><b><a href="docs/practices/amd/pupper-control/intro.md">AMD ROCm · Locomozione quadrupede</a></b><br/>GPU Radeon nativa · Inseguimento di velocità</sub>
     </td>
   </tr>
   <tr>
@@ -80,7 +100,7 @@ L'IA incarnata unisce molte discipline: **non serve completare tutta la teoria p
   </tr>
 </table>
 
-> Scopri altri progetti su quadrupedi, bipedi, bracci e AMD ROCm nei **[Progetti →](https://datawhalechina.github.io/dive-into-embodied-ai/it/practices)**, oppure prova Go2, Pupper v3, Quaddle e MicroDuck nel browser nella **[Simulazione →](https://datawhalechina.github.io/dive-into-embodied-ai/it/simulation)**.
+> Scopri altri progetti su quadrupedi, bipedi, bracci e AMD ROCm nei **[Progetti →](https://datawhalechina.github.io/dive-into-embodied-ai/it/practices)**, oppure prova 7 robot live—Unitree Go2, umanoidi Unitree G1 / H1 / H1-2, Pupper v3, MicroDuck e Quaddle—con test di spinta nel browser nella **[Simulazione →](https://datawhalechina.github.io/dive-into-embodied-ai/it/simulation)**.
 
 <a id="course-outline"></a>
 
@@ -91,25 +111,27 @@ Il corso è organizzato nelle quattro sezioni principali del sito (usa la versio
 | Sezione | Quando usarla | Contenuti principali | Link |
 | :--- | :--- | :--- | :--- |
 | **🧭 Introduzione** | All'inizio, per la visione d'insieme | Concetti, storia, abilità, piattaforme, sfide, tecnologie, profili professionali e risorse | [Leggi online](https://datawhalechina.github.io/dive-into-embodied-ai/it/docs/introduction/intro) · [Indice repo](i18n/it/docusaurus-plugin-content-docs/current/introduction/intro.md) |
-| **📐 Fondamenti** | Per chiarire i principi quando serve | Cervello (RL / VLA / modelli del mondo), Cervelletto (controllo / pianificazione), Percezione (VLM / calibrazione), Ingegneria (simulazione / ROS 2 / imitazione) | [Hub fondamenti](https://datawhalechina.github.io/dive-into-embodied-ai/it/foundations) · [Mappa](docs/foundations/intro.md) |
-| **🛠️ Progetti** | Per eseguire codice e risolvere compiti reali | Quadrupedi, bipedi e ruote-zampe, bracci e VLA, LeRobot + SO-101 reale e sezione AMD ROCm | [Hub progetti](https://datawhalechina.github.io/dive-into-embodied-ai/it/practices) · [Panoramica](i18n/it/docusaurus-plugin-content-docs/current/practices/intro.md) |
-| **🎮 Simulazione** | Per provare subito senza configurazione | Andature PPO Go2 e Pupper v3, riferimento Quaddle, controllo MicroDuck (vedi [guida modelli](simulation/README.it.md)) | [Apri nel browser](https://datawhalechina.github.io/dive-into-embodied-ai/it/simulation) |
+| **📐 Fondamenti** | Per chiarire i principi quando serve | Cervello (RL / VLA / modelli del mondo), Cervelletto (controllo / pianificazione), Percezione (VLM / tatto / calibrazione), Ingegneria (simulazione / ROS 2 / meccanica / CAN &amp; MCU) | [Hub fondamenti](https://datawhalechina.github.io/dive-into-embodied-ai/it/foundations) · [Mappa](docs/foundations/intro.md) |
+| **🛠️ Progetti** | Per eseguire codice e risolvere compiti reali | **Unitree G1 umanoide RL**, quadrupedi (CS123 / Go2 MJX / Quaddle), bipedi e ruote-zampe (MicroDuck / Flamingo), **manipolazione mobile (SLAM / Nav2 / VLN)**, bracci e VLA, SO-101 reale e sezione AMD ROCm | [Hub progetti](https://datawhalechina.github.io/dive-into-embodied-ai/it/practices) · [Panoramica](i18n/it/docusaurus-plugin-content-docs/current/practices/intro.md) |
+| **🎮 Simulazione** | Per provare subito senza configurazione | Politiche apprese Go2, umanoidi G1 / H1 / H1-2, Pupper v3 e MicroDuck con test di spinta, più riferimento Quaddle (vedi [guida modelli](simulation/README.it.md)) | [Apri nel browser](https://datawhalechina.github.io/dive-into-embodied-ai/it/simulation) |
 
-<details>
-<summary>Mostra collegamenti rapidi ai capitoli principali</summary>
+<details open>
+<summary>Collegamenti rapidi ai capitoli e a tutti i progetti</summary>
 
 - **Introduzione**: [1. Che cos'è l'IA incarnata](i18n/it/docusaurus-plugin-content-docs/current/introduction/1.what-is-embodied-ai.md) · [2. Breve storia](i18n/it/docusaurus-plugin-content-docs/current/introduction/2.history.md) · [3. Abilità robotiche](i18n/it/docusaurus-plugin-content-docs/current/introduction/3.tasks-and-skills.md) · [4. Piattaforme](i18n/it/docusaurus-plugin-content-docs/current/introduction/4.embodiments.md) · [5. Sfide principali](i18n/it/docusaurus-plugin-content-docs/current/introduction/5.challenges.md) · [6. Tecnologie e moduli](i18n/it/docusaurus-plugin-content-docs/current/introduction/6.tech-stack.md) · [7. Profili professionali](i18n/it/docusaurus-plugin-content-docs/current/introduction/7.careers.md) · [Risorse](i18n/it/docusaurus-plugin-content-docs/current/introduction/resources/index.md)
-- **Fondamenti**: [Rinforzo](docs/foundations/rl-for-robotics/1.intro.md) · [VLA](docs/foundations/vla/vla-intro.md) · [Modelli del mondo](docs/foundations/world-model/0.intro.md) · [Controllori](docs/foundations/controllers/intro.md) · [Percezione visiva e VLM](docs/foundations/vlm/0.intro.md) · [Calibrazione e sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) · [Simulazione](docs/foundations/simulation/1.intro.md) · [ROS 2](docs/foundations/robotics-and-ros2/0.intro.md) ([codice](codes/foundations/robotics-and-ros2/README.it.md))
-- **Progetti**: [MicroDuck RL](docs/practices/humanoid/microduck-rl/index.md) · [Flamingo ruote-zampe](docs/practices/humanoid/flamingo-isaaclab/0.intro.md) · [CS123 quadrupede](docs/practices/quadruped/cs123/0.intro.md) · [Quaddle: miglioramenti e limiti](i18n/it/docusaurus-plugin-content-docs/current/practices/quadruped/quaddle-mujoco/optimization.md) · [π₀.₅ + RECAP](docs/practices/vla/recap/index.md) · [ACT bimanuale](docs/practices/vla/act/index.md) · [SO-101 + LeRobot](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) · [Sezione AMD](docs/practices/amd/intro.md)
+- **Fondamenti**: [Rinforzo](docs/foundations/rl-for-robotics/1.intro.md) · [VLA](docs/foundations/vla/vla-intro.md) · [Modelli del mondo](docs/foundations/world-model/0.intro.md) · [Controllori](docs/foundations/controllers/intro.md) · [Percezione visiva e VLM](docs/foundations/vlm/0.intro.md) · [Percezione e tatto](docs/foundations/perception/placeholder.md) · [Calibrazione e sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) · [Simulazione](docs/foundations/simulation/1.intro.md) · [ROS 2](docs/foundations/robotics-and-ros2/0.intro.md) ([codice](codes/foundations/robotics-and-ros2/README.it.md)) · [Meccanica](docs/foundations/hardware/placeholder.md) · [CAN e MCU](docs/foundations/communication/can-mcu.md)
+- **Umanoidi e bipedi**: [Unitree G1 umanoide RL (4 parti)](docs/practices/humanoid/unitree-g1/index.md) · [MicroDuck RL e salto](docs/practices/humanoid/microduck-rl/index.md) · [Flamingo ruote-zampe](docs/practices/humanoid/flamingo-isaaclab/0.intro.md) · [Equilibrio dinamico](docs/practices/humanoid/balance-control/placeholder.md) · [Motion tracking](docs/practices/humanoid/motion-tracking/placeholder.md) · [Pianificazione compiti](docs/practices/humanoid/task-planning-demo/placeholder.md)
+- **Quadrupedi e manipolazione mobile**: [CS123 quadrupede (8 capitoli)](docs/practices/quadruped/cs123/0.intro.md) · [Go2 RL MJX (ROCm / CUDA)](docs/practices/amd/unitree-rl-mjx/index.md) · [Quaddle: miglioramenti e limiti](i18n/it/docusaurus-plugin-content-docs/current/practices/quadruped/quaddle-mujoco/optimization.md) · [Guida Sim2Sim](docs/practices/quadruped/sim2sim/placeholder.md) · [Guida Sim2Real](docs/practices/quadruped/sim2real-guide/placeholder.md) · [Manipolazione mobile (SLAM / Nav2 / VLN)](docs/practices/mobile-manipulation/placeholder.md)
+- **Bracci, VLA e sezione AMD**: [π₀.₅ + RECAP](docs/practices/vla/recap/index.md) · [ACT bimanuale](docs/practices/vla/act/index.md) · [Controllo braccio ROS 2](docs/practices/robot-arm/ros2-arm-control/placeholder.md) · [Imitation learning](docs/practices/robot-arm/imitation-learning/placeholder.md) · [SO-101 + LeRobot](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) · [Sezione AMD ROCm](docs/practices/amd/intro.md)
 
 </details>
 
 ## 👥 Gruppi di studio
 
-Datawhale organizza gruppi attorno al corso. I programmi saranno raccolti in `docs/team-learning/` (in preparazione), con percorsi, requisiti di partecipazione e introduzioni.
+Datawhale organizza periodicamente gruppi di studio aperti attorno a questo corso, raccogliendo nel repository percorsi, guide ai capitoli e materiali man mano che vengono avviati.
 
-- Iscrizione al prossimo gruppo: in preparazione.
-- Materiali dei gruppi precedenti: in preparazione.
+- **Resta aggiornato**: aggiungi **Star / Watch** a questo repository oppure segui **Datawhale su WeChat** in fondo alla pagina per le prossime iscrizioni.
+- **Inizia subito in autonomia**: segui il percorso in tre passi qui sopra e apri una [Issue su GitHub](https://github.com/datawhalechina/dive-into-embodied-ai/issues) per domande o proposte di nuovi temi.
 
 ## 💻 Anteprima locale
 

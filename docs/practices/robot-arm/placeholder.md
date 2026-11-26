@@ -20,7 +20,7 @@ displayed_sidebar: practicesRobotArmSidebar
 | 长时程 VLA 复现 | [π₀.₅ + RECAP：LIBERO 复现](/docs/practices/vla/recap) | 基于 OpenPI 与 4,096 条 LIBERO rollout，跑通分布式价值头、优势标注与 ACP 策略微调 |
 | 数据与算法讲义 | [LeRobot 中文课程讲义](./data-collection/lerobot-course) | 系统梳理经典机器人学瓶颈、`LeRobotDataset` 数据结构与端到端机器人学习工具链 |
 | 真机部署 | [SO-101 + LeRobot 真机教程](./data-collection/so101-lerobot-real) | 完成 SO-101 机械臂串口连通、低风险回零安全检查与首次真机动作回放 |
-| 工程扩展 | [ROS2 机械臂控制](./ros2-arm-control/placeholder) / [模仿学习训练](./imitation-learning/placeholder) | ROS2 控制链路接入与自定义遥操作采集训练（施工中） |
+| 工程扩展 | [ROS 2 机械臂控制](./ros2-arm-control/placeholder) / [自定义模仿学习训练](./imitation-learning/placeholder) | `ros2_control` + MoveIt 2 真机控制链路与自定义任务遥操作数据采集、训练闭环 |
 
 ## 🎬 典型演示 \{#demos}
 
@@ -70,5 +70,5 @@ displayed_sidebar: practicesRobotArmSidebar
 | :--- | :--- |
 | [LeRobot 中文课程讲义](./data-collection/lerobot-course) | Hugging Face Robotics Course Unit 0–2 中文重排：平面机械臂运动学、`LeRobotDataset` 时序结构与数据驱动方法演进 |
 | [SO-101 + LeRobot 真机教程](./data-collection/so101-lerobot-real) | Ubuntu 环境配置、USB 串口与供电排查、Home 回零安全测试与真机动作回放清单 |
-| [ROS2 机械臂控制](./ros2-arm-control/placeholder) | ROS2 控制器接口与机械臂真机执行链路（施工中） |
-| [模仿学习训练](./imitation-learning/placeholder) | 自定义任务遥操作数据采集与端到端模仿学习闭环（施工中） |
+| [ROS 2 机械臂控制实战](./ros2-arm-control/placeholder) | `ros2_control` 硬件接口、MoveIt 2 轨迹规划与机械臂安全执行链路 |
+| [自定义任务模仿学习训练](./imitation-learning/placeholder) | 自定义任务遥操作数据采集、数据清洗与 ACT / Diffusion Policy 端到端闭环 |

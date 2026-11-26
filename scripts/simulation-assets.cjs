@@ -32,21 +32,37 @@ function generateSimulationAssets(root) {
   copy(path.join(root, 'simulation/licenses/ONNX-Runtime-LICENSE'), 'ort/LICENSE');
   for (const entry of catalog) {
     if (entry.adapter === 'quaddle') continue; // Canonical assets from the Quaddle plugin.
-    if (['pupper', 'microduck'].includes(entry.adapter)) {
+    if (['pupper', 'microduck', 'g1'].includes(entry.adapter)) {
       const source = path.join(root, entry.source);
       const dir = path.dirname(path.join(source, entry.scene));
       const files = ['scene.xml'];
       let xml = fs.readFileSync(path.join(source, entry.scene), 'utf8');
       if (entry.adapter === 'microduck') {
-        const robot = fs.readFileSync(path.join(dir, 'robot_allcollisions.xml'), 'utf8');
-        const supported = robot.replace('<equality/>', '<equality><weld name="manual_support" body1="trunk_base" solref="0.02 1"/></equality>');
+        const robot = fs.readFileSync(path.join(dir, 'robot_walk.xml'), 'utf8');
         fs.mkdirSync(path.join(output, entry.id), {recursive: true});
-        fs.writeFileSync(path.join(output, entry.id, 'robot_allcollisions.xml'), supported);
-        files.push('robot_allcollisions.xml');
+        fs.writeFileSync(path.join(output, entry.id, 'robot_walk.xml'), robot);
+        files.push('robot_walk.xml');
         for (const [, name] of robot.matchAll(/<mesh\s[^>]*file="([^"]+)"/g)) {
           copy(path.join(dir, 'assets', name), `${entry.id}/assets/${name}`); files.push(`assets/${name}`);
         }
+        copy(path.join(source, entry.policy), `${entry.id}/policy.onnx`);
+        copy(path.join(source, entry.config), `${entry.id}/config.json`);
+        copy(path.join(path.dirname(path.join(source, entry.policy)), 'provenance.json'), `${entry.id}/provenance.json`);
         for (const name of ['LICENSE', 'UPSTREAM_README.md']) copy(path.join(source, name), `${entry.id}/${name}`);
+      } else if (entry.adapter === 'g1') {
+        const includeMatch = xml.match(/<include\s+file="([^"]+)"/);
+        if (!includeMatch) throw new Error(`${entry.id}: scene.xml must include robot XML`);
+        const robotFile = includeMatch[1];
+        const robot = fs.readFileSync(path.join(dir, robotFile), 'utf8');
+        fs.mkdirSync(path.join(output, entry.id), {recursive: true});
+        fs.writeFileSync(path.join(output, entry.id, robotFile), robot);
+        files.push(robotFile);
+        for (const [, name] of robot.matchAll(/<mesh\s[^>]*file="([^"]+)"/g)) {
+          copy(path.join(dir, 'meshes', name), `${entry.id}/meshes/${name}`); files.push(`meshes/${name}`);
+        }
+        copy(path.join(source, entry.policy), `${entry.id}/policy.onnx`);
+        copy(path.join(source, entry.config), `${entry.id}/config.json`);
+        for (const name of ['provenance.json', 'LICENSE', 'README.md']) copy(path.join(source, name), `${entry.id}/${name}`);
       } else {
         for (const [, name] of xml.matchAll(/<mesh\s[^>]*file="([^"]+)"/g)) {
           copy(path.join(dir, 'meshes/stl', name), `${entry.id}/meshes/stl/${name}`); files.push(`meshes/stl/${name}`);

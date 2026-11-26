@@ -1,0 +1,9 @@
+{
+  "source": "unitree_rl_gym (Unitree Robotics, BSD 3-Clause)",
+  "robot": "Unitree H1 10-DoF (legs active, upper body fixed)",
+  "policySource": "unitree_rl_gym/deploy/pre_train/h1/motion.pt -> stateless LSTM ONNX (max_err=1.43e-06)",
+  "policySha256": "548d73f07229551fb476ed4af83dd22383db277f072b91216bf72bac5679e85f",
+  "sceneSha256": "88ffcccad2c5df71a7472b4b30ec7e4ea06e045efc6b4e11ccd8bebc2848f0b3",
+  "robotXmlSha256": "5ff14b04dea36e9bdd715d194a8538e7ceb16aee7bc07332833dd87d80194065",
+  "meshOptimization": "21 binary STL meshes decimated from 14.15 MB to 1.02 MB while preserving original inertias, joints, actuators, and foot contacts."
+}

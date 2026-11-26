@@ -22,7 +22,7 @@ Le prospettive si sovrappongono. Un braccio può afferrare con pianificazione e 
 1. Leggi l'[introduzione](/docs/introduction/intro) per capire il ciclo completo.
 2. Scegli un corso a capitoli o un esperimento nei [progetti](/practices). Registra risultati e analizza guasti.
 3. Quando incontri una lacuna, consulta i [fondamenti](/foundations). Per simboli e concetti di RL, usa la [guida rapida a termini e formule](/docs/foundations/rl-for-robotics/quick-reference); i capitoli su MDP e differenza temporale, disponibili in cinese e inglese, offrono anche spiegazioni espandibili ed esempi numerici.
-4. Apri [Simulazione](/simulation) per controllare un robot con tastiera o pulsanti, oppure osserva le politiche addestrate Go2/Pupper v3 e l'andatura Quaddle. MicroDuck offre controllo manuale di testa e articolazioni.
+4. Apri [Simulazione](/simulation) per controllare i robot con tastiera o pulsanti, provare in tempo reale le politiche RL addestrate di Go2, Pupper v3, Unitree G1 / H1 / H1-2 (camminata umanoide LSTM) e MicroDuck (andatura PPO a 14 DoF) oltre al riferimento periodico Quaddle, e testare il recupero da **Spinta (`P`)** laterale.
 
 Per ROS2, parti dalla [panoramica del tutorial](/docs/foundations/robotics-and-ros2/intro). Il [codice di supporto](https://github.com/datawhalechina/dive-into-embodied-ai/blob/master/codes/foundations/robotics-and-ros2/README.it.md) include script autonomi di cinematica e pacchetti ROS di riferimento; la configurazione MoveIt va generata nella lezione 10.
 

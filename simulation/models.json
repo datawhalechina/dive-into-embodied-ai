@@ -15,12 +15,85 @@
       0,
       0
     ],
-    "tutorial": "/docs/practices/amd/intro",
+    "tutorial": "/docs/practices/amd/unitree-rl-mjx",
     "observationSize": 47,
     "speedRange": [
       0.2,
       1
-    ]
+    ],
+    "pushSpeed": 0.75
+  },
+  {
+    "id": "g1",
+    "name": "Unitree G1",
+    "kind": "policy",
+    "adapter": "g1",
+    "source": "codes/practices/humanoid/unitree-g1-web",
+    "policy": "policy.onnx",
+    "config": "config.json",
+    "scene": "scene.xml",
+    "body": "pelvis",
+    "cameraDistance": 2.1,
+    "demoCommand": [
+      0.5,
+      0,
+      0
+    ],
+    "tutorial": "/docs/practices/humanoid/unitree-g1",
+    "observationSize": 47,
+    "speedRange": [
+      0.2,
+      0.8
+    ],
+    "pushSpeed": 0.55
+  },
+  {
+    "id": "h1",
+    "name": "Unitree H1",
+    "kind": "policy",
+    "adapter": "g1",
+    "source": "codes/practices/humanoid/unitree-h1-web",
+    "policy": "policy.onnx",
+    "config": "config.json",
+    "scene": "scene.xml",
+    "body": "pelvis",
+    "cameraDistance": 2.6,
+    "demoCommand": [
+      0.5,
+      0,
+      0
+    ],
+    "tutorial": "/docs/practices/humanoid/unitree-g1",
+    "observationSize": 41,
+    "speedRange": [
+      0.2,
+      0.8
+    ],
+    "pushSpeed": 0.55
+  },
+  {
+    "id": "h1-2",
+    "name": "Unitree H1-2",
+    "kind": "policy",
+    "adapter": "g1",
+    "source": "codes/practices/humanoid/unitree-h1-2-web",
+    "policy": "policy.onnx",
+    "config": "config.json",
+    "scene": "scene.xml",
+    "body": "pelvis",
+    "cameraDistance": 2.6,
+    "demoCommand": [
+      0.5,
+      0,
+      0
+    ],
+    "tutorial": "/docs/practices/humanoid/unitree-g1",
+    "observationSize": 47,
+    "speedRange": [
+      0.2,
+      0.8
+    ],
+    "pushSpeed": 0.55
   },
   {
     "id": "pupper-v3",
@@ -43,22 +116,31 @@
       0.1,
       0.7
     ],
+    "pushSpeed": 0.35,
     "tutorial": "/docs/practices/quadruped/cs123/rl-gait"
   },
   {
     "id": "microduck",
     "name": "MicroDuck",
-    "kind": "manual",
+    "kind": "policy",
     "adapter": "microduck",
     "source": "codes/practices/humanoid/microduck-rl",
-    "scene": "src/mjlab_microduck/robot/microduck/scene.xml",
+    "policy": "web/policy.onnx",
+    "config": "web/config.json",
+    "scene": "src/mjlab_microduck/robot/microduck/scene_walk.xml",
     "body": "trunk_base",
     "cameraDistance": 0.65,
     "demoCommand": [
-      0,
+      0.3,
       0,
       0
     ],
+    "observationSize": 61,
+    "speedRange": [
+      0.15,
+      0.35
+    ],
+    "pushSpeed": 0.25,
     "tutorial": "/docs/practices/humanoid/microduck-rl"
   },
   {

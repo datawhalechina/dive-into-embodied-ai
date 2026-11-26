@@ -8,14 +8,19 @@ The `/simulation` route shares one catalog across Chinese, English, and Italian.
 
 | Model | Controller | Movement |
 | --- | --- | --- |
-| Unitree Go2 | Repository PPO v0 ONNX weights, 50 Hz inference | Forward, reverse, turning, strafing |
-| Pupper v3 | Project 8M-step PPO checkpoint, 50 Hz inference | Forward, reverse, turning, strafing |
-| MicroDuck | 14 position servos, no trained weights | Head keys, joint sliders, base support toggle |
+| Unitree Go2 | Repository PPO v0 ONNX weights, 50 Hz inference | Forward, reverse, turning, strafing, push recovery |
+| Unitree G1 (12-DoF) | `unitree_rl_gym` lower-body LSTM ONNX weights, 50 Hz inference | Forward, reverse, turning, strafing, push recovery |
+| Unitree H1 (10-DoF) | `unitree_rl_gym` full-size humanoid LSTM ONNX weights, 50 Hz inference | Forward, reverse, turning, strafing, push recovery |
+| Unitree H1-2 (12-DoF) | `unitree_rl_gym` full-size humanoid LSTM ONNX weights, 50 Hz inference | Forward, reverse, turning, strafing, push recovery |
+| Pupper v3 | Project 8M-step PPO checkpoint, 50 Hz inference | Forward, reverse, turning, strafing, push recovery |
+| MicroDuck | 14-DoF PPO walking ONNX + XL330 BAM M6 motor model, 50 Hz inference | Forward, reverse, turning, strafing, push recovery |
 | Petoi Quaddle | Existing periodic gait, no trained weights | Forward, walking turns, stop |
 
 Go2 uses 47 observations in training order FL / FR / RL / RR: body angular velocity, projected gravity, commands, gait phase, joint state, and previous actions. Normalization is embedded in ONNX. Actions become joint targets and PD torques, mapped by joint name to actuator order. Stop sends zero velocity; pause freezes physics.
 
 The original `scene_go2.xml` retains inertias, joints, actuators, and collision geometry. The build removes visual meshes that require a separate download and displays collision shapes instead. Provenance, weight hashes, and licenses ship with the assets. Browser checks do not validate physical hardware or training quality.
+
+Unitree G1 (12-DoF), Unitree H1 (10-DoF, 1.8 m full-size), and Unitree H1-2 (12-DoF with 2-axis ankles) share a lower-body recurrent (LSTM) adapter exported from `unitree_rl_gym` (BSD 3-Clause) as stateless ONNX graphs (`obs` 47-D for G1/H1-2 or 41-D for H1, plus 64-D `h_in / c_in` hidden states, 50 Hz control, 2 ms physics step, `< 1.5e-6` parity vs TorchScript). Visual STL meshes are decimated (G1: `24.0 → 1.49 MB`, H1: `14.15 → 1.02 MB`, H1-2: `39.37 → 1.66 MB`) while keeping original inertias, joint limits, and foot contacts. Policy-controlled models also support the **Push** button (or `P` while the scene is focused) to apply an instantaneous horizontal velocity impulse and test balance recovery.
 
 ## Pupper v3 and MicroDuck
 
@@ -23,7 +28,7 @@ Pupper v3 uses the archived 8M-step PPO checkpoint in `cs123/6.rl_pupper_v2_5` w
 
 The practice project's `web/` folder contains ONNX, configuration, native reference samples, and source hashes. To regenerate, install `onnx==1.23.2` and `onnxruntime==1.31.1` in the cs123 SB3/PyTorch environment, then run `codes/practices/quadruped/cs123/.venv/bin/python scripts/export-pupper-web.py` from the repository root. The exporter compares 256 deterministic SB3 and ONNX actions. Website builds use the saved export without Python or training dependencies.
 
-MicroDuck uses original meshes, 14 position servos, and the STAND pose. No trained weights are connected, so only free control is enabled. W/S pitch the head, A/D turn it, and Q/E roll it; sliders control all joints. A weld holds the base by default. Release it for free physics; enabling it again or resetting restores the initial pose. These are native MJCF servos, not the training BAM actuator model. Upstream code license and mesh license notice ship with the assets.
+MicroDuck uses original `scene_walk.xml` meshes with a trained 61-D observation PPO walking policy (`web/policy.onnx`, normalizer baked in, `< 1e-6` parity vs PyTorch). The browser adapter reproduces the training **XL330 BAM M6 voltage/back-EMF/current-limited DC motor law** and **4-step (20 ms) command lag** (5 ms physics step, 50 Hz control), supporting walking, reversing, strafing, turning in place, clean zero-command stopping, and push recovery. Upstream code license and mesh license notice ship with the assets.
 
 ## Adding trained models
 

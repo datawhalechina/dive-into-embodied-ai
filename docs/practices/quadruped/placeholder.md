@@ -14,10 +14,11 @@ displayed_sidebar: practicesQuadrupedSidebar
 | 分类 | 项目 | 简介 |
 | :--- | :--- | :--- |
 | 分章主线 | [从零到一搭建四足机器人](./cs123/intro) | 沿着 8 章主线，从 MuJoCo 执行器、正逆运动学、Pupper 建模走到开环步态、PPO 训练、LLM 控制与视觉追球 |
+| 跨平台运控与 Sim2Sim | [Unitree Go2 运控｜MJX（ROCm / CUDA）](/docs/practices/amd/unitree-rl-mjx) | 基于 MuJoCo MJX / JAX 在 AMD 与 NVIDIA 单卡（8 GB 显存）上训练 Go2 速度策略，导出 ONNX 直通官方 C++ 仿真部署栈（也可在 [在线仿真](/simulation) 零配置试玩） |
 | 网页与多场景仿真 | [Petoi Quaddle 四足步行仿真](./quaddle-mujoco/) | 在浏览器里直接控制四舵机机器人行走与停止，学习闭环连杆适配、残差 PPO 训练与多地形实验分析 |
 | 语言视觉闭环 | [Petoi Quaddle VLA 导航训练](../vla/quaddle/) | 只凭语言指令与相机画面的自主导航：SmolVLA 高层决策 + 查表 CPG 低层运控，10GB 显存复现（L2 导航 90% / L3 避障 80% / L4 组合 85%） |
-| 跨仿真验证 | [Sim2Sim 验证](./sim2sim/placeholder) | 跨物理引擎策略迁移与一致性验证（施工中） |
-| 真机部署 | [Sim2Real 指南](./sim2real-guide/placeholder) | 从仿真策略到真实四足硬件的标定、安全保护与部署流程（施工中） |
+| 跨仿真验证 | [Sim2Sim 验证指南](./sim2sim/placeholder) | 跨物理引擎策略迁移对齐、五大高频失败排查清单与 Go2 / Flamingo 实战入口 |
+| 真机部署 | [Sim2Real 工程部署指南](./sim2real-guide/placeholder) | 从仿真策略到真实四足硬件的系统辨识、域随机化、安全保护与逐级上线流程 |
 
 ## 🎬 典型演示 \{#demos}
 
@@ -76,3 +77,14 @@ displayed_sidebar: practicesQuadrupedSidebar
 | [VLA 导航：10GB 显存训一个策略](../vla/quaddle/) | 数据采集 → SmolVLA 微调 → 闭环评估的复现路线；效果预览（L2 导航 90%）与能力边界 |
 | [实验记录与 v5 路线图](../vla/quaddle/experiment-notes) | v4/v5/v6 全部试验（含阴性结果）；temporal ensembling 突破与 8.2x 训练加速 |
 | [实施现状与计划](../vla/quaddle/progress) | L1-L4 验收进度、任务分解（L3 避障 80% / L4 组合 85%）与真机交接计划 |
+
+### 4. Unitree Go2 运控（MJX · ROCm / CUDA） \{#go2-mjx}
+
+将宇树官方 `unitree_rl_mjlab` 移植到 MuJoCo MJX / JAX，同一套代码支持 AMD ROCm 与 NVIDIA CUDA 单卡训练，并将 ONNX 策略直接部署到未改动的官方 `unitree_mujoco` 与 `go2_ctrl` C++ 栈。
+
+| 篇章 | 内容 |
+| :--- | :--- |
+| [Go2 四足运控总览](/docs/practices/amd/unitree-rl-mjx) | 跨后端基线指标（R9700 / A40 / 8 GB 显存）、成品策略与目录结构 |
+| [1. 环境安装与硬件约束](/docs/practices/amd/unitree-rl-mjx/environment-setup) | `uv` 多后端安装、Go2 网格校验拉取、AUP 云端与 RDNA4（`gfx1201`）约束 |
+| [2. 训练 Go2 速度策略](/docs/practices/amd/unitree-rl-mjx/training) | 20 分钟冒烟验证、9.8 亿步完整训练、曲线绘制与离屏渲染 GIF |
+| [3. ONNX 导出与官方栈 Sim2Sim](/docs/practices/amd/unitree-rl-mjx/sim2sim) | ONNX 归一化烘焙与合同验证、官方 C++ 栈编译运行、无手柄脚本测试与跟踪对照 |

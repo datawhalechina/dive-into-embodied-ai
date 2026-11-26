@@ -1,6 +1,7 @@
 import loadMujoco from '../quaddle/mujoco.js';
 import {createSimulation} from '../quaddle/simulation.mjs';
 import {createGo2} from './go2.mjs';
+import {createG1} from './g1.mjs';
 import {createPupper} from './pupper.mjs';
 import {createMicroDuck} from './microduck.mjs';
 import {extractGeometry} from './geometry.mjs';
@@ -54,6 +55,13 @@ function processMessages() {
       visible = !!message.value; command = [0, 0, 0]; applyCommand();
     }
     if (message.type === 'reset') reset();
+    if (message.type === 'push' && !paused && Array.isArray(message.value) && message.value.length === 2 && message.value.every(Number.isFinite)) {
+      if (model.nv >= 6 && model.jnt_type[0] === 0 && !controller?.supported) {
+        data.qvel[0] += Math.max(-2, Math.min(2, message.value[0]));
+        data.qvel[1] += Math.max(-2, Math.min(2, message.value[1]));
+        mj.mj_forward(model, data);
+      }
+    }
     if (message.type === 'joint' && controller?.setJoint && mode === 'manual') controller.setJoint(message.index, message.value);
     if (message.type === 'support' && controller?.setSupported) controller.setSupported(!!message.value);
     if (message.type === 'rate' && [.25, .5, 1].includes(message.value)) rate = message.value;
@@ -98,7 +106,7 @@ async function initialize(message) {
     sim = createSimulation(mj, files, gait);
     ({model, data, geometry} = sim);
     geometry = geometry.map(item => ({...item, type: 7}));
-  } else if (['go2', 'pupper', 'microduck'].includes(entry.adapter)) {
+  } else if (['go2', 'g1', 'pupper', 'microduck'].includes(entry.adapter)) {
     const manifest = entry.adapter === 'go2' ? {files: ['scene.xml']} : await get(`${entry.id}/manifest.json`, true);
     const files = await Promise.all(manifest.files.map(async name => [name, await get(`${entry.id}/${name}`)]));
     const vfs = new mj.MjVFS();
@@ -107,16 +115,33 @@ async function initialize(message) {
       model = mj.MjModel.from_xml_path('scene.xml', vfs);
     } finally { vfs.delete(); }
     data = new mj.MjData(model);
-    if (entry.adapter === 'microduck') controller = createMicroDuck(mj, model, data);
-    else {
-      const [ort, config, policy] = await Promise.all([
-        import('./ort/ort.wasm.min.mjs'), get(`${entry.id}/config.json`, true), get(`${entry.id}/policy.onnx`),
-      ]);
-      ort.env.wasm.numThreads = 1;
-      ort.env.wasm.proxy = false;
-      ort.env.wasm.wasmPaths = new URL('./ort/', import.meta.url).href;
-      session = await ort.InferenceSession.create(policy, {executionProviders: ['wasm']});
-      const createController = entry.adapter === 'go2' ? createGo2 : createPupper;
+    const [ort, config, policy] = await Promise.all([
+      import('./ort/ort.wasm.min.mjs'), get(`${entry.id}/config.json`, true), get(`${entry.id}/policy.onnx`),
+    ]);
+    ort.env.wasm.numThreads = 1;
+    ort.env.wasm.proxy = false;
+    ort.env.wasm.wasmPaths = new URL('./ort/', import.meta.url).href;
+    session = await ort.InferenceSession.create(policy, {executionProviders: ['wasm']});
+    if (entry.adapter === 'g1') {
+      controller = createG1(mj, model, data, config, async (obs, hIn, cIn) => {
+        const obsT = new ort.Tensor('float32', obs, [1, entry.observationSize]);
+        const hT = new ort.Tensor('float32', hIn, [1, 1, config.hiddenSize]);
+        const cT = new ort.Tensor('float32', cIn, [1, 1, config.hiddenSize]);
+        let output;
+        try {
+          output = await session.run({obs: obsT, h_in: hT, c_in: cT});
+          return {
+            action: Float32Array.from(output.action.data),
+            h: Float32Array.from(output.h_out.data),
+            c: Float32Array.from(output.c_out.data),
+          };
+        } finally {
+          obsT.dispose(); hT.dispose(); cT.dispose();
+          if (output) Object.values(output).forEach(t => t.dispose());
+        }
+      });
+    } else {
+      const createController = entry.adapter === 'go2' ? createGo2 : entry.adapter === 'pupper' ? createPupper : createMicroDuck;
       controller = createController(mj, model, data, config, async obs => {
         const tensor = new ort.Tensor('float32', obs, [1, entry.observationSize]);
         let output;

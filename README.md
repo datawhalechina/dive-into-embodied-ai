@@ -49,6 +49,12 @@
 <table align="center">
   <tr>
     <td align="center" width="33%">
+      <a href="docs/practices/humanoid/unitree-g1/index.md">
+        <img src="docs/practices/humanoid/unitree-g1/figs/unitree-g1-push.gif" height="200" alt="Unitree G1 12-DoF 人形机器人在 MuJoCo 中行走并抵抗 0.55 m/s 侧向推撞" />
+      </a>
+      <br/><sub><b><a href="docs/practices/humanoid/unitree-g1/index.md">Unitree G1 · 12-DoF 人形运控</a></b><br/>LSTM 步态 · Sim2Sim 与 0.55 m/s 抗推撞恢复</sub>
+    </td>
+    <td align="center" width="33%">
       <a href="docs/practices/amd/microduck-rl/index.md">
         <img src="docs/practices/amd/microduck-rl/figs/microduck-amd-r9700-model750.gif" height="200" alt="MicroDuck 小黄鸭双足稳定行走回放" />
       </a>
@@ -60,11 +66,25 @@
       </a>
       <br/><sub><b><a href="docs/practices/humanoid/flamingo-isaaclab/0.intro.md">Flamingo · 两轮足并行训练</a></b><br/>Isaac Lab · 动态平衡与 PPO / CaT 控制</sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="33%">
       <a href="docs/practices/quadruped/cs123/0.intro.md">
         <img src="docs/practices/quadruped/cs123/figs/lab8_ball_chase.gif" height="200" alt="CS123 四足视觉感知与闭环追球" />
       </a>
       <br/><sub><b><a href="docs/practices/quadruped/cs123/0.intro.md">从 0 到 1 搭建四足机器人</a></b><br/>MuJoCo + RL 步态 + 视觉闭环追球</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/vla/quaddle/index.md">
+        <img src="docs/practices/vla/quaddle/figs/quaddle_L2_nav_silky50.gif" height="200" alt="Quaddle 四舵机机器人基于 SmolVLA 执行视觉语言端到端导航" />
+      </a>
+      <br/><sub><b><a href="docs/practices/vla/quaddle/index.md">Quaddle · SmolVLA 端到端导航</a></b><br/>10 GB 显存复现 · 视觉语言控制与 CPG 步态</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/amd/pupper-control/intro.md">
+        <img src="docs/practices/amd/pupper-control/figs/rocm-command-demo.gif" height="200" alt="AMD ROCm 平台上的 Pupper 四足速度指令跟踪演示" />
+      </a>
+      <br/><sub><b><a href="docs/practices/amd/pupper-control/intro.md">AMD ROCm · 四足运控实战</a></b><br/>Radeon GPU 原生加速 · 速度指令跟踪实测</sub>
     </td>
   </tr>
   <tr>
@@ -87,7 +107,7 @@
   </tr>
 </table>
 
-> 更多四足、双足、机械臂与 AMD ROCm 实战请浏览 **[项目实战目录 →](https://datawhalechina.github.io/dive-into-embodied-ai/practices)**；无需配置环境即可在 **[在线仿真 →](https://datawhalechina.github.io/dive-into-embodied-ai/simulation)** 试玩 Go2、Pupper v3、Quaddle 与 MicroDuck。
+> 更多四足、双足、机械臂与 AMD ROCm 实战请浏览 **[项目实战目录 →](https://datawhalechina.github.io/dive-into-embodied-ai/practices)**；无需配置环境即可在 **[在线仿真 →](https://datawhalechina.github.io/dive-into-embodied-ai/simulation)** 试玩 Unitree Go2、Unitree G1 / H1 / H1-2 人形、Pupper v3、MicroDuck 与 Quaddle（7 款机器人），并体验实时外力推撞恢复。
 
 <a id="内容大纲"></a>
 
@@ -98,16 +118,18 @@
 | 栏目 | 适合什么时候看 | 核心内容 | 入口 |
 | :--- | :--- | :--- | :--- |
 | **🧭 具身导论** | 刚入门，先建全局地图 | 什么是具身智能、发展脉络、技能与载体、核心挑战、技术栈、就业岗位与领域资源 | [开始阅读](https://datawhalechina.github.io/dive-into-embodied-ai/docs/introduction/intro) · [本地目录](docs/introduction/intro.md) |
-| **📐 理论基础** | 带着问题查原理、补底座 | 大脑（RL / VLA / World-Model）、小脑（控制器 / 运动规划）、感官（VLM / 标定）、工程（仿真 / ROS 2 / 模仿学习） | [理论目录](https://datawhalechina.github.io/dive-into-embodied-ai/foundations) · [技能树](docs/foundations/intro.md) |
-| **🛠️ 项目实战** | 跑通代码、解决真实问题 | 四足 / 双足 / 轮腿运控、机械臂与 VLA 复现、LeRobot + SO-101 真机实战与 AMD ROCm 专区 | [项目目录](https://datawhalechina.github.io/dive-into-embodied-ai/practices) · [实战总览](docs/practices/intro.md) |
-| **🎮 在线仿真** | 零配置直接上手体验 | Go2 / Pupper v3 的 PPO 行走、Quaddle 步态对照、MicroDuck 关节自由操纵（见 [模型库说明](simulation/README.md)） | [立即体验](https://datawhalechina.github.io/dive-into-embodied-ai/simulation) |
+| **📐 理论基础** | 带着问题查原理、补底座 | 大脑（RL / VLA / World-Model）、小脑（控制器 / 运动规划）、感官（VLM / 定位触觉 / 标定）、工程（仿真 / ROS 2 / 机械结构 / CAN & MCU） | [理论目录](https://datawhalechina.github.io/dive-into-embodied-ai/foundations) · [技能树](docs/foundations/intro.md) |
+| **🛠️ 项目实战** | 跑通代码、解决真实问题 | **Unitree G1 人形运控**、四足（CS123 / Go2 MJX / Quaddle）、双足与轮腿（MicroDuck / Flamingo）、**移动操作（SLAM / Nav2 / VLN）**、机械臂与 VLA、SO-101 真机与 AMD ROCm 专区 | [项目目录](https://datawhalechina.github.io/dive-into-embodied-ai/practices) · [实战总览](docs/practices/intro.md) |
+| **🎮 在线仿真** | 零配置直接上手体验 | Go2 / G1・H1・H1-2 人形 / Pupper v3 / MicroDuck 强化学习行走与外力推撞测试、Quaddle 步态对照（见 [模型库说明](simulation/README.md)） | [立即体验](https://datawhalechina.github.io/dive-into-embodied-ai/simulation) |
 
-<details>
-<summary>展开查看重点章节直达链接</summary>
+<details open>
+<summary>重点章节与全量实战直达链接</summary>
 
 - **具身导论**：[1. 什么是具身智能](docs/introduction/1.what-is-embodied-ai.md) · [2. 发展脉络](docs/introduction/2.history.md) · [3. 机器人的技能](docs/introduction/3.tasks-and-skills.md) · [4. 具身智能的载体](docs/introduction/4.embodiments.md) · [5. 核心挑战](docs/introduction/5.challenges.md) · [6. 技术栈](docs/introduction/6.tech-stack.md) · [7. 就业岗位](docs/introduction/7.careers.md) · [领域资源](docs/introduction/resources/index.md)
-- **理论基础**：[强化学习](docs/foundations/rl-for-robotics/1.intro.md) · [VLA 大模型](docs/foundations/vla/vla-intro.md) · [World-Model](docs/foundations/world-model/0.intro.md) · [控制器](docs/foundations/controllers/intro.md) · [VLM 与视觉](docs/foundations/vlm/0.intro.md) · [传感器标定与 sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) · [仿真工具](docs/foundations/simulation/1.intro.md) · [ROS 2](docs/foundations/robotics-and-ros2/0.intro.md)
-- **项目实战**：[MicroDuck RL](docs/practices/humanoid/microduck-rl/index.md) · [Flamingo 两轮足](docs/practices/humanoid/flamingo-isaaclab/0.intro.md) · [CS123 四足](docs/practices/quadruped/cs123/0.intro.md) · [Quaddle 仿真与优化](docs/practices/quadruped/quaddle-mujoco/index.md) · [π₀.₅ + RECAP](docs/practices/vla/recap/index.md) · [ACT 双臂](docs/practices/vla/act/index.md) · [LeRobot + SO-101 真机](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) · [AMD 专区](docs/practices/amd/intro.md)
+- **理论基础**：[强化学习](docs/foundations/rl-for-robotics/1.intro.md) · [VLA 大模型](docs/foundations/vla/vla-intro.md) · [World-Model](docs/foundations/world-model/0.intro.md) · [控制器](docs/foundations/controllers/intro.md) · [VLM 与视觉](docs/foundations/vlm/0.intro.md) · [定位与触觉感知](docs/foundations/perception/placeholder.md) · [传感器标定与 sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) · [仿真工具](docs/foundations/simulation/1.intro.md) · [ROS 2](docs/foundations/robotics-and-ros2/0.intro.md) · [机械结构入门](docs/foundations/hardware/placeholder.md) · [CAN 与 MCU 通信](docs/foundations/communication/can-mcu.md)
+- **人形与双足**：[Unitree G1 人形运控实战（4 篇）](docs/practices/humanoid/unitree-g1/index.md) · [MicroDuck RL & 跳墙课程](docs/practices/humanoid/microduck-rl/index.md) · [Flamingo 两轮足](docs/practices/humanoid/flamingo-isaaclab/0.intro.md) · [双足平衡与抗扰](docs/practices/humanoid/balance-control/placeholder.md) · [全身运动跟踪](docs/practices/humanoid/motion-tracking/placeholder.md) · [双足任务规划](docs/practices/humanoid/task-planning-demo/placeholder.md)
+- **四足与移动操作**：[CS123 四足（8 章）](docs/practices/quadruped/cs123/0.intro.md) · [Go2 运控 MJX（ROCm / CUDA）](docs/practices/amd/unitree-rl-mjx/index.md) · [Quaddle 仿真与 VLA 导航](docs/practices/quadruped/quaddle-mujoco/index.md) · [Sim2Sim 指南](docs/practices/quadruped/sim2sim/placeholder.md) · [Sim2Real 指南](docs/practices/quadruped/sim2real-guide/placeholder.md) · [移动操作（SLAM / Nav2 / VLN / 协同）](docs/practices/mobile-manipulation/placeholder.md)
+- **机械臂、VLA 与 AMD 专区**：[π₀.₅ + RECAP](docs/practices/vla/recap/index.md) · [ACT 双臂](docs/practices/vla/act/index.md) · [ROS 2 机械臂控制](docs/practices/robot-arm/ros2-arm-control/placeholder.md) · [自定义模仿学习](docs/practices/robot-arm/imitation-learning/placeholder.md) · [LeRobot + SO-101 真机](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) · [AMD ROCm 专区](docs/practices/amd/intro.md)
 
 </details>
 
@@ -115,10 +137,10 @@
 
 ## 👥 组队学习
 
-Datawhale 会围绕本教程组织组队学习。历史与在筹备中的组队学习计划文档会集中放在 `docs/team-learning/`(施工中),包括每期的学习路线、打卡要求和对应章节的导读。
+Datawhale 会围绕本教程定期组织公开组队学习与共学打卡，每期路线、导读与资料会陆续沉淀到仓库中。
 
-- 最新一期报名入口:施工中
-- 往期学习资料归档:施工中
+- **获取开营通知**：可先 **Star / Watch** 本仓库，或关注文末 **Datawhale 公众号**获取最新一期报名信息。
+- **现在就开始自学**：直接按上方三步路线推进，遇到问题或想建议新专题，欢迎在 [GitHub Issues](https://github.com/datawhalechina/dive-into-embodied-ai/issues) 交流。
 
 <a id="本地预览"></a>
 

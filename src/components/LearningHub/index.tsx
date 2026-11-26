@@ -112,7 +112,9 @@ export default function LearningHub({kind}: {kind: 'practices' | 'foundations'})
         </div>
         {isPractice && <aside className={styles.planning}><div><h2>{text.planning}</h2><p>{text.planningDescription}</p></div><div>
           <Link to="/docs/practices/mobile-manipulation/placeholder">{text.mobile}<ArrowUpRight size={16} aria-hidden="true" /></Link>
-          <Link to="/docs/practices/quadruped/sim2real-guide/placeholder">{text.sim2real}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+          <Link to="/docs/practices/mobile-manipulation/navigation-basics/placeholder">{text.mobileNav}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+          <Link to="/docs/practices/mobile-manipulation/vision-language-nav/placeholder">{text.mobileVln}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+          <Link to="/docs/practices/mobile-manipulation/mobile-manip-demo/placeholder">{text.mobileDemo}<ArrowUpRight size={16} aria-hidden="true" /></Link>
         </div></aside>}
         <section className={styles.bridge}>
           <h2>{text.bridgeTitle}</h2><p>{isPractice ? text.bridgePractice : text.bridgeTheory}</p>

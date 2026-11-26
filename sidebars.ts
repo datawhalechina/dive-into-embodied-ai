@@ -172,6 +172,7 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         { type: 'link', label: 'AUP Learning Cloud 云算力', href: '/docs/practices/amd/aup-learning-cloud' },
+        { type: 'link', label: 'Go2 运控｜MJX（ROCm / CUDA）', href: '/docs/practices/amd/unitree-rl-mjx' },
         { type: 'link', label: 'MicroDuck RL｜AMD ROCm', href: '/docs/practices/amd/microduck-rl' },
         { type: 'link', label: 'ACT 双臂操作训练｜AMD ROCm', href: '/docs/practices/amd/vla-act' },
         { type: 'link', label: '玩转 Pupper 四足机器人', href: '/docs/practices/amd/pupper-control/intro' },
@@ -211,6 +212,29 @@ const sidebars: SidebarsConfig = {
           type: 'doc',
           id: 'practices/amd/aup-learning-cloud',
           label: 'AUP Learning Cloud 云算力',
+        },
+        {
+          type: 'category',
+          label: 'Go2 运控｜MJX（ROCm / CUDA）',
+          link: { type: 'doc', id: 'practices/amd/unitree-rl-mjx/index' },
+          collapsed: false,
+          items: [
+            {
+              type: 'doc',
+              id: 'practices/amd/unitree-rl-mjx/environment-setup',
+              label: '1. 环境安装与硬件约束',
+            },
+            {
+              type: 'doc',
+              id: 'practices/amd/unitree-rl-mjx/training',
+              label: '2. 训练 Go2 速度策略',
+            },
+            {
+              type: 'doc',
+              id: 'practices/amd/unitree-rl-mjx/sim2sim',
+              label: '3. ONNX 导出与官方栈 Sim2Sim',
+            },
+          ],
         },
         {
           type: 'doc',
@@ -297,6 +321,7 @@ const sidebars: SidebarsConfig = {
       collapsible: false,
       items: [
         { type: 'link', label: '从零到一搭建四足机器人', href: '/docs/practices/quadruped/cs123/intro' },
+        { type: 'link', label: 'Unitree Go2 运控（MJX / Sim2Sim）', href: '/docs/practices/amd/unitree-rl-mjx' },
         {
           type: 'category', label: 'Petoi Quaddle 四足步行仿真', collapsed: false,
           items: [
@@ -364,6 +389,17 @@ const sidebars: SidebarsConfig = {
       link: { type: 'doc', id: 'practices/humanoid/placeholder' },
       collapsible: false,
       items: [
+        {
+          type: 'category',
+          label: 'Unitree G1 人形运控实战',
+          link: { type: 'doc', id: 'practices/humanoid/unitree-g1/index' },
+          collapsed: false,
+          items: [
+            { type: 'doc', id: 'practices/humanoid/unitree-g1/reward-and-training', label: '1. 奖励函数与训练动力学' },
+            { type: 'doc', id: 'practices/humanoid/unitree-g1/sim2sim-and-web', label: '2. Sim2Sim 与浏览器 LSTM 部署' },
+            { type: 'doc', id: 'practices/humanoid/unitree-g1/whole-body-extensions', label: '3. AMP / 起身与 GR00T 全身控制' },
+          ],
+        },
         { type: 'link', label: '两轮足 Flamingo · Isaac Lab', href: '/docs/practices/humanoid/flamingo-isaaclab/intro' },
         {
           type: 'category',

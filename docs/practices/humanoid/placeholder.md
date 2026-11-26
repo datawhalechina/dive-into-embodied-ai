@@ -13,19 +13,20 @@ displayed_sidebar: practicesHumanoidSidebar
 
 | 分类 | 项目 | 简介 |
 | :--- | :--- | :--- |
+| 全尺寸人形（4 篇） | [Unitree G1 人形运控实战](./unitree-g1/) | 从 16 项奖励深挖、10,000 轮 PPO 曲线、0.2–0.8 m/s 多速度 MuJoCo Sim2Sim 与 [浏览器 LSTM 仿真](/simulation)，延伸至 AMP、Get-Up 与 GR00T WBC |
 | 轮足完整课程（6 章） | [两轮足 Flamingo · Isaac Lab](./flamingo-isaaclab/intro) | 围绕 8 自由度双足轮腿机器人，从延迟/齿轮执行器建模、4096 环境并行 PPO、约束式强化学习（CaT），一路打通 ONNX 融合导出与 MuJoCo 零样本抗扰动压测 |
 | 入门动手主线 | [MicroDuck RL：教小黄鸭学会一个动作](./microduck-rl/) | 通过网页内动作回放与奖励设计互动实验建立直觉，再用 `mjlab` + MuJoCo Warp 启动第一次双足 PPO 训练 |
 | 进阶课程学习 | [MicroDuck 跳墙课程：12 步复现跑跳滚翻全链](./microduck-rl/wall-curriculum) | 用 12 步课程串联助跑、起跳、越过 5 cm 矮墙、前滚翻与起身继续跑，拆解镜像对称损失、防套利奖励与反向课程破局 |
 | 评测与探索 | [MicroDuck：实验记录与创意动作](./microduck-rl/experiment-notes) | 轮式起身、轮式转向、踢球收势与多模式固定条件离屏验收数据及创意动作探索 |
 | AMD 专区旗舰 | [MicroDuck RL｜AMD ROCm](/docs/practices/amd/microduck-rl) | 在 Radeon AI PRO R9700 上从源码编译 ROCm Warp / MuJoCo Warp，修复动态接触缓存并完成双足 PPO 长训 |
-| 规划章节 | [平衡控制](./balance-control/placeholder) / [运动跟踪](./motion-tracking/placeholder) / [任务规划 Demo](./task-planning-demo/placeholder) | 双足抗扰动平衡、全身动作重定向跟踪（Motion Tracking）与高层任务规划（施工中） |
+| 进阶专题（3 篇） | [双足动态平衡](./balance-control/placeholder) / [全身运动跟踪](./motion-tracking/placeholder) / [双足任务规划](./task-planning-demo/placeholder) | 双足抗扰动平衡与外力推撞恢复（含 [Unitree G1 在线仿真](/simulation)）、全身动捕重定向跟踪与高层技能编排 |
 
 ## 🎬 典型演示 \{#demos}
 
-### 两轮足 Flamingo · Isaac Lab 大规模并行训练 \{#flamingo-demos}
+### Unitree G1 人形运控与两轮足 Flamingo 并行训练 \{#flamingo-demos}
 
-| [![多个 Flamingo 两轮足机器人在 Isaac Lab 中并行仿真](./flamingo-isaaclab/figs/hero_swarm.gif)](./flamingo-isaaclab/intro)<br/>**[两轮足 Flamingo · Isaac Lab 6 章完整实战课程](./flamingo-isaaclab/intro)**<br/>8 自由度轮腿欠驱动动态平衡 · PPO vs CaT 约束式强化学习 · ONNX 导出与 MuJoCo 零样本抗扰动压测 |
-| :---: |
+| [![Unitree G1 多速度 MuJoCo Sim2Sim 对比](./unitree-g1/figs/g1_sim2sim_speed_comparison.gif)](./unitree-g1/)<br/>**[Unitree G1 人形运控实战（4 篇）](./unitree-g1/)**<br/>16 项奖励深挖 · 10,000 轮 PPO · 多速度 Sim2Sim · 浏览器 LSTM 实时推撞 | [![多个 Flamingo 两轮足机器人在 Isaac Lab 中并行仿真](./flamingo-isaaclab/figs/hero_swarm.gif)](./flamingo-isaaclab/intro)<br/>**[两轮足 Flamingo · Isaac Lab 6 章完整实战课程](./flamingo-isaaclab/intro)**<br/>8 自由度轮腿欠驱动动态平衡 · PPO vs CaT 约束式强化学习 · MuJoCo 抗扰压测 |
+| :---: | :---: |
 
 ### MicroDuck 基础动作与固定条件验收 \{#microduck-demos}
 
@@ -38,6 +39,17 @@ displayed_sidebar: practicesHumanoidSidebar
 | :---: | :---: | :---: |
 
 ## 🧭 内容大纲 \{#outline}
+
+### 0. Unitree G1 人形运控实战（4 篇完整专题） \{#unitree-g1-course}
+
+围绕 Unitree G1（12-DoF 下肢行走主线 + 29-DoF 全身控制延伸），串联 16 项奖励拆解、万轮训练诊断、多速度 MuJoCo Sim2Sim、浏览器无状态 LSTM 部署与 AMP / Get-Up / GR00T WBC 进阶经验。
+
+| 篇章 | 核心内容 |
+| :--- | :--- |
+| [Unitree G1 人形运控总览](./unitree-g1/) | 12-DoF / 29-DoF 规格、47 维观测契约、万轮基线指标与 [在线仿真](/simulation) 入口 |
+| [1. 奖励函数与训练动力学](./unitree-g1/reward-and-training) | 16 项奖励 6 大分组、公式与权重尺度对照、先存活后提速曲线与 8,000 轮后再平衡归因 |
+| [2. Sim2Sim 与浏览器 LSTM 部署](./unitree-g1/sim2sim-and-web) | 单进程/DDS 两级 Sim2Sim、0.2/0.5/0.8 m/s 对比回放、无状态 LSTM ONNX 与 24 MB → 1.49 MB 网格轻量化 |
+| [3. AMP / 起身与 GR00T 全身控制](./unitree-g1/whole-body-extensions) | AMP 复现与 RSI 瞬移假象避坑铁律、HoST/HumanUP 防空翻起身配方、SONIC Latent Action 架构 |
 
 ### 1. 两轮足 Flamingo · Isaac Lab（6 章完整课程） \{#flamingo-course}
 
@@ -77,6 +89,6 @@ displayed_sidebar: practicesHumanoidSidebar
 | 篇章 | 内容 |
 | :--- | :--- |
 | [MicroDuck RL｜AMD ROCm](/docs/practices/amd/microduck-rl) | ROCm Warp / MuJoCo Warp 源码构建、动态 broadphase 接触缓存修复、graph capture 回归与 R9700 训练评测 |
-| [平衡控制](./balance-control/placeholder) | 双足推力扰动恢复与质心/角动量平衡控制（施工中） |
-| [运动跟踪](./motion-tracking/placeholder) | 动作捕捉参考轨迹重定向与全身模仿跟踪（施工中） |
-| [任务规划 Demo](./task-planning-demo/placeholder) | 高层多模态指令分解与底层双足运动技能衔接（施工中） |
+| [双足动态平衡与抗扰控制](./balance-control/placeholder) | 质心/角动量与 Capture Point 平衡控制、外力推撞测试及 [Unitree G1 在线仿真](/simulation) |
+| [人形全身运动跟踪](./motion-tracking/placeholder) | 动作捕捉参考轨迹重定向、关键点追踪奖励设计与全身模仿策略训练 |
+| [双足高层任务规划](./task-planning-demo/placeholder) | 高层多模态指令分解、状态机/行为树编排与底层双足运动技能安全衔接 |

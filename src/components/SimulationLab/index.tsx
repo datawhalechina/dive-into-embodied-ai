@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import Link from '@docusaurus/Link';
 import {useColorMode} from '@docusaurus/theme-common';
-import {ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Play, Pause, RotateCcw, Crosshair, Gamepad2, Clapperboard, Box, Maximize2, Square} from 'lucide-react';
+import {ArrowUp, ArrowDown, ArrowLeft, ArrowRight, Play, Pause, RotateCcw, Crosshair, Gamepad2, Clapperboard, Box, Maximize2, Square, Wind} from 'lucide-react';
 import catalog from '@site/simulation/models.json';
 import {useSimulation, type Mode, type Joint} from './useSimulation';
 import {messages} from './messages';
@@ -35,18 +35,23 @@ export default function SimulationLab() {
   const workspace = useRef<HTMLDivElement>(null);
   const keys = useRef(new Set<string>());
   const pointers = useRef(new Map<number, string>());
+  const pushStep = useRef(0);
   const [pressed, setPressed] = useState<string[]>([]);
   const ready = sim.status === 'ready';
   const paused = sim.snapshot?.paused ?? false;
   const manual = mode === 'manual';
-  const duck = model.adapter === 'microduck';
+  const duck = model.kind === 'manual';
   const policy = model.kind === 'policy';
   const modelText: Record<string, {brief: string; about: string; demo: string; demoInfo: string}> = {
     go2: {brief: text.go2Brief, about: text.go2Info, demo: text.walkPolicy, demoInfo: text.policyInfo},
+    g1: {brief: text.g1Brief, about: text.g1Info, demo: text.g1Policy, demoInfo: text.g1PolicyInfo},
+    h1: {brief: text.h1Brief, about: text.h1Info, demo: text.h1Policy, demoInfo: text.h1PolicyInfo},
+    'h1-2': {brief: text.h12Brief, about: text.h12Info, demo: text.h12Policy, demoInfo: text.h12PolicyInfo},
     pupper: {brief: text.pupperBrief, about: text.pupperInfo, demo: text.pupperPolicy, demoInfo: text.pupperPolicyInfo},
-    microduck: {brief: text.duckBrief, about: text.duckInfo, demo: '', demoInfo: text.duckNoPolicy},
+    microduck: {brief: text.duckBrief, about: text.duckInfo, demo: text.duckPolicy, demoInfo: text.duckPolicyInfo},
     quaddle: {brief: text.quaddleBrief, about: text.quaddleInfo, demo: text.gaitDemo, demoInfo: text.gaitInfo},
   };
+  const infoFor = (item: (typeof catalog)[number]) => modelText[item.id] ?? modelText[item.adapter];
   const description = manual ? (duck ? text.duckDescription : text.manualDescription) : text.showcaseDescription;
   const commandRef = useRef((active: string[]) => {});
   commandRef.current = active => {
@@ -76,6 +81,13 @@ export default function SimulationLab() {
   const chooseMode = (value: Mode) => { if (duck && value === 'showcase') return; stopInput(); setMode(value); };
   const reset = () => { stopInput(); sim.send({type: 'reset'}); sim.scene.current?.resetView(); };
   const togglePause = () => { stopInput(); sim.send({type: 'pause', value: !paused}); };
+  const applyPush = () => {
+    if (!ready || paused || !policy) return;
+    const dirs: [number, number][] = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+    const dir = dirs[pushStep.current++ % dirs.length];
+    const mag = model.pushSpeed ?? .5;
+    sim.send({type: 'push', value: [dir[0] * mag, dir[1] * mag]});
+  };
   const pointerButton = (direction: string, label: string, icon: React.ReactNode, key: string) => (
     <button type="button" className={styles.direction} aria-label={label} title={label} aria-pressed={pressed.includes(direction)} disabled={!ready || paused || !manual}
       onPointerDown={event => {
@@ -102,7 +114,7 @@ export default function SimulationLab() {
             {catalog.map(item => <button key={item.id} type="button" className={styles.model} aria-pressed={modelId === item.id} onClick={() => { stopInput(); setModelId(item.id); setSpeed(item.demoCommand[0] || .4); if (item.kind === 'manual') setMode('manual'); }}>
               <span className={styles.modelGlyph}><Box size={25} aria-hidden="true" /></span>
               <strong>{item.name}</strong><span>{item.kind === 'policy' ? text.trained : item.kind === 'manual' ? text.manualOnly : text.controller}</span>
-              <small>{modelText[item.adapter].brief}</small>
+              <small>{infoFor(item).brief}</small>
             </button>)}
           </div>
           <p className={styles.libraryNote}>{text.libraryNote}</p>
@@ -123,6 +135,7 @@ export default function SimulationLab() {
                 if (event.altKey || event.ctrlKey || event.metaKey || event.target !== event.currentTarget) return;
                 if (event.code === 'Space' && !event.repeat && ready) { event.preventDefault(); togglePause(); return; }
                 if (event.code === 'KeyR' && !event.repeat && ready) { event.preventDefault(); reset(); return; }
+                if (event.code === 'KeyP' && !event.repeat && ready && !paused && policy) { event.preventDefault(); applyPush(); return; }
                 if (!manual || !ready || paused || !keyMap[event.code]) return;
                 event.preventDefault(); if (!event.repeat) { keys.current.add(event.code); syncInput(); }
               }}
@@ -150,7 +163,11 @@ export default function SimulationLab() {
             </div>}
           </div>
           <div className={styles.transport}>
-            <div><button type="button" disabled={!ready} onClick={togglePause}>{paused ? <Play size={16} /> : <Pause size={16} />}{paused ? text.resume : text.pause}</button><button type="button" disabled={!ready} onClick={reset}><RotateCcw size={16} />{text.reset}</button></div>
+            <div>
+              <button type="button" disabled={!ready} onClick={togglePause}>{paused ? <Play size={16} /> : <Pause size={16} />}{paused ? text.resume : text.pause}</button>
+              <button type="button" disabled={!ready} onClick={reset}><RotateCcw size={16} />{text.reset}</button>
+              {policy && <button type="button" disabled={!ready || paused} onClick={applyPush} title={text.pushTitle}><Wind size={16} />{text.push}</button>}
+            </div>
             <label>{text.rate}<select disabled={!ready} value={rate} onChange={event => setRate(Number(event.target.value))}><option value=".25">0.25×</option><option value=".5">0.5×</option><option value="1">1×</option></select></label>
           </div>
           <dl className={styles.telemetry} aria-label={text.telemetry}>
@@ -177,7 +194,7 @@ export default function SimulationLab() {
             </div>}
             <p className={styles.small}>{duck ? text.duckKeys : policy ? text.keys : text.quaddleKeys}</p>
             {policy && <label className={styles.speedLabel}>{text.speed}<output>{speed.toFixed(1)} m/s</output><input type="range" min={model.speedRange?.[0] ?? .2} max={model.speedRange?.[1] ?? 1} step=".1" value={speed} onChange={event => setSpeed(Number(event.target.value))} /></label>}
-          </> : <div className={styles.showcaseInfo}><Play size={22} aria-hidden="true" /><strong>{modelText[model.adapter].demo}</strong><p>{modelText[model.adapter].demoInfo}</p></div>}
+          </> : <div className={styles.showcaseInfo}><Play size={22} aria-hidden="true" /><strong>{infoFor(model).demo}</strong><p>{infoFor(model).demoInfo}</p></div>}
           {duck && <>
             <p className={styles.manualNotice}>{text.duckNoPolicy}</p>
             <label className={styles.follow}><input type="checkbox" disabled={!ready} checked={sim.snapshot?.supported ?? true} onChange={event => { stopInput(); sim.send({type: 'support', value: event.target.checked}); }} />{text.support}</label>
@@ -188,7 +205,7 @@ export default function SimulationLab() {
             </details>
           </>}
           <label className={styles.follow}><input type="checkbox" checked={follow} onChange={event => setFollow(event.target.checked)} />{text.follow}</label>
-          <div className={styles.modelInfo}><h3>{text.about}</h3><p>{modelText[model.adapter].about}</p><Link to={model.tutorial}>{text.tutorial} →</Link></div>
+          <div className={styles.modelInfo}><h3>{text.about}</h3><p>{infoFor(model).about}</p><Link to={model.tutorial}>{text.tutorial} →</Link></div>
         </aside>
       </div>
       <p className={styles.footnote}>{text.physicsNote}</p>

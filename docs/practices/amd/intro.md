@@ -18,6 +18,12 @@ displayed_sidebar: practicesAmdSidebar
 
 ## 旗舰项目
 
+### 🐾 [Go2 运控｜MJX（ROCm / CUDA）](./unitree-rl-mjx)
+
+基于 MuJoCo MJX / JAX 移植宇树官方 `unitree_rl_mjlab`，同一份代码在 AMD Radeon R9700 与 NVIDIA GPU 上完成 Go2 平地速度跟踪训练，并导出 ONNX 直通未改动的官方 `unitree_mujoco` + C++ 控制器 Sim2Sim 闭环。
+
+`AMD`　`ROCm`　`MJX`　`JAX`　`Unitree Go2`　`Sim2Sim`
+
 ### 🐥 [MicroDuck RL｜AMD ROCm](./microduck-rl)
 
 在 Radeon AI PRO R9700 上从源码编译 ROCm Warp / MuJoCo Warp，加入动态接触、graph capture 与 API 兼容回归，再运行 MicroDuck 双足 PPO smoke train 和固定 seed 长训。

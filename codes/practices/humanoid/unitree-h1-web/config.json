@@ -1,0 +1,64 @@
+{
+  "joints": [
+    "left_hip_yaw_joint",
+    "left_hip_roll_joint",
+    "left_hip_pitch_joint",
+    "left_knee_joint",
+    "left_ankle_joint",
+    "right_hip_yaw_joint",
+    "right_hip_roll_joint",
+    "right_hip_pitch_joint",
+    "right_knee_joint",
+    "right_ankle_joint"
+  ],
+  "defaults": [
+    0.0,
+    0.0,
+    -0.1,
+    0.3,
+    -0.2,
+    0.0,
+    0.0,
+    -0.1,
+    0.3,
+    -0.2
+  ],
+  "stiffness": [
+    150.0,
+    150.0,
+    150.0,
+    200.0,
+    40.0,
+    150.0,
+    150.0,
+    150.0,
+    200.0,
+    40.0
+  ],
+  "damping": [
+    2.0,
+    2.0,
+    2.0,
+    4.0,
+    2.0,
+    2.0,
+    2.0,
+    2.0,
+    4.0,
+    2.0
+  ],
+  "simDt": 0.002,
+  "decimation": 10,
+  "angVelScale": 0.25,
+  "dofPosScale": 1.0,
+  "dofVelScale": 0.05,
+  "actionScale": 0.25,
+  "cmdScale": [
+    2.0,
+    2.0,
+    0.25
+  ],
+  "period": 0.8,
+  "hiddenSize": 64,
+  "initHeight": 1.05
+}

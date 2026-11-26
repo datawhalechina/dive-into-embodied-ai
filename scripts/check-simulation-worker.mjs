@@ -20,7 +20,7 @@ if (!isMainThread) {
 } else {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
   await quaddleAssets({siteDir: root}).loadContent();
-  for (const id of ['go2', 'pupper-v3', 'microduck', 'quaddle']) {
+  for (const id of ['go2', 'g1', 'h1', 'h1-2', 'pupper-v3', 'microduck', 'quaddle']) {
     const worker = new Worker(new URL(import.meta.url));
     const wait = predicate => new Promise((resolve, reject) => {
       const timer = setTimeout(() => done(new Error(`${id}: worker timed out`)), 45000);
@@ -43,7 +43,7 @@ if (!isMainThread) {
       const ready = await loaded;
       assert(ready.geometry.length > 0);
       const moving = await wait(m => m.type === 'state' && m.time > .1);
-      assert.equal(moving.mode, id === 'microduck' ? 'manual' : 'showcase');
+      assert.equal(moving.mode, 'showcase');
       send({type: 'pause', value: true});
       const paused = await wait(m => m.type === 'state' && m.paused);
       const next = await wait(m => m.type === 'state');
@@ -51,20 +51,15 @@ if (!isMainThread) {
       send({type: 'reset'});
       const reset = await wait(m => m.type === 'state' && m.time === 0);
       assert(reset.paused, 'Reset must preserve pause');
-      if (id === 'microduck') {
-        assert.equal(ready.joints.length, 14);
-        send({type: 'mode', value: 'showcase'});
-        send({type: 'joint', index: 7, value: .3});
-        const joint = await wait(m => m.type === 'state' && m.jointTargets?.[7] === .3);
-        assert.equal(joint.mode, 'manual');
-        send({type: 'support', value: false});
-        await wait(m => m.type === 'state' && m.supported === false);
-        send({type: 'support', value: true});
-        await wait(m => m.type === 'state' && m.supported && m.jointTargets?.[7] === 0);
-      }
       send({type: 'mode', value: 'manual'});
       send({type: 'command', value: [.2, 0, 0]});
       await wait(m => m.type === 'state' && m.command[0] === .2);
+      if (['go2', 'g1', 'h1', 'h1-2', 'pupper-v3', 'microduck'].includes(id)) {
+        send({type: 'pause', value: false});
+        send({type: 'push', value: [0, .25]});
+        const pushed = await wait(m => m.type === 'state' && m.time > .05 && Number.isFinite(m.speed));
+        assert(pushed.upright > .5, `${id}: must remain valid after push`);
+      }
       send({type: 'visibility', value: false});
       send({type: 'pause', value: false});
       const hidden = await wait(m => m.type === 'state' && !m.paused && m.command.every(v => v === 0));

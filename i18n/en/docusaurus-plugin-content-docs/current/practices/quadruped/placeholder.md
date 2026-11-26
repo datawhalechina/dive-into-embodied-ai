@@ -14,10 +14,11 @@ Explore quadruped modeling, control, reinforcement learning, and multimodal deci
 | Category | Project | Description |
 | :--- | :--- | :--- |
 | Chapter-based course | [Build a quadruped from scratch](/docs/practices/quadruped/cs123/intro) | Eight chapters covering MuJoCo actuators, forward and inverse kinematics, Pupper modeling, open-loop gaits, PPO training, LLM control, and visual ball tracking |
+| Cross-backend locomotion & Sim2Sim | [Unitree Go2 locomotion · MJX (ROCm / CUDA)](/docs/practices/amd/unitree-rl-mjx) | Train Go2 velocity policies with MuJoCo MJX / JAX on an 8GB AMD or NVIDIA GPU and export ONNX directly to the official C++ Sim2Sim stack (also playable in the [browser simulator](/simulation)) |
 | Browser simulation and terrain experiments | [Petoi Quaddle walking simulation](/docs/practices/quadruped/quaddle-mujoco/) | Control a four-servo robot in the browser and explore closed-loop linkage adaptation, residual PPO training, and terrain experiments |
 | Language and vision feedback | [Petoi Quaddle VLA navigation training](/docs/practices/vla/quaddle/) | Navigate using language instructions and camera images: SmolVLA decisions with low-level lookup-table CPG control on a 10GB GPU (L2 navigation 90%, L3 obstacle avoidance 80%, L4 composition 85%) |
-| Cross-simulator validation | [Sim2Sim validation](/docs/practices/quadruped/sim2sim/placeholder) | Policy transfer and consistency checks across physics engines (in development) |
-| Hardware deployment | [Sim2Real guide](/docs/practices/quadruped/sim2real-guide/placeholder) | Calibration, safety protections, and deployment from simulation policies to quadruped hardware (in development) |
+| Cross-simulator validation | [Sim2Sim validation guide](/docs/practices/quadruped/sim2sim/placeholder) | Cross-engine policy transfer alignment, failure diagnostic checklists, and live Go2 / Flamingo walkthroughs |
+| Hardware deployment | [Sim2Real engineering guide](/docs/practices/quadruped/sim2real-guide/placeholder) | End-to-end calibration, system identification, safety guards, and staged bring-up from simulation to quadruped hardware |
 
 ## 🎬 Demos \{#demos}
 
@@ -76,3 +77,14 @@ Build a VLA pipeline in the Quaddle introduction environment: given "walk to the
 | [VLA navigation: train a policy on a 10GB GPU](/docs/practices/vla/quaddle/) | Data collection, SmolVLA fine-tuning, and closed-loop evaluation; L2 navigation demos (90%) and capability limits |
 | [Experiment notes and v5 roadmap](/docs/practices/vla/quaddle/experiment-notes) | v4/v5/v6 experiments, including negative results; temporal ensembling and 8.2x faster training |
 | [Implementation status and plans](/docs/practices/vla/quaddle/progress) | L1–L4 evaluation progress, task decomposition (L3 obstacle avoidance 80%, L4 composition 85%), and hardware handoff plans |
+
+### 4. Unitree Go2 locomotion (MJX · ROCm / CUDA) \{#go2-mjx}
+
+A MuJoCo MJX / JAX port of Unitree's official `unitree_rl_mjlab`, running identical training code on AMD ROCm and NVIDIA CUDA GPUs and exporting ONNX policies directly to the unmodified official `unitree_mujoco` and `go2_ctrl` C++ stack.
+
+| Chapter | Topics |
+| :--- | :--- |
+| [Go2 locomotion overview](/docs/practices/amd/unitree-rl-mjx) | Cross-backend baseline metrics (R9700 / A40 / 8GB VRAM), bundled policy, and repository layout |
+| [1. Environment setup & hardware notes](/docs/practices/amd/unitree-rl-mjx/environment-setup) | Multi-backend `uv` installation, verified Go2 mesh fetch, AUP cloud, and RDNA4 (`gfx1201`) notes |
+| [2. Train the Go2 velocity policy](/docs/practices/amd/unitree-rl-mjx/training) | 20-minute smoke run, full 980M-step training, reward plots, and offscreen GIF rendering |
+| [3. ONNX export & official Sim2Sim](/docs/practices/amd/unitree-rl-mjx/sim2sim) | ONNX normalizer baking & contract verification, C++ stack build, headless FIFO testing, and tracking comparison |

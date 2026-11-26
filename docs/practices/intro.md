@@ -21,13 +21,15 @@ displayed_sidebar: practicesOverviewSidebar
 
 | 方向 | 项目数 | 适合 |
 |------|--------|------|
-| [机械臂系列](./robot-arm/placeholder) | 9 个已上线，2 个规划中 | 连续控制 / VLA / 数据采集 / 模仿学习 / 真机入门 |
-| [四足系列](./quadruped/placeholder) | 3 个已上线，2 个规划中 | 强化学习 / 运动学与步态控制 / VLA 导航 / sim2real |
-| [双足系列](./humanoid/placeholder) | 5 个已上线，3 个规划中 | 两轮足 Isaac Lab + CaT / GPU 并行 PPO / 长链课程学习 |
-| [移动操作](./mobile-manipulation/placeholder) | 3 个规划中 | 导航 + 操作综合 |
+| [机械臂系列](./robot-arm/placeholder) | 11 个已上线 | 连续控制 / VLA / 数据采集 / 模仿学习 / ROS 2 / 真机入门 |
+| [四足系列](./quadruped/placeholder) | 6 个已上线 | 强化学习 / 运动学与步态控制 / MJX 与 Sim2Sim / Sim2Real / VLA 导航 |
+| [双足系列](./humanoid/placeholder) | 9 个已上线 | Unitree G1 人形运控 / 两轮足 Isaac Lab + CaT / GPU 并行 PPO / 长链课程 |
+| [移动操作](./mobile-manipulation/placeholder) | 3 个已上线 | SLAM + Nav2 自主导航 / 视觉语言导航 VLN / 移动底盘 + 机械臂协同 |
 
 ## 已上线项目 \{#available-projects}
 
+- [Unitree G1 人形运控实战（4 篇）](./humanoid/unitree-g1/)：基于 `unitree_rl_gym` 与 `humanoid-simulation`，完整拆解 16 项奖励与 10,000 轮 PPO 曲线、0.2–0.8 m/s 多速度 MuJoCo Sim2Sim、浏览器无状态 LSTM ONNX 部署（见 [在线仿真](/simulation)），以及 AMP / Get-Up / GR00T Whole-Body Control 进阶实录。
+- [Go2 四足运控｜MJX（ROCm / CUDA）](./amd/unitree-rl-mjx)：基于 MuJoCo MJX / JAX 移植宇树官方 `unitree_rl_mjlab`，同一份代码在 AMD ROCm 与 NVIDIA CUDA 上训练 Go2 速度策略，导出 ONNX 直通官方 C++ 部署与 Sim2Sim 栈。
 - [两轮足 Flamingo · Isaac Lab 强化学习实战](./humanoid/flamingo-isaaclab/intro)：围绕 8 自由度双足轮腿机器人，从延迟与齿轮耦合执行器建模出发，完成 4096 环境并行 PPO 与约束式强化学习（CaT）对比、ONNX 归一化融合导出以及 MuJoCo 零样本抗扰动评测（总览与 6 章完整上线）。
 - [MicroDuck RL：让小黄鸭学会走路、起身和翻滚](./humanoid/microduck-rl/)：从 MJCF、BAM 执行器和 mjlab 任务注册开始，在 MuJoCo Warp 中训练 18 个动作模式，并用 GIF / MP4 展示离屏评估结果。
 - [MicroDuck 跳墙课程](./humanoid/microduck-rl/wall-curriculum)：在基础教程之上，用 12 步课程把跑步、跳跃、越墙、前滚翻、起身串成全链，含每步配置、GIF 验收标准与课程心法。
@@ -35,6 +37,7 @@ displayed_sidebar: practicesOverviewSidebar
 ## AMD 专区 \{#amd}
 
 - [AUP Learning Cloud 云算力](./amd/aup-learning-cloud)：在浏览器中使用 Ryzen AI APU、JupyterHub、Code Server 与 ROCm 环境，适合课程练习、端侧推理和小规模实验。
+- [Go2 运控｜MJX（ROCm / CUDA）](./amd/unitree-rl-mjx)：单卡 8 GB 显存即可训练 Unitree Go2 速度跟踪策略，包含环境配置、RDNA4 已知约束、9.8 亿步训练与官方栈 Sim2Sim 闭环。
 - [MicroDuck RL｜AMD ROCm](./amd/microduck-rl)：在 Radeon R9700 上编译 ROCm Warp / MuJoCo Warp，修复动态 broadphase 缓存并训练双足 PPO。
 - [ACT 双臂操作训练｜AMD ROCm](./amd/vla-act)：在 Radeon GPU 上完成 ACT BF16 训练、断点续训、20 回合评测与视频导出。
 - [玩转 Pupper 四足机器人](./amd/pupper-control/intro)：AMD 专区旗舰项目，包含 **Pupper Locomotion｜强化学习运动策略**与 **Pupper VLA｜视觉-语言-动作智能**两个方向。
@@ -44,6 +47,7 @@ displayed_sidebar: practicesOverviewSidebar
 | 项目 | 技术主线 | 状态 |
 | --- | --- | --- |
 | [从零到一搭建四足机器人](./quadruped/cs123/intro) | MuJoCo、PD 控制、运动学、步态、策略训练与感知 | 总览与 8 章可读 |
+| [Go2 四足运控｜MJX（ROCm / CUDA）](./amd/unitree-rl-mjx) | MuJoCo MJX / JAX、跨平台训练、ONNX 导出与官方栈 Sim2Sim | 总览与 3 篇教程可读 |
 | [Petoi Quaddle 四舵机步行仿真](./quadruped/quaddle-mujoco/) | 官方 URDF 适配、周期控制、接触验证与长距离地面显示 | 可用 |
 | [MicroDuck RL：走路、起身和翻滚](./humanoid/microduck-rl/) | mjlab、MuJoCo Warp、CUDA 并行 PPO、18 个动作模式 | 可用 |
 | [MicroDuck 跳墙课程](./humanoid/microduck-rl/wall-curriculum) | 12 步课程学习、跑跳滚翻全链、奖励防套利、GIF 验收 | 可用 |
@@ -54,8 +58,13 @@ displayed_sidebar: practicesOverviewSidebar
 | [ACT 双臂操作训练](./vla/act) | ALOHA、模仿学习、ACT、多回合评估 | 可用 |
 | [π₀.₅ + RECAP：LIBERO 复现](./vla/recap) | 价值模型、优势标注、ACP、LIBERO 评估 | 可用 |
 | [Petoi Quaddle VLA 导航训练](./vla/quaddle/) | SmolVLA 微调、CPG 低层运控、temporal ensembling、任务分解 | 可用 |
-| [Sim2Sim 验证](./quadruped/sim2sim/placeholder) | 跨仿真策略验证 | 施工中 |
+| [Sim2Sim 验证指南](./quadruped/sim2sim/placeholder) | 跨物理引擎策略迁移对齐、排查清单与 Go2 / Flamingo 实战 | 可用 |
+| [Unitree G1 人形运控实战](./humanoid/unitree-g1/) | 16 项奖励深挖、万轮 PPO 曲线、多速度 MuJoCo Sim2Sim、浏览器 LSTM 与 GR00T WBC | 总览与 3 篇教程可读 |
 | [两轮足 Flamingo · Isaac Lab](./humanoid/flamingo-isaaclab/intro) | 8-DoF 轮足欠驱动平衡、PPO vs CaT、ONNX 导出与 MuJoCo Sim2Sim 压测 | 总览与 6 章可读 |
+| [双足动态平衡与抗扰控制](./humanoid/balance-control/placeholder) | 质心/角动量恢复、外力推撞测试与 Unitree G1 网页实时仿真 | 可用 |
+| [人形全身运动跟踪](./humanoid/motion-tracking/placeholder) | 动捕重定向、参考轨迹追踪奖励与全身模仿训练 | 可用 |
+| [双足高层任务规划](./humanoid/task-planning-demo/placeholder) | VLM/LLM 指令分解、技能编排与底层运控安全门控 | 可用 |
+| [移动操作系列（导航 / VLN / 协同）](./mobile-manipulation/placeholder) | SLAM + Nav2 自主导航、视觉语言导航 VLN 与底盘-机械臂协同操作 | 3 篇完整可读 |
 
 ## 真机实战 \{#real-robots}
 
@@ -65,5 +74,6 @@ LeRobot 讲义提供数据与工具链准备，SO-101 项目再将这些知识�
 | --- | --- | --- |
 | [LeRobot 中文课程讲义](./robot-arm/data-collection/lerobot-course) | 机器人学习、数据集、工具链与经典机器人学 | 已整理 Unit 0–2 |
 | [SO-101 + LeRobot 真机教程](./robot-arm/data-collection/so101-lerobot-real) | 硬件连通、安全测试、动作回放 | 可用 |
-| [ROS2 机械臂控制](./robot-arm/ros2-arm-control/placeholder) | ROS2 控制链路与机械臂执行 | 施工中 |
-| [Sim2Real 指南](./quadruped/sim2real-guide/placeholder) | 仿真策略部署与真机验证 | 施工中 |
+| [ROS 2 机械臂控制实战](./robot-arm/ros2-arm-control/placeholder) | `ros2_control`、MoveIt 2 规划与安全执行链路 | 可用 |
+| [自定义任务模仿学习训练](./robot-arm/imitation-learning/placeholder) | 遥操作数据采集、清洗与 ACT / Diffusion Policy 闭环 | 可用 |
+| [Sim2Real 工程部署指南](./quadruped/sim2real-guide/placeholder) | 系统辨识、域随机化、真机安全保护与逐级上线 | 可用 |

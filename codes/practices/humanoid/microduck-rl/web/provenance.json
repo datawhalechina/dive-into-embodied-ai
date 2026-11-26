@@ -1,0 +1,8 @@
+{
+  "task": "Mjlab-Velocity-Flat-MicroDuck",
+  "checkpoint": "model_1750.pt (from 2000-iter 2048-env seed=42 PPO run on RTX 4080 SUPER, 86.0M transitions at iter 1750)",
+  "actuatorModel": "XL330 BAM M6 voltage/current-limited DC motor with 4-step (20 ms) command lag at 5 ms physics dt (50 Hz policy)",
+  "onnxMaxErrVsPyTorch": 8.941e-07,
+  "policySha256": "2012ac9409cb9bbe759132064a4ae67625121bac3849a73b9563a768b2f55231",
+  "configSha256": "ccd1007d23a1a33844569eef15ca0a77dd4b2332a2ff867bd28c74a4d6e21cdb"
+}

@@ -44,6 +44,12 @@ Embodied AI spans many disciplines—**you do not need to finish all the theory 
 <table align="center">
   <tr>
     <td align="center" width="33%">
+      <a href="docs/practices/humanoid/unitree-g1/index.md">
+        <img src="docs/practices/humanoid/unitree-g1/figs/unitree-g1-push.gif" height="200" alt="Unitree G1 12-DoF humanoid walking and recovering from a 0.55 m/s lateral push in MuJoCo" />
+      </a>
+      <br/><sub><b><a href="docs/practices/humanoid/unitree-g1/index.md">Unitree G1 · 12-DoF Humanoid RL</a></b><br/>LSTM gait · Sim2Sim &amp; 0.55 m/s push recovery</sub>
+    </td>
+    <td align="center" width="33%">
       <a href="docs/practices/amd/microduck-rl/index.md">
         <img src="docs/practices/amd/microduck-rl/figs/microduck-amd-r9700-model750.gif" height="200" alt="MicroDuck biped stable walking gait playback" />
       </a>
@@ -55,11 +61,25 @@ Embodied AI spans many disciplines—**you do not need to finish all the theory 
       </a>
       <br/><sub><b><a href="docs/practices/humanoid/flamingo-isaaclab/0.intro.md">Flamingo · Wheel-legged swarm RL</a></b><br/>Isaac Lab · Dynamic balance &amp; PPO / CaT control</sub>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="33%">
       <a href="docs/practices/quadruped/cs123/0.intro.md">
         <img src="docs/practices/quadruped/cs123/figs/lab8_ball_chase.gif" height="200" alt="CS123 quadruped visual perception and closed-loop ball chasing" />
       </a>
       <br/><sub><b><a href="docs/practices/quadruped/cs123/0.intro.md">Build a quadruped from scratch</a></b><br/>MuJoCo + RL gaits + closed-loop visual chase</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/vla/quaddle/index.md">
+        <img src="docs/practices/vla/quaddle/figs/quaddle_L2_nav_silky50.gif" height="200" alt="Quaddle four-servo robot performing end-to-end SmolVLA visual-language navigation" />
+      </a>
+      <br/><sub><b><a href="docs/practices/vla/quaddle/index.md">Quaddle · SmolVLA Navigation</a></b><br/>10 GB VRAM · Vision-language control &amp; CPG gait</sub>
+    </td>
+    <td align="center" width="33%">
+      <a href="docs/practices/amd/pupper-control/intro.md">
+        <img src="docs/practices/amd/pupper-control/figs/rocm-command-demo.gif" height="200" alt="Pupper quadruped velocity-command tracking trained on AMD ROCm" />
+      </a>
+      <br/><sub><b><a href="docs/practices/amd/pupper-control/intro.md">AMD ROCm · Quadruped RL</a></b><br/>Native Radeon GPU · Velocity tracking benchmark</sub>
     </td>
   </tr>
   <tr>
@@ -82,7 +102,7 @@ Embodied AI spans many disciplines—**you do not need to finish all the theory 
   </tr>
 </table>
 
-> Browse more quadruped, biped, arm, and AMD ROCm tutorials in **[Projects →](https://datawhalechina.github.io/dive-into-embodied-ai/en/practices)**, or try Go2, Pupper v3, Quaddle, and MicroDuck right in your browser in **[Simulation →](https://datawhalechina.github.io/dive-into-embodied-ai/en/simulation)**.
+> Browse more quadruped, biped, arm, and AMD ROCm tutorials in **[Projects →](https://datawhalechina.github.io/dive-into-embodied-ai/en/practices)**, or try 7 live robots—Unitree Go2, Unitree G1 / H1 / H1-2 humanoids, Pupper v3, MicroDuck, and Quaddle—with push recovery right in your browser in **[Simulation →](https://datawhalechina.github.io/dive-into-embodied-ai/en/simulation)**.
 
 <a id="course-outline"></a>
 
@@ -93,25 +113,27 @@ The course is organized around four top-level website sections (use the web vers
 | Section | When to use it | What it covers | Links |
 | :--- | :--- | :--- | :--- |
 | **🧭 Introduction** | Start here for the big picture | Concepts, history, skills, platforms, challenges, technology stack, career roles, and curated resources | [Read online](https://datawhalechina.github.io/dive-into-embodied-ai/en/docs/introduction/intro) · [Repo index](i18n/en/docusaurus-plugin-content-docs/current/introduction/intro.md) |
-| **📐 Foundations** | Look up principles as questions arise | Brain (RL / VLA / World Models), Cerebellum (controllers / planning), Sensing (VLM / calibration), Engineering (simulation / ROS 2 / imitation) | [Foundations hub](https://datawhalechina.github.io/dive-into-embodied-ai/en/foundations) · [Skill tree](docs/foundations/intro.md) |
-| **🛠️ Projects** | Run code and solve concrete tasks | Quadruped, biped, and wheel-legged control, arm &amp; VLA reproductions, LeRobot + SO-101 hardware, and AMD ROCm projects | [Projects hub](https://datawhalechina.github.io/dive-into-embodied-ai/en/practices) · [Overview](i18n/en/docusaurus-plugin-content-docs/current/practices/intro.md) |
-| **🎮 Simulation** | Try robots with zero setup | Go2 &amp; Pupper v3 PPO gaits, Quaddle periodic reference, MicroDuck free joint control (see [model guide](simulation/README.en.md)) | [Launch in browser](https://datawhalechina.github.io/dive-into-embodied-ai/en/simulation) |
+| **📐 Foundations** | Look up principles as questions arise | Brain (RL / VLA / World Models), Cerebellum (controllers / planning), Sensing (VLM / perception / calibration), Engineering (simulation / ROS 2 / hardware / CAN &amp; MCU) | [Foundations hub](https://datawhalechina.github.io/dive-into-embodied-ai/en/foundations) · [Skill tree](docs/foundations/intro.md) |
+| **🛠️ Projects** | Run code and solve concrete tasks | **Unitree G1 humanoid RL**, quadrupeds (CS123 / Go2 MJX / Quaddle), bipeds &amp; wheel-legged (MicroDuck / Flamingo), **mobile manipulation (SLAM / Nav2 / VLN)**, arms &amp; VLA, SO-101 hardware, and AMD ROCm | [Projects hub](https://datawhalechina.github.io/dive-into-embodied-ai/en/practices) · [Overview](i18n/en/docusaurus-plugin-content-docs/current/practices/intro.md) |
+| **🎮 Simulation** | Try robots with zero setup | Go2, G1 / H1 / H1-2 humanoids, Pupper v3 &amp; MicroDuck learned policies with push recovery, plus Quaddle reference (see [model guide](simulation/README.en.md)) | [Launch in browser](https://datawhalechina.github.io/dive-into-embodied-ai/en/simulation) |
 
-<details>
-<summary>Expand quick links to key chapters</summary>
+<details open>
+<summary>Quick links to key chapters &amp; all projects</summary>
 
 - **Introduction**: [1. What is embodied AI](i18n/en/docusaurus-plugin-content-docs/current/introduction/1.what-is-embodied-ai.md) · [2. Brief history](i18n/en/docusaurus-plugin-content-docs/current/introduction/2.history.md) · [3. Robot skills](i18n/en/docusaurus-plugin-content-docs/current/introduction/3.tasks-and-skills.md) · [4. Platforms](i18n/en/docusaurus-plugin-content-docs/current/introduction/4.embodiments.md) · [5. Key challenges](i18n/en/docusaurus-plugin-content-docs/current/introduction/5.challenges.md) · [6. Technology stack](i18n/en/docusaurus-plugin-content-docs/current/introduction/6.tech-stack.md) · [7. Career roles](i18n/en/docusaurus-plugin-content-docs/current/introduction/7.careers.md) · [Resources](i18n/en/docusaurus-plugin-content-docs/current/introduction/resources/index.md)
-- **Foundations**: [RL for robotics](docs/foundations/rl-for-robotics/1.intro.md) · [VLA models](docs/foundations/vla/vla-intro.md) · [World models](docs/foundations/world-model/0.intro.md) · [Controllers](docs/foundations/controllers/intro.md) · [Visual perception &amp; VLMs](docs/foundations/vlm/0.intro.md) · [Calibration &amp; sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) · [Simulation tools](docs/foundations/simulation/1.intro.md) · [ROS 2](docs/foundations/robotics-and-ros2/0.intro.md) ([code](codes/foundations/robotics-and-ros2/README.en.md))
-- **Projects**: [MicroDuck RL](docs/practices/humanoid/microduck-rl/index.md) · [Flamingo wheel-legged](docs/practices/humanoid/flamingo-isaaclab/0.intro.md) · [CS123 quadruped](docs/practices/quadruped/cs123/0.intro.md) · [Quaddle optimization](i18n/en/docusaurus-plugin-content-docs/current/practices/quadruped/quaddle-mujoco/optimization.md) · [π₀.₅ + RECAP](docs/practices/vla/recap/index.md) · [ACT bimanual](docs/practices/vla/act/index.md) · [SO-101 + LeRobot](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) · [AMD zone](docs/practices/amd/intro.md)
+- **Foundations**: [RL for robotics](docs/foundations/rl-for-robotics/1.intro.md) · [VLA models](docs/foundations/vla/vla-intro.md) · [World models](docs/foundations/world-model/0.intro.md) · [Controllers](docs/foundations/controllers/intro.md) · [Visual perception &amp; VLMs](docs/foundations/vlm/0.intro.md) · [Perception &amp; tactile](docs/foundations/perception/placeholder.md) · [Calibration &amp; sim2real](docs/foundations/perception/1.sensor-calibration-sim2real.md) · [Simulation tools](docs/foundations/simulation/1.intro.md) · [ROS 2](docs/foundations/robotics-and-ros2/0.intro.md) ([code](codes/foundations/robotics-and-ros2/README.en.md)) · [Mechanical design](docs/foundations/hardware/placeholder.md) · [CAN &amp; MCU](docs/foundations/communication/can-mcu.md)
+- **Humanoids &amp; bipeds**: [Unitree G1 humanoid RL (4 parts)](docs/practices/humanoid/unitree-g1/index.md) · [MicroDuck RL &amp; wall-jump](docs/practices/humanoid/microduck-rl/index.md) · [Flamingo wheel-legged](docs/practices/humanoid/flamingo-isaaclab/0.intro.md) · [Dynamic balance](docs/practices/humanoid/balance-control/placeholder.md) · [Motion tracking](docs/practices/humanoid/motion-tracking/placeholder.md) · [Task planning](docs/practices/humanoid/task-planning-demo/placeholder.md)
+- **Quadrupeds &amp; mobile manipulation**: [CS123 quadruped (8 chapters)](docs/practices/quadruped/cs123/0.intro.md) · [Go2 RL MJX (ROCm / CUDA)](docs/practices/amd/unitree-rl-mjx/index.md) · [Quaddle optimization](i18n/en/docusaurus-plugin-content-docs/current/practices/quadruped/quaddle-mujoco/optimization.md) · [Sim2Sim guide](docs/practices/quadruped/sim2sim/placeholder.md) · [Sim2Real guide](docs/practices/quadruped/sim2real-guide/placeholder.md) · [Mobile manipulation (SLAM / Nav2 / VLN)](docs/practices/mobile-manipulation/placeholder.md)
+- **Arms, VLA &amp; AMD zone**: [π₀.₅ + RECAP](docs/practices/vla/recap/index.md) · [ACT bimanual](docs/practices/vla/act/index.md) · [ROS 2 arm control](docs/practices/robot-arm/ros2-arm-control/placeholder.md) · [Custom imitation learning](docs/practices/robot-arm/imitation-learning/placeholder.md) · [SO-101 + LeRobot](docs/practices/robot-arm/data-collection/so101-lerobot-real/index.md) · [AMD ROCm zone](docs/practices/amd/intro.md)
 
 </details>
 
 ## 👥 Study groups
 
-Datawhale organizes study groups around this course. Past and upcoming study plans will be collected in `docs/team-learning/` (under construction), including learning paths, check-in requirements, and chapter introductions.
+Datawhale organizes periodic open study groups and cohort check-ins around this tutorial, with cohort paths, reading guides, and materials published in this repository as they launch.
 
-- Registration for the next group: under construction
-- Previous study materials: under construction
+- **Stay notified**: **Star / Watch** this repository or follow **Datawhale on WeChat** below for upcoming cohort announcements.
+- **Start self-paced now**: follow the three-step path above and open a [GitHub Issue](https://github.com/datawhalechina/dive-into-embodied-ai/issues) if you have questions or topic requests.
 
 ## 💻 Local preview
 

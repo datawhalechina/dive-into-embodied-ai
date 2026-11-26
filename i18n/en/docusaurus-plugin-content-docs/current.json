@@ -15,6 +15,24 @@
   "sidebar.practicesOverviewSidebar.link.AUP Learning Cloud 云算力": {
     "message": "AUP Learning Cloud"
   },
+  "sidebar.practicesOverviewSidebar.link.Go2 运控｜MJX（ROCm / CUDA）": {
+    "message": "Go2 locomotion · MJX (ROCm / CUDA)"
+  },
+  "sidebar.practicesAmdSidebar.category.Go2 运控｜MJX（ROCm / CUDA）": {
+    "message": "Go2 locomotion · MJX (ROCm / CUDA)"
+  },
+  "sidebar.practicesAmdSidebar.doc.1. 环境安装与硬件约束": {
+    "message": "1. Environment setup & hardware notes"
+  },
+  "sidebar.practicesAmdSidebar.doc.2. 训练 Go2 速度策略": {
+    "message": "2. Train the Go2 velocity policy"
+  },
+  "sidebar.practicesAmdSidebar.doc.3. ONNX 导出与官方栈 Sim2Sim": {
+    "message": "3. ONNX export & official Sim2Sim"
+  },
+  "sidebar.practicesQuadrupedSidebar.link.Unitree Go2 运控（MJX / Sim2Sim）": {
+    "message": "Unitree Go2 locomotion (MJX / Sim2Sim)"
+  },
   "sidebar.practicesOverviewSidebar.link.MicroDuck RL｜AMD ROCm": {
     "message": "MicroDuck RL · AMD ROCm"
   },
@@ -146,5 +164,17 @@
   },
   "sidebar.practicesQuadrupedSidebar.doc.优化进展与瓶颈": {
     "message": "Optimization and bottlenecks"
+  },
+  "sidebar.practicesHumanoidSidebar.category.Unitree G1 人形运控实战": {
+    "message": "Unitree G1 humanoid locomotion"
+  },
+  "sidebar.practicesHumanoidSidebar.doc.1. 奖励函数与训练动力学": {
+    "message": "1. Rewards & training dynamics"
+  },
+  "sidebar.practicesHumanoidSidebar.doc.2. Sim2Sim 与浏览器 LSTM 部署": {
+    "message": "2. Sim2Sim & browser LSTM"
+  },
+  "sidebar.practicesHumanoidSidebar.doc.3. AMP / 起身与 GR00T 全身控制": {
+    "message": "3. AMP, Get-Up & GR00T WBC"
   }
 }

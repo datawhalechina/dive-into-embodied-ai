@@ -1,0 +1,52 @@
+{
+  "joints": [
+    "left_hip_yaw",
+    "left_hip_roll",
+    "left_hip_pitch",
+    "left_knee",
+    "left_ankle",
+    "neck_pitch",
+    "head_pitch",
+    "head_yaw",
+    "head_roll",
+    "right_hip_yaw",
+    "right_hip_roll",
+    "right_hip_pitch",
+    "right_knee",
+    "right_ankle"
+  ],
+  "defaults": [
+    0.0,
+    -0.087,
+    -0.458,
+    -0.005,
+    0.453,
+    0.349,
+    0.349,
+    0.0,
+    0.0,
+    0.0,
+    0.087,
+    0.458,
+    0.005,
+    -0.453
+  ],
+  "simDt": 0.005,
+  "decimation": 4,
+  "actionScale": 1.0,
+  "initHeight": 0.12,
+  "delaySteps": 4,
+  "bam": {
+    "kt": 0.36601349688984386,
+    "R": 2.8113923539223227,
+    "armature": 0.0018077432831600838,
+    "frictionBase": 0.004771183165566,
+    "frictionViscous": 0.005359668274599504,
+    "kpFw": 200.0,
+    "errorGain": 0.0028773775022263564,
+    "maxPwm": 1.0,
+    "maxCurrent": 1.75,
+    "vin": 7.4,
+    "forceLimit": 1.07
+  }
+}
