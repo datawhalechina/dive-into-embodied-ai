@@ -104,6 +104,11 @@ def build():
             elif name.endswith("_leg"):
                 # Knee support is also a proxy for the unmodeled spring compliance.
                 kwargs.update(damping="0.001", stiffness="0.08", springref="0")
+            elif name.endswith("_wheel"):
+                # Self-collision is disabled (floor-only contact mask), so bound the
+                # passive wheel rocker bracket against the rubber foot tip and lower leg.
+                # Stiff limit parameters prevent light wheel inertia from overshooting.
+                kwargs.update(range="-0.4 0.85", solreflimit="0.004 1", solimplimit="0.99 0.999 0.0001")
             ET.SubElement(body, "joint", **kwargs)
         inertia = links[name].find("inertial")
         mass = float(inertia.find("mass").get("value"))

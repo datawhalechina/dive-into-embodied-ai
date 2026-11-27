@@ -81,7 +81,7 @@
             <body name="left_front_foot" pos="-0.0261547 -0.0195792 -0.00155" quat="1 0 0 -5e-12" />
             <body name="left_front_knee" pos="0 0 0" quat="1 0 0 0" />
             <body name="left_front_wheel" pos="-0.0245472 -0.0151626 -0.00155" quat="1.326794897e-06 1 0 0">
-              <joint name="left_front_wheel" type="hinge" axis="0 0 1" damping="0.00002" armature="0.00000002" />
+              <joint name="left_front_wheel" type="hinge" axis="0 0 1" damping="0.00002" armature="0.00000002" range="-0.4 0.85" solreflimit="0.004 1" solimplimit="0.99 0.999 0.0001" />
               <inertial mass="0.00023416" pos="-0.00274895 -0.00106876 1.1992e-08" fullinertia="2.96e-09 5.734e-09 6.027e-09 1.62e-09 0 -0" />
               <geom name="left_front_wheel_visual_0" type="mesh" mesh="lower4wheel" rgba="0.65098 0.65098 0.65098 1" contype="0" conaffinity="0" group="2" mass="0" pos="0.0138219 -0.0472146 -0.00395" quat="1.326794897e-06 1 0 0" />
               <body name="left_front_wheel_tip" pos="-0.00909195 0.00369246 0" quat="-9.381839456e-07 0.7071054825 0.7071080799 -9.381873918e-07">
@@ -127,7 +127,7 @@
             <body name="right_front_foot" pos="-0.0261547 -0.0195792 0.00155" quat="4.537911747e-07 0.342020591 0.9396924578 1.246779158e-06" />
             <body name="right_front_knee" pos="0 0 0" quat="1 0 0 0" />
             <body name="right_front_wheel" pos="-0.0245472 -0.0151626 0.00155" quat="1.326794897e-06 1 0 0">
-              <joint name="right_front_wheel" type="hinge" axis="0 0 1" damping="0.00002" armature="0.00000002" />
+              <joint name="right_front_wheel" type="hinge" axis="0 0 1" damping="0.00002" armature="0.00000002" range="-0.4 0.85" solreflimit="0.004 1" solimplimit="0.99 0.999 0.0001" />
               <inertial mass="0.00023416" pos="-0.00303071 -0.00109341 1.1992e-08" fullinertia="2.96e-09 5.734e-09 6.027e-09 1.62e-09 0 -0" />
               <geom name="right_front_wheel_visual_0" type="mesh" mesh="lower4wheel" rgba="0.65098 0.65098 0.65098 1" contype="0" conaffinity="0" group="2" mass="0" pos="0.0135402 -0.0472392 -0.00395" quat="1.326794897e-06 1 0 0" />
               <body name="right_front_wheel_tip" pos="-0.00937372 0.00366781 -0" quat="-0.7071054825 0 0 0.7071080799">
@@ -173,7 +173,7 @@
             <body name="right_back_foot" pos="-0.0261547 -0.0195792 0.00155" quat="4.537911747e-07 0.342020591 0.9396924578 1.246779158e-06" />
             <body name="right_back_knee" pos="0 -0 0" quat="1 0 0 0" />
             <body name="right_back_wheel" pos="-0.0245472 -0.0151626 0.00155" quat="1.326794897e-06 1 0 0">
-              <joint name="right_back_wheel" type="hinge" axis="0 0 1" damping="0.00002" armature="0.00000002" />
+              <joint name="right_back_wheel" type="hinge" axis="0 0 1" damping="0.00002" armature="0.00000002" range="-0.4 0.85" solreflimit="0.004 1" solimplimit="0.99 0.999 0.0001" />
               <inertial mass="0.00023416" pos="-0.00303071 -0.00109341 1.1992e-08" fullinertia="2.96e-09 5.734e-09 6.027e-09 1.62e-09 0 -0" />
               <geom name="right_back_wheel_visual_0" type="mesh" mesh="lower4wheel" rgba="0.65098 0.65098 0.65098 1" contype="0" conaffinity="0" group="2" mass="0" pos="0.0135402 -0.0472392 -0.00395" quat="1.326794897e-06 1 0 0" />
               <body name="right_back_wheel_tip" pos="-0.00937372 0.00366781 -0" quat="-9.381839456e-07 0.7071054825 0.7071080799 -9.381873918e-07">
@@ -219,7 +219,7 @@
             <body name="left_back_foot" pos="-0.0261547 -0.0195792 -0.00155" quat="1 0 0 -5e-12" />
             <body name="left_back_knee" pos="0 0 0" quat="1 0 0 0" />
             <body name="left_back_wheel" pos="-0.0245472 -0.0151626 -0.00155" quat="1.326794897e-06 1 0 0">
-              <joint name="left_back_wheel" type="hinge" axis="0 0 1" damping="0.00002" armature="0.00000002" />
+              <joint name="left_back_wheel" type="hinge" axis="0 0 1" damping="0.00002" armature="0.00000002" range="-0.4 0.85" solreflimit="0.004 1" solimplimit="0.99 0.999 0.0001" />
               <inertial mass="0.00023416" pos="-0.00303071 -0.00109341 1.1992e-08" fullinertia="2.96e-09 5.734e-09 6.027e-09 1.62e-09 0 -0" />
               <geom name="left_back_wheel_visual_0" type="mesh" mesh="lower4wheel" rgba="0.65098 0.65098 0.65098 1" contype="0" conaffinity="0" group="2" mass="0" pos="0.0135402 -0.0472392 -0.00395" quat="1.326794897e-06 1 0 0" />
               <body name="left_back_wheel_tip" pos="-0.00937372 0.00366781 -0" quat="-9.381839456e-07 0.7071054825 0.7071080799 -9.381873918e-07">
